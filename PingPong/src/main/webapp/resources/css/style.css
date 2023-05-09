@@ -1,0 +1,585 @@
+/* 폰트 웹폰트 우선 사용 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap');
+/* font-family: 'Noto Sans KR', sans-serif; 
+font-weight: 100 / 400 / 700; 사용가능
+*/
+
+/* 기본 세팅 */
+*{padding: 0; margin: 0; font-family: 'Noto Sans KR', sans-serif;
+box-sizing: border-box;}
+ul,ol{list-style: none;}
+a{color: #000; text-decoration: none;}
+button{border: none; user-select: none; cursor: pointer;}
+svg{cursor: pointer; background-color: rgba(0, 0, 0, 0);}
+
+/* 컬러 
+: 컬러는 태그에 웬만하면 직접 지정해주세요
+혹시 몰라서 클래스로 세팅 해놨습니다.*/
+.colormain1{background-color: #5286DC;}
+.colorsub1{background-color: #92B4EC;}
+.colormain2{background-color: #FFD24C;}
+.colorsub1{background-color: #FFE69A;}
+.colorgoob{background-color: #FF2F2F;}
+.colorwarning{background-color: red;} 
+
+/* 무채색 컬러 */
+.monocolor1{background-color: #231F20;}
+.monocolor2{background-color: #5C5C5C;}
+.monocolor3{background-color: #C5C5C5;}
+.monocolor4{background-color: #F0F0F0;}
+
+/* 폰트 사이즈
+: 폰트 사이즈는 피그마 보고 작업 해주세요. 
+통일성을 위해 정해진 폰트 사이즈 안에서만 수정 부탁드립니다. */
+.font0{font-size: 30px;} /* 너무 크니까 사용 지양 */
+.font1{font-size: 24px;}
+.font2{font-size: 16px;}
+.font3{font-size: 14px;}
+.font4{font-size: 13px;}
+.font5{font-size: 12px;}
+
+/* 헤더 영역 : 상단 아이콘 + 로고 */
+header, header .logo img{z-index: 100;} /* 헤더 z-index: 100;*/
+header{
+    width: 100%; height: 100px; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex; justify-content: space-between; align-items: center;
+    position: fixed; background-color: #fff; top: 0;
+}
+header .logo{position: absolute; left: 50%; transform: translateX(-100px); user-select: none;}
+header .logo img{width: 200px; }
+header .menu_icon{margin-left: 50px;}
+header .alarm_search_box{margin-right: 50px;}
+header .alarm_icon{margin-right: 20px;}
+
+header .alarm_search_box{display: flex;}
+header .signBtn button{
+    width: 100px; height: 35px; border-radius: 20px;
+    color: #fff; font-size: 12px; font-weight: bold; background-color: #FFE69A;
+}
+header .signBtn .colormain2{margin-right: 20px; margin-left: 50px;}
+header .signBtn{display: flex; align-items: center;}
+.signBtn button:hover{background-color: #FFD24C;}
+
+/* 검색 아이콘 호버했을 때 늘어난 검색창*/
+.seachbox{
+    width: 400px; height: 50px; border-radius: 30px; border: 1px solid #231F20;
+    display: flex; justify-content: space-between; align-items: center; padding: 0 20px; 
+    display: none; z-index: 101; background-color: #fff;}
+.seachboxleft>svg{margin-right: 12px;}
+.seachbox .seachboxleft{display: flex; align-items: center;}
+.seachbox input{border: none;}
+.seachbox input:focus{outline: none;}
+
+/* 반응형 일 때 잠깐 해봄 */
+@media screen and (max-width : 1024px) {
+    header .logo img{width: 150px;}
+    header .alarm_icon,  header .search_icon{
+    display: none; transform: translateX(25px);}
+    header .signBtn button{display: none;}
+    .seachbox{width: 300px;}
+} 
+@media screen and (max-width : 767px) {
+    .alarm_search_box{display: none;}
+}
+
+.space{
+    width: 150px; background-color: #FF2F2F;
+}
+
+/* 햄버거 아이콘 */
+.navlist, .mainnav-icon{z-index: 200;}
+.menu_icon, .navlist>ul>li, .navlist>ul>li>a{z-index: 201;}
+.grayBackground{
+    width: 100vw;/* 화면 너비 100% */ height: 100vh;/* 화면 높이 100% */
+    position: fixed; background-color: #231F2050;
+    top: 0;left: 0; z-index: 199;
+}
+
+/* 메뉴 정렬 css */
+.mainnav{display: none;}
+.mainnav>.menu_icon{position: fixed; top: 28px; left: 50px;}
+.mainnav .navlist{
+width: 600px; height: 100%; background-color: #fff; 
+position: fixed; top: 0;
+}
+.mainnav .navlist ul{height: 370px; margin-top: 190px; margin-left: 60px; 
+position: fixed;}
+.mainnav .navlist ul li{margin-bottom: 30px; user-select: none;}
+.mainnav .navlist ul li .nav_more{text-decoration: underline; font-size: 12px;}
+.mainnav .navlist ul li svg{margin-right: 20px;}
+.mainnav .navlist ul li a{
+    display: flex; height: 40px; line-height: 40px;
+}
+.mainnav .navlist ul li:last-child a{
+    display: flex; height: 40px; line-height: 40px; font-size: 12px;
+    text-decoration: underline;
+}
+.navlist .mainnav-under-btn{position: absolute; bottom: 30px; left: 30px;}
+.mainnav-icon{
+    margin-top: 800px;
+    position: fixed; left: 250px; bottom: 14%;
+}
+
+/* 더보기 버튼 클릭 했을 때 뜨는 더보기 메뉴 박스  */
+.navmore{
+width: 168px; height: 188px; background-color: #fff;
+border-radius: 20px; border: 1px solid #C5C5C5; 
+position: absolute; bottom: 70px; left: 70px;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
+display: none; z-index: 202;
+}
+.navmore ul li{margin-top: 28px; margin-left: 30px;}
+.navmore ul a{display: block; width: 100%; height: 100%;}
+
+
+/* 더 많은 기능을 보실려면 로그인해주세요. */
+#logModContainer{
+    width : 420px; height : 420px;
+    border-radius: 20px; border: 1px solid #5C5C5C;
+    position: absolute; margin: auto;
+    top: 0; bottom: 0; left: 0; right: 0;
+    background-color: white; z-index: 300;
+    display: none;
+}
+
+#logModContainer>svg{position : absolute; right : 8px; top : 8px;}
+
+#logModContainer>div{
+    display: flex; align-items: center; justify-content: center;
+}
+#logModContainer>div:first-of-type>svg{
+    margin-top : 40px; margin-bottom: 30px;
+}
+
+#logModContainer>h2{
+    text-align: center; margin: 10px;
+}
+
+#logModContainer>p{
+    display: block; text-align: center;
+    margin: 30px; font-size: 12px;
+}
+#logModContainer>div:nth-of-type(2)>button{    
+    width: 320px; height: 60px;
+    background-color: #231F20;
+    font-size: 16px; color : white; font-weight: bold;
+    border-radius: 8px; margin-bottom: 10px;
+}
+#logModContainer>div:last-of-type>div>p{
+    font-size: 14px; display: inline;
+}    
+#logModContainer>div:last-of-type>div{
+    width:320px; display: flex;
+    justify-content: space-between; margin: 10px;
+}
+#logModContainer>div:last-of-type>div>a{
+    color:#5286DC; text-decoration : underline; font-size: 14px;
+}
+
+/*  더보기 + 사이트 정보 누르면 뜨는 팝업 */
+.siteInfoModContainer{
+    width: 600px; height: 600px; border-radius: 20px;
+    position: fixed; top: 0; bottom: 0; left: 0; right: 0; margin: auto;
+    border: 1px solid #5C5C5C; background-color: #fff;
+    display: flex; flex-direction: column; align-items: center;
+    display: none; z-index: 300;
+}
+.pingopacitylogo{
+    width: 100%; border-bottom: 1px solid #C5C5C5;
+    display: flex; align-items: center;
+}
+.pingopacitylogo>svg:first-child{
+    margin: 22px auto;
+}
+.pingopacitylogo>svg:last-child{
+    position: absolute; top: 12px; right: 12px;
+}
+
+/* 안에 내용 css */
+.siteInfoModContainer>h2{margin: 20px 0;} /* 제목 */
+.siteInfoModContainer>div:nth-of-type(2){
+    width: 480px; margin-bottom: 20px;
+}
+.siteInfoModContainer>div:nth-of-type(2) p{
+    font-size: 14px; font-weight: bold; margin-top: 16px;
+}
+
+.pingpongTeaminfo{
+    margin: 20px 60px; font-size: 13px; color: #5C5C5C;
+    width: 480px;
+}
+.pingpongTeaminfo>li{
+    width: 210px;
+    float: left; margin-right: 30px; margin-bottom: 12px;
+}
+.pingpongTeaminfo>li>pre{margin:8px 0;}
+.pingpongTeaminfo>li>span:first-child{
+    font-size: 14px; color: #000; font-weight: bold; margin-right: 8px;
+    margin-bottom: 12px;
+}
+
+
+
+/* 햄버거 안의 검색 눌렀을 때 검색창*/
+.seachModInnerbox{
+    width: 400px; height: 50px; border-radius: 30px; border: 1px solid #231F20;
+    display: flex; justify-content: space-between; align-items: center; padding: 0 20px; 
+    z-index: 101; background-color: #fff;}
+.seachModInnerbox .seachModInnerboxleft{display: flex; align-items: center;}
+.seachModInnerbox input{border: none;}
+.seachModInnerbox input:focus{outline: none;}
+
+#searchModContainer{
+    width : 500px; height : 600px; 
+    border-radius: 20px; border: 1px solid black; 
+    position: absolute; margin: auto; 
+    top: 0; bottom: 0; left: 0; right: 0; 
+    background-color: white; z-index: 300; 
+    display: none;
+}
+#searchModContainer>p>svg{
+    position: absolute; right:10px;
+}
+
+#searchModContainer>p{
+    display: flex; align-items: center; justify-content: center; 
+    position: relative; font-size: 24px; padding: 20px; 
+    border-bottom: 1px solid #C5C5C5;
+}
+
+#searchModContainer>div:first-of-type{
+    display: flex; align-items: center; justify-content: center; 
+    margin: 30px;
+}
+#searchModContainer>div:last-of-type{
+    height: 68%; overflow: auto; margin-right: 4px;
+}
+
+.searchModResultCont{
+    height: 50px; display: flex; align-items: center;
+}
+
+/* 태그 검색 시 동그라미 안의 # */
+.searchModTagRound1{
+    width: 30px; height: 30px; line-height: 40px; 
+    display: flex; align-items: center; justify-content: center; 
+    border : 1px solid black; border-radius: 50%; margin: 0 15px;
+}
+/* 그냥 검색 시 프로필 사진 */
+.searchModNameRound1{
+    width: 30px; height: 30px; line-height: 40px; 
+    display: flex; align-items: center; justify-content: center; 
+    border : 1px solid black; border-radius: 50%; 
+    margin: 0 15px; background-color: #C5C5C5; cursor: pointer;
+}
+/* 검색 시 이름, 태그 */
+.searchModcontent{
+    cursor: pointer; font-size: 16px;
+}
+
+
+/* 알림 하트 */
+.searchbox{
+    position: relative;
+}
+#headerSearchModContainer{
+    width : 500px; height : 600px; 
+    border-radius: 20px; border: 1px solid #5C5C5C; 
+    box-shadow: 0 4px #dadada; 
+    position: absolute; margin: auto; 
+    top : 80px; right : 50px; 
+    background-color: white; 
+    z-index: 300; display: none;
+}
+
+#headerSearchModContainer>p{
+    height: 64px; position: relative;
+    display: flex; align-items: center; justify-content: center; 
+    font-size: 24px; border-bottom: 1px solid #C5C5C5;
+}
+
+#headerSearchModResultList{
+    height: 88%; overflow: auto; margin-right: 4px;
+}
+
+#alarmModBox{
+    width : 500px; height : 600px; 
+    border-radius: 20px; border: 1px solid #5C5C5C; 
+    box-shadow: 0 4px #dadada; 
+    position: absolute; margin: auto; 
+    top : 100px; right : 320px; 
+    background-color: white; z-index: 300; /* display: none; */
+}
+
+#alarmModBox>p{ /* 알림 제목 */
+    height: 64px; 
+    display: flex; align-items: center; justify-content: center; 
+    position: relative; font-size: 24px; 
+    border-bottom: 1px solid #C5C5C5;
+}
+#alarmModBox>svg{
+    position: absolute; top : -31px; right: 50px
+}
+.alarm_icon>svg>svg{
+    border: 1px solid red; position: absolute;
+}
+.alarm-icon-redColor{
+    display: none;
+}
+/* .alarm_icon .basicheart{position: relative;}
+.alarm_icon .redheart{
+    position: absolute; top : 0px; right: 0px
+} */
+
+#alarmModBox .messageExample{
+    width: 100%; height: 46px; margin-bottom: 20px;
+    display: flex; align-items: center;
+    position: relative;
+}
+#alarmModBox .messageExample .probox{
+    width: 35px; height: 35px; 
+    background-color: #FFE69A; border-radius: 50%; margin-right: 15px;
+}
+#alarmModBox .messageExample>div:nth-of-type(2)>p{margin-bottom: 4px;}
+#alarmModBox .messageExample>div:nth-of-type(3){
+    display: flex; flex-direction: column; align-items: end;
+    justify-content: space-between;
+    position: absolute; top: 0; right: 0;
+}
+#alarmModBox .messageExample>div:nth-of-type(3) svg{color: #5C5C5C; margin-bottom: 12px;}
+#alarmModBox .messageExample>div:nth-of-type(3) p{
+    color: #5C5C5C;
+    align-self: flex-end;
+}
+
+#alarmModBox>div{
+    width: 100%; padding: 40px; height: 520px;
+    display: flex; flex-direction: column; justify-content: space-between;
+}
+
+.message-Box-recive .messageList{
+    margin: 40px 0; height: 400px; width: 500px;
+    font-size: 14px; color:#000;
+}
+.message-Box-recive .messageExample{
+    width: 100%; height: 46px; margin-bottom: 20px;
+    display: flex; align-items: center;
+}
+.message-Box-recive .messageExample .probox{
+    width: 35px; height: 35px; 
+    background-color: #FFE69A; border-radius: 50%; margin-right: 15px;
+}
+.message-Box-recive .messageExample>div:nth-of-type(2)>p{margin-bottom: 4px;}
+.message-Box-recive .messageExample>div:nth-of-type(3){
+    display: flex; flex-direction: column; align-items: end;
+    justify-content: space-between;
+}
+.message-Box-recive .messageExample>div:nth-of-type(3) svg{color: #5C5C5C; margin-bottom: 12px;}
+.message-Box-recive .messageExample>div:nth-of-type(3) p{
+    color: #5C5C5C;
+    align-self: flex-end;
+}
+.message-Box-recive .messageExample>div:nth-of-type(2){
+    width: 360px;
+}
+#alarmModBox .messageLink{
+    display: flex; justify-content: center;
+}
+#alarmModBox .messageLink svg{margin-right: 8px;}
+
+
+/* ------------------------------------------------ */
+/* 메세지 함 css */
+
+/* ---------------------------- */
+/* 받은 메세지 함 */
+.message-Box-recive{
+    width: 100vw; height: 100vh; background-color: #5C5C5C50; 
+    display: flex; justify-content: center; align-items: center;
+    position: fixed; z-index: 300; top: 0; left: 0;
+    display: none;
+}
+.message-Box-recive>div{
+    width: 600px;  height: 600px;  
+    background-color: #FFFFFF; border-radius: 20px; 
+    display: flex; flex-direction: column; align-items: center; 
+    position: relative;
+}
+.message-Box-recive>div>div:first-child{ /* 메세지 함 TOP */
+    width: 100%; height: 10%; border-bottom: 1px solid #C5C5C5;
+    display: flex; align-items: center;
+    padding: 0 20px;
+}
+.message-Box-recive .messageLink{
+    display: flex; align-items: center; user-select: none; cursor: pointer;
+}
+.message-Box-recive .messageLink>svg{margin-right: 8px;}
+
+.message-Box-recive>div>div:first-child h2{
+    position: absolute; left: 241px; user-select: none;
+}
+
+.message-Box-recive>div>div:first-child>svg:last-of-type{
+    width: 20px; height: 20px; position: absolute; 
+    right: 18px; top: 18px; cursor: pointer;
+}
+
+/* 메세지 리스트 */
+.message-Box-recive .messageList{
+    margin: 40px 0; height: 400px; width: 500px;
+    font-size: 14px; color:#000;
+}
+.message-Box-recive .messageExample{
+    width: 100%; height: 46px; margin-bottom: 20px;
+    display: flex; align-items: center;
+}
+.message-Box-recive .messageExample .probox{
+    width: 35px; height: 35px; 
+    background-color: #FFE69A; border-radius: 50%; margin-right: 15px;
+}
+.message-Box-recive .messageExample>div:nth-of-type(2)>p{margin-bottom: 4px;}
+.message-Box-recive .messageExample>div:nth-of-type(3){
+    display: flex; flex-direction: column; align-items: end;
+    justify-content: space-between; 
+}
+.message-Box-recive .messageExample>div:nth-of-type(3) svg{color: #5C5C5C; margin-bottom: 12px;}
+.message-Box-recive .messageExample>div:nth-of-type(3) p{
+    color: #5C5C5C;
+    align-self: flex-end;
+}
+.message-Box-recive .messageExample>div:nth-of-type(2){
+    width: 360px;
+}
+
+
+
+/* 보낸 메세지 함 */
+.message-Box-send{
+    width: 100vw; height: 100vh; background-color: #5C5C5C50; 
+    display: flex; justify-content: center; align-items: center;
+    position: fixed; z-index: 300; top: 0; left: 0;
+    display: none;
+}
+.message-Box-send>div{
+    width: 600px;  height: 600px;  
+    background-color: #FFFFFF; border-radius: 20px; 
+    display: flex; flex-direction: column; align-items: center; 
+    position: relative;
+}
+.message-Box-send>div>div:first-child{ /* 메세지 함 TOP */
+    width: 100%; height: 10%; border-bottom: 1px solid #C5C5C5;
+    display: flex; align-items: center;
+    padding: 0 20px;
+}
+.message-Box-send .messageLink{
+    display: flex; align-items: center; user-select: none; cursor: pointer;
+}
+.message-Box-send .messageLink>svg{margin-right: 8px;}
+
+.message-Box-send>div>div:first-child h2{
+    position: absolute; left: 241px; user-select: none;
+}
+
+.message-Box-send>div>div:first-child>svg:last-of-type{
+    width: 20px; height: 20px; position: absolute; 
+    right: 18px; top: 18px; cursor: pointer;
+}
+
+/* 메세지 리스트 */
+.message-Box-send .messageList{
+    margin: 40px 0; height: 400px; width: 500px;
+    font-size: 14px; color:#000;
+}
+.message-Box-send .messageExample{
+    width: 100%; height: 46px; margin-bottom: 20px;
+    display: flex; align-items: center;
+}
+.message-Box-send .messageExample .probox{
+    width: 35px; height: 35px; 
+    background-color: #FFE69A; border-radius: 50%; margin-right: 15px;
+}
+.message-Box-send .messageExample>div:nth-of-type(2){
+    width: 360px;
+}
+.message-Box-send .messageExample>div:nth-of-type(2)>p{margin-bottom: 4px;}
+.message-Box-send .messageExample>div:nth-of-type(3){
+    display: flex; flex-direction: column; align-items: end;
+    justify-content: space-between; 
+}
+.message-Box-send .messageExample>div:nth-of-type(3) svg{color: #5C5C5C; margin-bottom: 12px;}
+.message-Box-send .messageExample>div:nth-of-type(3) p{
+    color: #5C5C5C;
+    align-self: flex-end;
+}
+
+
+/* ------------------------------------------------ */
+/* 메세지 주고 받기 css */
+.message-container{
+    /* width: 1920px; height: 1080px; */
+    width: 100vw; height: 100vh; background-color: #5C5C5C50; 
+    display: flex; justify-content: center; align-items: center;
+    position: fixed; z-index: 300; top: 0; left: 0;
+    display: none;
+}
+.recieve-message-box{ 
+    width: 600px;  height: 600px;  
+    background-color: #FFFFFF; border-radius: 20px; 
+    display: flex; flex-direction: column; align-items: center; 
+    position: relative;
+}
+
+.message-box-top{
+    width: 100%; height: 10%; border-bottom: 1px solid #C5C5C5;
+}
+
+.message-box-top>div{
+    width: 100%; height: 100%; 
+    display: flex; justify-content: center; position: relative;
+}
+
+.message-box-top>div>.message-profile{
+    width: 30px; height: 30px; border-radius: 50px; 
+    background-color: #C5C5C5; 
+    display: flex; justify-content: center; margin-top: 15px;
+}
+
+.message-box-top>div>p{
+    height: 30px; 
+    display: flex; justify-content: center; 
+    font-size: 14px; margin-left: 10px; margin-top: 21px;
+}
+
+.recieve-message-x{
+    width: 20px; height: 20px; position: absolute; 
+    right: 18px; top: 18px; cursor: pointer;
+}
+
+
+.message-box-bottom>p{
+    font-size: 24px; font-weight: bold; 
+    display: flex; justify-content: center; 
+    margin-top: 44px; margin-bottom: 30px;
+}
+
+.message-box-bottom>div>.message-box-content{
+    width: 480px; height: 300px; border: 1px solid #C5C5C5; 
+    border-radius: 20px; padding: 20px; 
+    resize: none;
+}
+
+.message-box-button{
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 24px;
+}
+.message-box-button .messageLink{
+    display: flex; align-items: center; user-select: none; cursor: pointer;
+}
+.message-box-button .messageLink>svg{margin-right: 8px;}
+.message-box-button>button{
+    width: 100px; height: 35px; border-radius: 20px; 
+}
+.message-box-button>button:last-child{
+    background-color: #FFD24C; border: none; color: #fff; 
+    margin-left: 10px;
+}

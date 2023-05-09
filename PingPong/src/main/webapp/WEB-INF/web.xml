@@ -2,7 +2,7 @@
 <web-app version="4.0" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://JAVA.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_4_0.xsd">
-	
+    
 	<!-- web.xml (배포 서술자/설명서)
 		서버가 켜질 때(배포가 시작될 때) 가장 먼저 읽어들이는 설정 파일 
 	-->
