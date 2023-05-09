@@ -1,0 +1,134 @@
+/* 회원 페이지 전체를 감싸고 있는 요소 */
+.admin-content-container{
+    display: flex;
+    width: 70%;
+    min-height: 780px;
+    margin: 150px auto;
+}
+
+
+/* ************* 사이드 메뉴 ************* */
+
+/* Tab Menu Area */
+*{margin: 0; padding: 0;}
+.admin-left-side-menu>ul{list-style: none;}
+
+.admin-left-side-menu-group{
+    height: 100%;
+    padding: 15px; 
+    letter-spacing:-0.5px;
+}
+
+.admin-left-side-menu{
+    width: 100%;
+    list-style: none;
+    padding-right: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-left-side-menu > ul > li{
+    margin-bottom: 8px;
+}
+
+.admin-left-side-menu > ul > li:nth-child(3n-2){
+    background-color: #FFE69A;
+    border-radius: 5px;
+}
+
+.admin-left-side-menu > ul > li > *{
+    font-size: 16px;
+    color:black;
+    text-decoration: none;
+    width: 200px; height: 50px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-left-side-menu > ul > li > a:hover{
+    font-weight: bold;
+}
+
+.admin-left-side-menu> ul > li.admin_is_on > a{
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.admin-left-side-menu> ul > li.admin_is_on > div{
+    display:block;
+}
+
+
+/* Main Area */
+.admin-content-main-area{
+    width: 1100px;
+    padding: 15px; 
+    border: 1px solid #231F20;
+    border-radius: 5px;
+}
+
+
+.admin-content-main-area > div{
+    display:none;
+}  
+.admin-content-main-area > div:last-child{
+    display:flex;
+}
+
+
+/* ------------------------------------------------ */
+
+
+/* 1:1 문의 내용 창 */
+#oneToOneContent>div{
+    text-align: center;
+    padding: 20px 40px;
+}
+/* 돌아가기 버튼 */
+
+#admin-content-main-area{
+    position: absolute;
+}
+#oneToOneContent>a{
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+}
+
+/* 첫 줄 제목 */
+#oneToOneContent>div>div:first-of-type{
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+/* 이메일 아이디 */
+#oneToOneContent>div>div:nth-child(2)>div:first-child{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+/* 회원 이메일 나오는 창 */
+#oneToOneContent input{
+    width: 100%;
+    margin: 10px 0 20px 0;
+    border-radius: 8px;
+    border: 1px solid #5C5C5C;
+    height: 40px;
+}
+/* 내용 창 */
+#oneToOneContent textarea{
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+}
+#oneToOneContent>div>div>div:last-child{
+    text-align: left;
+}
+/* 신고 내용 ID */
+.reporter > a{color: rgb(79, 79, 255);}
+.respondent > a{color: #ff3636;}
+

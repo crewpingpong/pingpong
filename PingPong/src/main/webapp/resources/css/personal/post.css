@@ -1,0 +1,806 @@
+/* 상단 프로필 영역 */
+.personalHome {
+    width: 100%; position: relative;
+}
+
+.profileBackground {
+    width: 100%; height: 500px; background-color: #C5C5C5;
+    font-size: 14px; margin-top: 100px;
+}
+
+.profilebox {
+    width: 840px; height: 400px; background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+}
+
+/* 배경화면 이미지 등록하기 */
+.profileBackground .profileBgupload {
+    display: none;
+}
+
+.profileBackground>div>p {
+    position: absolute; right: 60px; top: 460px;
+    cursor: pointer; font-size: 16px; text-decoration: underline; z-index: 100;
+}
+
+.profileBackground>div:last-child {
+    display: flex; justify-content: center; align-items: center;
+    position: absolute; top: 0; left: 0; 
+    width: 100%; height: 500px;
+}
+
+.profileBackground>div:last-child>img {
+    width: 100%; height: 500px;
+}
+
+/* 프로필 왼쪽 구역 */
+.profileLeft {
+    width: 390px; margin: 15px; margin-top: 55px;
+    display: flex; flex-direction: column; align-items: center;
+}
+
+.profileCircle {
+    width: 150px; height: 150px; background-color: #C5C5C5;
+    border-radius: 50%; margin-bottom: 30px;
+}
+
+.profileName {
+    font-size: 16px; font-weight: bold; margin-bottom: 12px;
+}
+
+.profileIntroduce {
+    margin-bottom: 17px;
+}
+
+.followBtn {
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+.followBtn svg {
+    margin: 6px;
+}
+
+/* 팔로우 여부에 따라 보이게 할 클래스 */
+.nufollow,
+.followUser {
+    display: none;
+}
+
+/* 둘 다 안보이게 처리 */
+.followBtn>svg.followshow {
+    display: block;
+}
+
+/* 팔로우 여부에 따라 다른 아이콘 */
+
+/* 프로필 오른쪽 구역 (탭 넘어가는 부분) */
+.profileRight {
+    width: 380px; margin-top: 55px; margin-right: 70px;
+}
+
+#lnhtab1 .profilelist {
+    display: flex; justify-content: space-around; 
+    border-bottom: 1px solid #5C5C5C; padding-bottom: 15px; margin-bottom: 20px;
+}
+
+.profiletab_menu .profilelist li.is_on .btn {
+    font-weight: bold; color: black;
+}
+
+.profiletab_menu .profilelist .btn {
+    font-size: 14px; color: #C5C5C5;
+}
+
+/* 이거 나중에 글자수 제한 걸어주기 */
+.profiletab_menu .cont_area {
+    height: 250px; margin-top: 12px;
+    /* overflow: scroll; */
+}
+
+/* 탭 클릭 안되면 안보이게 */
+.profiletab_menu .cont_area .cont {
+    display: none; padding: 0 12px;
+}
+
+.profiletab_menu .cont_area .cont h4 {
+    margin-bottom: 8px;
+}
+
+.profiletab_menu .cont_area .cont div {
+    width: 360px; margin-bottom: 20px;
+}
+
+/* 대표 기술 아이콘 추가 할 수 있게 해주기 */
+.cont_area img {
+    width: 40px; height: 40px; margin-right: 12px;
+}
+
+/* 내정보 수정 페이지 가기 */
+.poroflieEdit {
+    position: absolute; bottom: 20px; right: 20px;
+    display: flex; justify-content: center;
+}
+
+.poroflieEdit p {
+    font-size: 16px; text-decoration: underline; margin-left: 8px;
+}
+
+
+
+/* 프로필 하단 게시글 구역 */
+
+/* .personalHome{position: relative;} */
+.profileContent {
+    width: 100%; display: flex; justify-content: center; position: relative;
+}
+
+.posttab_menu {
+    margin-bottom: 100px;
+}
+
+.postlist {
+    display: flex; font-size: 16px; margin: 50px 0; padding-left: 5px;
+}
+
+.postlist li {
+    margin-right: 32px;
+}
+
+/* 게시글 수정 버튼 */
+.postBtn {
+    position: absolute; top: 50px; right: 15%;
+}
+
+.postBtn>button {
+    width: 100px; height: 35px; border-radius: 20px; background-color: #92B4EC;
+    color: #fff; font-size: 12px; font-weight: bold; margin-left: 12px;
+}
+
+.postBtn>button:hover {
+    background-color: #5286DC;
+}
+
+/* 게시글 그리드 박스 */
+.contentBox {
+    margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr);
+    max-width: 1200px; grid-template-rows: auto; grid-gap: 20px;
+}
+
+.contentBox div {
+    width: 300px; height: 300px; border-radius: 20px; background-color: #C5C5C5;
+}
+
+.posttab_menu .postlist .btn {
+    font-size: 16px;
+}
+
+.posttab_menu .postlist li.is_on .btn {
+    font-weight: bold;
+    color: black;
+}
+
+.posttab_menu .postcont_area .postcont {
+    display: none;
+}
+
+/* 홈 게시글 그리드  */
+
+
+@media screen and (max-width: 768px) {
+
+    /* 핸드폰 화면 일 때 */
+    .contentBox {
+        grid-template-columns: repeat(1, 1fr); max-width: 300px;
+    }
+
+    .profilebox {
+        position: absolute; top: 0; bottom: 0; left: 0%; right: 0; margin: auto;
+        /* display: flex; */
+    }
+}
+
+@media screen and (min-width: 768px) {
+    /* 태블릿 화면 일 때 */
+
+    .contentBox {
+        grid-template-columns: repeat(2, 1fr); max-width: 600px;
+    }
+
+    .profilebox {
+        position: absolute; top: 0; bottom: 0; left: 0%; right: 0; margin: auto;
+        /* display: flex; */
+    }
+
+}
+
+@media screen and (min-width: 1024px) {
+
+    /* 웹 기준~1024 */
+    .contentBox {
+        grid-template-columns: repeat(4, 1fr);max-width: 1200px;
+    }
+
+    .profilebox {
+        position: absolute; margin: 0; top: 50px; left: 18%;
+    }
+}
+
+/* -------------------------------------------- */
+/* 보드 상세 구역 */
+.BoardBackground {
+    width: 100vw; height: 100vh; z-index: 250; 
+    position: fixed;  top: 0;  left: 0;  background-color: #231F2050;
+    display: flex; justify-content: center; align-items: center;
+}
+
+.BoardBackground2 {
+    width: 100vw; height: 100vh; z-index: 250;
+    /* position: fixed; top: 0; left: 0; */
+    background-color: #231F2050; justify-content: center; align-items: center; 
+    position: fixed; top: 0; left: 0;
+}
+
+.BoardBackground-close {
+    visibility: hidden;
+}
+
+.BoardMainContainer {
+    display: flex; justify-content: space-between;
+    /* width: 73%; height: 74%;  */
+    width: 1400px; height: 800px; background-color: white;
+    border-radius: 20px; position: relative; z-index: 250;
+}
+
+.BoardMainContainer2 {
+    display: flex; width: 1400px; height: 800px;
+    background-color: white; border-radius: 20px; position: relative; 
+    z-index: 250; justify-content: space-between;
+}
+
+/* 새 게시글 */
+
+.NewBoardMainContainer {
+    display: flex; flex-direction: column;
+    /* width: 73%; height: 74%;  */
+    width: 800px; height: 800px; background-color: white;
+    border-radius: 20px; position: relative; z-index: 250;
+}
+
+.NewBoardMainContainer>div:first-child {
+    height: 63px; width: 100%; border-bottom: 1px solid #C5C5C5;
+    text-align: center; position: relative; padding-top: 20px;
+}
+
+.NewBoardMainContainer>div:first-child>svg {
+    position: absolute; right: 12px; top: 20px;
+}
+
+.NewBoardMainContainer>div:last-child {
+    height: 737px; width: 100%; display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+}
+
+.NewBoardMainContainer>div:last-child>svg:first-child {
+    margin: 40px; cursor: default;
+}
+
+/* 새 게시글 파일 첨부 버튼 */
+.inputFileBtn {
+    padding: 6px 25px; background-color: #FFD24C;
+    width: 200px; height: 35px; border-radius: 20px;
+    color: white; text-align: center;
+}
+
+/* 파일 첨부 후 게시글 작성 화면 */
+.NewWriteContent {
+    width: 100vw; height: 100vh; z-index: 250;
+    position: fixed; top: 0; left: 0;
+    background-color: #231F2050; justify-content: center; align-items: center;
+    display: none;
+}
+
+.BoardWriteContainerleft {
+    width: 66%; height: 100%;
+}
+
+.NewBoardBackground {
+    width: 100vw; height: 100vh; z-index: 250;
+    position: fixed; top: 0; left: 0; background-color: #231F2050; 
+    justify-content: center; align-items: center; display: none;
+}
+
+/* 게시글 작성 상단 메뉴 */
+.board-container-top {
+    width: 100%; height: 8%; position: absolute;
+    padding: 0 20px; border-radius: 20px 20px 0 0; 
+    border-bottom: 1px solid #C5C5C5;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 300;
+}
+
+/* 게시글 작성 왼쪽 영역 */
+.BoardContainerleft {
+    width: 66%; height: 100%;
+}
+
+.BoardContainerleft2 {
+    width: 66%; height: 100%; position: relative;
+}
+
+.BoardPicture {
+    width: 87%; height: 75%;
+    /* width: 800px; height: 600px; */
+    margin-top: 65px; margin-left: 60px;
+}
+
+.BoardPicture2 {
+    height: 75%;
+    /* background-color: #C5C5C5; */
+    /* margin-top: 65px; */
+    /* margin-left: 60px; */
+}
+
+/* 게시글 작성 오른쪽 영역 */
+.NewWriteBoardContainerRight {
+    display: flex; flex-direction: column; margin-top: 86px; margin-right: 25px;
+}
+
+.NewWriteBoardTop {
+    display: flex; flex-direction: row;
+}
+
+.NewWriteProfileName {
+    margin-top: 20px;
+}
+
+.NewWriteTextArea {
+    margin-top: 20px; border: none; width: 420px; height: 400px; resize: none;
+}
+
+/* 글자수 카운트 */
+.countBox {
+    color: #C5C5C5; align-self: flex-end;
+}
+
+/* 게시글 작성 링크 추가 영역*/
+.addLink {
+    border-top: 1px solid #C5C5C5; padding: 10px;
+}
+
+.addLink>svg {
+    float: right;
+}
+
+.contentSet {
+    border-top: 1px solid #C5C5C5; padding: 10px;
+}
+
+.contentSet>svg {
+    float: right;
+}
+
+/* 창닫기 */
+.BoardClose {
+    color: #231F20; background-color: rgba(0, 0, 0, 0); 
+    position: absolute; right: 12px; top: 12px;
+}
+
+/* 게시글 오른쪽 영역 */
+.BoardContainerright {
+    display: flex; width: 34%; margin-top: 65px; flex-direction: column; 
+    font-size: 14px; padding: 4px;
+}
+
+
+/* 프사 + 이름 + 소개 */
+.BoardContainerright>div:nth-child(1) {
+    width: 80%; height: 75px;
+    /* height: 10%; */
+    border-bottom: 1px solid #231F2050; padding-bottom: 20px; margin-bottom: 20px;
+}
+
+.BoardContainerright .porfileRac {
+    width: 50px; height: 50px; margin-right: 20px; 
+    border-radius: 50%; border: 1px solid black; 
+    background-color: #231F2050; float: left; cursor: pointer;
+}
+
+.BoardContainerright>div>div:last-child>p {
+    font-size: 14px; padding: 5px;
+}
+
+.BoardContainerright>div>div:last-child>a {
+    font-size: 16px; margin-left: 10px; display: block;
+}
+
+.BoardContainerright>div>p {
+    font-size: 14px;
+}
+
+/* 게시글 내용 + 좋아요 수 */
+.Boardcontent {
+    width: 80%; height: 69%; border-bottom: 1px solid #231F2050; 
+    display: flex; flex-direction: column; justify-content: start; overflow: auto;
+}
+
+.BoardContentProfile {
+    width: 50px; height: 50px; margin-right: 20px; border-radius: 50%; 
+    background-color: #231F2050; float: left; margin-top: 5px; 
+    display: flex; cursor: pointer;
+}
+
+.BoardContentBox {
+    display: flex;
+
+}
+
+/* 하단 좋아요 */
+.BoardHeartBox {
+    display: flex;
+    /* 기능동작  좋아요 하단 숨기기 */
+    margin-top: 40px; align-self: self-start;
+    /* flex-direction: row; */
+}
+
+/* 댓글 영역 */
+.BoardCommentBox {
+    display: flex; align-items: center; width: 80%; height: 10%; padding: 10px;
+}
+
+.BoardCommentProfile {
+    width: 50px; height: 50px; margin-right: 20px; border-radius: 50%; 
+    background-color: #231F2050; float: left; margin-top: 5px; 
+    display: none; cursor: pointer;
+}
+
+.BoardHeartBox>svg {
+    margin-right: 4px;
+}
+
+.BoardComment {
+    margin-left: 10px;
+}
+
+/* 사이드 아이콘 */
+.BoardIcon {
+    padding: 8px;
+}
+
+.BoardIconInfo {
+    border-radius: 30%; text-align: center; margin: 5px;
+    /* display: none; */
+}
+
+.BoardIconBox {
+    margin-left: 5px;
+}
+
+.BoardCommentBtn>button {
+    width: 100px; height: 35px; background-color: #FFE69A; 
+    border-radius: 20px; text-align: center; margin-bottom: 20px; 
+    color: white; float: right; margin-left: 6px; margin-bottom: 10px; 
+    display: none;
+}
+
+.BoardCommentBtn>button:hover {
+    background-color: #FFD24C;
+}
+
+.BoardCommentText {
+    display: none; width: 80%; height: 35%; margin-top: 30px; margin-bottom: 20px; 
+    border-radius: 20px; resize: none; padding: 10px;
+}
+
+/*  신고 누르면 뜨는 팝업 */
+.BoardIconReportMod #grayBackground{
+    width: 100vw; height: 100vh; position: fixed; 
+    top:0; left: 0; left: 0; right: 0; margin: auto;
+    background-color: #231F2050; z-index: 300;
+    display: flex; align-items: center; justify-content: center;
+    display: none; 
+}
+
+.BoardIconReportMod #grayBackground>div {
+    width : 600px; min-height: 600px; background-color: white; 
+    border-radius: 20px;
+}
+
+.BoardIconReportMod #grayBackground>#oneToOne>div:first-child{
+    height: 80px; border-bottom: 1px solid #C5C5C5;;
+    display: flex; align-items: center; justify-content: center; 
+    position: relative;
+}
+.BoardIconReportMod #grayBackground>#oneToOne>div:first-child>svg:nth-child(2){
+    position: absolute; right:2%;
+}
+.BoardIconReportMod #grayBackground>div>div:nth-child(2){
+    font-size: 24px; font-weight: bold; padding: 20px;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.BoardIconReportMod #grayBackground>div>form{
+    padding: 0 60px;
+}
+
+.BoardIconReportMod #grayBackground>div>form>*{
+    margin-top : 10px; margin-bottom: 10px;
+}
+.BoardIconReportMod select{
+    width: 100%; height: 42px; border-radius: 5px; 
+    border: 1px solid #231F20; padding: 0 8px;
+}
+
+.BoardIconReportMod #grayBackground>div>form>textarea{
+    width: 100%; height: 200px; border-radius: 5px; padding: 18px; 
+    resize : none; border: 1px solid #231F20;
+}
+
+.BoardIconReportMod #grayBackground>div>form>input:nth-of-type(1){
+    display: none;
+}
+
+.BoardIconReportMod #grayBackground>div>form>div{
+    display: flex; align-items: center; justify-content: center; margin-top: 20px;
+}
+.BoardIconReportMod #grayBackground>div>form>div>button{
+    width : 150px; height: 35px; color : white; 
+    border-radius: 20px; background-color: #FFD24C; margin-bottom: 20px;
+}
+.BoardIconReportMod label{
+    cursor: pointer;
+}
+.BoardIconReportMod #fileName{
+    font-size: 13px; color: #5C5C5C;
+}
+
+
+
+/* 이전 버튼 클릭시 전환 영역 */
+
+.Boardcontent1 {
+    width: 80%; height: 50%; border-bottom: 1px solid #231F2050; 
+    display: none; flex-direction: column; justify-content: start; 
+    overflow: auto; margin-bottom: 8px;
+}
+
+.BoardCommentBox1 {
+    width: 80%; height: 40%; display: none;
+}
+
+.BoardCommentProfile1 {
+    width: 50px; height: 50px; margin-right: 20px; border-radius: 50%; 
+    background-color: #231F2050; float: left; margin-top: 20px; 
+    display: flex; cursor: pointer;
+}
+
+.BoardCommentText1 {
+    width: 80%; height: 35%; margin-top: 20px; margin-bottom: 20px; 
+    border-radius: 10px; resize: none; padding: 10px;
+}
+
+.BoardCommentBtn1>button {
+    width: 100px; height: 35px; background-color: #FFE69A; 
+    border-radius: 20px; text-align: center; margin-bottom: 20px; 
+    color: white; float: right; margin-left: 6px; margin-bottom: 10px; 
+    display: block;
+}
+
+.BoardCommentBtn1>button:hover {
+    background-color: #FFD24C;
+}
+
+/* .BoardPost1{
+    display: inline;
+} */
+.BoardProfile1 {
+    width: 40px; height: 40px; margin-right: 20px; border-radius: 50%; 
+    /* border: 1px solid black; */ background-color: #231F2050; 
+    float: left; margin-top: 5px; display: block; cursor: pointer;
+}
+
+.BoardComment-remove-row {
+    float: right; cursor: pointer; transform: translateY(-20px);
+}
+
+/* 스크롤바 설정*/
+/* .scrollBox::-webkit-scrollbar{
+    width: 8px;
+} */
+
+/* 스크롤바 막대 설정*/
+/* .scrollBox::-webkit-scrollbar-thumb{
+    background-color:#FFD24C;
+    border-radius: 10px;
+} */
+
+/* 스크롤바 뒷 배경 설정*/
+/* .scrollBox::-webkit-scrollbar-track{
+    background-color: #FFE69A; 
+} */
+
+/* 게시글 슬라이드 */
+
+/* ----------------------------------------------------------------- */
+.slide {
+    /* layout */
+    display: flex;
+    flex-wrap: nowrap;
+    /* 컨테이너의 내용물이 컨테이너 크기(width, height)를 넘어설 때 보이지 않도록 하기 위해 hidden을 준다. */
+    overflow: hidden;
+
+    /* position */
+    /* slide_button의 position absolute가 컨테이너 안쪽에서 top, left, right offset이 적용될 수 있도록 relative를 준다. (기본값이 static인데, static인 경우 그 상위 컨테이너로 나가면서 현재 코드에선 html을 기준으로 offset을 적용시키기 때문) */
+    position: relative;
+    background-color: #5C5C5C;
+    /* size */
+    width: 86.5%;
+}
+
+.slide_item {
+    /* layout */
+    display: flex; align-items: center; justify-content: center;
+
+    /* position - 버튼 클릭시 left offset값을 적용시키기 위해 */
+    position: relative;
+    left: 0px;
+
+    /* size */
+    width: 100%;
+    /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
+    flex-shrink: 0;
+
+    /* transition */
+    transition: left 0.15s;
+}
+
+.slide_button {
+    /* layout */
+    display: flex; align-items: center; justify-content: center;
+
+    /* position */
+    position: absolute;
+    /* 버튼이 중앙에 위치하게 하기위해 계산 */
+    top: calc(50% - 16px);
+
+    /* size */
+    width: 32px;
+    height: 32px;
+
+    /* style */
+    border-radius: 100%;
+    background-color: rgba(204, 204, 204, 0.3);
+    cursor: pointer;
+}
+
+.slide_prev_button {
+    left: 10px;
+}
+
+.slide_next_button {
+    right: 10px;
+}
+
+
+/* 페이지네이션 스타일 */
+ul,
+li {
+    list-style-type: none; padding: 0; margin: 0;
+}
+
+.slide_pagination {
+    /* layout */
+    display: flex; gap: 5px;
+
+    /* position */
+    position: absolute; bottom: 47px; left: 462px;
+    /* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
+    transform: translateX(-50%);
+}
+
+.slide_pagination>li {
+    /* 현재 슬라이드가 아닌 것은 투명도 부여 */
+    color: #D9D9D9; cursor: pointer; font-size: 35px; margin: 0 5px;
+}
+
+.slide_pagination>li.active {
+    /* 현재 슬라이드 색상은 투명도 없이 */
+    color: #5286DC;
+}
+
+
+/* ----------------------------------------------------------------- */
+
+.slide2 {
+    /* layout */
+    display: flex; flex-wrap: nowrap;
+    
+    /* 컨테이너의 내용물이 컨테이너 크기(width, height)를 넘어설 때 보이지 않도록 하기 위해 hidden을 준다. */
+    overflow: hidden;
+
+    /* position */
+    /* slide_button의 position absolute가 컨테이너 안쪽에서 top, left, right offset이 적용될 수 있도록 relative를 준다. (기본값이 static인데, static인 경우 그 상위 컨테이너로 나가면서 현재 코드에선 html을 기준으로 offset을 적용시키기 때문) */
+    position: relative; top: 8%; left: 0%;
+
+    /* size */
+    width: 100%;
+
+    /* slide drag를 위해 DOM요소가 드래그로 선택되는것을 방지 */
+    user-select: none;
+}
+
+.slide_item2 {
+    /* layout */
+    display: flex; align-items: center; justify-content: center;
+
+    /* position - 버튼 클릭시 left offset값을 적용시키기 위해 */
+    position: relative;
+    left: 0px;
+
+    /* size */
+    width: 100%;
+    /* flex item의 flex-shrink는 기본값이 1이므로 컨테이너 크기에 맞게 줄어드는데, 슬라이드를 구현할 것이므로 줄어들지 않도록 0을 준다. */
+    flex-shrink: 0;
+
+    /* transition */
+    transition: left 0.15s;
+}
+
+.slide_button2 {
+    /* layout */
+    display: flex; align-items: center; justify-content: center;
+
+    /* position */
+    position: absolute;
+    /* 버튼이 중앙에 위치하게 하기위해 계산 */
+    top: calc(50% - 16px);
+
+    /* size */
+    width: 32px; height: 32px;
+
+    /* style */
+    border-radius: 100%; background-color: #cccc; cursor: pointer;
+}
+
+.slide_prev_button2 {
+    left: 10px;
+}
+
+.slide_next_button2 {
+    right: 10px;
+}
+
+/* 각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용 */
+
+
+/* 페이지네이션 스타일 */
+ul,
+li {
+    list-style-type: none; padding: 0; margin: 0;
+}
+
+.slide_pagination2 {
+    /* layout */
+    display: flex; gap: 5px;
+
+    /* position */
+    position: absolute; bottom: 47px;
+    /* left:50%, translateX(-50%)를 하면 가로 가운데로 위치시킬 수 있다. */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.slide_pagination2>li {
+    /* 현재 슬라이드가 아닌 것은 투명도 부여 */
+    color: #D9D9D9; cursor: pointer; font-size: 35px; margin: 0 5px;
+}
+
+.slide_pagination2>li.active {
+    /* 현재 슬라이드 색상은 투명도 없이 */
+    color: #5286DC;
+}
+
+.slide-img {
+    width: 100%; -webkit-user-drag: none; user-select: none;
+}

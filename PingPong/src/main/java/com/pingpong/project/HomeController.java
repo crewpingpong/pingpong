@@ -33,7 +33,11 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";
+//		return "common/main";
+//		return "personal/myPageModi";
+//		return "member/signupInfo";
+//		return "qna/QnAHome";
+		return "maneger/managerReportContent";
 	}
 	
 }

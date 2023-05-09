@@ -1,0 +1,182 @@
+
+.ch-main-container{  /* 메인 컨테이너 */
+    max-width: 1420px;
+    margin: 0 auto;
+    padding: 50px;
+    margin-top: 30px;
+}
+
+/* 검색창 */
+.ch-search-area{ 
+    width : 100%;
+    height: 50px;
+    margin-top : 80px;
+    margin-bottom : 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ch-search-area svg:first-child{margin-right:13px;}
+.ch-search-area fieldset{display: flex;}
+.ch-search-area input{border: none; width:95%; height:100%;}
+.ch-search-area input:focus{outline: none;}
+.ch-search-area fieldset{
+    width: 600px;
+    height: 50px; border-radius: 30px; border: 2px solid #231F20;
+    display: flex; justify-content: space-between; align-items: center; padding: 0 20px; 
+}
+
+
+
+/* FAQ 버튼 */
+.ch-QnA-section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    list-style: none;
+    padding: 0;
+}
+.ch-squareBtn{
+    flex: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ch-squareBtn>a{
+    flex: 300px;
+    margin: 0px 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 320px;
+    height: 180px;
+    border-radius: 30px;
+    background-color: #FFE69A;
+    font-size: 30px;
+    font-weight: bold;
+    position: relative;
+}
+
+
+
+
+
+/* 밑에 인기많은 질문 몇개 구역 */
+.ch-main-container>section:nth-child(3){
+    display: flex;
+    justify-content: center;
+}
+.ch-rank-section{
+    background-color: #FFE69A;
+    border-radius: 30px;
+    padding: 20px;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.ch-listBtn>a{
+    background-color: white;
+    margin: 7px 20px;
+    width: 900px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-bottom: 2px;
+    font-size: 16px;
+}
+.ch-listBtn>a>svg{
+    margin-right: 5px;
+}
+
+#grayBackground {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top:0;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#grayBackground>div {
+    width : 600px;
+    min-height: 600px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+#grayBackground>#oneToOne>div:first-child{
+    height: 80px;
+    border-bottom: 1px solid #C5C5C5;;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+#grayBackground>#oneToOne>div:first-child>svg:nth-child(2){
+    position: absolute; right:2%;
+}
+#grayBackground>div>div:nth-child(2){
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+#grayBackground>div>form{
+    padding: 0 60px;
+}
+
+#grayBackground>div>form>*{
+    margin-top : 10px;
+    margin-bottom: 10px;
+}
+#grayBackground>div>form>input{
+    width: 100%;
+    height: 42px;
+    border-radius: 10px;
+    padding: 18px;
+    border: 1px solid #231F20;
+}
+
+#grayBackground>div>form>textarea{
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    padding: 18px;
+    resize : none;
+    border: 1px solid #231F20;
+}
+
+#grayBackground>div>form>input:nth-of-type(2){
+    display: none;
+}
+
+#grayBackground>div>form>div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+#grayBackground>div>form>div>button{
+    width : 150px;
+    height: 35px;
+    color : white;
+    border-radius: 20px;
+    background-color: #FFD24C;
+    margin-bottom: 20px;
+}
+label{
+    cursor: pointer;
+}
+#fileName{
+    font-size: 13px;
+    color: #5C5C5C;
+}
