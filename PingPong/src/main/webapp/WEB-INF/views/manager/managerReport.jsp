@@ -11,14 +11,14 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/resources/css/maneger/manageComment.css">
+    <link rel="stylesheet" href="/resources/css/maneger/managerReport.css">
     
 </head>
 <body>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-
-    <!-- 관리자 페이지 Tab Menu -->
+	
+	    <!-- 관리자 페이지 Tab Menu -->
 
     <div class="admin-content-container">
 
@@ -46,7 +46,7 @@
                     </li>
 
                     <li>                          
-                        <a href="/manageComment.html">댓글 관리</a>  
+                        <a href="/managerComment.html">댓글 관리</a>  
                     </li>
                     <li>
                         <p>문의</p>
@@ -65,21 +65,20 @@
                 </ul>
             </div>
         </div>
+
         <div class="admin-content-main-area"> 
-            <div id="adminModiTab4" class="admin-content-main">
+            <div id="adminModiTab5" class="admin-content-main">
+                <!-- ★★★★★★★★★★★★★★ 1:1문의 ★★★★★★★★★★★★★★ -->
                 <div class="admin-left-side-menu">
-                    <div>댓글 관리</div>
+                    <div>받은 신고</div>
                     <div>
                         <select name="select" id="">
                             <option value="memberNo">ID</option>
-                            <option value="memberNo">게시글 번호</option>
-                            <option value="memberNo">댓글 내용</option>
+                            <option value="memberNo">NickName</option>
+                            <option value="memberNo">Email</option>
                         </select>
                         <input type="text">
                         <button type="button">검색</button>
-                    </div>
-                    <div>
-                        <button>삭제처리</button>
                     </div>
                     <div>
                         <table id="oneToOneTable">
@@ -93,89 +92,51 @@
                             </colgroup>
                             <thead>
                                 <tr>
-                                    <th>
-                                        <input type="checkbox" name="choiceBox" value="selectAll" id="chkSelectAll">
-                                    </th>
+                                    <th><input type="checkbox" name="choiceBox" value="selectAll" id="chkSelectAll"></th>
                                     <th>No.</th>
-                                    <th>게시글</th>
-                                    <th>댓글 내용</th>
-                                    <th>ID(URL)</th>
-                                    <th>삭제</th>
+                                    <th>신고자 ID(URL)</th>
+                                    <th>피신고자 ID(URL)</th>
+                                    <th>내용</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
+                                    <td><input type="checkbox" name="choicebox" value="1"></td>
                                     <td>1</td>
-                                    <td>4</td>
-                                    <td><a href="/manager1To1Content.html">좋아요 반사 부탁드려요♥ </a></td>
-                                    <td>
-                                        <a href="/personalHome.html">Admin</a>
-                                    </td>
-                                    <td>N</td>
+                                    <td><a href="/personalHome.html" class="reporter">AAA</a></td>
+                                    <td><a href="/personalHome.html" class="respondent">badDog</a></a></td>
+                                    <td><a href="/managerReportContent.html">이 사람이 저한테 이렇게! 이렇게! 흑흑ㅎ흑흙...모래</a></td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
+                                    <td><input type="checkbox" name="choicebox" value="1"></td>
                                     <td>2</td>
-                                    <td>1</td>
-                                    <td><a href="/manager1To1Content.html">혹시 저희랑 일해보실 생각 없...</a></td>
-                                    <td>
-                                        <a href="">비회원</a>
-                                    </td>
-                                    <td>N</td>
+                                    <td><a href="/personalHome.html" class="reporter">DanA-Ka</a></td>
+                                    <td><a href="/personalHome.html" class="respondent">badDog</a></a></td>
+                                    <td><a href="/managerReportContent.html">와타시 하트에 대못 박혔다 데스</a></td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
+                                    <td><input type="checkbox" name="choicebox" value="1"></td>
                                     <td>3</td>
-                                    <td>2</td>
-                                    <td><a href="/manager1To1Content.html">너무 이뻐요</a></td>
-                                    <td>
-                                        <a href="">비회원</a>
-                                    </td>
-                                    <td>N</td>
+                                    <td><a href="/personalHome.html" class="reporter">ccc</a></td>
+                                    <td><a href="/personalHome.html" class="respondent">badDog</a></a></td>
+                                    <td><a href="/managerReportContent.html">매우 큰 마상입니다</a></td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
+                                    <td><input type="checkbox" name="choicebox" value="1"></td>
                                     <td>4</td>
-                                    <td>5</td>
-                                    <td><a href="/manager1To1Content.html">JQuery 어떻게 하셨나요?</a></td>
-                                    <td>
-                                        <a href="/personalHome.html">핑퐁짱</a>
-                                    </td>
-                                    <td>Y</td>
+                                    <td><a href="/personalHome.html" class="reporter">DDD</a></td>
+                                    <td><a href="/personalHome.html" class="respondent">badDog</a></a></td>
+                                    <td><a href="/managerReportContent.html">운영자님을 신고합니다!</a></td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
+                                    <td><input type="checkbox" name="choicebox" value="1"></td>
                                     <td>5</td>
-                                    <td>3</td>
-                                    <td><a href="/manager1To1Content.html">진짜 노력이 보입니다</a></td>
-                                    <td>
-                                        <a href="/personalHome.html">핑퐁</a>
-                                    </td>
-                                    <td>Y</td>
+                                    <td><a href="/personalHome.html" class="reporter">EEE</a></td>
+                                    <td><a href="/personalHome.html" class="respondent">badDog</a></a></td>
+                                    <td><a href="/managerReportContent.html">가나다라마바사</a></td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
-                                    <td>6</td>
-                                    <td>3</td>
-                                    <td><a href="/manager1To1Content.html">가나다라마바사</a></td>
-                                    <td>
-                                        <a href="/personalHome.html">쿠쿠루삥뽕</a>
-                                    </td>
-                                    <td>N</td>
-                                </tr>
+
+                                
                                 
                             </tbody>
                         </table>
@@ -191,14 +152,13 @@
                         <i class="fa-solid fa-arrow-right"></i>
                     </div>
                 </div>
+                <!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ -->
             </div> 
-
         </div>
-    </div> 
-</div>
-</div>
+    </div>
+    
 
     <script src="/resources/js/script.js"></script> <!-- 메인 헤더, 네브 js -->
-    <script src="/resources/js/maneger/manageComment.js"></script>
+    <script src="/resources/js/maneger/manager1To1Inquiry.js"></script>
 </body>
 </html>

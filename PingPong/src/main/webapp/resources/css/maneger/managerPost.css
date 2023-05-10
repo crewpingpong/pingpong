@@ -50,8 +50,8 @@
 .admin-left-side-menu > ul > li > a:hover{
     font-weight: bold;
 }
-
-.admin-left-side-menu> ul > li.admin_is_on > a{
+/* 선택된 관리자 페이지 볼드 */
+.admin-left-side-menu> ul > li:nth-child(5) > a{
     font-weight: bold;
     text-decoration: underline;
 }

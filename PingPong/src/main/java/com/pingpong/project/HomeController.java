@@ -37,7 +37,14 @@ public class HomeController {
 //		return "personal/myPageModi";
 //		return "member/signupInfo";
 //		return "qna/QnAHome";
-		return "maneger/managerReportContent";
+//		return "manager/manager1To1Content";
+//		return "manager/manager1To1Inquiry";
+		return "manager/managerComment";
+//		return "manager/managerExistingMe0mber";
+//		return "manager/managerPost";
+//		return "manager/managerReport";
+//		return "manager/managerSecessionMember";
+//		return "manager/managerReportContent";
 	}
 	
 }

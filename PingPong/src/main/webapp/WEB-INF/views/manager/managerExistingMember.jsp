@@ -11,12 +11,13 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/resources/css/maneger/managerSecessionMember.css">
+    <link rel="stylesheet" href="/resources/css/maneger/managerExistingMember.css">
     
 </head>
 <body>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
 
     <!-- 관리자 페이지 Tab Menu -->
 
@@ -26,7 +27,7 @@
             <div class="admin-left-side-menu">   
                 <ul>
                     <li>
-                        <p>회원 관리</p> <!-- XXXXX..? -->
+                        <p>회원 관리</p>
                     </li>  
 
                     <li class="admin_is_on">        
@@ -46,7 +47,7 @@
                     </li>
 
                     <li>                          
-                        <a href="#adminModiTab4">댓글 관리</a>  
+                        <a href="/managerCommnet.html">댓글 관리</a>  
                     </li>
                     <li>
                         <p>문의</p>
@@ -66,9 +67,9 @@
             </div>
         </div>
         <div class="admin-content-main-area"> 
-            <div id="adminModiTab2" class="admin-content-main">
+            <div id="adminModiTab1" class="admin-content-main">
                 <div class="admin-left-side-menu">
-                    <div>탈퇴 회원 관리</div>
+                    <div>가입 회원 관리</div>
                     <div>
                         <select name="select" id="">
                             <option value="memberNo">ID</option>
@@ -97,7 +98,7 @@
                                     <th>ID</th>
                                     <th>Nickname</th>
                                     <th>Email</th>
-                                    <th>탈퇴 일자</th>
+                                    <th>가입 일자</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -121,7 +122,7 @@
                                     <td>
                                         <a href="/personalHome.html">bbbbb</a>
                                     </td>
-                                    <td>abcdefghijklnmopqrstuvwxyz</td>
+                                    <td>abcdefghijklnmopqrstuvwxyzabc</td> <!-- 영어 소 29글자 1줄 -->
                                     <td>asdasdasda@gmail.com</td>
                                     <td>23/01/01</td>
                                 </tr>
@@ -133,7 +134,7 @@
                                     <td>
                                         <a href="/personalHome.html">ccccc</a>
                                     </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
+                                    <td>ABCDEFGHIJKLNMOPQRSTUVWX</td> <!-- 영어 대 24글자 1줄 -->
                                     <td>q1w2e3r4@gmail.com</td>
                                     <td>23/01/01</td>
                                 </tr>
@@ -185,6 +186,7 @@
                                     <td>q1w2e3r4@gmail.com</td>
                                     <td>23/01/01</td>
                                 </tr>
+
                                 
                             </tbody>
                         </table>
@@ -201,7 +203,7 @@
                     </div>
                 </div>
             </div> 
-            <div id="selectMemberRestoreExisting">선택한 회원 탈퇴 복구</div>
+            <div id="selectMemberSecession">선택한 회원 탈퇴 처리</div>
         </div>
     </div> 
 </div>

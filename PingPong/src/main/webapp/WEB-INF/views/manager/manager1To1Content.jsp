@@ -46,7 +46,7 @@
                     </li>
 
                     <li>                          
-                        <a href="/manageComment.html">댓글 관리</a>  
+                        <a href="/managerComment.html">댓글 관리</a>  
                     </li>
                     <li>
                         <p>문의</p>

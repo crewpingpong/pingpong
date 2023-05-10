@@ -11,13 +11,12 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="/resources/css/maneger/managerExistingMember.css">
+    <link rel="stylesheet" href="/resources/css/maneger/managerPost.css">
     
 </head>
 <body>
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-
 
     <!-- 관리자 페이지 Tab Menu -->
 
@@ -27,7 +26,7 @@
             <div class="admin-left-side-menu">   
                 <ul>
                     <li>
-                        <p>회원 관리</p>
+                        <p>회원 관리</p> <!-- XXXXX..? -->
                     </li>  
 
                     <li class="admin_is_on">        
@@ -47,7 +46,7 @@
                     </li>
 
                     <li>                          
-                        <a href="#adminModiTab4">댓글 관리</a>  
+                        <a href="/managerComment.html">댓글 관리</a>  
                     </li>
                     <li>
                         <p>문의</p>
@@ -66,18 +65,21 @@
                 </ul>
             </div>
         </div>
+        
         <div class="admin-content-main-area"> 
-            <div id="adminModiTab1" class="admin-content-main">
+            <div id="adminModiTab3" class="admin-content-main">
                 <div class="admin-left-side-menu">
-                    <div>가입 회원 관리</div>
+                    <div>게시글 관리</div>
                     <div>
                         <select name="select" id="">
                             <option value="memberNo">ID</option>
-                            <option value="memberNo">NickName</option>
-                            <option value="memberNo">Email</option>
+                            <option value="memberNo">게시글 내용</option>
                         </select>
                         <input type="text">
                         <button type="button">검색</button>
+                    </div>
+                    <div>
+                        <button>삭제처리</button>
                     </div>
                     <div>
                         <table id="oneToOneTable">
@@ -95,10 +97,10 @@
                                         <input type="checkbox" name="choiceBox" value="selectAll" id="chkSelectAll">
                                     </th>
                                     <th>No.</th>
-                                    <th>ID</th>
-                                    <th>Nickname</th>
-                                    <th>Email</th>
-                                    <th>가입 일자</th>
+                                    <th>ID(URL)</th>
+                                    <th>게시글 내용</th>
+                                    <th>신고횟수</th>
+                                    <th>삭제</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -106,87 +108,74 @@
                                     <td>
                                         <input type="checkbox" name="choicebox" value="1">
                                     </td>
-                                    <td>2-000001</td>
+                                    <td>1</td>
                                     <td>
-                                        <a href="/personalHome.html">aaaaa</a>
+                                        <a href="/personalHome.html">Admin</a>
                                     </td>
-                                    <td>가나다라마바사아자차카타파하가나</td> <!-- 한글 16글자 1줄 -->
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
+                                    <td><a href="/manager1To1Content.html">저의 첫 포트폴리오 입니다. ... </a></td>
+                                    <td>0</td>
+                                    <td>N</td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="choicebox" value="1">
+                                        <input type="checkbox" name="choicebox" value="2">
                                     </td>
-                                    <td>1-000001</td>
+                                    <td>2</td>
                                     <td>
-                                        <a href="/personalHome.html">bbbbb</a>
+                                        <a href="">비회원</a>
                                     </td>
-                                    <td>abcdefghijklnmopqrstuvwxyzabc</td> <!-- 영어 소 29글자 1줄 -->
-                                    <td>asdasdasda@gmail.com</td>
-                                    <td>23/01/01</td>
+                                    <td><a href="/manager1To1Content.html">내용 앞 15글자만 보여주...</a></td>
+                                    <td>0</td>
+                                    <td>N</td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="choicebox" value="1">
+                                        <input type="checkbox" name="choicebox" value="2">
                                     </td>
-                                    <td>1-000002</td>
+                                    <td>3</td>
                                     <td>
-                                        <a href="/personalHome.html">ccccc</a>
+                                        <a href="">비회원</a>
                                     </td>
-                                    <td>ABCDEFGHIJKLNMOPQRSTUVWX</td> <!-- 영어 대 24글자 1줄 -->
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
+                                    <td><a href="/manager1To1Content.html">나머지는...</a></td>
+                                    <td>0</td>
+                                    <td>N</td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="choicebox" value="1">
+                                        <input type="checkbox" name="choicebox" value="2">
                                     </td>
-                                    <td>1-000003</td>
+                                    <td>4</td>
                                     <td>
-                                        <a href="/personalHome.html">ddddd</a>
+                                        <a href="/personalHome.html">핑퐁짱</a>
                                     </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
+                                    <td><a href="/manager1To1Content.html">게시글 내용 클릭하면 모달로 보여주는?</a></td>
+                                    <td>1</td>
+                                    <td>Y</td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="choicebox" value="1">
+                                        <input type="checkbox" name="choicebox" value="2">
                                     </td>
-                                    <td>1-000004</td>
+                                    <td>5</td>
                                     <td>
-                                        <a href="/personalHome.html">eeeee</a>
+                                        <a href="/personalHome.html">핑퐁짱</a>
                                     </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
+                                    <td><a href="/manager1To1Content.html">가나다라마바사</a></td>
+                                    <td>3243</td>
+                                    <td>Y</td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="choicebox" value="1">
+                                        <input type="checkbox" name="choicebox" value="2">
                                     </td>
-                                    <td>1-000005</td>
+                                    <td>6</td>
                                     <td>
-                                        <a href="/personalHome.html">fffff</a>
+                                        <a href="/personalHome.html">핑퐁짱</a>
                                     </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
+                                    <td><a href="/manager1To1Content.html">가나다라마바사</a></td>
+                                    <td>0</td>
+                                    <td>N</td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1-000006</td>
-                                    <td>
-                                        <a href="/personalHome.html">ggggg</a>
-                                    </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
-
                                 
                             </tbody>
                         </table>
@@ -203,11 +192,12 @@
                     </div>
                 </div>
             </div> 
-            <div id="selectMemberSecession">선택한 회원 탈퇴 처리</div>
+
         </div>
     </div> 
 </div>
 </div>
+
 
     <script src="/resources/js/script.js"></script> <!-- 메인 헤더, 네브 js -->
     <script src="/resources/js/maneger/managerPost.js"></script>
