@@ -93,8 +93,8 @@
             </div>
     
             <div class="signBtn"> <!-- 로그인 회원가입 버튼 -->
-                <button type="button" class="colormain2" onclick="location.href='login.html'">로그인</button>
-                <button type="button" class="colorsub1" onclick="location.href='signup.html'">회원가입</button>
+                <button type="button" class="colormain2"><a href="/member/login">로그인</a></button>
+                <button type="button" class="colorsub1"><a href="/member/signUp">회원가입</a></button>
             </div>
     
             <div class="seachbox"> <!-- 검색 아이콘에 마우스 올리면 커지는 검색창 -->

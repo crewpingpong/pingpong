@@ -17,7 +17,7 @@
         <div class="login-box customChk">
             <a href="index.html"><img src="/resources/images/logo_X1.png"></a>
 
-            <form action="" method="get">
+            <form action="/member/login" method="post">
                 <div class="login-input-email">
                     <p>이메일</p>
                     <input type="email" name="userEmail" required>
@@ -29,7 +29,7 @@
                     <p class="passwordwrong">* 가입되어 있지 않은 계정입니다.</p>
                 </div>
     
-                <button class="login-button" type="button">로그인</button>
+                <button class="login-button">로그인</button>
     
                 <div class="login-check">
                     <div>
