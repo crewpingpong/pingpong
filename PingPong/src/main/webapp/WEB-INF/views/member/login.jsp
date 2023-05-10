@@ -20,12 +20,12 @@
             <form action="/member/login" method="post">
                 <div class="login-input-email">
                     <p>이메일</p>
-                    <input type="email" name="userEmail" required>
+                    <input type="email" name="memberEmail" required>
                 </div>
     
                 <div class="login-input-password">
                     <p>비밀번호</p>
-                    <input type="password" name="userPassword" autocomplete="off" required> <br>
+                    <input type="password" name="memberPw" autocomplete="off" required> <br>
                     <p class="passwordwrong">* 가입되어 있지 않은 계정입니다.</p>
                 </div>
     
@@ -33,7 +33,7 @@
     
                 <div class="login-check">
                     <div>
-                        <input type="checkbox" id="checkLogin">
+                        <input type="checkbox" id="checkLogin" name="saveId">
                         <label for="checkLogin">
                             <span></span>
                             로그인 유지

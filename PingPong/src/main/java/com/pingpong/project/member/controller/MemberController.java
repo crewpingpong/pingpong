@@ -46,7 +46,8 @@ public class MemberController {
          , HttpServletResponse resp
          , RedirectAttributes ra
          ) {
-      
+      System.out.println(inputMember.getMemberEmail());
+	   
       Member loginMember = service.login(inputMember);
       
       System.out.println(loginMember.getMemberNickname());
