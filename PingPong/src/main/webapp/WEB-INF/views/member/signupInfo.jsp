@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -14,21 +14,21 @@
 <body>
 
 	<div class="login-container">
-        <form class="signup-info-box">
-            <a href="index.html"><img src="/resources/images/logo_X1.png"></a>
+        <form class="signup-info-box" method="post" action="/member/signupInfo" name="signupInfoFrm" id="signupInfoFrm">
+            <a href="/"><img src="/resources/images/logo_X1.png"></a>
     
             <p>회원 정보 입력하기</p>
     
             <div class="signup-info-member-name">
                 <p>사용자 이름(닉네임)</p>
-                <input type="text" placeholder="닉네임을 입력해주세요." name="userNickname" required>
+                <input type="text" placeholder="닉네임을 입력해주세요." name="memberNickname" required>
             </div>
     
             <div class="signup-info-memberURL">
                 <p>PingPong URL(영문)</p>
                 <div>
                     <p>pingpong.net/</p>
-                    <input type="text" name="userurl" required> <br>
+                    <input type="text" name="memberUrl" required> <br>
                 </div>
                 <button class="url-double-check" type="button">중복 확인</button>
             </div>
@@ -37,6 +37,7 @@
                 <p>작업 & 관심 분야(선택)</p>
                 <div class="job-checkbox">
                     <div>
+
                         <label for=""><input type="checkbox"> 그래픽 디자인</label>
                         <label for=""><input type="checkbox"> 영상/모션그래픽</label> 
                         <label for=""><input type="checkbox"> 캐릭터 디자인</label> 
@@ -55,7 +56,7 @@
                 </div>
             </div>
     
-            <button><a href="#">완료</a></button>
+            <button>완료</button>
     
         </form>
     </div>
