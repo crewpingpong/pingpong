@@ -17,14 +17,34 @@
     <div class="personalHome">
     
         <div class="profileBackground">  <!-- 프로필 배경 사진 -->
-            <div> <!-- 내 홈화면 일 경우 뜨는 배경화면 편집 -->
-                <p>배경화면 편집</p> <!-- 파일 첨부 버튼 위임 -->
-                <input type="file" class="profileBgupload" accept="image/*" required multiple>
-            </div>
-            <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
 
-            </div>
+        <c:choose>
+            <c:when test="${not empty loginMember}">
+                <form action="/mypage/background" method="post">
+                    <div> <!-- 내 홈화면 일 경우 뜨는 배경화면 편집 -->
+                        <label for="background" id="selectBackground">배경화면 선택</label> <!-- 파일 첨부 버튼 위임 -->
+                        <span id="afterChoice">
+                            <button id="changeBackground">변경하기</button>
+                            <span id="deleteBackground">돌아가기</span>
+                        </span>
+                        <input type="file" name="backgroundImage" id="background" class="profileBgupload" accept="image/*">
+                    </div>
+                    <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
+                        <img class="preview">
+                    </div>
+                </form>
+            </c:when>
+        
+            <c:otherwise>
+                <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
+                    <img class="preview" src="/resources/images/green.jpg">
+                </div>
+            </c:otherwise>
+        </c:choose>
+
         </div>
+
+
         <div class="profilebox"> <!-- 프로필 박스 -->
             <div class="profileLeft"> <!-- 프로필 사진 있는 구역 -->
                 <div class="profileCircle">
