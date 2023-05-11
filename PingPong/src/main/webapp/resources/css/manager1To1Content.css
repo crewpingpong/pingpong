@@ -1,0 +1,47 @@
+/* 1:1 문의 내용 창 */
+#oneToOneContent>div{
+    text-align: center;
+    padding: 20px 40px;
+}
+/* 돌아가기 버튼 */
+
+#admin-content-main-area{
+    position: absolute;
+}
+#oneToOneContent>a{
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    position: absolute;
+}
+
+/* 첫 줄 제목 */
+#oneToOneContent>div>div:first-of-type{
+    font-size: 30px;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+/* 이메일 아이디 */
+#oneToOneContent>div>div:nth-child(2)>div:first-child{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+/* 회원 이메일 나오는 창 */
+#oneToOneContent input{
+    width: 100%;
+    margin: 10px 0 20px 0;
+    border-radius: 8px;
+    border: 1px solid #5C5C5C;
+    height: 40px;
+}
+/* 내용 창 */
+#oneToOneContent textarea{
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+}
+#oneToOneContent>div>div>div:last-child{
+    text-align: left;
+}

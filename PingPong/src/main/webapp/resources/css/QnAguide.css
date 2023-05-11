@@ -1,0 +1,87 @@
+/* 상단 기본 가이드 제목 */
+.ch-guide-container{
+    max-width: 1320px;
+    margin: 0 auto;
+    margin-top: 150px;
+}
+.ch-guideheader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 80px;
+}
+.ch-guideheader>a{
+    position: absolute;
+    left:0px;
+    font-size: 24px;
+}
+.ch-guideheader>h3{
+    text-align: center;
+    font-size: 30px;
+}
+
+
+/* 기본 가이드 목록 */
+.ch-guide-container>section:nth-child(2)>div{
+    height: 100%;
+}
+.ch-guide-container>section:nth-child(2)>div>ul{
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+.ch-guide-container a{
+    text-decoration:none;
+}
+
+.ch-list>li>a{
+    width: 330px;
+    flex: 250px;
+    height: 60px;
+    background-color: #92B4EC;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.ch-tabMenu{
+    position:relative;
+}
+.ch-tabMenu>div>.ch-cont{
+    display: none; position:absolute;
+}
+.ch-tabMenu>div>div.ch-is_cont_on>.ch-cont{
+    float:left;
+    position:absolute;
+    display: block;
+}
+.ch-is_on>.ch-guideBtn{
+    background-color: #5286DC;
+    color : white;
+}
+.ch-cont_area{
+    display: flex;
+    justify-content: center;
+}
+.ch-cont_area>div>div{
+    width: 1000px;
+    height: 500px;
+    background-color: #FFE69A;
+    margin-top: 50px;
+}
+
+.ch-cont_area>div:first-child{
+    display: block;
+}
+.ch-cont_area #ch-tab1 ul li img{
+    width: 100%;
+}
+.guide-infomation{
+    width: 100%; height: auto;
+}

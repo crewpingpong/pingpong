@@ -18,17 +18,10 @@
     <link rel="stylesheet" href="/resources/css/main/mainSlide.css">
     <script src="/resources/js/main/slick.js"></script>
 
-    <style>
-        #btn11{
-            z-index: 300; position: absolute; width: 100px; height: 50px; border: 1px solid #000; background-color: yellow; top: 200px; left: 200px;
-        }
-    </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <!-- 메인 슬라이드 -->
-    
-    <button id="btn11" onclick="location.href='/manager/'">관리자 페이지</button>
     <main>
         <div class="slider center autoplay">
             <div class="slider-item">
