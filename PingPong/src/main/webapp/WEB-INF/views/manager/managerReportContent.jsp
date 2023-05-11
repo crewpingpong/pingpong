@@ -30,11 +30,11 @@
                     </li>  
 
                     <li class="admin_is_on">        
-                        <a href="/managerExistingMember.html">가입 회원</a> 
+                        <a onclick="location.href='/manager/'">가입 회원</a> 
                     </li>
 
                     <li>                          
-                        <a href="/managerSecessionMember.html">탈퇴 회원</a>  
+                        <a onclick="location.href='/manager/Secession'">탈퇴 회원</a>  
                     </li>
                     
                     <li>
@@ -42,17 +42,17 @@
                     </li>
 
                     <li>                          
-                        <a href="/managerPost.html">게시글 관리</a>  
+                        <a onclick="location.href='/manager/Post'">게시글 관리</a>  
                     </li>
 
                     <li>                          
-                        <a href="/managerComment.html">댓글 관리</a>  
+                        <a onclick="location.href='/manager/Comment'">댓글 관리</a>  
                     </li>
                     <li>
                         <p>문의</p>
                     </li>
                     <li>
-                        <a href="/manager1To1Inquiry.html">1:1 문의</a> 
+                        <a onclick="location.href='/manager/1To1inquiry'">1:1 문의</a> 
                     </li>
                     <li>
                     </li>
@@ -60,7 +60,7 @@
                         <p>신고</p>
                     </li>
                     <li>
-                        <a href="/managerReport.html">신고함</a> 
+                        <a onclick="location.href='/manager/Report'">신고함</a> 
                     </li>
                 </ul>
             </div>
