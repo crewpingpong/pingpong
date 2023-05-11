@@ -107,7 +107,7 @@ kh 정보교육원에서 국비 수업<br>
             </div> <!-- // profileRight -->
             
             <!-- 내정보 수정으로 가는 링크 -->
-            <div class="poroflieEdit"  onclick="location.href='.html'">
+            <div class="poroflieEdit" onclick="location.href='/mypage/myPageModi'">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect width="20" height="20" fill="url(#pattern0)"/>
                 <defs>

@@ -41,7 +41,7 @@
 
             <!-- *** 내 정보 편집 *** -->
             <div id="myPageModiTab1" class="myPage-content-main">
-                <form name="" action="" method="">
+                <form name="myPageFrm" action="info" method="">
                     <div class="myIfo-modi">
 
                         <!-- 프로필 사진 -->
@@ -133,7 +133,7 @@
 
             <!-- *** 프로필 편집 *** -->
             <div id="myPageModiTab2" class="myPage-content-main">
-                <form name="" action="" method="">
+                <form name="myPageFrm" action="profile" method="">
                     <div class="profile-modi">
 
                         <!-- 소개 -->
@@ -231,7 +231,7 @@
 
             <!-- *** 비밀번호 변경 화면 구현 & 회원 탈퇴 *** -->
             <div id="myPageModiTab3" class="myPage-content-main">
-                <form name="" action="" method="">
+                <form name="myPageFrm" action="changePw" method="">
                     <div class="password-modi">
 
                         <p>비밀번호 변경</p>
@@ -257,7 +257,7 @@
                     </div>     
                 </form>
 
-                <form name="" action="" method=""> 
+                <form name="myPageFrm" action="secession" method=""> 
                     <div class="secession">       
                         <p>회원 탈퇴</p>
                         
@@ -286,7 +286,7 @@
             
             <!-- *** 문의 내역 화면 구현 *** -->
             <div id="myPageModiTab4" class="myPage-content-main">
-                <form name="" action="" method="">
+                <form name="myPageFrm" action="inquiry" method="">
                     <div class="inquiry-area">
                         <p>문의 내역</p> 
                         <div>
