@@ -2,6 +2,7 @@ package com.pingpong.project.mypage.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/mypage")
@@ -17,6 +18,11 @@ public class MypageController {
     @GetMapping("/myPageModi")
     public String myPageModi() {
        return "personal/myPageModi"; 
+    }
+    
+    @PostMapping("/background")
+    public String background() {
+    	return null;
     }
 	   
 }
