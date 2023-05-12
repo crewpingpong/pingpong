@@ -3,32 +3,32 @@ const searchicon=document.querySelector(".search_icon");
 const searchbox=document.querySelector(".seachbox");
 const searchboxList = searchbox.parentElement.children;
 
-const temp = document.querySelectorAll(".seachbox, .seachbox *");
+const temp = document.querySelectorAll(".seachbox, .seachbox *, .search_icon, .search_icon *");
 
 // 검색 아이콘에 마우스가 올려졌을 때 검색 박스 커짐
 // 검색 자리에 있던 아이콘은 사라짐 (알림, 검색, 로그인 버튼)
-searchicon.addEventListener("mouseenter",()=>{
+searchicon.addEventListener("click",()=>{
     for(let i=0; i<3; i++){ // 오른쪽 아이콘 들은 전부 사라지게
         searchboxList[i].style.display="none"; 
     }
     searchbox.style.display="flex"; // 검색 버튼 커지기
     
-    window.addEventListener("click", e => {
-    
-        let flag = true;
-        temp.forEach(el => {
-            if(el == e.target) flag = false; 
-        });
-        
-        if(flag){
-            searchbox.style.display="none";
-            for(let i=0; i<3; i++){
-                searchboxList[i].style.display="flex";
-            }
-        }
-    })
 });
 
+window.addEventListener("click", e => {
+    console.log(e.target);
+    let flag = true;
+    temp.forEach(el => {
+        if(el == e.target) flag = false; 
+    });
+    
+    if(flag){
+        searchbox.style.display="none";
+        for(let i=0; i<3; i++){
+            searchboxList[i].style.display="flex";
+        }
+    }
+})
 
 /* NAV 영역 */
 const openHam = document.getElementById('openHam');
@@ -38,6 +38,16 @@ const closeHam = document.getElementById('closeHam');
 // const nav = document.querySelector('nav');
 const mainnav = document.querySelector('.mainnav');
 const grayBackground = document.querySelector(".grayBackground");
+
+
+// 검색창 변수
+const seachModInnerContent = document.getElementById("seachModInnerContent");
+
+const searchModResultList = document.getElementById("searchModResultList");
+const headerSearchModResultList = document.getElementById("headerSearchModResultList");
+const tagArr = ['#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱'];
+const nameArr = ['kimchanhee', 'leenahyun', 'leesangyun', 'choigeuntae', 'parkjaekyung'];
+
 
 // 열기 버튼을 누르면 nav의 display가 flex로 변경
 openHam.addEventListener("click",() => {
@@ -50,11 +60,18 @@ openHam.addEventListener("click",() => {
                 navmore.style.display="none"; 
                 logModContainer.style.display = "none";
                 siteInfoMod.style.display="none";
+                searchModContainer.style.display = "none";
             }
         })
     }
     // 닫기 버튼을 누르면 nav의 display가 none로 변경
-    closeHam.addEventListener("click", function(){mainnav.style.display = "none";});
+    closeHam.addEventListener("click", function(){
+        mainnav.style.display = "none";
+        navmore.style.display="none"; 
+        logModContainer.style.display = "none";
+        siteInfoMod.style.display="none";
+        searchModContainer.style.display = "none";
+    });
     /* 더 많은 기능을 보실려면 로그인해주세요. */
     const navloginBtn = document.querySelector(".navlogin");
     const logModContainer = document.querySelector("#logModContainer");
@@ -64,14 +81,8 @@ openHam.addEventListener("click",() => {
     const navloginclBtn = document.getElementById("navloginclBtn");
     navloginclBtn.addEventListener("click", () => {
         logModContainer.style.display = "none";
+
     });
-
-    const seachModInnerContent = document.getElementById("seachModInnerContent");
-
-    const searchModResultList = document.getElementById("searchModResultList");
-    const headerSearchModResultList = document.getElementById("headerSearchModResultList");
-    const tagArr = ['#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱'];
-    const nameArr = ['kimchanhee', 'leenahyun', 'leesangyun', 'choigeuntae', 'parkjaekyung'];
 
     seachModInnerContent.addEventListener("keyup", e => {
         while(searchModResultList.hasChildNodes()) {
@@ -148,6 +159,16 @@ moreicon.addEventListener("click",()=>{
     }
 });
 
+// 검색 x버튼 누르면 안에 있는 값 지우기
+const hamseachboxX = document.querySelector('div.seachbox > svg'); // 햄버거 검색 X 버튼
+const navseachboxX = document.querySelector('#searchModContainer > div:nth-child(2) > div > svg'); // 햄버거 검색 X 버튼
+
+hamseachboxX.addEventListener("click",()=>{
+    headerOpenSearchBox.value="";
+});
+navseachboxX.addEventListener("click",()=>{
+    seachModInnerContent.value="";
+});
 
 // 햄버거창 검색버튼 눌렀을 때 검색 창
 const navSearch = document.querySelector(".navSearch");
@@ -160,7 +181,7 @@ navSearchclBtn.addEventListener("click", () => {
     searchModContainer.style.display = "none";
 });
 
-// 헤더에 검색버튼 올리면 열리는 검색 버튼
+// 헤더에 검색버튼 올리면 열리는 검색 버튼 id = "headerOpenSearchBox"
 const headerOpenSearchBox = document.querySelector("#headerOpenSearchBox");
 const headerSearchModContainer = document.querySelector("#headerSearchModContainer");
 headerOpenSearchBox.addEventListener("keyup", e => {

@@ -110,7 +110,7 @@ position: fixed;}
 .mainnav .navlist ul li a{
     display: flex; height: 40px; line-height: 40px;
 }
-.mainnav .navlist ul li:last-child a{
+.mainnav .navlist .navlogin{
     display: flex; height: 40px; line-height: 40px; font-size: 12px;
     text-decoration: underline;
 }
@@ -122,13 +122,14 @@ position: fixed;}
 
 /* 더보기 버튼 클릭 했을 때 뜨는 더보기 메뉴 박스  */
 .navmore{
-width: 168px; height: 188px; background-color: #fff;
+width: 168px; background-color: #fff;
 border-radius: 20px; border: 1px solid #C5C5C5; 
 position: absolute; bottom: 70px; left: 70px;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
 display: none; z-index: 202;
 }
 .navmore ul li{margin-top: 28px; margin-left: 30px;}
+.navmore ul li:last-child{margin-bottom: 28px;}
 .navmore ul a{display: block; width: 100%; height: 100%;}
 
 
@@ -277,6 +278,8 @@ display: none; z-index: 202;
     cursor: pointer; font-size: 16px;
 }
 
+/* 드래그 안되게 하기 */
+#headerSearchModContainer > p{user-select: none;}
 
 /* 알림 하트 */
 .searchbox{
