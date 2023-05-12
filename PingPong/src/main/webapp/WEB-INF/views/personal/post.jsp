@@ -19,9 +19,9 @@
         <div class="profileBackground">  <!-- 프로필 배경 사진 -->
 
         <c:choose>
-            <c:when test="${not empty loginMember}">
-                <form action="/mypage/background" method="post">
-                    <div> <!-- 내 홈화면 일 경우 뜨는 배경화면 편집 -->
+            <c:when test="${not empty loginMember}">  <%-- 회원일 때  --%>
+                <%-- <c:if test="${loginMember.memberNo == memberProfile.memberNo}" > --%> <%-- 내 프로필 화면일 경우 --%>
+                    <div>
                         <label for="background" id="selectBackground">배경화면 선택</label> <!-- 파일 첨부 버튼 위임 -->
                         <span id="afterChoice">
                             <button id="changeBackground">변경하기</button>
@@ -29,13 +29,14 @@
                         </span>
                         <input type="file" name="backgroundImage" id="background" class="profileBgupload" accept="image/*">
                     </div>
-                    <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
-                        <img class="preview">
-                    </div>
-                </form>
+                <%-- </c:if> --%>
+
+                <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
+                    <img class="preview">
+                </div>
             </c:when>
         
-            <c:otherwise>
+            <c:otherwise>  <%-- 회원이 아닐 때 --%>
                 <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
                     <img class="preview" src="/resources/images/green.jpg">
                 </div>

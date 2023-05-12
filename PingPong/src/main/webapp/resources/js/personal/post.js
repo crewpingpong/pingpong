@@ -38,6 +38,19 @@ deleteBackground.addEventListener('click', ()=>{
     }
 });
 
+const changeBackground = document.getElementById("changeBackground");
+changeBackground.addEventListener("click", () => {
+
+    if(background.value == ''){
+        alert("배경화면을 지정해주세요");
+        e.preventDefault();
+        return;
+    }
+
+    location.href = "/mypage/background";
+
+});
+
 
 // function getImageFiles(e) {
 //     // 이미지 배열로 받아서 검사 (아래부분 늘려주고 요소 추가하는 코드 넣으면 여러 개 가능)
