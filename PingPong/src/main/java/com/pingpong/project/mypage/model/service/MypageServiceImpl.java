@@ -19,4 +19,16 @@ public class MypageServiceImpl implements MypageService{
 	public int updateInfo(Member updateMember) {
 		return dao.updateInfo(updateMember);
 	}
+
+	// 비밀번호 변경 서비스
+	@Override
+	public int changePw(String currentPw, String newPw, int memberNo) {
+
+		// 1. 현재 비밀번호, DB에 저장된 비밀번호 비교
+		// 1) 회원번호가 일치하는 MEMBER 테이블 행의 MEMBER_PW 조회
+		/* String encPw = dao.selectEncPw(memberNo); */
+		
+		
+		return 0;
+	}
 }
