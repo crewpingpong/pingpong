@@ -777,3 +777,25 @@ SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NICKNAME, MEMBER_URL, TO_CHAR(
       AND MEMBER_EMAIL = 'pingpong123@kh.or.kr';
 
 INSERT INTO	"MEMBER" VALUES(SEQ_MEMBER_NO.NEXTVAL, 'pingpong123@kh.or.kr', '123', '핑퐁', 'pingpong123', DEFAULT, DEFAULT, DEFAULT);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
