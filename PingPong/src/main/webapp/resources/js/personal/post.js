@@ -1,55 +1,89 @@
 // 개인 홈 프로필 js
 // 홈프로필 배경 변경
-const profileBgUpload = document.querySelector('.profileBgupload');
-const upload = document.querySelector('.profileBackground p');
-upload.addEventListener('click', () => profileBgUpload.click());
-// 파일 첨부 버튼 위임
+// const profileBgUpload = document.querySelector('.profileBgupload');
+// const upload = document.querySelector('.profileBackground a');
+// upload.addEventListener('click', () => profileBgUpload.click());
+// // 파일 첨부 버튼 위임
+const preview = document.getElementsByClassName("preview");  // img 태그
+const background = document.getElementById("background");  // file
+const deleteBackground = document.getElementById("deleteBackground"); // 돌아가기
 
-function getImageFiles(e) {
-    // 이미지 배열로 받아서 검사 (아래부분 늘려주고 요소 추가하는 코드 넣으면 여러 개 가능)
-    const uploadFiles = [];
-    const files = e.currentTarget.files;
-    const bgimageBox = document.querySelector('.bgimageBox');
-    const docFrag = new DocumentFragment();
+const selectBackground = document.getElementById("selectBackground");
+const afterChoice = document.getElementById("afterChoice");
 
-    // 이미지 1개 이상 들어오면 돌려보내주기
-    if ([...files].length > 1) {
-        alert('이미지는 하나만 업로드가 가능합니다.');
-        return;
+background.addEventListener("change", e=>{
+    const file = e.target.files[0];
+    if(file != undefined){
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = e => {
+            preview[0].setAttribute("src", e.target.result);
+        }
+        selectBackground.style.display = 'none';
+        afterChoice.style.display = 'block';
+    } else {
+        preview[0].removeAttribute("src");
+        selectBackground.style.display = 'block';
+        afterChoice.style.display = 'none';
     }
 
-    // 파일 타입 검사
-    [...files].forEach(file => {
-        if (!file.type.match("image/.*")) {
-            alert('이미지 파일만 업로드가 가능합니다.');
-            return
-        }
+});
 
-        // 파일 갯수 검사 이미지 1개 들어온게 맞다면 요소 추가
-        if ([...files].length == 1) {
-            uploadFiles.push(file);
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const preview = createElement(e, file);
-                bgimageBox.innerHTML = "";
-                bgimageBox.appendChild(preview);
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-}
+deleteBackground.addEventListener('click', ()=>{
+    if(preview[0].getAttribute("src") != ""){
+        preview[0].removeAttribute("src");
+        background.value = "";
+        selectBackground.style.display = 'block';
+        afterChoice.style.display = 'none';
+    }
+});
 
-function createElement(e, file) {
-    // const div = document.createElement('div');
-    const img = document.createElement('img');
-    img.setAttribute('src', e.target.result);
-    img.setAttribute('data-file', file.name);
-    // div.appendChild(img);
 
-    return img;
-}
+// function getImageFiles(e) {
+//     // 이미지 배열로 받아서 검사 (아래부분 늘려주고 요소 추가하는 코드 넣으면 여러 개 가능)
+//     const uploadFiles = [];
+//     const files = e.currentTarget.files;
+//     const bgimageBox = document.querySelector('.bgimageBox');
+//     const docFrag = new DocumentFragment();
 
-profileBgUpload.addEventListener('change', getImageFiles);
+//     // 이미지 1개 이상 들어오면 돌려보내주기
+//     if ([...files].length > 1) {
+//         alert('이미지는 하나만 업로드가 가능합니다.');
+//         return;
+//     }
+
+//     // 파일 타입 검사
+//     [...files].forEach(file => {
+//         if (!file.type.match("image/.*")) {
+//             alert('이미지 파일만 업로드가 가능합니다.');
+//             return
+//         }
+
+//         // 파일 갯수 검사 이미지 1개 들어온게 맞다면 요소 추가
+//         if ([...files].length == 1) {
+//             uploadFiles.push(file);
+//             const reader = new FileReader();
+//             reader.onload = (e) => {
+//                 const preview = createElement(e, file);
+//                 bgimageBox.innerHTML = "";
+//                 bgimageBox.appendChild(preview);
+//             };
+//             reader.readAsDataURL(file);
+//         }
+//     });
+// }
+
+// function createElement(e, file) {
+//     // const div = document.createElement('div');
+//     const img = document.createElement('img');
+//     img.setAttribute('src', e.target.result);
+//     img.setAttribute('data-file', file.name);
+//     // div.appendChild(img);
+
+//     return img;
+// }
+
+// profileBgUpload.addEventListener('change', getImageFiles);
 
 
 // 상단 프로필 오른쪽 소개 탭 구역

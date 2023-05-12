@@ -31,8 +31,6 @@ public class MypageController {
 		return "personal/myPageModi"; 
 	}
 	
-	
-	
 	// 회원 정보 수정
 	@PostMapping("/info")
 	public String updateInfo(Member updateMember
@@ -64,25 +62,10 @@ public class MypageController {
 		return "redirect:info";
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    
+    @PostMapping("/background")
+    public String background() {
+    	return null;
+    }
+	   
 }

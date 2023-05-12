@@ -13,14 +13,14 @@
 <body>
 	<div class="login-container customChk">
 
-        <form class="signup-box" action="signupInfo.html" method="get">
-            <a href="index.html"><img src="/resources/images/logo_X1.png"></a>
+        <form class="signup-box" method="post" action="/member/signup">
+            <a href="/"><img src="/resources/images/logo_X1.png"></a>
         
             <p>이메일로 가입하기</p>
     
             <div class="signup-input-email">
                 <p>이메일 주소</p>
-                <input type="email" name="userEmail">
+                <input type="email" name="memberEmail">
                 <button type="button" class="certi-send">전송</button>
                 <button type="button" class="certi-resend">재전송</button>
                 <p class="email-send">인증 번호가 발송 되었습니다.</p>
@@ -33,7 +33,7 @@
     
             <div class="signup-input-password">
                 <p>비밀번호</p>
-                <input type="password" placeholder="6자 이상" name="userPassword" autocomplete="off"> <br>
+                <input type="password" placeholder="6자 이상" name="memberPw" autocomplete="off"> <br>
             </div>
     
             
