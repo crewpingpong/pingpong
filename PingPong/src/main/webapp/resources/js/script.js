@@ -1,18 +1,27 @@
 /* HEADER 영역 */
 const searchicon=document.querySelector(".search_icon");
 const searchbox=document.querySelector(".seachbox");
-const searchboxList = searchbox.parentElement.children;
 
 const temp = document.querySelectorAll(".seachbox, .seachbox *, .search_icon, .search_icon *");
+// const temp = document.querySelectorAll(".seachbox, .seachbox *");
 
 // 검색 아이콘에 마우스가 올려졌을 때 검색 박스 커짐
 // 검색 자리에 있던 아이콘은 사라짐 (알림, 검색, 로그인 버튼)
 searchicon.addEventListener("click",()=>{
-    for(let i=0; i<3; i++){ // 오른쪽 아이콘 들은 전부 사라지게
-        searchboxList[i].style.display="none"; 
+    if(document.querySelector(".basicheart") != null){
+        document.querySelector(".basicheart").style.display="none";
+
+        // 검색 켜지면 알람 켜 놓은거는 꺼지게 구현
+        alarmIconRedColor.classList.add("alarm-icon-redColor");
+        alarmModBox.classList.add("alarm-icon-redColor");
     }
-    searchbox.style.display="flex"; // 검색 버튼 커지기
-    
+
+    searchicon.style.display="none";
+    if(document.querySelector(".signBtn") != null){
+        document.querySelector(".signBtn").style.display="none";
+    }
+    searchbox.style.display="flex"; // 검색 박스 커지기
+
 });
 
 window.addEventListener("click", e => {
@@ -23,12 +32,30 @@ window.addEventListener("click", e => {
     });
     
     if(flag){
-        searchbox.style.display="none";
-        for(let i=0; i<3; i++){
-            searchboxList[i].style.display="flex";
+        if(document.querySelector(".basicheart") != null){
+            document.querySelector(".basicheart").style.display="flex";
         }
+
+        searchicon.style.display="flex";
+        if(document.querySelector(".signBtn") != null){
+            document.querySelector(".signBtn").style.display="flex";
+        }
+        searchbox.style.display="none"; // 검색 박스 닫기
     }
 })
+
+// 알람 하트 아이콘
+const alarmIcon = document.querySelector(".alarm_icon");
+// const alarmIconRedColor = document.querySelector(".alarm_icon>svg>svg");
+const alarmIconRedColor = document.querySelector(".redheart");
+const alarmModBox = document.querySelector("#alarmModBox");
+
+alarmIcon.addEventListener("click", () => {
+    alarmIconRedColor.classList.toggle("alarm-icon-redColor");
+    alarmModBox.classList.toggle("alarm-icon-redColor");
+});
+
+
 
 /* NAV 영역 */
 const openHam = document.getElementById('openHam');
@@ -52,6 +79,7 @@ const nameArr = ['kimchanhee', 'leenahyun', 'leesangyun', 'choigeuntae', 'parkja
 // 열기 버튼을 누르면 nav의 display가 flex로 변경
 openHam.addEventListener("click",() => {
     mainnav.style.display = "block";
+    searchbox.style.display="none";
     if(mainnav.style.display === "block"){
         // 네브 오른쪽 회색 배경을 누르면  nav의 display가 none로 변경
         document.addEventListener("click", e=>{
@@ -59,7 +87,9 @@ openHam.addEventListener("click",() => {
                 mainnav.style.display = "none";
                 navmore.style.display="none"; 
                 logModContainer.style.display = "none";
-                siteInfoMod.style.display="none";
+                if(siteInfoMod != null){
+                    siteInfoMod.style.display="none";
+                }
                 searchModContainer.style.display = "none";
             }
         })
@@ -69,20 +99,24 @@ openHam.addEventListener("click",() => {
         mainnav.style.display = "none";
         navmore.style.display="none"; 
         logModContainer.style.display = "none";
-        siteInfoMod.style.display="none";
+        if(siteInfoMod != null){
+            siteInfoMod.style.display="none";
+        }
         searchModContainer.style.display = "none";
     });
     /* 더 많은 기능을 보실려면 로그인해주세요. */
     const navloginBtn = document.querySelector(".navlogin");
     const logModContainer = document.querySelector("#logModContainer");
-    navloginBtn.addEventListener("click", ()=>{
-        logModContainer.style.display = "block";
-    });
-    const navloginclBtn = document.getElementById("navloginclBtn");
-    navloginclBtn.addEventListener("click", () => {
-        logModContainer.style.display = "none";
-
-    });
+    if(navloginBtn != null){
+        navloginBtn.addEventListener("click", ()=>{
+            logModContainer.style.display = "block";
+        });
+        const navloginclBtn = document.getElementById("navloginclBtn");
+        navloginclBtn.addEventListener("click", () => {
+            logModContainer.style.display = "none";
+    
+        });
+    }
 
     seachModInnerContent.addEventListener("keyup", e => {
         while(searchModResultList.hasChildNodes()) {
@@ -234,16 +268,6 @@ headerOpenSearchBox.addEventListener("keyup", e => {
 
 
 
-// 알람 하트 아이콘
-const alarmIcon = document.querySelector(".alarm_icon");
-// const alarmIconRedColor = document.querySelector(".alarm_icon>svg>svg");
-const alarmIconRedColor = document.querySelector(".redheart");
-const alarmModBox = document.querySelector("#alarmModBox");
-
-alarmIcon.addEventListener("click", () => {
-    alarmIconRedColor.classList.toggle("alarm-icon-redColor");
-    alarmModBox.classList.toggle("alarm-icon-redColor");
-});
 
 // 알림 모달에서 메세지 보기
 // 받은 메세지 제일 위에 샘플을 클릭하면 받은메세지로 이동함

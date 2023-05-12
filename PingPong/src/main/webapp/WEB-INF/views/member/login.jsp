@@ -10,6 +10,8 @@
     <title>PingPong</title>
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/member/loginSignup.css">
+    <link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
+    
 </head>
 <body>
 

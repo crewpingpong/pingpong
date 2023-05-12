@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error</title>
     <link rel="stylesheet" href="/resources/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
     <style>
         #error-container{
             width: 800px;

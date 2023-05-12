@@ -1,16 +1,15 @@
 package com.pingpong.project.mypage.model.service;
 
-import com.pingpong.project.member.model.dto.Member;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pingpong.project.common.utility.Util;
-
+import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.mypage.model.dao.MypageDAO;
 
 @Service
