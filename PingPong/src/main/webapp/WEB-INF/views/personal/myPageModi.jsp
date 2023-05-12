@@ -75,7 +75,7 @@
                         <!-- 사용자 이름 -->
                         <div class="userName-change"> 
                             <p>사용자 이름</p>
-                            <input type="text" maxlength="40" placeholder="사용자 이름을 입력해주세요.">
+                            <input type="text" maxlength="40" placeholder="사용자 이름을 입력해주세요." value="${loginMember.memberNickname}">
                         </div>
 
                         <!-- url -->
@@ -83,7 +83,7 @@
                             <p>PingPong URL(영문)</p>
                             <div>
                                 <p>pingpong.net/</p>
-                                <input type="text" name="userurl" required> <br>
+                                <input type="text" name="userurl" value="${loginMember.memberUrl}" required> <br>
                             </div>
                             <button class="url-double-check" type="button">중복 확인</button>
                         </div>
@@ -231,7 +231,8 @@
 
             <!-- *** 비밀번호 변경 화면 구현 & 회원 탈퇴 *** -->
             <div id="myPageModiTab3" class="myPage-content-main">
-                <form name="myPageFrm" action="changePw" method="">
+
+                <form name="myPageFrm" action="changePw" method="POST">
                     <div class="password-modi">
 
                         <p>비밀번호 변경</p>
