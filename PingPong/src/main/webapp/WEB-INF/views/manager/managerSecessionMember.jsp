@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="memberList" value="${SecessionList.memberList}"/>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -101,91 +104,34 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <c:choose>
+                            <c:when test="${empty memberList}">
+                                <%-- 조회된 탈퇴 회원 목록이 비어있거나 null인 경우 --%>
+
+                                <!-- 탈퇴 회원 목록 조회 결과가 비어있다면 -->
+                                <tr>
+                                    <th colspan="6">탈퇴한 회원이 존재하지 않습니다.</th>
+                                </tr>
+                            </c:when>
+                            <c:otherwise>
+                                <%-- 탈퇴 회원 목록 결과가 있다면 --%>
+                                <c:forEach items="${memberList}" var="member">
                                 <tr>
                                     <td>
                                         <input type="checkbox" name="choicebox" value="1">
                                     </td>
-                                    <td>2-000001</td>
+                                    <td>${member.memberNo}</td>
                                     <td>
-                                        <a href="/personalHome.html">aaaaa</a>
+                                        <a href="#">${member.memberUrl}</a>
                                     </td>
-                                    <td>가나다라마바사아자차카타파하가나</td> <!-- 한글 16글자 1줄 -->
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
+                                    <td>${member.memberNickname}</td> <!-- 한글 16글자 1줄 -->
+                                    <td>${member.memberEmail}</td>
+                                    <td>${member.enrollDate}</td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1-000001</td>
-                                    <td>
-                                        <a href="/personalHome.html">bbbbb</a>
-                                    </td>
-                                    <td>abcdefghijklnmopqrstuvwxyz</td>
-                                    <td>asdasdasda@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1-000002</td>
-                                    <td>
-                                        <a href="/personalHome.html">ccccc</a>
-                                    </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1-000003</td>
-                                    <td>
-                                        <a href="/personalHome.html">ddddd</a>
-                                    </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1-000004</td>
-                                    <td>
-                                        <a href="/personalHome.html">eeeee</a>
-                                    </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1-000005</td>
-                                    <td>
-                                        <a href="/personalHome.html">fffff</a>
-                                    </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1-000006</td>
-                                    <td>
-                                        <a href="/personalHome.html">ggggg</a>
-                                    </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
-                                
+                                </c:forEach>
+
+                            </c:otherwise>
+                        </c:choose>
                             </tbody>
                         </table>
                     </div>

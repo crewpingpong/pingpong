@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%-- map에 저장된 값을 각각 변수에 저장 --%>
+<c:set var="memberList" value="${map.memberList}"/>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -94,100 +98,42 @@
                                     <th>
                                         <input type="checkbox" name="choiceBox" value="selectAll" id="chkSelectAll">
                                     </th>
-                                    <th>No.</th>
-                                    <th>ID</th>
-                                    <th>Nickname</th>
+                                    <th>회원 번호</th>
+                                    <th>회원 아이디</th>
+                                    <th>닉네임</th>
                                     <th>Email</th>
                                     <th>가입 일자</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>2-000001</td>
-                                    <td>
-                                        <a href="/personalHome.html">aaaaa</a>
-                                    </td>
-                                    <td>가나다라마바사아자차카타파하가나</td> <!-- 한글 16글자 1줄 -->
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1-000001</td>
-                                    <td>
-                                        <a href="/personalHome.html">bbbbb</a>
-                                    </td>
-                                    <td>abcdefghijklnmopqrstuvwxyzabc</td> <!-- 영어 소 29글자 1줄 -->
-                                    <td>asdasdasda@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1-000002</td>
-                                    <td>
-                                        <a href="/personalHome.html">ccccc</a>
-                                    </td>
-                                    <td>ABCDEFGHIJKLNMOPQRSTUVWX</td> <!-- 영어 대 24글자 1줄 -->
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1-000003</td>
-                                    <td>
-                                        <a href="/personalHome.html">ddddd</a>
-                                    </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1-000004</td>
-                                    <td>
-                                        <a href="/personalHome.html">eeeee</a>
-                                    </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1-000005</td>
-                                    <td>
-                                        <a href="/personalHome.html">fffff</a>
-                                    </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1-000006</td>
-                                    <td>
-                                        <a href="/personalHome.html">ggggg</a>
-                                    </td>
-                                    <td>가나다라마바사아자차카타파하가나</td>
-                                    <td>q1w2e3r4@gmail.com</td>
-                                    <td>23/01/01</td>
-                                </tr>
+                            <c:choose>
+                            <c:when test="${empty memberList}">
+                                <%-- 조회된 가입 회원 목록이 비어있거나 null인 경우 --%>
 
-                                
+                                <!-- 게시글 목록 조회 결과가 비어있다면 -->
+                                <tr>
+                                    <th colspan="6">가입한 회원이 존재하지 않습니다.</th>
+                                </tr>
+                            </c:when>
+                            <c:otherwise>
+                                <%-- 가입 회원 목록 결과가 있다면 --%>
+                                <c:forEach items="${memberList}" var="member">
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="choicebox" value="1">
+                                    </td>
+                                    <td>${member.memberNo}</td>
+                                    <td>
+                                        <a href="#">${member.memberUrl}</a>
+                                    </td>
+                                    <td>${member.memberNickname}</td> <!-- 한글 16글자 1줄 -->
+                                    <td>${member.memberEmail}</td>
+                                    <td>${member.enrollDate}</td>
+                                </tr>
+                                </c:forEach>
+
+                            </c:otherwise>
+                        </c:choose>
                             </tbody>
                         </table>
                     </div>
