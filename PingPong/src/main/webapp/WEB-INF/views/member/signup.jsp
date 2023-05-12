@@ -20,15 +20,17 @@
     
             <div class="signup-input-email">
                 <p>이메일 주소</p>
-                <input type="email" name="memberEmail">
+                <input type="text" name="memberEmail" id="memberEmail" placeholder="Email" maxlength="30" autocomplete="off">
                 <button type="button" class="certi-send">전송</button>
                 <button type="button" class="certi-resend">재전송</button>
                 <p class="email-send">인증 번호가 발송 되었습니다.</p>
             </div>
+                <span class="signUp-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
+
             <div class="signup-input-CertNum">
                 <p>인증번호 입력</p>
                 <input type="text">
-                <button type="button">인증</button>
+                <button type="button" id="sendAuthKeyBtn">인증</button>
             </div> 
     
             <div class="signup-input-password">

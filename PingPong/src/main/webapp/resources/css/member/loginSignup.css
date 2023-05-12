@@ -99,6 +99,17 @@ form.signup-box>div .email-send{ /* 이메일 전송 눌렀을 때 나오는 문
     display: none;
 }
 
+/* 이메일 검사 메세지 */
+.signUp-message{
+    font-size: 14px;
+    letter-spacing: -1px;
+    margin-right: 90px;
+}
+
+/* 이메일 검사 메세지 색상 지정 */
+.confirm{ color : green; }
+.error{ color : red; }
+
 .signup-input-password{
     margin-top: 20px;
 }
