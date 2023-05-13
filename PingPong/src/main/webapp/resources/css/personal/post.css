@@ -124,11 +124,12 @@
 /* 내정보 수정 페이지 가기 */
 .poroflieEdit {
     position: absolute; bottom: 20px; right: 20px;
-    display: flex; justify-content: center;
+    display: flex; justify-content: center; cursor: pointer; user-select: none;
 }
 
 .poroflieEdit p {
     font-size: 16px; text-decoration: underline; margin-left: 8px;
+    cursor: pointer; user-select: none;
 }
 
 
