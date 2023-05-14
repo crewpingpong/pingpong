@@ -1,4 +1,4 @@
-package com.pingpong.project.member.model.dto;
+package com.pingpong.project.message.model.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
