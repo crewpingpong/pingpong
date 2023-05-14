@@ -20,7 +20,7 @@
         <!-- ----------------------------------- 상단 기본 가이드 제목 --------------------------------- -->
         <section>
             <div class="ch-guideheader">
-                <a href="QnAHome.html">&lt; BACK</a>
+                <a href="/qna/">&lt; BACK</a>
                 <h3>기본 가이드</h3>
             </div>
         </section>

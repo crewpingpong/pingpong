@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="messageMapper">
+
+	<!-- 메세지 관련 -->
+	<resultMap type="Message" id="message_rm">
+		<id property="messageNo" column="MESSAGE_NO" />
+		<result property="messageContent" column="MESSAGE_CONTENT" />
+		<result property="sendDate" column="SEND_DATE" />
+		<result property="sendMember" column="SEND_MEMBER" />
+		<result property="receivedMember" column="RECEIVED_MEMBER" />
+	</resultMap>
+	
+	<!-- 알람 관련 -->
+	<resultMap type="Notice" id="notice_rm">
+		<id property="noticeNo" column="NOTICE_NO" />
+		<result property="noticeContent" column="NOTICE_COMENT" />
+		<result property="elapsedDate" column="ELAPSED_TIME" />
+		<result property="memberNo" column="MEMBER_NO" />
+	</resultMap>
+	
+	
+</mapper>
