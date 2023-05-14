@@ -12,17 +12,14 @@
 	</update>
 	
 	
-	<!-- 조회 결과가 1개인 경우(int, string 등)
-		또는 조회 결과를 모두 Map에 담는 경우
-		resultType을 사용
-	 -->
-	<select id="selectEncPw" parameterType="_int" resultType="string">
+	<!-- 회원 비밀번호 조회 -->
+	<select id="selectEncPw" resultType="string">
 		SELECT MEMBER_PW FROM "MEMBER" WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
 	
 	<!-- 비밀번호 변경 -->
-	<!-- member : 사용자 지정 별칭 (mybatis-config.xml) -->
+	<!-- Member : 사용자 지정 별칭 (mybatis-config.xml) -->
 	<update id="changePw" parameterType="Member">
 		UPDATE "MEMBER" SET
 		MEMBER_PW = #{memberPw}

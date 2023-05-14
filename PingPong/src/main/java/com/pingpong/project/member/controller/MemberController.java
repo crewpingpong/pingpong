@@ -39,7 +39,10 @@ public class MemberController {
 			RedirectAttributes ra) {
 		System.out.println(inputMember.getMemberEmail());
 
-		Member loginMember = service.login(inputMember);
+		//Member loginMember = service.login(inputMember);
+		Member loginMember = new Member();
+		loginMember.setMemberEmail("pingpong@kh.or.kr");
+		loginMember.setMemberNo(1);
 
 		System.out.println(loginMember.getMemberNickname());
 

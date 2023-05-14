@@ -1,5 +1,7 @@
 package com.pingpong.project.mypage.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -73,13 +76,78 @@ public class MypageController {
 	// 비밀번호 수정
 	@PostMapping("/changePw")
 	public String changePw(String currentPw, String newPw
-						, @SessionAttribute("loginMember") Member loginMember) {
+						, @SessionAttribute("loginMember") Member loginMember
+						, RedirectAttributes ra) {
 		
 		int memberNo = loginMember.getMemberNo();
 		
 		int result = service.changePw(currentPw, newPw, memberNo);
 		
-		return null;
+		String path = "redirect:";
+		String message = null;
+		
+		if(result > 0) {
+			message = "비밀번호가 변경되었습니다.";
+			path += "info";
+		
+		}else {
+			message = "현재 비밀번호가 일치하지 않습니다.";
+			path += "changePw";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return path;
+	}
+	
+	
+	// 회원 탈퇴
+	@PostMapping("/secession")
+	public String secession(String memberPw
+						, @SessionAttribute("loginMember") Member loginMember
+						, SessionStatus status
+						, HttpServletResponse resp
+						, RedirectAttributes ra) {
+		
+		// 1. 로그인한 회원의 회원 번호 얻어오기
+		int memberNo = loginMember.getMemberNo();
+		
+		// 2. 회원 탈퇴 서비스 호출
+		//	- 비밀번호가 일치하면 MEMBER_DEL_FL -> 'Y'로 바꾸고 1 반환
+		//	- 비밀번호가 일치하지 않으면 -> 0 반환
+		int result = service.secession(memberPw, memberNo);
+		
+		String path = "redirect:";
+		String message = null;
+		
+		// 3. 탈퇴 성공 시
+		if(result > 0) {
+			//	- message : 탈퇴되었습니다
+			message = "탈퇴되었습니다";
+			//	- 메인 페이지로 리다이렉트
+			path += "/";
+			//	- 로그아웃
+			status.setComplete();
+			//	+ 쿠키 삭제
+			Cookie cookie = new Cookie("saveId", "");
+			cookie.setMaxAge(0);
+			cookie.setPath("/");
+			resp.addCookie(cookie);
+			
+		}		
+
+		// 4. 탈퇴 실패 시
+		else {
+			//	- message : 현재 비밀번호가 일치하지 않습니다
+			message = "현재 비밀번호가 일치하지 않습니다";
+			//	- 회원 탈퇴 페이지로 리다이렉트
+			path += "secession";
+			
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return path;
 	}
 	
 	

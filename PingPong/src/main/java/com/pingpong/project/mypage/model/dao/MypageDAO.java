@@ -22,8 +22,41 @@ public class MypageDAO {
 		return sqlSession.update("mypageMapper.updateInfo", updateMember);
 
 	}
-		public int backgroundUpdate(Map<String, Object> map) {
+	
+	/** 회원 비밀번호 조회
+	 * @param memberNo
+	 * @return encPw
+	 */
+	public String selectEncPw(int memberNo) {
+		return sqlSession.selectOne("mypageMapper.selectEncPw", memberNo);
+	}
+	
+	/** 비밀번호 변경
+	 * @param newPw
+	 * @param memberNo
+	 * @return result
+	 */
+	public int changePw(String newPw, int memberNo) {		
+		Member member = new Member();
+		member.setMemberNo(memberNo);
+		member.setMemberPw(newPw);
+		
+		return sqlSession.update("mypageMapper.changePw", member);
+	}
+	
+	/** 회원 탈퇴 
+	 * @param memberNo
+	 * @return result
+	 */
+	public int secession(int memberNo) {
+		return sqlSession.update("mypageMapper.secession", memberNo);
+	}
+	
+	public int backgroundUpdate(Map<String, Object> map) {
 		return sqlSession.update("memberProfileMapper.backgroundUpdate", map);
 	}
+
+
+	
 
 }

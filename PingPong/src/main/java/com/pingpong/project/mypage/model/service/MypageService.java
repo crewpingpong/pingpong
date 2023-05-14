@@ -12,7 +12,7 @@ public interface MypageService {
 	 */
 	int updateInfo(Member updateMember);
 
-	/** 비밀번호 변경
+	/** 회원 비밀번호 조회
 	 * @param currentPw
 	 * @param newPw
 	 * @param memberNo
@@ -20,6 +20,14 @@ public interface MypageService {
 	 */
 	int changePw(String currentPw, String newPw, int memberNo);
 
+	/** 회원 탈퇴 서비스
+	 * @param memberPw
+	 * @param memberNo
+	 * @return result
+	 */
+	int secession(String memberPw, int memberNo);
+	
 	int backgroundUpdate(int memberNo, MultipartFile backgroundImage, String webPath, String filePath);
+
 
 }
