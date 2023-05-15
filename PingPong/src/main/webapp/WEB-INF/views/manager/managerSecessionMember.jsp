@@ -3,6 +3,7 @@
 
 <c:set var="memberList" value="${SecessionList.memberList}"/>
 
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
