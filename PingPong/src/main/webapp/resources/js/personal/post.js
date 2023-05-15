@@ -11,46 +11,34 @@ const deleteBackground = document.getElementById("deleteBackground"); // 돌아�
 const selectBackground = document.getElementById("selectBackground");
 const afterChoice = document.getElementById("afterChoice");
 
-background.addEventListener("change", e=>{
-    const file = e.target.files[0];
-    if(file != undefined){
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = e => {
-            preview[0].setAttribute("src", e.target.result);
+if(background != null){
+    background.addEventListener("change", e=>{
+        const file = e.target.files[0];
+        if(file != undefined){
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = e => {
+                preview[0].setAttribute("src", e.target.result);
+            }
+            selectBackground.style.display = 'none';
+            afterChoice.style.display = 'block';
+        } else {
+            preview[0].removeAttribute("src");
+            selectBackground.style.display = 'block';
+            afterChoice.style.display = 'none';
         }
-        selectBackground.style.display = 'none';
-        afterChoice.style.display = 'block';
-    } else {
-        preview[0].removeAttribute("src");
-        selectBackground.style.display = 'block';
-        afterChoice.style.display = 'none';
-    }
 
-});
+    });
 
-deleteBackground.addEventListener('click', ()=>{
-    if(preview[0].getAttribute("src") != ""){
-        preview[0].removeAttribute("src");
-        background.value = "";
-        selectBackground.style.display = 'block';
-        afterChoice.style.display = 'none';
-    }
-});
-
-const changeBackground = document.getElementById("changeBackground");
-changeBackground.addEventListener("click", () => {
-
-    if(background.value == ''){
-        alert("배경화면을 지정해주세요");
-        e.preventDefault();
-        return;
-    }
-
-    location.href = "/mypage/background";
-
-});
-
+    deleteBackground.addEventListener('click', ()=>{
+        if(preview[0].getAttribute("src") != ""){
+            preview[0].removeAttribute("src");
+            background.value = "";
+            selectBackground.style.display = 'block';
+            afterChoice.style.display = 'none';
+        }
+    });
+}
 
 // function getImageFiles(e) {
 //     // 이미지 배열로 받아서 검사 (아래부분 늘려주고 요소 추가하는 코드 넣으면 여러 개 가능)

@@ -1,10 +1,15 @@
 package com.pingpong.project.mypage.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,8 +31,18 @@ public class MypageController {
 	@Autowired
 	private MypageService service;
 
-	@GetMapping("/")
-	public String personal() {
+	@GetMapping("/{memberNo}")  // 마이페이지로 넘어오면 각 회원의 정보를 가져와서 보여줘야 함 
+	public String personal(
+				@PathVariable(value="memberNo") int memberNo
+				, Model model
+				, RedirectAttributes ra
+				) {
+		
+		Board board = service.selectBoard(memberNo);
+		
+		
+		
+		
 		return "personal/post";
 	}
 	
@@ -93,9 +108,12 @@ public class MypageController {
     		,@SessionAttribute("loginMember") Member loginMember
     		, RedirectAttributes ra
     		, HttpSession session
-    		) {
+    		) throws IllegalStateException, IOException{
     	
-    	String webPath = "/resources/images/myProfile/";
+    	System.out.println("왔다장보리");
+    	System.out.println(backgroundImage);
+    	
+    	String webPath = "/resources/images/mypage/";
 		
 		String filePath = session.getServletContext().getRealPath(webPath);
     	
@@ -110,7 +128,7 @@ public class MypageController {
 		}
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:mypage";
+		return "redirect:/";
     }
 	   
 }

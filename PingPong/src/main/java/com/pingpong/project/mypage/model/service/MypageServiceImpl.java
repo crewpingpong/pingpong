@@ -1,5 +1,7 @@
 package com.pingpong.project.mypage.model.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,24 +39,33 @@ public class MypageServiceImpl implements MypageService{
 		return 0;
 	}
 
-		@Override
-	public int backgroundUpdate(int memberNo, MultipartFile backgroundImage, String webPath, String filePath) {
+	// 배경화면 변경 서비스
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int backgroundUpdate(int memberNo, MultipartFile backgroundImage, String webPath, String filePath) throws IllegalStateException, IOException {
 		
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();  // map 으로 담아서 전달
 		
-		map.put("memberNo", memberNo);
+		map.put("memberNo", memberNo);  // 회원번호 담기
 		
-		String fileName = Util.fileRename(backgroundImage.getOriginalFilename());
+		System.out.println(backgroundImage.getOriginalFilename());
 		
-		map.put("backgroundImage", webPath+fileName);
+		String fileName = Util.fileRename(backgroundImage.getOriginalFilename());  // 파일 이름 변경
 		
+		map.put("backgroundImage", webPath+fileName);  // 경로와 변경된 파일 이름 합쳐서 전달
 		
-		int result = dao.backgroundUpdate(map);
+//		int result = dao.backgroundUpdate(map);
+		int result = 0;
 		
-		System.out.println("123");
+		backgroundImage.transferTo(new File(filePath + fileName));
+		System.out.println(fileName);
+		System.out.println(filePath+fileName);
+		
 //		if(result == 0) {
 //			result = dao.backgroundInsert(map);
 //		}
+		
+		
 		return result;
 	}
 

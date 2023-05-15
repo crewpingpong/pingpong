@@ -37,11 +37,13 @@ public class MemberController {
 	public String login(Member inputMember, Model model, @RequestHeader(value = "referer") String referer,
 			@RequestParam(value = "saveId", required = false) String saveId, HttpServletResponse resp,
 			RedirectAttributes ra) {
-		System.out.println(inputMember.getMemberEmail());
 
-		Member loginMember = service.login(inputMember);
-
-		System.out.println(loginMember.getMemberNickname());
+//		Member loginMember = service.login(inputMember);
+		
+		
+		Member loginMember = new Member();
+		loginMember.setMemberEmail("pingpong@kh.or.kr");
+		loginMember.setMemberNo(1);
 
 		String path = "redirect:";
 

@@ -1,6 +1,8 @@
 package com.pingpong.project.mypage.model.service;
 
 
+import java.io.IOException;
+
 import org.springframework.web.multipart.MultipartFile;
 import com.pingpong.project.member.model.dto.Member;
 
@@ -20,6 +22,13 @@ public interface MypageService {
 	 */
 	int changePw(String currentPw, String newPw, int memberNo);
 
-	int backgroundUpdate(int memberNo, MultipartFile backgroundImage, String webPath, String filePath);
+	/** 배경화면 변경 서비스
+	 * @param memberNo
+	 * @param backgroundImage
+	 * @param webPath
+	 * @param filePath
+	 * @return result
+	 */
+	int backgroundUpdate(int memberNo, MultipartFile backgroundImage, String webPath, String filePath) throws IllegalStateException, IOException;
 
 }
