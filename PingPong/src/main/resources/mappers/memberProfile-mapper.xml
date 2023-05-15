@@ -7,4 +7,5 @@
 		BACKGROUND_IMG = #{backgroundImage},
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
 </mapper>

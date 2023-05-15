@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pingpong.project.common.utility.Util;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.mypage.model.dao.MypageDAO;
+import com.pingpong.project.mypage.model.dto.MyPage;
 
 @Service
 public class MypageServiceImpl implements MypageService{
@@ -54,19 +55,22 @@ public class MypageServiceImpl implements MypageService{
 		
 		map.put("backgroundImage", webPath+fileName);  // 경로와 변경된 파일 이름 합쳐서 전달
 		
-//		int result = dao.backgroundUpdate(map);
-		int result = 0;
+		int result = dao.backgroundUpdate(map);
 		
 		backgroundImage.transferTo(new File(filePath + fileName));
-		System.out.println(fileName);
-		System.out.println(filePath+fileName);
 		
-//		if(result == 0) {
-//			result = dao.backgroundInsert(map);
-//		}
-		
+		if(result == 0) {
+			result = dao.backgroundInsert(map);
+		}
 		
 		return result;
+	}
+
+	// 회원 프로필 가져오기
+	@Override
+	public MyPage selectMemberProfile(int memberNo) {
+		System.out.println("서비스");
+		return dao.selectMemberProfile(memberNo);
 	}
 
 }

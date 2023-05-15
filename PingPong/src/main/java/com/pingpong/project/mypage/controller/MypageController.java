@@ -19,29 +19,41 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pingpong.project.board.dto.Board;
 import com.pingpong.project.member.model.dto.Member;
+import com.pingpong.project.mypage.model.dto.MyPage;
 import com.pingpong.project.mypage.model.service.MypageService;
 
 
-@SessionAttributes({"loginMember"})
+@SessionAttributes({"loginMember", "memberProfile"})
 @RequestMapping("/mypage")
 @Controller
 public class MypageController {
 	
 	@Autowired
 	private MypageService service;
+	
+	
+	@GetMapping("/")
+	public String personal() {
+		return "personal/post";
+	}
 
-	@GetMapping("/{memberNo}")  // 마이페이지로 넘어오면 각 회원의 정보를 가져와서 보여줘야 함 
+	
+	@GetMapping("/self")  // 마이페이지로 넘어오면 각 회원의 정보를 가져와서 보여줘야 함 
 	public String personal(
-				@PathVariable(value="memberNo") int memberNo
+				@SessionAttribute("loginMember") Member loginMember
 				, Model model
 				, RedirectAttributes ra
 				) {
 		
-		Board board = service.selectBoard(memberNo);
+		System.out.println("화면들어오나");
+		MyPage memberProfile = service.selectMemberProfile(loginMember.getMemberNo());
+//		Board board = service.selectBoard(memberNo);
 		
+		System.out.println(memberProfile);
 		
-		
+		model.addAttribute("memberProfile", memberProfile);
 		
 		return "personal/post";
 	}
@@ -104,21 +116,18 @@ public class MypageController {
     // 배경화면 변경
     @PostMapping("/background")
     public String background(
-    		@RequestParam(value="backgroundImage", required=false) MultipartFile backgroundImage
-    		,@SessionAttribute("loginMember") Member loginMember
-    		, RedirectAttributes ra
-    		, HttpSession session
+    		@RequestParam(value="backgroundImage", required=false) MultipartFile backgroundImage // 배경화면 이미지
+    		,@SessionAttribute("loginMember") Member loginMember  // 회원 번호 확인용
+    		, RedirectAttributes ra  // 메시지 전달용
+    		, HttpSession session  //
+    		, Model model
     		) throws IllegalStateException, IOException{
     	
-    	System.out.println("왔다장보리");
-    	System.out.println(backgroundImage);
-    	
-    	String webPath = "/resources/images/mypage/";
+    	String webPath = "/resources/images/mypage/";  // 저장경로
 		
 		String filePath = session.getServletContext().getRealPath(webPath);
     	
     	int result = service.backgroundUpdate(loginMember.getMemberNo(), backgroundImage, webPath, filePath);
-    	
     	
     	String message = null;
 		if(result > 0) {  // 성공 시
@@ -128,7 +137,7 @@ public class MypageController {
 		}
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:/";
+		return "redirect:/mypage/";
     }
 	   
 }

@@ -27,7 +27,7 @@
                         <span id="afterChoice">
                             <form action="/mypage/background" method="post" enctype="multipart/form-data">
                                 <input type="file" name="backgroundImage" id="background" class="profileBgupload" accept="image/*">
-                                <button>변경하기</button>
+                                <button id="updateBackground">변경하기</button>
                             </form>
                             <span id="deleteBackground">돌아가기</span>
                         </span>
@@ -35,7 +35,7 @@
                 <!-- <%-- </c:if> --%> -->
 
                 <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
-                    <img class="preview">
+                    <img class="preview" src="${memberProfile.backgroundImage}">
                 </div>
             </c:when>
         

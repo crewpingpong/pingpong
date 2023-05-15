@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pingpong.project.member.model.dto.Member;
+import com.pingpong.project.mypage.model.dto.MyPage;
 
 @Repository
 public class MypageDAO {
@@ -22,8 +23,33 @@ public class MypageDAO {
 		return sqlSession.update("mypageMapper.updateInfo", updateMember);
 
 	}
-		public int backgroundUpdate(Map<String, Object> map) {
-		return sqlSession.update("memberProfileMapper.backgroundUpdate", map);
+	
+	/** 배경화면 수정
+	 * @param map
+	 * @return result
+	 */
+	public int backgroundUpdate(Map<String, Object> map) {
+		return sqlSession.update("mypageMapper.backgroundUpdate", map);
+	}
+	
+	/** 배경화면 삽입
+	 * @param map
+	 * @return result
+	 */
+	public int backgroundInsert(Map<String, Object> map) {
+		return sqlSession.insert("mypageMapper.backgroundInsert", map);
+	}
+
+	/** 회원 프로필 가져오기
+	 * @param memberNo
+	 * @return memberProfile
+	 */
+	public MyPage selectMemberProfile(int memberNo) {
+		System.out.println("DAO");
+		MyPage self = sqlSession.selectOne("mypageMapper.selectMemberProfile", memberNo);
+		System.out.println(self);
+		System.out.println(self.getBackgroundImage());
+		return self;
 	}
 
 }

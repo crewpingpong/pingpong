@@ -12,7 +12,7 @@ public class Board {
 	private int boardNo;
 	private String boardContent;
 	private String boardDate;
-	
+	private String boardDeleteFlag;
 	// member join
 	private int memberNo;
 	private int authority;
