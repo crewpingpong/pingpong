@@ -25,7 +25,6 @@ searchicon.addEventListener("click",()=>{
 });
 
 window.addEventListener("click", e => {
-    console.log(e.target);
     let flag = true;
     temp.forEach(el => {
         if(el == e.target) flag = false; 

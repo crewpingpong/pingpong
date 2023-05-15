@@ -1,9 +1,5 @@
 // 개인 홈 프로필 js
 // 홈프로필 배경 변경
-// const profileBgUpload = document.querySelector('.profileBgupload');
-// const upload = document.querySelector('.profileBackground a');
-// upload.addEventListener('click', () => profileBgUpload.click());
-// // 파일 첨부 버튼 위임
 const preview = document.getElementsByClassName("preview");  // img 태그
 const background = document.getElementById("background");  // file
 const deleteBackground = document.getElementById("deleteBackground"); // 돌아가기
@@ -11,46 +7,52 @@ const deleteBackground = document.getElementById("deleteBackground"); // 돌아�
 const selectBackground = document.getElementById("selectBackground");
 const afterChoice = document.getElementById("afterChoice");
 
-background.addEventListener("change", e=>{
-    const file = e.target.files[0];
-    if(file != undefined){
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = e => {
-            preview[0].setAttribute("src", e.target.result);
+if(background != null){
+    background.addEventListener("change", e=>{
+        const file = e.target.files[0];
+        if(file != undefined){
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = e => {
+                preview[0].setAttribute("src", e.target.result);
+            }
+            selectBackground.style.display = 'none';
+            afterChoice.style.display = 'block';
+        } else {
+            preview[0].removeAttribute("src");
+            selectBackground.style.display = 'block';
+            afterChoice.style.display = 'none';
         }
-        selectBackground.style.display = 'none';
-        afterChoice.style.display = 'block';
-    } else {
-        preview[0].removeAttribute("src");
-        selectBackground.style.display = 'block';
-        afterChoice.style.display = 'none';
-    }
+    
+    });
+    
+    deleteBackground.addEventListener('click', ()=>{
+        if(preview[0].getAttribute("src") != ""){
+            preview[0].removeAttribute("src");
+            background.value = "";
+            selectBackground.style.display = 'block';
+            afterChoice.style.display = 'none';
+        }
+    });
+    
+    const changeBackground = document.getElementById("changeBackground");
+    changeBackground.addEventListener("click", () => {
+    
+        if(background.value == ''){
+            alert("배경화면을 지정해주세요");
+            e.preventDefault();
+            return;
+        }
+    
+        location.href = "/mypage/background";
+    
+    });
+}
 
-});
-
-deleteBackground.addEventListener('click', ()=>{
-    if(preview[0].getAttribute("src") != ""){
-        preview[0].removeAttribute("src");
-        background.value = "";
-        selectBackground.style.display = 'block';
-        afterChoice.style.display = 'none';
-    }
-});
-
-const changeBackground = document.getElementById("changeBackground");
-changeBackground.addEventListener("click", () => {
-
-    if(background.value == ''){
-        alert("배경화면을 지정해주세요");
-        e.preventDefault();
-        return;
-    }
-
-    location.href = "/mypage/background";
-
-});
-
+// const profileBgUpload = document.querySelector('.profileBgupload');
+// const upload = document.querySelector('.profileBackground a');
+// upload.addEventListener('click', () => profileBgUpload.click());
+// // 파일 첨부 버튼 위임
 
 // function getImageFiles(e) {
 //     // 이미지 배열로 받아서 검사 (아래부분 늘려주고 요소 추가하는 코드 넣으면 여러 개 가능)
@@ -220,16 +222,6 @@ const submit = document.getElementById('submit');
 submit.addEventListener("click", ()=>{
     alert("제출 되었습니다.")
 });
-
-
-
-// 홈 프로필 설정 할 때 자격증 아이콘 설정 할 수 있게 해주기
-// 대표 자격 이미지로 추가해서 배열로 넣어주면 될듯 최대 6개
-// const certificate = document.getElementById("certificate");
-// 임시로 지식/기술 버튼 누르면 배열에 추가되게
-// certificate.addEventListener("click",()=>{
-//     let certList = ["PsCert.png", "AiCert.png", "PrCert.png", "XdCert.png"];
-// });
 
 
 // -------------------------------------------------------------------------
@@ -594,16 +586,90 @@ newContentClose.addEventListener("click", () => {
 })
 
 /* 게시글 파일 첨부 버튼 */
-const inputFileBtn = document.querySelector(".inputFileBtn");
+// const inputFileBtn = document.querySelector(".inputFileBtn");
 const BoardBackground2 = document.querySelector(".BoardBackground2");
 const BoardPicture = document.querySelector(".BoardPicture");
 
-inputFileBtn.addEventListener("click", () => {
-    NewBoardBackground.style.display = "none";
-    BoardBackground2.style.display = "flex";
-    BoardBackground2.classList.remove('BoardBackground-close');
+// inputFileBtn.addEventListener("click", () => {
+//     NewBoardBackground.style.display = "none";
+//     BoardBackground2.style.display = "flex";
+//     BoardBackground2.classList.remove('BoardBackground-close');
 
-});
+// });
+
+// const ContentNewFile = document.querySelector('#ContentNewFile');
+const upload = document.querySelector('#ContentNewFile');
+// upload.addEventListener('click', () => {
+//     NewBoardBackground.style.display = "none";
+//     BoardBackground2.style.display = "flex";
+//     BoardBackground2.classList.remove('BoardBackground-close');
+// });
+
+function getImageFiles(e) {
+    // 이미지 배열로 받아서 검사 (아래부분 늘려주고 요소 추가하는 코드 넣으면 여러 개 가능)
+    const uploadFiles = [];
+    const files = e.currentTarget.files;
+    const slidePrevButton = document.querySelector('.slide_prev_button2');
+    const docFrag = new DocumentFragment();
+
+    console.log(files);
+
+
+    // 이미지 6개 이상 들어오면 돌려보내주기
+    if ([...files].length > 7) {
+        alert('이미지는 6개까지만 업로드가 가능합니다.');
+        return;
+    }
+
+    // 파일 타입 검사
+    [...files].forEach((file, i) => {
+        if (!file.type.match("image/.*")) {
+            alert('이미지 파일만 업로드가 가능합니다.');
+            return;
+        }
+
+        // 파일 갯수 검사 이미지 1개 들어온게 맞다면 요소 추가
+        if ([...files].length >= 1) {
+            uploadFiles.push(file);
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = (e) => {
+                const preview = createElement(e, file);
+                // BoardPicture2.innerHTML = "";
+                slidePrevButton.before(preview);
+                
+                if([...files].length -1== i){
+                    slide2Fn();
+                }
+            };
+            NewBoardBackground.style.display = "none";
+            BoardBackground2.style.display = "flex";
+            BoardBackground2.classList.remove('BoardBackground-close');
+        }
+
+        
+    });
+
+    
+}
+
+function createElement(e, file) {
+    const div = document.createElement('div');
+    div.classList.add("slide_item2");
+    const img = document.createElement('img');
+    img.classList.add("slide-img");
+    img.setAttribute('src', e.target.result);
+    img.setAttribute('data-file', file.name);
+    div.appendChild(img);
+
+    return div;
+}
+
+upload.addEventListener('change', getImageFiles);
+
+
+
+
 /* 게시글 작성 화면 이전 버튼 */
 const BackIcon = document.querySelector("#BackIcon");
 
@@ -622,56 +688,101 @@ NewWriteTextArea.addEventListener("input", () => {
     NewWriteTextAreaCount.innerHTML = count;
 })
 // -----------------------------------------------------------------------------------------
-// 게시글 업로드 슬라이드
-// 슬라이크 전체 크기(width 구하기)
-const slide2 = document.querySelector(".slide2");
-let slideWidth2 = slide2.clientWidth;
 
-// 버튼 엘리먼트 선택하기
-const prevBtn2 = document.querySelector(".slide_prev_button2");
-const nextBtn2 = document.querySelector(".slide_next_button2");
+let slideWidth2;
+let slideItems2;
+let currSlide2;
+let prevBtn2;
+let nextBtn2; 
+let maxSlide2;
+let paginationItems2;
 
-// 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
-let slideItems2 = document.querySelectorAll(".slide_item2");
-// 현재 슬라이드 위치가 슬라이드 개수를 넘기지 않게 하기 위한 변수
-const maxSlide2 = slideItems2.length;
+function slide2Fn(){
 
-// 버튼 클릭할 때 마다 현재 슬라이드가 어디인지 알려주기 위한 변수
-let currSlide2 = 1;
+    // 게시글 업로드 슬라이드
+    // 슬라이크 전체 크기(width 구하기)
+    const slide2 = document.querySelector(".slide2");
+    slideWidth2 = slide2.clientWidth;
 
-// 페이지네이션 생성
-const pagination2 = document.querySelector(".slide_pagination2");
+    // 버튼 엘리먼트 선택하기
+    prevBtn2 = document.querySelector(".slide_prev_button2");
+    nextBtn2 = document.querySelector(".slide_next_button2");
 
-for (let i = 0; i < maxSlide2; i++) {
-    if (i === 0) pagination2.innerHTML += `<li class="active">•</li>`;
-    else pagination2.innerHTML += `<li>•</li>`;
+    // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
+    slideItems2 = document.querySelectorAll(".slide_item2");
+    // 현재 슬라이드 위치가 슬라이드 개수를 넘기지 않게 하기 위한 변수
+    maxSlide2  = slideItems2.length;
+
+    // 버튼 클릭할 때 마다 현재 슬라이드가 어디인지 알려주기 위한 변수
+    currSlide2 = 1;
+
+    // 페이지네이션 생성
+    const pagination2 = document.querySelector(".slide_pagination2");
+
+    for (let i = 0; i < maxSlide2; i++) {
+        if (i === 0) pagination2.innerHTML += `<li class="active">•</li>`;
+        else pagination2.innerHTML += `<li>•</li>`;
+    }
+
+    paginationItems2 = document.querySelectorAll(".slide_pagination2 > li");
+
+    // 무한 슬라이드를 위해 start, end 슬라이드 복사하기
+    const startSlide2 = slideItems2[0];
+    const endSlide2 = slideItems2[slideItems2.length - 1];
+    const startElem2 = document.createElement("div");
+    const endElem2 = document.createElement("div");
+
+    endSlide2.classList.forEach((c) => endElem2.classList.add(c));
+    endElem2.innerHTML = endSlide2.innerHTML;
+
+    startSlide2.classList.forEach((c) => startElem2.classList.add(c));
+    startElem2.innerHTML = startSlide2.innerHTML;
+
+    // 각 복제한 엘리먼트 추가하기
+    slideItems2[0].before(endElem2);
+    slideItems2[slideItems2.length - 1].after(startElem2);
+
+    // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
+    slideItems2 = document.querySelectorAll(".slide_item2");
+    //
+    let offset2 = slideWidth2 + currSlide2;
+    slideItems2.forEach((i) => {
+        i.setAttribute("style", `left: ${-offset2}px`);
+    });
+
+    nextBtn2.removeEventListener("click", ()=>{});
+    prevBtn2.removeEventListener("click", ()=>{});
+
+    // 버튼 엘리먼트에 클릭 이벤트 추가하기
+    nextBtn2.addEventListener("click", () => {
+        // 이후 버튼 누를 경우 현재 슬라이드를 변경
+        nextMove2();
+    });
+    // 버튼 엘리먼트에 클릭 이벤트 추가하기
+    prevBtn2.addEventListener("click", () => {
+        // 이전 버튼 누를 경우 현재 슬라이드를 변경
+        prevMove2();
+    });
+
+    // 각 페이지네이션 클릭 시 해당 슬라이드로 이동하기
+    for (let i = 0; i < maxSlide2; i++) {
+        // 각 페이지네이션마다 클릭 이벤트 추가하기
+        paginationItems2[i].addEventListener("click", () => {
+            // 클릭한 페이지네이션에 따라 현재 슬라이드 변경해주기(currSlide는 시작 위치가 1이기 때문에 + 1)
+            currSlide2 = i + 1;
+            // 슬라이드를 이동시키기 위한 offset 계산
+            const offset2 = slideWidth2 * currSlide2;
+            // 각 슬라이드 아이템의 left에 offset 적용
+            slideItems2.forEach((i) => {
+                i.setAttribute("style", `left: ${-offset2}px`);
+            });
+            // 슬라이드 이동 시 현재 활성화된 pagination 변경
+            paginationItems2.forEach((i) => i.classList.remove("active"));
+            paginationItems2[currSlide2 - 1].classList.add("active");
+        });
+    }
 }
 
-const paginationItems2 = document.querySelectorAll(".slide_pagination2 > li");
-
-// 무한 슬라이드를 위해 start, end 슬라이드 복사하기
-const startSlide2 = slideItems2[0];
-const endSlide2 = slideItems2[slideItems2.length - 1];
-const startElem2 = document.createElement("div");
-const endElem2 = document.createElement("div");
-
-endSlide2.classList.forEach((c) => endElem2.classList.add(c));
-endElem2.innerHTML = endSlide2.innerHTML;
-
-startSlide2.classList.forEach((c) => startElem2.classList.add(c));
-startElem2.innerHTML = startSlide2.innerHTML;
-
-// 각 복제한 엘리먼트 추가하기
-slideItems2[0].before(endElem2);
-slideItems2[slideItems2.length - 1].after(startElem2);
-
-// 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
-slideItems2 = document.querySelectorAll(".slide_item2");
-//
-let offset2 = slideWidth2 + currSlide2;
-slideItems2.forEach((i) => {
-    i.setAttribute("style", `left: ${-offset2}px`);
-});
 
 function nextMove2() {
     currSlide2++;
@@ -760,23 +871,7 @@ window.addEventListener("resize", () => {
     slideWidth2 = slide2.clientWidth;
 });
 
-// 각 페이지네이션 클릭 시 해당 슬라이드로 이동하기
-for (let i = 0; i < maxSlide2; i++) {
-    // 각 페이지네이션마다 클릭 이벤트 추가하기
-    paginationItems2[i].addEventListener("click", () => {
-        // 클릭한 페이지네이션에 따라 현재 슬라이드 변경해주기(currSlide는 시작 위치가 1이기 때문에 + 1)
-        currSlide2 = i + 1;
-        // 슬라이드를 이동시키기 위한 offset 계산
-        const offset2 = slideWidth2 * currSlide2;
-        // 각 슬라이드 아이템의 left에 offset 적용
-        slideItems2.forEach((i) => {
-            i.setAttribute("style", `left: ${-offset2}px`);
-        });
-        // 슬라이드 이동 시 현재 활성화된 pagination 변경
-        paginationItems2.forEach((i) => i.classList.remove("active"));
-        paginationItems2[currSlide2 - 1].classList.add("active");
-    });
-}
+
 
 // 드래그(스와이프) 이벤트를 위한 변수 초기화
 let startPoint2 = 0;

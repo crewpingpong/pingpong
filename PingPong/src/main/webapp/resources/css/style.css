@@ -1,6 +1,5 @@
 /* 폰트 웹폰트 우선 사용 */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap');
-/* @import url('https://fonts.googleapis.coodm/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap');
 /* font-family: 'Noto Sans KR', sans-serif; 
 font-weight: 100 / 400 / 700; 사용가능
 */

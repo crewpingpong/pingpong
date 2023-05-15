@@ -26,7 +26,7 @@
 
 .profileBackground label, .profileBackground span{
     position: absolute; right: 60px; top: 460px;
-    cursor: pointer; font-size: 16px; text-decoration: underline; z-index: 100;
+    cursor: pointer; font-size: 16px; text-decoration: underline; z-index: 20;
 }
 
 .profileBackground>div:last-child {
@@ -279,7 +279,7 @@
 }
 
 .NewBoardMainContainer>div:first-child>svg {
-    position: absolute; right: 12px; top: 20px;
+    position: absolute; right: 20px; top: 20px;
 }
 
 .NewBoardMainContainer>div:last-child {
@@ -809,3 +809,8 @@ li {
 .slide-img {
     width: 100%; -webkit-user-drag: none; user-select: none;
 }
+
+
+
+
+/* 나현 구역! */

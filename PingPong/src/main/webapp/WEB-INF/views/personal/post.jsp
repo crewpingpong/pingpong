@@ -501,11 +501,11 @@ kh 정보교육원에서 국비 수업<br>
 
             <div class="BoardContainerleft2">
                 <div class="BoardPicture2 slide2">
-                    <div class="slide_item2"><img src="img/peach.jpg" class="slide-img"></div>
-                    <div class="slide_item2"><img src="img/PrCert.png" class="slide-img"></div>
-                    <div class="slide_item2"><img src="img/peach.jpg" class="slide-img"></div>
-                    <div class="slide_item2"><img src="img/peach.jpg" class="slide-img"></div>
-                    <div class="slide_item2"><img src="img/peach.jpg" class="slide-img"></div>
+                    <%-- <div class="slide_item2"><img src="img/peach.jpg" class="slide-img"></div> --%>
+                    <%-- <div class="slide_item2"><img src="img/PrCert.png" class="slide-img"></div> --%>
+                    <%-- <div class="slide_item2"><img src="img/peach.jpg" class="slide-img"></div> --%>
+                    <%-- <div class="slide_item2"><img src="img/peach.jpg" class="slide-img"></div> --%>
+                    <%-- <div class="slide_item2"><img src="img/peach.jpg" class="slide-img"></div> --%>
                     <div class="slide_prev_button2 slide_button2">
                         <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M28.8121 39.5833C28.5008 39.5844 28.1933 39.5157 27.9121 39.3823C27.6309 39.2489 27.3831 39.0542 27.1871 38.8125L17.1246 26.3125C16.8181 25.9397 16.6506 25.4721 16.6506 24.9896C16.6506 24.507 16.8181 24.0394 17.1246 23.6667L27.5412 11.1667C27.8949 10.7412 28.403 10.4737 28.9539 10.4229C29.5048 10.3721 30.0533 10.5422 30.4787 10.8958C30.9042 11.2495 31.1717 11.7576 31.2225 12.3085C31.2733 12.8594 31.1032 13.4079 30.7496 13.8333L21.4371 25L30.4371 36.1667C30.6918 36.4725 30.8537 36.8449 30.9034 37.2397C30.9531 37.6346 30.8887 38.0355 30.7178 38.395C30.5468 38.7544 30.2765 39.0573 29.9388 39.2679C29.601 39.4785 29.2101 39.588 28.8121 39.5833Z" fill="#231F20"/>
