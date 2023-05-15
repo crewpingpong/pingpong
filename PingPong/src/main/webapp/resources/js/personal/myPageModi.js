@@ -25,7 +25,7 @@ for(var i = 0; i < tabList.length; i++){
 }
 
 
-// 개인 홈 프로필 js
+/* 개인 홈 프로필 */
 // 홈프로필 사진 변경
 const profileUpload = document.querySelector('.profileUpload');
 const upload = document.querySelector('.edit-profile-picture');
@@ -81,7 +81,136 @@ function createElement(e, file) {
 profileUpload.addEventListener('change', getImageFiles);
 
 
+/* 닉네임 & URL 유효성 검사 */
+const updateInfoFrm = document.querySelector("#updateInfoFrm");
+const memberNickname = document.querySelector("#memberNickname");
+const memberUrl = document.querySelector("#memberUrl");
 
+//updateInfo form태그가 존재할 때 (내 정보 페이지)
+if(updateInfoFrm != null){
+
+  // 수정 전 닉네임/URL 저장
+  initNickname = memberNickname.value;
+  initUrl = memberUrl.value;
+
+  // 닉네임 유효성 검사
+  memberNickname.addEventListener("input", () => {
+
+    if(memberNickname.value == initNickname){
+      memberNickname.removeAttribute("style");
+      return;
+    }
+
+    const regEx = /^[가-힣\w\d]{2,20}$/;
+
+    if(regEx.test(memberNickname.value)){
+      memberNickname.style.color = "green";
+    }else{
+      memberNickname.style.color = "red";
+    }
+  });
+
+  // url 유효성 검사
+  memberUrl.addEventListener("input", () => {
+
+    if(memberUrl.value == initUrl){
+      memberUrl.removeAttribute("style");
+      return;
+    }
+
+    const regEx = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+
+    if(regEx.test(memberUrl.value)){
+      memberUrl.style.color = "green";
+    }else{
+      memberUrl.style.color = "red";
+    }
+  });
+
+  // form태그 제출 시 유효하지 않은 값이 있으면 제출 X
+  updateInfoFrm.addEventListener("sibmit", e => {
+
+    if(memberNickname.style.color == "red"){
+      alert("닉네임이 유효하지 않습니다.");
+      memberNickname.focus();
+      e.preventDefault();
+      return;
+    }
+    if(memberUrl.style.color == "red"){
+      alert("URL이 유효하지 않습니다.");
+      memberUrl.focus();
+      e.preventDefault();
+      return;
+    }
+  });
+}
+
+
+/* 비밀번호 변경 유효성 검사, 일치 확인 */
+const changePwFrm = document.querySelector("#changePwFrm");
+const currentPw = document.querySelector("currentPw");
+const newPw = document.querySelector("#newPw");
+const newPwConfirm = document.querySelector("#newPwConfirm");
+
+if(changePwFrm != null){ // 비밀번호 변경 페이지인 경우
+
+  changePwFrm.addEventListener("submit", e => {
+
+    // 현재 비밀번호 미작성 시
+    if(currentPw.value.trim() == ""){
+      alert("현재 비밀번호를 입력해주세요");
+      e.preventDefault();
+      currentPw.focus();
+      return;
+    }
+
+    // 유효성 검사
+    const regEx = /^[a-zA-Z0-9\!\@\#\-\ ]{6,20}$/;
+    if(!regEx.test(newPw.value)){
+      alert("비밀번호가 유효하지 않습니다");
+      e.preventDefault();
+      newPw.focus();
+      return;
+    }
+
+    // 일치 확인
+    if(newPw.value != newPwConfirm.value){
+      alert("비밀번호가 일치하지 않습니다");
+      e.preventDefault();
+      newPwConfirm.focus();
+      return;
+    }
+  });
+}
+
+
+/* 탈퇴 유효성 검사 */
+const secessionFrm = document.querySelector("#secessionFrm");
+
+if(secessionFrm != null){
+  const memberPw = document.querySelector("#memberPw");
+  const secessionAgree = document.querySelector("#secessionAgree");
+
+  secessionFrm.addEventListener("submit", e => {
+    alert("비밀번호를 입력해주세요");
+    e.preventDefault();
+    memberPw.focus();
+    return;
+  });
+
+  if(!secessionAgree.checked){
+    alert("약관 동의 후 탈퇴 버튼을 눌러주세요");
+    e.preventDefault();
+    secessionAgree.focus();
+    return;
+  }
+
+  if(!confirm("정말 탈퇴 하시겠습니까?")){ // 취소 클릭 시?????????
+    alert("탈퇴 취소");
+    e.preventDefault();
+    return;
+  }
+}
 
 
 /* 저장 알림 */

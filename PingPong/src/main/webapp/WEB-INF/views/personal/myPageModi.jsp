@@ -42,7 +42,7 @@
 
             <!-- *** 내 정보 편집 *** -->
             <div id="myPageModiTab1" class="myPage-content-main">
-                <form name="myPageFrm" action="info" method="">
+                <form name="myPageFrm" id="updateInfoFrm" action="info" method="POST">
                     <div class="myIfo-modi">
 
                         <!-- 프로필 사진 -->
@@ -74,9 +74,10 @@
                         </div>
                         
                         <!-- 사용자 이름 -->
-                        <div class="userName-change"> 
+                        <div class="memberName-change"> 
                             <p>사용자 이름</p>
-                            <input type="text" maxlength="40" placeholder="사용자 이름을 입력해주세요." value="${loginMember.memberNickname}">
+                            <input type="text" name="memberNickname" maxlength="20" placeholder="사용자 이름을 입력해주세요." 
+                                value="${loginMember.memberNickname}" id="memberNickname">
                         </div>
 
                         <!-- url -->
@@ -84,7 +85,8 @@
                             <p>PingPong URL(영문)</p>
                             <div>
                                 <p>pingpong.net/</p>
-                                <input type="text" name="userurl" value="${loginMember.memberUrl}" required> <br>
+                                <input type="text" name="memberUrl" maxlength="40" 
+                                    value="${loginMember.memberUrl}" id="memberUrl" required> <br>
                             </div>
                             <button class="url-double-check" type="button">중복 확인</button>
                         </div>
@@ -134,7 +136,7 @@
 
             <!-- *** 프로필 편집 *** -->
             <div id="myPageModiTab2" class="myPage-content-main">
-                <form name="myPageFrm" action="profile" method="">
+                <form name="myPageFrm" action="profile" method="POST">
                     <div class="profile-modi">
 
                         <!-- 소개 -->
@@ -233,7 +235,7 @@
             <!-- *** 비밀번호 변경 화면 구현 & 회원 탈퇴 *** -->
             <div id="myPageModiTab3" class="myPage-content-main">
 
-                <form name="myPageFrm" action="changePw" method="POST">
+                <form name="myPageFrm" id="changePwFrm" action="changePw" method="POST">
                     <div class="password-modi">
 
                         <p>비밀번호 변경</p>
@@ -241,13 +243,13 @@
                         <!-- 현재 비밀번호 -->
                         <div class="current-password"> 
                             <p>현재 비밀번호</p>
-                            <input type="password" minlength="6" placeholder="6자 이상">
+                            <input type="password" name="currentPw" id="newPW" minlength="6" maxlength="30" placeholder="6자 이상">
                         </div>
 
                         <!-- 새 비밀번호 -->
                         <div class="new-password"> 
                             <p>새 비밀번호</p>
-                            <input type="password" minlength="6" placeholder="6자 이상">
+                            <input type="password" name="newPw" id="newPwConfirm" minlength="6" maxlength="30" placeholder="6자 이상">
                         </div>
 
                         <!-- 새 비밀번호 확인 -->
@@ -259,14 +261,14 @@
                     </div>     
                 </form>
 
-                <form name="myPageFrm" action="secession" method=""> 
+                <form name="myPageFrm" id="secessionFrm" action="secession" method="POST"> 
                     <div class="secession">       
                         <p>회원 탈퇴</p>
                         
                         <!-- 현재 비밀번호 -->
                         <div class="password-for-secession"> 
                             <p>현재 비밀번호</p>
-                            <input type="password" minlength="6" placeholder="6자 이상">
+                            <input type="password" name="memberPw" id="memberPw" minlength="6" placeholder="6자 이상">
                         </div>
                         
                         <!-- 회원 탈퇴 약관 -->
@@ -278,7 +280,10 @@
 이 약관은 샘플 약관입니다. 
 ① 약관 내용 1 ② 약관 내용 2 ③ 약관 내용 3 ④ 약관 내용 4
                             </textarea>
-                            <div class="termsCheckBox"><input type="checkbox">회원 탈퇴 약관에 동의합니다.</div>
+                            <div class="termsCheckBox">
+                                <input type="checkbox" id="secessionAgree">
+                                <label for="secessionAgree">회원 탈퇴 약관에 동의합니다.</label> 
+                            </div>
                             <button class="secessionBtn" type="button">회원 탈퇴</button>
                         </div>
                     </div>
@@ -288,7 +293,7 @@
             
             <!-- *** 문의 내역 화면 구현 *** -->
             <div id="myPageModiTab4" class="myPage-content-main">
-                <form name="myPageFrm" action="inquiry" method="">
+                <form name="myPageFrm" action="inquiry" method="POST">
                     <div class="inquiry-area">
                         <p>문의 내역</p> 
                         <div>
@@ -306,6 +311,6 @@
     </div>
 
     <script src="/resources/js/script.js"></script> <!-- 메인 헤더, 네브 js -->
-    <script src="/resources/js/personal/myPageModi.js"></script> <!-- 게시글 상세 -->
+    <script src="/resources/js/personal/myPageModi.js"></script> <!-- 내 정보 수정 -->
 </body>
 </html>
