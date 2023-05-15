@@ -30,6 +30,7 @@
 
       <mapper resource="/mappers/manager-mapper.xml"/>
       <mapper resource="/mappers/mypage-mapper.xml" />
+      <mapper resource="/mappers/ajax-mapper.xml" />
 
       
 

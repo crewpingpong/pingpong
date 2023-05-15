@@ -53,9 +53,6 @@ public class MypageDAO {
 		return sqlSession.update("mypageMapper.secession", memberNo);
 	}
 	
-	public int backgroundUpdate(Map<String, Object> map) {
-		return sqlSession.update("memberProfileMapper.backgroundUpdate", map);
-
 	/** 배경화면 수정
 	 * @param map
 	 * @return result

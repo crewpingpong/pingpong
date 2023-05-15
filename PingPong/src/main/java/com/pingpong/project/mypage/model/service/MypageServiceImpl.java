@@ -98,14 +98,11 @@ public class MypageServiceImpl implements MypageService{
 		return result;
 	}
 
-<<<<<<< HEAD
-=======
 	// 회원 프로필 가져오기
 	@Override
 	public MyPage selectMemberProfile(int memberNo) {
 		System.out.println("서비스");
 		return dao.selectMemberProfile(memberNo);
 	}
->>>>>>> origin/ChanHee
 
 }

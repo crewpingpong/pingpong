@@ -53,7 +53,7 @@
 		ORDER BY 1
 	</select>
 	
-	<!-- 이메일 중복 검사 -->
+	<!-- URL 중복 검사 -->
 	<select id="checkUrl" resultType="int">
 		SELECT COUNT(*) 
 		FROM "MEMBER"
