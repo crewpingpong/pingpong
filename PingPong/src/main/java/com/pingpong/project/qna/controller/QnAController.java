@@ -12,4 +12,14 @@ public class QnAController {
 	public String quahome() {      
 		return "qna/QnAHome";
 	}
+	
+	@GetMapping("/QnAguide")	
+	public String quaGuide() {      
+		return "qna/QnAguide";
+	}
+	
+	@GetMapping("/FAQlist")	
+	public String quaFAQList() {      
+		return "qna/FAQ_list";
+	}
 }
