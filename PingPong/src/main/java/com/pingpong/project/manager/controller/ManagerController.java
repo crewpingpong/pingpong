@@ -44,7 +44,13 @@ public class ManagerController {
 	
 	//게시글 관리
 	@GetMapping("/Post")
-	public String managerPost() {
+	public String managerPost(
+			Model model
+			) {
+		Map<String, Object> boardList = service.selectBoardList();
+		
+		model.addAttribute("boardList",boardList);
+		
 		
 		return "manager/managerPost";
 	}

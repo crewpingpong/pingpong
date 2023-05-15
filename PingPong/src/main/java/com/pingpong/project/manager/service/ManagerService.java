@@ -14,4 +14,9 @@ public interface ManagerService {
 	 */
 	Map<String, Object> selectSessionList();
 
+	/** 관리자 페이지 게시글 목록 조회
+	 * @return boardList
+	 */
+	Map<String, Object> selectBoardList();
+
 }

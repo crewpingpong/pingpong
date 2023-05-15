@@ -12,9 +12,11 @@
       <typeAlias type="com.pingpong.project.member.model.dto.Member" alias="Member" />
       <typeAlias type="com.pingpong.project.message.model.dto.Message" alias="Message" />
       <typeAlias type="com.pingpong.project.message.model.dto.Notice" alias="Notice" />
-<!--  <typeAlias type="com.pingpong.project.board.model.dto.Board" alias="Board" />
-      <typeAlias type="com.pingpong.project.board.model.dto.BoardImage" alias="BoardImage" />
-      <typeAlias type="com.pingpong.project.board.model.dto.Comment" alias="Comment" /> -->
+      <typeAlias type="com.pingpong.project.board.dto.Board" alias="Board" />
+
+
+
+
    </typeAliases>
    
    <!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
@@ -24,12 +26,9 @@
       <mapper resource="/mappers/email-mapper.xml" />
       <mapper resource="/mappers/ajax-mapper.xml" />
       
-      <!-- 
-      <mapper resource="/mappers/mypage-mapper.xml" />
-      <mapper resource="/mappers/mypage-mapper.xml" />
-      <mapper resource="/mappers/manager-mapper.xml"/>
-      <mapper resource="/mappers/email-mapper.xml" />
-      <mapper resource="/mappers/board-mapper.xml" /> -->
+
+      
+
       
    </mappers>
 </configuration>

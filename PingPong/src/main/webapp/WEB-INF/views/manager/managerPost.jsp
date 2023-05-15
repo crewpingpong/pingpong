@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="ContentList" value="${boardList.boardList}"/>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -105,79 +108,34 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <c:choose>
+                                    <c:when test="${empty ContentList}">
+                                        <%-- 조회된 탈퇴 회원 목록이 비어있거나 null인 경우 --%>
+
+                                        <!-- 탈퇴 회원 목록 조회 결과가 비어있다면 -->
+                                        <tr>
+                                            <th colspan="6">게시글이 존재하지 않습니다</th>
+                                        </tr>
+                                    </c:when>
+                            <c:otherwise>
+                                <%-- 탈퇴 회원 목록 결과가 있다면 --%>
+                                <c:forEach items="${ContentList}" var="Content">
                                 <tr>
                                     <td>
                                         <input type="checkbox" name="choicebox" value="1">
                                     </td>
-                                    <td>1</td>
+                                    <td>${Content.boardNo}</td>
                                     <td>
-                                        <a href="/personalHome.html">Admin</a>
+                                        <a href="#">${Content.memberUrl}</a>
                                     </td>
-                                    <td><a href="/manager1To1Content.html">저의 첫 포트폴리오 입니다. ... </a></td>
-                                    <td>0</td>
-                                    <td>N</td>
+                                    <td>${Content.boardContent}</td> <!-- 한글 16글자 1줄 -->
+                                    <td>${Content.boardNo}</td>
+                                    <td>${Content.boardDelFl}</td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
-                                    <td>2</td>
-                                    <td>
-                                        <a href="">비회원</a>
-                                    </td>
-                                    <td><a href="/manager1To1Content.html">내용 앞 15글자만 보여주...</a></td>
-                                    <td>0</td>
-                                    <td>N</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
-                                    <td>3</td>
-                                    <td>
-                                        <a href="">비회원</a>
-                                    </td>
-                                    <td><a href="/manager1To1Content.html">나머지는...</a></td>
-                                    <td>0</td>
-                                    <td>N</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
-                                    <td>4</td>
-                                    <td>
-                                        <a href="/personalHome.html">핑퐁짱</a>
-                                    </td>
-                                    <td><a href="/manager1To1Content.html">게시글 내용 클릭하면 모달로 보여주는?</a></td>
-                                    <td>1</td>
-                                    <td>Y</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
-                                    <td>5</td>
-                                    <td>
-                                        <a href="/personalHome.html">핑퐁짱</a>
-                                    </td>
-                                    <td><a href="/manager1To1Content.html">가나다라마바사</a></td>
-                                    <td>3243</td>
-                                    <td>Y</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
-                                    <td>6</td>
-                                    <td>
-                                        <a href="/personalHome.html">핑퐁짱</a>
-                                    </td>
-                                    <td><a href="/manager1To1Content.html">가나다라마바사</a></td>
-                                    <td>0</td>
-                                    <td>N</td>
-                                </tr>
-                                
+                                </c:forEach>
+
+                            </c:otherwise>
+                        </c:choose>
                             </tbody>
                         </table>
                     </div>

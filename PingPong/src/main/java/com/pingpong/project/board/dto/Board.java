@@ -12,9 +12,12 @@ public class Board {
 	private int boardNo;
 	private String boardContent;
 	private String boardDate;
+	private String boardDelFl;
+	private int boardCount;
 	
 	// member join
 	private int memberNo;
 	private int authority;
+	private String memberUrl;
 
 }

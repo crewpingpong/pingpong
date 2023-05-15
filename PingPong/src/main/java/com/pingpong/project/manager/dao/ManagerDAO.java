@@ -24,12 +24,20 @@ public class ManagerDAO {
 		return sqlSession.selectList("managerMapper.selectMemberList");
 	}
 
-	/**관리자 페이지 탈퇴 회원 목록 조회
+	/** 관리자 페이지 탈퇴 회원 목록 조회
 	 * @return memberList
 	 */
 	public List<Member> selectSessionList() {
 		
 		return sqlSession.selectList("managerMapper.selectSecessionList");
+	}
+
+	/** 관리자 페이지 게시글 목록 조회
+	 * @return boardList
+	 */
+	public List<Board> selectBoardList() {
+		
+		return sqlSession.selectList("managerMapper.selectBoardList");
 	}
 	
 }

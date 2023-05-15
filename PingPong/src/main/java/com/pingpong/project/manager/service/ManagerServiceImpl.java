@@ -40,6 +40,18 @@ public class ManagerServiceImpl implements ManagerService{
 		
 		return SecessionList;
 	}
+
+	// 게시글 목록 조회
+	@Override
+	public Map<String, Object> selectBoardList() {
+
+		List<Board> boardList = dao.selectBoardList();
+		
+		Map<String, Object> ContentList = new HashMap<>();
+		ContentList.put("boardList", boardList);
+		
+		return ContentList;
+	}
 	
 	
 }
