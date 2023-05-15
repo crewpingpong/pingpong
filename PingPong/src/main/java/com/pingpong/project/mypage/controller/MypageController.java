@@ -5,6 +5,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,13 +25,13 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.pingpong.project.board.dto.Board;
+import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.mypage.model.dto.MyPage;
 import com.pingpong.project.mypage.model.service.MypageService;
 
 
-@SessionAttributes({"loginMember", "memberProfile"})
+@SessionAttributes({"loginMember"})
 @RequestMapping("/mypage")
 @Controller
 public class MypageController {
@@ -39,26 +40,18 @@ public class MypageController {
 	private MypageService service;
 	
 	
-	@GetMapping("/")
-	public String personal() {
-		return "personal/post";
-	}
-
-	
-	@GetMapping("/self")  // 마이페이지로 넘어오면 각 회원의 정보를 가져와서 보여줘야 함 
+	@GetMapping("/{memberNo}")
 	public String personal(
-				@SessionAttribute("loginMember") Member loginMember
-				, Model model
-				, RedirectAttributes ra
-				) {
+			@PathVariable("memberNo") int memberNo
+			, Model model) {
 		
-		System.out.println("화면들어오나");
-		MyPage memberProfile = service.selectMemberProfile(loginMember.getMemberNo());
-//		Board board = service.selectBoard(memberNo);
 		
-		System.out.println(memberProfile);
+		MyPage mypage = service.selectMemberProfile(memberNo);
 		
-		model.addAttribute("memberProfile", memberProfile);
+		List<Board> boardList = service.selectBoardList(memberNo);
+		
+		model.addAttribute("mypage", mypage);
+		model.addAttribute("boardList", boardList);
 		
 		return "personal/post";
 	}

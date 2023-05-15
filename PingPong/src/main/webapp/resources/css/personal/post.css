@@ -190,6 +190,11 @@
     display: none;
 }
 
+.postcont_area img{
+    width: 100%;
+    height: 100%;
+}
+
 /* 홈 게시글 그리드  */
 
 

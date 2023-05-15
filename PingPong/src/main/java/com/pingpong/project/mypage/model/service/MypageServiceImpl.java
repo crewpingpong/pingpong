@@ -3,6 +3,7 @@ package com.pingpong.project.mypage.model.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.common.utility.Util;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.mypage.model.dao.MypageDAO;
@@ -98,10 +100,17 @@ public class MypageServiceImpl implements MypageService{
 		return result;
 	}
 
-	// 회원 프로필 가져오기
+	// 게시글 가져오기
+	@Override
+	public List<Board> selectBoardList(int memberNo) {
+		System.out.println("게시글~~");
+		
+		return dao.selectBoardList(memberNo);
+	}
+
+	// 회원 프로필 정보 가져오기
 	@Override
 	public MyPage selectMemberProfile(int memberNo) {
-		System.out.println("서비스");
 		return dao.selectMemberProfile(memberNo);
 	}
 

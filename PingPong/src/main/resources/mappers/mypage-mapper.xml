@@ -4,13 +4,22 @@
 
 	<resultMap type="MyPage" id="mypage_rm">
 		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
 		<result property="profileImage" column="PROFILE_IMG"/>
 		<result property="backgroundImage" column="BACKGROUND_IMG"/>
 		<result property="memberInfo" column="MEMBER_INFO"/>
-		<result property="memberCareer" column="MEBMER_CAREER"/>
-		<result property="memberTech" column="MEMBER_TECH"/>
-		<result property="certificateNo" column="CERTIFICATE_NO"/>
-	
+		<result property="memberCareer" column="MEMBER_CAREER"/>
+		
+		<collection property="techList" 
+					select="selectTechList"
+					column="java.util.ArrayList"
+					ofType="Tech"
+					/>
+		<collection property="careerList" 
+					select="selectCareerList"
+					column="java.util.ArrayList"
+					ofType="Career"
+					/>		
 	</resultMap>
 
 	<!-- 회원 정보 수정 -->
@@ -67,8 +76,22 @@
 	
 	<!-- 내 정보 조회하기 -->
 	<select id="selectMemberProfile" resultMap="mypage_rm">
-		SELECT MEMBER_NO, PROFILE_IMG, BACKGROUND_IMG, MEMBER_INFO, MEBMER_CAREER, MEMBER_TECH, CERTIFICATE_NO  
+		SELECT MEMBER_NO, PROFILE_IMG, BACKGROUND_IMG, MEMBER_INFO, MEMBER_CAREER  
 		FROM "MEMBER_PROFILE"
 		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<select id="selectTechList">
+		SELECT TECH_NAME, TECH_IMG
+		FROM "TECH"
+		WHERE TECH_NO IN (SELECT TECH_NO FROM "MEMBER_TECH"
+					WHERE MEMBER_NO = #{memberNO})
+	</select>
+	
+	<select id="selectCareerList">
+		SELECT CERTIFICATE_NO, MEMBER_CERT
+		FROM "CAREER"
+		WHERE CERTIFICATE_NO IN (SELECT CERTIFICATE_NO FROM "MEMBER_PROFILE"
+					WHERE MEMBER_NO = #{memberNo})	
 	</select>
 </mapper>

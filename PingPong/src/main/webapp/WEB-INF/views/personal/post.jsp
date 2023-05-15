@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,7 +21,7 @@
         <div class="profileBackground">  <!-- 프로필 배경 사진 -->
 
         <c:choose>
-            <c:when test="${not empty loginMember}">  <%-- 회원일 때  --%>
+            <c:when test="${not empty loginMember}">  <%-- 나의 프로필일 때  --%>
                 <!-- <%-- <c:if test="${loginMember.memberNo == memberProfile.memberNo}" > --%> <%-- 내 프로필 화면일 경우 --%> -->
                     <div>
                         <label for="background" id="selectBackground">배경화면 선택</label> <!-- 파일 첨부 버튼 위임 -->
@@ -35,13 +36,13 @@
                 <!-- <%-- </c:if> --%> -->
 
                 <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
-                    <img class="preview" src="${memberProfile.backgroundImage}">
+                    <img class="preview" src="${mypage.backgroundImage}">
                 </div>
             </c:when>
         
             <c:otherwise>  <%-- 회원이 아닐 때 --%>
                 <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
-                    <img class="preview" src="/resources/images/green.jpg">
+                    <img class="preview" src="/resources/images/기본배경.jpg">
                 </div>
             </c:otherwise>
         </c:choose>
@@ -55,8 +56,8 @@
                     
                 </div>
 
-                <p class="profileName">김핑퐁</p>
-                <p class="profileIntroduce">반응형 UIUX 개발자 김핑퐁 입니다.</p>
+                <p class="profileName">${mypage.memberNickname}</p>
+                <p class="profileIntroduce">여긴 무슨 컬럼명...??</p>
                 <div class="profileBtn">
                     <!-- 팔로워 버튼 --> <!-- c:choose/c:when -->
                     <div class="followBtn"> <!-- followshow 클래스 있으면 보임 -->
@@ -103,26 +104,37 @@
                             <!-- 나중에 여기다가 아이콘 추가해주는 기능 구현 -->
                             <!-- <div>없음</div> -->
                             <div>
-                                <img src="/resources/images/personal/PsCert.png" alt="certificateIcon">
-                                <img src="/resources/images/personal/AiCert.png" alt="certificateIcon">
-                                <img src="/resources/images/personal/PrCert.png" alt="certificateIcon">
-                                <img src="/resources/images/personal/XdCert.png" alt="certificateIcon">
+                                <c:choose>
+                                <c:when test="${empty mypage.techList}">
+                                    없음
+                                </c:when>
+                            
+                                <c:otherwise>
+                                    <c:forEach items="${techList}" var="tech">
+                                        <div>
+                                            <img src="${tech.techImg}" alt="${tech.techName}">
+                                        </div>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
                             </div>
                             <h4>자격증 / 수상 내역</h4>
                             <div>
-웹디자인 기능사 <br>
-컴퓨터그래픽스 운용기능사
+<c:forEach items="${techList}" var="tech">
+<div>
+${mypage.career}
+</div>
+</c:forEach>
                             </div>
                         </div>
                         <div id="profiletab2" class="cont">
                             <h4>소개</h4>
                             <div>
-kh 정보교육원에서 국비 수업을 받고 있는 김핑퐁 프론트 엔드 백엔드 둘다 할 수 있는 풀스택 개발자 입니다.
+${mypage.memberInfo}
                             </div>
                             <h4>커리어</h4>
                             <div>
-kh 정보교육원에서 국비 수업<br>
-핑퐁 프로젝트에서 웹사이트 구현  
+여기는 구현하는건가...
                             </div>
                         </div>
                     </div>
@@ -152,7 +164,7 @@ kh 정보교육원에서 국비 수업<br>
         <div class="posttab_menu">
             <ul class="postlist">
                 <li class="is_on">
-                <a href="#posttab1" class="btn">게시글  <span>12</span></a>
+                <a href="#posttab1" class="btn">게시글  <span>${fn:length(boardList)}</span></a>
                 </li>
                 <li>
                 <a href="#posttab2" class="btn">좋아요  <span>7</span></a>
@@ -170,18 +182,22 @@ kh 정보교육원에서 국비 수업<br>
             <div class="postcont_area">
                 <div id="posttab1" class="postcont" style="display:block;">
                     <div class="contentBox">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <c:choose>
+                            <c:when test="${empty boardList}">
+                                <%-- 조회된 게시글 목록이 비어있거나 null인 경우 --%>
+                                게시글이 존재하지 않습니다.
+                            </c:when>
+                        
+                            <c:otherwise>
+                                <!-- 게시글 목록 조회 결과가 있다면 -->
+                                <c:forEach items="${boardList}" var="board">
+                                    <div>
+                                        <img class="list-thumbnail" src="${board.thumbnail}">
+                                        <a href="#"></a>   
+                                    </div>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div id="posttab2" class="postcont">
