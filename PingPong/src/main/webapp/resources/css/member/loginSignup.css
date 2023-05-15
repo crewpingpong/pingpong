@@ -99,16 +99,36 @@ form.signup-box>div .email-send{ /* 이메일 전송 눌렀을 때 나오는 문
     display: none;
 }
 
+/* 회원가입 다음 페이지 */
+.hidden-next{
+    display: none;
+}
+
 /* 이메일 검사 메세지 */
-.signUp-message{
-    font-size: 14px;
+.email-message, .URL-check-message{
+    font-size: 12px;
     letter-spacing: -1px;
-    margin-right: 90px;
+    margin-right: 130px;
+    color: #5C5C5C;
+    font-weight: lighter;
+    display: block;
+}
+
+/* 인증 번호 타이머 */
+#authKeyMessage{
+    letter-spacing: 2px;
+    font-weight: lighter;
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+}
+.class-hidden{
+    visibility: hidden;
 }
 
 /* 이메일 검사 메세지 색상 지정 */
-.confirm{ color : green; }
-.error{ color : red; }
+.confirm{ color : green !important; }
+.error{ color : red !important; }
 
 .signup-input-password{
     margin-top: 20px;
@@ -119,9 +139,23 @@ form.signup-box>div .email-send{ /* 이메일 전송 눌렀을 때 나오는 문
     display: flex; justify-content: space-between;
     margin-top: 40px; margin-bottom: 73px; font-size: 14px;
 }
-form.signup-box>div .pwInconsistency{
+/* 비밀번호 체크 */
+/* form.signup-box>div .pwInconsistency{
     color: red; font-size: 13px; font-weight: normal;
     display: none;
+} */
+/* 비밀번호 관련 메세지 */
+.signUp-message{
+    font-size: 12px;
+    letter-spacing: -1px;
+    color: #5C5C5C;
+    font-weight: lighter;
+}
+
+input::placeholder {
+    color:#C5C5C5;
+    font-size: 12px;
+    font-weight: lighter;
 }
 
 .signup-check>div{display: flex; justify-content: center;}
@@ -252,13 +286,13 @@ form.signup-box>div .pwInconsistency{
     border-radius: 5px; border: 1px solid #92B4EC;
 }
 
-.url-double-check{
+/* .url-double-check{
     background-color: #92B4EC; border-radius: 20px;
     width: 100px; height: 34px;
     color: #FFFFFF; float: right;
     margin-top: 10px; margin-bottom: 5px;
     font-size: 12px; font-weight: bold; cursor: pointer;
-}
+} */
 
 .job-checkbox-container>p{ 
     font-size: 14px; font-weight: bold;

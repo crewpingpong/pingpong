@@ -15,7 +15,7 @@
 <body>
 	<div class="login-container customChk">
 
-        <form class="signup-box" method="post" action="/member/signup">
+        <form class="signup-box" method="post" action="/member/signup" name="signUpFrm" id="signUpFrm">
             <a href="/"><img src="/resources/images/logo_X1.png"></a>
         
             <p>이메일로 가입하기</p>
@@ -23,28 +23,33 @@
             <div class="signup-input-email">
                 <p>이메일 주소</p>
                 <input type="text" name="memberEmail" id="memberEmail" placeholder="Email" maxlength="30" autocomplete="off">
-                <button type="button" class="certi-send">전송</button>
-                <button type="button" class="certi-resend">재전송</button>
+                <button type="button" class="certi-send" id="sendAuthKeyBtn">전송</button>
+                <button type="button" class="certi-resend" id="reSendAuthKeyBtn">재전송</button>
                 <p class="email-send">인증 번호가 발송 되었습니다.</p>
+                <span class="email-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
+                
             </div>
-                <span class="signUp-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
 
             <div class="signup-input-CertNum">
                 <p>인증번호 입력</p>
-                <input type="text">
-                <button type="button" id="sendAuthKeyBtn">인증</button>
+                <input type="text" name="authKey" id="authKey" placeholder="인증번호 입력" maxlength="6" autocomplete="off">
+                <button type="button" id="checkAuthKeyBtn">인증</button>
+                <span class="class-hidden" id="authKeyMessage">5:00</span>
             </div> 
     
             <div class="signup-input-password">
                 <p>비밀번호</p>
-                <input type="password" placeholder="6자 이상" name="memberPw" autocomplete="off"> <br>
+                <input type="password" placeholder="6글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호" name="memberPw" autocomplete="off" id="memberPw"> <br>
+                <span class="pwInconsistency signUp-message" id="pwMessage1">
+                    6글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호를 입력해 주세요.
+                </span>
             </div>
     
             
             <div class="signup-password-check">
                 <p>비밀번호 확인</p>
-                <input type="password" placeholder="6자 이상"  autocomplete="off"> <br>
-                <p class="pwInconsistency">두 비밀번호가 일치 하지 않습니다.</p>
+                <input type="password" placeholder="6글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호"  autocomplete="off" id="memberPwConfirm"> <br>
+                <span class="pwInconsistency signUp-message" id="pwMessage2"></span>
             </div>
             
             <div class="signup-check">
@@ -60,7 +65,7 @@
             </div>
     
             <div>
-                <button type="button" onclick="location.href='login.html'">이전</button>
+                <button type="button" onclick="location.href='/'">이전</button>
                 <button class="signup-next">다음</button>
             </div>
         </form>

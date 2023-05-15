@@ -692,6 +692,45 @@ REFERENCES "TECH" (
 );
 
 
+/* 이메일 인증 */
+DROP TABLE "AUTH_KEY";
+
+CREATE TABLE "AUTH_KEY" (
+	"AUTH_KEY_NO"	NUMBER		NOT NULL,
+	"CODE"	CHAR(6)		NOT NULL,
+	"EMAIL"	VARCHAR2(50)		NOT NULL,
+	"CREATE_TIME"	DATE	DEFAULT SYSDATE	NOT NULL
+);
+
+COMMENT ON COLUMN "AUTH_KEY"."AUTH_KEY_NO" IS '인증키 구분 번호(SEQ_AUTH_KEY_NO)';
+
+COMMENT ON COLUMN "AUTH_KEY"."CODE" IS '코드';
+
+COMMENT ON COLUMN "AUTH_KEY"."EMAIL" IS '이메일';
+
+COMMENT ON COLUMN "AUTH_KEY"."CREATE_TIME" IS '인증 코드 생성 시간';
+
+ALTER TABLE "AUTH_KEY" ADD CONSTRAINT "PK_AUTH_KEY" PRIMARY KEY (
+	"AUTH_KEY_NO"
+);
+
+
+CREATE SEQUENCE SEQ_AUTH_KEY_NO NOCACHE;
+
+
+UPDATE "AUTH_KEY" SET
+CODE = #{authkey},
+CREATE_TIME = sysdate
+WHERE EMAIL = #{email};
+
+INSERT INTO "AUTH_KEY" VALUES(SEQ_AUTH_KEY_NO.NEXTVAL, #{authkey}, #{email}, DEFAULT);
+
+SELECT * FROM "AUTH_KEY";
+
+SELECT COUNT(*) FROM "AUTH_KEY"
+WHERE EMAIL = #{email}
+AND CODE = #{inputKey};
+
 --------------------------------------------------------------------------------------------------
 --------------------------------------------- INSERT  --------------------------------------------
 --------------------------------------------------------------------------------------------------
@@ -777,3 +816,9 @@ SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NICKNAME, MEMBER_URL, TO_CHAR(
       AND MEMBER_EMAIL = 'pingpong123@kh.or.kr';
 
 INSERT INTO	"MEMBER" VALUES(SEQ_MEMBER_NO.NEXTVAL, 'pingpong123@kh.or.kr', '123', '핑퐁', 'pingpong123', DEFAULT, DEFAULT, DEFAULT);
+
+
+SELECT COUNT(*) 
+FROM "MEMBER"
+WHERE MEMBER_URL  = '123123'
+AND MEMBER_DEL_FL = 'N';

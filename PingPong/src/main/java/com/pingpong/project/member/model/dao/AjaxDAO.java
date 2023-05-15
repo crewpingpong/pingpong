@@ -19,13 +19,6 @@ public class AjaxDAO {
 		return sqlSession.selectOne("ajaxMapper.selectNickname", email);
 	}
 
-	
-	// 닉네임으로 전화번호 조회
-	public String selectMemberTel(String nickname) {
-		return sqlSession.selectOne("ajaxMapper.selectMemberTel", nickname);
-	}
-
-
 	// 이메일 중복 검사
 	public int checkEmail(String email) {
 		return sqlSession.selectOne("ajaxMapper.checkEmail", email);
@@ -36,6 +29,12 @@ public class AjaxDAO {
 		return sqlSession.selectOne("ajaxMapper.checkNickname", nickname);
 	}
 
+	// URL 중복 검사
+	public int checkUrl(String URL) {
+		return sqlSession.selectOne("ajaxMapper.checkUrl", URL);
+	}
+		
+	//////////////////////////////////////////////////////////
 	// 이메일로 회원 정보 조회
 	public Member selectMember(String email) {
 		return sqlSession.selectOne("ajaxMapper.selectMember", email);
@@ -46,7 +45,10 @@ public class AjaxDAO {
 		return sqlSession.selectList("ajaxMapper.selectMemberList", input);
 		
 	}
-		
+	// 닉네임으로 전화번호 조회
+	public String selectMemberTel(String nickname) {
+		return sqlSession.selectOne("ajaxMapper.selectMemberTel", nickname);
+	}
 	
 
 }

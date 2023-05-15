@@ -39,6 +39,14 @@ public class AjaxController {
 		return service.checkNickname(nickname); 
 	}
 	
+	// URL 중복 검사
+	// produces 속성은 한글 깨질 때 사용
+	@GetMapping("/dupCheck/URL")
+	@ResponseBody
+	public int checkUrl(String URL) {
+		return service.checkUrl(URL); 
+	}
+	
 	// 이메일로 회원 정보 조회
 	@PostMapping(value = "/selectMember", produces = "application/json; charset=UTF-8")
 	@ResponseBody // JAVA 데이터 -> JSON, TEXT로 변환 + 비동기 요청한곳으로 응답

@@ -21,8 +21,8 @@
    <mappers>
       <mapper resource="/mappers/member-mapper.xml" />
       <mapper resource="/mappers/message-mapper.xml" />
-
-      <!-- <mapper resource="/mappers/ajax-mapper.xml" />  -->
+      <mapper resource="/mappers/email-mapper.xml" />
+      <mapper resource="/mappers/ajax-mapper.xml" />
       
       <!-- 
       <mapper resource="/mappers/mypage-mapper.xml" />

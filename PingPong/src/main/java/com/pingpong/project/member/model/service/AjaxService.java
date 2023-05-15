@@ -43,4 +43,10 @@ public interface AjaxService {
 	 */
 	List<Member> selectMemberList(String input);
 
+	/**	URL 중복 검사
+	 * @param URL
+	 * @return result
+	 */
+	int checkUrl(String URL);
+
 }
