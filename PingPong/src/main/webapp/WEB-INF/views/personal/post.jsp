@@ -21,19 +21,21 @@
 
         <c:choose>
             <c:when test="${not empty loginMember}">  <%-- 회원일 때  --%>
-                <%-- <c:if test="${loginMember.memberNo == memberProfile.memberNo}" > --%> <%-- 내 프로필 화면일 경우 --%>
+                <!-- <%-- <c:if test="${loginMember.memberNo == memberProfile.memberNo}" > --%> <%-- 내 프로필 화면일 경우 --%> -->
                     <div>
                         <label for="background" id="selectBackground">배경화면 선택</label> <!-- 파일 첨부 버튼 위임 -->
                         <span id="afterChoice">
-                            <button id="changeBackground">변경하기</button>
+                            <form action="/mypage/background" method="post" enctype="multipart/form-data">
+                                <input type="file" name="backgroundImage" id="background" class="profileBgupload" accept="image/*">
+                                <button id="updateBackground">변경하기</button>
+                            </form>
                             <span id="deleteBackground">돌아가기</span>
                         </span>
-                        <input type="file" name="backgroundImage" id="background" class="profileBgupload" accept="image/*">
                     </div>
-                <%-- </c:if> --%>
+                <!-- <%-- </c:if> --%> -->
 
                 <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
-                    <img class="preview">
+                    <img class="preview" src="${memberProfile.backgroundImage}">
                 </div>
             </c:when>
         

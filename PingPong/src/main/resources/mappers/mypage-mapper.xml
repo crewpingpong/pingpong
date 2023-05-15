@@ -2,6 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mypageMapper">
 
+	<resultMap type="MyPage" id="mypage_rm">
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="profileImage" column="PROFILE_IMG"/>
+		<result property="backgroundImage" column="BACKGROUND_IMG"/>
+		<result property="memberInfo" column="MEMBER_INFO"/>
+		<result property="memberCareer" column="MEBMER_CAREER"/>
+		<result property="memberTech" column="MEMBER_TECH"/>
+		<result property="certificateNo" column="CERTIFICATE_NO"/>
+	
+	</resultMap>
 
 	<!-- 회원 정보 수정 -->
 	<update id="updateInfo" parameterType="Member">
@@ -42,5 +52,23 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<!-- 배경화면 수정 -->
+	<update id="backgroundUpdate">
+		UPDATE "MEMBER_PROFILE" SET
+		BACKGROUND_IMG = #{backgroundImage}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
 	
+	<!-- 배경화면 삽입 -->
+	<insert id="backgroundInsert">
+		INSERT INTO "MEMBER_PROFILE"("MEMBER_NO", "BACKGROUND_IMG")
+		VALUES(#{memberNo}, #{backgroundImage})
+	</insert>
+	
+	<!-- 내 정보 조회하기 -->
+	<select id="selectMemberProfile" resultMap="mypage_rm">
+		SELECT MEMBER_NO, PROFILE_IMG, BACKGROUND_IMG, MEMBER_INFO, MEBMER_CAREER, MEMBER_TECH, CERTIFICATE_NO  
+		FROM "MEMBER_PROFILE"
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
 </mapper>
