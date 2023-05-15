@@ -30,9 +30,9 @@
                 <p>PingPong URL(영문)</p>
                 <div>
                     <p>pingpong.net/</p>
-                    <input type="text" name="memberUrl" required> <br>
+                    <input type="text" name="memberUrl" id="memberUrl" placeholder="영어, 숫자, - 로만 이루어진 3 ~ 16 글자의 URL" required> <br>
                 </div>
-                <button class="url-double-check" type="button">중복 확인</button>
+                <span class="URL-check-message " id="URLCheckMessage"></span>
             </div>
     
             <div class="job-checkbox-container">
@@ -63,6 +63,6 @@
         </form>
     </div>
     
-	<script src="/resources/js/member/loginSignup.js"></script>
+	<script src="/resources/js/member/signup.js"></script>
 </body>
 </html>

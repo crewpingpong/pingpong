@@ -52,14 +52,16 @@
 		AND MEMBER_EMAIL LIKE '%${input}%'
 		ORDER BY 1
 	</select>
-	<!-- 
 	
-	${} 사용이유 ${input} 
-	-> input #{input} 
-	-> 'input'
-	
-	-->
-<!-- ------------------------------------------------------------------------------------------------------------- --> 
+	<!-- 이메일 중복 검사 -->
+	<select id="checkUrl" resultType="int">
+		SELECT COUNT(*) 
+		FROM "MEMBER"
+		WHERE MEMBER_URL  = #{URL}
+		AND MEMBER_DEL_FL = 'N'
+	</select>
+
+<!-- ////////////////////////////////////////////////////////////////// --> 
 
 
 	<select id="selectNickname" parameterType="string"
