@@ -6,7 +6,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>PingPong</title>
+
     <link rel="stylesheet" href="/resources/css/style.css"> <!-- 메인 헤더, 네브 css -->
     <link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
     <link rel="stylesheet" href="/resources/css/personal/myPageModi.css">
@@ -16,7 +18,6 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
     <!-- 내 정보 수정 Tab Menu -->
-
     <div class="myPage-content-container">
 
         <div class="myPage-left-side-menu-group"> 
@@ -42,8 +43,8 @@
 
             <!-- *** 내 정보 편집 *** -->
             <div id="myPageModiTab1" class="myPage-content-main">
-                <form name="myPageFrm" action="info" method="">
-                    <div class="myIfo-modi">
+                <form name="myPageFrm" id="updateInfo" action="/mypage/myPageModi" method="POST">
+                    <div class="myInfo-modi">
 
                         <!-- 프로필 사진 -->
                         <div class="profile-change-area"> 
@@ -65,18 +66,19 @@
                                 </svg>
                                 프로필 사진 편집
                             </div>
-                            <form action="/upload" method="post" enctype="multipart/form-data">
-                                <div>
-                                    <label for="file"></label>
-                                    <input type="file" class="profileUpload" accept="image/*" required multiple>
-                                </div>
-                            </form>
+                            <%-- <form action="/upload" method="post" enctype="multipart/form-data"> --%>
+                            <div>
+                                <label for="file"></label>
+                                <input type="file" class="profileUpload" accept="image/*" required multiple>
+                            </div>
+                            <%-- </form> --%>
                         </div>
                         
                         <!-- 사용자 이름 -->
                         <div class="userName-change"> 
                             <p>사용자 이름</p>
-                            <input type="text" maxlength="40" placeholder="사용자 이름을 입력해주세요." value="${loginMember.memberNickname}">
+                            <input type="text" name="memberNickname" minlength="2" maxlength="20" placeholder="사용자 이름을 입력해주세요." 
+                                value="${loginMember.memberNickname}" id="memberNickname">
                         </div>
 
                         <!-- url -->
@@ -84,7 +86,8 @@
                             <p>PingPong URL(영문)</p>
                             <div>
                                 <p>pingpong.net/</p>
-                                <input type="text" name="userurl" value="${loginMember.memberUrl}" required> <br>
+                                <input type="text" name="memberUrl" id="memberUrl"
+                                    value="${loginMember.memberUrl}" required> <br>
                             </div>
                             <button class="url-double-check" type="button">중복 확인</button>
                         </div>
@@ -94,13 +97,13 @@
                             <p>작업 & 관심 분야(선택)</p>
                             <div class="interest-field">
                                 <div>
-                                    <label for=""><input type="checkbox" value="AI/로봇" name="interest"> AI/로봇</label>
-                                    <label for=""><input type="checkbox" value="IT/SW" name="interest"> IT/SW</label> 
-                                    <label for=""><input type="checkbox" value="게임" name="interest"> 게임</label> 
-                                    <label for=""><input type="checkbox" value="공학" name="interest"> 공학</label>
-                                    <label for=""><input type="checkbox" value="교육" name="interest"> 교육</label> 
-                                    <label for=""><input type="checkbox" value="마케팅" name="interest"> 마케팅</label> 
-                                    <label for=""><input type="checkbox" value="금융" name="interest"> 금융</label> 
+                                    <label for="AI/로봇"><input type="checkbox" value="AI/로봇" id="AI/로봇" name="interest"> AI/로봇</label>
+                                    <label for="IT/SW"><input type="checkbox" value="IT/SW" id="IT/SW" name="interest"> IT/SW</label> 
+                                    <label for="게임"><input type="checkbox" value="게임" id="게임" name="interest"> 게임</label> 
+                                    <label for="공학"><input type="checkbox" value="공학" id="공학" name="interest"> 공학</label>
+                                    <label for="교육"><input type="checkbox" value="교육" id="교육" name="interest"> 교육</label> 
+                                    <label for="마케팅"><input type="checkbox" value="마케팅" id="마케팅" name="interest"> 마케팅</label> 
+                                    <label for="금융"><input type="checkbox" value="금융" id="금융" name="interest"> 금융</label> 
                                 </div>
                                 <div>
                                     <label for=""><input type="checkbox" value="동물" name="interest"> 동물</label>
@@ -125,8 +128,7 @@
                     </div>
 
                     <div class="myPage-save">
-                        <button>편집 완료</button>
-                        <button>취소</button>
+                        <button id="editCompleteBtn" type="button">편집 완료</button>
                     </div>
                 </form>
             </div>   
@@ -223,7 +225,7 @@
 
                         <div class="myPage-save">
                             <button>편집 완료</button>
-                            <button> <a href="#">취소</a> </button>
+                            <button type="reset"> <a href="#">취소</a> </button>
                         </div>
                     </div>
                 </form>
@@ -233,7 +235,7 @@
             <!-- *** 비밀번호 변경 화면 구현 & 회원 탈퇴 *** -->
             <div id="myPageModiTab3" class="myPage-content-main">
 
-                <form name="myPageFrm" action="changePw" method="POST">
+                <form name="myPageFrm" id="changePwFrm" action="changePw" method="POST">
                     <div class="password-modi">
 
                         <p>비밀번호 변경</p>
@@ -259,14 +261,14 @@
                     </div>     
                 </form>
 
-                <form name="myPageFrm" action="secession" method=""> 
+                <form name="myPageFrm" id="secessionFrm" action="/mypage/secession" method="POST"> 
                     <div class="secession">       
                         <p>회원 탈퇴</p>
                         
                         <!-- 현재 비밀번호 -->
                         <div class="password-for-secession"> 
                             <p>현재 비밀번호</p>
-                            <input type="password" minlength="6" placeholder="6자 이상">
+                            <input type="password" name="memberPw" id="memberPw" minlength="6" placeholder="6자 이상">
                         </div>
                         
                         <!-- 회원 탈퇴 약관 -->
@@ -274,12 +276,14 @@
                             <p>회원 탈퇴 약관</p>
                             <textarea name="" class="terms-content" cols="30" rows="10">
 제1조 이 약관은 샘플 약관입니다. 
-① 약관 내용 1 ② 약관 내용 2 ③ 약관 내용 3 ④ 약관 내용 4 제2조 
-이 약관은 샘플 약관입니다. 
+① 약관 내용 1 ② 약관 내용 2 ③ 약관 내용 3 ④ 약관 내용 4 
+제2조 이 약관은 샘플 약관입니다. 
 ① 약관 내용 1 ② 약관 내용 2 ③ 약관 내용 3 ④ 약관 내용 4
                             </textarea>
-                            <div class="termsCheckBox"><input type="checkbox">회원 탈퇴 약관에 동의합니다.</div>
-                            <button class="secessionBtn" type="button">회원 탈퇴</button>
+                            <div class="termsCheckBox">
+                                <input type="checkbox" name="agree" id="agree">회원 탈퇴 약관에 동의합니다.
+                            </div>
+                            <button class="secessionBtn" id="secessionBtn" type="button">회원 탈퇴</button>
                         </div>
                     </div>
                 </form>

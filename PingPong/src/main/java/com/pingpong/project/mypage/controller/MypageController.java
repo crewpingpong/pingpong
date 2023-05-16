@@ -42,34 +42,38 @@ public class MypageController {
 	
 	
 	// 회원 정보 수정
-	@PostMapping("/info")
+	@PostMapping("/myPageModi")
 	public String updateInfo(Member updateMember
 						, @SessionAttribute("loginMember") Member loginMember
 						, RedirectAttributes ra) {
 		
 		updateMember.setMemberNo(loginMember.getMemberNo()); // 로그인한 회원의 번호를 updateMember에 추가
 		
-		int result = service.updateInfo(updateMember);
+//		System.out.println(updateMember.getMemberNickname());
+//		System.out.println(updateMember.getMemberUrl());
+//		System.out.println(updateMember.getMemberNo());
 		
+		int result = service.updateInfo(updateMember);
+
+//		System.out.println("result : " + result);
 		String message = null;
 		
-		if(result > 0) { // 성공
-			
+		if(result > 0) { // 성공	
 			message = "회원 정보가 수정되었습니다.";
 			
-			// Session에 로그인 된 회원 정보도 수정(동기화)
+			// Session에 로그인 된 회원 정보 수정
 			loginMember.setMemberNickname(updateMember.getMemberNickname());
 			loginMember.setMemberUrl(updateMember.getMemberUrl());
 			
-		}else { // 실패
-			
-			message = "회원 정보 수정 실패";
-			
+		}else { // 실패		
+			message = "회원 정보 수정 실패";		
 		}
+		
+		System.out.println(message);
 		
 		ra.addFlashAttribute("message", message);
 		
-		return "redirect:info";
+		return "redirect:myPageModi";
 	}
 	
 	
@@ -109,40 +113,31 @@ public class MypageController {
 						, HttpServletResponse resp
 						, RedirectAttributes ra) {
 		
-		// 1. 로그인한 회원의 회원 번호 얻어오기
+		// 로그인한 회원의 회원 번호 얻어오기
 		int memberNo = loginMember.getMemberNo();
 		
-		// 2. 회원 탈퇴 서비스 호출
-		//	- 비밀번호가 일치하면 MEMBER_DEL_FL -> 'Y'로 바꾸고 1 반환
-		//	- 비밀번호가 일치하지 않으면 -> 0 반환
+		// 회원 탈퇴 서비스 호출
 		int result = service.secession(memberPw, memberNo);
 		
 		String path = "redirect:";
 		String message = null;
 		
-		// 3. 탈퇴 성공 시
+		// 탈퇴 성공
 		if(result > 0) {
-			//	- message : 탈퇴되었습니다
 			message = "탈퇴되었습니다";
-			//	- 메인 페이지로 리다이렉트
 			path += "/";
-			//	- 로그아웃
-			status.setComplete();
-			//	+ 쿠키 삭제
-			Cookie cookie = new Cookie("saveId", "");
-			cookie.setMaxAge(0);
-			cookie.setPath("/");
-			resp.addCookie(cookie);
+			status.setComplete(); // 로그아웃
 			
+			// 쿠키 삭제
+//			Cookie cookie = new Cookie("saveId", "");
+//			cookie.setMaxAge(0);
+//			cookie.setPath("/");
 		}		
 
-		// 4. 탈퇴 실패 시
+		// 탈퇴 실패
 		else {
-			//	- message : 현재 비밀번호가 일치하지 않습니다
 			message = "현재 비밀번호가 일치하지 않습니다";
-			//	- 회원 탈퇴 페이지로 리다이렉트
-			path += "secession";
-			
+			path += "myPageModi";
 		}
 		
 		ra.addFlashAttribute("message", message);
@@ -168,17 +163,15 @@ public class MypageController {
 		String filePath = session.getServletContext().getRealPath(webPath);
     	
     	int result = service.backgroundUpdate(loginMember.getMemberNo(), backgroundImage, webPath, filePath);
-    	
-    	
+    	    	
     	String message = null;
 		if(result > 0) {  // 성공 시
 			message = "배경화면이 변경되었습니다";
 		} else {
-			message = "게시글 등록 실패......";
+			message = "배경화면 변경 실패......";
 		}
 		ra.addFlashAttribute("message", message);
 		
 		return "redirect:mypage";
-    }
-	   
+    }	   
 }

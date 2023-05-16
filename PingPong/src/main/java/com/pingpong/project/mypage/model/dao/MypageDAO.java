@@ -20,7 +20,6 @@ public class MypageDAO {
 	 */
 	public int updateInfo(Member updateMember) {
 		return sqlSession.update("mypageMapper.updateInfo", updateMember);
-
 	}
 	
 	/** 회원 비밀번호 조회
