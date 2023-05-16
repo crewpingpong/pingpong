@@ -268,112 +268,69 @@ headerOpenSearchBox.addEventListener("keyup", e => {
 
 
 
-// 알림 모달에서 메세지 보기
-// 받은 메세지 제일 위에 샘플을 클릭하면 받은메세지로 이동함
-const ModalmessageExample = document.querySelector("#alarmModBox .messageExample");
+// // 알림 모달에서 메세지 보기
+// // 받은 메세지 제일 위에 샘플을 클릭하면 받은메세지로 이동함
+// const ModalmessageExample = document.querySelector("#alarmModBox .messageExample");
 
-ModalmessageExample.addEventListener("click",()=>{
-    messagerecieveContainer.style.display="flex";
-})
-
-
-
-// 메세지 함 JS
-
-// 메세지 X 눌렀을 때 지우기 (시도해보다가 실패...)
-// const messageListX = document.querySelectorAll(".messageListX");
-
-// 받은 메세지함
-const messageBoXreciveX = document.querySelector(".message-Box-recive .message-Box-X");
-const messageBoXrecive = document.querySelector(".message-Box-recive");
+// ModalmessageExample.addEventListener("click",()=>{
+//     messagerecieveContainer.style.display="flex";
+// })
 
 
-// 보낸 메세지 함
-const messageBoXsendX = document.querySelector(".message-Box-send .message-Box-X");
-const messageBoXsend = document.querySelector(".message-Box-send");
+// // 메세지 함 JS
+
+// // 메세지 X 눌렀을 때 지우기 (시도해보다가 실패...)
+// // const messageListX = document.querySelectorAll(".messageListX");
 
 
-messageBoXreciveX.addEventListener("click",()=>{ /* 받은 메세지함 닫기 */
-    messageBoXrecive.style.display="none";
-})
 
-messageBoXsendX.addEventListener("click",()=>{ /* 보낸 메세지 함 닫기 */
-    messageBoXsend.style.display="none";
-})
 
-// 받은 메세지 함 -> 보낸 메세지 함
-const gotoMessagesend = document.querySelector(".goto-message-Box-send").parentElement;
+// // 받은 메세지로 이동해보기
+// const messageSend =document.querySelector(".messageSend");
+// const messageSendContainer = document.querySelector(".message-send");
+// const messagerecieveContainer = document.querySelector(".message-recieve");
 
-gotoMessagesend.addEventListener("click",()=>{
-    messageBoXrecive.style.display="none"; /* 받은 메세지함 닫기 */
-    messageBoXsend.style.display="flex"; /* 보낸 메세지함 열기 */
-})
+// // 받은 메세지 제일 위에 샘플을 클릭하면 받은메세지로 이동함
+// const messageExample = document.querySelector(".message-Box-recive .messageExample");
 
-// 보낸 메세지 함 -> 받은 메세지 함
-const gotoMessagerecive = document.querySelector(".goto-message-Box-recive").parentElement;
+// messageExample.addEventListener("click",()=>{
+//     messageBoXrecive.style.display="none";
+//     messagerecieveContainer.style.display="flex";
+// })
 
-gotoMessagerecive.addEventListener("click",()=>{
-    messageBoXsend.style.display="none"; /* 보낸 메세지함 닫기 */
-    messageBoXrecive.style.display="flex"; /* 받은 메세지함 열기 */
-})
+// // 예제 닫기
+// const messagebuttonxRe = document.querySelector(".message-recieve .recieve-message-x");
+// messagebuttonxRe.addEventListener("click",()=>{
+//     messagerecieveContainer.style.display="none";
+// })
 
-// 좋아요 알림 모달에서 -> 메세지 함
-const gotoMessage = document.querySelector(".goto-message-Box").parentElement;
+// // 받은 메세지 확인하고 -> 메세지함으로(받은 메세지가 기본) 이동해보기
+// const gotoMessagesendEx = document.querySelector(".message-recieve .message-box-button .goto-message-Box-recive").parentElement;
+// gotoMessagesendEx.addEventListener("click",()=>{
+//     messagerecieveContainer.style.display="none";
+//     messageBoXrecive.style.display="flex";
+// })
 
-gotoMessage.addEventListener("click",()=>{
-    messageBoXsend.style.display="none"; /* 보낸 메세지함 닫기 */
-    messageBoXrecive.style.display="flex"; /* 받은 메세지함 열기 */
-})
+// // 받은 메세지에서 답장 버튼 눌러서 메세지 전송 열기
+// const recieveMessageSend = document.querySelector(".recieve-message-send");
 
-// 받은 메세지로 이동해보기
-const messageSend =document.querySelector(".messageSend");
-const messageSendContainer = document.querySelector(".message-send");
-const messagerecieveContainer = document.querySelector(".message-recieve");
+// recieveMessageSend.addEventListener("click",()=>{
+//     messagerecieveContainer.style.display="none";
+//     messageSendContainer.style.display="flex";
+// })
 
-// 받은 메세지 제일 위에 샘플을 클릭하면 받은메세지로 이동함
-const messageExample = document.querySelector(".message-Box-recive .messageExample");
-
-messageExample.addEventListener("click",()=>{
-    messageBoXrecive.style.display="none";
-    messagerecieveContainer.style.display="flex";
-})
-
-// 예제 닫기
-const messagebuttonxRe = document.querySelector(".message-recieve .recieve-message-x");
-messagebuttonxRe.addEventListener("click",()=>{
-    messagerecieveContainer.style.display="none";
-})
-
-// 받은 메세지 확인하고 -> 메세지함으로(받은 메세지가 기본) 이동해보기
-const gotoMessagesendEx = document.querySelector(".message-recieve .message-box-button .goto-message-Box-recive").parentElement;
-gotoMessagesendEx.addEventListener("click",()=>{
-    messagerecieveContainer.style.display="none";
-    messageBoXrecive.style.display="flex";
-})
-
-// 받은 메세지에서 답장 버튼 눌러서 메세지 전송 열기
-const recieveMessageSend = document.querySelector(".recieve-message-send");
-
-recieveMessageSend.addEventListener("click",()=>{
-    messagerecieveContainer.style.display="none";
-    messageSendContainer.style.display="flex";
-})
-
-// 답장 메세지에서 메세지 함으로 가기
-const gotoMessageResendEx = document.querySelector(".message-send .message-box-button .goto-message-Box-recive").parentElement;
-gotoMessageResendEx.addEventListener("click",()=>{
-    messageSendContainer.style.display="none";
-    messageBoXrecive.style.display="flex";
-})
-// 답장 닫기
-const messagebuttonxResend = document.querySelector(".message-send .recieve-message-x");
-messagebuttonxResend.addEventListener("click",()=>{
-    messageSendContainer.style.display="none";
-})
+// // 답장 메세지에서 메세지 함으로 가기
+// const gotoMessageResendEx = document.querySelector(".message-send .message-box-button .goto-message-Box-recive").parentElement;
+// gotoMessageResendEx.addEventListener("click",()=>{
+    
+//     messageSendContainer.style.display="none";
+//     messageBoXrecive.style.display="flex";
+// })
+// // 답장 닫기
+// const messagebuttonxResend = document.querySelector(".message-send .recieve-message-x");
+// messagebuttonxResend.addEventListener("click",()=>{
+//     messageSendContainer.style.display="none";
+// })
 
 // -------------------------------------
-
-
-
-
 

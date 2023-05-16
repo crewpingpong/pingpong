@@ -230,7 +230,16 @@
 		    <version>${org.springframework-version}</version>
 		    <scope>test</scope>
 		</dependency>    
+		
+	<!-- Spring WebSocket -->
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+	<dependency>
+	   <groupId>org.springframework</groupId>
+	   <artifactId>spring-websocket</artifactId>
+	   <version>${org.springframework-version}</version>
+	</dependency>
 	</dependencies>
+	
 	
 	<!-- build : 프로젝트 빌드 시 사용되는 플러그인 추가 및 버전 정보 설정 -->
     <build>

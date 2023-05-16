@@ -8,7 +8,10 @@
 		<result property="messageContent" column="MESSAGE_CONTENT" />
 		<result property="sendDate" column="SEND_DATE" />
 		<result property="sendMember" column="SEND_MEMBER" />
-		<result property="receivedMember" column="RECEIVED_MEMBER" />
+		<result property="profileImg" column="PROFILE_IMG" />
+		<result property="memberNickname" column="MEMBER_NICKNAME" />
+		<result property="receivedMember" column="RECEIVED_MEMBER"/>
+		<result property="createDate" column="CREATE_DATE"/>
 	</resultMap>
 	
 	<!-- 알람 관련 -->
@@ -19,5 +22,33 @@
 		<result property="memberNo" column="MEMBER_NO" />
 	</resultMap>
 	
+	<!-- 받은 메세지 조회 -->
+	<select id="messageList" resultMap="message_rm">
+		SELECT MESSAGE_NO, MESSAGE_CONTENT, SEND_DATE, SEND_MEMBER, RECEIVED_MEMBER, PROFILE_IMG, MEMBER_NICKNAME,
+			<![CDATA[
+			CASE  
+				WHEN SYSDATE - SEND_DATE < 1/24/60
+				THEN FLOOR( (SYSDATE - SEND_DATE) * 24 * 60 * 60 ) || '초 전'
+				WHEN SYSDATE - SEND_DATE < 1/24
+				THEN FLOOR( (SYSDATE - SEND_DATE) * 24 * 60) || '분 전'
+				WHEN SYSDATE - SEND_DATE < 1
+				THEN FLOOR( (SYSDATE - SEND_DATE) * 24) || '시간 전'
+				ELSE TO_CHAR(SEND_DATE, 'YYYY-MM-DD')
+			END CREATE_DATE
+			]]>
+		FROM MESSAGE
+		JOIN "MEMBER_PROFILE" ON (SEND_MEMBER=MEMBER_NO)
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE RECEIVED_MEMBER = #{memberNo}
+	</select>
+	
+	<!-- 보낸 메세지 조회 -->
+	<select id="sendmessageList" resultMap="message_rm">
+		SELECT MESSAGE_NO, MESSAGE_CONTENT, SEND_DATE, SEND_MEMBER, RECEIVED_MEMBER, PROFILE_IMG, MEMBER_NICKNAME
+		FROM MESSAGE
+		JOIN "MEMBER_PROFILE" ON (SEND_MEMBER=MEMBER_NO)
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE SEND_MEMBER = #{memberNo}
+	</select>
 	
 </mapper>

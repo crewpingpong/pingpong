@@ -23,5 +23,9 @@ public class Message {
 	private String messageContent; // 메세지 내용
 	private String sendDate; // 메세지 보낸 날짜
 	private int sendMember; // 보낸 회원
+	private String profileImg; // 보낸 회원 프로필
+	private String memberNickname; // 보낸 회원 닉네임
 	private int receivedMember; // 받은 회원
+	
+	private String createDate; // 메세지 보낸 날짜
 }
