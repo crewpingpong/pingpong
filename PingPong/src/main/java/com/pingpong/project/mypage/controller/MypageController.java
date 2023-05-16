@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +38,7 @@ public class MypageController {
 	@Autowired
 	private MypageService service;
 	
-	
+	// 프로필 조회
 	@GetMapping("/{memberNo}")
 	public String personal(
 			@PathVariable("memberNo") int memberNo
@@ -47,11 +46,14 @@ public class MypageController {
 		
 		
 		MyPage mypage = service.selectMemberProfile(memberNo);
-		
 		List<Board> boardList = service.selectBoardList(memberNo);
+		List<Board> boardMarkList = service.selectBoardMarkList(memberNo);
+		List<Board> boardLikeList = service.selectBoardLikeList(memberNo);
 		
 		model.addAttribute("mypage", mypage);
 		model.addAttribute("boardList", boardList);
+		model.addAttribute("markList", boardMarkList);
+		model.addAttribute("likeList", boardLikeList);
 		
 		return "personal/post";
 	}
@@ -177,30 +179,28 @@ public class MypageController {
 	
     
     // 배경화면 변경
-    @PostMapping("/background")
+    @PostMapping("/background/insert")
     public String background(
     		@RequestParam(value="backgroundImage", required=false) MultipartFile backgroundImage // 배경화면 이미지
     		,@SessionAttribute("loginMember") Member loginMember  // 회원 번호 확인용
     		, RedirectAttributes ra  // 메시지 전달용
     		, HttpSession session  //
-    		, Model model
     		) throws IllegalStateException, IOException{
     	
     	String webPath = "/resources/images/mypage/";  // 저장경로
 		
 		String filePath = session.getServletContext().getRealPath(webPath);
-    	
     	int result = service.backgroundUpdate(loginMember.getMemberNo(), backgroundImage, webPath, filePath);
     	
     	String message = null;
 		if(result > 0) {  // 성공 시
 			message = "배경화면이 변경되었습니다";
 		} else {
-			message = "게시글 등록 실패......";
+			message = "배경화면 등록 실패......";
 		}
 		ra.addFlashAttribute("message", message);
-		
-		return "redirect:/mypage/";
+
+		return "redirect:/mypage/" + loginMember.getMemberNo();
     }
 	   
 }

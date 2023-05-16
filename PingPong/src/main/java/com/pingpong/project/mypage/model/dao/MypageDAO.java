@@ -88,6 +88,22 @@ public class MypageDAO {
 		return sqlSession.selectOne("mypageMapper.selectMemberProfile", memberNo);
 	}
 
+	/** 북마크한 게시글 조회 
+	 * @param memberNo
+	 * @return boardMarkList
+	 */
+	public List<Board> selectBoardMarkList(int memberNo) {
+		return sqlSession.selectList("boardMapper.selectBoardMarkList", memberNo);
+	}
+
+	/** 좋아요한 게시글 조회
+	 * @param memberNo
+	 * @return boardLikeList
+	 */
+	public List<Board> selectBoardLikeList(int memberNo) {
+		return sqlSession.selectList("boardMapper.selectBoardLikeList", memberNo);
+	}
+
 
 	
 

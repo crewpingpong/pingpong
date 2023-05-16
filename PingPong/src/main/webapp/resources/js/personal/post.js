@@ -36,8 +36,8 @@ if(background != null){
         }
     });
 
-    const changeBackground = document.getElementById("changeBackground");
-    changeBackground.addEventListener("click", () => {
+    const updateBackground = document.getElementById("updateBackground");
+    updateBackground.addEventListener("click", () => {
     
         if(background.value == ''){
             alert("배경화면을 지정해주세요");

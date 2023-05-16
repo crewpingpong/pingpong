@@ -51,4 +51,22 @@
 		AND IMG_ORDER = 1
 		ORDER BY BOARD_NO DESC
 	</select>	
+	
+	<select id="selectBoardMarkList" resultMap="board_rm">
+		SELECT BOARD_NO, IMG_ADDRESS THUMBNAIL
+		FROM BOARD
+		LEFT JOIN BOARD_IMG USING(BOARD_NO)
+		WHERE BOARD_NO IN (SELECT BOARD_NO FROM "BOOKMARK"
+				WHERE MEMBER_NO = #{memberNo})
+		AND IMG_ORDER = 1
+	</select>
+	
+	<select id="selectBoardLikeList" resultMap="board_rm">
+		SELECT BOARD_NO, IMG_ADDRESS THUMBNAIL
+		FROM BOARD
+		LEFT JOIN BOARD_IMG USING(BOARD_NO)
+		WHERE BOARD_NO IN (SELECT BOARD_NO FROM "LIKE"
+				WHERE MEMBER_NO = #{memberNo})
+		AND IMG_ORDER = 1
+	</select>
 </mapper>

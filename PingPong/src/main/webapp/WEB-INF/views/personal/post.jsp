@@ -20,32 +20,32 @@
     
         <div class="profileBackground">  <!-- 프로필 배경 사진 -->
 
-        <c:choose>
-            <c:when test="${not empty loginMember}">  <%-- 나의 프로필일 때  --%>
-                <!-- <%-- <c:if test="${loginMember.memberNo == memberProfile.memberNo}" > --%> <%-- 내 프로필 화면일 경우 --%> -->
-                    <div>
-                        <label for="background" id="selectBackground">배경화면 선택</label> <!-- 파일 첨부 버튼 위임 -->
-                        <span id="afterChoice">
-                            <form action="/mypage/background" method="post" enctype="multipart/form-data">
-                                <input type="file" name="backgroundImage" id="background" class="profileBgupload" accept="image/*">
-                                <button id="updateBackground">변경하기</button>
-                            </form>
-                            <span id="deleteBackground">돌아가기</span>
-                        </span>
-                    </div>
-                <!-- <%-- </c:if> --%> -->
+            <c:if test="${mypage.memberNo == loginMember.memberNo}" >  <%-- 나의 프로필일 때  --%>
+                <div>
+                    <label for="background" id="selectBackground">배경화면 선택</label> <!-- 파일 첨부 버튼 위임 -->
+                    <span id="afterChoice">
+                        <form action="/mypage/background/insert" method="post" enctype="multipart/form-data">
+                            <input type="file" name="backgroundImage" id="background" class="profileBgupload" accept="image/*">
+                            <button id="updateBackground">변경하기</button>
+                        </form>
+                        <span id="deleteBackground">돌아가기</span>
+                    </span>
+                </div>
+            </c:if>
 
-                <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
-                    <img class="preview" src="${mypage.backgroundImage}">
-                </div>
-            </c:when>
-        
-            <c:otherwise>  <%-- 회원이 아닐 때 --%>
-                <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
-                    <img class="preview" src="/resources/images/기본배경.jpg">
-                </div>
-            </c:otherwise>
-        </c:choose>
+            <c:choose>
+                <c:when test="${not empty mypage.backgroundImage}">
+                    <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
+                        <img class="preview" src="${mypage.backgroundImage}">
+                    </div>
+                </c:when>
+            
+                <c:otherwise>
+                    <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
+                        <img class="preview" src="${mypage.backgroundImage}">
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
         </div>
 
@@ -53,7 +53,7 @@
         <div class="profilebox"> <!-- 프로필 박스 -->
             <div class="profileLeft"> <!-- 프로필 사진 있는 구역 -->
                 <div class="profileCircle">
-                    
+                    <img src="${mypage.profileImage}">
                 </div>
 
                 <p class="profileName">${mypage.memberNickname}</p>
@@ -118,11 +118,11 @@
                                 </c:otherwise>
                             </c:choose>
                             </div>
-                            <h4>자격증 / 수상 내역</h4>
+                            <h4>자격증</h4>
                             <div>
 <c:forEach items="${techList}" var="tech">
 <div>
-${mypage.career}
+API 예정
 </div>
 </c:forEach>
                             </div>
@@ -134,7 +134,7 @@ ${mypage.memberInfo}
                             </div>
                             <h4>커리어</h4>
                             <div>
-여기는 구현하는건가...
+${mypage.memberCareer}
                             </div>
                         </div>
                     </div>
@@ -167,10 +167,10 @@ ${mypage.memberInfo}
                 <a href="#posttab1" class="btn">게시글  <span>${fn:length(boardList)}</span></a>
                 </li>
                 <li>
-                <a href="#posttab2" class="btn">좋아요  <span>7</span></a>
+                <a href="#posttab2" class="btn">좋아요  <span>${fn:length(likeList)}</span></a>
                 </li>
                 <li>
-                <a href="#posttab3" class="btn">컬렉션  <span>5</span></a>
+                <a href="#posttab3" class="btn">컬렉션  <span>${fn:length(markList)}</span></a>
                 </li>
             </ul>
 
@@ -202,22 +202,42 @@ ${mypage.memberInfo}
                 </div>
                 <div id="posttab2" class="postcont">
                     <div class="contentBox">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <c:choose>
+                            <c:when test="${empty likeList}">
+                                <%-- 조회된 게시글 목록이 비어있거나 null인 경우 --%>
+                                게시글이 존재하지 않습니다.
+                            </c:when>
+                        
+                            <c:otherwise>
+                                <!-- 게시글 목록 조회 결과가 있다면 -->
+                                <c:forEach items="${likeList}" var="like">
+                                    <div>
+                                        <img class="list-thumbnail" src="${like.thumbnail}">
+                                        <a href="#"></a>   
+                                    </div>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div id="posttab3" class="postcont">
                     <div class="contentBox">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <c:choose>
+                            <c:when test="${empty markList}">
+                                <%-- 조회된 게시글 목록이 비어있거나 null인 경우 --%>
+                                게시글이 존재하지 않습니다.
+                            </c:when>
+                        
+                            <c:otherwise>
+                                <!-- 게시글 목록 조회 결과가 있다면 -->
+                                <c:forEach items="${markList}" var="mark">
+                                    <div>
+                                        <img class="list-thumbnail" src="${mark.thumbnail}">
+                                        <a href="#"></a>   
+                                    </div>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>
