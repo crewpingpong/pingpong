@@ -12,4 +12,10 @@ public interface MemberService {
 	 */
 	int signupInfo(Member inputMember);
 
+	/** 비번찾기 이메일 유무 검사
+	 * @param memberEmail
+	 * @return result
+	 */
+	int emailSearch(String memberEmail);
+
 }

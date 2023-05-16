@@ -93,7 +93,7 @@ if(memberPw != null){
         if(memberPw.value.trim().length == 0){
             memberPw.value = ""; // 띄어쓰지 못넣게 하기
 
-            pwMessage1.innerText = "6글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호를 입력해 주세요.";
+            pwMessage1.innerText = "8글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호를 입력해 주세요.";
             pwMessage1.classList.remove("confirm", "error"); // 검정 글씨
 
             checkObj1.memberPw = false; // 빈칸 == 유효 X
@@ -102,8 +102,8 @@ if(memberPw != null){
 
         // 정규 표현식을 이용한 비밀번호 유효성 검사
 
-        // 6~ 영문 대소문자, 최소 1개의 숫자 혹은 특수 문자 포함
-        const regEx = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$/;
+        // 8~ 영문 소문자, 최소 1개의 숫자 혹은 특수 문자 포함
+        const regEx = /^(?=.*[a-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-z\d$@$!%*#?&]{8,}$/;
 
         // 입력한 비밀번호가 유효한 경우
         if(regEx.test(memberPw.value)){
@@ -184,15 +184,16 @@ let authSec = 59;
 // 인증번호를 발송한 이메일 저장
 let tempEmail;
 if(sendAuthKeyBtn != null){
-    sendAuthKeyBtn.addEventListener("click", function(){
+    sendAuthKeyBtn.addEventListener("click", function(e){
         authMin = 4;
         authSec = 59;
-
         checkObj1.authKey = false;
 
         if(checkObj1.memberEmail){ // 중복이 아닌 이메일인 경우
 
-
+            sendAuthKeyBtn.setAttribute("disabled", "disabled") // 재전송 방지
+            email.style.border="1px solid green";
+            
             /* fetch() API 방식 ajax */
             fetch("/sendEmail/signUp?email="+memberEmail.value)
             .then(resp => resp.text())
@@ -200,6 +201,7 @@ if(sendAuthKeyBtn != null){
                 if(result > 0){
                     console.log("인증 번호가 발송되었습니다.")
                     tempEmail = memberEmail.value;
+                    emailMessage.classList.add("class-hidden");
                 }else{
                     console.log("인증번호 발송 실패")
                 }
@@ -208,38 +210,35 @@ if(sendAuthKeyBtn != null){
                 console.log("이메일 발송 중 에러 발생");
                 console.log(err);
             });
-            
 
             alert("인증번호가 발송 되었습니다.");
-
             
-            authKeyMessage.innerText = "05:00";
-            authKeyMessage.classList.remove("confirm");
-            authKeyMessage.classList.add("error");
-            authKeyMessage.classList.remove("class-hidden");
+            sendAuthKeyBtn.innerText = "05:00";
+            sendAuthKeyBtn.classList.remove("confirm");
+            sendAuthKeyBtn.classList.remove("class-hidden");
+            // authKeyMessage.innerText = "05:00";
+            // authKeyMessage.classList.remove("confirm");
+            // authKeyMessage.classList.add("error");
+            // authKeyMessage.classList.remove("class-hidden");
 
             authTimer = window.setInterval(()=>{
-
-                authKeyMessage.innerText = "0" + authMin + ":" + (authSec<10 ? "0" + authSec : authSec);
-                
+                sendAuthKeyBtn.innerText = "0" + authMin + ":" + (authSec<10 ? "0" + authSec : authSec);
                 // 남은 시간이 0분 0초인 경우
                 if(authMin == 0 && authSec == 0){
                     checkObj1.authKey = false;
                     clearInterval(authTimer);
+                    sendAuthKeyBtn.classList.add("error");
                     return;
                 }
-
                 // 0초인 경우
                 if(authSec == 0){
                     authSec = 60;
                     authMin--;
                 }
 
-
                 authSec--; // 1초 감소
 
             }, 1000)
-            
 
         } else{
             alert("중복되지 않은 이메일을 작성해주세요.");
@@ -247,7 +246,6 @@ if(sendAuthKeyBtn != null){
         }
 
     });
-
 
     // 인증 확인
     const authKey = document.getElementById("authKey");
@@ -267,6 +265,7 @@ if(sendAuthKeyBtn != null){
                     authKeyMessage.innerText = "인증되었습니다.";
                     authKeyMessage.classList.remove("error");
                     authKeyMessage.classList.add("confirm");
+                    CertNum.style.border="1px solid green";
                     checkObj1.authKey = true;
 
                 } else{
@@ -385,13 +384,12 @@ if(memberUrl != null){
 /* 이메일 전송 버튼 눌렀을 때 */
 const certisend = document.querySelector(".certi-send");
 const certiresend = document.querySelector(".certi-resend");
-const emailsend = document.querySelector(".email-send");
 const email = document.querySelector(".signup-input-email input");
+const CertNum = document.querySelector(".signup-input-CertNum input");
 if(certisend != null){
     certisend.addEventListener("click",e=>{
         if(email.value.trim().length!==0){  
-        emailsend.style.display="block";
-        email.style.border="1px solid green";
+        emailMessage.innerText = "인증 번호가 발송 되었습니다.";
         email.focus(); // 비밀번호 확인에 초점을 맞춥
         e.preventDefault();
         }

@@ -24,8 +24,7 @@
                 <p>이메일 주소</p>
                 <input type="text" name="memberEmail" id="memberEmail" placeholder="Email" maxlength="30" autocomplete="off">
                 <button type="button" class="certi-send" id="sendAuthKeyBtn">전송</button>
-                <button type="button" class="certi-resend" id="reSendAuthKeyBtn">재전송</button>
-                <p class="email-send">인증 번호가 발송 되었습니다.</p>
+                <%-- <button type="button" class="certi-resend" id="reSendAuthKeyBtn">재전송</button> --%>
                 <span class="email-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
                 
             </div>
@@ -34,12 +33,12 @@
                 <p>인증번호 입력</p>
                 <input type="text" name="authKey" id="authKey" placeholder="인증번호 입력" maxlength="6" autocomplete="off">
                 <button type="button" id="checkAuthKeyBtn">인증</button>
-                <span class="class-hidden" id="authKeyMessage">5:00</span>
+                <span class="email-message" id="authKeyMessage"></span>
             </div> 
     
             <div class="signup-input-password">
                 <p>비밀번호</p>
-                <input type="password" placeholder="6글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호" name="memberPw" autocomplete="off" id="memberPw"> <br>
+                <input type="password" placeholder="8글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호" name="memberPw" autocomplete="off" id="memberPw"> <br>
                 <span class="pwInconsistency signUp-message" id="pwMessage1">
                     6글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호를 입력해 주세요.
                 </span>
@@ -48,7 +47,7 @@
             
             <div class="signup-password-check">
                 <p>비밀번호 확인</p>
-                <input type="password" placeholder="6글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호"  autocomplete="off" id="memberPwConfirm"> <br>
+                <input type="password" placeholder="비밀번호 재입력"  autocomplete="off" id="memberPwConfirm"> <br>
                 <span class="pwInconsistency signUp-message" id="pwMessage2"></span>
             </div>
             
@@ -65,7 +64,7 @@
             </div>
     
             <div>
-                <button type="button" onclick="location.href='/'">이전</button>
+                <button type="button" onclick="history.back()">이전</button>
                 <button class="signup-next">다음</button>
             </div>
         </form>

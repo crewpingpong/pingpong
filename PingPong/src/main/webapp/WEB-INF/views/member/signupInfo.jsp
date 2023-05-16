@@ -39,7 +39,6 @@
                 <p>작업 & 관심 분야(선택)</p>
                 <div class="job-checkbox">
                     <div>
-
                         <label for=""><input type="checkbox"> 그래픽 디자인</label>
                         <label for=""><input type="checkbox"> 영상/모션그래픽</label> 
                         <label for=""><input type="checkbox"> 캐릭터 디자인</label> 

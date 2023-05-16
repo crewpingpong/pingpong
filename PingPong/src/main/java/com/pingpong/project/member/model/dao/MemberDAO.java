@@ -22,4 +22,9 @@ public class MemberDAO {
 		return sqlSession.insert("memberMapper.signupInfo",inputMember);
 	}
 
+	// 비번 찾기 이메일 검사
+	public int emailSearch(String memberEmail) {
+		return sqlSession.selectOne("memberMapper.emailSearch", memberEmail);
+	}
+
 }

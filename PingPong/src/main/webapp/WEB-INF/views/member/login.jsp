@@ -17,7 +17,7 @@
 
     <div class="login-container">
         <div class="login-box customChk">
-            <a href="index.html"><img src="/resources/images/logo_X1.png"></a>
+            <a href="/"><img src="/resources/images/logo_X1.png"></a>
 
             <form action="/member/login" method="post">
                 <div class="login-input-email">
@@ -41,12 +41,12 @@
                             로그인 유지
                         </label>
                     </div>
-                    <a href="pwSearch.html">비밀번호 찾기 ></a>
+                    <a href="/member/pwSearch">비밀번호 찾기</a>
                 </div>
     
                 <div class="login-signUp">
                     <p>아직 PingPong 회원이 아니세요?</p>
-                    <a href="signup.html">회원가입 하기</a>
+                    <a href="/member/signup">회원가입 하기</a>
                 </div>
             </form>
         </div>

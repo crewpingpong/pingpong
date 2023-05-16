@@ -18,12 +18,19 @@
 
 .login-input-email{margin-top: 98px; margin-bottom: 23px;}
 
+/* 비밀번호 찾기 이메일 */
+.search-input-email{margin-top: 50px; margin-bottom: 23px;}
+
 .login-box div input{
     width: 320px; height: 42px;
     border-radius: 5px; border: 1px solid #C5C5C5;padding: 8px;
 }
 
 .login-input-email>p,.login-input-password>p{
+    font-size: 14px;font-weight: bold; margin-bottom: 8px;
+}
+/* 비밀번호 찾기 이메일 */
+.search-input-email>p,.login-input-password>p{
     font-size: 14px;font-weight: bold; margin-bottom: 8px;
 }
 .passwordwrong{ /* 비밀번호 틀렸을 때 나오는 경고 문구 */
@@ -91,10 +98,6 @@ margin-top: 20px;}
     width: 230px; margin-right: 10px;
 }
 
-form.signup-box>div .email-send{ /* 이메일 전송 눌렀을 때 나오는 문구 */
-    color: green; font-size: 13px; font-weight: normal;
-    display: none;
-}
 .signup-box>div:nth-of-type(1) .certi-resend{ /* 이메일 재전송 버튼 */
     display: none;
 }
@@ -114,14 +117,6 @@ form.signup-box>div .email-send{ /* 이메일 전송 눌렀을 때 나오는 문
     display: block;
 }
 
-/* 인증 번호 타이머 */
-#authKeyMessage{
-    letter-spacing: 2px;
-    font-weight: lighter;
-    display: block;
-    font-size: 14px;
-    font-weight: normal;
-}
 .class-hidden{
     visibility: hidden;
 }
@@ -330,7 +325,11 @@ input::placeholder {
 /* 비밀 번호 찾기 */
 
 .pwseachbox>p:nth-of-type(1){
-    font-size: 24px; margin-top: 44px;
+    font-size: 24px; 
+    margin-top: 44px;
+}
+.pwseachbox>p:nth-of-type(2){
+    font-size: 24px;
 }
 .pwseachbox a img{
     margin-top: 140px;
@@ -341,6 +340,13 @@ input::placeholder {
 }
 .pwseachbox button{
     margin-top: 30px;
+}
+#memberPwCheck{
+    display: block;
+    margin-top: 20px;
+}
+.login-container .login-box .search-input-email .reset-member-pw{
+    display: block;
 }
 
 .pwseachbox .email-pw-reset{ /* 비밀번호 재설정을 위한 이메일이 발송 되었습니다. */
