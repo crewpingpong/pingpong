@@ -57,7 +57,7 @@
                 </div>
 
                 <p class="profileName">${mypage.memberNickname}</p>
-                <p class="profileIntroduce">여긴 무슨 컬럼명...??</p>
+                <p class="profileIntroduce">${mypage.oneLiner}</p>
                 <div class="profileBtn">
                     <!-- 팔로워 버튼 --> <!-- c:choose/c:when -->
                     <div class="followBtn"> <!-- followshow 클래스 있으면 보임 -->
@@ -192,8 +192,10 @@ ${mypage.memberCareer}
                                 <!-- 게시글 목록 조회 결과가 있다면 -->
                                 <c:forEach items="${boardList}" var="board">
                                     <div>
-                                        <img class="list-thumbnail" src="${board.thumbnail}">
-                                        <a href="#"></a>   
+                                        <!-- <a href="/board/${board.boardNo}"> -->
+                                        <a onclick="selectBoardList(${board.boardNo})">
+                                            <img class="list-thumbnail" src="${board.thumbnail}">
+                                        </a>   
                                     </div>
                                 </c:forEach>
                             </c:otherwise>
@@ -212,8 +214,9 @@ ${mypage.memberCareer}
                                 <!-- 게시글 목록 조회 결과가 있다면 -->
                                 <c:forEach items="${likeList}" var="like">
                                     <div>
-                                        <img class="list-thumbnail" src="${like.thumbnail}">
-                                        <a href="#"></a>   
+                                        <a href="#">
+                                            <img class="list-thumbnail" src="${like.thumbnail}">
+                                        </a>   
                                     </div>
                                 </c:forEach>
                             </c:otherwise>
@@ -232,8 +235,9 @@ ${mypage.memberCareer}
                                 <!-- 게시글 목록 조회 결과가 있다면 -->
                                 <c:forEach items="${markList}" var="mark">
                                     <div>
-                                        <img class="list-thumbnail" src="${mark.thumbnail}">
-                                        <a href="#"></a>   
+                                        <a href="#">
+                                            <img class="list-thumbnail" src="${mark.thumbnail}">
+                                        </a>   
                                     </div>
                                 </c:forEach>
                             </c:otherwise>
@@ -250,17 +254,13 @@ ${mypage.memberCareer}
 
 
     <!-- 게시글 클릭 했을 때 상세페이지 -->
-    <div class="BoardBackground BoardBackground-close"> <!-- 게시글 불투명 배경 -->
+    <div id="boardModal" class="BoardBackground BoardBackground-close"> <!-- 게시글 불투명 배경 -->
     
         <div class="BoardMainContainer"> <!-- 게시글 하얀 배경 -->
     
             <div class="BoardContainerleft">
                 <div class="BoardPicture slide">
-                    <div class="slide_item"><img src="img/peach.jpg" class="slide-img"></div>
-                    <div class="slide_item"><img src="img/PrCert.png" class="slide-img"></div>
-                    <div class="slide_item"><img src="img/peach.jpg" class="slide-img"></div>
-                    <div class="slide_item"><img src="img/peach.jpg" class="slide-img"></div>
-                    <div class="slide_item"><img src="img/peach.jpg" class="slide-img"></div>
+                    <!-- 게시글 이미지 슬라이드 들어가는 곳 -->
                     <div class="slide_prev_button slide_button">
                         <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M28.8121 39.5833C28.5008 39.5844 28.1933 39.5157 27.9121 39.3823C27.6309 39.2489 27.3831 39.0542 27.1871 38.8125L17.1246 26.3125C16.8181 25.9397 16.6506 25.4721 16.6506 24.9896C16.6506 24.507 16.8181 24.0394 17.1246 23.6667L27.5412 11.1667C27.8949 10.7412 28.403 10.4737 28.9539 10.4229C29.5048 10.3721 30.0533 10.5422 30.4787 10.8958C30.9042 11.2495 31.1717 11.7576 31.2225 12.3085C31.2733 12.8594 31.1032 13.4079 30.7496 13.8333L21.4371 25L30.4371 36.1667C30.6918 36.4725 30.8537 36.8449 30.9034 37.2397C30.9531 37.6346 30.8887 38.0355 30.7178 38.395C30.5468 38.7544 30.2765 39.0573 29.9388 39.2679C29.601 39.4785 29.2101 39.588 28.8121 39.5833Z" fill="#231F20"/>
@@ -278,28 +278,17 @@ ${mypage.memberCareer}
             <div class="BoardContainerright"> <!-- 오른쪽 게시글 영역 -->
                 <div> <!-- 프사 + 이름 + 소개 -->
                     <div class="porfileRac">
-                        <a href="#" class="Boardprofile"></a>
+                        <!-- 프로필 이미지 들어가는 곳 -->
                     </div>
-                    <div>
-                        <a href="/post.html">김핑퐁</a>
-                        <p>게시글 정보 입니다. (회원 소개글 들어가도 됨)</p>
+                    <div class="boardMemberInfo">
+                        <!-- 닉네임, 한줄 소개 들어가는 곳 -->
                     </div>
                 </div>
                     <!-- 게시글 중단 -->
             <div class="Boardcontent"> <!-- 게시글 내용 + 좋아요 수 -->
                     <div class="postcontent"> <!-- 게시글 내용 박스 -->
                         <div class="BoardPost">
-                            Cookie란? <br>
-            * - 클라이언트 측(브라우저)에서 관리하는 파일 <br>
-            *  <br>
-            * - 쿠키파일에 등록된 주소 요청 시 마다 <br>
-            *   자동으로 요청에 첨부되어 서버로 전달됨. <br>
-            * <br>
-            * - 서버로 전달된 쿠키에<br>
-            *   값 추가, 수정, 삭제 등을 진행한 후 <br> 
-            *   다시 클라이언트에게 반환<br>
-            * 
-            * */
+                            <!-- 게시글 내용 들어가는 곳 -->
                         </div>
                         <!-- 게시글  좋아요 -->
                         <div class="BoardHeartBox"> 

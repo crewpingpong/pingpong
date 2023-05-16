@@ -9,6 +9,7 @@
 		<result property="backgroundImage" column="BACKGROUND_IMG"/>
 		<result property="memberInfo" column="MEMBER_INFO"/>
 		<result property="memberCareer" column="MEMBER_CAREER"/>
+		<result property="oneLiner" column="ONE_LINER"/>
 		
 		<collection property="techList" 
 					select="selectTechList"
@@ -76,7 +77,7 @@
 	
 	<!-- 내 정보 조회하기 -->
 	<select id="selectMemberProfile" resultMap="mypage_rm">
-		SELECT MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, BACKGROUND_IMG, MEMBER_INFO, MEMBER_CAREER  
+		SELECT MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, BACKGROUND_IMG, MEMBER_INFO, MEMBER_CAREER, ONE_LINER 
 		FROM "MEMBER_PROFILE"
 		JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE MEMBER_NO = #{memberNo}

@@ -51,6 +51,58 @@ if(background != null){
 }
 
 const updateBackground = document.getElementById("updateBackground");
+const checkSlideDiv = document.getElementsByClassName("slide_item");
+function selectBoardList(boardNo){
+
+    fetch("/boardDetail?boardNo="+boardNo)
+    .then(response => response.json())
+    .then(board => {
+        console.log(board);
+        document.querySelectorAll('.slide_item').forEach(function(slideItem) {
+            slideItem.remove();
+        });
+        const porfileRac = document.querySelector(".porfileRac");
+        const boardMemberInfo = document.querySelector(".boardMemberInfo");
+        const BoardPost = document.querySelector(".BoardPost");
+
+        porfileRac.innerHTML = '';
+        boardMemberInfo.innerHTML = '';
+        BoardPost.innerHTML = '';
+        
+        for(let i=0; i<board.imageList.length;i++){
+            const slideDiv = document.createElement("div");
+            slideDiv.classList.add("slide_item");
+            
+            const img = document.createElement("img");
+            img.src = board.imageList[i].imgAddress;
+            img.classList.add("slide-img");
+            slideDiv.append(img);
+            
+            prevBtn.before(slideDiv);
+        }
+
+        const profileA = document.createElement("img");
+        profileA.href = "/mypage/"+board.memberNo;
+        profileA.src = board.profileImage;
+        profileA.classList.add("Boardprofile");
+        
+        
+        porfileRac.append(profileA);
+        
+        const memberNickA = document.createElement("a");
+        memberNickA.href = "/mypage/"+board.memberNo;
+        memberNickA.innerText = board.memberNickname;
+        console.log(memberNickA);
+        const memberInfoP = document.createElement("p");
+        memberInfoP.innerText = board.oneLiner;
+        console.log(memberInfoP);
+        boardMemberInfo.append(memberNickA, memberInfoP);
+
+        BoardPost.innerHTML = board.boardContent;
+
+    })
+    .catch(err => console.log(err));
+}
 
 
 
@@ -316,6 +368,7 @@ contentBox.addEventListener("click", () => {
 // -----------------------------------------------------------------------------------------
 // 게시글 슬라이드
 // 슬라이크 전체 크기(width 구하기)
+
 const slide = document.querySelector(".slide");
 let slideWidth = slide.clientWidth;
 
@@ -348,23 +401,24 @@ const endSlide = slideItems[slideItems.length - 1];
 const startElem = document.createElement("div");
 const endElem = document.createElement("div");
 
-endSlide.classList.forEach((c) => endElem.classList.add(c));
-endElem.innerHTML = endSlide.innerHTML;
+if(checkSlideDiv.length != 0){
+    endSlide.classList.forEach((c) => endElem.classList.add(c));
+    endElem.innerHTML = endSlide.innerHTML;
 
-startSlide.classList.forEach((c) => startElem.classList.add(c));
-startElem.innerHTML = startSlide.innerHTML;
+    startSlide.classList.forEach((c) => startElem.classList.add(c));
+    startElem.innerHTML = startSlide.innerHTML;
 
-// 각 복제한 엘리먼트 추가하기
-slideItems[0].before(endElem);
-slideItems[slideItems.length - 1].after(startElem);
+    // 각 복제한 엘리먼트 추가하기
+    slideItems[0].before(endElem);
+    slideItems[slideItems.length - 1].after(startElem);
 
-// 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
-slideItems = document.querySelectorAll(".slide_item");
-//
-let offset = slideWidth + currSlide;
-slideItems.forEach((i) => {
-    i.setAttribute("style", `left: ${-offset}px`);
-});
+    // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
+    slideItems = document.querySelectorAll(".slide_item");
+    //
+    let offset = slideWidth + currSlide;
+    slideItems.forEach((i) => {
+        i.setAttribute("style", `left: ${-offset}px`);
+    });
 
 function nextMove() {
     currSlide++;
@@ -810,20 +864,20 @@ function prevMove2() {
 }
 
 // 버튼 엘리먼트에 클릭 이벤트 추가하기
-nextBtn2.addEventListener("click", () => {
-    // 이후 버튼 누를 경우 현재 슬라이드를 변경
-    nextMove2();
-});
-// 버튼 엘리먼트에 클릭 이벤트 추가하기
-prevBtn2.addEventListener("click", () => {
-    // 이전 버튼 누를 경우 현재 슬라이드를 변경
-    prevMove2();
-});
+// nextBtn2.addEventListener("click", () => {
+//     // 이후 버튼 누를 경우 현재 슬라이드를 변경
+//     nextMove2();
+// });
+// // 버튼 엘리먼트에 클릭 이벤트 추가하기
+// prevBtn2.addEventListener("click", () => {
+//     // 이전 버튼 누를 경우 현재 슬라이드를 변경
+//     prevMove2();
+// });
 
-// 브라우저 화면이 조정될 때 마다 slideWidth를 변경하기 위해
-window.addEventListener("resize", () => {
-    slideWidth2 = slide2.clientWidth;
-});
+// // 브라우저 화면이 조정될 때 마다 slideWidth를 변경하기 위해
+// window.addEventListener("resize", () => {
+//     slideWidth2 = slide2.clientWidth;
+// });
 
 
 
@@ -832,50 +886,52 @@ let startPoint2 = 0;
 let endPoint2 = 0;
 
 // PC 클릭 이벤트 (드래그)
-slide2.addEventListener("mousedown", (e) => {
-    startPoint2 = e.pageX; // 마우스 드래그 시작 위치 저장
-});
+// slide2.addEventListener("mousedown", (e) => {
+//     startPoint2 = e.pageX; // 마우스 드래그 시작 위치 저장
+// });
 
-slide2.addEventListener("mouseup", (e) => {
-    endPoint2 = e.pageX; // 마우스 드래그 끝 위치 저장
-    if (startPoint2 < endPoint2) {
-        // 마우스가 오른쪽으로 드래그 된 경우
-        prevMove2();
-    } else if (startPoint2 > endPoint2) {
-        // 마우스가 왼쪽으로 드래그 된 경우
-        nextMove2();
-    }
-});
+// slide2.addEventListener("mouseup", (e) => {
+//     endPoint2 = e.pageX; // 마우스 드래그 끝 위치 저장
+//     if (startPoint2 < endPoint2) {
+//         // 마우스가 오른쪽으로 드래그 된 경우
+//         prevMove2();
+//     } else if (startPoint2 > endPoint2) {
+//         // 마우스가 왼쪽으로 드래그 된 경우
+//         nextMove2();
+//     }
+// });
 
-// 모바일 터치 이벤트 (스와이프)
-slide2.addEventListener("touchstart", (e) => {
-    startPoint2 = e.touches[0].pageX; // 터치가 시작되는 위치 저장
-});
-slide2.addEventListener("touchend", (e) => {
-    endPoint2 = e.changedTouches[0].pageX; // 터치가 끝나는 위치 저장
-    if (startPoint2 < endPoint2) {
-        // 오른쪽으로 스와이프 된 경우
-        prevMove2();
-    } else if (startPoint2 > endPoint2) {
-        // 왼쪽으로 스와이프 된 경우
-        nextMove2();
-    }
-});
+// // 모바일 터치 이벤트 (스와이프)
+// slide2.addEventListener("touchstart", (e) => {
+//     startPoint2 = e.touches[0].pageX; // 터치가 시작되는 위치 저장
+// });
+// slide2.addEventListener("touchend", (e) => {
+//     endPoint2 = e.changedTouches[0].pageX; // 터치가 끝나는 위치 저장
+//     if (startPoint2 < endPoint2) {
+//         // 오른쪽으로 스와이프 된 경우
+//         prevMove2();
+//     } else if (startPoint2 > endPoint2) {
+//         // 왼쪽으로 스와이프 된 경우
+//         nextMove2();
+//     }
+// });
 
-// 기본적으로 슬라이드 루프 시작하기
-let loopInterval2 = setInterval(() => {
-    nextMove2();
-}, 3000);
+// // 기본적으로 슬라이드 루프 시작하기
+// let loopInterval2 = setInterval(() => {
+//     nextMove2();
+// }, 3000);
 
-// 슬라이드에 마우스가 올라간 경우 루프 멈추기
-slide2.addEventListener("mouseover", () => {
-    clearInterval(loopInterval2);
-});
+// // 슬라이드에 마우스가 올라간 경우 루프 멈추기
+// slide2.addEventListener("mouseover", () => {
+//     clearInterval(loopInterval2);
+// });
 
-// 슬라이드에서 마우스가 나온 경우 루프 재시작하기
-slide2.addEventListener("mouseout", () => {
-    loopInterval2 = setInterval(() => {
-        nextMove2();
-    }, 3000);
-});
+// // 슬라이드에서 마우스가 나온 경우 루프 재시작하기
+// slide2.addEventListener("mouseout", () => {
+//     loopInterval2 = setInterval(() => {
+//         nextMove2();
+//     }, 3000);
+// });
+
+}
 

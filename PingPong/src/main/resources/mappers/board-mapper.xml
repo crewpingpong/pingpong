@@ -9,20 +9,30 @@
 		<result property="boardDelFl" column="BOARD_DEL_FL"/>	
 		<result property="boardCount" column="BOARD_COUNT"/>	
 		<result property="thumbnail" column="THUMBNAIL"/>	
-		<result property="memberNo" column="MEMBER_NO"/>	
 		<result property="authority" column="AUTHORITY"/>	
+		<result property="memberNo" column="MEMBER_NO"/>
+		
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+		<result property="profileImage" column="PROFILE_IMG"/>
+		<result property="oneLiner" column="ONE_LINER"/>
 		<result property="memberUrl" column="MEMBER_URL"/>
+		
+		<result property="likeCount" column="LIKE_COUNT"/>
+		
+		
 		
 		
 		<collection property="imageList"
 					select="selectImageList"
-					column="java.util.ArrayList"
+					column="BOARD_NO"
+					javaType="java.util.ArrayList"
 					ofType="BoardImage"
 					/>
 					
 		<collection property="commentList"
 					select="selectCommentList"
-					column="java.util.ArrayList"
+					column="BOARD_NO"
+					javaType="java.util.ArrayList"
 					ofType="Comment"
 					/>
 	</resultMap>
@@ -58,6 +68,7 @@
 		LEFT JOIN BOARD_IMG USING(BOARD_NO)
 		WHERE BOARD_NO IN (SELECT BOARD_NO FROM "BOOKMARK"
 				WHERE MEMBER_NO = #{memberNo})
+		AND BOARD_DEL_FL='N'
 		AND IMG_ORDER = 1
 	</select>
 	
@@ -67,6 +78,40 @@
 		LEFT JOIN BOARD_IMG USING(BOARD_NO)
 		WHERE BOARD_NO IN (SELECT BOARD_NO FROM "LIKE"
 				WHERE MEMBER_NO = #{memberNo})
+		AND BOARD_DEL_FL='N'
 		AND IMG_ORDER = 1
 	</select>
+	
+	<!-- 게시글 상세 조회 -->
+	<select id="selectBoard" resultMap="board_rm">
+		SELECT BOARD_NO, BOARD_CONTENT, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, ONE_LINER, 
+		(SELECT COUNT(*) FROM "LIKE" L
+		 WHERE L.BOARD_NO = B.BOARD_NO) LIKE_COUNT
+		 FROM "BOARD" B
+		 JOIN "MEMBER" USING(MEMBER_NO)
+		 LEFT JOIN "MEMBER_PROFILE" USING(MEMBER_NO)
+		 WHERE BOARD_DEL_FL = 'N'
+		 AND BOARD_NO = #{boardNo}
+	</select>
+	
+	<select id="selectImageList" resultMap="boardImage_rm">
+		SELECT IMG_NO, IMG_ORDER, IMG_ADDRESS, BOARD_NO
+		FROM BOARD_IMG
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	<select id="selectCommentList" resultMap="comment_rm">
+		SELECT COMMENT_NO, COMMENT_CONTENT, COMMENT_MEMBER_NO, BOARD_NO
+		FROM "COMMENT"
+		WHERE BOARD_NO = #{boardNo}
+		AND COMMENT_DEL_FL = 'N'
+	</select>
+	
+	<!-- 좋아요 여부 확인 -->
+	<!-- <select id="boardLikeCheck">
+		SELECT COUNT(*) FROM "BOARD_LIKE"
+		WHERE BOARD_NO = #{boardNo}
+		AND MEMBER_NO = #{memberNo}
+	 </select> -->
+	
 </mapper>

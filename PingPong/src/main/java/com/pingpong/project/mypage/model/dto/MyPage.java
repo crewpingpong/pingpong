@@ -16,6 +16,7 @@ public class MyPage {
 	private String backgroundImage;
 	private String memberInfo;
 	private String memberCareer;
+	private String oneLiner;
 	
 	private List<Tech> techList;
 	private List<Career> careerList;
