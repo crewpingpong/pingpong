@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="ContentList" value="${boardList.boardList}"/>
+<c:set var="ContentList" value="${boardList}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -128,7 +128,7 @@
                                         <a href="#">${Content.memberUrl}</a>
                                     </td>
                                     <td>${Content.boardContent}</td> <!-- 한글 16글자 1줄 -->
-                                    <td>${Content.boardNo}</td>
+                                    <td>${Content.declarationCount}</td>
                                     <td>${Content.boardDelFl}</td>
                                 </tr>
                                 </c:forEach>

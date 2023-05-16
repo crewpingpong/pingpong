@@ -19,5 +19,6 @@ public class Board {
 	private int memberNo;
 	private int authority;
 	private String memberUrl;
-
+	
+	private int declarationCount;
 }

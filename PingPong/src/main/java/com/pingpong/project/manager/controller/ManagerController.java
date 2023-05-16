@@ -1,5 +1,6 @@
 package com.pingpong.project.manager.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.pingpong.project.board.dto.Board;
+import com.pingpong.project.board.dto.Comment;
+import com.pingpong.project.board.dto.Declaration;
+import com.pingpong.project.board.dto.Inquiry;
 import com.pingpong.project.manager.service.ManagerService;
 
 @SessionAttributes({"loginMember"})
@@ -47,28 +52,45 @@ public class ManagerController {
 	public String managerPost(
 			Model model
 			) {
-		Map<String, Object> boardList = service.selectBoardList();
+		List<Board> boardList = service.selectBoardList();
 		
 		model.addAttribute("boardList",boardList);
 		
-		
+
 		return "manager/managerPost";
 	}
 	//댓글 관리
 	@GetMapping("/Comment")
-	public String managerComment() {
+	public String managerComment(
+			Model model
+			) {
+		List<Comment> CommentList = service.selectCommentList();
+		
+		model.addAttribute("CommentList",CommentList);
 		
 		return "manager/managerComment";
 	}
 	//1:1문의
 	@GetMapping("/1To1inquiry")
-	public String manager1To1inquiry() {
+	public String manager1To1inquiry(
+			Model model
+			) {
+		
+		List<Inquiry> InquiryList = service.selectInquiryList();
+		
+		model.addAttribute("InquiryList",InquiryList);
+		
 		
 		return "manager/manager1To1Inquiry";
 	}
 	//신고함
 	@GetMapping("/Report")
-	public String manager1To1Content() {
+	public String manager1To1Content(
+			Model model
+			) {
+		List<Declaration> declarationList = service.selectDeclarationList();
+		
+		model.addAttribute("DeclarationList",declarationList);
 		
 		return "manager/managerReport";
 	}

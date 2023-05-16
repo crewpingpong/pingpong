@@ -16,9 +16,12 @@
    <typeAliases>
       <typeAlias type="com.pingpong.project.member.model.dto.Member" alias="Member" />
       <typeAlias type="com.pingpong.project.board.dto.Board" alias="Board" />
+      <typeAlias type="com.pingpong.project.board.dto.Comment" alias="Comment" />
+      <typeAlias type="com.pingpong.project.board.dto.Inquiry" alias="Inquiry" />
+      <typeAlias type="com.pingpong.project.board.dto.Declaration" alias="Declaration" />
 <!--       
       <typeAlias type="com.pingpong.project.board.model.dto.BoardImage" alias="BoardImage" />
-      <typeAlias type="com.pingpong.project.board.model.dto.Comment" alias="Comment" /> -->
+       -->
    </typeAliases>
    
    <!-- mapper 파일(SQL 작성되는파일) 위치 등록 부분 -->
