@@ -2,9 +2,11 @@ package com.pingpong.project.mypage.model.service;
 
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.mypage.model.dto.MyPage;
 
@@ -41,11 +43,29 @@ public interface MypageService {
 	 */
 	int backgroundUpdate(int memberNo, MultipartFile backgroundImage, String webPath, String filePath) throws IllegalStateException, IOException;
 
+	/** 회원 게시글 조회
+	 * @param memberUrl
+	 * @return boardList
+	 */
+	List<Board> selectBoardList(int memberNo);
+
 	/** 회원 프로필 조회
 	 * @param memberNo
-	 * @return memberProfile
+	 * @return myPage
 	 */
 	MyPage selectMemberProfile(int memberNo);
+
+	/** 북마크한 게시글 조회
+	 * @param memberNo
+	 * @return boardMarkList
+	 */
+	List<Board> selectBoardMarkList(int memberNo);
+
+	/** 좋아요 누른 게시글 조회
+	 * @param memberNo
+	 * @return boardLikeList
+	 */
+	List<Board> selectBoardLikeList(int memberNo);
 
 
 

@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pingpong.project.board.dto.Board;
+import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.member.model.dto.Member;
 
 @Repository

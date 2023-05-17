@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,32 +20,32 @@
     
         <div class="profileBackground">  <!-- 프로필 배경 사진 -->
 
-        <c:choose>
-            <c:when test="${not empty loginMember}">  <%-- 회원일 때  --%>
-                <!-- <%-- <c:if test="${loginMember.memberNo == memberProfile.memberNo}" > --%> <%-- 내 프로필 화면일 경우 --%> -->
-                    <div>
-                        <label for="background" id="selectBackground">배경화면 선택</label> <!-- 파일 첨부 버튼 위임 -->
-                        <span id="afterChoice">
-                            <form action="/mypage/background" method="post" enctype="multipart/form-data">
-                                <input type="file" name="backgroundImage" id="background" class="profileBgupload" accept="image/*">
-                                <button id="updateBackground">변경하기</button>
-                            </form>
-                            <span id="deleteBackground">돌아가기</span>
-                        </span>
-                    </div>
-                <!-- <%-- </c:if> --%> -->
+            <c:if test="${mypage.memberNo == loginMember.memberNo}" >  <%-- 나의 프로필일 때  --%>
+                <div>
+                    <label for="background" id="selectBackground">배경화면 선택</label> <!-- 파일 첨부 버튼 위임 -->
+                    <span id="afterChoice">
+                        <form action="/mypage/background/insert" method="post" enctype="multipart/form-data">
+                            <input type="file" name="backgroundImage" id="background" class="profileBgupload" accept="image/*">
+                            <button id="updateBackground">변경하기</button>
+                        </form>
+                        <span id="deleteBackground">돌아가기</span>
+                    </span>
+                </div>
+            </c:if>
 
-                <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
-                    <img class="preview" src="${memberProfile.backgroundImage}">
-                </div>
-            </c:when>
-        
-            <c:otherwise>  <%-- 회원이 아닐 때 --%>
-                <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
-                    <img class="preview" src="/resources/images/green.jpg">
-                </div>
-            </c:otherwise>
-        </c:choose>
+            <c:choose>
+                <c:when test="${not empty mypage.backgroundImage}">
+                    <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
+                        <img class="preview" src="${mypage.backgroundImage}">
+                    </div>
+                </c:when>
+            
+                <c:otherwise>
+                    <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
+                        <img class="preview" src="${mypage.backgroundImage}">
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
         </div>
 
@@ -52,11 +53,11 @@
         <div class="profilebox"> <!-- 프로필 박스 -->
             <div class="profileLeft"> <!-- 프로필 사진 있는 구역 -->
                 <div class="profileCircle">
-                    
+                    <img src="${mypage.profileImage}">
                 </div>
 
-                <p class="profileName">김핑퐁</p>
-                <p class="profileIntroduce">반응형 UIUX 개발자 김핑퐁 입니다.</p>
+                <p class="profileName">${mypage.memberNickname}</p>
+                <p class="profileIntroduce">${mypage.oneLiner}</p>
                 <div class="profileBtn">
                     <!-- 팔로워 버튼 --> <!-- c:choose/c:when -->
                     <div class="followBtn"> <!-- followshow 클래스 있으면 보임 -->
@@ -103,26 +104,37 @@
                             <!-- 나중에 여기다가 아이콘 추가해주는 기능 구현 -->
                             <!-- <div>없음</div> -->
                             <div>
-                                <img src="/resources/images/personal/PsCert.png" alt="certificateIcon">
-                                <img src="/resources/images/personal/AiCert.png" alt="certificateIcon">
-                                <img src="/resources/images/personal/PrCert.png" alt="certificateIcon">
-                                <img src="/resources/images/personal/XdCert.png" alt="certificateIcon">
+                                <c:choose>
+                                <c:when test="${empty mypage.techList}">
+                                    없음
+                                </c:when>
+                            
+                                <c:otherwise>
+                                    <c:forEach items="${techList}" var="tech">
+                                        <div>
+                                            <img src="${tech.techImg}" alt="${tech.techName}">
+                                        </div>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
                             </div>
-                            <h4>자격증 / 수상 내역</h4>
+                            <h4>자격증</h4>
                             <div>
-웹디자인 기능사 <br>
-컴퓨터그래픽스 운용기능사
+<c:forEach items="${techList}" var="tech">
+<div>
+API 예정
+</div>
+</c:forEach>
                             </div>
                         </div>
                         <div id="profiletab2" class="cont">
                             <h4>소개</h4>
                             <div>
-kh 정보교육원에서 국비 수업을 받고 있는 김핑퐁 프론트 엔드 백엔드 둘다 할 수 있는 풀스택 개발자 입니다.
+${mypage.memberInfo}
                             </div>
                             <h4>커리어</h4>
                             <div>
-kh 정보교육원에서 국비 수업<br>
-핑퐁 프로젝트에서 웹사이트 구현  
+${mypage.memberCareer}
                             </div>
                         </div>
                     </div>
@@ -152,13 +164,13 @@ kh 정보교육원에서 국비 수업<br>
         <div class="posttab_menu">
             <ul class="postlist">
                 <li class="is_on">
-                <a href="#posttab1" class="btn">게시글  <span>12</span></a>
+                <a href="#posttab1" class="btn">게시글  <span>${fn:length(boardList)}</span></a>
                 </li>
                 <li>
-                <a href="#posttab2" class="btn">좋아요  <span>7</span></a>
+                <a href="#posttab2" class="btn">좋아요  <span>${fn:length(likeList)}</span></a>
                 </li>
                 <li>
-                <a href="#posttab3" class="btn">컬렉션  <span>5</span></a>
+                <a href="#posttab3" class="btn">컬렉션  <span>${fn:length(markList)}</span></a>
                 </li>
             </ul>
 
@@ -170,38 +182,66 @@ kh 정보교육원에서 국비 수업<br>
             <div class="postcont_area">
                 <div id="posttab1" class="postcont" style="display:block;">
                     <div class="contentBox">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <c:choose>
+                            <c:when test="${empty boardList}">
+                                <%-- 조회된 게시글 목록이 비어있거나 null인 경우 --%>
+                                게시글이 존재하지 않습니다.
+                            </c:when>
+                        
+                            <c:otherwise>
+                                <!-- 게시글 목록 조회 결과가 있다면 -->
+                                <c:forEach items="${boardList}" var="board">
+                                    <div>
+                                        <!-- <a href="/board/${board.boardNo}"> -->
+                                        <a onclick="selectBoardList(${board.boardNo})">
+                                            <img class="list-thumbnail" src="${board.thumbnail}">
+                                        </a>   
+                                    </div>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div id="posttab2" class="postcont">
                     <div class="contentBox">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <c:choose>
+                            <c:when test="${empty likeList}">
+                                <%-- 조회된 게시글 목록이 비어있거나 null인 경우 --%>
+                                게시글이 존재하지 않습니다.
+                            </c:when>
+                        
+                            <c:otherwise>
+                                <!-- 게시글 목록 조회 결과가 있다면 -->
+                                <c:forEach items="${likeList}" var="like">
+                                    <div>
+                                        <a href="#">
+                                            <img class="list-thumbnail" src="${like.thumbnail}">
+                                        </a>   
+                                    </div>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div id="posttab3" class="postcont">
                     <div class="contentBox">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <c:choose>
+                            <c:when test="${empty markList}">
+                                <%-- 조회된 게시글 목록이 비어있거나 null인 경우 --%>
+                                게시글이 존재하지 않습니다.
+                            </c:when>
+                        
+                            <c:otherwise>
+                                <!-- 게시글 목록 조회 결과가 있다면 -->
+                                <c:forEach items="${markList}" var="mark">
+                                    <div>
+                                        <a href="#">
+                                            <img class="list-thumbnail" src="${mark.thumbnail}">
+                                        </a>   
+                                    </div>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>
@@ -214,17 +254,13 @@ kh 정보교육원에서 국비 수업<br>
 
 
     <!-- 게시글 클릭 했을 때 상세페이지 -->
-    <div class="BoardBackground BoardBackground-close"> <!-- 게시글 불투명 배경 -->
+    <div id="boardModal" class="BoardBackground BoardBackground-close"> <!-- 게시글 불투명 배경 -->
     
         <div class="BoardMainContainer"> <!-- 게시글 하얀 배경 -->
     
             <div class="BoardContainerleft">
                 <div class="BoardPicture slide">
-                    <div class="slide_item"><img src="img/peach.jpg" class="slide-img"></div>
-                    <div class="slide_item"><img src="img/PrCert.png" class="slide-img"></div>
-                    <div class="slide_item"><img src="img/peach.jpg" class="slide-img"></div>
-                    <div class="slide_item"><img src="img/peach.jpg" class="slide-img"></div>
-                    <div class="slide_item"><img src="img/peach.jpg" class="slide-img"></div>
+                    <!-- 게시글 이미지 슬라이드 들어가는 곳 -->
                     <div class="slide_prev_button slide_button">
                         <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M28.8121 39.5833C28.5008 39.5844 28.1933 39.5157 27.9121 39.3823C27.6309 39.2489 27.3831 39.0542 27.1871 38.8125L17.1246 26.3125C16.8181 25.9397 16.6506 25.4721 16.6506 24.9896C16.6506 24.507 16.8181 24.0394 17.1246 23.6667L27.5412 11.1667C27.8949 10.7412 28.403 10.4737 28.9539 10.4229C29.5048 10.3721 30.0533 10.5422 30.4787 10.8958C30.9042 11.2495 31.1717 11.7576 31.2225 12.3085C31.2733 12.8594 31.1032 13.4079 30.7496 13.8333L21.4371 25L30.4371 36.1667C30.6918 36.4725 30.8537 36.8449 30.9034 37.2397C30.9531 37.6346 30.8887 38.0355 30.7178 38.395C30.5468 38.7544 30.2765 39.0573 29.9388 39.2679C29.601 39.4785 29.2101 39.588 28.8121 39.5833Z" fill="#231F20"/>
@@ -242,51 +278,39 @@ kh 정보교육원에서 국비 수업<br>
             <div class="BoardContainerright"> <!-- 오른쪽 게시글 영역 -->
                 <div> <!-- 프사 + 이름 + 소개 -->
                     <div class="porfileRac">
-                        <a href="#" class="Boardprofile"></a>
+                        <!-- 프로필 이미지 들어가는 곳 -->
                     </div>
-                    <div>
-                        <a href="/post.html">김핑퐁</a>
-                        <p>게시글 정보 입니다. (회원 소개글 들어가도 됨)</p>
+                    <div class="boardMemberInfo">
+                        <!-- 닉네임, 한줄 소개 들어가는 곳 -->
                     </div>
                 </div>
                     <!-- 게시글 중단 -->
             <div class="Boardcontent"> <!-- 게시글 내용 + 좋아요 수 -->
-                    <div class="postcontent"> <!-- 게시글 내용 박스 -->
-                        <div class="BoardPost">
-                            Cookie란? <br>
-            * - 클라이언트 측(브라우저)에서 관리하는 파일 <br>
-            *  <br>
-            * - 쿠키파일에 등록된 주소 요청 시 마다 <br>
-            *   자동으로 요청에 첨부되어 서버로 전달됨. <br>
-            * <br>
-            * - 서버로 전달된 쿠키에<br>
-            *   값 추가, 수정, 삭제 등을 진행한 후 <br> 
-            *   다시 클라이언트에게 반환<br>
-            * 
-            * */
-                        </div>
-                        <!-- 게시글  좋아요 -->
-                        <div class="BoardHeartBox"> 
-                            <!-- <svg class="BoardHeart" width="23" height="23" viewBox="0 0 50 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M24.9982 44.2497C24.724 44.2513 24.4523 44.1987 24.1984 44.095C23.9446 43.9913 23.7137 43.8386 23.5191 43.6455L7.33156 27.4372C5.30106 25.3855 4.16211 22.6154 4.16211 19.7288C4.16211 16.8422 5.30106 14.0722 7.33156 12.0205C9.37794 9.9799 12.15 8.83398 15.0399 8.83398C17.9298 8.83398 20.7018 9.9799 22.7482 12.0205L24.9982 14.2705L27.2482 12.0205C29.2946 9.9799 32.0666 8.83398 34.9566 8.83398C37.8465 8.83398 40.6185 9.9799 42.6649 12.0205C44.6954 14.0722 45.8343 16.8422 45.8343 19.7288C45.8343 22.6154 44.6954 25.3855 42.6649 27.4372L26.4774 43.6455C26.2827 43.8386 26.0519 43.9913 25.798 44.095C25.5442 44.1987 25.2724 44.2513 24.9982 44.2497ZM15.0399 12.9997C14.158 12.9957 13.284 13.1667 12.4687 13.5029C11.6533 13.839 10.9128 14.3336 10.2899 14.958C9.03169 16.2228 8.32539 17.9344 8.32539 19.7184C8.32539 21.5025 9.03169 23.214 10.2899 24.4788L24.9982 39.208L39.7066 24.4788C40.9648 23.214 41.6711 21.5025 41.6711 19.7184C41.6711 17.9344 40.9648 16.2228 39.7066 14.958C38.4225 13.7449 36.723 13.069 34.9566 13.069C33.1901 13.069 31.4906 13.7449 30.2066 14.958L26.4774 18.708C26.2837 18.9033 26.0533 19.0583 25.7994 19.164C25.5456 19.2698 25.2733 19.3242 24.9982 19.3242C24.7232 19.3242 24.4509 19.2698 24.197 19.164C23.9432 19.0583 23.7127 18.9033 23.5191 18.708L19.7899 14.958C19.167 14.3336 18.4265 13.839 17.6111 13.5029C16.7958 13.1667 15.9218 12.9957 15.0399 12.9997Z" fill="#231F20"/>
-                            </svg> -->
-                            <!-- <svg class="BoardRedHeart" width="23" height="23" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12.5017 21.3041C12.3372 21.305 12.1741 21.2735 12.0218 21.2113C11.8695 21.1491 11.731 21.0574 11.6142 20.9416L1.90167 11.2166C0.683373 9.98557 0 8.32356 0 6.5916C0 4.85964 0.683373 3.19763 1.90167 1.9666C3.1295 0.742236 4.79271 0.0546875 6.52667 0.0546875C8.26063 0.0546875 9.92384 0.742236 11.1517 1.9666L12.5017 3.3166L13.8517 1.9666C15.0795 0.742236 16.7427 0.0546875 18.4767 0.0546875C20.2106 0.0546875 21.8738 0.742236 23.1017 1.9666C24.32 3.19763 25.0033 4.85964 25.0033 6.5916C25.0033 8.32356 24.32 9.98557 23.1017 11.2166L13.3892 20.9416C13.2724 21.0574 13.1339 21.1491 12.9816 21.2113C12.8293 21.2735 12.6662 21.305 12.5017 21.3041Z" fill="#FF2F2F"/>
-                            </svg> -->
+                <div class="postcontent"> <!-- 게시글 내용 박스 -->
+                    <div class="BoardPost">
+                        <!-- 게시글 내용 들어가는 곳 -->
+                    </div>
+                    <!-- 게시글  좋아요 -->
+                    <div class="BoardHeartBox"> 
+                        <!-- <svg class="BoardHeart" width="23" height="23" viewBox="0 0 50 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24.9982 44.2497C24.724 44.2513 24.4523 44.1987 24.1984 44.095C23.9446 43.9913 23.7137 43.8386 23.5191 43.6455L7.33156 27.4372C5.30106 25.3855 4.16211 22.6154 4.16211 19.7288C4.16211 16.8422 5.30106 14.0722 7.33156 12.0205C9.37794 9.9799 12.15 8.83398 15.0399 8.83398C17.9298 8.83398 20.7018 9.9799 22.7482 12.0205L24.9982 14.2705L27.2482 12.0205C29.2946 9.9799 32.0666 8.83398 34.9566 8.83398C37.8465 8.83398 40.6185 9.9799 42.6649 12.0205C44.6954 14.0722 45.8343 16.8422 45.8343 19.7288C45.8343 22.6154 44.6954 25.3855 42.6649 27.4372L26.4774 43.6455C26.2827 43.8386 26.0519 43.9913 25.798 44.095C25.5442 44.1987 25.2724 44.2513 24.9982 44.2497ZM15.0399 12.9997C14.158 12.9957 13.284 13.1667 12.4687 13.5029C11.6533 13.839 10.9128 14.3336 10.2899 14.958C9.03169 16.2228 8.32539 17.9344 8.32539 19.7184C8.32539 21.5025 9.03169 23.214 10.2899 24.4788L24.9982 39.208L39.7066 24.4788C40.9648 23.214 41.6711 21.5025 41.6711 19.7184C41.6711 17.9344 40.9648 16.2228 39.7066 14.958C38.4225 13.7449 36.723 13.069 34.9566 13.069C33.1901 13.069 31.4906 13.7449 30.2066 14.958L26.4774 18.708C26.2837 18.9033 26.0533 19.0583 25.7994 19.164C25.5456 19.2698 25.2733 19.3242 24.9982 19.3242C24.7232 19.3242 24.4509 19.2698 24.197 19.164C23.9432 19.0583 23.7127 18.9033 23.5191 18.708L19.7899 14.958C19.167 14.3336 18.4265 13.839 17.6111 13.5029C16.7958 13.1667 15.9218 12.9957 15.0399 12.9997Z" fill="#231F20"/>
+                        </svg> -->
+                        <!-- <svg class="BoardRedHeart" width="23" height="23" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.5017 21.3041C12.3372 21.305 12.1741 21.2735 12.0218 21.2113C11.8695 21.1491 11.731 21.0574 11.6142 20.9416L1.90167 11.2166C0.683373 9.98557 0 8.32356 0 6.5916C0 4.85964 0.683373 3.19763 1.90167 1.9666C3.1295 0.742236 4.79271 0.0546875 6.52667 0.0546875C8.26063 0.0546875 9.92384 0.742236 11.1517 1.9666L12.5017 3.3166L13.8517 1.9666C15.0795 0.742236 16.7427 0.0546875 18.4767 0.0546875C20.2106 0.0546875 21.8738 0.742236 23.1017 1.9666C24.32 3.19763 25.0033 4.85964 25.0033 6.5916C25.0033 8.32356 24.32 9.98557 23.1017 11.2166L13.3892 20.9416C13.2724 21.0574 13.1339 21.1491 12.9816 21.2113C12.8293 21.2735 12.6662 21.305 12.5017 21.3041Z" fill="#FF2F2F"/>
+                        </svg> -->
 
-                            <svg class="BoardHeart" width="25" height="22" viewBox="0 0 25 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="BoardHeart" width="25" height="22" viewBox="0 0 25 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12.5 21.2466C12.3355 21.2475 12.1725 21.216 12.0202 21.1538C11.8679 21.0916 11.7294 21 11.6126 20.8841L1.90142 11.1604C0.683282 9.92955 0 8.26776 0 6.53604C0 4.80431 0.683282 3.14252 1.90142 1.91166C3.12908 0.687457 4.79207 0 6.5258 0C8.25953 0 9.92252 0.687457 11.1502 1.91166L12.5 3.26147L13.8498 1.91166C15.0775 0.687457 16.7405 0 18.4742 0C20.2079 0 21.8709 0.687457 23.0986 1.91166C24.3167 3.14252 25 4.80431 25 6.53604C25 8.26776 24.3167 9.92955 23.0986 11.1604L13.3874 20.8841C13.2706 21 13.1321 21.0916 12.9798 21.1538C12.8275 21.216 12.6645 21.2475 12.5 21.2466ZM6.5258 2.49908C5.99671 2.49668 5.47241 2.59929 4.98327 2.80095C4.49412 3.00262 4.04984 3.29934 3.67618 3.67392C2.92136 4.43272 2.49763 5.45949 2.49763 6.52979C2.49763 7.60008 2.92136 8.62685 3.67618 9.38565L12.5 18.222L21.3238 9.38565C22.0786 8.62685 22.5024 7.60008 22.5024 6.52979C22.5024 5.45949 22.0786 4.43272 21.3238 3.67392C20.5535 2.94615 19.5339 2.54069 18.4742 2.54069C17.4145 2.54069 16.3949 2.94615 15.6246 3.67392L13.3874 5.92362C13.2712 6.04076 13.133 6.13374 12.9807 6.1972C12.8284 6.26065 12.665 6.29332 12.5 6.29332C12.335 6.29332 12.1716 6.26065 12.0193 6.1972C11.867 6.13374 11.7288 6.04076 11.6126 5.92362L9.37542 3.67392C9.00175 3.29934 8.55748 3.00262 8.06833 2.80095C7.57918 2.59929 7.05488 2.49668 6.5258 2.49908Z" fill="#231F20"/>
-                            </svg>
+                        </svg>
 
-                            <svg class="BoardRedHeart" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="BoardRedHeart" width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12.5017 21.2494C12.3372 21.2504 12.1741 21.2188 12.0218 21.1566C11.8695 21.0944 11.731 21.0028 11.6142 20.8869L1.90167 11.1619C0.683373 9.93088 0 8.26887 0 6.53691C0 4.80495 0.683373 3.14294 1.90167 1.91191C3.1295 0.687549 4.79271 0 6.52667 0C8.26063 0 9.92384 0.687549 11.1517 1.91191L12.5017 3.26191L13.8517 1.91191C15.0795 0.687549 16.7427 0 18.4767 0C20.2106 0 21.8738 0.687549 23.1017 1.91191C24.32 3.14294 25.0033 4.80495 25.0033 6.53691C25.0033 8.26887 24.32 9.93088 23.1017 11.1619L13.3892 20.8869C13.2724 21.0028 13.1339 21.0944 12.9816 21.1566C12.8293 21.2188 12.6662 21.2504 12.5017 21.2494Z" fill="#FF2F2F"/>
-                            </svg>
+                        </svg>
 
-                            <span>77</span><span>명이 좋아합니다.<span>
-                            </div>
-                            
+                        <span>77</span><span>명이 좋아합니다.<span>
                     </div>
-                    </div>
+                </div>
+            </div>
                     <!-- 이전 버튼 클릭시 전환 화면 -->
                     <div class="Boardcontent1"> <!-- 게시글 내용 + 좋아요 수 -->
                         

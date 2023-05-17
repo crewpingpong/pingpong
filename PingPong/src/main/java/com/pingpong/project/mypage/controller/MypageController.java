@@ -5,12 +5,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,13 +24,13 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.pingpong.project.board.dto.Board;
+import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.mypage.model.dto.MyPage;
 import com.pingpong.project.mypage.model.service.MypageService;
 
 
-@SessionAttributes({"loginMember", "memberProfile"})
+@SessionAttributes({"loginMember"})
 @RequestMapping("/mypage")
 @Controller
 public class MypageController {
@@ -38,27 +38,22 @@ public class MypageController {
 	@Autowired
 	private MypageService service;
 	
-	
-	@GetMapping("/")
-	public String personal() {
-		return "personal/post";
-	}
-
-	
-	@GetMapping("/self")  // 마이페이지로 넘어오면 각 회원의 정보를 가져와서 보여줘야 함 
+	// 프로필 조회
+	@GetMapping("/{memberNo}")
 	public String personal(
-				@SessionAttribute("loginMember") Member loginMember
-				, Model model
-				, RedirectAttributes ra
-				) {
+			@PathVariable("memberNo") int memberNo
+			, Model model) {
 		
-		System.out.println("화면들어오나");
-		MyPage memberProfile = service.selectMemberProfile(loginMember.getMemberNo());
-//		Board board = service.selectBoard(memberNo);
 		
-		System.out.println(memberProfile);
+		MyPage mypage = service.selectMemberProfile(memberNo);
+		List<Board> boardList = service.selectBoardList(memberNo);
+		List<Board> boardMarkList = service.selectBoardMarkList(memberNo);
+		List<Board> boardLikeList = service.selectBoardLikeList(memberNo);
 		
-		model.addAttribute("memberProfile", memberProfile);
+		model.addAttribute("mypage", mypage);
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("markList", boardMarkList);
+		model.addAttribute("likeList", boardLikeList);
 		
 		return "personal/post";
 	}
@@ -184,30 +179,28 @@ public class MypageController {
 	
     
     // 배경화면 변경
-    @PostMapping("/background")
+    @PostMapping("/background/insert")
     public String background(
     		@RequestParam(value="backgroundImage", required=false) MultipartFile backgroundImage // 배경화면 이미지
     		,@SessionAttribute("loginMember") Member loginMember  // 회원 번호 확인용
     		, RedirectAttributes ra  // 메시지 전달용
     		, HttpSession session  //
-    		, Model model
     		) throws IllegalStateException, IOException{
     	
     	String webPath = "/resources/images/mypage/";  // 저장경로
 		
 		String filePath = session.getServletContext().getRealPath(webPath);
-    	
     	int result = service.backgroundUpdate(loginMember.getMemberNo(), backgroundImage, webPath, filePath);
     	
     	String message = null;
 		if(result > 0) {  // 성공 시
 			message = "배경화면이 변경되었습니다";
 		} else {
-			message = "게시글 등록 실패......";
+			message = "배경화면 등록 실패......";
 		}
 		ra.addFlashAttribute("message", message);
-		
-		return "redirect:/mypage/";
+
+		return "redirect:/mypage/" + loginMember.getMemberNo();
     }
 	   
 }

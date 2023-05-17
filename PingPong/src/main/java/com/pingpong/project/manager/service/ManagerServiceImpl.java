@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pingpong.project.board.dto.Board;
+import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.manager.dao.ManagerDAO;
 import com.pingpong.project.member.model.dto.Member;
 
