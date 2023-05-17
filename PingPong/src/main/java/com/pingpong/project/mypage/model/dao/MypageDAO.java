@@ -23,7 +23,6 @@ public class MypageDAO {
 	 */
 	public int updateInfo(Member updateMember) {
 		return sqlSession.update("mypageMapper.updateInfo", updateMember);
-
 	}
 
 	/** 회원 비밀번호 조회
@@ -55,9 +54,18 @@ public class MypageDAO {
 		return sqlSession.update("mypageMapper.secession", memberNo);
 	}
 	
-	/** 배경화면 수정
+
+	/** 프로필 이미지 수정
 	 * @param map
 	 * @return result
+	 */
+	public int updateProfile(Map<String, Object> map) {
+		return sqlSession.update("memberProfileMapper.updateProfile", map);
+	}
+
+	/** 배경 이미지 수정
+	 * @param map
+	 * @return
 	 */
 	public int backgroundUpdate(Map<String, Object> map) {
 		return sqlSession.update("mypageMapper.backgroundUpdate", map);
@@ -104,7 +112,5 @@ public class MypageDAO {
 		return sqlSession.selectList("boardMapper.selectBoardLikeList", memberNo);
 	}
 
-
-	
 
 }

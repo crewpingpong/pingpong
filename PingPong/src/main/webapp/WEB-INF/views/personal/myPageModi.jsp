@@ -6,7 +6,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>PingPong</title>
+
     <link rel="stylesheet" href="/resources/css/style.css"> <!-- 메인 헤더, 네브 css -->
     <link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
     <link rel="stylesheet" href="/resources/css/personal/myPageModi.css">
@@ -16,7 +18,6 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
     <!-- 내 정보 수정 Tab Menu -->
-
     <div class="myPage-content-container">
 
         <div class="myPage-left-side-menu-group"> 
@@ -42,17 +43,16 @@
 
             <!-- *** 내 정보 편집 *** -->
             <div id="myPageModiTab1" class="myPage-content-main">
-                <form name="myPageFrm" action="info" method="">
-                    <div class="myIfo-modi">
+                <form name="myPageFrm" id="updateInfo" action="/mypage/myPageModi" method="POST">
+                    <div class="myInfo-modi">
 
                         <!-- 프로필 사진 -->
                         <div class="profile-change-area"> 
+                            <%-- 프로필 이미지가 없으면 기본 이미지 --%>
                             <span class="profile-picture removeBGC" id="profile-picture">
-                                <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M25.3636 23.405C27.0118 23.405 28.6229 22.9162 29.9934 22.0005C31.3638 21.0849 32.4319 19.7834 33.0626 18.2606C33.6933 16.7379 33.8584 15.0624 33.5368 13.4459C33.2153 11.8294 32.4216 10.3445 31.2562 9.17906C30.0907 8.01362 28.6059 7.21995 26.9894 6.89841C25.3729 6.57686 23.6973 6.74189 22.1746 7.37262C20.6519 8.00335 19.3504 9.07146 18.4347 10.4419C17.519 11.8123 17.0303 13.4234 17.0303 15.0716C17.0303 17.2818 17.9082 19.4014 19.471 20.9642C21.0339 22.527 23.1535 23.405 25.3636 23.405ZM25.3636 10.905C26.1877 10.905 26.9933 11.1493 27.6785 11.6072C28.3637 12.065 28.8977 12.7157 29.2131 13.4771C29.5285 14.2385 29.611 15.0762 29.4502 15.8845C29.2894 16.6927 28.8926 17.4352 28.3099 18.0179C27.7272 18.6006 26.9847 18.9975 26.1765 19.1582C25.3682 19.319 24.5305 19.2365 23.7691 18.9211C23.0077 18.6058 22.357 18.0717 21.8992 17.3865C21.4413 16.7013 21.1969 15.8957 21.1969 15.0716C21.1969 13.9665 21.6359 12.9067 22.4173 12.1253C23.1987 11.3439 24.2585 10.905 25.3636 10.905Z" fill="#231F20"/>
-                                    <path d="M25.3636 27.5723C21.4959 27.5723 17.7865 29.1087 15.0516 31.8436C12.3167 34.5785 10.7803 38.2879 10.7803 42.1556C10.7803 42.7081 10.9998 43.238 11.3905 43.6287C11.7812 44.0194 12.3111 44.2389 12.8636 44.2389C13.4161 44.2389 13.946 44.0194 14.3367 43.6287C14.7274 43.238 14.9469 42.7081 14.9469 42.1556C14.9469 39.3929 16.0444 36.7434 17.9979 34.7899C19.9514 32.8364 22.6009 31.7389 25.3636 31.7389C28.1263 31.7389 30.7758 32.8364 32.7293 34.7899C34.6828 36.7434 35.7803 39.3929 35.7803 42.1556C35.7803 42.7081 35.9998 43.238 36.3905 43.6287C36.7812 44.0194 37.3111 44.2389 37.8636 44.2389C38.4161 44.2389 38.946 44.0194 39.3367 43.6287C39.7274 43.238 39.9469 42.7081 39.9469 42.1556C39.9469 38.2879 38.4105 34.5785 35.6756 31.8436C32.9407 29.1087 29.2313 27.5723 25.3636 27.5723Z" fill="#231F20"/>
-                                </svg>
+                                <img src="/resources/images/profileImage.jpg" id="profileImage">
                             </span>
+
                             <div class="edit-profile-picture">
                                 <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <rect width="50" height="50" fill="url(#pattern0)"/>
@@ -65,18 +65,17 @@
                                 </svg>
                                 프로필 사진 편집
                             </div>
-                            <form action="/upload" method="post" enctype="multipart/form-data">
-                                <div>
-                                    <label for="file"></label>
-                                    <input type="file" class="profileUpload" accept="image/*" required multiple>
-                                </div>
-                            </form>
+                            <div>
+                                <label for="file"></label>
+                                <input type="file" class="profileUpload" accept="image/*" required multiple>
+                            </div>
                         </div>
                         
                         <!-- 사용자 이름 -->
                         <div class="userName-change"> 
                             <p>사용자 이름</p>
-                            <input type="text" maxlength="40" placeholder="사용자 이름을 입력해주세요." value="${loginMember.memberNickname}">
+                            <input type="text" name="memberNickname" minlength="2" maxlength="20" placeholder="사용자 이름을 입력해주세요." 
+                                value="${loginMember.memberNickname}" id="memberNickname">
                         </div>
 
                         <!-- url -->
@@ -84,7 +83,8 @@
                             <p>PingPong URL(영문)</p>
                             <div>
                                 <p>pingpong.net/</p>
-                                <input type="text" name="userurl" value="${loginMember.memberUrl}" required> <br>
+                                <input type="text" name="memberUrl" id="memberUrl"
+                                    value="${loginMember.memberUrl}" required> <br>
                             </div>
                             <button class="url-double-check" type="button">중복 확인</button>
                         </div>
@@ -94,13 +94,13 @@
                             <p>작업 & 관심 분야(선택)</p>
                             <div class="interest-field">
                                 <div>
-                                    <label for=""><input type="checkbox" value="AI/로봇" name="interest"> AI/로봇</label>
-                                    <label for=""><input type="checkbox" value="IT/SW" name="interest"> IT/SW</label> 
-                                    <label for=""><input type="checkbox" value="게임" name="interest"> 게임</label> 
-                                    <label for=""><input type="checkbox" value="공학" name="interest"> 공학</label>
-                                    <label for=""><input type="checkbox" value="교육" name="interest"> 교육</label> 
-                                    <label for=""><input type="checkbox" value="마케팅" name="interest"> 마케팅</label> 
-                                    <label for=""><input type="checkbox" value="금융" name="interest"> 금융</label> 
+                                    <label for="AI/로봇"><input type="checkbox" value="AI/로봇" id="AI/로봇" name="interest"> AI/로봇</label>
+                                    <label for="IT/SW"><input type="checkbox" value="IT/SW" id="IT/SW" name="interest"> IT/SW</label> 
+                                    <label for="게임"><input type="checkbox" value="게임" id="게임" name="interest"> 게임</label> 
+                                    <label for="공학"><input type="checkbox" value="공학" id="공학" name="interest"> 공학</label>
+                                    <label for="교육"><input type="checkbox" value="교육" id="교육" name="interest"> 교육</label> 
+                                    <label for="마케팅"><input type="checkbox" value="마케팅" id="마케팅" name="interest"> 마케팅</label> 
+                                    <label for="금융"><input type="checkbox" value="금융" id="금융" name="interest"> 금융</label> 
                                 </div>
                                 <div>
                                     <label for=""><input type="checkbox" value="동물" name="interest"> 동물</label>
@@ -125,8 +125,7 @@
                     </div>
 
                     <div class="myPage-save">
-                        <button>편집 완료</button>
-                        <button>취소</button>
+                        <button id="editCompleteBtn" type="button">편집 완료</button>
                     </div>
                 </form>
             </div>   
@@ -223,7 +222,7 @@
 
                         <div class="myPage-save">
                             <button>편집 완료</button>
-                            <button> <a href="#">취소</a> </button>
+                            <button type="reset"> <a href="#">취소</a> </button>
                         </div>
                     </div>
                 </form>
@@ -233,7 +232,7 @@
             <!-- *** 비밀번호 변경 화면 구현 & 회원 탈퇴 *** -->
             <div id="myPageModiTab3" class="myPage-content-main">
 
-                <form name="myPageFrm" action="changePw" method="POST">
+                <form name="myPageFrm" id="changePwFrm" action="changePw" method="POST">
                     <div class="password-modi">
 
                         <p>비밀번호 변경</p>
@@ -259,14 +258,14 @@
                     </div>     
                 </form>
 
-                <form name="myPageFrm" action="secession" method=""> 
+                <form name="myPageFrm" id="secessionFrm" action="/mypage/secession" method="POST"> 
                     <div class="secession">       
                         <p>회원 탈퇴</p>
                         
                         <!-- 현재 비밀번호 -->
                         <div class="password-for-secession"> 
                             <p>현재 비밀번호</p>
-                            <input type="password" minlength="6" placeholder="6자 이상">
+                            <input type="password" name="memberPw" id="memberPw" minlength="6" placeholder="6자 이상">
                         </div>
                         
                         <!-- 회원 탈퇴 약관 -->
@@ -274,12 +273,14 @@
                             <p>회원 탈퇴 약관</p>
                             <textarea name="" class="terms-content" cols="30" rows="10">
 제1조 이 약관은 샘플 약관입니다. 
-① 약관 내용 1 ② 약관 내용 2 ③ 약관 내용 3 ④ 약관 내용 4 제2조 
-이 약관은 샘플 약관입니다. 
+① 약관 내용 1 ② 약관 내용 2 ③ 약관 내용 3 ④ 약관 내용 4 
+제2조 이 약관은 샘플 약관입니다. 
 ① 약관 내용 1 ② 약관 내용 2 ③ 약관 내용 3 ④ 약관 내용 4
                             </textarea>
-                            <div class="termsCheckBox"><input type="checkbox">회원 탈퇴 약관에 동의합니다.</div>
-                            <button class="secessionBtn" type="button">회원 탈퇴</button>
+                            <div class="termsCheckBox">
+                                <input type="checkbox" name="agree" id="agree">회원 탈퇴 약관에 동의합니다.
+                            </div>
+                            <button class="secessionBtn" id="secessionBtn" type="button">회원 탈퇴</button>
                         </div>
                     </div>
                 </form>

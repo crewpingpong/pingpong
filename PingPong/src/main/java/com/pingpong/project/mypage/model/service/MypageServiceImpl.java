@@ -62,16 +62,35 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public int secession(String memberPw, int memberNo) {
 		
-		// 1. 회원번호가 일치하는 회원의 비밀번호 조회
+		// 회원번호가 일치하는 회원의 비밀번호 조회
 		String encPw = dao.selectEncPw(memberNo);
 		
-		// 2. 비밀번호가 일치하면 
+		// 비밀번호 일치
 		if(bcrypt.matches(memberPw, encPw)) {
-			return dao.secession(memberNo);			
+			
+			return dao.secession(memberNo); 
 		}
 		
-		// 3. 비밀번호가 일치하지 않으면 0 반환
+		// 비밀번호 일치 X
 		return 0;
+	}
+	
+	
+	// 프로필 이미지 수정 서비스
+	@Override
+	public int updateProfile(MultipartFile profileImage, String webPath, String filePath, int memberNo) {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("memberNo", memberNo);
+		
+		String fileName = Util.fileRename(profileImage.getOriginalFilename());
+		
+		map.put("profileImage", webPath+fileName);
+		
+		int result = dao.updateProfile(map);
+		
+		return result;
 	}
 	
 
@@ -125,5 +144,6 @@ public class MypageServiceImpl implements MypageService{
 	public List<Board> selectBoardLikeList(int memberNo) {
 		return dao.selectBoardLikeList(memberNo);
 	}
+
 
 }

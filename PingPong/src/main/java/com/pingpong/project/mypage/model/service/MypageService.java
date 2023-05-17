@@ -32,7 +32,6 @@ public interface MypageService {
 	 * @return result
 	 */
 	int secession(String memberPw, int memberNo);
-	
 
 	/** 배경화면 변경 서비스
 	 * @param memberNo
@@ -66,6 +65,17 @@ public interface MypageService {
 	 * @return boardLikeList
 	 */
 	List<Board> selectBoardLikeList(int memberNo);
+
+
+	/** 프로필 이미지 수정
+	 * @param profileImage
+	 * @param webPath
+	 * @param filePath
+	 * @param loginMember
+	 * @return result
+	 */
+	int updateProfile(MultipartFile profileImage, String webPath, String filePath, int memberNo);
+	
 
 
 

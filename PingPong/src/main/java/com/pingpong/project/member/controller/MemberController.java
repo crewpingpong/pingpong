@@ -45,7 +45,6 @@ public class MemberController {
 //		Member loginMember = new Member();
 //		loginMember.setMemberEmail("pingpong@kh.or.kr");
 //		loginMember.setMemberNo(1);
-		
 		String path = "redirect:";
 		
 		if(loginMember != null) { 
