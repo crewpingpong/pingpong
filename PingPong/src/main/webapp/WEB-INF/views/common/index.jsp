@@ -9,9 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PingPong</title>
-    <!-- 공통 헤더 css -->
+    <%-- <!-- 공통 헤더 css -->
     <link rel="stylesheet" href="/resources/css/style.css">
-    
+     --%>
     <!-- 파비콘 -->
 	<link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
 	
