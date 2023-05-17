@@ -27,7 +27,17 @@ public interface MypageService {
 	 */
 	int secession(String memberPw, int memberNo);
 	
+	/** 프로필 이미지 수정
+	 * @param profileImage
+	 * @param webPath
+	 * @param filePath
+	 * @param loginMember
+	 * @return result
+	 */
+	int updateProfile(MultipartFile profileImage, String webPath, String filePath, int memberNo);
+	
 	int backgroundUpdate(int memberNo, MultipartFile backgroundImage, String webPath, String filePath);
+
 
 
 }

@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="memberMapper">
+<mapper namespace="memberProfileMapper">
 	
+	
+	<!-- 프로필 이미지 수정 -->
+	<update id="updateProfile">
+		UPDATE "MEMBER_PROFILE" SET
+		PROFILE_IMG = #{profileImage},
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<!-- 배경 이미지 수정 -->
 	<update id="backgroundUpdate">
 		UPDATE "MEMBER_PROFILE" SET
 		BACKGROUND_IMG = #{backgroundImage},

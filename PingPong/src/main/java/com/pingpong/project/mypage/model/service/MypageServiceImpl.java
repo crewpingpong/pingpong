@@ -59,14 +59,34 @@ public class MypageServiceImpl implements MypageService{
 		String encPw = dao.selectEncPw(memberNo);
 		
 		// 비밀번호 일치
-		/* if(bcrypt.matches(memberPw, encPw)) { */
-		/*
-		 * if(memberPw == ) { return dao.secession(memberNo); }
-		 */
+		if(bcrypt.matches(memberPw, encPw)) {
+			
+			return dao.secession(memberNo); 
+		}
 		
 		// 비밀번호 일치 X
 		return 0;
 	}
+	
+	
+	// 프로필 이미지 수정 서비스
+	@Override
+	public int updateProfile(MultipartFile profileImage, String webPath, String filePath, int memberNo) {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("memberNo", memberNo);
+		
+		String fileName = Util.fileRename(profileImage.getOriginalFilename());
+		
+		map.put("profileImage", webPath+fileName);
+		
+		int result = dao.updateProfile(map);
+		
+		return result;
+	}
+	
+	
 	
 	//  
 	@Override
@@ -89,6 +109,7 @@ public class MypageServiceImpl implements MypageService{
 //		}
 		return result;
 	}
+
 
 
 }

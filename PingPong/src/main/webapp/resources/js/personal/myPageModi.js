@@ -5,14 +5,14 @@ let activeCont = '#myPageModiTab1';
 
 
 for(var i = 0; i < tabList.length; i++){
-  tabList[i].querySelector('.myPage-left-side-menu > ul > li > a').addEventListener('click', function(e){
+    tabList[i].querySelector('.myPage-left-side-menu > ul > li > a').addEventListener('click', function(e){
     e.preventDefault();
     for(var j = 0; j < tabList.length; j++){
-      // 나머지 버튼 클래스 제거
-      tabList[j].classList.remove('myPage_modi_is_on');
+        // 나머지 버튼 클래스 제거
+        tabList[j].classList.remove('myPage_modi_is_on');
 
-      // 나머지 컨텐츠 display:none 처리
-      contents[j].style.display = 'none';
+        // 나머지 컨텐츠 display:none 처리
+        contents[j].style.display = 'none';
     }
 
     // 버튼 관련 이벤트
@@ -21,7 +21,7 @@ for(var i = 0; i < tabList.length; i++){
     // 버튼 클릭시 컨텐츠 전환
     activeCont = this.getAttribute('href');
     document.querySelector(activeCont).style.display = 'block';
-  });
+    });
 }
 
 
@@ -60,17 +60,17 @@ if(updateInfo != null){
     memberUrl.addEventListener("input", () => {
 
         if(memberUrl.value == initUrl){
-          memberUrl.removeAttribute("style");
+            memberUrl.removeAttribute("style");
             return;
         }
 
         const regEx = /^[a-zA-z0-9]{4,12}$/;
 
         if(regEx.test(memberUrl.value)){
-          memberUrl.style.color = "green";
+            memberUrl.style.color = "green";
         
         }else{
-          memberUrl.style.color = "red";
+            memberUrl.style.color = "red";
         }
     });
 
@@ -125,7 +125,7 @@ if(changePwFrm != null){ // 현재 페이지가 비밀번호 변경 페이지인
             return;
         }
     
-        // 비밀번호 == 비밀번호 확인
+        // 비밀번호 != 비밀번호 확인
         if(newPw.value != newPwConfirm.value){
             alert("비밀번호가 일치하지 않습니다");
             e.preventDefault();
@@ -170,6 +170,7 @@ if(secessionFrm != null){ // 탈퇴 페이지인 경우
         secessionFrm.submit();
     });
 }
+
 
 
 
@@ -243,45 +244,45 @@ const passwordChange = document.querySelector(".password-change");
 const passwordcorrect = document.querySelector(".passwordcorrect");
 
 passwordChange.addEventListener("click", e => {
-  
-  const newPw = document.querySelector('.new-password>input').value;
-  const newPwChk = document.querySelector('.new-password-check>input').value;
+    
+    const newPw = document.querySelector('.new-password>input').value;
+    const newPwChk = document.querySelector('.new-password-check>input').value;
 
-  // 새 비밀번호가 입력되지 않은 경우
-  if(newPw.trim().length ==0){
-    alert("비밀번호를 입력해주세요.");
-    newPw="";
-    newPw.focus(); // 새 비밀번호 input 태그에 초점을 맞춤
-    e.preventDefault();
-    return; // 제출 못하게 하기
-  }
-  // 비밀번호 확인이 입력되지 않은 경우
-  if(newPwChk.trim().length ==0){
-      alert("새 비밀번호 확인을 입력해주세요.");
-      newPwChk="";
-      newPwChk.focus(); // 비밀번호 확인 input 태그에 초점을 맞춤
-      e.preventDefault();
-      return; // 제출 못하게 하기
-  }
-  // 비밀번호가 6글자 미만으로 입력된 경우
-  if(newPw.trim().length < 6){
-    alert("비밀번호를 6자리 이상 입력해주세요.");
-    newPwChk="";
-    newPwChk.focus(); // 비밀번호 확인 input 태그에 초점을 맞춤
-    e.preventDefault();
-    return; // 제출 못하게 하기
-  }
+    // 새 비밀번호가 입력되지 않은 경우
+    if(newPw.trim().length ==0){
+        alert("비밀번호를 입력해주세요.");
+        newPw="";
+        newPw.focus(); // 새 비밀번호 input 태그에 초점을 맞춤
+        e.preventDefault();
+        return; // 제출 못하게 하기
+    }
+    // 비밀번호 확인이 입력되지 않은 경우
+    if(newPwChk.trim().length ==0){
+        alert("새 비밀번호 확인을 입력해주세요.");
+        newPwChk="";
+        newPwChk.focus(); // 비밀번호 확인 input 태그에 초점을 맞춤
+        e.preventDefault();
+        return; // 제출 못하게 하기
+    }
+    // 비밀번호가 6글자 미만으로 입력된 경우
+    if(newPw.trim().length < 6){
+        alert("비밀번호를 6자리 이상 입력해주세요.");
+        newPwChk="";
+        newPwChk.focus(); // 비밀번호 확인 input 태그에 초점을 맞춤
+        e.preventDefault();
+        return; // 제출 못하게 하기
+    }
 
-  // 비밀번호가 일치하는 경우
-  if (newPw === newPwChk && newPw.trim().length >= 6) {
-    document.querySelector('.new-password input').style.border="1px solid green"
-    document.querySelector('.new-password-check input').style.border="1px solid green"
-    alert("비밀번호가 변경되었습니다.");
-  }
-  // 비밀번호가 일치하지 않는 경우
-  else{
-    alert("비밀번호가 일치하지 않습니다.");
-  }
+    // 비밀번호가 일치하는 경우
+    if (newPw === newPwChk && newPw.trim().length >= 6) {
+        document.querySelector('.new-password input').style.border="1px solid green"
+        document.querySelector('.new-password-check input').style.border="1px solid green"
+        alert("비밀번호가 변경되었습니다.");
+    }
+    // 비밀번호가 일치하지 않는 경우
+    else{
+        alert("비밀번호가 일치하지 않습니다.");
+    }
 });
 
 

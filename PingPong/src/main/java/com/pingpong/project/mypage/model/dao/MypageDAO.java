@@ -51,11 +51,21 @@ public class MypageDAO {
 		return sqlSession.update("mypageMapper.secession", memberNo);
 	}
 	
+	/** 프로필 이미지 수정
+	 * @param map
+	 * @return result
+	 */
+	public int updateProfile(Map<String, Object> map) {
+		return sqlSession.update("memberProfileMapper.updateProfile", map);
+	}
+
+	/** 배경 이미지 수정
+	 * @param map
+	 * @return
+	 */
 	public int backgroundUpdate(Map<String, Object> map) {
 		return sqlSession.update("memberProfileMapper.backgroundUpdate", map);
 	}
 
-
-	
 
 }
