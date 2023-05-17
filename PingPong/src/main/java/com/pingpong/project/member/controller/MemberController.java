@@ -111,29 +111,54 @@ public class MemberController {
 
 		return "member/signupInfo";
 	}
-	// 비번찾기 이메일 검사
+	
+	// 비밀번호 인증키 전송&&이동
 	@PostMapping("/pwSearch")
 	public String pwSearch(@RequestParam("memberEmail") String memberEmail,
 			HttpSession session,
-			RedirectAttributes ra) {
+			RedirectAttributes ra,
+			Model Model) {
 		
 		int result = service.emailSearch(memberEmail);
+		System.out.println(memberEmail);
+		System.out.println(result);
 		
 		String path = "redirect:";
 		String message = "일치하는 이메일이 없습니다.";
 		
 		if(result > 0) {
 			session.setAttribute("memberEmail", memberEmail);
+			Model.addAttribute("emailCheck", 1);
 			path += "pwSearchCertNum";
 		}else {
 			path += "pwSearch";
+			ra.addFlashAttribute("message", message);
+			Model.addAttribute("emailCheck", 2);
+		}
+		return path;
+	}
+	
+	// 비번찾기 이메일 검사
+	@PostMapping("/pwSearchCertNum")
+	public String pwSearchCertNum(HttpSession session, RedirectAttributes ra) {
+		
+		String memberEmail = (String) session.getAttribute("memberEmail");
+		
+		int result = 0;
+		
+		String path = "redirect:";
+		String message = "인증키가 일치하지 않습니다.";
+		
+		if(result > 0) {
+			path += "pwReset";
+		}else {
+			path += "pwSearchCertNum";
 			ra.addFlashAttribute("message", message);
 		}
 		return path;
 	}
 	
-	
-	// 회원 가입 진행
+	// 회원 가입 진행 1페이지
 	@PostMapping("/signup")
 	public String signup(@RequestParam("memberEmail") String memberEmail, @RequestParam("memberPw") String memberPw,
 			HttpSession session, Member inputMember) {
@@ -143,7 +168,7 @@ public class MemberController {
 
 		return "member/signupInfo";
 	}
-
+	// 회원 가입 진행 2페이지
 	@PostMapping("/signupInfo")
 	public String signupInfo(
 			HttpSession session, RedirectAttributes ra, Member inputMember) {

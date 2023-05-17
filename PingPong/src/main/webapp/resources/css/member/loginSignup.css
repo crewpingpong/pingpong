@@ -111,14 +111,14 @@ margin-top: 20px;}
 .email-message, .URL-check-message{
     font-size: 12px;
     letter-spacing: -1px;
-    margin-right: 130px;
+    /* margin-right: 130px; */
     color: #5C5C5C;
     font-weight: lighter;
     display: block;
 }
 
 .class-hidden{
-    visibility: hidden;
+    display: none;
 }
 
 /* 이메일 검사 메세지 색상 지정 */
@@ -352,6 +352,17 @@ input::placeholder {
 .pwseachbox .email-pw-reset{ /* 비밀번호 재설정을 위한 이메일이 발송 되었습니다. */
     color: green; font-size: 13px; font-weight: normal; margin-top: 8px;
     display: none;
+}
+.input-CertNum{
+    position: relative;
+}
+.cert-num-email-message{
+    /* background-color: #231F20;
+    top: 0;
+    font-size: 14px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    cursor: pointer; */
 }
 
 /* 체크 박스 타입 css */

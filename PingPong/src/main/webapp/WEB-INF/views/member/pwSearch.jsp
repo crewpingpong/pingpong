@@ -18,15 +18,18 @@
         <div class="login-box pwseachbox">
             <a href="/"><img src="/resources/images/logo_X1.png"></a>
 
-            <p>비밀번호를 찾고자 하는 이메일을 입력해 주세요.</p>
-            <form action="/member/pwSearch" method="POST">
+            <p class="pw-search-message">비밀번호를 찾고자 하는 이메일을 입력해 주세요.</p>
+
+            <form action="/member/pwSearch" method="POST" id="findEmailFrm">
                 <div class="search-input-email">
                     <p>이메일</p>
-                    <input type="text" name="memberEmail" id="memberEmail" placeholder="Email" maxlength="30" autocomplete="off" required>
+                    <input type="text" name="memberEmail" id="memberEmail" placeholder="Email" 
+                    maxlength="30" autocomplete="off" required>
                     <p class="email-pw-reset"></p>
                 </div>
-                <button class="login-button email-reset-button">전송</button>
+                <button class="login-button email-reset-button" id="sendAuthKeyBtn">다음</button><%-- 인증키 보내기 && 다음 --%>
             </form>
+
                 <div class="login-signUp">
                     <p>비밀번호가 생각 나셨나요?</p>
                     <a href="/member/login">로그인 하기</a>
