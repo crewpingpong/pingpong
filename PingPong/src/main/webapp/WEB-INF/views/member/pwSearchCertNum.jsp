@@ -17,23 +17,21 @@
 	<div class="login-container">
         <div class="login-box pwseachbox">
             <a href="/"><img src="/resources/images/logo_X1.png"></a>
+            <p>인증키를 인증해 주세요.</p>
 
-            <p class="pw-search-message">비밀번호를 찾고자 하는 이메일을 입력해 주세요.</p>
-
-            <form action="/member/pwSearch" method="POST" id="findEmailFrm">
-                <div class="search-input-email">
-                    <p>이메일</p>
-                    <input type="text" name="memberEmail" id="memberEmail" placeholder="Email" 
-                    maxlength="30" autocomplete="off" required>
-                    <p class="email-pw-reset"></p>
+            <form action="/member/pwSearchCertNum" method="POST" id="checkCertNum">
+                <div class="search-input-email input-CertNum">
+                    <input type="text" name="authKey" id="authKey" placeholder="인증키 입력" 
+                    maxlength="7" autocomplete="off" required>
+                    <button type="button" class="email-message cert-num-email-message" id="sendAuthKeyBtn">인증키 받기</button>
                 </div>
-                <button class="login-button email-reset-button" id="sendAuthKeyBtn">다음</button><%-- 인증키 보내기 && 다음 --%>
+                <button class="login-button email-reset-button" id="checkAuthKeyBtn">다음</button><%-- 인증 && 다음 --%>
             </form>
-
-                <div class="login-signUp">
-                    <p>비밀번호가 생각 나셨나요?</p>
-                    <a href="/member/login">로그인 하기</a>
-                </div>
+            
+            <div class="login-signUp">
+                <p>비밀번호가 생각 나셨나요?</p>
+                <a href="/member/login">로그인 하기</a>
+            </div>
         </div>
     </div>
     

@@ -27,6 +27,12 @@
 .profileBackground label, .profileBackground span{
     position: absolute; right: 60px; top: 460px;
     cursor: pointer; font-size: 16px; text-decoration: underline; z-index: 20;
+    background-color: #fff; padding: 4px 8px; border-radius: 5px;
+}
+#deleteBackground{
+    cursor: pointer; font-size: 16px; text-decoration: underline; z-index: 20;
+    background-color: #fff; padding: 4px 8px; border-radius: 5px;
+    display: inline; float: left;
 }
 
 .profileBackground>div:last-child {
@@ -152,6 +158,12 @@
 .postlist li {
     margin-right: 32px;
 }
+#updateBackground{
+    /* position: absolute; right: 60px; top: 460px; */ 
+    background-color: #fff; padding: 4px 8px; border-radius: 5px;
+    cursor: pointer; font-size: 16px; text-decoration: underline; z-index: 20;
+    display: inline; float: left;
+}
 
 /* 게시글 수정 버튼 */
 .postBtn {
@@ -172,6 +184,10 @@
     margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr);
     max-width: 1200px; grid-template-rows: auto; grid-gap: 20px;
 }
+.postcont_area > div > div > a > img {
+    width: 100%; height: 100%; border-radius: 20px;
+}
+.list-thumbnail{border-radius: 20px;}
 
 .contentBox div {
     width: 300px; height: 300px; border-radius: 20px; background-color: #C5C5C5;

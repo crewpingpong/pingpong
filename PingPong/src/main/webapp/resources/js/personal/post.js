@@ -802,16 +802,21 @@ function slide2Fn(){
     nextBtn2.removeEventListener("click", ()=>{});
     prevBtn2.removeEventListener("click", ()=>{});
 
-    // 버튼 엘리먼트에 클릭 이벤트 추가하기
-    nextBtn2.addEventListener("click", () => {
-        // 이후 버튼 누를 경우 현재 슬라이드를 변경
-        nextMove2();
-    });
-    // 버튼 엘리먼트에 클릭 이벤트 추가하기
-    prevBtn2.addEventListener("click", () => {
-        // 이전 버튼 누를 경우 현재 슬라이드를 변경
-        prevMove2();
-    });
+    if(nextBtn2!=null){
+        // 버튼 엘리먼트에 클릭 이벤트 추가하기
+        nextBtn2.addEventListener("click", () => {
+            // 이후 버튼 누를 경우 현재 슬라이드를 변경
+            nextMove2();
+        });
+    }
+    
+    if(prevBtn2!=null){        
+        // 버튼 엘리먼트에 클릭 이벤트 추가하기
+        prevBtn2.addEventListener("click", () => {
+            // 이전 버튼 누를 경우 현재 슬라이드를 변경
+            prevMove2();
+        });
+    }
 
     // 각 페이지네이션 클릭 시 해당 슬라이드로 이동하기
     for (let i = 0; i < maxSlide2; i++) {
@@ -904,20 +909,27 @@ function prevMove2() {
     }
 }
 
-// 버튼 엘리먼트에 클릭 이벤트 추가하기
-nextBtn2.addEventListener("click", () => {
-    // 이후 버튼 누를 경우 현재 슬라이드를 변경
-    nextMove2();
-});
-// 버튼 엘리먼트에 클릭 이벤트 추가하기
-prevBtn2.addEventListener("click", () => {
-    // 이전 버튼 누를 경우 현재 슬라이드를 변경
-    prevMove2();
-});
+if(nextBtn2!=null){
+    // 버튼 엘리먼트에 클릭 이벤트 추가하기
+    nextBtn2.addEventListener("click", () => {
+        // 이후 버튼 누를 경우 현재 슬라이드를 변경
+        nextMove2();
+    });
+}
+
+if(prevBtn2!=null){        
+    // 버튼 엘리먼트에 클릭 이벤트 추가하기
+    prevBtn2.addEventListener("click", () => {
+        // 이전 버튼 누를 경우 현재 슬라이드를 변경
+        prevMove2();
+    });
+}
 
 // 브라우저 화면이 조정될 때 마다 slideWidth를 변경하기 위해
 window.addEventListener("resize", () => {
-    slideWidth2 = slide2.clientWidth;
+    if(slideWidth2!=null){
+        slideWidth2 = slide2.clientWidth;
+    }
 });
 
 

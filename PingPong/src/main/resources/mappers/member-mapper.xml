@@ -15,7 +15,7 @@
 
 	
 	<select id="login" resultMap="member_rm">
-		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NICKNAME, MEMBER_URL,
+		SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_URL, MEMBER_PW,
 		TO_CHAR(ENROLL_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"')
 		ENROLL_DATE, AUTHORITY
 		FROM "MEMBER"
@@ -30,5 +30,11 @@
 		VALUES(SEQ_MEMBER_NO.NEXTVAL, #{memberEmail}, #{memberPw}, #{memberNickname}
 			, #{memberUrl}, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
+	
+	<select id="emailSearch" resultType="_int">
+		SELECT COUNT(*)
+		FROM "MEMBER"
+		WHERE MEMBER_EMAIL = #{memberEmail}
+	</select>
 
 </mapper>

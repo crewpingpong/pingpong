@@ -24,11 +24,11 @@
                 <div>
                     <label for="background" id="selectBackground">배경화면 선택</label> <!-- 파일 첨부 버튼 위임 -->
                     <span id="afterChoice">
+                        <p id="deleteBackground">돌아가기</p>
                         <form action="/mypage/background/insert" method="post" enctype="multipart/form-data">
                             <input type="file" name="backgroundImage" id="background" class="profileBgupload" accept="image/*">
                             <button id="updateBackground">변경하기</button>
                         </form>
-                        <span id="deleteBackground">돌아가기</span>
                     </span>
                 </div>
             </c:if>
