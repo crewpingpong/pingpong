@@ -435,9 +435,15 @@
 }
 
 /* 게시글 내용 + 좋아요 수 */
+
+.BoardPost{
+    height: 420px;
+    overflow: auto;
+}
+
 .Boardcontent {
     width: 80%; height: 69%; border-bottom: 1px solid #231F2050; 
-    display: flex; flex-direction: column; justify-content: start; overflow: auto;
+    display: flex; flex-direction: column; justify-content: space-between; overflow: auto;
 }
 
 .BoardContentProfile {
@@ -455,8 +461,7 @@
 .BoardHeartBox {
     display: flex;
     /* 기능동작  좋아요 하단 숨기기 */
-    margin-top: 40px; align-self: self-start;
-    /* flex-direction: row; */
+    margin-top: 40px;
 }
 
 /* 댓글 영역 */
