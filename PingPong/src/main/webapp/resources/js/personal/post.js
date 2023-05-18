@@ -197,99 +197,105 @@ const BoardCommentBox = document.querySelector(".BoardCommentBox");
 const BoardCommentBox1 = document.querySelector(".BoardCommentBox1");
 
 const BoardComment = document.querySelector(".BoardComment");
-const BoardCommentBtn1 = document.querySelector(".BoardCommentBtn1").firstElementChild
-const BoardCommentBtn2 = document.querySelector(".BoardCommentBtn1").lastElementChild
+// const BoardCommentBtn1 = document.querySelector(".BoardCommentBtn1").firstElementChild
+// const BoardCommentBtn2 = document.querySelector(".BoardCommentBtn1").lastElementChild
 const BoardPost1 = document.querySelector(".BoardPost1")
 let BoardCommentText1 = document.querySelector(".BoardCommentText1");
 
 const newContent = document.querySelector(".newContent");
 /* 댓글 달기 버튼 */
-BoardComment.addEventListener("click", () => {
+// BoardComment.addEventListener("click", () => {
 
-    Boardcontent.style.display = "none";
-    Boardcontent1.style.display = "flex";
+//     Boardcontent.style.display = "none";
+//     Boardcontent1.style.display = "flex";
 
-    BoardHeartBox.style.display = "none";
+//     BoardHeartBox.style.display = "none";
 
-    BoardCommentBox.style.display = "none";
-    BoardCommentBox1.style.display = "block";
-
-
-})
-/* 이전 버튼 */
-BoardCommentBtn2.addEventListener("click", () => {
-    // console.log("dddddd")
-    Boardcontent.style.display = "flex";
-    Boardcontent1.style.display = "none";
-
-    BoardHeartBox.style.display = "flex";
-
-    BoardCommentBox.style.display = "flex";
-    BoardCommentBox1.style.display = "none";
-
-});
-
-/* 확인 버튼 */
+//     BoardCommentBox.style.display = "none";
+//     BoardCommentBox1.style.display = "block";
 
 
-BoardCommentBtn1.addEventListener("click", () => {
+// })
+// /* 이전 버튼 */
+// BoardCommentBtn2.addEventListener("click", () => {
+//     // console.log("dddddd")
+//     Boardcontent.style.display = "flex";
+//     Boardcontent1.style.display = "none";
 
-    const check = confirm("댓글을 등록하시겠습니까?");
-    let text = document.querySelector(".BoardCommentText1").value;
+//     BoardHeartBox.style.display = "flex";
 
-    if (check && text.trim() !== "") {
-        alert("등록되었습니다")
+//     BoardCommentBox.style.display = "flex";
+//     BoardCommentBox1.style.display = "none";
 
-        const div1 = document.createElement("div");
-        div1.classList.add("postcontent1");
+// });
 
-        const div2 = document.createElement("div");
-        div2.classList.add("BoardPost1");
+// /* 확인 버튼 */
+// function selectCommentList(){
 
-        const a1 = document.createElement("a");
-        a1.classList.add("BoardProfile1")
+//     fetch("/comment?boardNo="+boardNo)
 
-        const div3 = document.createElement("div");
 
-        const a2 = document.createElement("a")
+// }
+// if(BoardCommentBtn1 != null){
+//     BoardCommentBtn1.addEventListener("click", () => {
 
-        const p = document.createElement("p")
+//         const check = confirm("댓글을 등록하시겠습니까?");
+//         let text = document.querySelector(".BoardCommentText1").value;
 
-        const span = document.createElement("span");
-        span.classList.add("BoardComment-remove-row");
+//         if (check && text.trim() !== "") {
+//             alert("등록되었습니다")
 
-        span.innerHTML = "&times;"
+//             const div1 = document.createElement("div");
+//             div1.classList.add("postcontent1");
 
-        text = text.replaceAll(/(\n|\r\n)/g, "<br>");
+//             const div2 = document.createElement("div");
+//             div2.classList.add("BoardPost1");
 
-        p.innerHTML = text
-        a2.innerHTML = "김핑퐁" /* 추후 프로필명 으로 수정 */
+//             const a1 = document.createElement("a");
+//             a1.classList.add("BoardProfile1")
 
-        Boardcontent1.prepend(div1);
-        div1.prepend(div2);
-        div2.append(a1);
-        div1.append(div3);
-        div1.append(span);
-        div3.prepend(a2);
-        div3.append(p);
+//             const div3 = document.createElement("div");
 
-        document.querySelector(".BoardCommentText1").value = "";
+//             const a2 = document.createElement("a")
 
-        span.addEventListener("click", e => {
+//             const p = document.createElement("p")
 
-            const check1 = confirm("삭제하시겠습니까?")
+//             const span = document.createElement("span");
+//             span.classList.add("BoardComment-remove-row");
 
-            if (check1) {
-                alert("댓글 삭제 완료")
-                e.target.parentElement.remove();
+//             span.innerHTML = "&times;"
 
-            } else alert("취소되었습니다")
-        });
+//             text = text.replaceAll(/(\n|\r\n)/g, "<br>");
 
-    }
-    else alert("취소되었습니다")
+//             p.innerHTML = text
+//             a2.innerHTML = "김핑퐁" /* 추후 프로필명 으로 수정 */
 
-});
+//             Boardcontent1.prepend(div1);
+//             div1.prepend(div2);
+//             div2.append(a1);
+//             div1.append(div3);
+//             div1.append(span);
+//             div3.prepend(a2);
+//             div3.append(p);
+
+//             document.querySelector(".BoardCommentText1").value = "";
+
+//             span.addEventListener("click", e => {
+
+//                 const check1 = confirm("삭제하시겠습니까?")
+
+//                 if (check1) {
+//                     alert("댓글 삭제 완료")
+//                     e.target.parentElement.remove();
+
+//                 } else alert("취소되었습니다")
+//             });
+
+//         }
+//         else alert("취소되었습니다")
+
+//     });
+// }
 
 /* 게시글 닫기 버튼으로 닫기 */
 const BoardClose = document.querySelector(".BoardClose");
@@ -364,15 +370,15 @@ function selectBoardList(boardNo){
             slideItem.remove();
         });
 
-        BoardRedHeart.style.display = "none";
-        BoardHeart.style.display = "none";
         let flag = 0;
         for(let i of board.likeList){
-            if(loginMemberNo == i.memberNo){
+            if(loginMemberNo == "" || loginMemberNo == i.memberNo){
                 flag++;
                 break;
             }
         }
+        BoardRedHeart.style.display = "none";
+        BoardHeart.style.display = "none";
         if(flag>0){
             BoardRedHeart.style.display = "block";
         } else {

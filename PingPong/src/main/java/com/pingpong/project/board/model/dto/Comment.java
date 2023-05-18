@@ -14,5 +14,8 @@ public class Comment {
 	private String commentDate;
 	private int memberNo;
 	private int boardNo;
-
+	private String memberNickname;
+	private String profileImg;
+	private int parentNo;
+	private String commentDelFl;
 }
