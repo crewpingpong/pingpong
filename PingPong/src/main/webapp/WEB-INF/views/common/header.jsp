@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="/resources/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<script>
+<%-- <script>
     // const loginMemberNo = ${loginMember.memberNo};
     // const loginMemberNickname = ${loginMember.memberNickname};
-</script>
+</script> --%>
 
 
 <!-- 메인 헤더 영역 -->
@@ -540,13 +540,12 @@ Java를 이용한 백엔드 연결
     
     <!-- !!!!!!!!!!!!! 여기까지가 기본 헤더+네브 입니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
+
 <c:if test="${not empty message}" >
     <script>
-        // EL/JSTL 구문이 먼저 해석되는데
-        // 문자열의 경우 따옴표가 없는 상태이니 붙여줘야한다
+        // EL/JSTL 구문이 먼저 해석되는데 문자열의 경우 따옴표가 없는 상태이니 붙여줘야한다
         alert("${message}");
     </script>
 </c:if>
-
 <script src="/resources/js/alarm.js"></script>
 <script src="/resources/js/message.js"></script>
