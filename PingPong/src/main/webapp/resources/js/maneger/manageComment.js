@@ -103,3 +103,28 @@ arrowLeftBtn.addEventListener("click",()=>{
   --pageActiveIdx;
   displayPage(pageActiveIdx);
 });  // https://www.youtube.com/watch?v=drXZCq3Y9d8&list=PL-qMANrofLyvzqz2yYzNectJnYo5ZifE7&index=74&ab_channel=Rock%27sEasyweb
+
+// 댓글 삭제 (제출)
+const commentForm = document.getElementById("commentForm");
+const DelBtn = document.getElementById("DelBtn");
+
+if(DelBtn != null){
+
+  DelBtn.addEventListener("click",()=>{
+    
+    commentForm.submit();
+    
+  });
+};
+
+// 댓글 복구(제출)
+
+const ReBtn = document.getElementById("ReBtn");
+
+if(ReBtn != null){
+
+  ReBtn.addEventListener("click",()=>{
+
+    commentForm.action = "//manager/commentrestore";
+  });
+};

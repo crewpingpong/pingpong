@@ -82,9 +82,10 @@
                         <button type="button">검색</button>
                     </div>
                     <div>
-                        <button>삭제처리</button>
+                        <button id="DelBtn">삭제처리</button>
+                        <button id="ReBtn">복구처리</button>
                     </div>
-                    <div>
+                    <form action="/manager/commentdel" method="POST" id="commentForm">
                         <table id="oneToOneTable">
                             <colgroup>
                                 <col class="col1">
@@ -107,35 +108,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-                        <c:choose>
-                            <c:when test="${empty CommentList}">
-                                    <tr>
-                                        <th colspan="6">등록된 댓글이 없습니다.</th>
-                                    </tr>
-                            </c:when>
+                                <c:choose>
+                                    <c:when test="${empty CommentList}">
+                                            <tr>
+                                                <th colspan="6">등록된 댓글이 없습니다.</th>
+                                            </tr>
+                                    </c:when>
 
-                            <c:otherwise>
-                                    <%-- 탈퇴 회원 목록 결과가 있다면 --%>
-                                <c:forEach items="${CommentList}" var="Comment">
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="choicebox" value="1">
-                                        </td>
-                                        <td>${Comment.commentNo}</td>
-                                        <td>${Comment.boardNo}</td>
-                                        <td><a href="/manager1To1Content.html">${Comment.commentContent}</a></td>
-                                        <td>
-                                            <a href="/personalHome.html">${Comment.memberUrl}</a>
-                                        </td>
-                                        <td>${Comment.commentDelFl}</td>
-                                    </tr>
-                                </c:forEach>
-                            </c:otherwise>
+                                    <c:otherwise>
+                                        <c:forEach items="${CommentList}" var="Comment">
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="choicebox" value="${Comment.commentNo}">
+                                                </td>
+                                                <td>${Comment.commentNo}</td>
+                                                <td>${Comment.boardNo}</td>
+                                                <td><a href="/manager1To1Content.html">${Comment.commentContent}</a></td>
+                                                <td>
+                                                    <a href="/personalHome.html">${Comment.memberUrl}</a>
+                                                </td>
+                                                <td>${Comment.commentDelFl}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:otherwise>
 
-                        </c:choose>
+                                </c:choose>
                             </tbody>
                         </table>
-                    </div>
+                    </form>
                     <!-- 페이지 네이션 -->
                     <div class="pagination">
                         <i class="fa-solid fa-arrow-left"></i>
@@ -155,6 +155,6 @@
 </div>
 
     <script src="/resources/js/script.js"></script> <!-- 메인 헤더, 네브 js -->
-    <script src="/resources/js/maneger/managerComment.js"></script>
+    <script src="/resources/js/maneger/manageComment.js"></script>
 </body>
 </html>

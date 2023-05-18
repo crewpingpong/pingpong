@@ -82,9 +82,10 @@
                         <button type="button">검색</button>
                     </div>
                     <div>
-                        <button>삭제처리</button>
-                    </div>
-                    <div>
+                        <button id="PostDelBtn">삭제처리</button>
+                        <button id="PostReBtn">복구처리</button>
+                    </div>  
+                    <form action="/manager/postdelete" method="POST" id="PostForm">
                         <table id="oneToOneTable">
                             <colgroup>
                                 <col class="col1">
@@ -121,7 +122,7 @@
                                 <c:forEach items="${ContentList}" var="Content">
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="choicebox" value="1">
+                                        <input type="checkbox" name="choicebox" value="${Content.boardNo}">
                                     </td>
                                     <td>${Content.boardNo}</td>
                                     <td>
@@ -137,7 +138,7 @@
                         </c:choose>
                             </tbody>
                         </table>
-                    </div>
+                    </form>
                     <!-- 페이지 네이션 -->
                     <div class="pagination">
                         <i class="fa-solid fa-arrow-left"></i>

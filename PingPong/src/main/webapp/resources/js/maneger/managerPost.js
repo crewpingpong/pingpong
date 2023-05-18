@@ -103,3 +103,52 @@ arrowLeftBtn.addEventListener("click",()=>{
   --pageActiveIdx;
   displayPage(pageActiveIdx);
 });  // https://www.youtube.com/watch?v=drXZCq3Y9d8&list=PL-qMANrofLyvzqz2yYzNectJnYo5ZifE7&index=74&ab_channel=Rock%27sEasyweb
+
+//선택한 회원 탈퇴 처리 (제출)
+const selectMemberSecession = document.getElementById("selectMemberSecession");
+const form = document.getElementById("form");
+
+if(selectMemberSecession != null){
+  
+  selectMemberSecession.addEventListener("click",()=>{
+      
+      form.submit();
+  });
+}
+
+//선택한 탈퇴 회원 복구(제출)
+const selectMemberRestoreExisting = document.getElementById("selectMemberRestoreExisting");
+const Secessionform = document.getElementById("Secessionform");
+
+if(selectMemberRestoreExisting != null){
+  
+  selectMemberRestoreExisting.addEventListener("click",()=>{
+  
+      Secessionform.submit();
+  });
+};
+
+// 선택한 게시글 삭제(제출)
+const PostDelBtn = document.getElementById("PostDelBtn");
+const PostForm = document.getElementById("PostForm");
+
+if(PostDelBtn != null){
+  
+  PostDelBtn.addEventListener("click",()=>{
+
+    PostForm.submit();
+  })
+
+};
+
+const PostReBtn = document.getElementById("PostReBtn");
+
+if(PostReBtn != null){
+
+  PostReBtn.addEventListener("click",()=>{
+
+    PostForm.action = "/manager/postrestore"
+
+    PostForm.submit();
+  });
+};

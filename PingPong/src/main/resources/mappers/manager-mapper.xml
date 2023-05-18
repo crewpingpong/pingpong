@@ -20,10 +20,11 @@
 		<result property="declarationCount" column="DECLARATION_COUNT"/>
 </resultMap>
 <resultMap type="Comment" id="comment_rm">
-		<id property="indictmentNo" column="INDICTMENT_No"/>
+		<id property="commentNo" column="COMMENT_NO"/>
 		<result property="boardNo" column="BOARD_NO"/>
 		<result property="memberUrl" column="MEMBER_URL"/>
-		<result property="indictmentContent" column="INDICTMENT_CONTENT"/>
+		<result property="commentContent" column="COMMENT_CONTENT"/>
+		<result property="commentDelFl" column="COMMENT_DEL_FL"/>
 </resultMap>
 <resultMap type="Inquiry" id="inquiry_rm">
 		<id property="inquiryNo" column="INQUIRY_NO"/>
@@ -57,7 +58,6 @@ SELECT BOARD_NO,MEMBER_URL,BOARD_CONTENT,BOARD_DEL_FL,
 (SELECT COUNT(*) FROM DECLARATION D WHERE D.BOARD_NO = B.BOARD_NO) DECLARATION_COUNT
 FROM "BOARD" B
 JOIN "MEMBER" USING (MEMBER_NO)
-WHERE BOARD_DEL_FL = 'N'
 ORDER BY BOARD_NO DESC
 </select>
 
@@ -82,5 +82,33 @@ SELECT INDICTMENT_NO ,MEMBER_URL ,BOARD_NO , INDICTMENT_CONTENT
 FROM DECLARATION d
 JOIN "MEMBER" M USING(MEMBER_NO)
 </select>
+
+<!-- 회원 탈퇴 처리 -->
+<update id="updateId" parameterType="int">
+	UPDATE "MEMBER" SET
+	MEMBER_DEL_FL = 'Y'
+	WHERE MEMBER_NO = #{memberNo}
+</update>
+
+<!-- 탈퇴 회원 복구 -->
+<update id="restoreId" parameterType="int">
+	UPDATE "MEMBER" SET
+	MEMBER_DEL_FL = 'N'
+	WHERE MEMBER_NO = #{memberNo}
+</update>
+
+<!-- 게시글 삭제 -->
+<update id="deletePost" parameterType="int">
+	UPDATE "BOARD" SET
+	BOARD_DEL_FL = 'Y'
+	WHERE BOARD_NO = #{boardNo}
+</update>
+
+<!-- 게시글 복구 -->
+<update id="restorePost" parameterType="int">
+	UPDATE "BOARD" SET
+	BOARD_DEL_FL = 'N'
+	WHERE BOARD_NO = #{boardNo}
+</update>
 
 </mapper>

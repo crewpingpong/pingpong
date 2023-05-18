@@ -64,5 +64,40 @@ public class ManagerDAO {
 	public List<Declaration> selectDeclarationList() {
 		return sqlSession.selectList("managerMapper.selectDeclarationList");
 	}
+
+	/** 체크된 회원 탈퇴
+	 * @param boardNo
+	 * @return 
+	 */
+	public int deleteId(int boardNo) {
+		return sqlSession.update("managerMapper.updateId",boardNo);
+	}
+
+	/** 체크된 탈퇴 회원 복구
+	 * @param boardNo
+	 * @return
+	 */
+	public int restoreId(int boardNo) {
+		
+		return sqlSession.update("managerMapper.restoreId",boardNo);
+	}
+
+	/** 체크된 게시글 삭제
+	 * @param boardNo
+	 * @return
+	 */
+	public int deletePost(int boardNo) {
+		
+		return sqlSession.update("managerMapper.deletePost",boardNo);
+	}
+
+	/** 체크된 게시글 복구
+	 * @param boardNo
+	 * @return
+	 */
+	public int restorePost(int boardNo) {
+		
+		return sqlSession.update("managerMapper.restorePost",boardNo);
+	}
 	
 }

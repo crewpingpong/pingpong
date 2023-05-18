@@ -40,4 +40,29 @@ public interface ManagerService {
 	 */
 	List<Declaration> selectDeclarationList();
 
+	/** 체크된 회원 탈퇴
+	 * @param boardNo
+	 * @return result
+	 */
+	int deleteId(int boardNo);
+
+	/** 탈퇴 회원 복구
+	 * @param boardNo
+	 * @return result
+	 */
+	int restoreId(int boardNo);
+
+	/** 체크된 게시글 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	int deletePost(int boardNo);
+
+	/** 체크된 게시글 복구
+	 * @param boardNo
+	 * @return result
+	 */
+	int restorePost(int boardNo);
+
+	
 }

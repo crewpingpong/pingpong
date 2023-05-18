@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pingpong.project.board.dto.Board;
 import com.pingpong.project.board.dto.Comment;
@@ -14,6 +15,10 @@ import com.pingpong.project.board.dto.Inquiry;
 import com.pingpong.project.manager.dao.ManagerDAO;
 import com.pingpong.project.member.model.dto.Member;
 
+/**
+ * @author user
+ *
+ */
 /**
  * @author user
  *
@@ -86,6 +91,40 @@ public class ManagerServiceImpl implements ManagerService{
 		
 		return DeclarationList;
 	}
+
+	// 체크된 회원 탈퇴
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteId(int boardNo) {
+		
+		return dao.deleteId(boardNo);
+	}
+
+	// 체크된 탈퇴한 회원 복구
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int restoreId(int boardNo) {
+		
+		return dao.restoreId(boardNo);
+	}
+
+	// 체크된 게시글 삭제
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deletePost(int boardNo) {
+		
+		return dao.deletePost(boardNo);
+	}
+
+	// 체크된 게시글 복구
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int restorePost(int boardNo) {
+		
+		return dao.restorePost(boardNo);
+	}
+
+	
 	
 	
 }
