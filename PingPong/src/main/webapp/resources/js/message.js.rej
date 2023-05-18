@@ -1,0 +1,7 @@
+diff a/PingPong/src/main/webapp/resources/js/message.js b/PingPong/src/main/webapp/resources/js/message.js	(rejected hunks)
+@@ -1,5 +1,4 @@
+ // 좋아요 알림 모달에서 -> 메세지 함
+-
+ const gotoMessage = document.querySelector(".goto-message-Box").parentElement;
+ 
+ // 받은 메세지함

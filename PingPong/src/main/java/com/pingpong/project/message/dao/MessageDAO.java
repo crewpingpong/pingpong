@@ -23,5 +23,20 @@ public class MessageDAO {
 	public List<Message> sendmessageList(int memberNo) {
 		return sqlsession.selectList("messageMapper.sendmessageList",memberNo);
 	}
+
+	// 답장 보내기
+	public int resendMessage(Message message) {
+		return sqlsession.insert("messageMapper.resendMessage", message);
+	}
+
+//	// 받은 메세지 삭제
+//	public int delmessage(int delNo) {
+//		return sqlsession.update("messageMapper.delmessage",delNo);
+//	}
+//	
+//	// 보낸 메세지 삭제
+//	public int delSendmessage(int delNo) {
+//		return sqlsession.update("messageMapper.delSendmessage",delNo);
+//	}
 	
 }
