@@ -35,6 +35,23 @@ public class MypageServiceImpl implements MypageService{
 	public int updateInfo(Member updateMember) {
 		return dao.updateInfo(updateMember);
 	}
+	
+	// 프로필 이미지 수정 서비스
+	@Override
+	public int updateProfile(MultipartFile profileImage, String webPath, String filePath, int memberNo) {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("memberNo", memberNo);
+		
+		String fileName = Util.fileRename(profileImage.getOriginalFilename());
+		
+		map.put("profileImage", webPath+fileName);
+		
+		int result = dao.updateProfile(map);
+		
+		return result;
+	}
 
 	// 비밀번호 변경 서비스
 	@Transactional(rollbackFor = Exception.class)
@@ -73,24 +90,6 @@ public class MypageServiceImpl implements MypageService{
 		
 		// 비밀번호 일치 X
 		return 0;
-	}
-	
-	
-	// 프로필 이미지 수정 서비스
-	@Override
-	public int updateProfile(MultipartFile profileImage, String webPath, String filePath, int memberNo) {
-		
-		Map<String, Object> map = new HashMap<>();
-		
-		map.put("memberNo", memberNo);
-		
-		String fileName = Util.fileRename(profileImage.getOriginalFilename());
-		
-		map.put("profileImage", webPath+fileName);
-		
-		int result = dao.updateProfile(map);
-		
-		return result;
 	}
 	
 

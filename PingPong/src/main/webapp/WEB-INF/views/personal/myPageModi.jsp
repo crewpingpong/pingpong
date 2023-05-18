@@ -61,18 +61,14 @@
                                 </c:if>
 
                             </span>
-                            <span id="deleteProfile">x</span>
 
                             <div class="edit-profile-picture">
-
-                                <img src="/resources/images/mypage/pencil.png" alt="">
-                                프로필 사진 편집
-                                <img src="/resources/images/message/messageDeleteImg.png" alt="">
-
-                            </div>
-                            <div class="profile-change-Btn">
-                                <label for="imageInput"><button id="updateProfile">프로필 사진 편집</button></label> 
-                                <input type="file" class="profileUpload" id="imageInput" accept="image/*" required multiple>
+                                <img src="/resources/images/mypage/pencil.png"> <%-- 연필 --%>
+                                <div class="profile-change-Btn">
+                                    <label for="file">프로필 사진 편집</label> 
+                                    <input type="file" class="profileUpload" id="file" accept="image/*" required multiple>
+                                </div>
+                                <img src="/resources/images/message/messageDeleteImg.png" id="deleteProfile"> <%-- X버튼 --%>
                             </div>
                         </div>
                         
@@ -245,20 +241,20 @@
                         <!-- 현재 비밀번호 -->
                         <div class="current-password"> 
                             <p>현재 비밀번호</p>
-                            <input type="password" minlength="6" placeholder="6자 이상">
+                            <input type="password" name="currentPw" id="currentPw" minlength="6" placeholder="6자 이상">
                         </div>
 
                         <!-- 새 비밀번호 -->
                         <div class="new-password"> 
                             <p>새 비밀번호</p>
-                            <input type="password" minlength="6" placeholder="6자 이상">
+                            <input type="password" name="newPw" id="newPw" minlength="6" placeholder="6자 이상">
                         </div>
 
                         <!-- 새 비밀번호 확인 -->
                         <div class="new-password-check"> 
                             <p>새 비밀번호 확인</p>
-                            <input type="password" minlength="6" placeholder="6자 이상" autocomplete="off" required>
-                            <button class="password-change" type="button">비밀번호 변경</button>
+                            <input type="password" name="newPwConfirm" id="newPwConfirm" minlength="6" placeholder="6자 이상" autocomplete="off" required>
+                            <button class="password-change" id="changePwBtn" type="button">비밀번호 변경</button>
                         </div> 
                     </div>     
                 </form>

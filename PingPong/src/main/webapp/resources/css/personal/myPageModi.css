@@ -133,6 +133,7 @@
     background-color: #F0F0F0;
 }
 .edit-profile-picture{
+    display: flex;
     font-weight: bold;
     font-size: 14px;
     background-color: none;
