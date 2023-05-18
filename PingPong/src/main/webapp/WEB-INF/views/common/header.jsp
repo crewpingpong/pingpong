@@ -454,8 +454,8 @@ Java를 이용한 백엔드 연결
     </div>
 
     <!-- 메세지 보내기 -->
-    <%-- <div class="message-container message-send">
-        <div class="recieve-message-box">
+    <div class="message-container message-send">
+        <form class="recieve-message-box" method="POST" action="/message/send">
             <div class="message-box-top">
                 <div>
                     <div class="message-profile"></div>
@@ -469,7 +469,7 @@ Java를 이용한 백엔드 연결
             <div class="message-box-bottom">
                 <p>보낼 메시지</p>
                 <div>
-                    <textarea class="message-box-content" cols="480px" rows="300px"></textarea>
+                    <textarea class="message-box-content" cols="480px" rows="300px" name="messageContent"></textarea>
                 </div>
                 <div class="message-box-button">
                     <div class="messageLink"> <!-- 보낸메세지 함으로 가기 -->
@@ -478,11 +478,11 @@ Java를 이용한 백엔드 연결
                         </svg>
                         <p class="goto-message-Box-recive">메세지함 보기</p>
                     </div>
-                    <button type="button">전송</button>
+                    <button type="button" class="sendBtn">전송</button>
                 </div>
             </div>
-        </div>
-    </div> --%>
+        </form>
+    </div>
 
     <!-- 받은 메세지 -->
     <div class="message-container message-recieve">

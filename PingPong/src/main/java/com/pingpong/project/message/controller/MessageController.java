@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.message.model.dto.Message;
@@ -72,4 +73,27 @@ public class MessageController {
 ////		return service.delSendmessage(delNo);
 //		
 //	}
+	
+	
+	
+	
+	
+	// 메세지 보내기
+	@PostMapping("/send")
+	@ResponseBody
+	public int resendMessage(
+			@SessionAttribute("loginMember") Member loginMember
+			, RedirectAttributes ra
+			, String messageContent
+			, Message message
+			) {
+		message.setSendMember(loginMember.getMemberNo());
+		message.setMessageContent(messageContent));
+		
+		// 프로필 보고 있는 회원 번호 가져와서 보내기
+		return service.sendMessage(message);
+	}
+	
+	
+	
 }

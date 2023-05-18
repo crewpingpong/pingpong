@@ -37,6 +37,7 @@ public class MessageServiceImpl implements MessageService{
 		return dao.resendMessage(message);
 	}
 
+
 //	// 보낸 메세지 삭제
 //	@Override
 //	public int delmessage(int delNo) {
@@ -49,6 +50,11 @@ public class MessageServiceImpl implements MessageService{
 //		return dao.delSendmessage(delNo);
 //	}
 	
-	
+
+	// 메세지 보내기
+	@Override
+	public int sendMessage(Message message) {
+		return dao.sendMessage(message);
+	}
 	
 }

@@ -9,13 +9,13 @@ const messageBoXrecive = document.querySelector(".message-Box-recive");
 const messageBoXsendX = document.querySelector(".message-Box-send .message-Box-X");
 const messageBoXsend = document.querySelector(".message-Box-send");
 
-messageBoXreciveX.addEventListener("click",()=>{ /* 받은 메세지함 닫기 */
-    messageBoXrecive.style.display="none";
-})
+// messageBoXreciveX.addEventListener("click",()=>{ /* 받은 메세지함 닫기 */
+//     messageBoXrecive.style.display="none";
+// })
 
-messageBoXsendX.addEventListener("click",()=>{ /* 보낸 메세지 함 닫기 */
-    messageBoXsend.style.display="none";
-})
+// messageBoXsendX.addEventListener("click",()=>{ /* 보낸 메세지 함 닫기 */
+//     messageBoXsend.style.display="none";
+// })
 
 // 보낸 메세지 함 -> 받은 메세지 함
 const gotoMessagerecive1 = document.querySelector(".goto-message-Box-recive").parentElement;
@@ -343,4 +343,99 @@ function gotoMessagesendFn(){ // 보낸 메세지 함으로 가는 함수
     .catch(err =>{
         console.log(err);
     })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 개인 프로필에서 post.jsp에서 버튼 눌렀을 때 회원 번호 가져와서 메세지 보내기
+window.onload = function (){
+
+    // 프로필에서 메세지 보내기 하다가 받은 메세지함으로 가기
+    const gotoMessagerecive5 = document.querySelector(".message-send .messageLink");
+
+    gotoMessagerecive5.addEventListener("click",gotoMessageFn);
+
+    const postMessageSend = document.querySelector(".followBtn .messageSend"); // 프로필에서 메세지 보내기
+    const MessageSendBox = document.querySelector(".message-send"); // 메세지 전송 모달
+
+    const messageSendFrm = document.querySelector(".message-send .recieve-message-box"); // 메세지 전송 폼
+    
+    if(postMessageSend != null){
+        postMessageSend.addEventListener("click",postMessageSendFn);
+    }
+    
+    // 메세지 보내기 닫기
+    const MessageSendBoxbtnX = document.querySelector(".message-send .recieve-message-x");
+
+    // 메세지 전송 버튼
+    const messageSendBtn = document.querySelector(".message-send .sendBtn");
+
+    // 메세지 값
+    const messageSendBoxContent = document.querySelector(".message-send .message-box-content");
+
+
+    function postMessageSendFn(){
+        MessageSendBox.style.display = "flex";
+        
+        if(messageSendBoxContent.value.trim().length==0){
+            alert("메세지를 입력해주세요.");
+            messageSendBoxContent.focus();
+            e.preventDefault();
+            return;
+        }
+        
+        MessageSendBoxbtnX.addEventListener("click",()=>{ // 닫기 버튼
+            messageSendBoxContent.value=""; // 닫으면 쓰던 내용 지우기
+            MessageSendBox.style.display = "none";
+        });
+
+        messageSendBtn.addEventListener("click",()=>{ // 전송 버튼
+
+            MessageSendBox.style.display = "none";
+
+            messageSendBoxContent.value="";
+            MessageSendBox.style.display="none";
+            messageSendFrm.submit();
+            gotoMessageFn();
+
+        });
+
+
+
+
+    }
+    // MessageSendBox.style.display = "none"; // 메세지 보내기 닫기
+    // 내일 변수 위로 빼주고 .onload 웬만하면 해주기
+
 }
