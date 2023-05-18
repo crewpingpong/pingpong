@@ -1,131 +1,159 @@
-const emailResetSendbtn = document.querySelector(".email-reset-button");
-const emailPwReset = document.querySelector(".email-pw-reset");
+// ----------------------------------------------- 비밀번호 유효성 검사 시작 -----------------------------------------------
+// 비밀번호/비밀번호 확인 유효성 검사
+const newMemberPw = document.getElementById("newMemberPw");
+const newMemberPwConfirm = document.getElementById("newMemberPwConfirm");
+const pwMessage1 = document.getElementById("pwMessage1");
+const pwMessage2 = document.getElementById("pwMessage2");
 
-emailResetSendbtn.addEventListener("click", () => {
-  emailPwReset.style.display = "block";
-})
-// 이메일 확인 form
-const findEmailFrm = document.getElementById("findEmailFrm");
-// 인증키 확인 form
-const checkCertNum = document.getElementById("checkCertNum");
-// 비번 변경 form
-const pwReset = document.getElementById("pwReset");
-// 로고 아래 메세지
-const pwSearchMessage = document.querySelector(".pw-search-message");
-// 인증키 보내기 && 다음
-const sendAuthKeyBtn = document.getElementById("sendAuthKeyBtn");
-// 인증키 타이머
-const authKeyMessage = document.getElementById("authKeyMessage");
-// 인증 && 다음 버튼
-const checkAuthKeyBtn = document.getElementById("checkAuthKeyBtn");
+const checkObj = {
+    "newMemberPw": false,
+    "newMemberPwConfirm": false
+};
 
+if (newMemberPw != null) {
+    // 비밀번호 입력 시 유효성 검사
+    newMemberPw.addEventListener("input", (e) => {
 
+        // 비밀번호가 입력되지 않은 경우
+        if (newMemberPw.value.trim().length == 0) {
+            newMemberPw.value = ""; // 띄어쓰지 못넣게 하기
 
-// ----------------------------------------------- 이메일 인증 시작 -----------------------------------------------
-// 인증번호 발송
-let authTimer;
-let authMin = 4;
-let authSec = 59; 
+            pwMessage1.innerText = "8글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호를 입력해 주세요.";
+            pwMessage1.classList.remove("confirm", "error"); // 검정 글씨
 
-// 인증번호를 발송한 이메일 저장
-// let tempEmail;
-// if(sendAuthKeyBtn != null){
-//     sendAuthKeyBtn.addEventListener("click", function(e){
-//         authMin = 4;
-//         authSec = 59;
-//         checkObj1.authKey = false;
+            checkObj.newMemberPw = false; // 빈칸 == 유효 X
+            return;
+        }
 
-//         if(checkObj1.memberEmail){ // 중복이 아닌 이메일인 경우 << 이메일이 있는 경우로 변경 예정
+        // 정규 표현식을 이용한 비밀번호 유효성 검사
 
-//             sendAuthKeyBtn.setAttribute("disabled", "disabled") // 재전송 방지
-//             email.style.border="1px solid green";
-            
-//             /* fetch() API 방식 ajax */
-//             fetch("/sendEmail/signUp?email="+memberEmail.value)
-//             .then(resp => resp.text())
-//             .then(result => {
-//                 if(result > 0){
-//                     console.log("인증 번호가 발송되었습니다.")
-//                     tempEmail = memberEmail.value;
-//                     emailMessage.classList.add("class-hidden");
-//                 }else{
-//                     console.log("인증번호 발송 실패")
-//                 }
-//             })
-//             .catch(err => {
-//                 console.log("이메일 발송 중 에러 발생");
-//                 console.log(err);
-//             });
+        // 8~ 영문 소문자, 최소 1개의 숫자 혹은 특수 문자 포함
+        const regEx = /^(?=.*[a-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-z\d$@$!%*#?&]{8,}$/;
 
-//             alert("인증번호가 발송 되었습니다.");
-            
-//             sendAuthKeyBtn.innerText = "05:00";
-//             sendAuthKeyBtn.classList.remove("confirm");
-//             sendAuthKeyBtn.classList.remove("class-hidden");
-//             // authKeyMessage.innerText = "05:00";
-//             // authKeyMessage.classList.remove("confirm");
-//             // authKeyMessage.classList.add("error");
-//             // authKeyMessage.classList.remove("class-hidden");
+        // 입력한 비밀번호가 유효한 경우
+        if (regEx.test(newMemberPw.value)) {
+            checkObj.newMemberPw = true;
 
-//             authTimer = window.setInterval(()=>{
-//                 sendAuthKeyBtn.innerText = "0" + authMin + ":" + (authSec<10 ? "0" + authSec : authSec);
-//                 // 남은 시간이 0분 0초인 경우
-//                 if(authMin == 0 && authSec == 0){
-//                     checkObj1.authKey = false;
-//                     clearInterval(authTimer);
-//                     sendAuthKeyBtn.classList.add("error");
-//                     return;
-//                 }
-//                 // 0초인 경우
-//                 if(authSec == 0){
-//                     authSec = 60;
-//                     authMin--;
-//                 }
+            // 비밀번호가 유효하게 작성된 상태에서
+            // 비밀번호 확인이 입력되지 않았을 때
+            if (newMemberPwConfirm.value.trim().length == 0) {
 
-//                 authSec--; // 1초 감소
+                pwMessage1.innerText = "유효한 비밀번호 형식입니다";
+                pwMessage1.classList.add("confirm");
+                pwMessage1.classList.remove("error");
 
-//             }, 1000)
+            } else {
+                // 비밀번호가 유효하게 작성된 상태에서
+                // 비밀번호 확인이 입력되어 있을 때
 
-//         } else{
-//             alert("중복되지 않은 이메일을 작성해주세요.");
-//             memberEmail.focus();
-//         }
-
-//     });
-
-//     // 인증 확인
-//     const authKey = document.getElementById("authKey");
-//     const checkAuthKeyBtn = document.getElementById("checkAuthKeyBtn");
-
-//     checkAuthKeyBtn.addEventListener("click", function(){
-
-//         if(authMin > 0 || authSec > 0){ // 시간 제한이 지나지 않은 경우에만 인증번호 검사 진행
-//             /* fetch API */
-//             const obj = {"inputKey":authKey.value, "email":tempEmail}
-//             const query = new URLSearchParams(obj).toString()
-//             fetch("/sendEmail/checkAuthKey?" + query)
-//             .then(resp => resp.text())
-//             .then(result => {
-//                 if(result > 0){
-//                     clearInterval(authTimer);
-//                     authKeyMessage.innerText = "인증되었습니다.";
-//                     authKeyMessage.classList.remove("error");
-//                     authKeyMessage.classList.add("confirm");
-//                     CertNum.style.border="1px solid green";
-//                     checkObj1.authKey = true;
-
-//                 } else{
-//                     alert("인증번호가 일치하지 않습니다.")
-//                     checkObj1.authKey = false;
-//                 }
-//             })
-//             .catch(err => console.log(err));
+                // 비밀번호 == 비밀번호 확인  (같을 경우)
+                if (newMemberPw.value == newMemberPwConfirm.value) {
+                    pwMessage2.innerText = "비밀번호가 일치합니다";
+                    pwMessage2.classList.add("confirm");
+                    pwMessage2.classList.remove("error");
+                    checkObj.newMemberPwConfirm = true;
 
 
-//         } else{
-//             alert("인증 시간이 만료되었습니다. 다시 시도해주세요.")
-//         }
+                } else { // 다를 경우
+                    pwMessage2.innerText = "비밀번호가 일치하지 않습니다";
+                    pwMessage2.classList.add("error");
+                    pwMessage2.classList.remove("confirm");
+                    checkObj.newMemberPwConfirm = false;
+                }
+            }
 
-//     });
-// }
-// ----------------------------------------------- 이메일 인증 끝 -----------------------------------------------
+
+        } else { // 유효하지 않은 경우
+
+            pwMessage1.innerText = "비밀번호 형식이 유효하지 않습니다";
+            pwMessage1.classList.add("error");
+            pwMessage1.classList.remove("confirm");
+            checkObj.newMemberPw = false;
+        }
+    });
+
+
+    // 비밀번호 확인 유효성 검사
+    newMemberPwConfirm.addEventListener('input', () => {
+
+        if (checkObj.newMemberPw) { // 비밀번호가 유효하게 작성된 경우에
+
+            // 비밀번호 == 비밀번호 확인  (같을 경우)
+            if (newMemberPw.value == newMemberPwConfirm.value) {
+                pwMessage2.innerText = "비밀번호가 일치합니다";
+                pwMessage2.classList.add("confirm");
+                pwMessage2.classList.remove("error");
+                checkObj.newMemberPwConfirm = true;
+
+            } else { // 다를 경우
+                pwMessage2.innerText = "비밀번호가 일치하지 않습니다";
+                pwMessage2.classList.add("error");
+                pwMessage2.classList.remove("confirm");
+                checkObj.newMemberPwConfirm = false;
+            }
+
+        } else { // 비밀번호가 유효하지 않은 경우
+            checkObj.newMemberPwConfirm = false;
+        }
+    });
+}
+// ----------------------------------------------- 비밀번호 유효성 검사 끝 -----------------------------------------------
+
+document.getElementById("pwReset").addEventListener("submit", e => {
+
+    for (let key in checkObj) {
+
+        if (!checkObj[key]) { // 각 key에 대한 value(true/false)를 얻어와
+            // false인 경우 == 유효하지 않다!
+            switch (key) {
+                case "newMemberPw":
+                    alert("비밀번호가 유효하지 않습니다"); break;
+
+                case "newMemberPwConfirm":
+                    alert("비밀번호가 확인되지 않았습니다"); break;
+            }
+
+            document.getElementById(key).focus();
+
+            e.preventDefault(); // form 태그 기본 이벤트 제거
+            return; // 함수 종료
+        }
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

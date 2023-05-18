@@ -26,7 +26,6 @@
                 <button type="button" class="certi-send" id="sendAuthKeyBtn">전송</button>
                 <%-- <button type="button" class="certi-resend" id="reSendAuthKeyBtn">재전송</button> --%>
                 <span class="email-message" id="emailMessage">메일을 받을 수 있는 이메일을 입력해주세요.</span>
-                
             </div>
 
             <div class="signup-input-CertNum">

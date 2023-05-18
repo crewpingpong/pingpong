@@ -19,13 +19,14 @@
             <a href="/"><img src="/resources/images/logo_X1.png"></a>
             <p>인증키를 인증해 주세요.</p>
 
-            <form action="/member/pwSearchCertNum" method="POST" id="checkCertNum">
+            <form action="/member/pwSearchCertNum" method="POST" id="pwSearchCertNumFrm">
                 <div class="search-input-email input-CertNum">
                     <input type="text" name="authKey" id="authKey" placeholder="인증키 입력" 
                     maxlength="7" autocomplete="off" required>
-                    <button type="button" class="email-message cert-num-email-message" id="sendAuthKeyBtn">인증키 받기</button>
+                    <button type="button" class="click-btn" id="sendAuthKeyBtn">인증키 받기</button>
+                    <input type="hidden" name="checkCertNum" value="false" id="checkCertNum">
                 </div>
-                <button class="login-button email-reset-button" id="checkAuthKeyBtn">다음</button><%-- 인증 && 다음 --%>
+                <button type="button" class="login-button email-reset-button" id="checkAuthKeyBtn">인증키 입력</button><%-- 인증 && 다음 --%>
             </form>
             
             <div class="login-signUp">
@@ -34,8 +35,13 @@
             </div>
         </div>
     </div>
-    
+
+    <script>
+        const memberEmail = "${memberEmail}";
+        console.log("pwSearchCertNum : " + memberEmail);
+    </script>
+
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-	<script src="/resources/js/member/pwSearch.js"></script>
+	<script src="/resources/js/member/pwSearchCertNum.js"></script>
 </body>
 </html>

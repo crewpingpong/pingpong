@@ -29,6 +29,14 @@ public class EmailController {
         
     }
     
+    @GetMapping("/pwSearchCertNum")
+    @ResponseBody
+    public int pwSearchCertNum(String email) {
+        
+        return service.pwSearchCertNum(email, "비밀번호 찾기(변경)");
+        
+    }
+    
     
     @GetMapping("/checkAuthKey")
     @ResponseBody

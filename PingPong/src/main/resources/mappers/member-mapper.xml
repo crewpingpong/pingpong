@@ -36,5 +36,13 @@
 		FROM "MEMBER"
 		WHERE MEMBER_EMAIL = #{memberEmail}
 	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<!-- Member : 사용자 지정 별칭 (mybatis-config.xml) -->
+	<update id="changePw" parameterType="Member">
+		UPDATE "MEMBER" SET
+		MEMBER_PW = #{memberPw}
+		WHERE MEMBER_EMAIL = #{memberEmail}
+	</update>
 
 </mapper>

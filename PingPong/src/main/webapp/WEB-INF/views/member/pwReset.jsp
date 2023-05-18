@@ -21,14 +21,19 @@
             <p>변경하실 비밀번호를 입력해 주세요.</p>
 
             <form action="/member/pwReset" method="POST" id="pwReset">
-                <div class="search-input-email input-CertNum">
-
-                    <input type="password" name="memberPw" id="memberPw" placeholder="비밀번호 입력" 
-                    autocomplete="off" required>
-
-                    <input type="password" id="memberPwCheck" placeholder="비밀번호 확인" 
-                    autocomplete="off" required>
-
+                <div class="signup-input-password">
+                    <p class="reset-pw-text">비밀번호</p>
+                    <input type="password" placeholder="8글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호" name="newMemberPw" autocomplete="off" id="newMemberPw"> <br>
+                    <span class="pwInconsistency signUp-message" id="pwMessage1">
+                        8글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호를 입력해 주세요.
+                    </span>
+                </div>
+    
+            
+                <div class="signup-password-check">
+                    <p class="reset-pw-text">비밀번호 확인</p>
+                    <input type="password" placeholder="비밀번호 재입력"  autocomplete="off" id="newMemberPwConfirm"> <br>
+                    <span class="pwInconsistency signUp-message" id="pwMessage2"></span>
                 </div>
                 <button class="login-button email-reset-button" id="pwResetBtn">완료</button><%-- 변경 비밀번호 제출 --%>
             </form>
@@ -41,6 +46,6 @@
     </div>
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-	<script src="/resources/js/member/pwSearch.js"></script>
+	<script src="/resources/js/member/pwReset.js"></script>
 </body>
 </html>
