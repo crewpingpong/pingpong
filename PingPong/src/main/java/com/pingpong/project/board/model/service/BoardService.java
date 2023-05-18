@@ -1,6 +1,10 @@
 package com.pingpong.project.board.model.service;
 
+
+import java.util.Map;
+
 import com.pingpong.project.board.model.dto.Board;
+
 
 public interface BoardService {
 
@@ -21,5 +25,11 @@ public interface BoardService {
 	 * @return board
 	 */
 	Board select(int boardNo);
+	
+    /** 좋아요 처리 서비스 (AJAX)
+     * @param paramMap
+     * @return count
+     */
+    int like(Map<String, Integer> paramMap);
 
 }
