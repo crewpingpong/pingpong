@@ -136,6 +136,8 @@
     font-weight: bold;
     font-size: 14px;
 }
+.edit-profile-picture img{width: 20px; height: 20px; margin-right: 4px;}
+.edit-profile-picture img:last-of-type{width: 12px; height: 12px; margin-left: 4px;}
 .chooseFile{
     display: flex;
     align-items: flex-end;
