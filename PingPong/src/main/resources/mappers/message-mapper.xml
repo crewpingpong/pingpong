@@ -71,19 +71,19 @@
 	</insert>
 	
 	<!-- 받은 메세지 삭제 -->
-<!-- 	<update id="delmessage">
+	<update id="delmessage">
 		UPDATE MESSAGE
 		SET MESSAGE_DEL_FL='Y' 
-		WHERE MESSAGE_NO= #{}
+		WHERE MESSAGE_NO= #{delNo}
 		AND MESSAGE_DEL_FL='N'
-	</update> -->
+	</update>
 	
 	<!-- 보낸 메세지 삭제 -->
-<!-- 	<update id="delSendmessage">
+ 	<update id="delSendmessage">
 		UPDATE MESSAGE
 		SET MESSAGE_DEL_FL='Y' 
-		WHERE MESSAGE_NO= #{}
+		WHERE MESSAGE_NO= #{delNo}
 		AND MESSAGE_SEND_DEL_FL='N'
-	</update> -->
+	</update>
 	
 </mapper>

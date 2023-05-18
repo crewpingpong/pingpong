@@ -46,8 +46,8 @@ let resendMemNo;
 const messageResendBtn = document.querySelector("#messageResendBtn");
 const messageResendBox = document.querySelector(".message-resend .message-box-content");
 
-// 삭제 할 메세지 번호
-let delMessageNo;
+// 삭제할 메세지 번호
+let delNo;
 
 // 받은 메세지로 이동해보기
 const messageSend =document.querySelector(".messageSend");
@@ -87,6 +87,8 @@ messageResendBtn.addEventListener("click",()=>{
     })
 })
 
+// 어떤 메세지 함인지 알려주기
+let MessageBox = 1; //  MessageBox 1이면 받은 메세지함 / 2이면 보낸 메세지 함
 
 function gotoMessageFn(){ // 받은 메세지 함으로 가는 함수
     fetch("/message/receive")
@@ -95,6 +97,7 @@ function gotoMessageFn(){ // 받은 메세지 함으로 가는 함수
     .then(reciveMessage => { // 파싱한 데이터를 이용해서 비동기 처리 후 동작
         
         recivemessageList.innerHTML=""; // 내부 내용 모두 없애기
+        MessageBox = 1; // MessageBox 1이면 받은 메세지함
 
         if(reciveMessage.length > 0){
             for(let reciveMem of reciveMessage){
@@ -181,33 +184,34 @@ function gotoMessageFn(){ // 받은 메세지 함으로 가는 함수
                 deleteImg.setAttribute('alt', 'messageDeleteImg');
                 deleteImg.classList.add('messageListX');
                 
-                // // 메세지 삭제 하기
-                // deleteImg.addEventListener("click", e =>{
-                // // messageResendBox.value;
-                //     const delNo = e.currentTarget.parentElement.previousElementSibling.getAttribute("delNo");
+                // 받은 메세지 삭제 하기
+                deleteImg.addEventListener("click", e =>{
+                // messageResendBox.value;
+                    delNo = e.currentTarget.parentElement.previousElementSibling.getAttribute("delNo");
 
-                //     if(!confirm("정말 삭제하시겠습니까?")){
-                //         return;
-                //     }
+                    if(!confirm("정말 삭제하시겠습니까?")){
+                        return;
+                    }
 
-                //     fetch("/message/messageDel",{
-                //         method : "DELETE",
-                //         headers : {"content-type":"application/json"},
-                //         body : JSON.stringify({
-                //             "messageNo" : delNo,
-                //             "messageContent" : messageResendBox.value
-                //         })
-                //     })
-                //     .then(resp => resp.text())
-                //     .then(result => {
-                //         if(result>0){
-                //             alert("삭제되었습니다.");
-                //             gotoMessagesendFn();
-                //         } else{
-                //             alert("메세지 삭제 실패");
-                //         }
-                //     })
-                // })
+                    fetch("/message/messageDel",{
+                        method : "DELETE",
+                        headers : {"content-type":"application/json"},
+                        body : JSON.stringify({
+                            "deletMessageNo" : delNo,
+                            "MessageBoxType" : MessageBox
+                        })
+                    })
+                    .then(resp => resp.text())
+                    .then(result => {
+                        if(result>0){
+                            alert("삭제되었습니다.");
+                            gotoMessageFn();
+                            return;
+                        } else {
+                            alert("메세지 삭제 실패");
+                        }
+                    })
+                })
 
 
                 const time = document.createElement('p');
@@ -255,6 +259,8 @@ function gotoMessagesendFn(){ // 보낸 메세지 함으로 가는 함수
     .then(reciveMessage => { // 파싱한 데이터를 이용해서 비동기 처리 후 동작
         
         sendMessageList.innerHTML=""; // 내부 내용 모두 없애기
+        MessageBox = 2; // MessageBox 2이면 보낸 메세지함
+
         if(reciveMessage.length > 0){
             for(let reciveMem of reciveMessage){
                 // 부모 요소 선택
@@ -282,6 +288,34 @@ function gotoMessagesendFn(){ // 보낸 메세지 함으로 가는 함수
                 textContainer.appendChild(message);
                 newMessage.appendChild(textContainer);
         
+                // 보낸 메세지 삭제 하기
+                deleteImg.addEventListener("click", e =>{
+                // messageResendBox.value;
+                    delNo = e.currentTarget.parentElement.previousElementSibling.getAttribute("delNo");
+
+                    if(!confirm("정말 삭제하시겠습니까?")){
+                        return;
+                    }
+
+                    fetch("/message/messageDel",{
+                        method : "DELETE",
+                        headers : {"content-type":"application/json"},
+                        body : JSON.stringify({
+                            "deletMessageNo" : delNo,
+                            "MessageBoxType" : MessageBox
+                        })
+                    })
+                    .then(resp => resp.text())
+                    .then(result => {
+                        if(result>0){
+                            alert("삭제되었습니다.");
+                            gotoMessagesendFn();
+                        } else{
+                            alert("메세지 삭제 실패");
+                        }
+                    })
+                })
+
                 // 메세지 상세 보기
                 textContainer.addEventListener('click', e=>{
                     messageBoXsend.style.display="none"; 

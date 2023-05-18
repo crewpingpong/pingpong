@@ -23,16 +23,16 @@ public interface MessageService {
 	 */
 	int resendMessage(Message message);
 
-//	/** 받은 메세지 삭제
-//	 * @param delNo
-//	 * @return
-//	 */
-//	int delmessage(int delNo);
-//	
-//	/** 보낸 메세지 삭제
-//	 * @param delNo
-//	 * @return
-//	 */
-//	int delSendmessage(int delNo);
+	/** 받은 메세지 삭제
+	 * @param delNo
+	 * @return
+	 */
+	int delmessage(int delNo);
+	
+	/** 보낸 메세지 삭제
+	 * @param delNo
+	 * @return
+	 */
+	int delSendmessage(int delNo);
 	
 }

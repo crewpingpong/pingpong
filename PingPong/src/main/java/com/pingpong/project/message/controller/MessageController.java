@@ -1,6 +1,7 @@
 package com.pingpong.project.message.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,13 +64,32 @@ public class MessageController {
 	}
 	
 	
-	// 메세지 삭제
+//	// 메세지 삭제
 //	@DeleteMapping("/messageDel")
 //	@ResponseBody
-//	public int delmessage(@RequestBody int delNo){
+//	public int delmessage(@RequestBody int deletMmessageNo){
 //		
 //		return service.delmessage(delNo);
 ////		return service.delSendmessage(delNo);
 //		
 //	}
+	
+	// 메세지 삭제
+	@DeleteMapping("/messageDel")
+	@ResponseBody
+	public int delMessage(@RequestBody Map<String, String> request) {
+	    int deletMessageNo = Integer.parseInt(request.get("deletMessageNo"));
+	    int MessageBoxType = Integer.parseInt(request.get("MessageBoxType"));
+	    
+	    if(MessageBoxType==1) { // 받은 메세지함 메세지 삭제
+	    	return service.delmessage(deletMessageNo);	    	
+	    } else if(MessageBoxType==2) { // 보낸 메세지함 메세지 삭제
+			return service.delSendmessage(deletMessageNo);	    	
+	    } else {
+	    	return 0; // 실패
+	    }
+
+	}
+	
+	
 }

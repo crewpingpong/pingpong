@@ -456,7 +456,7 @@ display: none; z-index: 202;
 .message-Box-recive .messageExample>div:nth-of-type(2){
     width: 330px;
 }
-.probox>img{width: 100%; height: 100%;}
+.probox>img{width: 100%; height: 100%; border-radius: 50%;}
 
 /* 보낸 메세지 함 */
 .message-Box-send{
@@ -548,7 +548,7 @@ display: none; z-index: 202;
     background-color: #C5C5C5; 
     display: flex; justify-content: center; margin-top: 15px;
 }
-.message-profile>img{width: 100%; height: 100%;}
+.message-profile>img{width: 100%; height: 100%; border-radius: 50%;}
 .message-box-top>div>p{
     height: 30px; 
     display: flex; justify-content: center; 
