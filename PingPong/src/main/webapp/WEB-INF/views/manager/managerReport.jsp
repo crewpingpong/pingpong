@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="DeclarationList"  value="${DeclarationList}"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -96,49 +98,31 @@
                                     <th><input type="checkbox" name="choiceBox" value="selectAll" id="chkSelectAll"></th>
                                     <th>No.</th>
                                     <th>신고자 ID(URL)</th>
-                                    <th>피신고자 ID(URL)</th>
+                                    <th>신고 게시글</th>
                                     <th>내용</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><input type="checkbox" name="choicebox" value="1"></td>
-                                    <td>1</td>
-                                    <td><a href="/personalHome.html" class="reporter">AAA</a></td>
-                                    <td><a href="/personalHome.html" class="respondent">badDog</a></a></td>
-                                    <td><a href="/managerReportContent.html">이 사람이 저한테 이렇게! 이렇게! 흑흑ㅎ흑흙...모래</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="choicebox" value="1"></td>
-                                    <td>2</td>
-                                    <td><a href="/personalHome.html" class="reporter">DanA-Ka</a></td>
-                                    <td><a href="/personalHome.html" class="respondent">badDog</a></a></td>
-                                    <td><a href="/managerReportContent.html">와타시 하트에 대못 박혔다 데스</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="choicebox" value="1"></td>
-                                    <td>3</td>
-                                    <td><a href="/personalHome.html" class="reporter">ccc</a></td>
-                                    <td><a href="/personalHome.html" class="respondent">badDog</a></a></td>
-                                    <td><a href="/managerReportContent.html">매우 큰 마상입니다</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="choicebox" value="1"></td>
-                                    <td>4</td>
-                                    <td><a href="/personalHome.html" class="reporter">DDD</a></td>
-                                    <td><a href="/personalHome.html" class="respondent">badDog</a></a></td>
-                                    <td><a href="/managerReportContent.html">운영자님을 신고합니다!</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input type="checkbox" name="choicebox" value="1"></td>
-                                    <td>5</td>
-                                    <td><a href="/personalHome.html" class="reporter">EEE</a></td>
-                                    <td><a href="/personalHome.html" class="respondent">badDog</a></a></td>
-                                    <td><a href="/managerReportContent.html">가나다라마바사</a></td>
-                                </tr>
+                                <c:choose>
+                                    <c:when test="${empty DeclarationList}">
+                                        <tr>
+                                            <th colspan="6">등록된 신고가 없습니다.</th>
+                                        </tr>
+                                    </c:when>
 
-                                
-                                
+                                    <c:otherwise>
+                                <c:forEach items="${DeclarationList}" var="Declaration">
+                                    <tr>
+                                        <td><input type="checkbox" name="choicebox" value="1"></td>
+                                        <td>${Declaration.indictmentNo}</td>
+                                        <td><a href="/personalHome.html" class="reporter">${Declaration.memberUrl}</a></td>
+                                        <td><a href="/personalHome.html" class="respondent">${Declaration.boardNo}</a></a></td>
+                                        <td><a href="/managerReportContent.html">${Declaration.indictmentContent}</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </c:otherwise>
+
+                        </c:choose>
                             </tbody>
                         </table>
                     </div>

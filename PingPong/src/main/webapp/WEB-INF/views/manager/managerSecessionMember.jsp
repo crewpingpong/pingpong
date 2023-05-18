@@ -83,7 +83,7 @@
                         <input type="text">
                         <button type="button">검색</button>
                     </div>
-                    <div>
+                    <form action="/manager/restore" method="POST" id="Secessionform">
                         <table id="oneToOneTable">
                             <colgroup>
                                 <col class="col1">
@@ -120,7 +120,7 @@
                                 <c:forEach items="${memberList}" var="member">
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="choicebox" value="1">
+                                        <input type="checkbox" name="choicebox" value="${member.memberNo}">
                                     </td>
                                     <td>${member.memberNo}</td>
                                     <td>
@@ -136,7 +136,7 @@
                         </c:choose>
                             </tbody>
                         </table>
-                    </div>
+                    </form>
                     <!-- 페이지 네이션 -->
                     <div class="pagination">
                         <i class="fa-solid fa-arrow-left"></i>

@@ -74,6 +74,7 @@
         <div class="admin-content-main-area"> 
             <div id="adminModiTab1" class="admin-content-main">
                 <div class="admin-left-side-menu">
+                
                     <div>가입 회원 관리</div>
                     <div>
                         <select name="select" id="">
@@ -84,7 +85,7 @@
                         <input type="text">
                         <button type="button">검색</button>
                     </div>
-                    <div>
+                    <form action="/manager/delete" method="POST" id="form">
                         <table id="oneToOneTable">
                             <colgroup>
                                 <col class="col1">
@@ -97,13 +98,13 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <input type="checkbox" name="choiceBox" value="selectAll" id="chkSelectAll">
+                                        <input type="checkbox" name="choiceBox" value="1" id="chkSelectAll">
                                     </th>
                                     <th>회원 번호</th>
                                     <th>회원 아이디</th>
                                     <th>닉네임</th>
                                     <th>Email</th>
-                                    <th>가입 일자</th>
+                                    <th>가입일</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -121,7 +122,7 @@
                                 <c:forEach items="${memberList}" var="member">
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="choicebox" value="1">
+                                        <input type="checkbox" name="choicebox" value="${member.memberNo}">
                                     </td>
                                     <td>${member.memberNo}</td>
                                     <td>
@@ -137,7 +138,7 @@
                         </c:choose>
                             </tbody>
                         </table>
-                    </div>
+                    </form>
                     <!-- 페이지 네이션 -->
                     <div class="pagination">
                         <i class="fa-solid fa-arrow-left"></i>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="ContentList" value="${boardList.boardList}"/>
+<c:set var="ContentList" value="${boardList}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -83,9 +83,10 @@
                         <button type="button">검색</button>
                     </div>
                     <div>
-                        <button>삭제처리</button>
-                    </div>
-                    <div>
+                        <button id="PostDelBtn">삭제처리</button>
+                        <button id="PostReBtn">복구처리</button>
+                    </div>  
+                    <form action="/manager/postdelete" method="POST" id="PostForm">
                         <table id="oneToOneTable">
                             <colgroup>
                                 <col class="col1">
@@ -122,14 +123,14 @@
                                 <c:forEach items="${ContentList}" var="Content">
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="choicebox" value="1">
+                                        <input type="checkbox" name="choicebox" value="${Content.boardNo}">
                                     </td>
                                     <td>${Content.boardNo}</td>
                                     <td>
                                         <a href="#">${Content.memberUrl}</a>
                                     </td>
                                     <td>${Content.boardContent}</td> <!-- 한글 16글자 1줄 -->
-                                    <td>${Content.boardNo}</td>
+                                    <td>${Content.declarationCount}</td>
                                     <td>${Content.boardDelFl}</td>
                                 </tr>
                                 </c:forEach>
@@ -138,7 +139,7 @@
                         </c:choose>
                             </tbody>
                         </table>
-                    </div>
+                    </form>
                     <!-- 페이지 네이션 -->
                     <div class="pagination">
                         <i class="fa-solid fa-arrow-left"></i>

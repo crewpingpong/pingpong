@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<c:set var="CommentList" value="${CommentList}"/>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -80,9 +83,10 @@
                         <button type="button">검색</button>
                     </div>
                     <div>
-                        <button>삭제처리</button>
+                        <button id="DelBtn">삭제처리</button>
+                        <button id="ReBtn">복구처리</button>
                     </div>
-                    <div>
+                    <form action="/manager/commentdel" method="POST" id="commentForm">
                         <table id="oneToOneTable">
                             <colgroup>
                                 <col class="col1">
@@ -105,82 +109,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="1">
-                                    </td>
-                                    <td>1</td>
-                                    <td>4</td>
-                                    <td><a href="/manager1To1Content.html">좋아요 반사 부탁드려요♥ </a></td>
-                                    <td>
-                                        <a href="/personalHome.html">Admin</a>
-                                    </td>
-                                    <td>N</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
-                                    <td>2</td>
-                                    <td>1</td>
-                                    <td><a href="/manager1To1Content.html">혹시 저희랑 일해보실 생각 없...</a></td>
-                                    <td>
-                                        <a href="">비회원</a>
-                                    </td>
-                                    <td>N</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
-                                    <td>3</td>
-                                    <td>2</td>
-                                    <td><a href="/manager1To1Content.html">너무 이뻐요</a></td>
-                                    <td>
-                                        <a href="">비회원</a>
-                                    </td>
-                                    <td>N</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td><a href="/manager1To1Content.html">JQuery 어떻게 하셨나요?</a></td>
-                                    <td>
-                                        <a href="/personalHome.html">핑퐁짱</a>
-                                    </td>
-                                    <td>Y</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
-                                    <td>5</td>
-                                    <td>3</td>
-                                    <td><a href="/manager1To1Content.html">진짜 노력이 보입니다</a></td>
-                                    <td>
-                                        <a href="/personalHome.html">핑퐁</a>
-                                    </td>
-                                    <td>Y</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="2">
-                                    </td>
-                                    <td>6</td>
-                                    <td>3</td>
-                                    <td><a href="/manager1To1Content.html">가나다라마바사</a></td>
-                                    <td>
-                                        <a href="/personalHome.html">쿠쿠루삥뽕</a>
-                                    </td>
-                                    <td>N</td>
-                                </tr>
-                                
+                                <c:choose>
+                                    <c:when test="${empty CommentList}">
+                                            <tr>
+                                                <th colspan="6">등록된 댓글이 없습니다.</th>
+                                            </tr>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <c:forEach items="${CommentList}" var="Comment">
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="choicebox" value="${Comment.commentNo}">
+                                                </td>
+                                                <td>${Comment.commentNo}</td>
+                                                <td>${Comment.boardNo}</td>
+                                                <td><a href="/manager1To1Content.html">${Comment.commentContent}</a></td>
+                                                <td>
+                                                    <a href="/personalHome.html">${Comment.memberUrl}</a>
+                                                </td>
+                                                <td>${Comment.commentDelFl}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </c:otherwise>
+
+                                </c:choose>
                             </tbody>
                         </table>
-                    </div>
+                    </form>
                     <!-- 페이지 네이션 -->
                     <div class="pagination">
                         <i class="fa-solid fa-arrow-left"></i>
@@ -200,6 +156,6 @@
 </div>
 
     <script src="/resources/js/script.js"></script> <!-- 메인 헤더, 네브 js -->
-    <script src="/resources/js/maneger/managerComment.js"></script>
+    <script src="/resources/js/maneger/manageComment.js"></script>
 </body>
 </html>
