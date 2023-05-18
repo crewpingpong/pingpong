@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.pingpong.project.common.utility.Util;
 import com.pingpong.project.message.dao.MessageDAO;
 import com.pingpong.project.message.model.dto.Message;
 
@@ -27,27 +25,6 @@ public class MessageServiceImpl implements MessageService{
 	public List<Message> sendmessageList(int memberNo) {
 		return dao.sendmessageList(memberNo);
 	}
-
-	// 답장 보내기
-	@Transactional(rollbackFor = Exception.class)
-	@Override
-	public int resendMessage(Message message) {
-		message.setMessageContent(Util.XSSHandling(message.getMessageContent()));
-		return dao.resendMessage(message);
-	}
-
-	// 보낸 메세지 삭제
-	@Override
-	public int delmessage(int delNo) {
-		return dao.delmessage(delNo);
-	}
-	
-	// 받은 메세지 삭제
-	@Override
-	public int delSendmessage(int delNo) {
-		return dao.delSendmessage(delNo);
-	}
-	
 	
 	
 }
