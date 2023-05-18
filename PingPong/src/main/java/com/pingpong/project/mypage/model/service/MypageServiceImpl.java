@@ -38,17 +38,24 @@ public class MypageServiceImpl implements MypageService{
 	
 	// 프로필 이미지 수정 서비스
 	@Override
-	public int updateProfile(MultipartFile profileImage, String webPath, String filePath, int memberNo) {
+	public int updateProfile(MultipartFile profileImage, String reName, String webPath, String filePath, int memberNo) throws IllegalStateException, IOException {
 		
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("memberNo", memberNo);
 		
-		String fileName = Util.fileRename(profileImage.getOriginalFilename());
-		
-		map.put("profileImage", webPath+fileName);
+		map.put("profileImage", webPath+reName);
 		
 		int result = dao.updateProfile(map);
+		
+		if(result == 0) {
+			result = dao.backgroundInsert(map);
+		} 
+		if(result != 0) {
+			profileImage.transferTo(new File(filePath+reName));
+		} else {
+			throw new FileUploadException();
+		}
 		
 		return result;
 	}
