@@ -28,7 +28,6 @@
                 <div class="login-input-password">
                     <p>비밀번호</p>
                     <input type="password" name="memberPw" autocomplete="off" required> <br>
-                    <p class="passwordwrong">* 가입되어 있지 않은 계정입니다.</p>
                 </div>
     
                 <button class="login-button">로그인</button>

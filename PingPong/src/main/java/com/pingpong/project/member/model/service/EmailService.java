@@ -9,4 +9,6 @@ public interface EmailService {
     String createAuthKey();
 
 	int checkAuthKey(Map<String, Object> paramMap);
+
+	int pwSearchCertNum(String email, String title);
 }

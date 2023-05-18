@@ -27,4 +27,12 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.emailSearch", memberEmail);
 	}
 
+	// 비밀번호 찾기(변경)
+	public int changePw(String newMemberPw, String memberEmail) {
+		Member member = new Member();
+		member.setMemberEmail(memberEmail);
+		member.setMemberPw(newMemberPw);
+		return sqlSession.update("memberMapper.changePw", member);
+	}
+
 }

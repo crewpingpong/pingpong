@@ -33,10 +33,6 @@
 .search-input-email>p,.login-input-password>p{
     font-size: 14px;font-weight: bold; margin-bottom: 8px;
 }
-.passwordwrong{ /* 비밀번호 틀렸을 때 나오는 경고 문구 */
-    color: red; font-size: 13px; margin-top: 4px;
-    display: none;
-}
 
 .login-box button{
     width: 320px; height: 50px; border-radius: 5px;
@@ -87,14 +83,14 @@ form.signup-box>div>p{font-weight: bold; font-size: 14px; margin-bottom: 8px;
 margin-top: 20px;}
 
 /* 이메일 주소 + 인증 번호 + 비밀번호 */
-.signup-input-email{margin-top: 30px;}
+.signup-input-email{margin-top: 30px; display: block;}
 
 .signup-box>div:nth-of-type(1)>button, .signup-box>div:nth-of-type(2)>button{
     width: 80px; height: 40px;
     border-radius: 5px; font-size: 14px; font-weight: bold;
     background-color: #231F20; color: #fff;
 }
-.signup-box>div:nth-of-type(1)>input, .signup-box>div:nth-of-type(2)>input{
+.signup-box>div:nth-of-type(1)>input,  .signup-box>div:nth-of-type(2)>input{
     width: 230px; margin-right: 10px;
 }
 
@@ -116,6 +112,9 @@ margin-top: 20px;}
     font-weight: lighter;
     display: block;
 }
+#pwSearchCertNumFrm > .search-input-email > #sendAuthKeyBtn{
+    display: block;
+} 
 
 .class-hidden{
     display: none;
@@ -134,11 +133,7 @@ margin-top: 20px;}
     display: flex; justify-content: space-between;
     margin-top: 40px; margin-bottom: 73px; font-size: 14px;
 }
-/* 비밀번호 체크 */
-/* form.signup-box>div .pwInconsistency{
-    color: red; font-size: 13px; font-weight: normal;
-    display: none;
-} */
+
 /* 비밀번호 관련 메세지 */
 .signUp-message{
     font-size: 12px;
@@ -151,6 +146,12 @@ input::placeholder {
     color:#C5C5C5;
     font-size: 12px;
     font-weight: lighter;
+}
+.reset-pw-text{
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+    margin-top: 20px;
 }
 
 .signup-check>div{display: flex; justify-content: center;}
@@ -356,14 +357,7 @@ input::placeholder {
 .input-CertNum{
     position: relative;
 }
-.cert-num-email-message{
-    /* background-color: #231F20;
-    top: 0;
-    font-size: 14px;
-    letter-spacing: 1px;
-    font-weight: bold;
-    cursor: pointer; */
-}
+
 
 /* 체크 박스 타입 css */
 .customChk input[type="checkbox"] {

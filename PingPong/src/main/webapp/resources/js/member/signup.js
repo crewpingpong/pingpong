@@ -328,57 +328,57 @@ if(memberUrl != null){
         }
     });
 }
-// /* signup 제출 시 검사 */
-// document.getElementById("signUpFrm").addEventListener("submit", e=>{
+/* signup 제출 시 검사 */
+document.getElementById("signUpFrm").addEventListener("submit", e=>{
     
-//     for(let key in checkObj1){
+    for(let key in checkObj1){
 
-//         if(!checkObj1[key]){ // 각 key에 대한 value(true/false)를 얻어와
-//                             // false인 경우 == 유효하지 않다!
-//             switch(key){
-//             case "memberNickname": 
-//                 alert("이메일이 유효하지 않습니다"); break;
+        if(!checkObj1[key]){ // 각 key에 대한 value(true/false)를 얻어와
+                            // false인 경우 == 유효하지 않다!
+            switch(key){
+            case "memberNickname": 
+                alert("이메일이 유효하지 않습니다"); break;
 
-//             case "memberPw": 
-//                 alert("비밀번호가 유효하지 않습니다"); break;
+            case "memberPw": 
+                alert("비밀번호가 유효하지 않습니다"); break;
 
-//             case "memberPwConfirm":
-//                 alert("비밀번호가 확인되지 않았습니다"); break;
+            case "memberPwConfirm":
+                alert("비밀번호가 확인되지 않았습니다"); break;
 
-//             case "authKey":
-//                 alert("인증번호가 확인되지 않았습니다"); break;
-//             }
-//             // 유효하지 않은 input 태그로 focus 이동
-//             // - key를 input의 id와 똑같이 설정했음!
-//             document.getElementById(key).focus();
+            case "authKey":
+                alert("인증번호가 확인되지 않았습니다"); break;
+            }
+            // 유효하지 않은 input 태그로 focus 이동
+            // - key를 input의 id와 똑같이 설정했음!
+            document.getElementById(key).focus();
             
-//             e.preventDefault(); // form 태그 기본 이벤트 제거
-//             return; // 함수 종료
-//         }
-//     }
-// });
-// /* signupInfo 제출 시 검사 */
-// document.getElementById("signupInfoFrm").addEventListener("submit", e=>{
+            e.preventDefault(); // form 태그 기본 이벤트 제거
+            return; // 함수 종료
+        }
+    }
+});
+/* signupInfo 제출 시 검사 */
+document.getElementById("signupInfoFrm").addEventListener("submit", e=>{
     
-//     for(let key in checkObj2){
+    for(let key in checkObj2){
 
-//         if(!checkObj2[key]){ // 각 key에 대한 value(true/false)를 얻어와
-//                             // false인 경우 == 유효하지 않다!
-//         switch(key){
-//         case "memberNickname": 
-//             alert("닉네임이 입력되지 않았거나 이미 존재하는 닉네임입니다."); break;
+        if(!checkObj2[key]){ // 각 key에 대한 value(true/false)를 얻어와
+                            // false인 경우 == 유효하지 않다!
+        switch(key){
+        case "memberNickname": 
+            alert("닉네임이 입력되지 않았거나 이미 존재하는 닉네임입니다."); break;
 
-//         case "memberUrl": 
-//             alert("URL이 입력되지 않았거나 이미 존재하는 URL입니다."); break;
-//         }
+        case "memberUrl": 
+            alert("URL이 입력되지 않았거나 이미 존재하는 URL입니다."); break;
+        }
 
-//             document.getElementById(key).focus();
+            document.getElementById(key).focus();
             
-//             e.preventDefault(); // form 태그 기본 이벤트 제거
-//             return; // 함수 종료
-//         }
-//     }
-// });
+            e.preventDefault(); // form 태그 기본 이벤트 제거
+            return; // 함수 종료
+        }
+    }
+});
 
 
 /* 이메일 전송 버튼 눌렀을 때 */

@@ -21,7 +21,7 @@ public class MemberServiceImpl implements MemberService {
 	public Member login(Member inputMember) {
 
 		Member loginMember = dao.login(inputMember);
-//		System.out.println("암호화 확인 : " + bcrypt.encode(inputMember.getMemberPw()));
+		System.out.println("암호화 확인 : " + bcrypt.encode(inputMember.getMemberPw()));
 
 		if (loginMember != null) { // 아이디가 일치하는 회원이 조회된 경우
 
@@ -58,6 +58,13 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int emailSearch(String memberEmail) {
 		return dao.emailSearch(memberEmail);
+	}
+	
+	// 비번 변경
+	@Transactional(rollbackFor = Exception.class) 
+	@Override
+	public int changePw(String memberEmail, String newMemberPw) {
+		return dao.changePw(bcrypt.encode(newMemberPw) , memberEmail);
 	}
 
 }

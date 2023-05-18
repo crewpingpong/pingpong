@@ -111,7 +111,7 @@ public class MemberController {
 		return "member/signupInfo";
 	}
 	
-	// 비밀번호 인증키 전송&&이동
+	// 이메일 검사
 	@PostMapping("/pwSearch")
 	public String pwSearch(@RequestParam("memberEmail") String memberEmail,
 			HttpSession session,
@@ -119,43 +119,65 @@ public class MemberController {
 			Model Model) {
 		
 		int result = service.emailSearch(memberEmail);
-		System.out.println(memberEmail);
-		System.out.println(result);
 		
-		String path = "redirect:";
+		String path = "member/";
 		String message = "일치하는 이메일이 없습니다.";
 		
 		if(result > 0) {
 			session.setAttribute("memberEmail", memberEmail);
-			Model.addAttribute("emailCheck", 1);
 			path += "pwSearchCertNum";
 		}else {
 			path += "pwSearch";
 			ra.addFlashAttribute("message", message);
-			Model.addAttribute("emailCheck", 2);
 		}
 		return path;
 	}
 	
-	// 비번찾기 이메일 검사
+	// 비번변경 인증키 검사
 	@PostMapping("/pwSearchCertNum")
-	public String pwSearchCertNum(HttpSession session, RedirectAttributes ra) {
+	public String pwSearchCertNum(HttpSession session, RedirectAttributes ra
+			, @RequestParam("checkCertNum") boolean checkCertNum) {
 		
-		String memberEmail = (String) session.getAttribute("memberEmail");
+		String message;
 		
-		int result = 0;
+		String path = "member/";
+		message = "인증키가 일치하지 않습니다.";
 		
-		String path = "redirect:";
-		String message = "인증키가 일치하지 않습니다.";
-		
-		if(result > 0) {
+		if(checkCertNum) {
 			path += "pwReset";
 		}else {
 			path += "pwSearchCertNum";
 			ra.addFlashAttribute("message", message);
 		}
+		
 		return path;
 	}
+	
+	// 비밀번호 변경
+	@PostMapping("/pwReset")
+	public String pwReset(HttpSession session, RedirectAttributes ra, @RequestParam("newMemberPw") String newMemberPw) {
+		
+		String memberEmail = (String) session.getAttribute("memberEmail");
+		session.removeAttribute("memberEmail");
+		
+		int result = service.changePw(memberEmail, newMemberPw);
+		
+		String path = "redirect:";
+		String message;
+		
+		if(result > 0) {
+			message = "비밀번호 변경에 성공했습니다.";
+			ra.addFlashAttribute("message", message);
+			path += "login";
+		}else {
+			message = "비밀번호 변경에 실패했습니다.";
+			ra.addFlashAttribute("message", message);
+			path = "member/pwReset";
+		}
+		
+		return path;
+	}
+	
 	
 	// 회원 가입 진행 1페이지
 	@PostMapping("/signup")
@@ -187,7 +209,6 @@ public class MemberController {
 		// DB에 DML 수행 시 성공 행의 개수 (int형) 반환
 		int result = service.signupInfo(inputMember);
 
-		System.out.println("getMemberNickname" + inputMember.getMemberNickname());
 		if (result > 0) {
 			path += "/member/login"; // 메인페이지
 			
