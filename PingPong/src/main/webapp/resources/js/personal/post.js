@@ -351,8 +351,9 @@ let FirstPagination;
 const updateBackground = document.getElementById("updateBackground");
 const checkSlideDiv = document.getElementsByClassName("slide_item");
 let slideItems; // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
-
-
+const BoardHeart = document.querySelector(".BoardHeart");
+const BoardRedHeart = document.querySelector(".BoardRedHeart");
+let boardNumber;
 function selectBoardList(boardNo){
 
     fetch("/boardDetail?boardNo="+boardNo)
@@ -362,10 +363,28 @@ function selectBoardList(boardNo){
         document.querySelectorAll('.slide_item').forEach(function(slideItem) {
             slideItem.remove();
         });
+
+        BoardRedHeart.style.display = "none";
+        BoardHeart.style.display = "none";
+        let flag = 0;
+        for(let i of board.likeList){
+            if(loginMemberNo == i.memberNo){
+                flag++;
+                break;
+            }
+        }
+        if(flag>0){
+            BoardRedHeart.style.display = "block";
+        } else {
+            BoardHeart.style.display = "block";
+        }
+        boardNumber = board.boardNo;
+
         const porfileRac = document.querySelector(".porfileRac");
         const boardMemberInfo = document.querySelector(".boardMemberInfo");
         const BoardPost = document.querySelector(".BoardPost");
-
+        const likeCountSpan = document.querySelector(".likeCount");
+        likeCountSpan.innerHTML = '';
         porfileRac.innerHTML = '';
         boardMemberInfo.innerHTML = '';
         BoardPost.innerHTML = '';
@@ -404,6 +423,7 @@ function selectBoardList(boardNo){
 
         BoardPost.innerHTML = board.boardContent;
 
+        likeCountSpan.innerText = board.likeCount+"명이 좋아합니다";
 
         slideInitFn();
 
@@ -411,6 +431,55 @@ function selectBoardList(boardNo){
     .catch(err => console.log(err));
 }
 
+// 좋아요 처리 구현
+const boardLike = document.querySelectorAll(".boardLike");
+const likeCount = document.querySelector(".likeCount");
+for(let i=0;i<boardLike.length;i++){
+    boardLike[i].addEventListener("click", e=>{
+        if(loginMemberNo == ""){
+            alert("로그인 후 이용해주세요");
+            return;
+        }
+        let check;
+
+        if(e.target.classList.contains("BoardHeart")){  // 좋아요 x
+            check = 0;
+        } else {  // 좋아요 o
+            check = 1;
+        }
+        console.log(check);
+
+
+        const data = {"boardNo" : boardNumber, "memberNo" : loginMemberNo, "check" : check};
+
+        fetch("/board/like",{
+            method : "POST",
+            headers : {"Content-Type" : "application/json"},
+            body : JSON.stringify(data)
+        })
+        .then(resp => resp.text())
+        .then(count => {
+            console.log("count : " + count);
+
+            if(count == -1){  // INSERT, DELETE 실패 시
+                console.log("좋아요 처리 실패");
+                return;
+            }
+            console.log(check);
+            if(check==0){
+                BoardRedHeart.style.display = "block";
+                BoardHeart.style.display = "none";
+            } else {
+                BoardRedHeart.style.display = "none";
+                BoardHeart.style.display = "block";
+            }
+            likeCount.innerText = count+"명이 좋아합니다";
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    });
+}
 
 
 //let currSlide = 1;
@@ -456,15 +525,15 @@ function slideInitFn(){
     const startElem = document.createElement("div");
     const endElem = document.createElement("div");
     
-    endSlide.classList.forEach((c) => endElem.classList.add(c));
-    endElem.innerHTML = endSlide.innerHTML;
+    // endSlide.classList.forEach((c) => endElem.classList.add(c));
+    // endElem.innerHTML = endSlide.innerHTML;
 
-    startSlide.classList.forEach((c) => startElem.classList.add(c));
-    startElem.innerHTML = startSlide.innerHTML;
+    // startSlide.classList.forEach((c) => startElem.classList.add(c));
+    // startElem.innerHTML = startSlide.innerHTML;
 
-    // 각 복제한 엘리먼트 추가하기
-    slideItems[0].before(endElem);
-    slideItems[slideItems.length - 1].after(startElem);
+    // // 각 복제한 엘리먼트 추가하기
+    // slideItems[0].before(endElem);
+    // slideItems[slideItems.length - 1].after(startElem);
 
     // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
     slideItems = document.querySelectorAll(".slide_item");

@@ -18,9 +18,14 @@
 		<result property="memberUrl" column="MEMBER_URL"/>
 		
 		<result property="likeCount" column="LIKE_COUNT"/>
-		
-		
-		
+		<result property="likeCheck" column="LIKE_CHECK"/>
+					
+		<collection property="likeList"
+					select="selectLikeList"
+					column="BOARD_NO"
+					javaType="java.util.ArrayList"
+					ofType="Like"
+					/>
 		
 		<collection property="imageList"
 					select="selectImageList"
@@ -35,6 +40,10 @@
 					javaType="java.util.ArrayList"
 					ofType="Comment"
 					/>
+	</resultMap>
+	<resultMap type="Like" id="like_rm" autoMapping="true">
+		<id property="boardNo" column="BOARD_NO"/>
+		<id property="memberNo" column="MEMBER_NO"/>
 	</resultMap>
 	
 	<resultMap type="BoardImage" id="boardImage_rm">
@@ -107,11 +116,29 @@
 		AND COMMENT_DEL_FL = 'N'
 	</select>
 	
-	<!-- 좋아요 여부 확인 -->
-	<!-- <select id="boardLikeCheck">
-		SELECT COUNT(*) FROM "BOARD_LIKE"
+	<select id="selectLikeList" resultMap="like_rm">
+		SELECT MEMBER_NO
+		FROM "LIKE"
 		WHERE BOARD_NO = #{boardNo}
-		AND MEMBER_NO = #{memberNo}
-	 </select> -->
+	</select>
+	
+	
+    <!-- 좋아요 테이블 삽입 -->
+    <insert id="insertBoardLike">
+        INSERT INTO "LIKE" VALUES(
+        #{memberNo}, #{boardNo})
+    </insert>
+     
+    <!-- 좋아요 테이블 삭제 -->
+    <delete id="deleteBoardLike">
+        DELETE FROM "LIKE"
+        WHERE BOARD_NO = #{boardNo}
+        AND MEMBER_NO = #{memberNo}
+    </delete>
+    
+    <!-- 좋아요 수 조회 -->
+    <select id="countBoardLike" resultType="_int">
+        SELECT COUNT(*) FROM "LIKE" WHERE BOARD_NO = #{boardNo}
+    </select>
 	
 </mapper>

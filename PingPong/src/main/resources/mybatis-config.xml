@@ -15,6 +15,7 @@
       <typeAlias type="com.pingpong.project.board.model.dto.Board" alias="Board" />
       <typeAlias type="com.pingpong.project.board.model.dto.BoardImage" alias="BoardImage" />
       <typeAlias type="com.pingpong.project.board.model.dto.Comment" alias="Comment" />
+      <typeAlias type="com.pingpong.project.board.model.dto.Like" alias="Like" />
       <typeAlias type="com.pingpong.project.mypage.model.dto.MyPage" alias="MyPage" />
       
 

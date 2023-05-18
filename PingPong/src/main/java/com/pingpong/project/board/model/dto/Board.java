@@ -27,7 +27,9 @@ public class Board {
 	private String oneLiner;
 	
 	private String likeCount;
+    private String likeCheck;
 
+    private List<Like> likeList;
 	private List<BoardImage> imageList;
 	
 	private List<Comment> commentList;
