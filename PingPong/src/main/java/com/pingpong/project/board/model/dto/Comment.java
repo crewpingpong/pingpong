@@ -21,4 +21,10 @@ public class Comment {
 	private String memberUrl;
 	private String commentDelFl;
 
+
+	private String memberNickname;
+	private String profileImg;
+	private int parentNo;
+	private String childCheck;
+
 }

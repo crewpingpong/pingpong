@@ -493,7 +493,6 @@
 
 .BoardHeartBox>svg {
     margin-right: 4px;
-    display: none;
 }
 #boardLike{
     font-size: 1.5em;
@@ -597,8 +596,49 @@
     font-size: 13px; color: #5C5C5C;
 }
 
+.postcontent1>div:first-child{
+    display: flex;
+    margin-bottom : 16px;
+    
+}
+.BoardPost1{
+    margin-right:16px;
+}
+.innerDiv a{
+    margin-right:8px;
+}
 
+.BoardPost1 a{
+    width: 40px; height: 40px;
+}
+.BoardPost1 a img{
+    width: 40px; height: 40px;
+}
 
+.BoardProfile1 {
+    width: 40px; height: 40px; margin-right: 20px; border-radius: 50%; 
+    /* border: 1px solid black; */ background-color: #231F2050; 
+    float: left; margin-top: 5px; display: block; cursor: pointer;
+}
+
+.postcontent1 div div p{
+    color:#5C5C5C;
+    /* font-size: 12px; */
+}
+.dateDiv{
+    display: flex;
+}
+.dateDiv span{
+    color:#5C5C5C;
+    font-size: 12px;
+    margin-left : 8px;
+    font-weight: bold;
+}
+
+.innerDiv{
+    display: flex;
+    /* padding-bottom: 20px; */
+}
 /* 이전 버튼 클릭시 전환 영역 */
 
 .Boardcontent1 {
@@ -633,14 +673,6 @@
     background-color: #FFD24C;
 }
 
-/* .BoardPost1{
-    display: inline;
-} */
-.BoardProfile1 {
-    width: 40px; height: 40px; margin-right: 20px; border-radius: 50%; 
-    /* border: 1px solid black; */ background-color: #231F2050; 
-    float: left; margin-top: 5px; display: block; cursor: pointer;
-}
 
 .BoardComment-remove-row {
     float: right; cursor: pointer; transform: translateY(-20px);
