@@ -74,7 +74,7 @@ public interface MypageService {
 	 * @param loginMember
 	 * @return result
 	 */
-	int updateProfile(MultipartFile profileImage, String webPath, String filePath, int memberNo);
+	int updateProfile(MultipartFile profileImage, String reName, String webPath, String filePath, int memberNo) throws IllegalStateException, IOException ;
 	
 
 
