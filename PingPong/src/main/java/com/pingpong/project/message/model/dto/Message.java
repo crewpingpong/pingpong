@@ -27,6 +27,7 @@ public class Message {
 	private String memberNickname; // 보낸 회원 닉네임
 	private int receivedMember; // 받은 회원
 	
-	private String messageDelFl; // 메세지 삭제 여부
+	private String messageSendDelFl; // 보낸 메세지 삭제 여부
+	private String messageDelFl; // 받은 메세지 삭제 여부
 	private String createDate; // 메세지 보낸 날짜
 }
