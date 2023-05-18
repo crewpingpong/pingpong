@@ -62,6 +62,7 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	
 	<!-- 배경화면 수정 -->
 	<update id="backgroundUpdate">
 		UPDATE "MEMBER_PROFILE" SET
@@ -69,11 +70,13 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	
 	<!-- 배경화면 삽입 -->
 	<insert id="backgroundInsert">
 		INSERT INTO "MEMBER_PROFILE"("MEMBER_NO", "BACKGROUND_IMG")
 		VALUES(#{memberNo}, #{backgroundImage})
 	</insert>
+	
 	
 	<!-- 내 정보 조회하기 -->
 	<select id="selectMemberProfile" resultMap="mypage_rm">

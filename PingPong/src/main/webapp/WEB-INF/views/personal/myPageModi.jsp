@@ -48,19 +48,27 @@
 
                         <!-- 프로필 사진 -->
                         <div class="profile-change-area"> 
-                            <%-- 프로필 이미지가 없으면 기본 이미지 --%>
                             <span class="profile-picture removeBGC" id="profile-picture">
-                                <img src="/resources/images/profileImage.jpg" id="profileImage">
+
+                                <%-- 프로필 이미지가 없으면 기본 이미지 --%>
+                                <c:if test="${empty mypage.profileImage}" >
+                                    <img src="/resources/images/pingpong.ico" id="profileImage">
+                                </c:if>
+
+                                <%-- 프로필 이미지가 있으면 프로필 이미지 --%>
+                                <c:if test="${not empty mypage.profileImage}" >
+                                    <img src="${mypage.profileImage}" id="profileImage">
+                                </c:if>
+
                             </span>
 
                             <div class="edit-profile-picture">
-                                <img src="/resources/images/mypage/pencil.png" alt="">
-                                프로필 사진 편집
-                                <img src="/resources/images/message/messageDeleteImg.png" alt="">
-                            </div>
-                            <div>
-                                <label for="file"></label>
-                                <input type="file" class="profileUpload" accept="image/*" required multiple>
+                                <img src="/resources/images/mypage/pencil.png"> <%-- 연필 --%>
+                                <div class="profile-change-Btn">
+                                    <label for="file">프로필 사진 편집</label> 
+                                    <input type="file" class="profileUpload" id="file" accept="image/*" required multiple>
+                                </div>
+                                <img src="/resources/images/message/messageDeleteImg.png" id="deleteProfile"> <%-- X버튼 --%>
                             </div>
                         </div>
                         
@@ -126,7 +134,7 @@
 
             <!-- *** 프로필 편집 *** -->
             <div id="myPageModiTab2" class="myPage-content-main">
-                <form name="myPageFrm" action="profile" method="">
+                <form name="myPageFrm" action="/mypage/profile" method="POST">
                     <div class="profile-modi">
 
                         <!-- 소개 -->
@@ -225,7 +233,7 @@
             <!-- *** 비밀번호 변경 화면 구현 & 회원 탈퇴 *** -->
             <div id="myPageModiTab3" class="myPage-content-main">
 
-                <form name="myPageFrm" id="changePwFrm" action="changePw" method="POST">
+                <form name="myPageFrm" id="changePwFrm" action="/mypage/changePw" method="POST">
                     <div class="password-modi">
 
                         <p>비밀번호 변경</p>
@@ -233,20 +241,20 @@
                         <!-- 현재 비밀번호 -->
                         <div class="current-password"> 
                             <p>현재 비밀번호</p>
-                            <input type="password" minlength="6" placeholder="6자 이상">
+                            <input type="password" name="currentPw" id="currentPw" minlength="6" placeholder="6자 이상">
                         </div>
 
                         <!-- 새 비밀번호 -->
                         <div class="new-password"> 
                             <p>새 비밀번호</p>
-                            <input type="password" minlength="6" placeholder="6자 이상">
+                            <input type="password" name="newPw" id="newPw" minlength="6" placeholder="6자 이상">
                         </div>
 
                         <!-- 새 비밀번호 확인 -->
                         <div class="new-password-check"> 
                             <p>새 비밀번호 확인</p>
-                            <input type="password" minlength="6" placeholder="6자 이상" autocomplete="off" required>
-                            <button class="password-change" type="button">비밀번호 변경</button>
+                            <input type="password" name="newPwConfirm" id="newPwConfirm" minlength="6" placeholder="6자 이상" autocomplete="off" required>
+                            <button class="password-change" id="changePwBtn" type="button">비밀번호 변경</button>
                         </div> 
                     </div>     
                 </form>
@@ -282,7 +290,7 @@
             
             <!-- *** 문의 내역 화면 구현 *** -->
             <div id="myPageModiTab4" class="myPage-content-main">
-                <form name="myPageFrm" action="inquiry" method="">
+                <form name="myPageFrm" action="/mypage/inquiry" method="POST">
                     <div class="inquiry-area">
                         <p>문의 내역</p> 
                         <div>

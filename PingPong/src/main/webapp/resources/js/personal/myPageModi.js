@@ -25,6 +25,8 @@ for(var i = 0; i < tabList.length; i++){
 }
 
 
+/* ********************************************************************** */
+
 /* *** 내 정보 수정 *** */
 const memberNickname = document.querySelector("#memberNickname");
 const memberUrl = document.querySelector("#memberUrl");
@@ -98,15 +100,125 @@ if(updateInfo != null){
 }
 
 
+// 홈프로필 배경 변경
+const profileImage = document.querySelector("#profileImage");   // img태그
+const imageInput = document.querySelector("#file");       // input태그
+const deleteProfile = document.querySelector("#deleteProfile"); // x버튼
+
+let initCheck; // 초기 프로필 이미지 상태
+let deleteCheck = -1; // 프로필 이미지가 새로 업로드 되거나 삭제 되었음을 나타내는 변수
+// -1 == 초기값, 0 == 프로필 삭제(x버튼), 1 == 새 이미지 업로그
+let originalImage; // 초기 프로필 이미지 파일 경로 저장
+
+if(imageInput != null){ 
+    // 프로필 이미지가 출력되는 img태그의 src 속성을 저장
+    originalImage = profileImage.getAttribute("src");
+
+    // 회원 프로필 화면 진입 시 현재 회원의 프로필 이미지 상태를 확인
+    if(profileImage.getAttribute("src") == "/resources/images/pingpong.ico"){
+        initCheck = false; // 기본 이미지
+    }
+    else{
+        initCheck = true; // 이전 업로드 이미지
+    }
+
+    imageInput.addEventListener("change", e => {
+
+        const maxSize = 1 * 1024 * 1024 * 2; // 파일 최대 크기 지정(바이트 단위)
+
+        console.log(e.target);       // input
+        console.log(e.target.value); // 업로드 된 파일 경로
+        console.log(e.target.files); // 업로드 된 파일의 정보가 담긴 배열
+        const file = e.target.files[0]; // 업로드 한 파일의 정보가 담긴 객체
+        
+        // 파일을 한 번 선택한 후 취소했을 때
+        if(file == undefined){ 
+            console.log("파일 선택이 취소됨");
+            deleteCheck = -1; // 취소 == 파일 없음 == 초기상태
+
+            // 취소 시 기존 프로필 이미지로 변경
+            profileImage.setAttribute("src", originalImage);
+
+            return;
+        }
+
+        if(file.size > maxSize){ 
+            alert("2MB 이하의 이미지를 선택해주세요.")
+            imageInput.value = "";
+            // input type="file" 태그에 대입할 수 있는 value는 ""(빈칸) 뿐이다!
+            deleteCheck = -1; // 취소 == 파일 없음 == 초기상태 
+
+            // 기존 프로필 이미지로 변경
+            profileImage.setAttribute("src", originalImage);
+
+            return;
+        }
+
+        // JS에서 파일을 읽는 객체
+        const reader = new FileReader();
+
+        reader.readAsDataURL(file);
+        // 매개변수에 작성된 파일을 읽어서 저장 후  
+        // 파일을 나타내는 URL을 result 속성으로 얻어올 수 있게 함
+
+        // 파일을 다 읽었을 때
+        reader.onload = e => {
+            //console.log(e.target);
+            //console.log(e.target.result); // 읽은 파일의 URL
+
+            const url = e.target.result;
+
+            // 프로필이미지(img) 태그에 src 속성으로 추가
+            profileImage.setAttribute("src", url);
+
+            deleteCheck = 1;
+        }
+    });
+
+    // x 버튼 클릭 시 
+    deleteProfile.addEventListener("click", () =>{
+
+        imageInput.value=""; 
+        profileImage.setAttribute("src", "/resources/images/pingpong.ico");
+
+        deleteCheck = 0;
+    });
+
+    // #profileFrm이 제출 되었을 때
+    document.querySelector("#updateInfo").addEventListener("submit", e => {
+
+        let flag = true;
+
+        // 프로필 이미지가 없다 -> 있다
+        if(!initCheck && deleteCheck == 1) flag = false;
+
+        // 이전 프로필 이미지가 있다 -> 삭제
+        if(initCheck && deleteCheck == 0) flag = false;
+
+        // 이전 프로필 이미지가 있다 -> 새 이미지
+        if(initCheck && deleteCheck == 1) flag = false;
+
+        if(flag){ // flag == true -> 제출하면 안 되는 경우
+            e.preventDefault(); // form 기본 이벤트 제거
+            alert("이미지 변경 후 클릭하세요");
+        }
+    });
+}
+
+
+
+/* ********************************************************************** */
+
 /* 비밀번호 변경 제출 시 */
-const changePwFrm = document.querySelector("changePwFrm");
-const currentPw = document.querySelector("currentPw");
-const newPw = document.querySelector("newPw");
-const newPwConfirm = document.querySelector("newPwConfirm");
+const currentPw = document.querySelector("#currentPw");
+const newPw = document.querySelector("#newPw");
+const newPwConfirm = document.querySelector("#newPwConfirm");
+const secessionBtn = document.querySelector("#secessionBtn");
+const changePwFrm = document.querySelector("#changePwFrm");
 
 if(changePwFrm != null){ // 현재 페이지가 비밀번호 변경 페이지인 경우
 
-    changePwFrm.addEventListener("submit", e => {
+    changePwBtn.addEventListener("click", e => {
 
         // 현재 비밀번호 미작성 시
         if(currentPw.value.trim() == ""){
@@ -132,6 +244,8 @@ if(changePwFrm != null){ // 현재 페이지가 비밀번호 변경 페이지인
             newPwConfirm.focus();
             return;
         }
+
+        changePwFrm.submit();
     });
 }
 
@@ -172,118 +286,7 @@ if(secessionFrm != null){ // 탈퇴 페이지인 경우
 }
 
 
-
-
-// 개인 홈 프로필 js
-// 홈프로필 사진 변경
-const profileUpload = document.querySelector('.profileUpload');
-const upload = document.querySelector('.edit-profile-picture');
-upload.addEventListener('click', () => profileUpload.click());
-// 파일 첨부 버튼 위임
-
-function getImageFiles(e) {
-    // 이미지 배열로 받아서 검사 (아래부분 늘려주고 요소 추가하는 코드 넣으면 여러 개 가능)
-    const uploadFiles = [];
-    const files = e.currentTarget.files;
-    const profileImg = document.querySelector('.profile-picture');
-    const removeBGC = document.querySelector('.removeBGC');
-    const docFrag = new DocumentFragment();
-
-    // 이미지 1개 이상 들어오면 돌려보내주기
-    if ([...files].length > 1) {
-        alert('이미지는 하나만 업로드가 가능합니다.');
-        return;
-    }
-
-    // 파일 타입 검사
-    [...files].forEach(file => {
-        if (!file.type.match("image/.*")) {
-            alert('이미지 파일만 업로드가 가능합니다.');
-            return
-        }
-
-        // 파일 갯수 검사 이미지 1개 들어온게 맞다면 요소 추가
-        if ([...files].length == 1) {
-            uploadFiles.push(file);
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const preview = createElement(e, file);
-                profileImg.innerHTML = "";
-                profileImg.appendChild(preview);
-                removeBGC.classList.remove('removeBGC');
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-}
-
-function createElement(e, file) {
-    // const div = document.createElement('div');
-    const img = document.createElement('img');
-    img.setAttribute('src', e.target.result);
-    img.setAttribute('data-file', file.name);
-    // div.appendChild(img);
-
-    return img;
-}
-
-profileUpload.addEventListener('change', getImageFiles);
-
-
-
-
-
-
-
-
-/* **************************** */
-
-/* 비밀번호 변경 시 일치할 때 나오는 문구 */
-
-const passwordChange = document.querySelector(".password-change");
-const passwordcorrect = document.querySelector(".passwordcorrect");
-
-passwordChange.addEventListener("click", e => {
-    
-    const newPw = document.querySelector('.new-password>input').value;
-    const newPwChk = document.querySelector('.new-password-check>input').value;
-
-    // 새 비밀번호가 입력되지 않은 경우
-    if(newPw.trim().length ==0){
-        alert("비밀번호를 입력해주세요.");
-        newPw="";
-        newPw.focus(); // 새 비밀번호 input 태그에 초점을 맞춤
-        e.preventDefault();
-        return; // 제출 못하게 하기
-    }
-    // 비밀번호 확인이 입력되지 않은 경우
-    if(newPwChk.trim().length ==0){
-        alert("새 비밀번호 확인을 입력해주세요.");
-        newPwChk="";
-        newPwChk.focus(); // 비밀번호 확인 input 태그에 초점을 맞춤
-        e.preventDefault();
-        return; // 제출 못하게 하기
-    }
-    // 비밀번호가 6글자 미만으로 입력된 경우
-    if(newPw.trim().length < 6){
-        alert("비밀번호를 6자리 이상 입력해주세요.");
-        newPwChk="";
-        newPwChk.focus(); // 비밀번호 확인 input 태그에 초점을 맞춤
-        e.preventDefault();
-        return; // 제출 못하게 하기
-    }
-
-    // 비밀번호가 일치하는 경우
-    if (newPw === newPwChk && newPw.trim().length >= 6) {
-        document.querySelector('.new-password input').style.border="1px solid green"
-        document.querySelector('.new-password-check input').style.border="1px solid green"
-        alert("비밀번호가 변경되었습니다.");
-    }
-    // 비밀번호가 일치하지 않는 경우
-    else{
-        alert("비밀번호가 일치하지 않습니다.");
-    }
-});
+/* ********************************************************************** */
 
 
 
