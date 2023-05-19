@@ -38,6 +38,39 @@
 		<result property="boardNo" column="BOARD_NO"/>
 		<result property="indictmentContent" column="INDICTMENT_CONTENT"/>
 </resultMap>
+
+<!-- 가입 회원 카운트 -->
+<select id="getListCount" resultType="_int">
+SELECT COUNT(*) FROM "MEMBER"
+WHERE MEMBER_DEL_FL = 'N'
+</select>
+
+<!-- 탈퇴 회원 카운트 -->
+<select id="getDelListCount" resultType="_int">
+SELECT COUNT(*) FROM "MEMBER"
+WHERE MEMBER_DEL_FL = 'Y'
+</select>
+
+<!-- 게시글 목록 카운트 -->
+<select id="getContentListCount" resultType="_int">
+SELECT COUNT(*) FROM "BOARD"
+</select>
+
+<!-- 댓글 목록 카운트 -->
+<select id="getCommentListCount" resultType="_int">
+SELECT COUNT(*) FROM "COMMENT"
+</select>
+
+<!-- 1:1 문의 목록 카운트 -->
+<select id="getInquiryListCount" resultType="_int">
+SELECT COUNT(*) FROM INQUIRY
+</select>
+
+<!-- 신고함 목록 카운트 -->
+<select id="getDeclarationListCount" resultType="_int">
+SELECT COUNT(*) FROM DECLARATION
+</select>
+
 <!-- 가입 회원 목록 조회 -->
 <select id="selectMemberList" resultMap="member_rm">
 SELECT MEMBER_NO,MEMBER_URL,MEMBER_NICKNAME,MEMBER_EMAIL,ENROLL_DATE
@@ -109,6 +142,19 @@ JOIN "MEMBER" M USING(MEMBER_NO)
 	UPDATE "BOARD" SET
 	BOARD_DEL_FL = 'N'
 	WHERE BOARD_NO = #{boardNo}
+</update>
+
+<!-- 댓글 삭제 -->
+<update id="commentdel" parameterType="int">
+	UPDATE "COMMENT" SET
+	COMMENT_DEL_FL = 'Y'
+	WHERE COMMENT_NO = #{commentNo}
+</update>
+<!-- 댓글 복구 -->
+<update id="commentRe" parameterType="int">
+	UPDATE "COMMENT" SET
+	COMMENT_DEL_FL = 'N'
+	WHERE COMMENT_NO = #{commentNo}
 </update>
 
 </mapper>

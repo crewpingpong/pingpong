@@ -17,7 +17,6 @@
       <typeAlias type="com.pingpong.project.board.model.dto.Comment" alias="Comment" />
       <typeAlias type="com.pingpong.project.board.model.dto.Like" alias="Like" />
       <typeAlias type="com.pingpong.project.mypage.model.dto.MyPage" alias="MyPage" />
-      
       <typeAlias type="com.pingpong.project.board.model.dto.Inquiry" alias="Inquiry" />
       <typeAlias type="com.pingpong.project.board.model.dto.Declaration" alias="Declaration" />
 
@@ -34,10 +33,5 @@
       <mapper resource="/mappers/ajax-mapper.xml" />
       <mapper resource="/mappers/board-mapper.xml" />
 
-      
-
-
-
-      
    </mappers>
 </configuration>

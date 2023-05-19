@@ -12,17 +12,11 @@ import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.board.model.dto.Comment;
 import com.pingpong.project.board.model.dto.Declaration;
 import com.pingpong.project.board.model.dto.Inquiry;
+import com.pingpong.project.board.model.dto.Pagination;
 import com.pingpong.project.manager.dao.ManagerDAO;
 import com.pingpong.project.member.model.dto.Member;
 
-/**
- * @author user
- *
- */
-/**
- * @author user
- *
- */
+
 @Service
 public class ManagerServiceImpl implements ManagerService{
 
@@ -31,11 +25,23 @@ public class ManagerServiceImpl implements ManagerService{
 
 	// 가입 회원 목록 조회
 	@Override
-	public Map<String, Object> selectMemberList() {
+	public Map<String, Object> selectMemberList(int cp) {
 		
-		List<Member> memberList = dao.selectMemberList();
+		//1. DEL_FL이 'N'인 회원 수 카운트
+		int listCount = dao.getListCount();
 		
+		//2. 1번 조회 결과 + cp 를 이용해서 Pagination 객체 생성
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		// 3. 특정 게시판에서
+		// 현재 페이지에 해당하는 부분에 대한 게시글 목록 조회
+		//  몇페이지(pagination.currentPage)에 대한 
+		//  게시글 몇개(pagination.limit) 조회)
+		List<Member> memberList = dao.selectMemberList(pagination);
+		
+		// 4. pagination, boardList를 Map에 담아서 반환
 		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
 		map.put("memberList", memberList);
 		
 		return map;
@@ -43,11 +49,16 @@ public class ManagerServiceImpl implements ManagerService{
 	
 	// 탈퇴 회원 목록 조회
 	@Override
-	public Map<String, Object> selectSessionList() {
+	public Map<String, Object> selectSessionList(int cp) {
 
-		List<Member> memberList = dao.selectSessionList();
+		int listCount = dao.getDelListCount();
+		
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		List<Member> memberList = dao.selectSessionList(pagination);
 		
 		Map<String, Object> SecessionList = new HashMap<>();
+		SecessionList.put("pagination", pagination);
 		SecessionList.put("memberList", memberList);
 		
 		return SecessionList;
@@ -55,41 +66,70 @@ public class ManagerServiceImpl implements ManagerService{
 
 	// 게시글 목록 조회
 	@Override
-	public List<Board> selectBoardList() {
+	public Map<String, Object> selectBoardList(int cp) {
 
-		List<Board> boardList = dao.selectBoardList();
+		int listCount = dao.getContentListCount();
 		
-		//Map<String, Object> ContentList = new HashMap<>();
-		//ContentList.put("boardList", boardList);
+		Pagination pagination = new Pagination(listCount, cp);
 		
-		return boardList;
+		List<Board> boardList = dao.selectBoardList(pagination);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+		
+		return map;
 	}
 
 	// 댓글 목록 조회
 	@Override
-	public List<Comment> selectCommentList() {
+	public Map<String, Object> selectCommentList(int cp) {
 		
-		List<Comment> CommentList = dao.selectCommentList();
+		int listCount = dao.getCommentListCount();
 		
-		return CommentList;
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		List<Comment> CommentList = dao.selectCommentList(pagination);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		map.put("CommentList", CommentList);
+		
+		return map;
 	}
 
 	// 1:1 문의 목록 조회
 	@Override
-	public List<Inquiry> selectInquiryList() {
+	public Map<String, Object> selectInquiryList(int cp) {
 		
-		List<Inquiry> InquiryList = dao.selectInquiryList();
+		int listCount = dao.getInquiryListCount();
 		
-		return InquiryList;
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		List<Inquiry> InquiryList = dao.selectInquiryList(pagination);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		map.put("inquiryList", InquiryList);
+		
+		return map;
 	}
 
 	// 신고함 목록 조회
 	@Override
-	public List<Declaration> selectDeclarationList() {
+	public Map<String, Object> selectDeclarationList(int cp) {
 		
-		List<Declaration> DeclarationList = dao.selectDeclarationList();
+		int listCount = dao.getDeclarationListCount();
 		
-		return DeclarationList;
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		List<Declaration> DeclarationList = dao.selectDeclarationList(pagination);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		map.put("DeclarationList", DeclarationList);
+		
+		return map;
 	}
 
 	// 체크된 회원 탈퇴
@@ -122,6 +162,22 @@ public class ManagerServiceImpl implements ManagerService{
 	public int restorePost(int boardNo) {
 		
 		return dao.restorePost(boardNo);
+	}
+
+	// 체크된 댓글 삭제
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int commentdel(int commentNo) {
+		
+		return dao.commentdel(commentNo);
+	}
+
+	// 체크된 댓글 복구
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int commentRe(int commentNo) {
+		
+		return dao.commentRe(commentNo);
 	}
 
 	

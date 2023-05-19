@@ -26,12 +26,13 @@ public class ManagerController {
 	@Autowired
 	private ManagerService service;
 	
-	//가입 회원 + 회원 목록 조회
+	//가입 회원 + 회원 목록 조회 + 페이지 네이션
 	@GetMapping("/")
 	public String managerPage(
 			Model model
+			,@RequestParam(value="cp", required=false, defaultValue="1") int cp
 			) {
-		Map<String, Object> map = service.selectMemberList();
+		Map<String, Object> map = service.selectMemberList(cp);
 		
 		model.addAttribute("map",map);
 		
@@ -58,8 +59,9 @@ public class ManagerController {
 	@GetMapping("/Secession")
 	public String managerSecessionMember(
 			Model model
+			,@RequestParam(value="cp", required=false, defaultValue="1") int cp
 			) {
-		Map<String, Object> SecessionList = service.selectSessionList();
+		Map<String, Object> SecessionList = service.selectSessionList(cp);
 		
 		model.addAttribute("SecessionList",SecessionList);
 		
@@ -84,8 +86,9 @@ public class ManagerController {
 	@GetMapping("/Post")
 	public String managerPost(
 			Model model
+			,@RequestParam(value="cp", required=false, defaultValue="1") int cp
 			) {
-		List<Board> boardList = service.selectBoardList();
+		Map<String, Object> boardList = service.selectBoardList(cp);
 		
 		model.addAttribute("boardList",boardList);
 		
@@ -125,20 +128,51 @@ public class ManagerController {
 	@GetMapping("/Comment")
 	public String managerComment(
 			Model model
+			,@RequestParam(value="cp", required=false, defaultValue="1") int cp
 			) {
-		List<Comment> CommentList = service.selectCommentList();
+		Map<String, Object> CommentList = service.selectCommentList(cp);
 		
 		model.addAttribute("CommentList",CommentList);
 		
 		return "manager/managerComment";
 	}
+	
+	//댓글 삭제
+	@PostMapping("/commentdel")
+	public String CommentDel(
+			@RequestParam(name = "choicebox", required = false) String[] choicebox) {
+	
+		for(int i=0; i<choicebox.length;i++) {
+			
+			 int commentNo = Integer.parseInt(choicebox[i]);
+			 int result = service.commentdel(commentNo);
+			}
+		
+		return "redirect:/manager/Comment";
+	}
+	
+	//댓글 복구
+	@PostMapping("/commentrestore")
+	public String CommentRe(
+			@RequestParam(name = "choicebox", required = false) String[] choicebox) {
+		
+		for(int i=0; i<choicebox.length;i++) {
+			
+			 int commentNo = Integer.parseInt(choicebox[i]);
+			 int result = service.commentRe(commentNo);
+			}
+		
+		return "redirect:/manager/Comment";
+	}
+	
 	//1:1문의
 	@GetMapping("/1To1inquiry")
 	public String manager1To1inquiry(
 			Model model
+			,@RequestParam(value="cp", required=false, defaultValue="1") int cp
 			) {
 		
-		List<Inquiry> InquiryList = service.selectInquiryList();
+		Map<String, Object> InquiryList = service.selectInquiryList(cp);
 		
 		model.addAttribute("InquiryList",InquiryList);
 		
@@ -149,8 +183,9 @@ public class ManagerController {
 	@GetMapping("/Report")
 	public String manager1To1Content(
 			Model model
+			,@RequestParam(value="cp", required=false, defaultValue="1") int cp
 			) {
-		List<Declaration> declarationList = service.selectDeclarationList();
+		Map<String, Object> declarationList = service.selectDeclarationList(cp);
 		
 		model.addAttribute("DeclarationList",declarationList);
 		

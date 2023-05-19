@@ -11,34 +11,40 @@ import com.pingpong.project.board.model.dto.Inquiry;
 public interface ManagerService {
 
 	/** 관리자 페이지 가입 회원 목록 조회
+	 * @param cp 
 	 * @return map
 	 */
-	Map<String, Object> selectMemberList();
+	Map<String, Object> selectMemberList(int cp);
 
 	/** 관리자 페이지 탈퇴 회원 목록 조회
-	 * @return SecessionList
+	 * @param cp 
+	 * @return map
 	 */
-	Map<String, Object> selectSessionList();
+	Map<String, Object> selectSessionList(int cp);
 
 	/** 관리자 페이지 게시글 목록 조회
-	 * @return boardList
+	 * @param cp 
+	 * @return map
 	 */
-	List<Board> selectBoardList();
+	Map<String, Object> selectBoardList(int cp);
 
 	/** 관리자 페이지 댓글 목록 조회
-	 * @return CommentList
+	 * @param cp 
+	 * @return map
 	 */
-	List<Comment> selectCommentList();
+	Map<String, Object> selectCommentList(int cp);
 
 	/** 관리자 페이지 1:1 문의 목록 조회
-	 * @return InquiryList
+	 * @param cp 
+	 * @return map
 	 */
-	List<Inquiry> selectInquiryList();
+	Map<String, Object> selectInquiryList(int cp);
 
 	/** 관리자 페이지 신고함 목록 조회
-	 * @return  DeclarationList
+	 * @param cp 
+	 * @return  map
 	 */
-	List<Declaration> selectDeclarationList();
+	Map<String, Object> selectDeclarationList(int cp);
 
 	/** 체크된 회원 탈퇴
 	 * @param boardNo
@@ -63,6 +69,18 @@ public interface ManagerService {
 	 * @return result
 	 */
 	int restorePost(int boardNo);
+
+	/** 체크된 댓글 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	int commentdel(int commentNo);
+
+	/** 체크된 댓글 복구
+	 * @param commentNo
+	 * @return result
+	 */
+	int commentRe(int commentNo);
 
 	
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="Inquiry" value="${InquiryList}"/>
+<c:set var="Inquiry" value="${InquiryList.inquiryList}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -113,8 +113,7 @@
                                 </c:when>
                             
                                 <c:otherwise>
-                                    <%-- 탈퇴 회원 목록 결과가 있다면 --%>
-                                    <c:forEach items="${InquiryList}" var="Inquiry">
+                                    <c:forEach items="${InquiryList.inquiryList}" var="Inquiry">
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="choicebox" value="1">
