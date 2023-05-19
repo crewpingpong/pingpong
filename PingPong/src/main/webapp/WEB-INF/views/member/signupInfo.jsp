@@ -23,7 +23,8 @@
     
             <div class="signup-info-member-name">
                 <p>사용자 이름(닉네임)</p>
-                <input type="text" placeholder="닉네임을 입력해주세요." name="memberNickname" required>
+                <input type="text" placeholder="닉네임을 입력해주세요." name="memberNickname" id="memberNickname" required>
+                <br><span class="signUp-message" id="nickMessage">한글,영어,숫자로만 2~10글자</span>
             </div>
     
             <div class="signup-info-memberURL">

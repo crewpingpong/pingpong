@@ -18,7 +18,7 @@ public interface MypageService {
 	 */
 	int updateInfo(Member updateMember);
 
-	/** 회원 비밀번호 조회
+	/** 회원 비밀번호 변경 서비스
 	 * @param currentPw
 	 * @param newPw
 	 * @param memberNo

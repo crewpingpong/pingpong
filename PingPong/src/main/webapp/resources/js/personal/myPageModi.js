@@ -48,9 +48,27 @@ if(updateInfo != null){
             return;
         }
 
-        const regEx = /^[가-힣\w\d]{2,20}$/;
+        const regEx = /^[가-힣\w\d]{2,10}$/;
 
         if(regEx.test(memberNickname.value)){
+
+            fetch("/dupCheck/nickname?nickname=" + memberNickname.value)
+                .then(resp => resp.text()) // 응답 객체를를 text로 파싱(변환)
+                .then(count => {
+                    // 중복되면 1, 중복 아니면 0
+                    if (count == 0) {
+                        nickMessage.classList.add("confirm"); // .confirm 스타일 적용
+                        nickMessage.classList.remove("error"); // .error 스타일 제거
+                        checkObj2.memberNickname = true; // 유효 O
+                    } else {
+                        nickMessage.innerText = "이미 사용중인 닉네임 입니다.";
+                        nickMessage.classList.remove("confirm"); // .confirm 스타일 적용
+                        nickMessage.classList.add("error"); // .error 스타일 제거
+                        checkObj2.memberNickname = false; // 유효 X
+                    }
+                })
+                .catch(err => console.log(err));
+
             memberNickname.style.color = "green";
         
         }else{ 
