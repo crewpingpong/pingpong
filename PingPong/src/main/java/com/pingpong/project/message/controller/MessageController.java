@@ -94,8 +94,6 @@ public class MessageController {
 			,@RequestBody Message message
 			) {
 		
-		System.out.println(message);
-		
 		message.setSendMember(loginMember.getMemberNo());
 		
 		// 프로필 보고 있는 회원 번호 가져와서 보내기
