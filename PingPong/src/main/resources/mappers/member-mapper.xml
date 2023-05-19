@@ -31,6 +31,7 @@
 			, #{memberUrl}, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
+	<!-- 이메일 중복 검사 -->
 	<select id="emailSearch" resultType="_int">
 		SELECT COUNT(*)
 		FROM "MEMBER"
