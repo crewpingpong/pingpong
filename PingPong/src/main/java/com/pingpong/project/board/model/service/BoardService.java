@@ -38,4 +38,10 @@ public interface BoardService {
 	 */
     int boardMarkup(Map<String, Integer> paramMap);
 
+	/** 댓글 달기 서비스 (AJAX)
+	 * @param paramMap
+	 * @return result
+	 */
+	int commentInsert(Map<String, Object> paramMap);
+
 }

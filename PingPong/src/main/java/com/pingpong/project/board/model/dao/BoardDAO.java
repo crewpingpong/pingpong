@@ -63,6 +63,14 @@ public class BoardDAO {
 	public int deleteBoardMarkup(Map<String, Integer> paramMap) {
 		return sqlSession.delete("boardMapper.deleteBoardMarkup", paramMap);
 	}
+
+	/** 댓글 삽입
+	 * @param paramMap
+	 * @return result
+	 */
+	public int commentInsert(Map<String, Object> paramMap) {
+		return sqlSession.insert("boardMapper.insertComment", paramMap);
+	}
 	
 
 }

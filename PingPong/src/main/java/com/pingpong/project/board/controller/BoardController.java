@@ -40,4 +40,12 @@ public class BoardController {
     	System.out.println(paramMap.get("check"));
     	return service.boardMarkup(paramMap);
     }
+    
+    //댓글 달기
+    @PostMapping("/board/comment")
+    public int commentInsert(@RequestBody Map<String, Object> paramMap) {
+    	
+    	return service.commentInsert(paramMap);
+    }
+    
 }

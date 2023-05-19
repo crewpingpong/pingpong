@@ -468,6 +468,7 @@
 /* 게시글 내용 + 좋아요 수 */
 .BoardPost{
     min-height: 50px;
+    margin-bottom: 30px;
 }
 .Boardcontent {
     width: 100%;
@@ -501,7 +502,9 @@
     padding : 14px 4px 14px 16px;
     line-height: var(--system-14-line-height);
 }
-
+.secondComment{
+    cursor: pointer;
+}
 .postcontent2{
     display: none;
 }
@@ -617,17 +620,26 @@
     font-size: 13px; color: #5C5C5C;
 }
 
-.postcontent1>div:first-child{
+
+
+.lastDivadd{
     display: flex;
     margin-bottom : 16px;
 }
-.postcontent1:last-child>div{
-    margin-bottom : 0px;
+
+.lastDivadd1{
+    display: flex;
+    margin-top : 12px; 
+}
+.commentbox{
+    margin-bottom: 0px;
 }
 
 
-
 .BoardPost1{
+    margin-right:16px;
+}
+.BoardPost2{
     margin-right:16px;
 }
 .innerDiv a{
@@ -635,6 +647,12 @@
 }
 
 .BoardPost1 a img{
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid #5C5C5C;
+}
+
+.BoardPost2 a img{
     width: 32px; height: 32px;
     border-radius: 50%;
     border: 1px solid #5C5C5C;
@@ -666,11 +684,17 @@
     font-weight: bold;
 }
 
+
+
 .innerDiv{
     display: flex;
     /* padding-bottom: 20px; */
 }
 /* 이전 버튼 클릭시 전환 영역 */
+
+.BoardPost .innerDiv{
+    display: block;
+}
 
 .Boardcontent1 {
     width: 100%; height: 100%;

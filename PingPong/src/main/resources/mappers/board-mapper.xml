@@ -233,5 +233,11 @@
 			</foreach>	
     	) A
     </insert>
+    
+    <insert id="insertComment">
+    	INSERT INTO "COMMENT" VALUES(
+    	SEQ_COMMENT_NO.NEXTVAL, #{commentContent}, SYSDATE, #{memberNo}, #{boardNo}, DEFAULT, #{parentNo})
+    
+    </insert>
 	
 </mapper>

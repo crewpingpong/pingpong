@@ -52,4 +52,13 @@ public class BoardServiceImpl implements BoardService{
         }
         return result;
 	}
+
+	@Override
+	public int commentInsert(Map<String, Object> paramMap) {
+		
+		dao.commentInsert(paramMap);
+		
+		int boardNo = (int) paramMap.get("boardNo");
+		return boardNo; 
+	}
 }

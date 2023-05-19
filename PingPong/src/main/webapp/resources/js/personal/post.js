@@ -444,6 +444,7 @@ function selectBoardList(boardNo){
 
 
                 const div = document.createElement("div");
+                div.classList.add("commentbox");
 
                 const innerDiv = document.createElement("div");
                 innerDiv.classList.add("innerDiv");
@@ -517,7 +518,7 @@ function selectBoardList(boardNo){
                         div1.append(innerDiv1, dateDiv1);
 
                         const lastDiv1 = document.createElement("div");
-                        lastDiv1.classList.add("lastDivadd")
+                        lastDiv1.classList.add("lastDivadd1")
                         lastDiv1.append(boardPostDiv1, div1);
                         postContentDiv1.append(lastDiv1);
                         div.append(postContentDiv1);
@@ -530,6 +531,27 @@ function selectBoardList(boardNo){
                 Boardcontent1.append(postContentDiv);
 
             }
+        }
+        // 답글 보기 누르면 댓댓글 보이는 이벤트
+        const secondComment = document.querySelectorAll(".secondComment");
+        for(let i=0;i<secondComment.length;i++){
+            secondComment[i].addEventListener("click", e=>{
+                let siblings = getSiblings(e.target);
+                
+                for(let j=0;j<siblings.length;j++){
+                    siblings[j].classList.toggle("postcontent2");
+                }
+            });
+        }
+
+        // 답글 달기 누르면 댓글textarea에 @아이디 추가됨
+        const replyCommentInsert = document.querySelectorAll(".replyCommentInsert");
+        for(let i=0;i<replyCommentInsert.length;i++){
+            replyCommentInsert[i].addEventListener("click", e=>{
+                let nickName = e.target.parentNode.previousElementSibling.children[0].innerText;
+                commentContentArea.focus();
+                commentContentArea.value = "@" + nickName+" ";
+            })
         }
 
 
@@ -600,10 +622,80 @@ function selectBoardList(boardNo){
         
 
         slideInitFn();
-        secondComment = document.querySelectorAll("secondComment");
+
+
+
+
     })
     .catch(err => console.log(err));
 }
+
+// 댓글 달기 AJAX
+const insertComment = document.getElementById("insertComment");
+let commentContentArea = document.getElementById("commentContentArea");
+
+insertComment.addEventListener("click", e=>{
+    if(loginMemberNo == ""){
+        alert("로그인 후 이용해주세요");
+        return;
+    }
+    let data;
+    if(commentContentArea.value[0] == "@"){
+        const parentNickname = commentContentArea.value.split(" ")[0].substring(1);
+        const commentContent = commentContentArea.value.split(" ").slice(1).join(' ');
+        data = {"commentContent" : commentContent, "memberNo" : loginMemberNo, "boardNo" : boardNumber, "parentNo" : commentNo};
+    } else{
+        data = {"commentContent" : commentContentArea.value, "memberNo" : loginMemberNo, "boardNo" : boardNumber, "parentNo" : null};
+    }
+    
+    console.log(data);
+    
+
+    fetch("/board/comment", {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(data)
+    })
+    .then(resp => resp.text())
+    .then(boardNo => {
+        console.log("boardNo : " + boardNo);
+
+        selectBoardList(boardNo);
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
+})
+
+
+
+function getSiblings(currentNode) {
+    let slblings = [];
+  
+    // 부모 노드가 없는 경우 현재 노드를 반환
+    if (!currentNode.parentNode) {
+      return currentNode;
+    }
+  
+    // 1. 부모 노드를 접근합니다.
+    let parentNode = currentNode.parentNode;
+  
+    // 2. 부모 노드의 첫 번째 자식 노드를 가져옵니다.
+    let silblingNode = parentNode.firstChild;
+  
+    while (silblingNode) {
+      // 기존 노드가 아닌 경우 배열에 추가합니다.
+      if (silblingNode.nodeType === 1 && silblingNode !== currentNode) {
+        slblings.push(silblingNode);
+      }
+      // 다음 노드를 접근합니다.
+      silblingNode = silblingNode.nextElementSibling;
+    }
+  
+    // 형제 노드가 담긴 배열을 반환합니다.
+    return slblings;
+  }
 
 // 답글 보기 버튼을 눌렀을 때
 
