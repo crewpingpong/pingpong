@@ -47,7 +47,11 @@ public class MessageServiceImpl implements MessageService{
 	public int delSendmessage(int delNo) {
 		return dao.delSendmessage(delNo);
 	}
-	
-	
+
+	// 메세지 보내기
+	@Override
+	public int sendMessage(Message message) {
+		return dao.sendMessage(message);
+	}
 	
 }

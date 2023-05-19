@@ -38,5 +38,11 @@ public class MessageDAO {
 	public int delSendmessage(int delNo) {
 		return sqlsession.update("messageMapper.delSendmessage",delNo);
 	}
+
+
+	
+	public int sendMessage(Message message) {
+		return sqlsession.insert("messageMapper.sendMessage",message);
+	}
 	
 }

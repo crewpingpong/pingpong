@@ -23,6 +23,7 @@ public interface MessageService {
 	 */
 	int resendMessage(Message message);
 
+
 	/** 받은 메세지 삭제
 	 * @param delNo
 	 * @return
@@ -34,5 +35,16 @@ public interface MessageService {
 	 * @return
 	 */
 	int delSendmessage(int delNo);
+
+
+
+
+	/** 메세지 보내기
+	 * @param message
+	 * @return
+	 */
+	int sendMessage(Message message);
+
+	
 	
 }
