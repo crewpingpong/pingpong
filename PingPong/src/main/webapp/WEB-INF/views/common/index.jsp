@@ -9,9 +9,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PingPong</title>
-    <!-- 공통 헤더 css -->
+    <%-- <!-- 공통 헤더 css -->
     <link rel="stylesheet" href="/resources/css/style.css">
-    
+     --%>
     <!-- 파비콘 -->
 	<link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
 	
@@ -23,7 +23,7 @@
     <script src="/resources/js/main/slick.js"></script>
 
     <style>
-        #btn11{
+        #btn11{ /* 임시 관리자 페이지 버튼 입니다.*/
             position: absolute; width: 100px; height: 40px; background-color: #5286DC; top: 200px; left: 100px; border-radius: 20px; color: #fff;
         }
     </style>
@@ -35,32 +35,32 @@
     <main>
         <div class="slider center autoplay">
             <div class="slider-item">
-                <a href="#" class="slider-item-link">
+                <a href="/mypage/" class="slider-item-link">
                     <img src="/resources/images/peach.jpg" class="item-picture textImg">
                 </a>
             </div>
             <div class="slider-item">
-                <a href="#" class="slider-item-link">
+                <a href="/mypage/" class="slider-item-link">
                     <img src="/resources/images/peach.jpg" class="item-picture textImgtextImg">
                 </a>
             </div>
             <div class="slider-item">
-                <a href="#" class="slider-item-link">
+                <a href="/mypage/" class="slider-item-link">
                     <img src="/resources/images/peach.jpg" class="item-picture textImg">
                 </a>
             </div>
             <div class="slider-item">
-                <a href="#" class="slider-item-link">
+                <a href="/mypage/" class="slider-item-link">
                     <img src="/resources/images/peach.jpg" class="item-picture textImg">
                 </a>
             </div>
             <div class="slider-item">
-                <a href="#" class="slider-item-link">
+                <a href="/mypage/" class="slider-item-link">
                     <img src="/resources/images/peach.jpg" class="item-picture textImg">
                 </a>
             </div>
             <div class="slider-item">
-                <a href="#" class="slider-item-link">
+                <a href="/mypage/" class="slider-item-link">
                     <img src="/resources/images/peach.jpg" class="item-picture textImg">
                 </a>
             </div>
@@ -80,7 +80,7 @@
     </main>
 
     <!-- 게시글 (무한 스크롤) -->
-    <article class="main-post">
+    <article class="main-post" onclick="location.href='/mypage/'">
         <div class="main-post-item"><a href="#"></a></div>
         <div class="main-post-item"><a href="#"></a></div>
         <div class="main-post-item"><a href="#"></a></div>
@@ -100,5 +100,8 @@
     </article>
 
     <script src="/resources/js/script.js"></script>
+
+    <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>
+    
 </body>
 </html>

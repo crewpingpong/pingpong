@@ -10,6 +10,8 @@
     <title>PingPong</title>
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/member/loginSignup.css">
+    <link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
+    
 </head>
 <body>
 
@@ -21,23 +23,23 @@
     
             <div class="signup-info-member-name">
                 <p>사용자 이름(닉네임)</p>
-                <input type="text" placeholder="닉네임을 입력해주세요." name="memberNickname" required>
+                <input type="text" placeholder="닉네임을 입력해주세요." name="memberNickname" id="memberNickname" required>
+                <br><span class="signUp-message" id="nickMessage">한글,영어,숫자로만 2~10글자</span>
             </div>
     
             <div class="signup-info-memberURL">
                 <p>PingPong URL(영문)</p>
                 <div>
                     <p>pingpong.net/</p>
-                    <input type="text" name="memberUrl" required> <br>
+                    <input type="text" name="memberUrl" id="memberUrl" placeholder="영어, 숫자, - 로만 이루어진 3 ~ 16 글자의 URL" required> <br>
                 </div>
-                <button class="url-double-check" type="button">중복 확인</button>
+                <span class="URL-check-message " id="URLCheckMessage"></span>
             </div>
     
             <div class="job-checkbox-container">
                 <p>작업 & 관심 분야(선택)</p>
                 <div class="job-checkbox">
                     <div>
-
                         <label for=""><input type="checkbox"> 그래픽 디자인</label>
                         <label for=""><input type="checkbox"> 영상/모션그래픽</label> 
                         <label for=""><input type="checkbox"> 캐릭터 디자인</label> 
@@ -61,6 +63,7 @@
         </form>
     </div>
     
-	<script src="/resources/js/member/loginSignup.js"></script>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<script src="/resources/js/member/signup.js"></script>
 </body>
 </html>

@@ -10,33 +10,35 @@
     <title>PingPong</title>
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/member/loginSignup.css">
+    <link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
+    
 </head>
 <body>
-	    <div class="login-container">
+	<div class="login-container">
         <div class="login-box pwseachbox">
-            <a href="index.html"><img src="/resources/images/logo_X1.png"></a>
+            <a href="/"><img src="/resources/images/logo_X1.png"></a>
 
-            <p>비밀번호 찾기</p>
-            <form action="" method="get">
-                <div class="login-input-email">
+            <p class="pw-search-message">비밀번호를 찾고자 하는 이메일을 입력해 주세요.</p>
+
+            <form action="/member/pwSearch" method="POST" id="findEmailFrm">
+                <div class="search-input-email">
                     <p>이메일</p>
-                    <input type="email" name="serchEmail" required>
-                    <p class="email-pw-reset">비밀번호 재설정을 위한 이메일이 발송 되었습니다.</p>
+                    <input type="text" name="memberEmail" id="memberEmail" placeholder="Email" 
+                    maxlength="30" autocomplete="off" required>
+                    <p class="email-pw-reset"></p>
                 </div>
-    
-    
-                <button class="login-button email-reset-button" type="button">전송</button>
-    
+                <button class="login-button email-reset-button" id="sendAuthKeyBtn">다음</button><%-- 인증키 보내기 && 다음 --%>
+            </form>
 
-    
                 <div class="login-signUp">
                     <p>비밀번호가 생각 나셨나요?</p>
-                    <a href="login.html">로그인 하기</a>
+                    <a href="/member/login">로그인 하기</a>
                 </div>
-            </form>
         </div>
     </div>
-    
+
+
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script src="/resources/js/member/pwSearch.js"></script>
 </body>
 </html>

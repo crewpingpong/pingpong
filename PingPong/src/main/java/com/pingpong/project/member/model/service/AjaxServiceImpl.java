@@ -54,6 +54,12 @@ public class AjaxServiceImpl implements AjaxService{
 		return dao.selectMemberList(input);
 	}
 
+	// URL 중복 검사
+	@Override
+	public int checkUrl(String URL) {
+		return dao.checkUrl(URL);
+	}
+
 	
 	
 }

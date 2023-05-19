@@ -2,6 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mypageMapper">
 
+	<resultMap type="MyPage" id="mypage_rm">
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="memberNickname" column="MEMBER_NICKNAME"/>
+		<result property="profileImage" column="PROFILE_IMG"/>
+		<result property="backgroundImage" column="BACKGROUND_IMG"/>
+		<result property="memberInfo" column="MEMBER_INFO"/>
+		<result property="memberCareer" column="MEMBER_CAREER"/>
+		<result property="oneLiner" column="ONE_LINER"/>
+		
+		<collection property="techList" 
+					select="selectTechList"
+					column="java.util.ArrayList"
+					ofType="Tech"
+					/>
+		<collection property="careerList" 
+					select="selectCareerList"
+					column="java.util.ArrayList"
+					ofType="Career"
+					/>		
+	</resultMap>
 
 	<!-- 회원 정보 수정 -->
 	<update id="updateInfo" parameterType="Member">
@@ -12,17 +32,14 @@
 	</update>
 	
 	
-	<!-- 조회 결과가 1개인 경우(int, string 등)
-		또는 조회 결과를 모두 Map에 담는 경우
-		resultType을 사용
-	 -->
+	<!-- 회원 비밀번호 조회 -->
 	<select id="selectEncPw" parameterType="_int" resultType="string">
 		SELECT MEMBER_PW FROM "MEMBER" WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
 	
 	<!-- 비밀번호 변경 -->
-	<!-- member : 사용자 지정 별칭 (mybatis-config.xml) -->
+	<!-- Member : 사용자 지정 별칭 (mybatis-config.xml) -->
 	<update id="changePw" parameterType="Member">
 		UPDATE "MEMBER" SET
 		MEMBER_PW = #{memberPw}
@@ -40,10 +57,46 @@
 	
 	<!-- 프로필 이미지 수정 -->
 	<update id="updateProfileImage">
-		UPDATE "MEMBER" SET
+		UPDATE "MEMBER_PROFILE" SET
 		PROFILE_IMG = #{profileImage}
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
 	
+	<!-- 배경화면 수정 -->
+	<update id="backgroundUpdate">
+		UPDATE "MEMBER_PROFILE" SET
+		BACKGROUND_IMG = #{backgroundImage}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	<!-- 배경화면 삽입 -->
+	<insert id="backgroundInsert">
+		INSERT INTO "MEMBER_PROFILE"("MEMBER_NO", "BACKGROUND_IMG")
+		VALUES(#{memberNo}, #{backgroundImage})
+	</insert>
+	
+	
+	<!-- 내 정보 조회하기 -->
+	<select id="selectMemberProfile" resultMap="mypage_rm">
+		SELECT MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, BACKGROUND_IMG, MEMBER_INFO, MEMBER_CAREER, ONE_LINER 
+		FROM "MEMBER_PROFILE"
+		RIGHT JOIN "MEMBER" USING(MEMBER_NO)
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<select id="selectTechList">
+		SELECT TECH_NAME, TECH_IMG
+		FROM "TECH"
+		WHERE TECH_NO IN (SELECT TECH_NO FROM "MEMBER_TECH"
+					WHERE MEMBER_NO = #{memberNO})
+	</select>
+	
+	<select id="selectCareerList">
+		SELECT CERTIFICATE_NO, MEMBER_CERT
+		FROM "CAREER"
+		WHERE CERTIFICATE_NO IN (SELECT CERTIFICATE_NO FROM "MEMBER_PROFILE"
+					WHERE MEMBER_NO = #{memberNo})	
+	</select>
 </mapper>

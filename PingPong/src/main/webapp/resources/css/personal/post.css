@@ -26,7 +26,13 @@
 
 .profileBackground label, .profileBackground span{
     position: absolute; right: 60px; top: 460px;
-    cursor: pointer; font-size: 16px; text-decoration: underline; z-index: 100;
+    cursor: pointer; font-size: 16px; text-decoration: underline; z-index: 20;
+    background-color: #fff; padding: 4px 8px; border-radius: 5px;
+}
+#deleteBackground{
+    cursor: pointer; font-size: 16px; text-decoration: underline; z-index: 20;
+    background-color: #fff; padding: 4px 8px; border-radius: 5px;
+    display: inline; float: left;
 }
 
 .profileBackground>div:last-child {
@@ -45,7 +51,7 @@
     display: flex; flex-direction: column; align-items: center;
 }
 
-.profileCircle {
+.profileCircle>img {
     width: 150px; height: 150px; background-color: #C5C5C5;
     border-radius: 50%; margin-bottom: 30px;
 }
@@ -124,11 +130,12 @@
 /* 내정보 수정 페이지 가기 */
 .poroflieEdit {
     position: absolute; bottom: 20px; right: 20px;
-    display: flex; justify-content: center;
+    display: flex; justify-content: center; cursor: pointer; user-select: none;
 }
 
 .poroflieEdit p {
     font-size: 16px; text-decoration: underline; margin-left: 8px;
+    cursor: pointer; user-select: none;
 }
 
 
@@ -151,6 +158,12 @@
 .postlist li {
     margin-right: 32px;
 }
+#updateBackground{
+    /* position: absolute; right: 60px; top: 460px; */ 
+    background-color: #fff; padding: 4px 8px; border-radius: 5px;
+    cursor: pointer; font-size: 16px; text-decoration: underline; z-index: 20;
+    display: inline; float: left;
+}
 
 /* 게시글 수정 버튼 */
 .postBtn {
@@ -171,6 +184,10 @@
     margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr);
     max-width: 1200px; grid-template-rows: auto; grid-gap: 20px;
 }
+.postcont_area > div > div > a > img {
+    width: 100%; height: 100%; border-radius: 20px;
+}
+.list-thumbnail{border-radius: 20px;}
 
 .contentBox div {
     width: 300px; height: 300px; border-radius: 20px; background-color: #C5C5C5;
@@ -187,6 +204,11 @@
 
 .posttab_menu .postcont_area .postcont {
     display: none;
+}
+
+.postcont_area img{
+    width: 100%;
+    height: 100%;
 }
 
 /* 홈 게시글 그리드  */
@@ -278,7 +300,7 @@
 }
 
 .NewBoardMainContainer>div:first-child>svg {
-    position: absolute; right: 12px; top: 20px;
+    position: absolute; right: 20px; top: 20px;
 }
 
 .NewBoardMainContainer>div:last-child {
@@ -301,7 +323,7 @@
 .NewWriteContent {
     width: 100vw; height: 100vh; z-index: 250;
     position: fixed; top: 0; left: 0;
-    background-color: #231F2050; justify-content: center; align-items: center;
+    background-color: #CCCCCC; justify-content: center; align-items: center;
     display: none;
 }
 
@@ -319,7 +341,7 @@
 .board-container-top {
     width: 100%; height: 8%; position: absolute;
     padding: 0 20px; border-radius: 20px 20px 0 0; 
-    border-bottom: 1px solid #C5C5C5;
+    border-bottom: 1px solid #CCCCCC;
     display: flex; justify-content: space-between; align-items: center;
     z-index: 300;
 }
@@ -387,32 +409,52 @@
 
 /* 창닫기 */
 .BoardClose {
-    color: #231F20; background-color: rgba(0, 0, 0, 0); 
+    color: #CCCCCC; background-color: rgba(0, 0, 0, 0); 
     position: absolute; right: 12px; top: 12px;
 }
 
 /* 게시글 오른쪽 영역 */
 .BoardContainerright {
-    display: flex; width: 34%; margin-top: 65px; flex-direction: column; 
-    font-size: 14px; padding: 4px;
+    display: flex; width: 34%; 
+    /* margin-top: 65px;  */
+    flex-direction: column; 
+    font-size: 14px;
+    border-left: 1px solid #CCCCCC;
+    position: relative;
 }
-
+.BoardContainerright>div:last-child{
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+}
 
 /* 프사 + 이름 + 소개 */
 .BoardContainerright>div:nth-child(1) {
-    width: 80%; height: 75px;
+    width: 100%; height: 60px;
+    padding: 14px 4px 14px 16px;
     /* height: 10%; */
-    border-bottom: 1px solid #231F2050; padding-bottom: 20px; margin-bottom: 20px;
+    display: flex;
+    border-bottom: 1px solid #CCCCCC; 
+    /* padding-bottom: 20px; 
+    margin-bottom: 20px; */
 }
 
 .BoardContainerright .porfileRac {
-    width: 50px; height: 50px; margin-right: 20px; 
-    border-radius: 50%; border: 1px solid black; 
-    background-color: #231F2050; float: left; cursor: pointer;
+    height: 100%;
+    cursor: pointer;
 }
 
-.BoardContainerright>div>div:last-child>p {
-    font-size: 14px; padding: 5px;
+.BoardContainerright .porfileRac img{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid black; 
+}
+
+.BoardContainerright .boardMemberInfo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .BoardContainerright>div>div:last-child>a {
@@ -424,14 +466,17 @@
 }
 
 /* 게시글 내용 + 좋아요 수 */
+.BoardPost{
+    min-height: 50px;
+}
 .Boardcontent {
-    width: 80%; height: 69%; border-bottom: 1px solid #231F2050; 
-    display: flex; flex-direction: column; justify-content: start; overflow: auto;
+    width: 100%;
+    display: flex; flex-direction: column; justify-content: space-between;
 }
 
 .BoardContentProfile {
-    width: 50px; height: 50px; margin-right: 20px; border-radius: 50%; 
-    background-color: #231F2050; float: left; margin-top: 5px; 
+    width: 32px; height: 32px; margin-right: 20px; border-radius: 50%; 
+    background-color: #CCCCCC; float: left; margin-top: 5px; 
     display: flex; cursor: pointer;
 }
 
@@ -443,24 +488,37 @@
 /* 하단 좋아요 */
 .BoardHeartBox {
     display: flex;
+    width: 100%;
+    border-top: 1px solid #CCCCCC;
     /* 기능동작  좋아요 하단 숨기기 */
-    margin-top: 40px; align-self: self-start;
-    /* flex-direction: row; */
+    padding : 14px 4px 14px 16px;
 }
 
 /* 댓글 영역 */
 .BoardCommentBox {
-    display: flex; align-items: center; width: 80%; height: 10%; padding: 10px;
+    display: flex; align-items: center; width: 100%; 
+    border-top: 1px solid #CCCCCC;
+    padding : 14px 4px 14px 16px;
+    line-height: var(--system-14-line-height);
+}
+
+.postcontent2{
+    display: none;
 }
 
 .BoardCommentProfile {
     width: 50px; height: 50px; margin-right: 20px; border-radius: 50%; 
-    background-color: #231F2050; float: left; margin-top: 5px; 
+    background-color: #CCCCCC; float: left; margin-top: 5px; 
     display: none; cursor: pointer;
 }
 
 .BoardHeartBox>svg {
     margin-right: 4px;
+}
+#boardLike{
+    font-size: 1.5em;
+    color: red;
+    cursor: pointer;
 }
 
 .BoardComment {
@@ -501,7 +559,7 @@
 .BoardIconReportMod #grayBackground{
     width: 100vw; height: 100vh; position: fixed; 
     top:0; left: 0; left: 0; right: 0; margin: auto;
-    background-color: #231F2050; z-index: 300;
+    background-color: #CCCCCC; z-index: 300;
     display: flex; align-items: center; justify-content: center;
     display: none; 
 }
@@ -559,18 +617,90 @@
     font-size: 13px; color: #5C5C5C;
 }
 
+.postcontent1>div:first-child{
+    display: flex;
+    margin-bottom : 16px;
+}
+.postcontent1:last-child>div{
+    margin-bottom : 0px;
+}
 
 
+
+.BoardPost1{
+    margin-right:16px;
+}
+.innerDiv a{
+    margin-right:8px;
+}
+
+.BoardPost1 a img{
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 1px solid #5C5C5C;
+}
+
+.BoardProfile1 {
+    width: 40px; height: 40px; margin-right: 20px; border-radius: 50%; 
+    /* border: 1px solid black; */ background-color: #231F2050; 
+    float: left; margin-top: 5px; display: block; cursor: pointer;
+}
+
+.postcontent{
+    height: 630px;
+    padding: 14px 4px 14px 16px;
+    overflow: auto;
+}
+
+.postcontent1 div div p{
+    color:#5C5C5C;
+    /* font-size: 12px; */
+}
+.dateDiv{
+    display: flex;
+}
+.dateDiv span{
+    color:#5C5C5C;
+    font-size: 12px;
+    margin-left : 8px;
+    font-weight: bold;
+}
+
+.innerDiv{
+    display: flex;
+    /* padding-bottom: 20px; */
+}
 /* 이전 버튼 클릭시 전환 영역 */
 
 .Boardcontent1 {
-    width: 80%; height: 50%; border-bottom: 1px solid #231F2050; 
-    display: none; flex-direction: column; justify-content: start; 
-    overflow: auto; margin-bottom: 8px;
+    width: 100%; height: 100%;
+    flex-direction: column; justify-content: start;
+}
+
+#commentContentArea{
+    border : none;
+    display: flex;
+    align-items: center;
+    resize : none;
+    height: 20px !important;
+    font-size: 100%;
+    width: 100%;
+}
+
+#commentContentArea:focus{
+    outline:none;
+
+}
+
+#insertComment{
+    width: 60px;
+    font-size: 16px;
+    color:#5286DC;
+    font-weight: bold;
 }
 
 .BoardCommentBox1 {
-    width: 80%; height: 40%; display: none;
+    width: 80%; height: 40%;
 }
 
 .BoardCommentProfile1 {
@@ -595,14 +725,6 @@
     background-color: #FFD24C;
 }
 
-/* .BoardPost1{
-    display: inline;
-} */
-.BoardProfile1 {
-    width: 40px; height: 40px; margin-right: 20px; border-radius: 50%; 
-    /* border: 1px solid black; */ background-color: #231F2050; 
-    float: left; margin-top: 5px; display: block; cursor: pointer;
-}
 
 .BoardComment-remove-row {
     float: right; cursor: pointer; transform: translateY(-20px);
@@ -808,3 +930,8 @@ li {
 .slide-img {
     width: 100%; -webkit-user-drag: none; user-select: none;
 }
+
+
+
+
+/* 나현 구역! */

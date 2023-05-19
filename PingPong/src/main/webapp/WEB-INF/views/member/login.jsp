@@ -10,12 +10,14 @@
     <title>PingPong</title>
     <link rel="stylesheet" href="/resources/css/style.css">
     <link rel="stylesheet" href="/resources/css/member/loginSignup.css">
+    <link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
+    
 </head>
 <body>
 
     <div class="login-container">
         <div class="login-box customChk">
-            <a href="index.html"><img src="/resources/images/logo_X1.png"></a>
+            <a href="/"><img src="/resources/images/logo_X1.png"></a>
 
             <form action="/member/login" method="post">
                 <div class="login-input-email">
@@ -26,7 +28,6 @@
                 <div class="login-input-password">
                     <p>비밀번호</p>
                     <input type="password" name="memberPw" autocomplete="off" required> <br>
-                    <p class="passwordwrong">* 가입되어 있지 않은 계정입니다.</p>
                 </div>
     
                 <button class="login-button">로그인</button>
@@ -39,18 +40,19 @@
                             로그인 유지
                         </label>
                     </div>
-                    <a href="pwSearch.html">비밀번호 찾기 ></a>
+                    <a href="/member/pwSearch">비밀번호 찾기</a>
                 </div>
     
                 <div class="login-signUp">
                     <p>아직 PingPong 회원이 아니세요?</p>
-                    <a href="signup.html">회원가입 하기</a>
+                    <a href="/member/signup">회원가입 하기</a>
                 </div>
             </form>
         </div>
     </div>
 
 
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script src="/resources/js/member/login.js"></script>
 </body>
 </html>

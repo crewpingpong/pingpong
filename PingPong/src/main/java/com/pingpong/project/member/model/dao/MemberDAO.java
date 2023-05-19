@@ -22,4 +22,17 @@ public class MemberDAO {
 		return sqlSession.insert("memberMapper.signupInfo",inputMember);
 	}
 
+	// 비번 찾기 이메일 검사
+	public int emailSearch(String memberEmail) {
+		return sqlSession.selectOne("memberMapper.emailSearch", memberEmail);
+	}
+
+	// 비밀번호 찾기(변경)
+	public int changePw(String newMemberPw, String memberEmail) {
+		Member member = new Member();
+		member.setMemberEmail(memberEmail);
+		member.setMemberPw(newMemberPw);
+		return sqlSession.update("memberMapper.changePw", member);
+	}
+
 }

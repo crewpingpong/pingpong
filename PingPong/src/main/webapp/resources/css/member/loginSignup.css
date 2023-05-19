@@ -18,6 +18,9 @@
 
 .login-input-email{margin-top: 98px; margin-bottom: 23px;}
 
+/* 비밀번호 찾기 이메일 */
+.search-input-email{margin-top: 50px; margin-bottom: 23px;}
+
 .login-box div input{
     width: 320px; height: 42px;
     border-radius: 5px; border: 1px solid #C5C5C5;padding: 8px;
@@ -26,9 +29,9 @@
 .login-input-email>p,.login-input-password>p{
     font-size: 14px;font-weight: bold; margin-bottom: 8px;
 }
-.passwordwrong{ /* 비밀번호 틀렸을 때 나오는 경고 문구 */
-    color: red; font-size: 13px; margin-top: 4px;
-    display: none;
+/* 비밀번호 찾기 이메일 */
+.search-input-email>p,.login-input-password>p{
+    font-size: 14px;font-weight: bold; margin-bottom: 8px;
 }
 
 .login-box button{
@@ -80,35 +83,46 @@ form.signup-box>div>p{font-weight: bold; font-size: 14px; margin-bottom: 8px;
 margin-top: 20px;}
 
 /* 이메일 주소 + 인증 번호 + 비밀번호 */
-.signup-input-email{margin-top: 30px;}
+.signup-input-email{margin-top: 30px; display: block;}
 
 .signup-box>div:nth-of-type(1)>button, .signup-box>div:nth-of-type(2)>button{
     width: 80px; height: 40px;
     border-radius: 5px; font-size: 14px; font-weight: bold;
     background-color: #231F20; color: #fff;
 }
-.signup-box>div:nth-of-type(1)>input, .signup-box>div:nth-of-type(2)>input{
+.signup-box>div:nth-of-type(1)>input,  .signup-box>div:nth-of-type(2)>input{
     width: 230px; margin-right: 10px;
 }
 
-form.signup-box>div .email-send{ /* 이메일 전송 눌렀을 때 나오는 문구 */
-    color: green; font-size: 13px; font-weight: normal;
-    display: none;
-}
 .signup-box>div:nth-of-type(1) .certi-resend{ /* 이메일 재전송 버튼 */
     display: none;
 }
 
+/* 회원가입 다음 페이지 */
+.hidden-next{
+    display: none;
+}
+
 /* 이메일 검사 메세지 */
-.signUp-message{
-    font-size: 14px;
+.email-message, .URL-check-message{
+    font-size: 12px;
     letter-spacing: -1px;
-    margin-right: 90px;
+    /* margin-right: 130px; */
+    color: #5C5C5C;
+    font-weight: lighter;
+    display: block;
+}
+#pwSearchCertNumFrm > .search-input-email > #sendAuthKeyBtn{
+    display: block;
+} 
+
+.class-hidden{
+    display: none;
 }
 
 /* 이메일 검사 메세지 색상 지정 */
-.confirm{ color : green; }
-.error{ color : red; }
+.confirm{ color : green !important; }
+.error{ color : red !important; }
 
 .signup-input-password{
     margin-top: 20px;
@@ -119,9 +133,25 @@ form.signup-box>div .email-send{ /* 이메일 전송 눌렀을 때 나오는 문
     display: flex; justify-content: space-between;
     margin-top: 40px; margin-bottom: 73px; font-size: 14px;
 }
-form.signup-box>div .pwInconsistency{
-    color: red; font-size: 13px; font-weight: normal;
-    display: none;
+
+/* 비밀번호 관련 메세지 */
+.signUp-message{
+    font-size: 12px;
+    letter-spacing: -1px;
+    color: #5C5C5C;
+    font-weight: lighter;
+}
+
+input::placeholder {
+    color:#C5C5C5;
+    font-size: 12px;
+    font-weight: lighter;
+}
+.reset-pw-text{
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+    margin-top: 20px;
 }
 
 .signup-check>div{display: flex; justify-content: center;}
@@ -252,13 +282,13 @@ form.signup-box>div .pwInconsistency{
     border-radius: 5px; border: 1px solid #92B4EC;
 }
 
-.url-double-check{
+/* .url-double-check{
     background-color: #92B4EC; border-radius: 20px;
     width: 100px; height: 34px;
     color: #FFFFFF; float: right;
     margin-top: 10px; margin-bottom: 5px;
     font-size: 12px; font-weight: bold; cursor: pointer;
-}
+} */
 
 .job-checkbox-container>p{ 
     font-size: 14px; font-weight: bold;
@@ -296,7 +326,11 @@ form.signup-box>div .pwInconsistency{
 /* 비밀 번호 찾기 */
 
 .pwseachbox>p:nth-of-type(1){
-    font-size: 24px; margin-top: 44px;
+    font-size: 24px; 
+    margin-top: 44px;
+}
+.pwseachbox>p:nth-of-type(2){
+    font-size: 24px;
 }
 .pwseachbox a img{
     margin-top: 140px;
@@ -308,11 +342,22 @@ form.signup-box>div .pwInconsistency{
 .pwseachbox button{
     margin-top: 30px;
 }
+#memberPwCheck{
+    display: block;
+    margin-top: 20px;
+}
+.login-container .login-box .search-input-email .reset-member-pw{
+    display: block;
+}
 
 .pwseachbox .email-pw-reset{ /* 비밀번호 재설정을 위한 이메일이 발송 되었습니다. */
     color: green; font-size: 13px; font-weight: normal; margin-top: 8px;
     display: none;
 }
+.input-CertNum{
+    position: relative;
+}
+
 
 /* 체크 박스 타입 css */
 .customChk input[type="checkbox"] {

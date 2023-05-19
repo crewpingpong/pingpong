@@ -7,8 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PingPong</title>
-    <link rel="stylesheet" href="/resources/css/style.css"> <!-- 메인 헤더, 네브 css -->
+    <%-- <link rel="stylesheet" href="/resources/css/style.css"> <!-- 메인 헤더, 네브 css --> --%>
     <link rel="stylesheet" href="/resources/css/qna/FAQ_list.css">
+    <link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
+    
 </head>
 <body>
 
@@ -18,7 +20,7 @@
         <!-- ----------------------------------- 상단 기본 가이드 제목 --------------------------------- -->
         <section>
             <div class="ch-guideheader">
-                <a href="QnAHome.html">&lt; BACK</a>
+                <a href="/qna/">&lt; BACK</a>
                 <h3>계정/프로필</h3>
             </div>
         </section>

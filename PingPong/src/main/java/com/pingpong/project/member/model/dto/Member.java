@@ -19,5 +19,4 @@ public class Member {
    private String enrollDate;
    private String memberDeleteFlag;
    private int Authority;
-   
 }

@@ -1,5 +1,6 @@
 package com.pingpong.project.board.model.dto;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,11 +15,27 @@ public class Board {
 	private String boardDate;
 	private String boardDelFl;
 	private int boardCount;
-	
+
+	private String thumbnail;
+
+
 	// member join
 	private int memberNo;
 	private int authority;
 	private String memberUrl;
+
+	private String memberNickname;
+	private String profileImage;
+	private String oneLiner;
+	
+	private String likeCount;
+    private String likeCheck;
+
+    private List<Like> likeList;
+	private List<BoardImage> imageList;
+	
+	private List<Comment> commentList;
 	
 	private int declarationCount;
+
 }
