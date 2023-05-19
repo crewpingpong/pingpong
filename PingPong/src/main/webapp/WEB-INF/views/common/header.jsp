@@ -454,12 +454,12 @@ Java를 이용한 백엔드 연결
     </div>
 
     <!-- 메세지 보내기 -->
-    <%-- <div class="message-container message-send">
+    <div class="message-container message-send">
         <div class="recieve-message-box">
             <div class="message-box-top">
                 <div>
-                    <div class="message-profile"></div>
-                    <p>받는 사람</p>   
+                    <div class="message-profile"><img src="${mypage.profileImage}"></div>
+                    <p>${mypage.memberNickname}</p>   
                     <svg class="recieve-message-x" width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M16.4379 13.0007L25.3962 4.06321C25.7885 3.67091 26.0089 3.13884 26.0089 2.58405C26.0089 2.02925 25.7885 1.49718 25.3962 1.10488C25.0039 0.712579 24.4718 0.492187 23.917 0.492188C23.3622 0.492188 22.8302 0.712579 22.4379 1.10488L13.5004 10.0632L4.56286 1.10488C4.17056 0.712579 3.63849 0.492187 3.08369 0.492188C2.5289 0.492188 1.99683 0.712579 1.60453 1.10488C1.21223 1.49718 0.991837 2.02925 0.991837 2.58405C0.991837 3.13884 1.21223 3.67091 1.60453 4.06321L10.5629 13.0007L1.60453 21.9382C1.40926 22.1319 1.25427 22.3623 1.1485 22.6162C1.04274 22.87 0.988281 23.1424 0.988281 23.4174C0.988281 23.6924 1.04274 23.9647 1.1485 24.2186C1.25427 24.4725 1.40926 24.7029 1.60453 24.8965C1.7982 25.0918 2.02862 25.2468 2.28249 25.3526C2.53637 25.4583 2.80867 25.5128 3.08369 25.5128C3.35872 25.5128 3.63102 25.4583 3.8849 25.3526C4.13877 25.2468 4.36919 25.0918 4.56286 24.8965L13.5004 15.9382L22.4379 24.8965C22.6315 25.0918 22.862 25.2468 23.1158 25.3526C23.3697 25.4583 23.642 25.5128 23.917 25.5128C24.1921 25.5128 24.4644 25.4583 24.7182 25.3526C24.9721 25.2468 25.2025 25.0918 25.3962 24.8965C25.5915 24.7029 25.7465 24.4725 25.8522 24.2186C25.958 23.9647 26.0124 23.6924 26.0124 23.4174C26.0124 23.1424 25.958 22.87 25.8522 22.6162C25.7465 22.3623 25.5915 22.1319 25.3962 21.9382L16.4379 13.0007Z" fill="#231F20"/>
                     </svg>
@@ -469,7 +469,7 @@ Java를 이용한 백엔드 연결
             <div class="message-box-bottom">
                 <p>보낼 메시지</p>
                 <div>
-                    <textarea class="message-box-content" cols="480px" rows="300px"></textarea>
+                    <textarea class="message-box-content" cols="480px" rows="300px" name="messageContent"></textarea>
                 </div>
                 <div class="message-box-button">
                     <div class="messageLink"> <!-- 보낸메세지 함으로 가기 -->
@@ -478,11 +478,11 @@ Java를 이용한 백엔드 연결
                         </svg>
                         <p class="goto-message-Box-recive">메세지함 보기</p>
                     </div>
-                    <button type="button">전송</button>
+                    <button type="button" class="sendBtn">전송</button>
                 </div>
             </div>
         </div>
-    </div> --%>
+    </div>
 
     <!-- 받은 메세지 -->
     <div class="message-container message-recieve">

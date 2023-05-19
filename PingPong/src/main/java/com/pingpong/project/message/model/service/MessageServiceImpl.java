@@ -33,22 +33,25 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public int resendMessage(Message message) {
 		message.setMessageContent(Util.XSSHandling(message.getMessageContent()));
-		System.out.println("여기");
 		return dao.resendMessage(message);
 	}
 
-//	// 보낸 메세지 삭제
-//	@Override
-//	public int delmessage(int delNo) {
-//		return dao.delmessage(delNo);
-//	}
-//	
-//	// 받은 메세지 삭제
-//	@Override
-//	public int delSendmessage(int delNo) {
-//		return dao.delSendmessage(delNo);
-//	}
+	// 보낸 메세지 삭제
+	@Override
+	public int delmessage(int delNo) {
+		return dao.delmessage(delNo);
+	}
 	
-	
+	// 받은 메세지 삭제
+	@Override
+	public int delSendmessage(int delNo) {
+		return dao.delSendmessage(delNo);
+	}
+
+	// 메세지 보내기
+	@Override
+	public int sendMessage(Message message) {
+		return dao.sendMessage(message);
+	}
 	
 }

@@ -1,6 +1,7 @@
 package com.pingpong.project.message.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,14 +63,45 @@ public class MessageController {
 		return service.resendMessage(message);
 	}
 	
-	
+
+
 	// 메세지 삭제
-//	@DeleteMapping("/messageDel")
-//	@ResponseBody
-//	public int delmessage(@RequestBody int delNo){
-//		
-//		return service.delmessage(delNo);
-////		return service.delSendmessage(delNo);
-//		
-//	}
+	@DeleteMapping("/messageDel")
+	@ResponseBody
+	public int delMessage(@RequestBody Map<String, String> request) {
+	    int deletMessageNo = Integer.parseInt(request.get("deletMessageNo"));
+	    int MessageBoxType = Integer.parseInt(request.get("MessageBoxType"));
+	    
+	    if(MessageBoxType==1) { // 받은 메세지함 메세지 삭제
+	    	return service.delmessage(deletMessageNo);	    	
+	    } else if(MessageBoxType==2) { // 보낸 메세지함 메세지 삭제
+			return service.delSendmessage(deletMessageNo);	    	
+	    } else {
+	    	return 0; // 실패
+	    }
+
+	}
+	
+	
+	
+	
+	
+	// 메세지 보내기
+	@PostMapping("/messageSend")
+	@ResponseBody
+	public int sendMessage(
+			@SessionAttribute("loginMember") Member loginMember
+			,@RequestBody Message message
+			) {
+		
+		message.setSendMember(loginMember.getMemberNo());
+		
+		// 프로필 보고 있는 회원 번호 가져와서 보내기
+		
+		int result = service.sendMessage(message);
+		
+		return result;
+	}
+	
+
 }
