@@ -352,6 +352,8 @@ let paginationItems;
 let FirstPagination;
 let parentComment;
 
+let commentParentNo;
+
 const updateBackground = document.getElementById("updateBackground");
 const checkSlideDiv = document.getElementsByClassName("slide_item");
 let slideItems; // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
@@ -426,8 +428,12 @@ function selectBoardList(boardNo){
             prevBtn.before(slideDiv);
         }
 
+        let arr = [];
+
         for(let i=0; i<board.commentList.length;i++){
             if(board.commentList[i].parentNo == 0){
+
+                arr.push(board.commentList[i].commentNo);
                 const postContentDiv = document.createElement("div");
                 postContentDiv.classList.add("postcontent1");
 
@@ -529,9 +535,24 @@ function selectBoardList(boardNo){
                 lastDiv.append(boardPostDiv, div);
                 postContentDiv.append(lastDiv);
                 Boardcontent1.append(postContentDiv);
-
             }
-        }
+        }  // 댓글 창 구현 끝
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // 답글 보기 누르면 댓댓글 보이는 이벤트
         const secondComment = document.querySelectorAll(".secondComment");
         for(let i=0;i<secondComment.length;i++){
@@ -551,6 +572,7 @@ function selectBoardList(boardNo){
                 let nickName = e.target.parentNode.previousElementSibling.children[0].innerText;
                 commentContentArea.focus();
                 commentContentArea.value = "@" + nickName+" ";
+                commentParentNo = arr[i];
             })
         }
 
@@ -643,7 +665,7 @@ insertComment.addEventListener("click", e=>{
     if(commentContentArea.value[0] == "@"){
         const parentNickname = commentContentArea.value.split(" ")[0].substring(1);
         const commentContent = commentContentArea.value.split(" ").slice(1).join(' ');
-        data = {"commentContent" : commentContent, "memberNo" : loginMemberNo, "boardNo" : boardNumber, "parentNo" : commentNo};
+        data = {"commentContent" : commentContent, "memberNo" : loginMemberNo, "boardNo" : boardNumber, "parentNo" : commentParentNo};
     } else{
         data = {"commentContent" : commentContentArea.value, "memberNo" : loginMemberNo, "boardNo" : boardNumber, "parentNo" : null};
     }
