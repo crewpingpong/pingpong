@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="/resources/css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<%-- <script>
-    // const loginMemberNo = ${loginMember.memberNo};
-    // const loginMemberNickname = ${loginMember.memberNickname};
-</script> --%>
+<script>
+    const loginMemberNo = ${loginMember.memberNo};
+    const loginMemberNickname = ${loginMember.memberNickname};
+</script>
 
 
 <!-- 메인 헤더 영역 -->
@@ -41,24 +41,22 @@
                     <p>알림</p>
                     <!-- 메세지가 왔을 때 JS 구현 해야함 -->
                     <div>
-                        <div>
+                        <div class="alarmList">
                             <div class="messageExample">
-                                <div class="probox"></div>
+                                <div class="probox"><img src="" alt=""></div>
                                 <div>
-                                    <p>김핑퐁</p>
-                                    <a>안녕하세요. 김핑퐁 입니다...</a>
+                                    <p><a>김핑퐁</a> <a>안녕하세요. 김핑퐁 입니다...</a></p>
+                                    
                                 </div>
                                 <div>
-                                    <svg class="messageListX" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.17387 4.99858L9.75374 1.42703C9.91051 1.27026 9.99858 1.05764 9.99858 0.835935C9.99858 0.614231 9.91051 0.401608 9.75374 0.24484C9.59697 0.0880715 9.38435 0 9.16264 0C8.94094 0 8.72832 0.0880715 8.57155 0.24484L5 3.82471L1.42845 0.24484C1.27168 0.0880715 1.05906 -1.65182e-09 0.837356 0C0.615652 1.65182e-09 0.403029 0.0880715 0.246261 0.24484C0.0894923 0.401608 0.0014208 0.614231 0.00142079 0.835935C0.00142079 1.05764 0.0894923 1.27026 0.246261 1.42703L3.82613 4.99858L0.246261 8.57013C0.168229 8.64752 0.106294 8.7396 0.0640274 8.84105C0.021761 8.9425 0 9.05132 0 9.16122C0 9.27112 0.021761 9.37994 0.0640274 9.48139C0.106294 9.58284 0.168229 9.67492 0.246261 9.75232C0.323655 9.83035 0.415733 9.89228 0.517185 9.93455C0.618636 9.97682 0.727452 9.99858 0.837356 9.99858C0.94726 9.99858 1.05608 9.97682 1.15753 9.93455C1.25898 9.89228 1.35106 9.83035 1.42845 9.75232L5 6.17244L8.57155 9.75232C8.64894 9.83035 8.74102 9.89228 8.84247 9.93455C8.94392 9.97682 9.05274 9.99858 9.16264 9.99858C9.27255 9.99858 9.38136 9.97682 9.48281 9.93455C9.58427 9.89228 9.67634 9.83035 9.75374 9.75232C9.83177 9.67492 9.89371 9.58284 9.93597 9.48139C9.97824 9.37994 10 9.27112 10 9.16122C10 9.05132 9.97824 8.9425 9.93597 8.84105C9.89371 8.7396 9.83177 8.64752 9.75374 8.57013L6.17387 4.99858Z" fill="#5C5C5C"/>
-                                    </svg>
-                                    <p>30minute 전</p>
+                                    <img src="/resources/images/message/messageDeleteImg.png" alt="messageDeleteImg" class="messageListX">
+                                    <p>1hour 전</p>
                                 </div>
                             </div>
                             <div class="messageExample">
-                                <div class="probox"></div>
+                                <div class="probox"><img src="" alt=""></div>
                                 <div>
-                                    <p>김핑퐁 님이 좋아요를 누르셨습니다.</p>
+                                    <p><a>김핑퐁</a> 님이 <a>좋아요를 누르셨습니다.</a></p>
                                 </div>
                                 <div>
                                     <svg class="messageListX" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,9 +66,9 @@
                                 </div>
                             </div>
                             <div class="messageExample">
-                                <div class="probox"></div>
+                                <div class="probox"><img src="" alt=""></div>
                                 <div>
-                                    <p>김핑퐁 님이 댓글을 다셨습니다.</p>
+                                    <p><a>김핑퐁<a> 님이 <a>댓글을 다셨습니다.</a></p>
                                 </div>
                                 <div>
                                     <svg class="messageListX" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -79,6 +77,8 @@
                                     <p>1hour 전</p>
                                 </div>
                             </div>
+
+                        <%-- <div><p>받은 메세지가 없습니다.</p></div> --%>
                         </div>
     
                         
@@ -383,7 +383,8 @@ Java를 이용한 백엔드 연결
                 
             </div>
 
-            <p>읽지 않은 메세지 <span>0</span></p>
+            <%-- <p class="underline">메세지 비우기</p> --%>
+            <%-- <p class="underline">읽지 않은 메세지 <span>0</span></p> --%>
         </div>
     </div>
         
@@ -411,13 +412,10 @@ Java를 이용한 백엔드 연결
                         <a>안녕하세요. 김핑퐁 입니다...</a>
                     </div>
                 </div> --%>
-                    <%-- <div><p> 보낸 메세지가 없습니다.</p></div> --%>
                 </div>
-
-                
+            <%-- <p class="underline">메세지 비우기</p> --%>
             </div>
-
-            <p><span></span></p>
+            <%-- <p><span></span></p> --%>
         </div>
     </div>
 

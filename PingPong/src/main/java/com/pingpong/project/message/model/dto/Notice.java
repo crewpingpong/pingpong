@@ -21,4 +21,12 @@ public class Notice {
 	private String noticeContent; // 알림 내용
 	private String elapsedDate; // 받은 시간
 	private int memberNo; // 받은 회원
+	
+	private int sendNo; // 보낸 회원 번호
+	private String sendName; // 보낸 회원 닉네임
+	private String sendProfile; // 보낸 회원 이미지
+	private int type; // 타입
+	
+	private int boardNo;
+	
 }

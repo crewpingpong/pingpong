@@ -32,6 +32,7 @@
       <mapper resource="/mappers/mypage-mapper.xml" />
       <mapper resource="/mappers/ajax-mapper.xml" />
       <mapper resource="/mappers/board-mapper.xml" />
+      <mapper resource="/mappers/alarm-mapper.xml" />
 
    </mappers>
 </configuration>
