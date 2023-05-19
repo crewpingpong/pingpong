@@ -125,6 +125,8 @@ if(ReBtn != null){
 
   ReBtn.addEventListener("click",()=>{
 
-    commentForm.action = "//manager/commentrestore";
+    commentForm.action = "/manager/commentrestore";
+    
+    commentForm.submit();
   });
 };

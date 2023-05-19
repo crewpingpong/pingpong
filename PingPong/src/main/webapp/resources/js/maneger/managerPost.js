@@ -138,7 +138,6 @@ if(PostDelBtn != null){
 
     PostForm.submit();
   })
-
 };
 
 const PostReBtn = document.getElementById("PostReBtn");

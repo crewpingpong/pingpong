@@ -1,4 +1,4 @@
-package com.pingpong.project.board.dto;
+package com.pingpong.project.board.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
