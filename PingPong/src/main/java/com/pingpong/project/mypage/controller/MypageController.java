@@ -80,20 +80,23 @@ public class MypageController {
 	    // 닉네임, url 수정
 	    int infoResult = service.updateInfo(updateMember);
 
-	    String webPath = "/resources/images/profileImage/";
-	    
+	    String webPath = "/resources/images/profileImage/";	    
 	    String filePath = session.getServletContext().getRealPath(webPath);
-	    System.out.println(profileImage);
+	    
+//	    System.out.println(profileImage);
 	    
 	    String fileName = profileImage.getOriginalFilename();
-		System.out.println(fileName);
+//		System.out.println(fileName);
+	    
 		String reName = Util.fileRename(fileName);
-		System.out.println(reName);
+//		System.out.println(reName);
+		
 	    // 프로필 이미지 수정
 	    int profileResult = service.updateProfile(profileImage, reName, webPath, filePath, loginMember.getMemberNo());
 
 	    String message = null;
 	    if (infoResult > 0 && profileResult > 0) {
+	    	
 	        message = "회원 정보가 수정되었습니다.";
 
 	        // Session에 로그인 된 회원 정보 수정
@@ -128,7 +131,7 @@ public class MypageController {
 		
 		if(result > 0) {
 			message = "비밀번호가 변경되었습니다.";
-			path += "info";
+			path += "myPageModi";
 		
 		}else {
 			message = "현재 비밀번호가 일치하지 않습니다.";

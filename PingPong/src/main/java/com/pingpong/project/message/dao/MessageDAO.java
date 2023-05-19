@@ -29,14 +29,20 @@ public class MessageDAO {
 		return sqlsession.insert("messageMapper.resendMessage", message);
 	}
 
-//	// 받은 메세지 삭제
-//	public int delmessage(int delNo) {
-//		return sqlsession.update("messageMapper.delmessage",delNo);
-//	}
-//	
-//	// 보낸 메세지 삭제
-//	public int delSendmessage(int delNo) {
-//		return sqlsession.update("messageMapper.delSendmessage",delNo);
-//	}
+	// 받은 메세지 삭제
+	public int delmessage(int delNo) {
+		return sqlsession.update("messageMapper.delmessage",delNo);
+	}
+	
+	// 보낸 메세지 삭제
+	public int delSendmessage(int delNo) {
+		return sqlsession.update("messageMapper.delSendmessage",delNo);
+	}
+
+
+	
+	public int sendMessage(Message message) {
+		return sqlsession.insert("messageMapper.sendMessage",message);
+	}
 	
 }
