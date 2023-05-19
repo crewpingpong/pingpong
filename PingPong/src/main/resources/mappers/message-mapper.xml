@@ -51,7 +51,7 @@
 	<!-- 보낸 메세지 조회 -->
 	<select id="sendmessageList" resultMap="message_rm">
 		SELECT m.MESSAGE_NO, m.MESSAGE_CONTENT, 
-			   TO_CHAR(m.SEND_DATE, 'YY"년" MM"월" DD"일" HH24":"MI') SEND_DATE, 
+			   TO_CHAR(m.SEND_DATE, 'YYYY-MM-DD HH24":"MI') SEND_DATE, 
 			   m.SEND_MEMBER, m.RECEIVED_MEMBER,
 		       MP.PROFILE_IMG, R.MEMBER_NICKNAME MEMBER_NICKNAME, m.MESSAGE_SEND_DEL_FL
 		FROM MESSAGE m
@@ -81,7 +81,7 @@
 	<!-- 보낸 메세지 삭제 -->
  	<update id="delSendmessage">
 		UPDATE MESSAGE
-		SET MESSAGE_DEL_FL='Y' 
+		SET MESSAGE_SEND_DEL_FL='Y' 
 		WHERE MESSAGE_NO= #{delNo}
 		AND MESSAGE_SEND_DEL_FL='N'
 	</update>
@@ -93,4 +93,5 @@
 		(MESSAGE_NO, MESSAGE_CONTENT, SEND_DATE, SEND_MEMBER, RECEIVED_MEMBER)
 		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, SYSDATE, #{sendMember}, #{receivedMember})
 	</insert>
+	
 </mapper>

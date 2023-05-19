@@ -64,17 +64,7 @@ public class MessageController {
 		return service.resendMessage(message);
 	}
 	
-	
-//	// 메세지 삭제
-//	@DeleteMapping("/messageDel")
-//	@ResponseBody
-//	public int delmessage(@RequestBody int deletMmessageNo){
-//		
-//		return service.delmessage(delNo);
-////		return service.delSendmessage(delNo);
-//		
-//	}
-	
+
 
 	// 메세지 삭제
 	@DeleteMapping("/messageDel")
@@ -102,12 +92,9 @@ public class MessageController {
 	@ResponseBody
 	public int resendMessage(
 			@SessionAttribute("loginMember") Member loginMember
-			, RedirectAttributes ra
-			, String messageContent
-			, Message message
+			,@RequestBody Message message
 			) {
 		message.setSendMember(loginMember.getMemberNo());
-		message.setMessageContent(messageContent);
 		
 		// 프로필 보고 있는 회원 번호 가져와서 보내기
 		return service.sendMessage(message);
