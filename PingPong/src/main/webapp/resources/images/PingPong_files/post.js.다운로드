@@ -6,7 +6,7 @@ const deleteBackground = document.getElementById("deleteBackground"); // 돌아�
 
 const selectBackground = document.getElementById("selectBackground");
 const afterChoice = document.getElementById("afterChoice");
-let secondComment;
+
 if(background != null){
     background.addEventListener("change", e=>{
         const file = e.target.files[0];
@@ -194,25 +194,25 @@ const Boardcontent1 = document.querySelector(".Boardcontent1");
 const BoardHeartBox = document.querySelector(".BoardHeartBox");
 
 const BoardCommentBox = document.querySelector(".BoardCommentBox");
-// const BoardCommentBox1 = document.querySelector(".BoardCommentBox1");
+const BoardCommentBox1 = document.querySelector(".BoardCommentBox1");
 
 const BoardComment = document.querySelector(".BoardComment");
-// const BoardCommentBtn1 = document.querySelector(".BoardCommentBtn1").firstElementChild
-// const BoardCommentBtn2 = document.querySelector(".BoardCommentBtn1").lastElementChild
+const BoardCommentBtn1 = document.querySelector(".BoardCommentBtn1").firstElementChild
+const BoardCommentBtn2 = document.querySelector(".BoardCommentBtn1").lastElementChild
 const BoardPost1 = document.querySelector(".BoardPost1")
-// let BoardCommentText1 = document.querySelector(".BoardCommentText1");
+let BoardCommentText1 = document.querySelector(".BoardCommentText1");
 
 const newContent = document.querySelector(".newContent");
 /* 댓글 달기 버튼 */
-// BoardComment.addEventListener("click", () => {
-//     Boardcontent.style.display = "none";
-//     Boardcontent1.style.display = "flex";
+BoardComment.addEventListener("click", () => {
+    Boardcontent.style.display = "none";
+    Boardcontent1.style.display = "flex";
 
-//     BoardHeartBox.style.display = "none";
+    BoardHeartBox.style.display = "none";
 
-//     BoardCommentBox.style.display = "none";
-//     BoardCommentBox1.style.display = "block";
-// })
+    BoardCommentBox.style.display = "none";
+    BoardCommentBox1.style.display = "block";
+})
 // /* 이전 버튼 */
 // BoardCommentBtn2.addEventListener("click", () => {
 //     // console.log("dddddd")
@@ -233,66 +233,66 @@ const newContent = document.querySelector(".newContent");
 
 
 // }
-// if(BoardCommentBtn1 != null){
-//     BoardCommentBtn1.addEventListener("click", () => {
+if(BoardCommentBtn1 != null){
+    BoardCommentBtn1.addEventListener("click", () => {
 
-//         const check = confirm("댓글을 등록하시겠습니까?");
-//         let text = document.querySelector(".BoardCommentText1").value;
+        const check = confirm("댓글을 등록하시겠습니까?");
+        let text = document.querySelector(".BoardCommentText1").value;
 
-//         if (check && text.trim() !== "") {
-//             alert("등록되었습니다")
+        if (check && text.trim() !== "") {
+            alert("등록되었습니다")
 
-//             const div1 = document.createElement("div");
-//             div1.classList.add("postcontent1");
+            const div1 = document.createElement("div");
+            div1.classList.add("postcontent1");
 
-//             const div2 = document.createElement("div");
-//             div2.classList.add("BoardPost1");
+            const div2 = document.createElement("div");
+            div2.classList.add("BoardPost1");
 
-//             const a1 = document.createElement("a");
-//             a1.classList.add("BoardProfile1")
+            const a1 = document.createElement("a");
+            a1.classList.add("BoardProfile1")
 
-//             const div3 = document.createElement("div");
+            const div3 = document.createElement("div");
 
-//             const a2 = document.createElement("a")
+            const a2 = document.createElement("a")
 
-//             const p = document.createElement("p")
+            const p = document.createElement("p")
 
-//             const span = document.createElement("span");
-//             span.classList.add("BoardComment-remove-row");
+            const span = document.createElement("span");
+            span.classList.add("BoardComment-remove-row");
 
-//             span.innerHTML = "&times;"
+            span.innerHTML = "&times;"
 
-//             text = text.replaceAll(/(\n|\r\n)/g, "<br>");
+            text = text.replaceAll(/(\n|\r\n)/g, "<br>");
 
-//             p.innerHTML = text
-//             a2.innerHTML = "김핑퐁" /* 추후 프로필명 으로 수정 */
+            p.innerHTML = text
+            a2.innerHTML = "김핑퐁" /* 추후 프로필명 으로 수정 */
 
-//             Boardcontent1.prepend(div1);
-//             div1.prepend(div2);
-//             div2.append(a1);
-//             div1.append(div3);
-//             div1.append(span);
-//             div3.prepend(a2);
-//             div3.append(p);
+            Boardcontent1.prepend(div1);
+            div1.prepend(div2);
+            div2.append(a1);
+            div1.append(div3);
+            div1.append(span);
+            div3.prepend(a2);
+            div3.append(p);
 
-//             document.querySelector(".BoardCommentText1").value = "";
+            document.querySelector(".BoardCommentText1").value = "";
 
-//             span.addEventListener("click", e => {
+            span.addEventListener("click", e => {
 
-//                 const check1 = confirm("삭제하시겠습니까?")
+                const check1 = confirm("삭제하시겠습니까?")
 
-//                 if (check1) {
-//                     alert("댓글 삭제 완료")
-//                     e.target.parentElement.remove();
+                if (check1) {
+                    alert("댓글 삭제 완료")
+                    e.target.parentElement.remove();
 
-//                 } else alert("취소되었습니다")
-//             });
+                } else alert("취소되었습니다")
+            });
 
-//         }
-//         else alert("취소되었습니다")
+        }
+        else alert("취소되었습니다")
 
-//     });
-// }
+    });
+}
 
 /* 게시글 닫기 버튼으로 닫기 */
 const BoardClose = document.querySelector(".BoardClose");
@@ -350,7 +350,6 @@ let maxSlide; // 현재 슬라이드 위치가 슬라이드 개수를 넘기지 
 
 let paginationItems;
 let FirstPagination;
-let parentComment;
 
 const updateBackground = document.getElementById("updateBackground");
 const checkSlideDiv = document.getElementsByClassName("slide_item");
@@ -392,7 +391,6 @@ function selectBoardList(boardNo){
         porfileRac.innerHTML = '';
         boardMemberInfo.innerHTML = '';
         BoardPost.innerHTML = '';
-        Boardcontent1.innerHTML = '';
         
         for(let i=0; i<board.imageList.length;i++){
             const slideDiv = document.createElement("div");
@@ -407,109 +405,57 @@ function selectBoardList(boardNo){
         }
 
         for(let i=0; i<board.commentList.length;i++){
-            if(board.commentList[i].parentNo == 0){
-                const postContentDiv = document.createElement("div");
-                postContentDiv.classList.add("postcontent1");
+            const postContentDiv = document.createElement("div");
+            postContentDiv.classList.add("postcontent1");
 
-                const boardPostDiv = document.createElement("div");
-                boardPostDiv.classList.add("BoardPost1");
+            const boardPostDiv = document.createElement("div");
+            boardPostDiv.classList.add("BoardPost1");
 
-                const boardProfileA = document.createElement("a");
-                boardProfileA.href = "/mypage/"+board.commentList[i].memberNo;
-                boardProfileA.classList.add("Boardprofile1");
-                const profileImg = document.createElement("img");
-                profileImg.src = board.commentList[i].profileImg;
-                boardProfileA.append(profileImg);
-                boardPostDiv.append(boardProfileA);
-
-
-                const div = document.createElement("div");
-
-                const innerDiv = document.createElement("div");
-                innerDiv.classList.add("innerDiv");
-
-                const nameA = document.createElement("a");
-                nameA.href = "/mypage/"+board.commentList[i].memberNo;
-                nameA.innerText = board.commentList[i].memberNickname;
-
-                const contentP = document.createElement("p");
-                contentP.innerText = board.commentList[i].commentContent;
-
-                const dateDiv = document.createElement("div");
-                dateDiv.classList.add("dateDiv");
-
-                const cDateP = document.createElement("p");
-                cDateP.innerText = board.commentList[i].commentDate;
-
-                const replSpan = document.createElement("span");
-                replSpan.innerText = "답글 달기";
-                replSpan.classList.add("replyCommentInsert");
-
-                dateDiv.append(cDateP, replSpan);
-
-                innerDiv.append(nameA, contentP);
-                div.append(innerDiv, dateDiv);
-                if(board.commentList[i].childCheck > 0){
-                    const secondDiv = document.createElement("div");
-                    secondDiv.classList.add("secondComment");
-                    secondDiv.innerText = "—— 답글 보기(" + board.commentList[i].childCheck + ")";
-                    div.append(secondDiv);
-                }
-                
-                for(let j=0; j<board.commentList.length;j++){
-                    if(board.commentList[i].commentNo == board.commentList[j].parentNo){
-                        const postContentDiv1 = document.createElement("div");
-                        postContentDiv1.classList.add("postcontent2");
-
-                        const boardPostDiv1 = document.createElement("div");
-                        boardPostDiv1.classList.add("BoardPost2");
-
-                        const boardProfileA1 = document.createElement("a");
-                        boardProfileA1.href = "/mypage/"+board.commentList[i].memberNo;
-                        boardProfileA1.classList.add("Boardprofile2");
-                        const profileImg1 = document.createElement("img");
-                        profileImg1.src = board.commentList[j].profileImg;
-                        boardProfileA1.append(profileImg1);
-                        boardPostDiv1.append(boardProfileA1);
+            const boardProfileA = document.createElement("a");
+            boardProfileA.href = "/mypage/"+board.commentList[i].memberNo;
+            boardProfileA.classList.add("Boardprofile1");
+            const profileImg = document.createElement("img");
+            profileImg.src = board.commentList[i].profileImg;
+            boardProfileA.append(profileImg);
+            boardPostDiv.append(boardProfileA);
 
 
-                        const div1 = document.createElement("div");
+            const div = document.createElement("div");
 
-                        const innerDiv1 = document.createElement("div");
-                        innerDiv1.classList.add("innerDiv");
+            const innerDiv = document.createElement("div");
+            innerDiv.classList.add("innerDiv");
 
-                        const nameA1 = document.createElement("a");
-                        nameA1.href = "/mypage/"+board.commentList[j].memberNo;
-                        nameA1.innerText = board.commentList[j].memberNickname;
+            const nameA = document.createElement("a");
+            nameA.href = "/mypage/"+board.commentList[i].memberNo;
+            nameA.innerText = board.commentList[i].memberNickname;
 
-                        const contentP1 = document.createElement("p");
-                        contentP1.innerText = board.commentList[j].commentContent;
+            const contentP = document.createElement("p");
+            contentP.innerText = board.commentList[i].commentContent;
 
-                        const dateDiv1 = document.createElement("div");
-                        dateDiv1.classList.add("dateDiv");
+            const dateDiv = document.createElement("div");
+            dateDiv.classList.add("dateDiv");
 
-                        const cDateP1 = document.createElement("p");
-                        cDateP1.innerText = board.commentList[j].commentDate;
+            const cDateP = document.createElement("p");
+            cDateP.innerText = board.commentList[i].commentDate;
 
-                        dateDiv1.append(cDateP1);
+            const replSpan = document.createElement("span");
+            replSpan.innerText = "답글 달기";
 
-                        innerDiv1.append(nameA1, contentP1);
-                        div1.append(innerDiv1, dateDiv1);
+            dateDiv.append(cDateP, replSpan);
 
-                        const lastDiv1 = document.createElement("div");
-                        lastDiv1.classList.add("lastDivadd")
-                        lastDiv1.append(boardPostDiv1, div1);
-                        postContentDiv1.append(lastDiv1);
-                        div.append(postContentDiv1);
-                    }
-                }
-                const lastDiv = document.createElement("div");
-                lastDiv.classList.add("lastDivadd")
-                lastDiv.append(boardPostDiv, div);
-                postContentDiv.append(lastDiv);
-                Boardcontent1.append(postContentDiv);
-
+            innerDiv.append(nameA, contentP)
+            div.append(innerDiv, dateDiv);
+            if(board.commentList[i].childCheck > 0){
+                const secondDiv = document.createElement("div");
+                secondDiv.innerText = "—— 답글 보기(" + board.commentList[i].childCheck + ")";
+                div.append(secondDiv);
             }
+            const lastDiv = document.createElement("div");
+            lastDiv.classList.add("lastDivadd")
+            lastDiv.append(boardPostDiv, div);
+            postContentDiv.append(lastDiv);
+            
+            Boardcontent1.append(postContentDiv);
         }
 
 
@@ -531,69 +477,15 @@ function selectBoardList(boardNo){
         console.log(memberNickA);
         boardMemberInfo.append(memberNickA);
 
-
-                const postContentDiv = document.createElement("div");
-                postContentDiv.classList.add("postcontent1");
-
-                const boardPostDiv = document.createElement("div");
-                boardPostDiv.classList.add("BoardPost1");
-
-                const boardProfileA = document.createElement("a");
-                boardProfileA.href = "/mypage/"+board.memberNo;
-                boardProfileA.classList.add("Boardprofile1");
-                const profileImg = document.createElement("img");
-                profileImg.src = board.profileImage;
-                boardProfileA.append(profileImg);
-                boardPostDiv.append(boardProfileA);
-
-
-                const div = document.createElement("div");
-
-                const innerDiv = document.createElement("div");
-                innerDiv.classList.add("innerDiv");
-
-                const nameA = document.createElement("a");
-                nameA.href = "/mypage/"+board.memberNo;
-                nameA.innerText = board.memberNickname;
-
-                const contentP = document.createElement("p");
-                contentP.innerText = board.boardContent;
-
-                const dateDiv = document.createElement("div");
-                dateDiv.classList.add("dateDiv");
-
-                const cDateP = document.createElement("p");
-                cDateP.innerText = board.boardDate;
-
-                dateDiv.append(cDateP);
-
-                innerDiv.append(nameA, contentP)
-                div.append(innerDiv, dateDiv);
-                const lastDiv = document.createElement("div");
-                lastDiv.classList.add("lastDivadd")
-                lastDiv.append(boardPostDiv, div);
-                postContentDiv.append(lastDiv);
-                
-                BoardPost.append(postContentDiv);
+        BoardPost.innerHTML = board.boardContent;
 
         likeCountSpan.innerText = board.likeCount+"명이 좋아합니다";
 
         slideInitFn();
-        secondComment = document.querySelectorAll("secondComment");
+
     })
     .catch(err => console.log(err));
 }
-
-// 답글 보기 버튼을 눌렀을 때
-
-
-for(let i=0;i<secondComment.length;i++){
-    secondComment.addEventListener("click", e =>{
-        e.target.nextAll().classList.toggle("postcontent2");
-    });
-}
-
-
 
 // 좋아요 처리 구현
 const boardLike = document.querySelectorAll(".boardLike");

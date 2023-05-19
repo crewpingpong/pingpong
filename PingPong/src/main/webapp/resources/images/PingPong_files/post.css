@@ -264,7 +264,7 @@
 .BoardBackground2 {
     width: 100vw; height: 100vh; z-index: 250;
     /* position: fixed; top: 0; left: 0; */
-    background-color: #CCCCCC; justify-content: center; align-items: center; 
+    background-color: #231F2050; justify-content: center; align-items: center; 
     position: fixed; top: 0; left: 0;
 }
 
@@ -323,7 +323,7 @@
 .NewWriteContent {
     width: 100vw; height: 100vh; z-index: 250;
     position: fixed; top: 0; left: 0;
-    background-color: #CCCCCC; justify-content: center; align-items: center;
+    background-color: #231F2050; justify-content: center; align-items: center;
     display: none;
 }
 
@@ -333,7 +333,7 @@
 
 .NewBoardBackground {
     width: 100vw; height: 100vh; z-index: 250;
-    position: fixed; top: 0; left: 0; background-color: #CCCCCC; 
+    position: fixed; top: 0; left: 0; background-color: #231F2050; 
     justify-content: center; align-items: center; display: none;
 }
 
@@ -341,7 +341,7 @@
 .board-container-top {
     width: 100%; height: 8%; position: absolute;
     padding: 0 20px; border-radius: 20px 20px 0 0; 
-    border-bottom: 1px solid #CCCCCC;
+    border-bottom: 1px solid #C5C5C5;
     display: flex; justify-content: space-between; align-items: center;
     z-index: 300;
 }
@@ -409,7 +409,7 @@
 
 /* 창닫기 */
 .BoardClose {
-    color: #CCCCCC; background-color: rgba(0, 0, 0, 0); 
+    color: #231F20; background-color: rgba(0, 0, 0, 0); 
     position: absolute; right: 12px; top: 12px;
 }
 
@@ -419,34 +419,30 @@
     /* margin-top: 65px;  */
     flex-direction: column; 
     font-size: 14px;
-    border-left: 1px solid #CCCCCC;
-    position: relative;
-}
-.BoardContainerright>div:last-child{
-    position: absolute;
-    width: 100%;
-    bottom: 0px;
+    border-left: 1px solid #231F2050;
 }
 
 /* 프사 + 이름 + 소개 */
 .BoardContainerright>div:nth-child(1) {
-    width: 100%; height: 60px;
-    padding: 14px 4px 14px 16px;
+    width: 100%; height: 75px;
     /* height: 10%; */
     display: flex;
-    border-bottom: 1px solid #CCCCCC; 
+    border-bottom: 1px solid #231F2050; 
     /* padding-bottom: 20px; 
     margin-bottom: 20px; */
 }
 
 .BoardContainerright .porfileRac {
-    height: 100%;
+    width: 75px; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
 }
 
 .BoardContainerright .porfileRac img{
-    width: 32px;
-    height: 32px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     border: 1px solid black; 
 }
@@ -455,6 +451,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+.BoardContainerright>div>div:last-child>p {
+    font-size: 14px; padding: 5px;
 }
 
 .BoardContainerright>div>div:last-child>a {
@@ -466,17 +467,15 @@
 }
 
 /* 게시글 내용 + 좋아요 수 */
-.BoardPost{
-    min-height: 50px;
-}
+
 .Boardcontent {
-    width: 100%;
-    display: flex; flex-direction: column; justify-content: space-between;
+    width: 100%; height: 600px; border-bottom: 1px solid #231F2050; 
+    display: flex; flex-direction: column; justify-content: space-between; overflow: auto;
 }
 
 .BoardContentProfile {
-    width: 32px; height: 32px; margin-right: 20px; border-radius: 50%; 
-    background-color: #CCCCCC; float: left; margin-top: 5px; 
+    width: 50px; height: 50px; margin-right: 20px; border-radius: 50%; 
+    background-color: #231F2050; float: left; margin-top: 5px; 
     display: flex; cursor: pointer;
 }
 
@@ -488,27 +487,18 @@
 /* 하단 좋아요 */
 .BoardHeartBox {
     display: flex;
-    width: 100%;
-    border-top: 1px solid #CCCCCC;
     /* 기능동작  좋아요 하단 숨기기 */
-    padding : 14px 4px 14px 16px;
+    margin-top: 40px;
 }
 
 /* 댓글 영역 */
 .BoardCommentBox {
-    display: flex; align-items: center; width: 100%; 
-    border-top: 1px solid #CCCCCC;
-    padding : 14px 4px 14px 16px;
-    line-height: var(--system-14-line-height);
-}
-
-.postcontent2{
-    display: none;
+    display: flex; align-items: center; width: 80%; height: 10%; padding: 10px;
 }
 
 .BoardCommentProfile {
     width: 50px; height: 50px; margin-right: 20px; border-radius: 50%; 
-    background-color: #CCCCCC; float: left; margin-top: 5px; 
+    background-color: #231F2050; float: left; margin-top: 5px; 
     display: none; cursor: pointer;
 }
 
@@ -559,7 +549,7 @@
 .BoardIconReportMod #grayBackground{
     width: 100vw; height: 100vh; position: fixed; 
     top:0; left: 0; left: 0; right: 0; margin: auto;
-    background-color: #CCCCCC; z-index: 300;
+    background-color: #231F2050; z-index: 300;
     display: flex; align-items: center; justify-content: center;
     display: none; 
 }
@@ -620,13 +610,8 @@
 .postcontent1>div:first-child{
     display: flex;
     margin-bottom : 16px;
+    
 }
-.postcontent1:last-child>div{
-    margin-bottom : 0px;
-}
-
-
-
 .BoardPost1{
     margin-right:16px;
 }
@@ -634,22 +619,17 @@
     margin-right:8px;
 }
 
+.BoardPost1 a{
+    width: 40px; height: 40px;
+}
 .BoardPost1 a img{
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    border: 1px solid #5C5C5C;
+    width: 40px; height: 40px;
 }
 
 .BoardProfile1 {
     width: 40px; height: 40px; margin-right: 20px; border-radius: 50%; 
     /* border: 1px solid black; */ background-color: #231F2050; 
     float: left; margin-top: 5px; display: block; cursor: pointer;
-}
-
-.postcontent{
-    height: 630px;
-    padding: 14px 4px 14px 16px;
-    overflow: auto;
 }
 
 .postcontent1 div div p{
@@ -673,34 +653,13 @@
 /* 이전 버튼 클릭시 전환 영역 */
 
 .Boardcontent1 {
-    width: 100%; height: 100%;
-    flex-direction: column; justify-content: start;
-}
-
-#commentContentArea{
-    border : none;
-    display: flex;
-    align-items: center;
-    resize : none;
-    height: 20px !important;
-    font-size: 100%;
-    width: 100%;
-}
-
-#commentContentArea:focus{
-    outline:none;
-
-}
-
-#insertComment{
-    width: 60px;
-    font-size: 16px;
-    color:#5286DC;
-    font-weight: bold;
+    width: 80%; height: 50%; border-bottom: 1px solid #231F2050; 
+    display: none; flex-direction: column; justify-content: start; 
+    overflow: auto; margin-bottom: 8px;
 }
 
 .BoardCommentBox1 {
-    width: 80%; height: 40%;
+    width: 80%; height: 40%; display: none;
 }
 
 .BoardCommentProfile1 {
