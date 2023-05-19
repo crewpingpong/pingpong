@@ -264,7 +264,7 @@
 .BoardBackground2 {
     width: 100vw; height: 100vh; z-index: 250;
     /* position: fixed; top: 0; left: 0; */
-    background-color: #CCCCCC; justify-content: center; align-items: center; 
+    background-color: #231F2050; justify-content: center; align-items: center; 
     position: fixed; top: 0; left: 0;
 }
 
@@ -333,7 +333,7 @@
 
 .NewBoardBackground {
     width: 100vw; height: 100vh; z-index: 250;
-    position: fixed; top: 0; left: 0; background-color: #CCCCCC; 
+    position: fixed; top: 0; left: 0; background-color: #231F2050; 
     justify-content: center; align-items: center; display: none;
 }
 

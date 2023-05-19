@@ -33,4 +33,10 @@ public class BoardController {
     public int like(@RequestBody Map<String, Integer> paramMap) {
         return service.like(paramMap);
     }
+    
+    // 북마크 처리
+    @PostMapping("/board/markup")
+    public int boardMarkup(@RequestBody Map<String, Integer> paramMap) {
+    	return service.boardMarkup(paramMap);
+    }
 }

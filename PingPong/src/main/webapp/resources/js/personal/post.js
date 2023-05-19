@@ -357,6 +357,8 @@ const checkSlideDiv = document.getElementsByClassName("slide_item");
 let slideItems; // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
 const BoardHeart = document.querySelector(".BoardHeart");
 const BoardRedHeart = document.querySelector(".BoardRedHeart");
+const boardMark = document.querySelector(".boardMark");
+
 let boardNumber;
 function selectBoardList(boardNo){
 
@@ -578,6 +580,40 @@ function selectBoardList(boardNo){
 
         likeCountSpan.innerText = board.likeCount+"명이 좋아합니다";
 
+        boardMark.addEventListener("click", e=>{
+            if(loginMemberNo == ""){
+                alert("로그인 후 이용해주세요");
+                return;
+            }
+            let check;
+            if(e.target.classList.contains("Markup")){  // 북마크 o
+                check = 1;
+            } else {
+                check = 0;
+            }
+
+            const data = {"boardNo" : boardNumber, "memberNo" : loginMemberNo, "check" : check};
+
+            fetch("/board/markup", {
+                method : "POST",
+                headers : {"Content-Type" : "application/json"},
+                body : JSON.stringify(data)}
+            )
+            .then(response => response.text())
+            .then(result => {
+                if(result = 0){
+                    console.log("북마크 처리 실패");
+                    return;
+                }
+                if(check==0){
+                    
+                }
+
+
+            })
+
+        })
+
         slideInitFn();
         secondComment = document.querySelectorAll("secondComment");
     })
@@ -587,11 +623,11 @@ function selectBoardList(boardNo){
 // 답글 보기 버튼을 눌렀을 때
 
 
-for(let i=0;i<secondComment.length;i++){
-    secondComment.addEventListener("click", e =>{
-        e.target.nextAll().classList.toggle("postcontent2");
-    });
-}
+// for(let i=0;i<secondComment.length;i++){
+//     secondComment.addEventListener("click", e =>{
+//         e.target.nextAll().classList.toggle("postcontent2");
+//     });
+// }
 
 
 
@@ -868,16 +904,15 @@ newContentClose.addEventListener("click", () => {
 })
 
 /* 게시글 파일 첨부 버튼 */
-// const inputFileBtn = document.querySelector(".inputFileBtn");
+const inputFileBtn = document.querySelector(".inputFileBtn");
 const BoardBackground2 = document.querySelector(".BoardBackground2");
 const BoardPicture = document.querySelector(".BoardPicture");
 
-// inputFileBtn.addEventListener("click", () => {
-//     NewBoardBackground.style.display = "none";
-//     BoardBackground2.style.display = "flex";
-//     BoardBackground2.classList.remove('BoardBackground-close');
+inputFileBtn.addEventListener("click", () => {
+    BoardBackground2.style.display = "flex";
+    BoardBackground2.classList.remove('BoardBackground-close');
 
-// });
+});
 
 // const ContentNewFile = document.querySelector('#ContentNewFile');
 const upload = document.querySelector('#ContentNewFile');
@@ -924,7 +959,6 @@ function getImageFiles(e) {
                     slide2Fn();
                 }
             };
-            NewBoardBackground.style.display = "none";
             BoardBackground2.style.display = "flex";
             BoardBackground2.classList.remove('BoardBackground-close');
         }

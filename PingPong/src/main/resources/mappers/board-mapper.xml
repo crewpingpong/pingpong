@@ -174,9 +174,47 @@
         AND MEMBER_NO = #{memberNo}
     </delete>
     
+    <!-- 북마크 테이블 삽입 -->
+    <insert id="insertBoardMarkup">
+    	INSERT INTO "BOOKMARK" VALUES(
+    	#{memberNo}, #{boardNo})
+    </insert>
+    
+    <!-- 북마크 테이블 삭제 -->
+	<delete id="deleteBoardMarkup">
+		DELETE FROM "BOOKMARK"
+		WHERE BOARD_NO = #{boardNo}
+		AND MEMBER_NO = #{memberNo]
+	</delete>
+    
     <!-- 좋아요 수 조회 -->
     <select id="countBoardLike" resultType="_int">
         SELECT COUNT(*) FROM "LIKE" WHERE BOARD_NO = #{boardNo}
     </select>
+    
+    <insert id="boardInsert" parameterType="Board" useGeneratedKeys="true">
+    	<selectKey order="BEFORE" resultType="_int" keyProperty="boardNo">
+			SELECT SEQ_BOARD_NO.NEXTVAL FROM DUAL
+		</selectKey>	
+	
+		INSERT INTO BOARD 
+	      VALUES( #{boardNo},
+	              #{boardContent},
+	              DEFAULT, DEFAULT, 
+	              #{memberNo})
+    </insert>
+    
+    <insert id="insertImageList" parameterType="list">
+    	INSERT INTO "BOARD_IMG"
+    	SELECT SEQ_BOARD_IMG_NO.NEXTVAL, A.*
+    	FROM(
+    		<foreach collection="list" item="img" separator=" UNION ALL ">
+				SELECT #{img.imgOrder} IMG_ORDER
+						, #{img.imgAddress} IMG_ADDRESS
+					   	, #{img.boardNo} BOARD_NO 
+				FROM DUAL 
+			</foreach>	
+    	) A
+    </insert>
 	
 </mapper>
