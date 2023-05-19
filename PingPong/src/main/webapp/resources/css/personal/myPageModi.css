@@ -86,7 +86,7 @@
     border: 1px solid #C5C5C5;
     border-radius: 5px;
     padding: 8px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 .userName-change>p,.URL-change>p,.interest-field-container>p{
     margin-top: 25px;
@@ -94,7 +94,22 @@
     font-size: 14px;
     margin-bottom: 5px;
 }
-
+.user-name-change-message{
+    font-size: 12px;
+    letter-spacing: -1px;
+    color: #5C5C5C;
+    font-weight: lighter;
+    display: inline-block;
+}
+.URL-change-check-message{
+    margin-top: 0px;
+    font-size: 12px;
+    letter-spacing: -1px;
+    color: #5C5C5C;
+    font-weight: lighter;
+    vertical-align: top;
+    display: inline-block;
+}
 
 /* input file 커스텀 */
 .profile-change-area>div{
@@ -171,14 +186,6 @@
 .URL-change>div{
     width: 100%; height: 96px;
     border-radius: 5px; border: 1px solid #92B4EC;
-}
-
-.url-double-check{
-    background-color: #92B4EC; border-radius: 20px;
-    width: 100px; height: 34px;
-    color: #FFFFFF; float: right;
-    margin-top: 10px; margin-bottom: 5px;
-    font-size: 12px; font-weight: bold; cursor: pointer;
 }
 
 

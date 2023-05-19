@@ -77,6 +77,7 @@
                             <p>사용자 이름</p>
                             <input type="text" name="memberNickname" minlength="2" maxlength="20" placeholder="사용자 이름을 입력해주세요." 
                                 value="${loginMember.memberNickname}" id="memberNickname">
+                            <br><span class="user-name-change-message" id="nickMessage"> </span>
                         </div>
 
                         <!-- url -->
@@ -85,9 +86,9 @@
                             <div>
                                 <p>pingpong.net/</p>
                                 <input type="text" name="memberUrl" id="memberUrl"
-                                    value="${loginMember.memberUrl}" required> <br>
+                                    value="${loginMember.memberUrl}" required>
                             </div>
-                            <button class="url-double-check" type="button">중복 확인</button>
+                                <span class="URL-change-check-message" id="URLCheckMessage"></span>
                         </div>
 
                         <!-- 관심분야 변경 -->
