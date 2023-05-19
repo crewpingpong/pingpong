@@ -455,7 +455,7 @@ Java를 이용한 백엔드 연결
 
     <!-- 메세지 보내기 -->
     <div class="message-container message-send">
-        <form class="recieve-message-box" method="POST" action="/message/send/${mypage.memberNo}">
+        <div class="recieve-message-box">
             <div class="message-box-top">
                 <div>
                     <div class="message-profile"><img src="${mypage.profileImage}"></div>
@@ -481,7 +481,7 @@ Java를 이용한 백엔드 연결
                     <button type="button" class="sendBtn">전송</button>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 
     <!-- 받은 메세지 -->
