@@ -265,13 +265,14 @@ function gotoMessageFn(){ // 받은 메세지 함으로 가는 함수
         
                 // 프로필 사진 요소 생성
                 const profileImg = document.createElement('img');
-                profileImg.setAttribute('src', reciveMem.profileImg);
+                if(reciveMem.profileImg != null){
+                    profileImg.setAttribute('src', reciveMem.profileImg);
+                }
                 profileImg.setAttribute('alt', '프로필 사진');
                 const profileBox = document.createElement('div'); // 보낸 멤버 이름 + 내용 담는 상자
                 profileBox.classList.add('probox');
                 profileBox.appendChild(profileImg);
                 newMessage.appendChild(profileBox);
-        
                 // 이름 요소 생성
                 const name = document.createElement('p');
                 name.innerText = reciveMem.memberNickname; 
@@ -371,6 +372,9 @@ function gotoMessageFn(){ // 받은 메세지 함으로 가는 함수
                             alert("메세지 삭제 실패");
                         }
                     })
+                    .catch(err =>{
+                        console.log(err);
+                    })
                 })
 
 
@@ -427,7 +431,9 @@ function gotoMessagesendFn(){ // 보낸 메세지 함으로 가는 함수
         
                 // 프로필 사진 요소 생성
                 const profileImg = document.createElement('img');
-                profileImg.setAttribute('src', reciveMem.profileImg);
+                if(reciveMem.profileImg != null){
+                    profileImg.setAttribute('src', reciveMem.profileImg);
+                }
                 profileImg.setAttribute('alt', '프로필 사진');
                 const profileBox = document.createElement('div');
                 profileBox.classList.add('probox');
@@ -522,6 +528,9 @@ function gotoMessagesendFn(){ // 보낸 메세지 함으로 가는 함수
                             alert("메세지 삭제 실패");
                         }
                     })
+                    .catch(err =>{
+                        console.log(err);
+                    })
                 })
 
                 // 부모 요소에 새로운 메시지 요소 추가
@@ -544,6 +553,8 @@ function gotoMessagesendFn(){ // 보낸 메세지 함으로 가는 함수
     .catch(err =>{
         console.log(err);
     })
+
+    
 }
 
 
@@ -563,7 +574,7 @@ function postMessageSendFn(){ // 메세지 전송 함수
 
     const messageContent= messageSendBoxContent.value;
 
-    fetch("/message/send",{
+    fetch("/message/messageSend",{
         method : "POST",
         headers : {"content-type":"application/json"},
         body : JSON.stringify({
@@ -583,6 +594,8 @@ function postMessageSendFn(){ // 메세지 전송 함수
 
     })
 
-
+    .catch(err =>{
+        console.log(err);
+    })
 
 }
