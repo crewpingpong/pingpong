@@ -120,8 +120,10 @@
     
                 <!-- 상단에 검색했을 때 열리는 검색 창 -->
                 <div id="headerSearchModContainer">
-                    <p>검색</p>
-                    <div id="headerSearchModResultList"></div>
+                    <form action="/board/1" method="get">
+                        <p>검색</p>
+                        <div id="headerSearchModResultList"></div>
+                    </form>
                 </div>
             </div>
     
