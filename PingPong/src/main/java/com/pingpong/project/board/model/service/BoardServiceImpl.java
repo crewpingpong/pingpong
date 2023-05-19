@@ -39,4 +39,16 @@ public class BoardServiceImpl implements BoardService{
         int count = dao.countBoardLike(paramMap.get("boardNo"));
         return count;
     }
+
+	@Override
+	public int boardMarkup(Map<String, Integer> paramMap) {
+		int result = 0;
+        if(paramMap.get("check") == 0) {
+            result = dao.insertBoardMarkup(paramMap);
+        } else {
+            result = dao.deleteBoardMarkup(paramMap);
+        }
+        
+        return result;
+	}
 }

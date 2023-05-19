@@ -32,4 +32,10 @@ public interface BoardService {
      */
     int like(Map<String, Integer> paramMap);
 
+	/** 북마크 처리 서비스 (AJAX)
+	 * @param paramMap
+	 * @return count
+	 */
+    int boardMarkup(Map<String, Integer> paramMap);
+
 }

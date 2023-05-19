@@ -48,4 +48,21 @@ public class BoardDAO {
         return sqlSession.selectOne("boardMapper.countBoardLike", boardNo);
     }
 
+	/** 북마크 테이블 삽입
+	 * @param paramMap
+	 * @return result
+	 */
+	public int insertBoardMarkup(Map<String, Integer> paramMap) {
+		return sqlSession.insert("boardMapper.insertBoardMarkup", paramMap);
+	}
+
+	/** 북마크 테이블 삭제
+	 * @param paramMap
+	 * @return result
+	 */
+	public int deleteBoardMarkup(Map<String, Integer> paramMap) {
+		return sqlSession.delete("boardMapper.deleteBoardMarkup", paramMap);
+	}
+	
+
 }

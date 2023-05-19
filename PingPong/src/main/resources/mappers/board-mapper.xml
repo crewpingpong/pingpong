@@ -127,7 +127,18 @@
 	<select id="selectBoard" resultMap="board_rm">
 		SELECT BOARD_NO, BOARD_CONTENT, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, ONE_LINER, 
 		(SELECT COUNT(*) FROM "LIKE" L
-		 WHERE L.BOARD_NO = B.BOARD_NO) LIKE_COUNT
+		 WHERE L.BOARD_NO = B.BOARD_NO) LIKE_COUNT,
+		 	<![CDATA[
+				CASE  
+					WHEN SYSDATE - BOARD_DATE < 1/24/60
+					THEN FLOOR( (SYSDATE - BOARD_DATE) * 24 * 60 * 60 ) || '초 전'
+					WHEN SYSDATE - BOARD_DATE < 1/24
+					THEN FLOOR( (SYSDATE - BOARD_DATE) * 24 * 60) || '분 전'
+					WHEN SYSDATE - BOARD_DATE < 1
+					THEN FLOOR( (SYSDATE - BOARD_DATE) * 24) || '시간 전'
+					ELSE TO_CHAR(BOARD_DATE, 'YYYY-MM-DD')
+				END BOARD_DATE
+			]]>
 		 FROM "BOARD" B
 		 JOIN "MEMBER" USING(MEMBER_NO)
 		 LEFT JOIN "MEMBER_PROFILE" USING(MEMBER_NO)
@@ -163,9 +174,47 @@
         AND MEMBER_NO = #{memberNo}
     </delete>
     
+    <!-- 북마크 테이블 삽입 -->
+    <insert id="insertBoardMarkup">
+    	INSERT INTO "BOOKMARK" VALUES(
+    	#{memberNo}, #{boardNo})
+    </insert>
+    
+    <!-- 북마크 테이블 삭제 -->
+	<delete id="deleteBoardMarkup">
+		DELETE FROM "BOOKMARK"
+		WHERE BOARD_NO = #{boardNo}
+		AND MEMBER_NO = #{memberNo]
+	</delete>
+    
     <!-- 좋아요 수 조회 -->
     <select id="countBoardLike" resultType="_int">
         SELECT COUNT(*) FROM "LIKE" WHERE BOARD_NO = #{boardNo}
     </select>
+    
+    <insert id="boardInsert" parameterType="Board" useGeneratedKeys="true">
+    	<selectKey order="BEFORE" resultType="_int" keyProperty="boardNo">
+			SELECT SEQ_BOARD_NO.NEXTVAL FROM DUAL
+		</selectKey>	
+	
+		INSERT INTO BOARD 
+	      VALUES( #{boardNo},
+	              #{boardContent},
+	              DEFAULT, DEFAULT, 
+	              #{memberNo})
+    </insert>
+    
+    <insert id="insertImageList" parameterType="list">
+    	INSERT INTO "BOARD_IMG"
+    	SELECT SEQ_BOARD_IMG_NO.NEXTVAL, A.*
+    	FROM(
+    		<foreach collection="list" item="img" separator=" UNION ALL ">
+				SELECT #{img.imgOrder} IMG_ORDER
+						, #{img.imgAddress} IMG_ADDRESS
+					   	, #{img.boardNo} BOARD_NO 
+				FROM DUAL 
+			</foreach>	
+    	) A
+    </insert>
 	
 </mapper>
