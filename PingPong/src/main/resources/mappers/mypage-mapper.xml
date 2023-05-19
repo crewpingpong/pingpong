@@ -57,7 +57,7 @@
 	
 	<!-- 프로필 이미지 수정 -->
 	<update id="updateProfileImage">
-		UPDATE "MEMBER" SET
+		UPDATE "MEMBER_PROFILE" SET
 		PROFILE_IMG = #{profileImage}
 		WHERE MEMBER_NO = #{memberNo}
 	</update>

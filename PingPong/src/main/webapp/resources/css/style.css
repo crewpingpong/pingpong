@@ -377,7 +377,7 @@ display: none; z-index: 202;
 .message-Box-recive .messageExample>div:nth-of-type(3) img{cursor: pointer;}
 .message-Box-recive .messageExample>div:nth-of-type(3) p{
     color: #5C5C5C;
-    align-self: flex-end;
+    align-self: flex-end; font-size: 12px; margin-top: 4px;
 }
 .message-Box-recive .messageExample>div:nth-of-type(2){
     width: 360px; cursor: pointer; 
@@ -447,7 +447,7 @@ display: none; z-index: 202;
     justify-content: space-between; 
 }
 /* .message-Box-recive .messageExample>div:nth-of-type(3) svg{color: #5C5C5C; margin-bottom: 12px;} */
-.messageExample .messageListX{width: 10px; width: 10px; color: #5C5C5C; margin-bottom: 12px;}
+.messageExample .messageListX{width: 10px; width: 10px; color: #5C5C5C;}
 .message-Box-recive .messageExample>div:nth-of-type(3) p{
     color: #5C5C5C;
     align-self: flex-end;
@@ -456,7 +456,7 @@ display: none; z-index: 202;
 .message-Box-recive .messageExample>div:nth-of-type(2){
     width: 330px;
 }
-.probox>img{width: 100%; height: 100%;}
+.probox>img{width: 100%; height: 100%; border-radius: 50%;}
 
 /* 보낸 메세지 함 */
 .message-Box-send{
@@ -493,7 +493,8 @@ display: none; z-index: 202;
 /* 메세지 리스트 */
 .message-Box-send .messageList{
     margin: 40px 0; height: 400px; width: 500px;
-    font-size: 14px; color:#000;
+    font-size: 14px; color:#000; overflow: auto;
+    padding-right: 8px;
 }
 .message-Box-send .messageExample{
     width: 100%; height: 46px; margin-bottom: 20px;
@@ -514,7 +515,7 @@ display: none; z-index: 202;
 .message-Box-send .messageExample>div:nth-of-type(3) svg{color: #5C5C5C; margin-bottom: 12px;}
 .message-Box-send .messageExample>div:nth-of-type(3) p{
     color: #5C5C5C;
-    align-self: flex-end;
+    align-self: flex-end; font-size: 12px;
 }
 
 
@@ -548,7 +549,7 @@ display: none; z-index: 202;
     background-color: #C5C5C5; 
     display: flex; justify-content: center; margin-top: 15px;
 }
-.message-profile>img{width: 100%; height: 100%;}
+.message-profile>img{width: 100%; height: 100%; border-radius: 50%;}
 .message-box-top>div>p{
     height: 30px; 
     display: flex; justify-content: center; 

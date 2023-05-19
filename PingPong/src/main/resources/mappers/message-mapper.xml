@@ -51,7 +51,7 @@
 	<!-- 보낸 메세지 조회 -->
 	<select id="sendmessageList" resultMap="message_rm">
 		SELECT m.MESSAGE_NO, m.MESSAGE_CONTENT, 
-			   TO_CHAR(m.SEND_DATE, 'YY"년" MM"월" DD"일" HH24":"MI') SEND_DATE, 
+			   TO_CHAR(m.SEND_DATE, 'YYYY-MM-DD HH24":"MI') SEND_DATE, 
 			   m.SEND_MEMBER, m.RECEIVED_MEMBER,
 		       MP.PROFILE_IMG, R.MEMBER_NICKNAME MEMBER_NICKNAME, m.MESSAGE_SEND_DEL_FL
 		FROM MESSAGE m
@@ -71,19 +71,27 @@
 	</insert>
 	
 	<!-- 받은 메세지 삭제 -->
-<!-- 	<update id="delmessage">
+	<update id="delmessage">
 		UPDATE MESSAGE
 		SET MESSAGE_DEL_FL='Y' 
-		WHERE MESSAGE_NO= #{}
+		WHERE MESSAGE_NO= #{delNo}
 		AND MESSAGE_DEL_FL='N'
-	</update> -->
+	</update>
 	
 	<!-- 보낸 메세지 삭제 -->
-<!-- 	<update id="delSendmessage">
+ 	<update id="delSendmessage">
 		UPDATE MESSAGE
-		SET MESSAGE_DEL_FL='Y' 
-		WHERE MESSAGE_NO= #{}
+		SET MESSAGE_SEND_DEL_FL='Y' 
+		WHERE MESSAGE_NO= #{delNo}
 		AND MESSAGE_SEND_DEL_FL='N'
-	</update> -->
+	</update>
+	
+	
+	<!-- 메세지 보내기 -->
+	<insert id="sendMessage">
+		INSERT INTO MESSAGE
+		(MESSAGE_NO, MESSAGE_CONTENT, SEND_DATE, SEND_MEMBER, RECEIVED_MEMBER)
+		VALUES(SEQ_MESSAGE_NO.NEXTVAL, #{messageContent}, SYSDATE, #{sendMember}, #{receivedMember})
+	</insert>
 	
 </mapper>

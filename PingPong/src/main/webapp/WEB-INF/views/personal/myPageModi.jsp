@@ -43,7 +43,7 @@
 
             <!-- *** 내 정보 편집 *** -->
             <div id="myPageModiTab1" class="myPage-content-main">
-                <form name="myPageFrm" id="updateInfo" action="/mypage/myPageModi" method="POST">
+                <form name="myPageFrm" id="updateInfo" action="/mypage/myPageModi" method="POST" enctype= multipart/form-data>
                     <div class="myInfo-modi">
 
                         <!-- 프로필 사진 -->
@@ -66,7 +66,7 @@
                                 <img src="/resources/images/mypage/pencil.png"> <%-- 연필 --%>
                                 <div class="profile-change-Btn">
                                     <label for="file">프로필 사진 편집</label> 
-                                    <input type="file" class="profileUpload" id="file" accept="image/*" required multiple>
+                                    <input type="file" name="profileImage" class="profileUpload" id="file" accept="image/*" required multiple>
                                 </div>
                                 <img src="/resources/images/message/messageDeleteImg.png" id="deleteProfile"> <%-- X버튼 --%>
                             </div>
