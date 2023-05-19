@@ -107,7 +107,7 @@ public class MessageController {
 			, Message message
 			) {
 		message.setSendMember(loginMember.getMemberNo());
-		message.setMessageContent(messageContent));
+		message.setMessageContent(messageContent);
 		
 		// 프로필 보고 있는 회원 번호 가져와서 보내기
 		return service.sendMessage(message);
