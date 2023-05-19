@@ -118,7 +118,7 @@ if(updateInfo != null){
 }
 
 
-// 홈프로필 배경 변경
+// 홈프로필 이미지 변경
 const profileImage = document.querySelector("#profileImage");   // img태그
 const imageInput = document.querySelector("#file");       // input태그
 const deleteProfile = document.querySelector("#deleteProfile"); // x버튼

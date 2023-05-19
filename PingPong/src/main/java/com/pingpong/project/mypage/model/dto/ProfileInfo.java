@@ -11,9 +11,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class ProfileInfo { 
-    private String introduce;      // 자기소개    
-    private String career;         // 경력 
-    private String certificate;    // 자격증 (아이콘)
-    private List<String> techList; // 지식/기술
-    private Map<String, String> snsMap; 
+    private String introduce;           // 자기소개    
+    private String career;              // 경력 
+    private String certificate;         // 자격증
+    
+    private List<Tech> techList;        // 지식/기술 (아이콘)
+    private Map<String, Object> snsMap; // SNS (아이콘)
 }

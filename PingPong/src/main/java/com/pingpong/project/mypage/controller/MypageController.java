@@ -95,14 +95,13 @@ public class MypageController {
 	    int profileResult = service.updateProfile(profileImage, reName, webPath, filePath, loginMember.getMemberNo());
 
 	    String message = null;
-	    if (infoResult > 0 && profileResult > 0) {
+	    if (infoResult > 0 || profileResult > 0) {
 	    	
 	        message = "회원 정보가 수정되었습니다.";
 
 	        // Session에 로그인 된 회원 정보 수정
 	        loginMember.setMemberNickname(updateMember.getMemberNickname());
 	        loginMember.setMemberUrl(updateMember.getMemberUrl());
-	        
 	        mypage.setProfileImage(webPath+reName);
 	        
 	    } else {
@@ -113,6 +112,16 @@ public class MypageController {
 
 	    return "redirect:myPageModi";
 	}
+	
+	
+	// 프로필 정보 수정 (자기소개, 커리어, 자격증, 지식/기술, SNS)
+	public String updateProfileInfo(Member updateMember
+								, @SessionAttribute("loginMember") Member loginMember) {
+		
+		return null;
+		
+	}
+	
 
 
 	
