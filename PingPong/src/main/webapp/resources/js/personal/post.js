@@ -357,7 +357,8 @@ const checkSlideDiv = document.getElementsByClassName("slide_item");
 let slideItems; // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
 const BoardHeart = document.querySelector(".BoardHeart");
 const BoardRedHeart = document.querySelector(".BoardRedHeart");
-const boardMark = document.querySelector(".boardMark");
+const markOn = document.querySelector(".markOn");
+const markOff = document.querySelector(".markOff");
 
 let boardNumber;
 function selectBoardList(boardNo){
@@ -370,20 +371,37 @@ function selectBoardList(boardNo){
             slideItem.remove();
         });
 
-        let flag = 0;
+        let flagHeart = 0;
         for(let i of board.likeList){
-            if(loginMemberNo == "" || loginMemberNo == i.memberNo){
-                flag++;
+            if(loginMemberNo == i.memberNo){
+                flagHeart++;
                 break;
             }
         }
         BoardRedHeart.style.display = "none";
         BoardHeart.style.display = "none";
-        if(flag>0){
+        if(flagHeart>0){
             BoardRedHeart.style.display = "block";
         } else {
             BoardHeart.style.display = "block";
         }
+
+        let flagBookmark = 0;
+        for(let i of board.bookmarkList){
+            if(loginMemberNo == i.memberNo){
+                flagBookmark++;
+                break;
+            }
+        }
+        markOn.style.display = "none";
+        markOff.style.display = "none";
+        if(flagBookmark>0){
+            markOn.style.display = "block";
+        } else {
+            markOff.style.display = "block";
+        }
+
+
         boardNumber = board.boardNo;
 
         const porfileRac = document.querySelector(".porfileRac");
@@ -534,85 +552,52 @@ function selectBoardList(boardNo){
         boardMemberInfo.append(memberNickA);
 
 
-                const postContentDiv = document.createElement("div");
-                postContentDiv.classList.add("postcontent1");
+        const postContentDiv = document.createElement("div");
+        postContentDiv.classList.add("postcontent1");
 
-                const boardPostDiv = document.createElement("div");
-                boardPostDiv.classList.add("BoardPost1");
+        const boardPostDiv = document.createElement("div");
+        boardPostDiv.classList.add("BoardPost1");
 
-                const boardProfileA = document.createElement("a");
-                boardProfileA.href = "/mypage/"+board.memberNo;
-                boardProfileA.classList.add("Boardprofile1");
-                const profileImg = document.createElement("img");
-                profileImg.src = board.profileImage;
-                boardProfileA.append(profileImg);
-                boardPostDiv.append(boardProfileA);
+        const boardProfileA = document.createElement("a");
+        boardProfileA.href = "/mypage/"+board.memberNo;
+        boardProfileA.classList.add("Boardprofile1");
+        const profileImg = document.createElement("img");
+        profileImg.src = board.profileImage;
+        boardProfileA.append(profileImg);
+        boardPostDiv.append(boardProfileA);
 
 
-                const div = document.createElement("div");
+        const div = document.createElement("div");
 
-                const innerDiv = document.createElement("div");
-                innerDiv.classList.add("innerDiv");
+        const innerDiv = document.createElement("div");
+        innerDiv.classList.add("innerDiv");
 
-                const nameA = document.createElement("a");
-                nameA.href = "/mypage/"+board.memberNo;
-                nameA.innerText = board.memberNickname;
+        const nameA = document.createElement("a");
+        nameA.href = "/mypage/"+board.memberNo;
+        nameA.innerText = board.memberNickname;
 
-                const contentP = document.createElement("p");
-                contentP.innerText = board.boardContent;
+        const contentP = document.createElement("p");
+        contentP.innerText = board.boardContent;
 
-                const dateDiv = document.createElement("div");
-                dateDiv.classList.add("dateDiv");
+        const dateDiv = document.createElement("div");
+        dateDiv.classList.add("dateDiv");
 
-                const cDateP = document.createElement("p");
-                cDateP.innerText = board.boardDate;
+        const cDateP = document.createElement("p");
+        cDateP.innerText = board.boardDate;
 
-                dateDiv.append(cDateP);
+        dateDiv.append(cDateP);
 
-                innerDiv.append(nameA, contentP)
-                div.append(innerDiv, dateDiv);
-                const lastDiv = document.createElement("div");
-                lastDiv.classList.add("lastDivadd")
-                lastDiv.append(boardPostDiv, div);
-                postContentDiv.append(lastDiv);
-                
-                BoardPost.append(postContentDiv);
+        innerDiv.append(nameA, contentP)
+        div.append(innerDiv, dateDiv);
+        const lastDiv = document.createElement("div");
+        lastDiv.classList.add("lastDivadd")
+        lastDiv.append(boardPostDiv, div);
+        postContentDiv.append(lastDiv);
+        
+        BoardPost.append(postContentDiv);
 
         likeCountSpan.innerText = board.likeCount+"명이 좋아합니다";
-
-        boardMark.addEventListener("click", e=>{
-            if(loginMemberNo == ""){
-                alert("로그인 후 이용해주세요");
-                return;
-            }
-            let check;
-            if(e.target.classList.contains("Markup")){  // 북마크 o
-                check = 1;
-            } else {
-                check = 0;
-            }
-
-            const data = {"boardNo" : boardNumber, "memberNo" : loginMemberNo, "check" : check};
-
-            fetch("/board/markup", {
-                method : "POST",
-                headers : {"Content-Type" : "application/json"},
-                body : JSON.stringify(data)}
-            )
-            .then(response => response.text())
-            .then(result => {
-                if(result = 0){
-                    console.log("북마크 처리 실패");
-                    return;
-                }
-                if(check==0){
-                    
-                }
-
-
-            })
-
-        })
+        
 
         slideInitFn();
         secondComment = document.querySelectorAll("secondComment");
@@ -631,7 +616,7 @@ function selectBoardList(boardNo){
 
 
 
-// 좋아요 처리 구현
+// 좋아요 AJAX
 const boardLike = document.querySelectorAll(".boardLike");
 const likeCount = document.querySelector(".likeCount");
 for(let i=0;i<boardLike.length;i++){
@@ -647,7 +632,6 @@ for(let i=0;i<boardLike.length;i++){
         } else {  // 좋아요 o
             check = 1;
         }
-        console.log(check);
 
 
         const data = {"boardNo" : boardNumber, "memberNo" : loginMemberNo, "check" : check};
@@ -679,6 +663,51 @@ for(let i=0;i<boardLike.length;i++){
             console.log(err);
         })
     });
+}
+
+const boardMark = document.querySelectorAll(".boardMark");
+
+
+// 북마크 AJAX
+for(let i=0;i<boardMark.length;i++){
+    boardMark[i].addEventListener("click", e=>{
+        if(loginMemberNo == ""){
+            alert("로그인 후 이용해주세요");
+            return;
+        }
+        let check1;
+        
+        if(e.target.classList.contains("markOff")){  // 북마크 x
+            check1 = 0;
+        } else { // 북마크 o
+            check1 = 1;
+        }
+
+        const data = {"boardNo" : boardNumber, "memberNo" : loginMemberNo, "check" : check1};
+
+        fetch("/board/markup", {
+            method : "POST",
+            headers : {"Content-Type" : "application/json"},
+            body : JSON.stringify(data)}
+        )
+        .then(response => response.text())
+        .then(result => {
+            if(result = 0){
+                console.log("북마크 처리 실패");
+                return;
+            }
+            if(check1==0){
+                markOn.style.display = "block";
+                markOff.style.display = "none";
+            } else{
+                markOn.style.display = "none";
+                markOff.style.display = "block";
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    })
 }
 
 

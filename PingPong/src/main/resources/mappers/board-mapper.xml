@@ -20,6 +20,13 @@
 		<result property="likeCount" column="LIKE_COUNT"/>
 		<result property="likeCheck" column="LIKE_CHECK"/>
 					
+		<collection property="bookmarkList"
+					select="selectBookmarkList"
+					column="BOARD_NO"
+					javaType="java.util.ArrayList"
+					ofType="Bookmark"
+					/>			
+					
 		<collection property="likeList"
 					select="selectLikeList"
 					column="BOARD_NO"
@@ -42,6 +49,11 @@
 					/>
 	</resultMap>
 	<resultMap type="Like" id="like_rm" autoMapping="true">
+		<id property="boardNo" column="BOARD_NO"/>
+		<id property="memberNo" column="MEMBER_NO"/>
+	</resultMap>
+	
+	<resultMap type="Bookmark" id="bookmark_rm" autoMapping="true">
 		<id property="boardNo" column="BOARD_NO"/>
 		<id property="memberNo" column="MEMBER_NO"/>
 	</resultMap>
@@ -160,6 +172,11 @@
 		WHERE BOARD_NO = #{boardNo}
 	</select>
 	
+	<select id="selectBookmarkList" resultMap="bookmark_rm">
+		SELECT MEMBER_NO
+		FROM "BOOKMARK"
+		WHERE BOARD_NO = #{boardNo}
+	</select>
 	
     <!-- 좋아요 테이블 삽입 -->
     <insert id="insertBoardLike">
@@ -184,7 +201,7 @@
 	<delete id="deleteBoardMarkup">
 		DELETE FROM "BOOKMARK"
 		WHERE BOARD_NO = #{boardNo}
-		AND MEMBER_NO = #{memberNo]
+		AND MEMBER_NO = #{memberNo}
 	</delete>
     
     <!-- 좋아요 수 조회 -->

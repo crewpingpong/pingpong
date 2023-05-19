@@ -37,6 +37,7 @@ public class BoardController {
     // 북마크 처리
     @PostMapping("/board/markup")
     public int boardMarkup(@RequestBody Map<String, Integer> paramMap) {
+    	System.out.println(paramMap.get("check"));
     	return service.boardMarkup(paramMap);
     }
 }

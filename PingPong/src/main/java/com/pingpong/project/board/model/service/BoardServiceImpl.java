@@ -45,10 +45,11 @@ public class BoardServiceImpl implements BoardService{
 		int result = 0;
         if(paramMap.get("check") == 0) {
             result = dao.insertBoardMarkup(paramMap);
+            System.out.println("테이블 삽입");
         } else {
             result = dao.deleteBoardMarkup(paramMap);
+            System.out.println("테이블 삭제");
         }
-        
         return result;
 	}
 }

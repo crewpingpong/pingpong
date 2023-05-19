@@ -31,6 +31,7 @@ public class Board {
 	private String likeCount;
     private String likeCheck;
 
+    private List<Bookmark> bookmarkList;
     private List<Like> likeList;
 	private List<BoardImage> imageList;
 	
