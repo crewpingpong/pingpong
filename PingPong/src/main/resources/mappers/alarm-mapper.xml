@@ -9,9 +9,30 @@
 		<result property="noticeContent" column="NOTICE_COMENT" />
 		<result property="elapsedDate" column="ELAPSED_TIME" />
 		<result property="memberNo" column="MEMBER_NO" />
+				
+		<result property="sendNo" column="SEND_NO" />
+		<result property="sendProfile" column="PROFILE_IMG" />
 	</resultMap>
 	
-
+	<!-- 알람 메세지를 보낸 사람의 프로필 이미지 조회 -->
+	<select id="selectProfileImage" resultType="string">
+		SELECT PROFILE_IMG
+		FROM MEMBER_PROFILE
+		WHERE MEMBER_NO = #{sendNo}
+	</select>
+	
+	<!-- 알람을 받는 사람 번호(== 게시글 작성) -->
+	<select id="selectMemberNo" resultType="int">
+		SELECT MEMBER_NO 
+		FROM BOARD
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	<insert id="insertAlarm">
+		INSERT INTO NOTICE
+		(NOTICE_NO, NOTICE_COMENT, ELAPSED_TIME, MEMBER_NO)
+		VALUES(SEQ_NOTICE_NO.NEXTVAL, #{noticeContent} , SYSDATE, #{memberNo})
+	</insert>
 	
 
 	
