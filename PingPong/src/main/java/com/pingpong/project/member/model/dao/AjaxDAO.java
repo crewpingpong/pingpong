@@ -34,17 +34,20 @@ public class AjaxDAO {
 		return sqlSession.selectOne("ajaxMapper.checkUrl", URL);
 	}
 		
+	// 닉네임이 일부라도 일치하는 모든 회원 조회 (40명)
+	// 이메일이 일부라도 일치하는 모든 회원 조회
+	public List<Member> selectMemberList(String input) {
+		return sqlSession.selectList("ajaxMapper.selectMemberList", input);
+		
+	}
+	
 	//////////////////////////////////////////////////////////
 	// 이메일로 회원 정보 조회
 	public Member selectMember(String email) {
 		return sqlSession.selectOne("ajaxMapper.selectMember", email);
 	}
 
-	// 이메일이 일부라도 일치하는 모든 회원 조회
-	public List<Member> selectMemberList(String input) {
-		return sqlSession.selectList("ajaxMapper.selectMemberList", input);
-		
-	}
+	
 	// 닉네임으로 전화번호 조회
 	public String selectMemberTel(String nickname) {
 		return sqlSession.selectOne("ajaxMapper.selectMemberTel", nickname);

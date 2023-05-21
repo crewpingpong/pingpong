@@ -1,88 +1,61 @@
-// 문서가 모두 로딩된 후 수행
-document.addEventListener("DOMContentLoaded", () => {
 
-    const query = document.querySelector("#query"); // 헤더 검색창
+const headerOpenSearchBox1 = document.getElementById("headerOpenSearchBox");
 
-    const searchResult = document.querySelector("#searchResult"); // 검색창 자동 완성 영역
+if (headerOpenSearchBox1 != null) {
 
+    headerOpenSearchBox1.addEventListener("input", (e) => {
 
-    query.addEventListener("input", e => {
+        const headerSearchBoxValue = headerOpenSearchBox1.value;
 
-        if (query.value.trim().length > 0) { // 입력된 내용이 있을 때
-            fetch("/board/headerSearch?query=" + query.value.trim())
-                .then(resp => resp.json())
-                .then(list => {
-                    console.log(list);
+        if (headerSearchBoxValue.charAt(0) === '#') {
+            console.log("# 있어요");
+            // # 있을때
+            // fetch("/selectNickname", {
+            //     method : "POST",
+            //     headers : {"Content-Type" : "application/text"}, // 문자열 하나를 파라미터로 전달
+            //     body : input.value // 보내질 문자열 하나
+            // })
+            // .then(resp => resp.json())
+            // .then(memberList => {
+            //     console.log(memberList);
 
-                    if (list.length > 0) { // 검색 결과가 있을 때
-                        searchResult.classList.remove("close");
+            //     result3.innerHTML="";
+            //     if(memberList.length == 0){
+            //         result3.innerHTML = "조회 결과가 없습니다";
+            //         return;
+            //     }
 
-                        // BOARD_NO, BOARD_TITLE, READ_COUNT, BOARD_CODE, BOARD_NAME 
+            //     for(let member of memberList){
 
-                        searchResult.innerHTML = ""; // 이전 검색 내역 삭제
+            //         // tr, td 만들어서 result3에 추가
+            //         const tr = document.createElement("tr");
 
-                        for (let map of list) {
-                            const li = document.createElement("li");
-                            li.setAttribute("path", `${map.BOARD_CODE}/${map.BOARD_NO}`);
+            //         const td1 = document.createElement("td");
+            //         td1.innerText = member.memberNo;
 
+            //         const td2 = document.createElement("td");
+            //         td2.innerText = member.memberEmail;
 
-                            const a = document.createElement("a");
+            //         const td3 = document.createElement("td");
+            //         td3.innerText = member.memberNickname;
 
-                            map.BOARD_TITLE = map.BOARD_TITLE.replace(query.value, `<mark>${query.value}</mark>`);
-                            map.BOARD_TITLE = `<b>${map.BOARD_TITLE}</b>`;
+            //         // 1) tr의 자식으로 td1~3 추가
+            //         tr.append(td1, td2, td3);
 
-                            a.innerHTML = `${map.BOARD_TITLE} - ${map.BOARD_NAME}`;
+            //         // 2) result3의 자식으로 tr 추가
+            //         result3.append(tr);
+            //     }
 
-                            a.setAttribute("href", "#");
+            // })
+            // .catch(err => {
+            //     console.log(err);
 
-                            a.addEventListener("click", e => {
-                                e.preventDefault();
-
-                                const path = e.currentTarget.parentElement.getAttribute("path");
-
-                                location.href = "/board/" + path;
-
-
-                            });
-
-                            li.append(a)
-                            searchResult.append(li);
-
-
-                        }
-
-                    } else { // 검색 결과가 없다면
-                        searchResult.classList.add("close");
-                    }
-                })
-                .catch(err => console.log(err));
-
-
-        } else { // 입력된 내용이 없을 때
-            searchResult.classList.add("close");
+            // });
+        } else {
+            // # 없을때
+            console.log("# 없어요");
         }
 
 
-    })
-
-});
-
-document.addEventListener("click", e => {
-    const elementList = document.querySelectorAll(".search-area, .search-area *");
-    const searchResult = document.querySelector("#searchResult"); // 검색창 자동 완성 영역
-
-    let flag = true;
-    for (let element of elementList) {
-
-        if (element == e.target) {
-            flag = false;
-            break;
-        }
-    }
-
-    if (flag) {
-        searchResult.classList.add("close");
-        // searchResult.innerHTML = ""; 
-    }
-
-});
+    });
+}

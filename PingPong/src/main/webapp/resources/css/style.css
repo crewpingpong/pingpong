@@ -60,16 +60,6 @@ header .signBtn .colormain2{margin-right: 20px; margin-left: 50px;}
 header .signBtn{display: flex; align-items: center;}
 .signBtn button:hover{background-color: #FFD24C;}
 
-/* 검색 아이콘 호버했을 때 늘어난 검색창*/
-.seachbox{
-    width: 400px; height: 50px; border-radius: 30px; border: 1px solid #231F20;
-    display: flex; justify-content: space-between; align-items: center; padding: 0 20px; 
-    display: none; z-index: 101; background-color: #fff;}
-.seachboxleft>svg{margin-right: 12px;}
-.seachbox .seachboxleft{display: flex; align-items: center;}
-.seachbox input{border: none;}
-.seachbox input:focus{outline: none;}
-
 /* 반응형 일 때 잠깐 해봄 */
 @media screen and (max-width : 1024px) {
     header .logo img{width: 150px;}
@@ -260,18 +250,42 @@ display: none; z-index: 202;
     height: 50px; display: flex; align-items: center;
 }
 
-/* 태그 검색 시 동그라미 안의 # */
-.searchModTagRound1{
-    width: 30px; height: 30px; line-height: 40px; 
-    display: flex; align-items: center; justify-content: center; 
-    border : 1px solid black; border-radius: 50%; margin: 0 15px;
+/* 검색 아이콘 호버했을 때 늘어난 검색창*/
+.seachbox{
+    width: 400px; height: 50px; border-radius: 30px; border: 1px solid #231F20;
+    display: flex; justify-content: space-between; align-items: center; padding: 0 20px; 
+    display: none; z-index: 101; /* background-color: #fff; */
 }
-/* 그냥 검색 시 프로필 사진 */
+.seachboxleft>svg{margin-right: 12px;}
+.seachbox .seachboxleft{display: flex; align-items: center;}
+.seachbox input{border: none;}
+.seachbox input:focus{outline: none;}
+
+/* 검색 결과창 */
+
+/* 검색 시 태그 동그라미 */
+.searchModRound1{
+    width: 44px; height: 100%; 
+    line-height: 42px;
+    display: inline-block;/*  align-items: center; justify-content: center;  */
+    border : 1px solid black; 
+    border-radius: 50%;
+    position: relative;
+}
+/* 검색 시 프로필 사진 동그라미 */
 .searchModNameRound1{
-    width: 30px; height: 30px; line-height: 40px; 
-    display: flex; align-items: center; justify-content: center; 
-    border : 1px solid black; border-radius: 50%; 
-    margin: 0 15px; background-color: #C5C5C5; cursor: pointer;
+    width: 44px; height: 100%; 
+    line-height: 42px;
+    display: inline-block;/*  align-items: center; justify-content: center;  */
+    border : 1px solid black; 
+    border-radius: 50%;
+    position: relative;
+}
+.search-tag-icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 /* 검색 시 이름, 태그 */
 .searchModcontent{
@@ -281,28 +295,76 @@ display: none; z-index: 202;
 /* 드래그 안되게 하기 */
 #headerSearchModContainer > p{user-select: none;}
 
-/* 알림 하트 */
-.searchbox{
-    position: relative;
-}
+/* 검색 결과 창 div*/
 #headerSearchModContainer{
-    width : 500px; height : 600px; 
+    width : 500px; 
+    /* height : 600px;  */
+    padding: 16px 0;
     border-radius: 20px; border: 1px solid #5C5C5C; 
     box-shadow: 0 4px #dadada; 
     position: absolute; margin: auto; 
-    top : 70px; left : 0px; 
+    top : 70px; left : -50px; 
     background-color: white; 
     z-index: 300; display: none;
 }
 
-#headerSearchModContainer>p{
-    height: 64px; position: relative;
-    display: flex; align-items: center; justify-content: center; 
-    font-size: 24px; border-bottom: 1px solid #C5C5C5;
+.search-result-main-box{
+    height: 60px;
+    display: flex;  
+    align-items: center;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+.search-result-inner-box{
+    width: 100%;
+    height: 100%;
+    padding: 8px 24px;
+    box-sizing: border-box;
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+}
+.search-input-tag-box>span{
+    font-size: 16px;
+    display: block;
+    width: 100%;
+    margin-left: 10px;
+}
+.search-input-tag-box{
+    position: relative;
+    width: 90%;
 }
 
-#headerSearchModResultList{
-    height: 88%; overflow: auto; margin-right: 4px;
+/* 검색 결과 : 태그 + result 개수 */
+.search-input-tag-name{
+    position: absolute;
+    top: -23px;
+}
+.search-input-tag-count{
+    position: absolute;
+    top: -2px;
+    
+}
+/* 검색 결과 : 태그 */
+/* .search-input-tag-name{
+    position: absolute;
+    top: -13px;
+}
+ */
+
+.search-user-picture{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 110%;
+    height: 110%;
+    border-radius: 50%;
+}
+
+/* 알림 하트 */
+.searchbox{
+    position: relative;
 }
 
 #alarmModBox{

@@ -31,11 +31,7 @@ public interface AjaxService {
 	 */
 	int checkNickname(String nickname);
 
-	/** 이메일로 회원 정보 조회
-	 * @param email
-	 * @return
-	 */
-	Member selectMember(String email);
+
 
 	/** 이메일이 일부라도 일치하는 모든 회원 조회
 	 * @param input
@@ -48,5 +44,12 @@ public interface AjaxService {
 	 * @return result
 	 */
 	int checkUrl(String URL);
+	
+	//////////////////////////////////////////
+	/** 이메일로 회원 정보 조회
+	 * @param email
+	 * @return
+	 */
+	Member selectMember(String email);
 
 }
