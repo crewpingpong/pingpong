@@ -1,5 +1,6 @@
 package com.pingpong.project.message.model.service;
 
+import com.pingpong.project.message.model.dto.Follow;
 import com.pingpong.project.message.model.dto.Notice;
 
 public interface AlarmService {
@@ -21,5 +22,32 @@ public interface AlarmService {
 	 * @return
 	 */
 	int insertAlarm(Notice notice);
+
+	/** 팔로우 여부 확인
+	 * @param follow
+	 * @return
+	 */
+	int followCheck(Follow follow);
+	
+	/** 팔로우 처리
+	 * @param follow
+	 * @return
+	 */
+	int followFL(Follow follow);
+	
+//	/** 팔로우 삽입
+//	 * @param follow
+//	 * @return
+//	 */
+//	int follow(Follow follow);
+//
+//
+//	/** 팔로우 취소
+//	 * @param follow
+//	 * @return
+//	 */
+//	int unfollow(Follow follow);
+
+
 
 }

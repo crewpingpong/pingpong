@@ -1255,3 +1255,103 @@ window.addEventListener("resize", () => {
 // });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 팔로우 버튼이 클릭 되었을 때
+let followUser;
+let nufollow;
+let profileBtn; 
+let followBtn;
+
+document.addEventListener("DOMContentLoaded",()=>{
+})
+
+    followBtn = document.querySelectorAll(".followBtn>svg.fb");
+
+    followUser = document.querySelector(".followUser");
+    nufollow = document.querySelector(".nufollow");
+    profileBtn = document.querySelector(".followBtn");
+
+
+    for(let i=0;i<followBtn.length;i++){
+        followBtn[i].addEventListener("click", ()=>{
+            followFn()
+        });
+    }    
+    
+
+function followFn(){
+    // 로그인 여부 검사
+    if(loginMemberNo==""){
+        alert("로그인 후 이용해주세요.");
+        return;
+    }
+
+    let check; // 기존에 팔로우 X(노란색) : 0, followUser
+               //        팔로우 0(하늘색) : 1 nufollow
+    // contains("클래스명") : 클래스가 있으면 true, 없으면 false
+    if(followUser.classList.contains("followshow")){
+        check = 0; // 팔로우 X(노란색) : 0, followUser
+    } else{
+        check = 1;  // 팔로우 0(하늘색) : 1 nufollow
+    }
+
+    // 팔로우 할 대상 
+    const followerNo = profileBtn.getAttribute("follow");
+
+    // ajax로 서버로 제출할 파라미터를 모아둔 JS 객체
+    const data = {"memberNo": followerNo, // 회원 번호
+                "followerNo":loginMemberNo, // 팔로우한 사람 번호
+                "check":check
+                };
+
+    // ajax 코드 작성
+    fetch("/alarm/follow", {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"}, // 우리가 지금 보낼 거는 json이야
+        body : JSON.stringify(data)
+    })
+    .then(response=>response.text()) // 응답 객체를 필요한 형태로 파싱하여 리턴
+    .then(count =>{
+
+        console.log("count : "+count);
+
+        if(count == -1){ // INSERT, DELETE 실패 시
+            console.log("팔로우 처리 실패");
+            return;
+        }
+        if(count == 0){ // 자기 자신
+            console.log("자신은 팔로우 하지 못합니다.");
+            return;
+        }
+        
+        // followUser.classList.toggle("followshow");
+        // nufollow.classList.toggle("followshow");
+
+        if(check==0){ // 팔로우 성공
+            followUser.classList.remove("followshow");
+            nufollow.classList.add("followshow");
+        } else {
+            followUser.classList.add("followshow");
+            nufollow.classList.remove("followshow");
+        }
+
+    }) // 파싱한 데이터를 받아서 처리하는 코드 작성
+    .catch(err=>{
+        console.log("예외 발생");
+        console.log(err);
+    }) // 예외 발생 시 처리하는 부분
+}

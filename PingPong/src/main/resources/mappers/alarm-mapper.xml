@@ -14,6 +14,36 @@
 		<result property="sendProfile" column="PROFILE_IMG" />
 	</resultMap>
 	
+	<!-- 팔로우 관련 -->
+	<resultMap type="Follow" id="follow_rm">
+		<id property="followNo" column="FOLLOW_NO" />
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="followerNo" column="FOLLOWER_NO" />
+	</resultMap>
+	
+	
+	<!-- 팔로우 여부 -->
+	<select id="followCheck" resultType="_int">
+		SELECT COUNT(*) 
+		FROM FOLLOW
+		WHERE MEMBER_NO = #{memberNo}
+		AND FOLLOWER_NO = #{followerNo}
+	</select>
+	
+	<!-- 팔로워 삽입 -->
+	<insert id="follow">
+		INSERT INTO FOLLOW
+		VALUES(SEQ_FOLLOW_NO.NEXTVAL, #{memberNo}, #{followerNo})    
+	</insert>
+	
+	<!-- 팔로우 삭제 -->
+	<delete id="unfollow">
+		DELETE FROM FOLLOW
+		WHERE MEMBER_NO = #{memberNo}
+		AND FOLLOWER_NO = #{followerNo}
+	</delete>
+	
+	
 	<!-- 알람 메세지를 보낸 사람의 프로필 이미지 조회 -->
 	<select id="selectProfileImage" resultType="string">
 		SELECT PROFILE_IMG
@@ -28,6 +58,7 @@
 		WHERE BOARD_NO = #{boardNo}
 	</select>
 	
+	<!-- 알람 삽입 -->
 	<insert id="insertAlarm">
 		INSERT INTO NOTICE
 		(NOTICE_NO, NOTICE_COMENT, ELAPSED_TIME, MEMBER_NO)

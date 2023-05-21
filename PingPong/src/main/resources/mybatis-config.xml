@@ -19,6 +19,7 @@
       <typeAlias type="com.pingpong.project.mypage.model.dto.MyPage" alias="MyPage" />
       <typeAlias type="com.pingpong.project.board.model.dto.Inquiry" alias="Inquiry" />
       <typeAlias type="com.pingpong.project.board.model.dto.Declaration" alias="Declaration" />
+      <typeAlias type="com.pingpong.project.message.model.dto.Follow" alias="Follow" />
 
 
    </typeAliases>
