@@ -168,10 +168,10 @@ document.addEventListener("DOMContentLoaded",()=>{
         .then(resp => resp.text())
         .then(result => {
             if(result>0){
+                sendMessage(messageResendBox.value,resendMemNo);
                 alert("메세지 전송 성공");
                 messageResendBox.value = '';
                 messageSendContainer.style.display="none";
-                
                 gotoMessagesendFn();
             } else{
                 alert("메세지 전송 실패");
@@ -585,6 +585,7 @@ function postMessageSendFn(){ // 메세지 전송 함수
     .then(resp => resp.text())
     .then(result => {
         if(result>0){
+            sendMessage(messageContent,receiveMessageNo);
             alert("메세지 전송 성공");
             messageSendBoxContent.value ="";
             gotoMessagesendFn();

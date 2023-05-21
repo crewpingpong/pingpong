@@ -55,7 +55,7 @@
                                     <p>1hour 전</p>
                                 </div>
                             </div> --%>
-                        <div><p>받은 알림이 없습니다.</p></div>
+                        <div class="receiveAlarm"><p>받은 알림이 없습니다.</p></div>
                         </div>
     
                         

@@ -600,7 +600,7 @@ ${mypage.memberCareer}
     </div>
 
     <script>
-        const loginMemberNo = "${loginMember.memberNo}";
+        // const loginMemberNo = "${loginMember.memberNo}";
     </script>
     <script src="/resources/js/script.js"></script> <!-- 메인 헤더, 네브 js -->
     <script src="/resources/js/personal/post.js"></script> <!-- 게시글 상세 -->

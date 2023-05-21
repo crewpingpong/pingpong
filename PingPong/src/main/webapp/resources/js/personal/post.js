@@ -669,6 +669,7 @@ for(let i=0;i<boardLike.length;i++){
             if(check==0){
                 BoardRedHeart.style.display = "block";
                 BoardHeart.style.display = "none";
+                sendLike(boardNumber);
             } else {
                 BoardRedHeart.style.display = "none";
                 BoardHeart.style.display = "block";

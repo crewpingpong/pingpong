@@ -62,27 +62,60 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
 		String noticeContent = null;
 		
 		switch(notice.getType()) {
-		case 1:
+		case 1: // 좋아요 알람
 			// 게시글 작성 번호 이용해서 작성자 찾기
 			memberNo = service.selectMemberNo(notice.getBoardNo());
 			// noticeContent = "<a href='/mypage/"+memberNo+"?boardNo="+notice.getBoardNo()+"'>"+notice.getSendName()+"님이 좋아요를 누르셨습니다.</a>"; 
 			noticeContent 
 			= "<a href='/mypage/"+memberNo+"'>"+notice.getSendName()+"님이 좋아요를 누르셨습니다.</a>"; 
 			
-			notice.setMemberNo(memberNo);
+			notice.setMemberNo(memberNo); // 알람을 받는 사람 번호(== 게시글 작성)
 			notice.setNoticeContent(noticeContent);
 			notice.setSendProfile(profileImage);
+			notice.setSendNo(notice.getSendNo());
 			
 			notice.setBoardNo(notice.getBoardNo());
 			
 			break;
-		}
+			
+		case 2: // 댓글 알람
+			// 게시글 작성 번호 이용해서 작성자 찾기
+			memberNo = service.selectMemberNo(notice.getBoardNo());
+			// noticeContent = "<a href='/mypage/"+memberNo+"?boardNo="+notice.getBoardNo()+"'>"+notice.getSendName()+"님이 좋아요를 누르셨습니다.</a>"; 
+			noticeContent 
+			= "<a href='/mypage/"+memberNo+"'>"+notice.getSendName()+"님이 댓글을 다셨습니다.</a>"; 
+			
+			notice.setMemberNo(memberNo); // 알람을 받는 사람 번호(== 게시글 작성)
+			notice.setNoticeContent(noticeContent);
+			notice.setSendProfile(profileImage);
+			notice.setSendNo(notice.getSendNo());
+			
+			notice.setBoardNo(notice.getBoardNo());
+			
+			break;
+			
+		case 3: // 메세지 알람
+
+			memberNo = notice.getMemberNo();
+			
+			String messageContent = notice.getMessageContent();
+			String limitedContent = messageContent.substring(0, Math.min(messageContent.length(), 10)) + "...";
+			
+			noticeContent = "<a href='/mypage/" + notice.getMemberNo() + "'>" + notice.getSendName() + "님의 메세지 입니다.</a>"
+			        + "<p class='messageBoxOpen'>" + limitedContent + "</p>";
+			
+			notice.setMemberNo(memberNo); // 메세지 받는 사람 번호
+			notice.setNoticeContent(noticeContent);
+			notice.setSendProfile(profileImage);
+			notice.setSendNo(notice.getSendNo());
+			
+			break;
+		} // case 종료
 		
 
 		int result = service.insertAlarm(notice); // 알람 삽입
 		
 		if(result > 0) { // 삽입 성공
-			
 			
 			// /testSock으로 연결된 객체를 만든 클라이언트들 (sessions)에게 전달 받은 내용을 보냄
 			for(WebSocketSession s : sessions) {
@@ -93,17 +126,16 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
 				if(member != null) { // 있음					
 					if(member.getMemberNo() == memberNo) {
 						s.sendMessage(new TextMessage(new Gson().toJson(notice)));
-//						s.sendMessage(message);
 						break;
 					}
 				}
-				
-				
-			}
+			} // 반복문 종료
 		}
 		
 		
-	}
+		
+	} // handleTextMessage 종료
+	
 
 	//  - 클라이언트와 연결이 종료되면 실행
 	@Override
