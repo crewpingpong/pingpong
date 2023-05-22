@@ -15,17 +15,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class MyPage {
-	private int memberNo;
-	private String memberNickname;
-	private String profileImage;
-	private String backgroundImage;
-	private String memberInfo;
-	private String memberCareer;
-	private String memberCertificate;
-	private String oneLiner;
+public class MemberTech {
 	
-	private List<Tech> techList;
-
+	private int memberTechNo;
+	private int memberNo;
+	private int techNo;
 
 }

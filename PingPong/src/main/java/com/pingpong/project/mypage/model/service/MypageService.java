@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.mypage.model.dto.MyPage;
+import com.pingpong.project.mypage.model.dto.Tech;
 
 public interface MypageService {
 
@@ -75,6 +76,18 @@ public interface MypageService {
 	 * @return result
 	 */
 	int updateProfile(MultipartFile profileImage, String reName, String webPath, String filePath, int memberNo) throws IllegalStateException, IOException ;
+
+	/** 지식/기술 리스트 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<Member> selectTechList(int memberNo);
+
+	/** 프로필 정보 수정
+	 * @param updateMember
+	 * @return
+	 */
+	int updateProfileInfo(MyPage updateMyPage);
 	
 
 

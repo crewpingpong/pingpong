@@ -43,6 +43,12 @@ COMMIT;
 DELETE FROM "MEMBER_TECH";
 DELETE FROM "TECH";
 
+
+DELETE FROM "TECH"
+WHERE TECH_NO=24;
+
+COMMIT;
+
 ---------------------
 -- 지식/기술 아이콘 INSERT
 
