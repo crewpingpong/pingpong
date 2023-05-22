@@ -8,7 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.member.model.dto.Member;
+import com.pingpong.project.mypage.model.dto.Interest;
 import com.pingpong.project.mypage.model.dto.MyPage;
+import com.pingpong.project.mypage.model.dto.SNS;
 import com.pingpong.project.mypage.model.dto.Tech;
 
 public interface MypageService {
@@ -85,7 +87,7 @@ public interface MypageService {
 	int updateProfileInfo(MyPage updateMyPage);
 
 	
-	/** 지식/기술 리스트 조회
+	/** 전체 지식/기술 리스트 조회
 	 * @return
 	 */
 	List<Tech> selectTechList();
@@ -108,13 +110,18 @@ public interface MypageService {
 	 * @return
 	 */
 	int deleteTechList(List<String> selectedtechList);
+
+	/** 전체 관심분야 리스트 조회
+	 * @return
+	 */
+	List<Interest> selectInterestList();
+
+	/** 전체 SNS 리스트 조회
+	 * @return
+	 */
+	List<SNS> selectSNSList();
 	
 
 
 
-	/** 지식/기술 리스트 조회
-	 * @param memberNo
-	 * @return
-	 */
-	/* List<Member> selectTechList(int memberNo); */
 }

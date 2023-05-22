@@ -31,6 +31,7 @@ import com.pingpong.project.common.utility.Util;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.message.model.dto.Follow;
 import com.pingpong.project.message.model.service.AlarmService;
+import com.pingpong.project.mypage.model.dto.Interest;
 import com.pingpong.project.mypage.model.dto.MyPage;
 import com.pingpong.project.mypage.model.dto.SNS;
 import com.pingpong.project.mypage.model.dto.Tech;
@@ -83,11 +84,21 @@ public class MypageController {
 	
 	// 내 정보 수정으로 이동
 	@GetMapping("/myPageModi")
-	public String myPageModi(@SessionAttribute("loginMember") Member loginMember, Model model) {
+	public String myPageModi(@SessionAttribute("loginMember") Member loginMember
+							, Model model) {
+		
+		// interestList 전체 조회
+		List<Interest> interestList = service.selectInterestList();
+		model.addAttribute("interestList", interestList);
 		
 		// techList 전체 조회
 		List<Tech> techList = service.selectTechList();
 		model.addAttribute("techList", techList); 
+		
+		// SNSList 전체 조회
+		List<SNS> SNSList = service.selectSNSList();
+		model.addAttribute("SNSList", SNSList);
+		
 		
 		return "personal/myPageModi"; 
 	}
@@ -169,6 +180,10 @@ public class MypageController {
 		
 		List<String> selectedtechList = Arrays.asList(techArray);
 		
+		for(String t : selectedtechList) {
+			System.out.println(t);
+		}
+		
 		updateMyPage.setMemberNo(mypage.getMemberNo());
 		
 		// 자기소개, 커리어, 자격증 수정
@@ -202,14 +217,19 @@ public class MypageController {
 			
 			int techListDeleteResult = service.deleteTechList(selectedtechList);
 			
-			int techListInsertResult = service.insertTechList(selectedtechList);
-			
-			for(String tech : selectedtechList) {
-				selectedtechList.add(tech);
+			if(techListDeleteResult != 0) {
+				
+				for(String tech : selectedtechList) {
+					
+					int techListInsertResult = service.insertTechList(selectedtechList);
+					
+					selectedtechList.add(tech);
+				}
 			}
 		}
 		
 		else {
+			
 			int techListInsertResult = service.insertTechList(selectedtechList);
 			
 			for(String tech : selectedtechList) {

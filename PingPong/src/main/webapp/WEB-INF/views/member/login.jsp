@@ -34,6 +34,11 @@
     
                 <div class="login-check">
                     <div>
+                    
+	                    <c:if test="${not empty cookie.saveId.value}">
+	                    	<c:set var="save" value="checked"/>
+	                    </c:if>
+                    
                         <input type="checkbox" id="checkLogin" name="saveId">
                         <label for="checkLogin">
                             <span></span>

@@ -156,7 +156,7 @@ if (imageInput != null) {
     originalImage = profileImage.getAttribute("src");
 
     // 회원 프로필 화면 진입 시 현재 회원의 프로필 이미지 상태를 확인
-    if (profileImage.getAttribute("src") == "/resources/images/pingpong.ico") {
+    if (profileImage.getAttribute("src") == "/resources/images/profileImage/basicUserProfile.ico") {
         initCheck = false; // 기본 이미지
     }
     else {
@@ -220,7 +220,7 @@ if (imageInput != null) {
     deleteProfile.addEventListener("click", () => {
 
         imageInput.value = "";
-        profileImage.setAttribute("src", "/resources/images/pingpong.ico");
+        profileImage.setAttribute("src", "/resources/images/profileImage/basicUserProfile.ico");
 
         deleteCheck = 0;
     });
@@ -321,6 +321,7 @@ if (updateProfileInfo != null) {
 
 
 /* *** 지식/기술 *** */
+/*
 function tech_checkbox(){
   var flag = false;
 
@@ -346,7 +347,7 @@ function tech_checkbox(){
 
   return flag;
 }
-
+*/
 
 
 /* ********************************************************************** */
@@ -371,7 +372,7 @@ if (changePwFrm != null) { // 현재 페이지가 비밀번호 변경 페이지�
         }
 
         // 비밀번호 유효성 검사
-        const regEx = /^[a-zA-Z0-9\!\@\#\-\_]{6,20}$/;
+        const regEx = /^(?=.*[a-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-z\d$@$!%*#?&]{8,}$/;
         if (!regEx.test(newPw.value)) {
             alert("비밀번호가 유효하지 않습니다");
             e.preventDefault();

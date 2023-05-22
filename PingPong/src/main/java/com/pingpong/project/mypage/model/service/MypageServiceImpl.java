@@ -16,7 +16,9 @@ import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.common.utility.Util;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.mypage.model.dao.MypageDAO;
+import com.pingpong.project.mypage.model.dto.Interest;
 import com.pingpong.project.mypage.model.dto.MyPage;
+import com.pingpong.project.mypage.model.dto.SNS;
 import com.pingpong.project.mypage.model.dto.Tech;
 import com.pingpong.project.mypage.model.exception.FileUploadException;
 
@@ -165,7 +167,7 @@ public class MypageServiceImpl implements MypageService{
 		return dao.updateProfileInfo(updateMyPage);
 	}
 
-	// 지식/기술 리스트 조회
+	// 전체 지식/기술 리스트 조회
 	@Override
 	public List<Tech> selectTechList() {
 		return dao.selectTechList();
@@ -187,6 +189,18 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public int deleteTechList(List<String> selectedtechList) {
 		return dao.deleteTechList(selectedtechList);
+	}
+
+	// 전체 관심분야 리스트 조회
+	@Override
+	public List<Interest> selectInterestList() {
+		return dao.selectInterestList();
+	}
+
+	// 전체 SNS 리스트 조회
+	@Override
+	public List<SNS> selectSNSList() {
+		return dao.selectSNSList();
 	}
 
 
