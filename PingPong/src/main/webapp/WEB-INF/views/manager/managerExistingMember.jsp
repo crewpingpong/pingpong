@@ -77,13 +77,18 @@
                 
                     <div>가입 회원 관리</div>
                     <div>
-                        <select name="select" id="">
-                            <option value="memberNo">ID</option>
-                            <option value="memberNo">NickName</option>
-                            <option value="memberNo">Email</option>
-                        </select>
-                        <input type="text">
-                        <button type="button">검색</button>
+            <form action="/manager/" method="get" id="boardSearch">
+
+                    <select name="key" id="searchKey">
+                        <option value="i">ID</option>
+                        <option value="n">NICKNAME</option>
+                        <option value="e">EMAIL</option>
+                    </select>
+
+                    <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+                    <button>검색</button>
+            </form>
                     </div>
                     <form action="/manager/delete" method="POST" id="form">
                         <table id="oneToOneTable">
@@ -126,7 +131,7 @@
                                     </td>
                                     <td>${member.memberNo}</td>
                                     <td>
-                                        <a href="#">${member.memberUrl}</a>
+                                        <a href="/mypage/${member.memberNo}">${member.memberUrl}</a>
                                     </td>
                                     <td>${member.memberNickname}</td> <!-- 한글 16글자 1줄 -->
                                     <td>${member.memberEmail}</td>
