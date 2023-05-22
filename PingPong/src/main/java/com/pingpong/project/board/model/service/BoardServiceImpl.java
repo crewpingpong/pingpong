@@ -1,6 +1,7 @@
 package com.pingpong.project.board.model.service;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pingpong.project.board.model.dao.BoardDAO;
 import com.pingpong.project.board.model.dto.Board;
+import com.pingpong.project.board.model.dto.Hashtag;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -40,6 +42,7 @@ public class BoardServiceImpl implements BoardService{
         return count;
     }
 
+    // 북마크 테이블 삽입/삭제
 	@Override
 	public int boardMarkup(Map<String, Integer> paramMap) {
 		int result = 0;
@@ -53,6 +56,7 @@ public class BoardServiceImpl implements BoardService{
         return result;
 	}
 
+	// 댓글 테이블 삽입
 	@Override
 	public int commentInsert(Map<String, Object> paramMap) {
 		
@@ -61,4 +65,19 @@ public class BoardServiceImpl implements BoardService{
 		int boardNo = (int) paramMap.get("boardNo");
 		return boardNo; 
 	}
+	
+	// 게시글 수정
+	@Override
+	public int boardEditing(Map<String, Object> paramMap) {
+		return dao.boardEditing(paramMap);
+	}
+
+	// 해시태그 리스트 반환
+	@Override
+	public List<Hashtag> getHashtags(Map<String, String> hashtags) {
+		return dao.getHashtags(hashtags);
+	}
+	
+
+	
 }

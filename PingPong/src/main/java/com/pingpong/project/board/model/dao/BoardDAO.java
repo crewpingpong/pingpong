@@ -1,6 +1,7 @@
 package com.pingpong.project.board.model.dao;
 
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pingpong.project.board.model.dto.Board;
+import com.pingpong.project.board.model.dto.Hashtag;
 
 
 @Repository
@@ -70,6 +72,22 @@ public class BoardDAO {
 	 */
 	public int commentInsert(Map<String, Object> paramMap) {
 		return sqlSession.insert("boardMapper.insertComment", paramMap);
+	}
+
+	/** 게시글 수정
+	 * @param paramMap
+	 * @return result
+	 */
+	public int boardEditing(Map<String, Object> paramMap) {
+		return sqlSession.update("boardMapper.updateBoard", paramMap);
+	}
+
+	/** 해시태그 리스트 반환
+	 * @param hashtags
+	 * @return
+	 */
+	public List<Hashtag> getHashtags(Map<String, String> hashtags) {
+		return sqlSession.selectList("boardMapper.selectHashtagList", hashtags);
 	}
 	
 

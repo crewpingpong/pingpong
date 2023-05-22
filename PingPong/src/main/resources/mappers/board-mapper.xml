@@ -78,6 +78,12 @@
 		<result property="commentDelFl" column="COMMENT_DEL_FL"/>		
 	</resultMap>
 	
+	<resultMap type="Hashtag" id="hashtag_rm">
+		<id property="hashNo" column="HASH_NO"/>
+		<result property="hashtagName" column="HASHTAG_NAME"/>
+		<result property="boardNo" column="BOARD_NO"/>
+	</resultMap>
+	
 	<select id="selectCommentList" resultMap="comment_rm">
 		SELECT LEVEL, C.* FROM
 			(SELECT COMMENT_NO, COMMENT_CONTENT,
@@ -239,5 +245,16 @@
     	SEQ_COMMENT_NO.NEXTVAL, #{commentContent}, SYSDATE, #{memberNo}, #{boardNo}, DEFAULT, #{parentNo})
     
     </insert>
+    
+    <update id="updateBoard">
+    	UPDATE "BOARD" SET
+    	BOARD_CONTENT = #{boardContent}
+    	WHERE BOARD_NO = #{boardNo}
+    </update>
 	
+	<select id="selectHashtagList" resultMap="hashtag_rm">
+		SELECT HASHTAG_NAME
+		FROM "HASHTAG"
+		WHERE HASHTAG_NAME LIKE '${hashtagName}%'
+	</select>
 </mapper>

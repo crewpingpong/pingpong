@@ -172,12 +172,10 @@ ${mypage.memberCareer}
                 <li>
                 <a href="#posttab3" class="btn">컬렉션  <span>${fn:length(markList)}</span></a>
                 </li>
+                <li>
+                    <button class="newContent">새 게시글</button>
+                </li>
             </ul>
-
-            <div class="postBtn">
-                <button type="button">게시글 편집</button>
-                <button type="button" class="newContent">새 게시글</button>
-            </div>
         
             <div class="postcont_area">
                 <div id="posttab1" class="postcont" style="display:block;">
@@ -228,7 +226,7 @@ ${mypage.memberCareer}
                         <c:choose>
                             <c:when test="${empty markList}">
                                 <%-- 조회된 게시글 목록이 비어있거나 null인 경우 --%>
-                                게시글이 존재하지 않습니다.
+                                <div>게시글이 존재하지 않습니다.</div> 
                             </c:when>
                         
                             <c:otherwise>
@@ -367,16 +365,16 @@ ${mypage.memberCareer}
     
         </div>
         <div class="BoardIconBox">
-            <!-- 좋아요 -->
-            <!-- <div class="BoardIcon">
+
+            <div class="BoardIcon editing"> <!-- 게시글 편집 -->
                 <a href="#">
-                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="30" cy="30" r="30" fill="white"/>
-                    <path d="M29.999 46.0005C29.7796 46.0018 29.5622 45.9597 29.3591 45.8768C29.1561 45.7939 28.9714 45.6716 28.8156 45.5172L15.8656 32.5505C14.2412 30.9091 13.3301 28.6931 13.3301 26.3838C13.3301 24.0746 14.2412 21.8586 15.8656 20.2172C17.5027 18.5847 19.7204 17.668 22.0323 17.668C24.3443 17.668 26.5619 18.5847 28.199 20.2172L29.999 22.0172L31.799 20.2172C33.4361 18.5847 35.6537 17.668 37.9656 17.668C40.2776 17.668 42.4952 18.5847 44.1323 20.2172C45.7567 21.8586 46.6679 24.0746 46.6679 26.3838C46.6679 28.6931 45.7567 30.9091 44.1323 32.5505L31.1823 45.5172C31.0266 45.6716 30.8419 45.7939 30.6388 45.8768C30.4358 45.9597 30.2183 46.0018 29.999 46.0005ZM22.0323 21.0005C21.3268 20.9973 20.6276 21.1341 19.9753 21.4031C19.323 21.672 18.7306 22.0677 18.2323 22.5672C17.2257 23.5791 16.6607 24.9483 16.6607 26.3755C16.6607 27.8028 17.2257 29.172 18.2323 30.1838L29.999 41.9672L41.7656 30.1838C42.7722 29.172 43.3372 27.8028 43.3372 26.3755C43.3372 24.9483 42.7722 23.5791 41.7656 22.5672C40.7384 21.5967 39.3788 21.056 37.9656 21.056C36.5525 21.056 35.1929 21.5967 34.1656 22.5672L31.1823 25.5672C31.0274 25.7234 30.843 25.8474 30.6399 25.932C30.4368 26.0166 30.219 26.0602 29.999 26.0602C29.779 26.0602 29.5611 26.0166 29.358 25.932C29.1549 25.8474 28.9706 25.7234 28.8156 25.5672L25.8323 22.5672C25.334 22.0677 24.7416 21.672 24.0893 21.4031C23.437 21.1341 22.7378 20.9973 22.0323 21.0005Z" fill="#231F20"/>
-                    </svg>
+                    <svg class="boardEditing" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle class="boardEditing" cx="30" cy="30" r="30" fill="white"/>
+                        <path class="boardEditing" d="M31.9201 19.12L37.0401 14L46 22.96L40.88 28.08M31.9201 19.12L14.5302 36.5099C14.1907 36.8493 14 37.3098 14 37.7899V46H22.2102C22.6903 46 23.1507 45.8094 23.4902 45.4698L40.88 28.08M31.9201 19.12L40.88 28.08" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg> 
                 </a>
-                <p class="BoardIconInfo">좋아요</p>
-            </div> -->
+                <p class="BoardIconInfo">편집</p>
+            </div>
 
             <div class = "BoardIcon"><!-- 저장 -->
                     <svg class = "markOff boardMark" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -521,8 +519,8 @@ ${mypage.memberCareer}
 
                             <div class="board-container-top">
                                 <!-- 이전 아이콘 -->
-                                <svg id="BackIcon" width="28" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M25.666 10.7169H5.89935L11.9493 3.45026C12.2322 3.1099 12.3683 2.6711 12.3277 2.23039C12.2871 1.78968 12.073 1.38316 11.7327 1.10026C11.3923 0.817367 10.9535 0.681263 10.5128 0.721896C10.0721 0.762529 9.66558 0.97657 9.38268 1.31693L1.04935 11.3169C0.993283 11.3965 0.943148 11.48 0.899349 11.5669C0.899349 11.6503 0.899349 11.7003 0.782683 11.7836C0.707138 11.9747 0.667584 12.1781 0.666016 12.3836C0.667584 12.5891 0.707138 12.7925 0.782683 12.9836C0.782683 13.0669 0.782682 13.1169 0.899349 13.2003C0.943148 13.2872 0.993283 13.3707 1.04935 13.4503L9.38268 23.4503C9.53939 23.6384 9.73562 23.7897 9.95743 23.8934C10.1792 23.9971 10.4212 24.0507 10.666 24.0503C11.0554 24.051 11.4328 23.9154 11.7327 23.6669C11.9014 23.527 12.0409 23.3552 12.1432 23.1613C12.2455 22.9674 12.3085 22.7552 12.3286 22.5369C12.3487 22.3186 12.3256 22.0985 12.2605 21.8891C12.1954 21.6798 12.0897 21.4853 11.9493 21.3169L5.89935 14.0503H25.666C26.108 14.0503 26.532 13.8747 26.8445 13.5621C27.1571 13.2495 27.3327 12.8256 27.3327 12.3836C27.3327 11.9416 27.1571 11.5176 26.8445 11.2051C26.532 10.8925 26.108 10.7169 25.666 10.7169Z" fill="#231F20"/>
+                                <svg class = "new-board-close" id="BackIcon" width="28" height="25" viewBox="0 0 28 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path class = "new-board-close" d="M25.666 10.7169H5.89935L11.9493 3.45026C12.2322 3.1099 12.3683 2.6711 12.3277 2.23039C12.2871 1.78968 12.073 1.38316 11.7327 1.10026C11.3923 0.817367 10.9535 0.681263 10.5128 0.721896C10.0721 0.762529 9.66558 0.97657 9.38268 1.31693L1.04935 11.3169C0.993283 11.3965 0.943148 11.48 0.899349 11.5669C0.899349 11.6503 0.899349 11.7003 0.782683 11.7836C0.707138 11.9747 0.667584 12.1781 0.666016 12.3836C0.667584 12.5891 0.707138 12.7925 0.782683 12.9836C0.782683 13.0669 0.782682 13.1169 0.899349 13.2003C0.943148 13.2872 0.993283 13.3707 1.04935 13.4503L9.38268 23.4503C9.53939 23.6384 9.73562 23.7897 9.95743 23.8934C10.1792 23.9971 10.4212 24.0507 10.666 24.0503C11.0554 24.051 11.4328 23.9154 11.7327 23.6669C11.9014 23.527 12.0409 23.3552 12.1432 23.1613C12.2455 22.9674 12.3085 22.7552 12.3286 22.5369C12.3487 22.3186 12.3256 22.0985 12.2605 21.8891C12.1954 21.6798 12.0897 21.4853 11.9493 21.3169L5.89935 14.0503H25.666C26.108 14.0503 26.532 13.8747 26.8445 13.5621C27.1571 13.2495 27.3327 12.8256 27.3327 12.3836C27.3327 11.9416 27.1571 11.5176 26.8445 11.2051C26.532 10.8925 26.108 10.7169 25.666 10.7169Z" fill="#231F20"/>
                                 </svg>
                     
                                 <span class="new-borad-make">새 게시글 만들기</span>
@@ -532,6 +530,7 @@ ${mypage.memberCareer}
 
                             <div class="BoardContainerleft2">
                                 <div class="BoardPicture2 slide2">
+                                    <!-- 예시 -->
                                     <%-- <div class="slide_item2"><img src="img/peach.jpg" class="slide-img"></div> --%>
                                     <%-- <div class="slide_item2"><img src="img/PrCert.png" class="slide-img"></div> --%>
                                     <%-- <div class="slide_item2"><img src="img/peach.jpg" class="slide-img"></div> --%>
@@ -552,18 +551,28 @@ ${mypage.memberCareer}
                             </div>
 
                             <div class="NewWriteBoardContainerRight"><!-- 게시글 작성 오른쪽 화면 -->
+                                <div>
+                                    <div class="NewWriteBoardTop"><!-- 게시글 작성 프로필, 내용 영역 -->
+                                        <div class="BoardPost1">
+                                            <a>
+                                                <img class="Boardprofile1" src="${mypage.profileImage}"></img>
+                                            </a>
+                                        </div>
+                                        <div class="NewWriteProfileName">
+                                            <a>${mypage.memberNickname}</a>
+                                        </div>
 
-                                <div class="NewWriteBoardTop"><!-- 게시글 작성 프로필, 내용 영역 -->
-                                    <div class="BoardCommentProfile1">
-                                        <a href="#" class="Boardprofile1"></a>
                                     </div>
-                                    <div class="NewWriteProfileName">
-                                        <a href="#">김핑퐁</a>
+                                    <textarea class="NewWriteTextArea" name="boardContent" maxlength="2000" cols="30" rows="10" placeholder="문구 입력.."></textarea>
+                                    <!-- <div class="NewWriteTextArea" id="hashtag-input" contenteditable="true" role="textbox" spellcheck="true" data-lexical-editor="true" style="user-select: text; white-space: pre-wrap; word-break: break-word;"></div> -->
+                                    <div class="upload-form-hashtag" align="center">
+                                        <input type="text" placeholder="해시태그를 추가해보세요!" id="hashtag" name="hashtag">
+                                        <button type="button" class="cta blue" onclick="addHashtag()">추가</button>
+                                        <input type="hidden" name="hashtagList">
                                     </div>
-
+                                    <div class="countBox"><span class="NewWriteTextAreaCount">0</span><span>/2000</span></div>
+                                    <div class="hashtagList" id="hashtagList"></div>
                                 </div>
-                                <textarea class="NewWriteTextArea" name="boardContent" maxlength="2000" cols="30" rows="10" placeholder="문구 입력.."></textarea>
-                                <div class="countBox"><span class="NewWriteTextAreaCount">0</span><span>/2000</span></div>
                                 <div class="addLink">
                                     <span>링크추가</span>
                                     
@@ -605,6 +614,8 @@ ${mypage.memberCareer}
 
     <script>
         const loginMemberNo = "${loginMember.memberNo}";
+        const loginMember = "${loginMember}";
+        const mypage = "${mypage}";
     </script>
     <script src="/resources/js/script.js"></script> <!-- 메인 헤더, 네브 js -->
     <script src="/resources/js/personal/post.js"></script> <!-- 게시글 상세 -->

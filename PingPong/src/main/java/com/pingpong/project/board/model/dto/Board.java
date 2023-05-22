@@ -36,6 +36,7 @@ public class Board {
 	private List<BoardImage> imageList;
 	
 	private List<Comment> commentList;
+	private List<Hashtag> hashtagList;
 	
 	private int declarationCount;
 

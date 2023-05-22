@@ -156,7 +156,15 @@
 }
 
 .postlist li {
+    display: flex;
+    align-items: center;
     margin-right: 32px;
+  }
+  
+.postlist li:last-child {
+    margin-right: 0;
+    margin-left: auto;
+    /* 앞에 있는 요소들이 왼쪽으로 몰리고, 마지막 요소가 오른쪽 끝으로 이동 */
 }
 #updateBackground{
     /* position: absolute; right: 60px; top: 460px; */ 
@@ -166,16 +174,13 @@
 }
 
 /* 게시글 수정 버튼 */
-.postBtn {
-    position: absolute; top: 50px; right: 15%;
-}
 
-.postBtn>button {
+.newContent {
     width: 100px; height: 35px; border-radius: 20px; background-color: #92B4EC;
     color: #fff; font-size: 12px; font-weight: bold; margin-left: 12px;
 }
 
-.postBtn>button:hover {
+.newContent:hover {
     background-color: #5286DC;
 }
 
@@ -190,7 +195,7 @@
 .list-thumbnail{border-radius: 20px;}
 
 .contentBox div {
-    width: 300px; height: 300px; border-radius: 20px; background-color: #C5C5C5;
+    width: 300px; height: 300px; border-radius: 20px;
 }
 
 .posttab_menu .postlist .btn {
@@ -376,13 +381,12 @@
 .NewWriteBoardTop {
     display: flex; flex-direction: row;
 }
-
-.NewWriteProfileName {
-    margin-top: 20px;
-}
-
 .NewWriteTextArea {
-    margin-top: 20px; border: none; width: 420px; height: 400px; resize: none;
+    margin-top: 20px; border: none; width: 420px; height: 240px; resize: none;
+}
+.NewWriteProfileName{
+    display: grid;
+    place-items: center;
 }
 
 /* 글자수 카운트 */
@@ -445,8 +449,8 @@
 }
 
 .BoardContainerright .porfileRac img{
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 1px solid black; 
 }
@@ -469,6 +473,40 @@
 .BoardPost{
     min-height: 50px;
     margin-bottom: 30px;
+}
+
+.hiddenEditing{
+    border : 1px solid #231F2050;
+    display: none;
+    border-radius: 4%;
+    width : 250px;
+}
+.editingSubmit{
+    display: none;
+    background-color: #C5C5C5;
+    border-radius: 10%;
+    margin-right: 2px;
+    cursor: pointer;
+}
+.editingCancel{
+    display: none;
+    background-color: #C5C5C5;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+.innerDiv>div{
+    float: right;
+    margin : 2px;
+}
+
+
+.hiddenEditing:focus{
+    outline:none;
+}
+
+.BoardPost textarea{
+    resize : none;
 }
 .Boardcontent {
     width: 100%;
@@ -647,13 +685,13 @@
 }
 
 .BoardPost1 a img{
-    width: 32px; height: 32px;
+    width: 40px; height: 40px;
     border-radius: 50%;
     border: 1px solid #5C5C5C;
 }
 
 .BoardPost2 a img{
-    width: 32px; height: 32px;
+    width: 40px; height: 40px;
     border-radius: 50%;
     border: 1px solid #5C5C5C;
 }
@@ -752,6 +790,10 @@
 
 .BoardComment-remove-row {
     float: right; cursor: pointer; transform: translateY(-20px);
+}
+
+.editing{
+    display: none;
 }
 
 /* 스크롤바 설정*/
@@ -955,7 +997,14 @@ li {
     width: 100%; -webkit-user-drag: none; user-select: none;
 }
 
-
-
-
+.tag{
+    cursor: pointer;
+}
+#hashtag-input:focus-visible{
+    outline : none;
+}
 /* 나현 구역! */
+
+#hashtag-input a{
+    color : #5286DC;
+}
