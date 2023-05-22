@@ -254,6 +254,8 @@ function selectBoardList(boardNo){
     fetch("/boardDetail?boardNo="+boardNo)
     .then(response => response.json())
     .then(board => {
+        console.log(board.commentList);
+
         boardCont = board.boardContent;
 
         console.log(board);
@@ -262,6 +264,7 @@ function selectBoardList(boardNo){
         });
 
         let flagHeart = 0;
+
         for(let i of board.likeList){
             if(loginMemberNo == i.memberNo){
                 flagHeart++;
@@ -369,6 +372,7 @@ function selectBoardList(boardNo){
                 if(board.commentList[i].childCheck > 0){
                     const secondDiv = document.createElement("div");
                     secondDiv.classList.add("secondComment");
+                    secondDiv.classList.add("commentNo"+board.commentList[i].commentNo);
                     secondDiv.innerText = "—— 답글 보기(" + board.commentList[i].childCheck + ")";
                     div.append(secondDiv);
                 }
@@ -413,9 +417,19 @@ function selectBoardList(boardNo){
                         innerDiv1.append(nameA1, contentP1);
                         div1.append(innerDiv1, dateDiv1);
 
+                        
                         const lastDiv1 = document.createElement("div");
                         lastDiv1.classList.add("lastDivadd1")
                         lastDiv1.append(boardPostDiv1, div1);
+                        if(board.commentList[j].memberNo == loginMemberNo){
+
+                            let item = 
+                                `<div class="deleteComment">
+                                    <button type="button" onclick="removeChildComment(event, ${board.commentList[j].commentNo})">×</button>
+                                </div>`;
+                            lastDiv1.insertAdjacentHTML("beforeend", item);
+        
+                        }
                         postContentDiv1.append(lastDiv1);
                         div.append(postContentDiv1);
                     }
@@ -423,15 +437,11 @@ function selectBoardList(boardNo){
                 const lastDiv = document.createElement("div");
                 lastDiv.classList.add("lastDivadd")
                 lastDiv.append(boardPostDiv, div);
-                if(board.commentList[i].memberNo == loginMemberNo){
-
                     let item = 
                         `<div class="deleteComment">
-                            <button type="button" onclick="removeComment(${board.commentList[i].commentNo})">×</button>
+                            <button type="button" onclick="removeComment(event, ${board.commentList[i].commentNo})">×</button>
                         </div>`;
                     lastDiv.insertAdjacentHTML("beforeend", item);
-
-                }
                 postContentDiv.append(lastDiv);
                 Boardcontent1.append(postContentDiv);
             }
@@ -626,8 +636,55 @@ function selectBoardList(boardNo){
 
 
 // 댓글 삭제 함수
-function removeComment(commentNo) {
-    document.getElementById(hashtag).remove();
+function removeComment(event, commentNo) {
+
+    fetch("/board/deleteComment", {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(commentNo)
+    })
+    .then(resp=>resp.text())
+    .then(result=>{
+        if(result>0){
+            event.target.parentNode.parentNode.parentNode.innerHTML = '';
+        }
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
+// 댓댓글 삭제 함수
+function removeChildComment(event, commentNo) {
+
+    console.log(commentNo);
+    fetch("/board/deleteChildComment", {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(commentNo)
+    })
+    .then(resp=>resp.text())
+    .then(result=>{
+        if(result>0){
+            // selectBoardList(boardNumber)
+            let a = event.target.parentNode.parentNode.parentNode.parentNode.querySelector(".secondComment").innerText;
+            console.log(a);
+            if(Number(a.match(/\d+/)[0]) == 1){
+                event.target.parentNode.parentNode.parentNode.parentNode.querySelector(".secondComment").style.display = 'none';
+
+            } else {
+
+                event.target.parentNode.parentNode.parentNode.parentNode.querySelector(".secondComment").innerText = "—— 답글 보기(" + (Number(a.match(/\d+/)[0]) -1) + ")";
+            }
+
+
+            event.target.parentNode.parentNode.parentNode.innerHTML = '';
+            
+        }
+    })
+    .catch(err=>{
+        console.log(err);
+    })
 }
 
 
@@ -640,13 +697,17 @@ insertComment.addEventListener("click", e=>{
         alert("로그인 후 이용해주세요");
         return;
     }
+    if(commentContentArea.value == ""){
+        alert("댓글을 입력해주세요");
+        return;
+    }
     let data;
     if(commentContentArea.value[0] == "@"){
         const parentNickname = commentContentArea.value.split(" ")[0].substring(1);
         const commentContent = commentContentArea.value.split(" ").slice(1).join(' ');
         data = {"commentContent" : commentContent, "memberNo" : loginMemberNo, "boardNo" : boardNumber, "parentNo" : commentParentNo};
     } else{
-        data = {"commentContent" : commentContentArea.value, "memberNo" : loginMemberNo, "boardNo" : boardNumber, "parentNo" : null};
+        data = {"commentContent" : commentContentArea.value, "memberNo" : loginMemberNo, "boardNo" : boardNumber, "parentNo" : 0};
     }
     
     console.log(data);
@@ -658,11 +719,136 @@ insertComment.addEventListener("click", e=>{
         headers : {"Content-Type" : "application/json"},
         body : JSON.stringify(data)
     })
-    .then(resp => resp.text())
-    .then(boardNo => {
-        console.log("boardNo : " + boardNo);
+    .then(resp => resp.json())
+    .then(comment => {
+        console.log(comment);
+        if(comment.commentNo > 0){
+            sendComment(comment.boardNo);
+            if(comment.parentNo == 0){
+                
+                const postContentDiv = document.createElement("div");
+                postContentDiv.classList.add("postcontent1");
 
-        selectBoardList(boardNo);
+                const boardPostDiv = document.createElement("div");
+                boardPostDiv.classList.add("BoardPost1");
+
+                const boardProfileA = document.createElement("a");
+                boardProfileA.href = "/mypage/"+comment.memberNo;
+                boardProfileA.classList.add("Boardprofile1");
+                const profileImg = document.createElement("img");
+                profileImg.src = comment.profileImg;
+                boardProfileA.append(profileImg);
+                boardPostDiv.append(boardProfileA);
+
+
+                const div = document.createElement("div");
+                div.classList.add("commentbox");
+
+                const innerDiv = document.createElement("div");
+                innerDiv.classList.add("innerDiv");
+
+                const nameA = document.createElement("a");
+                nameA.href = "/mypage/"+ comment.memberNo;
+                nameA.innerText = comment.memberNickname;
+
+                const contentP = document.createElement("p");
+                contentP.innerText = comment.commentContent;
+
+                const dateDiv = document.createElement("div");
+                dateDiv.classList.add("dateDiv");
+
+                const cDateP = document.createElement("p");
+                cDateP.innerText = comment.commentDate;
+
+                const replSpan = document.createElement("span");
+                replSpan.innerText = "답글 달기";
+                replSpan.classList.add("replyCommentInsert");
+
+                dateDiv.append(cDateP, replSpan);
+
+                innerDiv.append(nameA, contentP);
+                div.append(innerDiv, dateDiv);
+
+                const lastDiv = document.createElement("div");
+                lastDiv.classList.add("lastDivadd")
+                lastDiv.append(boardPostDiv, div);
+                let item = 
+                    `<div class="deleteComment">
+                        <button type="button" onclick="removeComment(event, ${comment.commentNo})">×</button>
+                    </div>`;
+                lastDiv.insertAdjacentHTML("beforeend", item);
+                postContentDiv.append(lastDiv);
+                Boardcontent1.append(postContentDiv);
+
+            } else{
+                const postContentDiv1 = document.createElement("div");
+                postContentDiv1.classList.add("postcontent2");
+
+                const boardPostDiv1 = document.createElement("div");
+                boardPostDiv1.classList.add("BoardPost2");
+
+                const boardProfileA1 = document.createElement("a");
+                boardProfileA1.href = "/mypage/"+comment.memberNo;
+                boardProfileA1.classList.add("Boardprofile2");
+                const profileImg1 = document.createElement("img");
+                profileImg1.src = comment.profileImg;
+                boardProfileA1.append(profileImg1);
+                boardPostDiv1.append(boardProfileA1);
+
+
+                const div1 = document.createElement("div");
+
+                const innerDiv1 = document.createElement("div");
+                innerDiv1.classList.add("innerDiv");
+
+                const nameA1 = document.createElement("a");
+                nameA1.href = "/mypage/"+comment.memberNo;
+                nameA1.innerText = comment.memberNickname;
+
+                const contentP1 = document.createElement("p");
+                contentP1.innerText = comment.commentContent;
+
+                const dateDiv1 = document.createElement("div");
+                dateDiv1.classList.add("dateDiv");
+
+                const cDateP1 = document.createElement("p");
+                cDateP1.innerText = comment.commentDate;
+
+                dateDiv1.append(cDateP1);
+
+                innerDiv1.append(nameA1, contentP1);
+                div1.append(innerDiv1, dateDiv1);
+
+                
+                const lastDiv1 = document.createElement("div");
+                lastDiv1.classList.add("lastDivadd1")
+                lastDiv1.append(boardPostDiv1, div1);
+                let item = 
+                    `<div class="deleteComment">
+                        <button type="button" onclick="removeChildComment(event, ${comment.commentNo})">×</button>
+                    </div>`;
+                lastDiv1.insertAdjacentHTML("beforeend", item);
+                postContentDiv1.append(lastDiv1);
+                const prntCommentNode = document.querySelector(".commentNo"+comment.parentNo);
+                console.log(prntCommentNode.parentNode);
+                postContentDiv1.classList.toggle("postcontent2");
+                prntCommentNode.parentNode.append(postContentDiv1);
+
+                const a = prntCommentNode.innerText;
+                prntCommentNode.innerText = "—— 답글 보기(" + (Number(a.match(/\d+/)[0]) +1) + ")";
+
+            }
+            const replyCommentInsert = document.querySelectorAll(".replyCommentInsert");
+            for(let i=0;i<replyCommentInsert.length;i++){
+                replyCommentInsert[i].addEventListener("click", e=>{
+                    let nickName = e.target.parentNode.previousElementSibling.children[0].innerText;
+                    commentContentArea.focus();
+                    commentContentArea.value = "@" + nickName+" ";
+                })
+            }
+        }
+
+
     })
     .catch(err => {
         console.log(err);
@@ -1298,6 +1484,15 @@ document.addEventListener("DOMContentLoaded",()=>{
     nufollow = document.querySelector(".nufollow");
     profileBtn = document.querySelector(".followBtn");
 
+    if(followCheck != null){
+        if(followCheck == 1){ // 팔로우 된 유저
+            followUser.classList.remove("followshow");
+            nufollow.classList.add("followshow");
+        } else if(followCheck == 0){ // 팔로우 안된 유저
+            followUser.classList.add("followshow");
+            nufollow.classList.remove("followshow");
+        }
+    }
 
     for(let i=0;i<followBtn.length;i++){
         followBtn[i].addEventListener("click", ()=>{
@@ -1316,7 +1511,7 @@ function followFn(){
     let check; // 기존에 팔로우 X(노란색) : 0, followUser
                //        팔로우 0(하늘색) : 1 nufollow
     // contains("클래스명") : 클래스가 있으면 true, 없으면 false
-    if(followUser.classList.contains("followshow")){
+    if(followUser.classList.contains("followshow")){ // followshow 보여주는 클래스
         check = 0; // 팔로우 X(노란색) : 0, followUser
     } else{
         check = 1;  // 팔로우 0(하늘색) : 1 nufollow
@@ -1351,11 +1546,11 @@ function followFn(){
             return;
         }
         
-        sendFollow(followerNo);
         // followUser.classList.toggle("followshow");
         // nufollow.classList.toggle("followshow");
-
+        
         if(check==0){ // 팔로우 성공
+            sendFollow(followerNo);
             followUser.classList.remove("followshow");
             nufollow.classList.add("followshow");
         } else {

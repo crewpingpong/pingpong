@@ -83,7 +83,7 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
 			memberNo = service.selectMemberNo(notice.getBoardNo());
 			// noticeContent = "<a href='/mypage/"+memberNo+"?boardNo="+notice.getBoardNo()+"'>"+notice.getSendName()+"님이 좋아요를 누르셨습니다.</a>"; 
 			noticeContent 
-			= "<a href='/mypage/"+memberNo+"'>"+notice.getSendName()+"님이 댓글을 다셨습니다.</a>"; 
+			= "<a href='/mypage/"+memberNo+"?boardNo="+notice.getBoardNo()+"'>"+notice.getSendName()+"님이 댓글을 다셨습니다.</a>"; 
 			
 			notice.setMemberNo(memberNo); // 알람을 받는 사람 번호(== 게시글 작성)
 			notice.setNoticeContent(noticeContent);
@@ -116,9 +116,10 @@ public class AlarmWebsocketHandler extends TextWebSocketHandler{
 			
 			// noticeContent = "<a href='/mypage/"+memberNo+"?boardNo="+notice.getBoardNo()+"'>"+notice.getSendName()+"님이 좋아요를 누르셨습니다.</a>"; 
 			noticeContent 
-			= "<a href='/mypage/"+memberNo+"'>"+notice.getSendName()+"님이 팔로우 하셨습니다.</a>"; 
+			= "<a href='/mypage/"+notice.getSendNo()+"'>"+notice.getSendName()+"님이 팔로우 하셨습니다.</a>"; 
 			
 			notice.setMemberNo(memberNo); // 알람을 받는 사람 번호(== 팔로우 당한 사람)
+			notice.setNoticeContent(noticeContent);
 			notice.setSendProfile(profileImage);
 			notice.setSendNo(notice.getSendNo());
 			

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pingpong.project.board.model.dto.Board;
+import com.pingpong.project.board.model.dto.Comment;
 import com.pingpong.project.board.model.dto.Hashtag;
 import com.pingpong.project.board.model.service.BoardService;
 
@@ -45,9 +46,14 @@ public class BoardController {
     
     //댓글 달기
     @PostMapping("/board/comment")
-    public int commentInsert(@RequestBody Map<String, Object> paramMap) {
-    	
-    	return service.commentInsert(paramMap);
+    public Comment commentInsert(@RequestBody Map<String, Object> paramMap) {
+    	Comment comment = new Comment();
+    	comment.setCommentContent((String)paramMap.get("commentContent"));
+    	comment.setMemberNo((Integer)paramMap.get("memberNo"));
+    	comment.setBoardNo((Integer)paramMap.get("boardNo"));
+    	comment.setParentNo(((Integer)paramMap.get("parentNo")).intValue());
+    	System.out.println(comment);
+    	return service.commentInsert(comment);
     }
     
     // 게시글 수정
@@ -64,5 +70,21 @@ public class BoardController {
     	return service.getHashtags(hashtags);
     }
 
+    // 댓글 삭제
+    @PostMapping("/board/deleteComment")
+    public int commentDelete(@RequestBody String commentNo1) {
+    	int commentNo = Integer.parseInt(commentNo1);
+    	return service.commentDelete(commentNo);
+    }
+    
+    // 댓댓글 삭제
+    @PostMapping("/board/deleteChildComment")
+    public int childCommentDelete(@RequestBody String commentNo1) {
+    	
+    	System.out.println(commentNo1);
+    	
+    	int commentNo = Integer.parseInt(commentNo1);
+    	return service.childCommentDelete(commentNo);
+    }
    
 }

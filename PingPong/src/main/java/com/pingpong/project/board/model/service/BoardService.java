@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.pingpong.project.board.model.dto.Board;
+import com.pingpong.project.board.model.dto.Comment;
 import com.pingpong.project.board.model.dto.Hashtag;
 
 
@@ -44,7 +45,7 @@ public interface BoardService {
 	 * @param paramMap
 	 * @return result
 	 */
-	int commentInsert(Map<String, Object> paramMap);
+    Comment commentInsert(Comment comment);
 
 	/** 게시글 수정 서비스 (AJAX)
 	 * @param paramMap
@@ -57,5 +58,17 @@ public interface BoardService {
 	 * @return hashtagList
 	 */
 	List<Hashtag> getHashtags(Map<String, String> hashtags);
+
+	/** 댓글 삭제
+	 * @param commentNo
+	 * @return result
+	 */
+	int commentDelete(int commentNo);
+
+	/** 댓댓글 삭제
+	 * @param commentNo
+	 * @return result
+	 */
+	int childCommentDelete(int commentNo);
 
 }

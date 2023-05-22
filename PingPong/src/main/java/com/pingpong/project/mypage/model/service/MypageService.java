@@ -77,19 +77,44 @@ public interface MypageService {
 	 */
 	int updateProfile(MultipartFile profileImage, String reName, String webPath, String filePath, int memberNo) throws IllegalStateException, IOException ;
 
-	/** 지식/기술 리스트 조회
-	 * @param memberNo
-	 * @return
-	 */
-	List<Member> selectTechList(int memberNo);
 
 	/** 프로필 정보 수정
 	 * @param updateMember
 	 * @return
 	 */
 	int updateProfileInfo(MyPage updateMyPage);
+
+	
+	/** 지식/기술 리스트 조회
+	 * @return
+	 */
+	List<Tech> selectTechList();
+
+	
+	/** 선택된 지식기술 리스트 삽입
+	 * @param techList
+	 * @return
+	 */
+	int insertTechList(List<String> selectedtechList);
+
+	/** 선택된 지식기술 리스트 조회
+	 * @param techList
+	 * @return
+	 */
+	int selectTechCount(List<String> selectedtechList);
+
+	/** 선택된 지식기술 리스트 삭제
+	 * @param techList
+	 * @return
+	 */
+	int deleteTechList(List<String> selectedtechList);
 	
 
 
 
+	/** 지식/기술 리스트 조회
+	 * @param memberNo
+	 * @return
+	 */
+	/* List<Member> selectTechList(int memberNo); */
 }

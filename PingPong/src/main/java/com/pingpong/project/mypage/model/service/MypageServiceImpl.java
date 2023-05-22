@@ -153,15 +153,40 @@ public class MypageServiceImpl implements MypageService{
 	}
 
 	// 지식/기술 리스트 조회
-	@Override
-	public List<Member> selectTechList(int memberNo) {
-		return dao.selectTechList(memberNo);
-	}
+	/*
+	 * @Override public List<Member> selectTechList(int memberNo) { 
+	 * return dao.selectTechList(memberNo); 
+	 * }
+	 */
 
 	// 프로필 정보 수정
 	@Override
 	public int updateProfileInfo(MyPage updateMyPage) {
 		return dao.updateProfileInfo(updateMyPage);
+	}
+
+	// 지식/기술 리스트 조회
+	@Override
+	public List<Tech> selectTechList() {
+		return dao.selectTechList();
+	}
+
+	// 선택된 지식기술 리스트 삽입
+	@Override
+	public int insertTechList(List<String> selectedtechList) {
+		return dao.insertTechList(selectedtechList);
+	}
+
+	// 선택된 지식기술 리스트 조회
+	@Override
+	public int selectTechCount(List<String> selectedtechList) {
+		return dao.selectTechCount(selectedtechList);
+	}
+
+	// 선택된 지식기술 리스트 삭제
+	@Override
+	public int deleteTechList(List<String> selectedtechList) {
+		return dao.deleteTechList(selectedtechList);
 	}
 
 
