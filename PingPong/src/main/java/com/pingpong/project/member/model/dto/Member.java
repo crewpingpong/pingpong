@@ -1,5 +1,9 @@
 package com.pingpong.project.member.model.dto;
 
+import java.util.List;
+
+import com.pingpong.project.mypage.model.dto.Tech;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,4 +23,21 @@ public class Member {
    private String enrollDate;
    private String memberDeleteFlag;
    private int Authority;
+   
+   private List<Tech> techList;
+   
+	/*
+	 * private String profileImage; 
+	 * private String backgroundImage;
+	 */
+   private String oneLiner;
+   
+   private int memberTechNo;
+   private int techNo;
+   private String techName;
+   private String techImg;
+   
+   private String memberInfo;
+   private String memberCareer;
+   private String memberCertificate;
 }

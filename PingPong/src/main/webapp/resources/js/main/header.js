@@ -1,4 +1,4 @@
-const headerSearchModContainer = document.getElementById("headerSearchModContainer");
+const headerSearchModContainer1 = document.getElementById("headerSearchModContainer");
 const headerOpenSearchBox1 = document.getElementById("headerOpenSearchBox");
 
 if (headerOpenSearchBox1 != null) {
@@ -63,7 +63,7 @@ if (headerOpenSearchBox1 != null) {
                         mainBox.appendChild(innerBox);
                         newLink.appendChild(mainBox);
 
-                        headerSearchModContainer.appendChild(newLink);
+                        headerSearchModContainer1.appendChild(newLink);
 
                         // 헬퍼 함수들
 
@@ -161,8 +161,8 @@ if (headerOpenSearchBox1 != null) {
                         mainBox.appendChild(innerBox);
                         newLink.appendChild(mainBox);
 
-                        // headerSearchModContainer에 새로운 요소 추가
-                        headerSearchModContainer.appendChild(newLink);
+                        // headerSearchModContainer1에 새로운 요소 추가
+                        headerSearchModContainer1.appendChild(newLink);
 
                     }
                 })

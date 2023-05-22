@@ -7,11 +7,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Career {
+public class SNS {
+	
+	private int snsNo;
+	private String snsName;
+	private String snsImg;
+	
+	private int memberNo; 
 
-	private int certificateNo;
-	private String memberCert;
-	
-	private int memberNo;
-	
 }

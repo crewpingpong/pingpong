@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.mypage.model.dto.MyPage;
+import com.pingpong.project.mypage.model.dto.Tech;
 
 @Repository
 public class MypageDAO {
@@ -84,7 +85,6 @@ public class MypageDAO {
 	 * @return boardList
 	 */
 	public List<Board> selectBoardList(int memberNo) {
-		
 		return sqlSession.selectList("boardMapper.selectBoardList", memberNo);
 	}
 
@@ -110,6 +110,22 @@ public class MypageDAO {
 	 */
 	public List<Board> selectBoardLikeList(int memberNo) {
 		return sqlSession.selectList("boardMapper.selectBoardLikeList", memberNo);
+	}
+
+	/** 지식기술 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public List<Member> selectTechList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.selectTechList", memberNo);
+	}
+
+	/** 프로필 정보 수정
+	 * @param updateMember
+	 * @return
+	 */
+	public int updateProfileInfo(MyPage updateMyPage) {
+		return sqlSession.update("mypageMapper.updateProfileInfo", updateMyPage);
 	}
 
 
