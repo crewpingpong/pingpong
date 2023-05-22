@@ -71,9 +71,9 @@ public class MypageController {
 	@PostMapping("/myPageModi")
 	public String updateInfoAndProfile(Member updateMember
 									, @RequestParam(value="profileImage", required=false) MultipartFile profileImage
+									, @RequestParam(value = "interest", required = false) String[] interest
 									, @SessionAttribute("loginMember") Member loginMember
 									, @SessionAttribute("mypage") MyPage mypage
-									, String[] interest
 									, RedirectAttributes ra
 									, HttpSession session) throws IllegalStateException, IOException {
 		
@@ -84,51 +84,63 @@ public class MypageController {
 
 	    String webPath = "/resources/images/profileImage/";	    
 	    String filePath = session.getServletContext().getRealPath(webPath);
-	    
-//	    System.out.println(profileImage);
-	    
-	    String fileName = profileImage.getOriginalFilename();
-//		System.out.println(fileName);
-	    
-		String reName = Util.fileRename(fileName);
-//		System.out.println(reName);
-		
-	    // 프로필 이미지 수정
-	    int profileResult = service.updateProfile(profileImage, reName, webPath, filePath, loginMember.getMemberNo());
 
 	    String message = null;
-	    if (infoResult > 0 && profileResult > 0) {
-	    	
-	        message = "회원 정보가 수정되었습니다.";
+	    if (profileImage != null && !profileImage.isEmpty()) {
+	        String fileName = profileImage.getOriginalFilename();
+	        String reName = Util.fileRename(fileName);
+	        
+	        // 프로필 이미지 수정
+	        int profileResult = service.updateProfile(profileImage, reName, webPath, filePath, loginMember.getMemberNo());
 
-	        // Session에 로그인 된 회원 정보 수정
-	        loginMember.setMemberNickname(updateMember.getMemberNickname());
-	        loginMember.setMemberUrl(updateMember.getMemberUrl());
-	        
-	        mypage.setProfileImage(webPath+reName);
-	        
+	        if (infoResult > 0 && profileResult > 0) {
+	            message = "회원 정보가 수정되었습니다.";
+
+	            // Session에 로그인 된 회원 정보 수정
+	            loginMember.setMemberNickname(updateMember.getMemberNickname());
+	            loginMember.setMemberUrl(updateMember.getMemberUrl());
+	            
+	            mypage.setProfileImage(webPath + reName);
+	        } else {
+	            message = "회원 정보 수정 실패";
+	        }
 	    } else {
-	        message = "회원 정보 수정 실패";
+	        if (infoResult > 0) {
+	            message = "회원 정보가 수정되었습니다.";
+
+	            // Session에 로그인 된 회원 정보 수정
+	            loginMember.setMemberNickname(updateMember.getMemberNickname());
+	            loginMember.setMemberUrl(updateMember.getMemberUrl());
+	        } else {
+	            message = "회원 정보 수정 실패";
+	        }
 	    }
 	    
 	    // 관심분야
-		for(String i : interest) {
-			System.out.println(i);
-		}
+	    if (interest != null) {
+	        for(String i : interest) {
+	            // System.out.println(i);
+	        }
+	    }
 
 	    ra.addFlashAttribute("message", message);
 
 	    return "personal/post";
 	}
+
 	
 	
 	// 프로필 편집 memberInfo, memberCareer, memberCertificate
 	@PostMapping("/profile")
 	public String updateProfileInfo(MyPage updateMyPage
+			, @RequestParam(value = "tech", required = false) String[] tech
+			, @RequestParam(value = "SNS", required = false) String[] SNS
 			, @SessionAttribute("mypage") MyPage mypage
-			, String[] tech, String[] SNS
 			, RedirectAttributes ra
 			, HttpSession session) {
+		
+		System.out.println(tech);
+		System.out.println(SNS);
 		
 		updateMyPage.setMemberNo(mypage.getMemberNo());
 		
@@ -156,14 +168,14 @@ public class MypageController {
 		}
 		
 		
-		// 지식기술 푸쉬!
+		// 지식기술
 		for(String t : tech) {
-			System.out.println(t);
+//			System.out.println(t);
 		}
 		
 		// SNS 
 		for(String s : SNS) {
-			System.out.println(s);
+//			System.out.println(s);
 		}
 		
 		
