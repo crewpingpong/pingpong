@@ -79,14 +79,45 @@
         </button>
     </main>
 
+    <div class="profileContent">
+        <div class="posttab_menu">
+            <div class="postcont_area">
+                <div id="posttab1" class="postcont" style="display:block;">
+                    <div class="contentBox">
+                        <c:choose>
+                            <c:when test="${empty boardList}">
+                                <%-- 조회된 게시글 목록이 비어있거나 null인 경우 --%>
+                                게시글이 존재하지 않습니다.
+                            </c:when>
+                        
+                            <c:otherwise>
+                                <!-- 게시글 목록 조회 결과가 있다면 -->
+                                <c:forEach items="${boardList}" var="board">
+                                    <div>
+                                        <%-- <a href="/board/${board.boardNo}">
+                                        onclick="selectBoardList(${board.boardNo})" --%>
+                                        <a href="mypage/${board.memberNo}?boardNo=${board.boardNo}">
+                                            <img class="list-thumbnail" src="${board.thumbnail}">
+                                        </a>   
+                                    </div>
+                                </c:forEach>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+
+
     <!-- 게시글 (무한 스크롤) -->
+<%--
     <article class="main-post">
         <div class="main-post-item"><a href="#"></a></div>
         <div class="main-post-item"><a href="#"></a></div>
         <div class="main-post-item"><a href="#"></a></div>
         <div class="main-post-item"><a href="#"></a></div>
         <div class="main-post-item"><a href="#"></a></div>
-        <%-- <div class="main-post-item"><a href="#"></a></div>
         <div class="main-post-item"><a href="#"></a></div>
         <div class="main-post-item"><a href="#"></a></div>
         <div class="main-post-item"><a href="#"></a></div>
@@ -96,9 +127,10 @@
         <div class="main-post-item"><a href="#"></a></div>
         <div class="main-post-item"><a href="#"></a></div>
         <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div> --%>
+        <div class="main-post-item"><a href="#"></a></div>
+        <div class="main-post-item"><a href="#"></a></div>
     </article>
-
+--%>
     <script src="/resources/js/script.js"></script>
 
     <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>
