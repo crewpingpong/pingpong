@@ -4,7 +4,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +28,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.common.utility.Util;
 import com.pingpong.project.member.model.dto.Member;
+import com.pingpong.project.message.model.dto.Follow;
+import com.pingpong.project.message.model.service.AlarmService;
 import com.pingpong.project.mypage.model.dto.MyPage;
 import com.pingpong.project.mypage.model.service.MypageService;
 
@@ -38,11 +42,15 @@ public class MypageController {
 	@Autowired
 	private MypageService service;
 	
+	@Autowired
+	private AlarmService alarmService;
+	
 	// 프로필 조회
 	@GetMapping("/{memberNo}")
 	public String personal(
 			@PathVariable("memberNo") int memberNo
-			, Model model) {
+			, Model model
+			, @SessionAttribute("loginMember") Member loginMember) {
 		
 		
 		MyPage mypage = service.selectMemberProfile(memberNo);  // 멤버 프로필 회원의 정보
@@ -50,10 +58,22 @@ public class MypageController {
 		List<Board> boardMarkList = service.selectBoardMarkList(memberNo);  // 북마크한 게시글 목록
 		List<Board> boardLikeList = service.selectBoardLikeList(memberNo);  // 좋아요한 게시글 목록
 		
+		// memberNo == 현재 보고 있는 페이지의 멤버 번호
+		Map<String, Integer> follow = new HashMap<>();
+		follow.put("memberNo", memberNo);
+		follow.put("followerNo", loginMember.getMemberNo());
+		int followCheck = alarmService.followCheck(follow); // 팔로우 여부 체크 0 == 안함 / 1 == 함
+		List<Follow> myfollowList = alarmService.myfollowList(follow); // 내가 팔로우 하는 사람들
+		List<Follow> mefollowList = alarmService.mefollowList(follow); // 나를 팔로우 하는 사람들
+		
 		model.addAttribute("mypage", mypage);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("markList", boardMarkList);
 		model.addAttribute("likeList", boardLikeList);
+		
+		model.addAttribute("followCheck", followCheck);
+		model.addAttribute("myfollowList", myfollowList);
+		model.addAttribute("mefollowList", mefollowList);
 		
 		return "personal/post";
 	}

@@ -1,5 +1,8 @@
 package com.pingpong.project.message.model.service;
 
+import java.util.List;
+import java.util.Map;
+
 import com.pingpong.project.message.model.dto.Follow;
 import com.pingpong.project.message.model.dto.Notice;
 
@@ -23,17 +26,36 @@ public interface AlarmService {
 	 */
 	int insertAlarm(Notice notice);
 
+//	/** 팔로우 여부 확인
+//	 * @param follow
+//	 * @return
+//	 */
+//	int followCheck(Follow follow);
+	
 	/** 팔로우 여부 확인
 	 * @param follow
 	 * @return
 	 */
-	int followCheck(Follow follow);
+	int followCheck(Map<String, Integer> follow);
 	
 	/** 팔로우 처리
 	 * @param follow
 	 * @return
 	 */
 	int followFL(Follow follow);
+
+	/** 내가 팔로우 하는 사람들
+	 * @param follow
+	 * @return
+	 */
+	List<Follow> myfollowList(Map<String, Integer> follow);
+
+	/** 나를 팔로우 하는 사람들
+	 * @param follow
+	 * @return
+	 */
+	List<Follow> mefollowList(Map<String, Integer> follow);
+
 	
 //	/** 팔로우 삽입
 //	 * @param follow

@@ -1298,6 +1298,15 @@ document.addEventListener("DOMContentLoaded",()=>{
     nufollow = document.querySelector(".nufollow");
     profileBtn = document.querySelector(".followBtn");
 
+    if(followCheck != null){
+        if(followCheck == 1){ // 팔로우 된 유저
+            followUser.classList.remove("followshow");
+            nufollow.classList.add("followshow");
+        } else if(followCheck == 0){ // 팔로우 안된 유저
+            followUser.classList.add("followshow");
+            nufollow.classList.remove("followshow");
+        }
+    }
 
     for(let i=0;i<followBtn.length;i++){
         followBtn[i].addEventListener("click", ()=>{
@@ -1316,7 +1325,7 @@ function followFn(){
     let check; // 기존에 팔로우 X(노란색) : 0, followUser
                //        팔로우 0(하늘색) : 1 nufollow
     // contains("클래스명") : 클래스가 있으면 true, 없으면 false
-    if(followUser.classList.contains("followshow")){
+    if(followUser.classList.contains("followshow")){ // followshow 보여주는 클래스
         check = 0; // 팔로우 X(노란색) : 0, followUser
     } else{
         check = 1;  // 팔로우 0(하늘색) : 1 nufollow
@@ -1351,11 +1360,11 @@ function followFn(){
             return;
         }
         
-        sendFollow(followerNo);
         // followUser.classList.toggle("followshow");
         // nufollow.classList.toggle("followshow");
-
+        
         if(check==0){ // 팔로우 성공
+            sendFollow(followerNo);
             followUser.classList.remove("followshow");
             nufollow.classList.add("followshow");
         } else {
