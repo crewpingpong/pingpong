@@ -92,15 +92,19 @@
                 <div class="profiletab_menu" id="lnhtab1">
                     <ul class="profilelist">
                         <li class="is_on"> <!-- CERTIFICATE -->
-                            <a href="#profiletab1" class="btn">CERT</a>
+                            <a href="#profiletab1" class="btn">INFO</a>
                         </li>
                         <li>
-                            <a href="#profiletab2" class="btn">INFO</a>
+                            <a href="#profiletab2" class="btn">CERT</a>
                         </li>
                     </ul>
                 
                     <div class="cont_area">
                         <div id="profiletab1" class="cont" style="display:block;">
+                            <h4>소개</h4>
+                            <div>
+${mypage.memberInfo}
+                            </div>
                             <h4 id="certificate">지식 / 기술</h4>
                             <!-- 아이콘 추가 기능 구현 -->
                             <div>
@@ -118,16 +122,11 @@
 	                                </c:otherwise>
                             	</c:choose>
                             </div>
+                        </div>
+                        <div id="profiletab2" class="cont">
                             <h4>자격증</h4>
                             <div>
 ${mypage.memberCertificate}
-                            </div>
-                        </div>
-                        
-                        <div id="profiletab2" class="cont">
-                            <h4>소개</h4>
-                            <div>
-${mypage.memberInfo}
                             </div>
                             <h4>커리어</h4>
                             <div>
@@ -136,7 +135,6 @@ ${mypage.memberCareer}
                         </div>
                     </div>
                 </div>
-
             </div> <!-- // profileRight -->
             
             <!-- 내정보 수정으로 가는 링크 -->

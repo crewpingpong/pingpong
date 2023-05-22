@@ -132,6 +132,52 @@ JOIN "MEMBER_TECH" USING (MEMBER_NO)
 JOIN "TECH" USING (TECH_NO)
 WHERE MEMBER_NO = 50;
 
+SELECT TECH_NAME
+FROM "MEMBER"
+JOIN "MEMBER_TECH" USING (MEMBER_NO)
+JOIN "TECH" USING (TECH_NO)
+WHERE MEMBER_NO = 1;
+
+SELECT TECH_NO, TECH_NAME, TECH_IMG
+FROM "TECH"
+WHERE TECH_NO IN (SELECT TECH_NO FROM "MEMBER_TECH"
+			WHERE MEMBER_NO = 50);
+
+
+---------------------
+-- !!!!!!!!!!!!!!!!!  UPDATE  !!!!!!!!!!!!!!!!!
+--UPDATE [변경될테이블] 
+--SET [컬럼1] = A2.[컬럼1] , [컬럼2] = A2.[컬럼2] 
+--FROM [조인테이블1] A2 
+--JOIN [조인테이블2] A3 
+--ON A2.[컬럼] = A3.[컬럼] 
+--WHERE [변경될테이블].[조건컬럼] = A2.[조건컬럼]
+
+
+---------------------
+---------------------	
+SELECT MEMBER_TECH_NO, MEMBER_NO, TECH_NO FROM "MEMBER_TECH";
+---------------------
+		
+SELECT COUNT(TECH_NO) 
+FROM "MEMBER_TECH"
+WHERE MEMBER_NO = 50;
+
+DELETE FROM "MEMBER_TECH"
+WHERE MEMBER_NO=50;
+
+INSERT INTO "MEMBER_TECH"
+VALUES(SEQ_TECH_NO.NEXTVAL, 50, 10);
+
+UPDATE "MEMBER_TECH"
+SET TECH_NO = 4
+WHERE MEMBER_NO = 50;
+
+---------------------
+---------------------
+
+
+
 
 
 ---------------------
@@ -172,6 +218,11 @@ SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_PW, MEMBER_NICKNAME, MEMBER_URL, ENROLL_D
 FROM "pingpong"."MEMBER";
 
 COMMIT;
+
+
+
+
+
 
 
 

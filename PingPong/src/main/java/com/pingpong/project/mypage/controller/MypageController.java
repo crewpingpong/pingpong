@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,8 @@ import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.message.model.dto.Follow;
 import com.pingpong.project.message.model.service.AlarmService;
 import com.pingpong.project.mypage.model.dto.MyPage;
+import com.pingpong.project.mypage.model.dto.SNS;
+import com.pingpong.project.mypage.model.dto.Tech;
 import com.pingpong.project.mypage.model.service.MypageService;
 
 
@@ -81,6 +84,11 @@ public class MypageController {
 	// 내 정보 수정으로 이동
 	@GetMapping("/myPageModi")
 	public String myPageModi(@SessionAttribute("loginMember") Member loginMember, Model model) {
+		
+		// techList 전체 조회
+		List<Tech> techList = service.selectTechList();
+		model.addAttribute("techList", techList); 
+		
 		return "personal/myPageModi"; 
 	}
 	
@@ -91,7 +99,7 @@ public class MypageController {
 	@PostMapping("/myPageModi")
 	public String updateInfoAndProfile(Member updateMember
 									, @RequestParam(value="profileImage", required=false) MultipartFile profileImage
-									, @RequestParam(value = "interest", required = false) String[] interest
+									, @RequestParam(value="interest", required=false) String[] interest
 									, @SessionAttribute("loginMember") Member loginMember
 									, @SessionAttribute("mypage") MyPage mypage
 									, RedirectAttributes ra
@@ -153,14 +161,13 @@ public class MypageController {
 	// 프로필 편집 memberInfo, memberCareer, memberCertificate
 	@PostMapping("/profile")
 	public String updateProfileInfo(MyPage updateMyPage
-			, @RequestParam(value = "tech", required = false) String[] tech
-			, @RequestParam(value = "SNS", required = false) String[] SNS
+			, @RequestParam(value="tech", required=false) String[] techArray
+			, @RequestParam(value="SNS", required=false) String[] SNSArray
 			, @SessionAttribute("mypage") MyPage mypage
 			, RedirectAttributes ra
 			, HttpSession session) {
 		
-		System.out.println(tech);
-		System.out.println(SNS);
+		List<String> selectedtechList = Arrays.asList(techArray);
 		
 		updateMyPage.setMemberNo(mypage.getMemberNo());
 		
@@ -189,15 +196,33 @@ public class MypageController {
 		
 		
 		// 지식기술
-		for(String t : tech) {
-//			System.out.println(t);
+		int techYN = service.selectTechCount(selectedtechList);
+		
+		if(techYN != 0) {
+			
+			int techListDeleteResult = service.deleteTechList(selectedtechList);
+			
+			int techListInsertResult = service.insertTechList(selectedtechList);
+			
+			for(String tech : selectedtechList) {
+				selectedtechList.add(tech);
+			}
 		}
+		
+		else {
+			int techListInsertResult = service.insertTechList(selectedtechList);
+			
+			for(String tech : selectedtechList) {
+				selectedtechList.add(tech);
+			}
+		}
+		
+       
 		
 		// SNS 
-		for(String s : SNS) {
+//		for(String s : SNS) {
 //			System.out.println(s);
-		}
-		
+//		}
 		
 		ra.addFlashAttribute("message", message);
 		
