@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -95,15 +96,22 @@
                         <div class="interest-field-container">
                             <p>작업 & 관심 분야(선택)</p>
                             <div class="interest-field">
-                                <div>
-                                    <label for="AI-robot"><input type="checkbox" value="AI/로봇" id="AI-robot" name="interest"> AI/로봇</label>
+                            
+                            	<%-- <c:forEach var="interest" items="${interestList}">
+	                                <div> 
+	                                    <label for="${interest.interestsNo}">
+	                                    	<input type="checkbox" value="${interest.interestsNo}" id="${interest.interestsNo}" name="interest"> ${interest.interestsName}
+	                                    </label>
+	                                </div>
+                                </c:forEach> --%>
+                                
+
                                     <label for="IT-SW"><input type="checkbox" value="IT/SW" id="IT-SW" name="interest"> IT/SW</label> 
                                     <label for="game"><input type="checkbox" value="게임" id="game" name="interest"> 게임</label> 
                                     <label for="engineering"><input type="checkbox" value="공학" id="engineering" name="interest"> 공학</label>
                                     <label for="education"><input type="checkbox" value="교육" id="education" name="interest"> 교육</label> 
                                     <label for="marketing"><input type="checkbox" value="마케팅" id="marketing" name="interest"> 마케팅</label> 
-                                    <label for="finance"><input type="checkbox" value="금융" id="finance" name="interest"> 금융</label> 
-                                </div>
+                                    <label for="finance"><input type="checkbox" value="금융" id="finance" name="interest"> 금융</label>  
                                 <div>
                                     <label for="animal"><input type="checkbox" value="동물" id="animal" name="interest"> 동물</label>
                                     <label for="design"><input type="checkbox" value="디자인" id="design" name="interest"> 디자인</label> 
@@ -121,7 +129,8 @@
                                     <label for="music"><input type="checkbox" value="음악" id="music" name="interest"> 음악</label> 
                                     <label for="medical-bio"><input type="checkbox" value="의료/바이오" id="medical-bio" name="interest"> 의료/바이오</label> 
                                     <label for="environment"><input type="checkbox" value="환경/생태" id="environment" name="interest"> 환경/생태</label> 
-                                </div>                                
+                                </div> 
+                                                             
                             </div>
                         </div>
                     </div>
@@ -163,13 +172,23 @@
                         <div class="tech-field-container">
                             <p>지식 / 기술</p>
                             <div class="tech-field">
-                                <div>
-                                    <label for="Ps"><input type="checkbox" value="포토샵" id="Ps" name="tech"> 포토샵</label>
-                                    <label for="Ai"><input type="checkbox" value="일러스트" id="Ai" name="tech"> 일러스트</label> 
-                                    <label for="Xd"><input type="checkbox" value="인디자인" id="Xd" name="tech"> 인디자인</label> 
-                                    <label for="Pr"><input type="checkbox" value="그래픽 디자인" id="Pr" name="tech"> 그래픽 디자인</label>
-                                    <label for="java"><input type="checkbox" value="자바" id="java" name="tech"> 자바</label> 
-                                </div>
+
+                            	<c:forEach var="tech" items="${techList}">
+	                                <div>
+	                                    <label for="${tech.techNo}">
+	                                    	<input type="checkbox" value="${tech.techNo}" id="${tech.techNo}" name="tech"> ${tech.techName}
+	                                    </label>
+	                                </div>
+                                </c:forEach>
+
+                            
+	                                    <!-- 
+	                                    <label for="Ai"><input type="checkbox" value="일러스트" id="Ai" name="tech"> 일러스트</label> 
+	                                    <label for="Xd"><input type="checkbox" value="인디자인" id="Xd" name="tech"> 인디자인</label> 
+	                                    <label for="Pr"><input type="checkbox" value="그래픽 디자인" id="Pr" name="tech"> 그래픽 디자인</label>
+	                                    <label for="java"><input type="checkbox" value="자바" id="java" name="tech"> 자바</label>  
+	                                    -->
+                                <!-- 
                                 <div>
                                     <label for="python"><input type="checkbox" value="파이썬" id="python" name="tech"> 파이썬</label> 
                                     <label for="c"><input type="checkbox" value="씨언어" id="c" name="tech"> 씨언어</label> 
@@ -190,7 +209,8 @@
                                     <label for="chatGPT"><input type="checkbox" value="chat GPT" id="chatGPT" name="tech"> chat GPT</label> 
                                     <label for="cubase"><input type="checkbox" value="큐베이스" id="cubase" name="tech"> 큐베이스</label> 
                                     <label for="vegas"><input type="checkbox" value="베가스" id="vegas" name="tech"> 베가스</label> 
-                                </div>                                
+                                </div>   
+                                -->                              
                             </div>
                         </div>
 

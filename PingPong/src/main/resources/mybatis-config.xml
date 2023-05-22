@@ -22,6 +22,9 @@
       <typeAlias type="com.pingpong.project.board.model.dto.Inquiry" alias="Inquiry" />
       <typeAlias type="com.pingpong.project.board.model.dto.Declaration" alias="Declaration" />
       <typeAlias type="com.pingpong.project.message.model.dto.Follow" alias="Follow" />
+      <typeAlias type="com.pingpong.project.mypage.model.dto.Tech" alias="Tech" />
+      
+      <typeAlias type="com.pingpong.project.mypage.model.dto.Interest" alias="Interest" />
 
 
    </typeAliases>

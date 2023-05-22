@@ -116,9 +116,9 @@ public class MypageDAO {
 	 * @param memberNo
 	 * @return
 	 */
-	public List<Member> selectTechList(int memberNo) {
-		return sqlSession.selectList("mypageMapper.selectTechList", memberNo);
-	}
+//	public List<Member> selectTechList(int memberNo) {
+//		return sqlSession.selectList("mypageMapper.selectTechList", memberNo);
+//	}
 
 	/** 프로필 정보 수정
 	 * @param updateMember
@@ -126,6 +126,37 @@ public class MypageDAO {
 	 */
 	public int updateProfileInfo(MyPage updateMyPage) {
 		return sqlSession.update("mypageMapper.updateProfileInfo", updateMyPage);
+	}
+
+	/** 지식/기술 리스트 조회
+	 * @return
+	 */
+	public List<Tech> selectTechList() {
+		return sqlSession.selectList("mypageMapper.selectTechList");
+	}
+
+	/** 선택된 지식기술 리스트 삽입
+	 * @param techList
+	 * @return
+	 */
+	public int insertTechList(List<String> techList) {
+		return sqlSession.insert("mypageMapper.insertTechList", techList);
+	}
+
+	/** 선택된 지식기술 리스트 조회
+	 * @param selectedTech
+	 * @return
+	 */
+	public int selectTechCount(List<String> techList) {
+		return sqlSession.selectOne("mypageMapper.selectTechCount", techList);
+	}
+
+	/** 선택된 지식기술 리스트 삭제
+	 * @param selectedTech
+	 * @return
+	 */
+	public int deleteTechList(List<String> techList) {
+		return sqlSession.delete("mypageMapper.deleteTechList", techList);
 	}
 
 
