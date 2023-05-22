@@ -1,9 +1,11 @@
 package com.pingpong.project.board.model.service;
 
 
+import java.util.List;
 import java.util.Map;
 
 import com.pingpong.project.board.model.dto.Board;
+import com.pingpong.project.board.model.dto.Hashtag;
 
 
 public interface BoardService {
@@ -37,5 +39,23 @@ public interface BoardService {
 	 * @return count
 	 */
     int boardMarkup(Map<String, Integer> paramMap);
+
+	/** 댓글 달기 서비스 (AJAX)
+	 * @param paramMap
+	 * @return result
+	 */
+	int commentInsert(Map<String, Object> paramMap);
+
+	/** 게시글 수정 서비스 (AJAX)
+	 * @param paramMap
+	 * @return result
+	 */
+	int boardEditing(Map<String, Object> paramMap);
+
+	/** 해시태그 리스트 반환
+	 * @param hashtags
+	 * @return hashtagList
+	 */
+	List<Hashtag> getHashtags(Map<String, String> hashtags);
 
 }

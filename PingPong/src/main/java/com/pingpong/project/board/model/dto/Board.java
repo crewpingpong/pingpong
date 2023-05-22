@@ -31,10 +31,12 @@ public class Board {
 	private String likeCount;
     private String likeCheck;
 
+    private List<Bookmark> bookmarkList;
     private List<Like> likeList;
 	private List<BoardImage> imageList;
 	
 	private List<Comment> commentList;
+	private List<Hashtag> hashtagList;
 	
 	private int declarationCount;
 

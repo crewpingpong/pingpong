@@ -39,6 +39,8 @@ public class BoardController2 {
 			, HttpSession session
 			) throws IllegalStateException, IOException{
 		
+		System.out.println(board.getHashtagList());
+		
 		board.setMemberNo(loginMember.getMemberNo());
 		
 		String webPath = "/resources/images/boardImage/";  // 저장경로

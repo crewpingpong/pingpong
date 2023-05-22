@@ -18,12 +18,12 @@
 	</resultMap>
 	
 	<!-- 알람 관련 -->
-	<resultMap type="Notice" id="notice_rm">
-		<id property="noticeNo" column="NOTICE_NO" />
-		<result property="noticeContent" column="NOTICE_COMENT" />
-		<result property="elapsedDate" column="ELAPSED_TIME" />
-		<result property="memberNo" column="MEMBER_NO" />
-	</resultMap>
+    <resultMap type="Notice" id="notice_rm">
+        <id property="noticeNo" column="NOTICE_NO" />
+        <result property="noticeContent" column="NOTICE_COMENT" />
+        <result property="elapsedDate" column="ELAPSED_TIME" />
+        <result property="memberNo" column="MEMBER_NO" />
+    </resultMap>
 	
 	<!-- 받은 메세지 조회 -->
 	<select id="messageList" resultMap="message_rm">
@@ -42,7 +42,7 @@
 				]]>
 		FROM MESSAGE m
 		JOIN "MEMBER_PROFILE" ON (SEND_MEMBER=MEMBER_NO)
-		JOIN "MEMBER" USING (MEMBER_NO)
+		LEFT JOIN "MEMBER" USING (MEMBER_NO)
 		WHERE RECEIVED_MEMBER = #{memberNo}
 		AND m.MESSAGE_DEL_FL ='N'
 		ORDER BY 1 DESC
@@ -55,7 +55,7 @@
 			   m.SEND_MEMBER, m.RECEIVED_MEMBER,
 		       MP.PROFILE_IMG, R.MEMBER_NICKNAME MEMBER_NICKNAME, m.MESSAGE_SEND_DEL_FL
 		FROM MESSAGE m
-		JOIN "MEMBER_PROFILE" MP ON (m.RECEIVED_MEMBER = MP.MEMBER_NO)
+		RIGHT JOIN "MEMBER_PROFILE" MP ON (m.RECEIVED_MEMBER = MP.MEMBER_NO)
 		JOIN "MEMBER" S ON (m.SEND_MEMBER = S.MEMBER_NO)
 		JOIN "MEMBER" R ON (m.RECEIVED_MEMBER = R.MEMBER_NO)
 		WHERE m.SEND_MEMBER = #{memberNo}

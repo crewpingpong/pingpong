@@ -99,4 +99,5 @@
 		WHERE CERTIFICATE_NO IN (SELECT CERTIFICATE_NO FROM "MEMBER_PROFILE"
 					WHERE MEMBER_NO = #{memberNo})	
 	</select>
+	
 </mapper>

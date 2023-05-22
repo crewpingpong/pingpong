@@ -156,7 +156,15 @@
 }
 
 .postlist li {
+    display: flex;
+    align-items: center;
     margin-right: 32px;
+  }
+  
+.postlist li:last-child {
+    margin-right: 0;
+    margin-left: auto;
+    /* 앞에 있는 요소들이 왼쪽으로 몰리고, 마지막 요소가 오른쪽 끝으로 이동 */
 }
 #updateBackground{
     /* position: absolute; right: 60px; top: 460px; */ 
@@ -166,16 +174,13 @@
 }
 
 /* 게시글 수정 버튼 */
-.postBtn {
-    position: absolute; top: 50px; right: 15%;
-}
 
-.postBtn>button {
+.newContent {
     width: 100px; height: 35px; border-radius: 20px; background-color: #92B4EC;
     color: #fff; font-size: 12px; font-weight: bold; margin-left: 12px;
 }
 
-.postBtn>button:hover {
+.newContent:hover {
     background-color: #5286DC;
 }
 
@@ -190,7 +195,7 @@
 .list-thumbnail{border-radius: 20px;}
 
 .contentBox div {
-    width: 300px; height: 300px; border-radius: 20px; background-color: #C5C5C5;
+    width: 300px; height: 300px; border-radius: 20px;
 }
 
 .posttab_menu .postlist .btn {
@@ -376,13 +381,12 @@
 .NewWriteBoardTop {
     display: flex; flex-direction: row;
 }
-
-.NewWriteProfileName {
-    margin-top: 20px;
-}
-
 .NewWriteTextArea {
-    margin-top: 20px; border: none; width: 420px; height: 400px; resize: none;
+    margin-top: 20px; border: none; width: 420px; height: 240px; resize: none;
+}
+.NewWriteProfileName{
+    display: grid;
+    place-items: center;
 }
 
 /* 글자수 카운트 */
@@ -445,8 +449,8 @@
 }
 
 .BoardContainerright .porfileRac img{
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     border: 1px solid black; 
 }
@@ -468,6 +472,41 @@
 /* 게시글 내용 + 좋아요 수 */
 .BoardPost{
     min-height: 50px;
+    margin-bottom: 30px;
+}
+
+.hiddenEditing{
+    border : 1px solid #231F2050;
+    display: none;
+    border-radius: 4%;
+    width : 250px;
+}
+.editingSubmit{
+    display: none;
+    background-color: #C5C5C5;
+    border-radius: 10%;
+    margin-right: 2px;
+    cursor: pointer;
+}
+.editingCancel{
+    display: none;
+    background-color: #C5C5C5;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+.innerDiv>div{
+    float: right;
+    margin : 2px;
+}
+
+
+.hiddenEditing:focus{
+    outline:none;
+}
+
+.BoardPost textarea{
+    resize : none;
 }
 .Boardcontent {
     width: 100%;
@@ -483,6 +522,21 @@
 .BoardContentBox {
     display: flex;
 
+}
+
+.deleteComment{
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    position: relative;
+}
+
+.deleteComment>button{
+    background-color: white;
+    position: absolute;
+    top:13px;
 }
 
 /* 하단 좋아요 */
@@ -501,7 +555,9 @@
     padding : 14px 4px 14px 16px;
     line-height: var(--system-14-line-height);
 }
-
+.secondComment{
+    cursor: pointer;
+}
 .postcontent2{
     display: none;
 }
@@ -617,17 +673,26 @@
     font-size: 13px; color: #5C5C5C;
 }
 
-.postcontent1>div:first-child{
+
+
+.lastDivadd{
     display: flex;
     margin-bottom : 16px;
 }
-.postcontent1:last-child>div{
-    margin-bottom : 0px;
+
+.lastDivadd1{
+    display: flex;
+    margin-top : 12px; 
+}
+.commentbox{
+    margin-bottom: 0px;
 }
 
 
-
 .BoardPost1{
+    margin-right:16px;
+}
+.BoardPost2{
     margin-right:16px;
 }
 .innerDiv a{
@@ -635,7 +700,13 @@
 }
 
 .BoardPost1 a img{
-    width: 32px; height: 32px;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid #5C5C5C;
+}
+
+.BoardPost2 a img{
+    width: 40px; height: 40px;
     border-radius: 50%;
     border: 1px solid #5C5C5C;
 }
@@ -666,11 +737,17 @@
     font-weight: bold;
 }
 
+
+
 .innerDiv{
     display: flex;
     /* padding-bottom: 20px; */
 }
 /* 이전 버튼 클릭시 전환 영역 */
+
+.BoardPost .innerDiv{
+    display: block;
+}
 
 .Boardcontent1 {
     width: 100%; height: 100%;
@@ -728,6 +805,10 @@
 
 .BoardComment-remove-row {
     float: right; cursor: pointer; transform: translateY(-20px);
+}
+
+.editing{
+    display: none;
 }
 
 /* 스크롤바 설정*/
@@ -931,7 +1012,14 @@ li {
     width: 100%; -webkit-user-drag: none; user-select: none;
 }
 
-
-
-
+.tag{
+    cursor: pointer;
+}
+#hashtag-input:focus-visible{
+    outline : none;
+}
 /* 나현 구역! */
+
+#hashtag-input a{
+    color : #5286DC;
+}
