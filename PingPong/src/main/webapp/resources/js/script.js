@@ -224,10 +224,10 @@ headerOpenSearchBox.addEventListener("keyup", e => {
     } else{
         headerSearchModContainer.style.display = "block";
     }
-
-    while(headerSearchModResultList.hasChildNodes()) {
-        headerSearchModResultList.removeChild(headerSearchModResultList.firstChild);
-    }
+    // 여기 수정
+    // while(headerSearchModResultList.hasChildNodes()) {
+    //     headerSearchModResultList.removeChild(headerSearchModResultList.firstChild);
+    // }
     if(headerOpenSearchBox.value.startsWith('#')){
         for(let i=0;i<tagArr.length;i++){
             if(tagArr[i].startsWith(headerOpenSearchBox.value) && headerOpenSearchBox.value!='#'){
