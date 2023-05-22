@@ -613,9 +613,10 @@ ${mypage.memberCareer}
     </div>
 
     <script>
-        const mypage = "${mypage}";
+        // const mypage = "${mypage}";
     </script>
     <script src="/resources/js/script.js"></script> <!-- 메인 헤더, 네브 js -->
     <script src="/resources/js/personal/post.js"></script> <!-- 게시글 상세 -->
+    <script src="/resources/js/personal/post2.js"></script> <%-- 두번째 post --%>
 </body>
 </html> 

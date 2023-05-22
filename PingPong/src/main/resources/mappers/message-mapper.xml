@@ -17,6 +17,13 @@
 		<result property="createDate" column="CREATE_DATE"/>
 	</resultMap>
 	
+	<!-- 알람 관련 -->
+    <resultMap type="Notice" id="notice_rm">
+        <id property="noticeNo" column="NOTICE_NO" />
+        <result property="noticeContent" column="NOTICE_COMENT" />
+        <result property="elapsedDate" column="ELAPSED_TIME" />
+        <result property="memberNo" column="MEMBER_NO" />
+    </resultMap>
 	
 	<!-- 받은 메세지 조회 -->
 	<select id="messageList" resultMap="message_rm">
