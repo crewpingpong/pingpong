@@ -1,5 +1,8 @@
 package com.pingpong.project.message.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -38,15 +41,39 @@ public class AlarmDAO {
 		return sqlSession.insert("alarmMapper.insertAlarm",notice);
 	}
 	
+//	/** 팔로우 여부
+//	 * @param follow
+//	 * @return
+//	 */
+//	public int followCheck(Follow follow) {
+//		return sqlSession.selectOne("alarmMapper.followCheck",follow);
+//	}
+	
+
 	/** 팔로우 여부
 	 * @param follow
 	 * @return
 	 */
-	public int followCheck(Follow follow) {
+	public int followCheck(Map<String, Integer> follow) {
 		return sqlSession.selectOne("alarmMapper.followCheck",follow);
 	}
-	
 
+	/** 내가 팔로우 하는 사람들
+	 * @param follow
+	 * @return
+	 */
+	public List<Follow> myfollowList(Map<String, Integer> follow) {
+		return sqlSession.selectList("alarmMapper.myfollowList",follow);
+	}
+
+	/** 나를 팔로우 하는 사람들
+	 * @param follow
+	 * @return
+	 */
+	public List<Follow> mefollowList(Map<String, Integer> follow) {
+		return sqlSession.selectList("alarmMapper.mefollowList",follow);
+	}
+	
 	/** 팔로우 삽입
 	 * @param follow
 	 * @return
@@ -64,5 +91,8 @@ public class AlarmDAO {
 	public int unfollow(Follow follow) {
 		return sqlSession.delete("alarmMapper.unfollow",follow);
 	}
+
+
+
 	
 }

@@ -280,7 +280,7 @@
 		FROM "HASHTAG"
 		WHERE HASHTAG_NAME LIKE '${hashtagName}%'
 	</select>
-	
+
 	<!-- 댓글 삭제 -->
 	<update id="deleteComment">
 		UPDATE "COMMENT" SET
@@ -295,5 +295,16 @@
 		COMMENT_DEL_FL = 'Y'
 		WHERE COMMENT_NO = #{commentNo}
 	</update>
+
+	<!-- 메인 화면 게시글 리스트 조회 (최신순) -->
+	<select id="selectBoardAll" resultMap="board_rm">
+		SELECT BOARD_NO, IMG_ADDRESS THUMBNAIL, MEMBER_NO
+		FROM BOARD
+		JOIN BOARD_IMG USING(BOARD_NO)
+		WHERE BOARD_DEL_FL = 'N'
+		AND IMG_ORDER = 1
+		ORDER BY 1 DESC
+	</select>
+
 	
 </mapper>

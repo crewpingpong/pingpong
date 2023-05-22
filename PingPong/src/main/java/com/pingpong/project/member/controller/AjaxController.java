@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.member.model.service.AjaxService;
+import com.pingpong.project.search.model.dto.SearchTag;
 
 @Controller // 요청 / 응답 제어 + bean 등
 public class AjaxController {
@@ -61,12 +62,19 @@ public class AjaxController {
 	}
 	
 	// 닉네임이 일부라도 일치하는 모든 회원 조회 (40명)
-//	@PostMapping(value = "/selectAllNickname", produces = "application/json; charset=UTF-8")
-//	@ResponseBody
-//	public List<Member> selectAllNickname(@RequestBody String input){
-//		
-//		return service.selectAllNickname(input);
-//	};
+	@PostMapping(value = "/selectAllNickname", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Member> selectAllNickname(@RequestBody String headerOpenSearchBox1){
+		
+		return service.selectAllNickname(headerOpenSearchBox1);
+	};
+	// 태그가 일부라도 일치하는 모든 태그 조회 (40명)
+		@PostMapping(value = "/selectAllTag", produces = "application/json; charset=UTF-8")
+		@ResponseBody
+		public List<SearchTag> selectAllTag(@RequestBody String headerOpenSearchBox1){
+			
+			return service.selectAllTag(headerOpenSearchBox1);
+	};
 
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////

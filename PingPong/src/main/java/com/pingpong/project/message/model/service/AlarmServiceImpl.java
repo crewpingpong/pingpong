@@ -1,5 +1,8 @@
 package com.pingpong.project.message.model.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,13 +36,32 @@ public class AlarmServiceImpl implements AlarmService{
 		return dao.insertAlarm(notice);
 	}
 	
+//	// 팔로우 여부
+//	@Override
+//	public int followCheck(Follow follow) {
+//		return dao.followCheck(follow);
+//	}
+	
 	// 팔로우 여부
 	@Override
-	public int followCheck(Follow follow) {
+	public int followCheck(Map<String, Integer> follow) {
 		return dao.followCheck(follow);
 	}
 	
 	
+	
+	// 내가 팔로우 하는 사람들
+	@Override
+	public List<Follow> myfollowList(Map<String, Integer> follow) {
+		return dao.myfollowList(follow);
+	}
+		
+	// 나를 팔로우 하는 사람들
+	@Override
+	public List<Follow> mefollowList(Map<String, Integer> follow) {
+		return dao.mefollowList(follow);
+	}
+
 	// 팔로우 처리
 	@Transactional(rollbackFor = Exception.class)
 	@Override

@@ -29,5 +29,6 @@ public class Notice {
 	private int type; // 타입
 	
 	private int boardNo; // 알림 받은 게시글 번호 (좋아요/댓글)
+//	private int follow; // 팔로우 했을 경우만
 	
 }
