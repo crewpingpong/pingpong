@@ -486,6 +486,7 @@ function selectBoardList(boardNo){
 
                 innerDiv.append(nameA, contentP);
                 div.append(innerDiv, dateDiv);
+
                 if(board.commentList[i].childCheck > 0){
                     const secondDiv = document.createElement("div");
                     secondDiv.classList.add("secondComment");
@@ -543,6 +544,15 @@ function selectBoardList(boardNo){
                 const lastDiv = document.createElement("div");
                 lastDiv.classList.add("lastDivadd")
                 lastDiv.append(boardPostDiv, div);
+                if(board.commentList[i].memberNo == loginMemberNo){
+
+                    let item = 
+                        `<div class="deleteComment">
+                            <button type="button" onclick="removeComment(${board.commentList[i].commentNo})">×</button>
+                        </div>`;
+                    lastDiv.insertAdjacentHTML("beforeend", item);
+
+                }
                 postContentDiv.append(lastDiv);
                 Boardcontent1.append(postContentDiv);
             }
@@ -734,6 +744,13 @@ function selectBoardList(boardNo){
     })
     .catch(err => console.log(err));
 }
+
+
+// 댓글 삭제 함수
+function removeComment(commentNo) {
+    document.getElementById(hashtag).remove();
+}
+
 
 // 댓글 달기 AJAX
 const insertComment = document.getElementById("insertComment");
@@ -1521,27 +1538,27 @@ window.addEventListener("resize", () => {
 //         console.log(error);
 //       });
 //   }
-  
-  function addHashtag() {
+
+function addHashtag() {
     let hashtag = document.getElementById("hashtag").value;
     let item = getHashtagItem(hashtag);
-  
+
     document.getElementById("hashtagList").insertAdjacentHTML("beforeend", item);
-  }
-  
-  function removeHashtag(hashtag) {
+}
+
+function removeHashtag(hashtag) {
     document.getElementById(hashtag).remove();
-  }
-  
-  function getHashtagItem(hashtag) {
+}
+
+function getHashtagItem(hashtag) {
 
     hashtag = hashtag.replaceAll(' ', '');
     let item = `
-      <div class="hashtag" id="${hashtag}">
-        <span class="hashtag-value">#${hashtag}</span>
-        <button type="button" onclick="removeHashtag('${hashtag}')">×</button>
-      </div>
+        <div class="hashtag" id="${hashtag}">
+            <span class="hashtag-value">#${hashtag}</span>
+            <button type="button" onclick="removeHashtag('${hashtag}')">×</button>
+        </div>
     `;
-  
+
     return item;
-  }
+}

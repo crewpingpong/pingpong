@@ -524,6 +524,21 @@
 
 }
 
+.deleteComment{
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    position: relative;
+}
+
+.deleteComment>button{
+    background-color: white;
+    position: absolute;
+    top:13px;
+}
+
 /* 하단 좋아요 */
 .BoardHeartBox {
     display: flex;
