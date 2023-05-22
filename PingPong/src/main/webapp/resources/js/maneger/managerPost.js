@@ -151,3 +151,39 @@ if(PostReBtn != null){
     PostForm.submit();
   });
 };
+
+//검색
+
+const boardSearch = document.querySelector("#boardSearch");
+const searchKey = document.querySelector("#searchKey");
+const searchQuery = document.querySelector("#searchQuery");
+
+const options = document.querySelectorAll("#searchKey > option");
+
+(()=>{
+  const params = new URL(location.href).searchParams;
+
+  const key = params.get("key"); // i,n,e 중 하나
+  const query = params.get("query"); // 검색어
+
+  if(key != null){ 
+      searchQuery.value = query; 
+      for(let op of options){
+          if(op.value == key){
+              op.selected = true;
+          }
+      }
+  }
+
+})();
+
+boardSearch.addEventListener("submit", e => {
+
+  if(searchQuery.value.trim().length == 0){ 
+      e.preventDefault(); 
+
+      location.href = location.pathname; 
+
+  }
+
+});

@@ -20,7 +20,7 @@ public interface ManagerService {
 	 * @param cp 
 	 * @return map
 	 */
-	Map<String, Object> selectSessionList(int cp);
+	Map<String, Object> selectSecessionList(int cp);
 
 	/** 관리자 페이지 게시글 목록 조회
 	 * @param cp 
@@ -81,6 +81,27 @@ public interface ManagerService {
 	 * @return result
 	 */
 	int commentRe(int commentNo);
+
+	/** 검색된 가입 회원 목록 조회
+	 * @param paramMap
+	 * @param cp
+	 * @return map
+	 */
+	Map<String, Object> selectMemberList(Map<String, Object> paramMap, int cp);
+
+	/** 검색된 탈퇴 회원 목록 조회
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectSecessionList(Map<String, Object> paramMap, int cp);
+
+	/** 검색된 게시글 목록 조회
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectBoardList(Map<String, Object> paramMap, int cp);
 
 	
 }
