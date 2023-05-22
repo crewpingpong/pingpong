@@ -71,8 +71,8 @@ const seachModInnerContent = document.getElementById("seachModInnerContent");
 
 const searchModResultList = document.getElementById("searchModResultList");
 const headerSearchModResultList = document.getElementById("headerSearchModResultList");
-const tagArr = ['#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱'];
-const nameArr = ['kimchanhee', 'leenahyun', 'leesangyun', 'choigeuntae', 'parkjaekyung'];
+// const tagArr = ['#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱'];
+// const nameArr = ['kimchanhee', 'leenahyun', 'leesangyun', 'choigeuntae', 'parkjaekyung'];
 
 
 // 열기 버튼을 누르면 nav의 display가 flex로 변경

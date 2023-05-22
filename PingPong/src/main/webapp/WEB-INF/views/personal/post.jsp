@@ -57,7 +57,8 @@
                 </div>
 
                 <p class="profileName">${mypage.memberNickname}</p>
-                <p class="profileIntroduce">${mypage.oneLiner}</p>
+                <p class="profileIntroduce">pingpong.net/${loginMember.memberUrl}</p>
+                <%-- <p class="profileIntroduce">${mypage.oneLiner}</p> --%>
                 <div class="profileBtn">
                     <!-- 팔로워 버튼 --> <!-- c:choose/c:when -->
                     <div class="followBtn" follow="${mypage.memberNo}"> <!-- followshow 클래스 있으면 보임 -->
@@ -101,32 +102,28 @@
                     <div class="cont_area">
                         <div id="profiletab1" class="cont" style="display:block;">
                             <h4 id="certificate">지식 / 기술</h4>
-                            <!-- 나중에 여기다가 아이콘 추가해주는 기능 구현 -->
-                            <!-- <div>없음</div> -->
+                            <!-- 아이콘 추가 기능 구현 -->
                             <div>
                                 <c:choose>
-                                <c:when test="${empty mypage.techList}">
-                                    없음
-                                </c:when>
-                            
-                                <c:otherwise>
-                                    <c:forEach items="${techList}" var="tech">
-                                        <div>
-                                            <img src="${tech.techImg}" alt="${tech.techName}">
-                                        </div>
-                                    </c:forEach>
-                                </c:otherwise>
-                            </c:choose>
+	                                <c:when test="${empty mypage.techList}">
+	                                    없음
+	                                </c:when>
+	                            
+	                                <c:otherwise>
+	                                    <c:forEach items="${techList}" var="tech">
+	                                        <div>
+	                                            <img src="${tech.techImg}" alt="${tech.techName}">
+	                                        </div>
+	                                    </c:forEach>
+	                                </c:otherwise>
+                            	</c:choose>
                             </div>
                             <h4>자격증</h4>
                             <div>
-<c:forEach items="${techList}" var="tech">
-<div>
-API 예정
-</div>
-</c:forEach>
+${mypage.memberCertificate}
                             </div>
                         </div>
+                        
                         <div id="profiletab2" class="cont">
                             <h4>소개</h4>
                             <div>

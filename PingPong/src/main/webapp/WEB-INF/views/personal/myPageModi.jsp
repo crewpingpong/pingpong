@@ -96,31 +96,31 @@
                             <p>작업 & 관심 분야(선택)</p>
                             <div class="interest-field">
                                 <div>
-                                    <label for="AI/로봇"><input type="checkbox" value="AI/로봇" id="AI/로봇" name="interest"> AI/로봇</label>
-                                    <label for="IT/SW"><input type="checkbox" value="IT/SW" id="IT/SW" name="interest"> IT/SW</label> 
-                                    <label for="게임"><input type="checkbox" value="게임" id="게임" name="interest"> 게임</label> 
-                                    <label for="공학"><input type="checkbox" value="공학" id="공학" name="interest"> 공학</label>
-                                    <label for="교육"><input type="checkbox" value="교육" id="교육" name="interest"> 교육</label> 
-                                    <label for="마케팅"><input type="checkbox" value="마케팅" id="마케팅" name="interest"> 마케팅</label> 
-                                    <label for="금융"><input type="checkbox" value="금융" id="금융" name="interest"> 금융</label> 
+                                    <label for="AI-robot"><input type="checkbox" value="AI/로봇" id="AI-robot" name="interest"> AI/로봇</label>
+                                    <label for="IT-SW"><input type="checkbox" value="IT/SW" id="IT-SW" name="interest"> IT/SW</label> 
+                                    <label for="game"><input type="checkbox" value="게임" id="game" name="interest"> 게임</label> 
+                                    <label for="engineering"><input type="checkbox" value="공학" id="engineering" name="interest"> 공학</label>
+                                    <label for="education"><input type="checkbox" value="교육" id="education" name="interest"> 교육</label> 
+                                    <label for="marketing"><input type="checkbox" value="마케팅" id="marketing" name="interest"> 마케팅</label> 
+                                    <label for="finance"><input type="checkbox" value="금융" id="finance" name="interest"> 금융</label> 
                                 </div>
                                 <div>
-                                    <label for=""><input type="checkbox" value="동물" name="interest"> 동물</label>
-                                    <label for=""><input type="checkbox" value="디자인" name="interest"> 디자인</label> 
-                                    <label for=""><input type="checkbox" value="미용/패션" name="interest"> 미용/패션</label> 
-                                    <label for=""><input type="checkbox" value="방송" name="interest"> 방송</label> 
-                                    <label for=""><input type="checkbox" value="법/수사" name="interest"> 법/수사</label> 
-                                    <label for=""><input type="checkbox" value="사회복지" name="interest"> 사회복지</label> 
-                                    <label for=""><input type="checkbox" value="스포츠" name="interest"> 스포츠</label> 
+                                    <label for="animal"><input type="checkbox" value="동물" id="animal" name="interest"> 동물</label>
+                                    <label for="design"><input type="checkbox" value="디자인" id="design" name="interest"> 디자인</label> 
+                                    <label for="beauty-fashion"><input type="checkbox" value="미용/패션" id="beauty-fashion" name="interest"> 미용/패션</label> 
+                                    <label for="boardcast"><input type="checkbox" value="방송" id="boardcast" name="interest"> 방송</label> 
+                                    <label for="law"><input type="checkbox" value="법/수사" id="law" name="interest"> 법/수사</label> 
+                                    <label for="welfare"><input type="checkbox" value="사회복지" id="welfare" name="interest"> 사회복지</label> 
+                                    <label for="sports"><input type="checkbox" value="스포츠" id="sports" name="interest"> 스포츠</label> 
                                 </div> 
                                 <div>
-                                    <label for=""><input type="checkbox" value="여행" name="interest"> 여행</label> 
-                                    <label for=""><input type="checkbox" value="책/영화/드라마" name="interest"> 책/영화/드라마</label> 
-                                    <label for=""><input type="checkbox" value="우주/항공" name="interest"> 우주/항공</label> 
-                                    <label for=""><input type="checkbox" value="음식" name="interest"> 음식</label> 
-                                    <label for=""><input type="checkbox" value="음악" name="interest"> 음악</label> 
-                                    <label for=""><input type="checkbox" value="의료/바이오" name="interest"> 의료/바이오</label> 
-                                    <label for=""><input type="checkbox" value="환경/생태" name="interest"> 환경/생태</label> 
+                                    <label for="travel"><input type="checkbox" value="여행" id="travel" name="interest"> 여행</label> 
+                                    <label for="b-m-d"><input type="checkbox" value="책/영화/드라마" id="b-m-d" name="interest"> 책/영화/드라마</label> 
+                                    <label for="universe"><input type="checkbox" value="우주/항공" id="universe" name="interest"> 우주/항공</label> 
+                                    <label for="food"><input type="checkbox" value="음식" id="food" name="interest"> 음식</label> 
+                                    <label for="music"><input type="checkbox" value="음악" id="music" name="interest"> 음악</label> 
+                                    <label for="medical-bio"><input type="checkbox" value="의료/바이오" id="medical-bio" name="interest"> 의료/바이오</label> 
+                                    <label for="environment"><input type="checkbox" value="환경/생태" id="environment" name="interest"> 환경/생태</label> 
                                 </div>                                
                             </div>
                         </div>
@@ -135,25 +135,28 @@
 
             <!-- *** 프로필 편집 *** -->
             <div id="myPageModiTab2" class="myPage-content-main">
-                <form name="myPageFrm" action="/mypage/profile" method="POST">
+                <form name="myPageFrm" id="updateProfileInfo" action="/mypage/profile" method="POST">
                     <div class="profile-modi">
 
                         <!-- 소개 -->
                         <div class="introduce-change"> 
                             <p>소개</p>
-                            <input type="text" maxlength="40" placeholder="자기 소개를 입력해주세요.">
+                            <input type="text" name="memberInfo" maxlength="40" placeholder="자기 소개를 입력해주세요."
+                            	value="${mypage.memberInfo}" id="memberInfo">
                         </div>
 
                         <!-- 커리어 -->
                         <div class="career-change"> 
                             <p>커리어</p>
-                            <input type="text" maxlength="40" placeholder="경력 / 수상 내역을 입력해주세요.">
+                            <input type="text" name="memberCareer" maxlength="40" placeholder="경력 / 수상 내역을 입력해주세요."
+                            	value="${mypage.memberCareer}" id="memberCareer">
                         </div>
 
                         <!-- 자격증 -->
                         <div class="certificate-change"> 
                             <p>자격증</p>
-                            <input type="text" maxlength="40" placeholder="보유중인 자격증을 입력해주세요.">
+                            <input type="text" name="memberCertificate" maxlength="40" placeholder="보유중인 자격증을 입력해주세요."
+                            	value="${mypage.memberCertificate}" id="memberCertificate">
                         </div>                        
 
                         <!-- 지식 / 기술 -->
@@ -161,32 +164,32 @@
                             <p>지식 / 기술</p>
                             <div class="tech-field">
                                 <div>
-                                    <label for=""><input type="checkbox" value="Java" name="tech"> 자바</label>
-                                    <label for=""><input type="checkbox" value="Python" name="tech"> 파이썬</label> 
-                                    <label for=""><input type="checkbox" value="C" name="tech"> C언어</label> 
-                                    <label for=""><input type="checkbox" value="SQL" name="tech"> SQL</label>
-                                    <label for=""><input type="checkbox" value="HTML" name="tech"> HTML</label> 
+                                    <label for="Ps"><input type="checkbox" value="포토샵" id="Ps" name="tech"> 포토샵</label>
+                                    <label for="Ai"><input type="checkbox" value="일러스트" id="Ai" name="tech"> 일러스트</label> 
+                                    <label for="Xd"><input type="checkbox" value="인디자인" id="Xd" name="tech"> 인디자인</label> 
+                                    <label for="Pr"><input type="checkbox" value="그래픽 디자인" id="Pr" name="tech"> 그래픽 디자인</label>
+                                    <label for="java"><input type="checkbox" value="자바" id="java" name="tech"> 자바</label> 
                                 </div>
                                 <div>
-                                    <label for=""><input type="checkbox" value="CSS" name="tech"> CSS</label> 
-                                    <label for=""><input type="checkbox" value="JavaScript" name="tech"> JavaScript</label> 
-                                    <label for=""><input type="checkbox" value="Unity" name="tech"> Unity</label>
-                                    <label for=""><input type="checkbox" value="chatGPT" name="tech"> chat GPT</label> 
-                                    <label for=""><input type="checkbox" value="Exel" name="tech"> 엑셀</label> 
+                                    <label for="python"><input type="checkbox" value="파이썬" id="python" name="tech"> 파이썬</label> 
+                                    <label for="c"><input type="checkbox" value="씨언어" id="c" name="tech"> 씨언어</label> 
+                                    <label for="sql"><input type="checkbox" value="SQL" id="sql" name="tech"> SQL</label>
+                                    <label for="html"><input type="checkbox" value="HTML" id="html" name="tech"> HTML</label> 
+                                    <label for="css"><input type="checkbox" value="CSS" id="css" name="tech"> CSS</label> 
                                 </div> 
                                 <div>
-                                    <label for=""><input type="checkbox" value="Access" name="tech"> 엑세스</label> 
-                                    <label for=""><input type="checkbox" value="PPT" name="tech"> 파워포인트</label> 
-                                    <label for=""><input type="checkbox" value="Word" name="tech"> 워드</label> 
-                                    <label for=""><input type="checkbox" value="한글" name="tech"> 한글</label> 
-                                    <label for=""><input type="checkbox" value="Cubase" name="tech"> 큐베이스</label> 
+                                    <label for="js"><input type="checkbox" value="JavaScript" id="js" name="tech"> JavaScript</label> 
+                                    <label for="unity"><input type="checkbox" value="Unity" id="unity" name="tech"> Unity</label> 
+                                    <label for="exel"><input type="checkbox" value="엑셀" id="exel" name="tech"> 엑셀</label> 
+                                    <label for="access"><input type="checkbox" value="엑세스" id="access" name="tech"> 엑세스</label> 
+                                    <label for="powerpoint"><input type="checkbox" value="파워포인트" id="powerpoint" name="tech"> 파워포인트</label> 
                                 </div> 
                                 <div>  
-                                    <label for=""><input type="checkbox" value="Vegas" name="tech"> 베가스</label> 
-                                    <label for=""><input type="checkbox" value="포토샵" name="tech"> 포토샵</label> 
-                                    <label for=""><input type="checkbox" value="일러스트" name="tech"> 일러스트</label> 
-                                    <label for=""><input type="checkbox" value="인디자인" name="tech"> 인디자인</label> 
-                                    <label for=""><input type="checkbox" value="그래픽 디자인" name="tech"> 그래픽 디자인</label> 
+                                    <label for="word"><input type="checkbox" value="워드" id="word" name="tech"> 워드</label> 
+                                    <label for="hancom"><input type="checkbox" value="한글" id="hancom" name="tech"> 한글</label> 
+                                    <label for="chatGPT"><input type="checkbox" value="chat GPT" id="chatGPT" name="tech"> chat GPT</label> 
+                                    <label for="cubase"><input type="checkbox" value="큐베이스" id="cubase" name="tech"> 큐베이스</label> 
+                                    <label for="vegas"><input type="checkbox" value="베가스" id="vegas" name="tech"> 베가스</label> 
                                 </div>                                
                             </div>
                         </div>
@@ -196,35 +199,34 @@
                             <p>SNS</p>
                             <div class="SNS-field">
                                 <div>
-                                    <label for=""><input type="checkbox"> 인스타그램</label>
-                                    <input type="text" value="www." name="SNS">
+                                    <label for="instagram"><input type="checkbox" value="인스타그램" id="instagram" name="SNS"> 인스타그램</label>
+                                    <input type="text" value="www." id="" name="address">
                                 </div>           
                                 <div>
-                                    <label for=""><input type="checkbox"> 페이스북</label>
-                                    <input type="text" value="www." name="SNS"> 
+                                    <label for="facebook"><input type="checkbox" value="페이스북" id="facebook" name="SNS"> 페이스북</label>
+                                    <input type="text" value="www." id="" name="address"> 
                                 </div>
                                 <div>
-                                    <label for=""><input type="checkbox"> 트위터</label> 
-                                    <input type="text" value="www." name="SNS">
+                                    <label for="twitter"><input type="checkbox" value="트위터" id="twitter" name="SNS"> 트위터</label> 
+                                    <input type="text" value="www." id="" name="address">
                                 </div>                  
                                 <div>
-                                    <label for=""><input type="checkbox"> 깃허브</label>
-                                    <input type="text" value="www." name="SNS">
+                                    <label for="github"><input type="checkbox" value="깃허브" id="github" name="SNS"> 깃허브</label>
+                                    <input type="text" value="www." id="" name="address">
                                 </div>
                                 <div>
-                                    <label for=""><input type="checkbox"> 노션</label> 
-                                    <input type="text" value="www." name="SNS">
+                                    <label for="notion"><input type="checkbox" value="노션" id="notion" name="SNS"> 노션</label> 
+                                    <input type="text" value="www." id="" name="address">
                                 </div>
                                 <div>
-                                    <label for=""><input type="checkbox"> 네이버 블로그</label>
-                                    <input type="text" value="www." name="SNS"> 
+                                    <label for="blog"><input type="checkbox" value="네이버 블로그" id="blog" name="SNS"> 네이버 블로그</label>
+                                    <input type="text" value="www." id="" name="address"> 
                                 </div>
                             </div>
                         </div>
 
                         <div class="myPage-save">
-                            <button>편집 완료</button>
-                            <button type="reset"> <a href="#">취소</a> </button>
+                            <button id="ProfileEditCompleteBtn" onclick="techListEvent()">편집 완료</button>
                         </div>
                     </div>
                 </form>

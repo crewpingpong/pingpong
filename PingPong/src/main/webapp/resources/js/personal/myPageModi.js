@@ -141,7 +141,7 @@ if (updateInfo != null) {
 }
 
 
-// 홈프로필 배경 변경
+/* *** 프로필 이미지 변경 *** */
 const profileImage = document.querySelector("#profileImage");   // img태그
 const imageInput = document.querySelector("#file");       // input태그
 const deleteProfile = document.querySelector("#deleteProfile"); // x버튼
@@ -246,11 +246,112 @@ if (imageInput != null) {
     });
 }
 
+/* ********************************************************************** */
+
+/* *** 프로필 정보 수정 *** */
+const memberInfo = document.querySelector("#memberInfo");
+const memberCareer = document.getElementById("memberCareer");
+const memberCertificate = document.querySelector("#memberCertificate");
+const ProfileEditCompleteBtn = document.querySelector("#ProfileEditCompleteBtn");
+const updateProfileInfo = document.querySelector("#updateProfileInfo");
+
+if (updateProfileInfo != null) {
+
+  /* 자기소개 글자수 제한 (50) */
+  memberInfo.addEventListener("input", () => {
+    if(memberInfo.value.length <= 50){
+      memberInfo.style.color = "black"; 
+    }
+    else {
+      memberInfo.style.color = "red"; 
+    }
+  });
+
+  /* 커리어 글자수 제한 (50) */
+  memberCareer.addEventListener("input", () => {
+    if(memberCareer.value.length <= 50){
+      memberCareer.style.color = "black"; 
+    }
+    else {
+      memberCareer.style.color = "red"; 
+    }
+  });
+
+  /* 자격증 글자수 제한 (50) */
+  memberCertificate.addEventListener("input", () => {
+    if(memberCertificate.value.length <= 50){
+      memberCertificate.style.color = "black"; 
+    }
+    else {
+      memberCertificate.style.color = "red"; 
+    }
+  });
+  
+  /* 제출 버튼 클릭 시 */
+  ProfileEditCompleteBtn.addEventListener("click", e => {
+
+    // 소개
+    if (memberInfo.style.color == "red") {
+        alert("입력 글자수를 초과하였습니다.");
+        memberInfo.focus(); 
+        e.preventDefault(); 
+        return;
+    }
+
+    // 커리어
+    if (memberCareer.style.color == "red") {
+        alert("입력 글자수를 초과하였습니다.");
+        memberCareer.focus();
+        e.preventDefault(); 
+        return;
+    }
+
+    // 자격증
+    if (memberCertificate.style.color == "red") {
+      alert("입력 글자수를 초과하였습니다.");
+      memberCertificate.focus(); 
+      e.preventDefault(); 
+      return;
+    }
+
+    updateProfileInfo.submit();
+  });
+}
+
+
+
+/* *** 지식/기술 *** */
+function tech_checkbox(){
+  var flag = false;
+
+  var values = document.querySelector("tech");
+  // alert(values.length);
+
+  var count=0;
+
+  for(var i=0; i<values.length; i++){
+    if(values[i].checked){
+      // alert(values[i].value);
+      count++;
+    }
+  }
+
+  if(count>6){
+    alert("6개까지 선택할 수 있습니다.");
+  }
+  else{
+    alert(count + " 개 선택했습니다.");
+    flag = true;
+  }
+
+  return flag;
+}
+
 
 
 /* ********************************************************************** */
 
-/* 비밀번호 변경 제출 시 */
+/* *** 비밀번호 변경 제출 시 *** */
 const currentPw = document.querySelector("#currentPw");
 const newPw = document.querySelector("#newPw");
 const newPwConfirm = document.querySelector("#newPwConfirm");
@@ -292,7 +393,7 @@ if (changePwFrm != null) { // 현재 페이지가 비밀번호 변경 페이지�
 
 
 
-/* 탈퇴 제출 시 */
+/* *** 탈퇴 제출 시 *** */
 const secessionFrm = document.querySelector("#secessionFrm");
 
 if (secessionFrm != null) { // 탈퇴 페이지인 경우
