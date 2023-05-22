@@ -80,10 +80,10 @@ const posttabList = document.querySelectorAll('.posttab_menu .postlist li');
 const postcontents = document.querySelectorAll('.posttab_menu .postcont_area .postcont')
 let postactiveCont = ''; // 현재 활성화 된 컨텐츠 (기본:#tab1 활성화)
 
-for (var i = 0; i < posttabList.length; i++) {
+for (var i = 0; i < posttabList.length-1; i++) {
     posttabList[i].querySelector('.btn').addEventListener('click', function (e) {
         e.preventDefault();
-        for (var j = 0; j < posttabList.length; j++) {
+        for (var j = 0; j < posttabList.length-1; j++) {
             // 나머지 버튼 클래스 제거
             posttabList[j].classList.remove('is_on');
 
@@ -102,9 +102,14 @@ for (var i = 0; i < posttabList.length; i++) {
 
 // 프로필 메세지함 클릭하면 받은메세지함으로 이동
 const messageBox = document.querySelector(".messageBox");
+const messageBoxClose = document.querySelector(".message-Box-X");
 
 messageBox.addEventListener("click", () => {
     messageBoXrecive.style.display = "flex";
+})
+
+messageBoxClose.addEventListener("click", () => {
+    messageBoXrecive.style.display = "none";
 })
 
 // 게시글 상세 페이지 메세지 누르면 메세지 보내기 화면으로 넘어가기
@@ -172,127 +177,19 @@ submit.addEventListener("click", ()=>{
     alert("제출 되었습니다.")
 });
 
-
-// -------------------------------------------------------------------------
-// 게시글 상세 시작
-
-// // let IconList = document.getElementsByClassName("BoardIcon");
-// // let BoardIconInfo = document.getElementsByClassName("BoardIconInfo");
-// /* 아이콘 드랍다운 */
-
-// // for(let i = 0 ; i<IconList.length; i++){
-// //     IconList[i].addEventListener("mouseenter",()=>{
-// //         if(IconList[i]) BoardIconInfo[i].style.display ="flex";
-// //     });
-// //     IconList[i].addEventListener("mouseleave",()=>{
-// //         if(IconList[i])BoardIconInfo[i].style.display ="none";
-// //     })
-// // }
 const Boardcontent = document.querySelector(".Boardcontent");
 const Boardcontent1 = document.querySelector(".Boardcontent1");
 
 const BoardHeartBox = document.querySelector(".BoardHeartBox");
 
 const BoardCommentBox = document.querySelector(".BoardCommentBox");
-// const BoardCommentBox1 = document.querySelector(".BoardCommentBox1");
 
 const BoardComment = document.querySelector(".BoardComment");
-// const BoardCommentBtn1 = document.querySelector(".BoardCommentBtn1").firstElementChild
-// const BoardCommentBtn2 = document.querySelector(".BoardCommentBtn1").lastElementChild
+
 const BoardPost1 = document.querySelector(".BoardPost1")
-// let BoardCommentText1 = document.querySelector(".BoardCommentText1");
 
 const newContent = document.querySelector(".newContent");
-/* 댓글 달기 버튼 */
-// BoardComment.addEventListener("click", () => {
-//     Boardcontent.style.display = "none";
-//     Boardcontent1.style.display = "flex";
 
-//     BoardHeartBox.style.display = "none";
-
-//     BoardCommentBox.style.display = "none";
-//     BoardCommentBox1.style.display = "block";
-// })
-// /* 이전 버튼 */
-// BoardCommentBtn2.addEventListener("click", () => {
-//     // console.log("dddddd")
-//     Boardcontent.style.display = "flex";
-//     Boardcontent1.style.display = "none";
-
-//     BoardHeartBox.style.display = "flex";
-
-//     BoardCommentBox.style.display = "flex";
-//     BoardCommentBox1.style.display = "none";
-
-// });
-
-// /* 확인 버튼 */
-// function selectCommentList(){
-
-//     fetch("/comment?boardNo="+boardNo)
-
-
-// }
-// if(BoardCommentBtn1 != null){
-//     BoardCommentBtn1.addEventListener("click", () => {
-
-//         const check = confirm("댓글을 등록하시겠습니까?");
-//         let text = document.querySelector(".BoardCommentText1").value;
-
-//         if (check && text.trim() !== "") {
-//             alert("등록되었습니다")
-
-//             const div1 = document.createElement("div");
-//             div1.classList.add("postcontent1");
-
-//             const div2 = document.createElement("div");
-//             div2.classList.add("BoardPost1");
-
-//             const a1 = document.createElement("a");
-//             a1.classList.add("BoardProfile1")
-
-//             const div3 = document.createElement("div");
-
-//             const a2 = document.createElement("a")
-
-//             const p = document.createElement("p")
-
-//             const span = document.createElement("span");
-//             span.classList.add("BoardComment-remove-row");
-
-//             span.innerHTML = "&times;"
-
-//             text = text.replaceAll(/(\n|\r\n)/g, "<br>");
-
-//             p.innerHTML = text
-//             a2.innerHTML = "김핑퐁" /* 추후 프로필명 으로 수정 */
-
-//             Boardcontent1.prepend(div1);
-//             div1.prepend(div2);
-//             div2.append(a1);
-//             div1.append(div3);
-//             div1.append(span);
-//             div3.prepend(a2);
-//             div3.append(p);
-
-//             document.querySelector(".BoardCommentText1").value = "";
-
-//             span.addEventListener("click", e => {
-
-//                 const check1 = confirm("삭제하시겠습니까?")
-
-//                 if (check1) {
-//                     alert("댓글 삭제 완료")
-//                     e.target.parentElement.remove();
-
-//                 } else alert("취소되었습니다")
-//             });
-
-//         }
-//         else alert("취소되었습니다")
-
-//     });
-// }
 
 /* 게시글 닫기 버튼으로 닫기 */
 const BoardClose = document.querySelector(".BoardClose");
@@ -316,21 +213,8 @@ const boardModal = document.querySelector("#boardModal");
 if(boardModal.style.display == 'flex'){
     console.log("abc");
 }
-// -----------------------------------------------------------------------------------------
-// 게시글 슬라이드
-
-
-//const slide = document.querySelector(".slide");
-//let slideWidth = slide.clientWidth;
-
-// 버튼 엘리먼트 선택하기
-//const prevBtn = document.querySelector(".slide_prev_button");
-//const nextBtn = document.querySelector(".slide_next_button");
-
 
 //*** */ 게시글 슬라이드****
-
-
 
 const slide = document.querySelector(".slide");
 // 버튼 엘리먼트 선택하기
@@ -351,40 +235,65 @@ let maxSlide; // 현재 슬라이드 위치가 슬라이드 개수를 넘기지 
 let paginationItems;
 let FirstPagination;
 let parentComment;
+let boardCont;
+
+let commentParentNo;
 
 const updateBackground = document.getElementById("updateBackground");
 const checkSlideDiv = document.getElementsByClassName("slide_item");
 let slideItems; // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
 const BoardHeart = document.querySelector(".BoardHeart");
 const BoardRedHeart = document.querySelector(".BoardRedHeart");
-const boardMark = document.querySelector(".boardMark");
+const markOn = document.querySelector(".markOn");
+const markOff = document.querySelector(".markOff");
 
 let boardNumber;
+let boardMember;
 function selectBoardList(boardNo){
 
     fetch("/boardDetail?boardNo="+boardNo)
     .then(response => response.json())
     .then(board => {
+        boardCont = board.boardContent;
+
         console.log(board);
         document.querySelectorAll('.slide_item').forEach(function(slideItem) {
             slideItem.remove();
         });
 
-        let flag = 0;
+        let flagHeart = 0;
         for(let i of board.likeList){
-            if(loginMemberNo == "" || loginMemberNo == i.memberNo){
-                flag++;
+            if(loginMemberNo == i.memberNo){
+                flagHeart++;
                 break;
             }
         }
         BoardRedHeart.style.display = "none";
         BoardHeart.style.display = "none";
-        if(flag>0){
+        if(flagHeart>0){
             BoardRedHeart.style.display = "block";
         } else {
             BoardHeart.style.display = "block";
         }
+
+        let flagBookmark = 0;
+        for(let i of board.bookmarkList){
+            if(loginMemberNo == i.memberNo){
+                flagBookmark++;
+                break;
+            }
+        }
+        markOn.style.display = "none";
+        markOff.style.display = "none";
+        if(flagBookmark>0){
+            markOn.style.display = "block";
+        } else {
+            markOff.style.display = "block";
+        }
+
+
         boardNumber = board.boardNo;
+        boardMember = board.memberNo;
 
         const porfileRac = document.querySelector(".porfileRac");
         const boardMemberInfo = document.querySelector(".boardMemberInfo");
@@ -408,8 +317,12 @@ function selectBoardList(boardNo){
             prevBtn.before(slideDiv);
         }
 
+        let arr = [];
+
         for(let i=0; i<board.commentList.length;i++){
             if(board.commentList[i].parentNo == 0){
+
+                arr.push(board.commentList[i].commentNo);
                 const postContentDiv = document.createElement("div");
                 postContentDiv.classList.add("postcontent1");
 
@@ -426,6 +339,7 @@ function selectBoardList(boardNo){
 
 
                 const div = document.createElement("div");
+                div.classList.add("commentbox");
 
                 const innerDiv = document.createElement("div");
                 innerDiv.classList.add("innerDiv");
@@ -451,6 +365,7 @@ function selectBoardList(boardNo){
 
                 innerDiv.append(nameA, contentP);
                 div.append(innerDiv, dateDiv);
+
                 if(board.commentList[i].childCheck > 0){
                     const secondDiv = document.createElement("div");
                     secondDiv.classList.add("secondComment");
@@ -499,7 +414,7 @@ function selectBoardList(boardNo){
                         div1.append(innerDiv1, dateDiv1);
 
                         const lastDiv1 = document.createElement("div");
-                        lastDiv1.classList.add("lastDivadd")
+                        lastDiv1.classList.add("lastDivadd1")
                         lastDiv1.append(boardPostDiv1, div1);
                         postContentDiv1.append(lastDiv1);
                         div.append(postContentDiv1);
@@ -508,10 +423,48 @@ function selectBoardList(boardNo){
                 const lastDiv = document.createElement("div");
                 lastDiv.classList.add("lastDivadd")
                 lastDiv.append(boardPostDiv, div);
+                if(board.commentList[i].memberNo == loginMemberNo){
+
+                    let item = 
+                        `<div class="deleteComment">
+                            <button type="button" onclick="removeComment(${board.commentList[i].commentNo})">×</button>
+                        </div>`;
+                    lastDiv.insertAdjacentHTML("beforeend", item);
+
+                }
                 postContentDiv.append(lastDiv);
                 Boardcontent1.append(postContentDiv);
-
             }
+        }  // 댓글 창 구현 끝
+
+
+        const editing = document.querySelector(".editing");
+        if(loginMemberNo == boardMember){
+            editing.style.display = 'block';
+        }
+
+
+        // 답글 보기 누르면 댓댓글 보이는 이벤트
+        const secondComment = document.querySelectorAll(".secondComment");
+        for(let i=0;i<secondComment.length;i++){
+            secondComment[i].addEventListener("click", e=>{
+                let siblings = getSiblings(e.target);
+                
+                for(let j=0;j<siblings.length;j++){
+                    siblings[j].classList.toggle("postcontent2");
+                }
+            });
+        }
+
+        // 답글 달기 누르면 댓글textarea에 @아이디 추가됨
+        const replyCommentInsert = document.querySelectorAll(".replyCommentInsert");
+        for(let i=0;i<replyCommentInsert.length;i++){
+            replyCommentInsert[i].addEventListener("click", e=>{
+                let nickName = e.target.parentNode.previousElementSibling.children[0].innerText;
+                commentContentArea.focus();
+                commentContentArea.value = "@" + nickName+" ";
+                commentParentNo = arr[i];
+            })
         }
 
 
@@ -534,104 +487,224 @@ function selectBoardList(boardNo){
         boardMemberInfo.append(memberNickA);
 
 
-                const postContentDiv = document.createElement("div");
-                postContentDiv.classList.add("postcontent1");
+        const postContentDiv = document.createElement("div");
+        postContentDiv.classList.add("postcontent1");
 
-                const boardPostDiv = document.createElement("div");
-                boardPostDiv.classList.add("BoardPost1");
+        const boardPostDiv = document.createElement("div");
+        boardPostDiv.classList.add("BoardPost1");
 
-                const boardProfileA = document.createElement("a");
-                boardProfileA.href = "/mypage/"+board.memberNo;
-                boardProfileA.classList.add("Boardprofile1");
-                const profileImg = document.createElement("img");
-                profileImg.src = board.profileImage;
-                boardProfileA.append(profileImg);
-                boardPostDiv.append(boardProfileA);
+        const boardProfileA = document.createElement("a");
+        boardProfileA.href = "/mypage/"+board.memberNo;
+        boardProfileA.classList.add("Boardprofile1");
+        const profileImg = document.createElement("img");
+        profileImg.src = board.profileImage;
+        boardProfileA.append(profileImg);
+        boardPostDiv.append(boardProfileA);
 
 
-                const div = document.createElement("div");
+        const div = document.createElement("div");
 
-                const innerDiv = document.createElement("div");
-                innerDiv.classList.add("innerDiv");
+        const innerDiv = document.createElement("div");
+        innerDiv.classList.add("innerDiv");
 
-                const nameA = document.createElement("a");
-                nameA.href = "/mypage/"+board.memberNo;
-                nameA.innerText = board.memberNickname;
+        const nameA = document.createElement("a");
+        nameA.href = "/mypage/"+board.memberNo;
+        nameA.innerText = board.memberNickname;
 
-                const contentP = document.createElement("p");
-                contentP.innerText = board.boardContent;
+        const contentP = document.createElement("p");
+        contentP.innerText = board.boardContent;
 
-                const dateDiv = document.createElement("div");
-                dateDiv.classList.add("dateDiv");
+        const input = document.createElement("textarea");
+        input.classList.add("hiddenEditing");
 
-                const cDateP = document.createElement("p");
-                cDateP.innerText = board.boardDate;
+        const editingDiv = document.createElement("div");
 
-                dateDiv.append(cDateP);
+        const submit = document.createElement("span");
+        submit.classList.add("editingSubmit");
+        submit.innerText = '수정';
 
-                innerDiv.append(nameA, contentP)
-                div.append(innerDiv, dateDiv);
-                const lastDiv = document.createElement("div");
-                lastDiv.classList.add("lastDivadd")
-                lastDiv.append(boardPostDiv, div);
-                postContentDiv.append(lastDiv);
-                
-                BoardPost.append(postContentDiv);
+        const cancel = document.createElement("span");
+        cancel.classList.add("editingCancel");
+        cancel.innerText = '취소';
+
+        editingDiv.append(submit, cancel);
+
+        const dateDiv = document.createElement("div");
+        dateDiv.classList.add("dateDiv");
+
+        const cDateP = document.createElement("p");
+        cDateP.innerText = board.boardDate;
+
+        dateDiv.append(cDateP);
+
+        innerDiv.append(nameA, contentP, input, editingDiv);
+        div.append(innerDiv, dateDiv);
+        const lastDiv = document.createElement("div");
+        lastDiv.classList.add("lastDivadd")
+        lastDiv.append(boardPostDiv, div);
+        postContentDiv.append(lastDiv);
+        
+        BoardPost.append(postContentDiv);
 
         likeCountSpan.innerText = board.likeCount+"명이 좋아합니다";
 
-        boardMark.addEventListener("click", e=>{
-            if(loginMemberNo == ""){
-                alert("로그인 후 이용해주세요");
+
+        // 게시글 수정 (내용 / 태그)
+        const boardEditing = document.querySelectorAll(".boardEditing");
+        const hiddenEditing = document.querySelector(".hiddenEditing");
+        const editingSubmit = document.querySelector(".editingSubmit");
+        const editingCancel = document.querySelector(".editingCancel");
+        for(let i=0;i<boardEditing.length;i++){
+            boardEditing[i].addEventListener("click", ()=>{
+                console.log("abc");
+                BoardPost.querySelector(".innerDiv>p").style.display = 'none';
+                hiddenEditing.style.display = 'block';
+                editingSubmit.style.display = 'inline';
+                editingCancel.style.display = 'inline';
+                hiddenEditing.focus();
+                hiddenEditing.value = BoardPost.querySelector(".innerDiv>p").innerHTML;
+                
+            });
+        }
+
+        editingCancel.addEventListener("click", ()=>{
+            BoardPost.querySelector(".innerDiv>p").style.display = 'block';
+            hiddenEditing.style.display = 'none';
+            editingSubmit.style.display = 'none';
+            editingCancel.style.display = 'none';
+        });
+
+        editingSubmit.addEventListener("click", ()=>{
+
+            console.log(board.boardNo);
+            console.log(hiddenEditing.value);
+
+            if(board.boardContent == hiddenEditing.value){
+                BoardPost.querySelector(".innerDiv>p").style.display = 'block';
+                hiddenEditing.style.display = 'none';
+                editingSubmit.style.display = 'none';
+                editingCancel.style.display = 'none';
                 return;
             }
-            let check;
-            if(e.target.classList.contains("Markup")){  // 북마크 o
-                check = 1;
-            } else {
-                check = 0;
-            }
 
-            const data = {"boardNo" : boardNumber, "memberNo" : loginMemberNo, "check" : check};
 
-            fetch("/board/markup", {
+            const data = {"boardNo" : board.boardNo, "boardContent" : hiddenEditing.value};
+
+            fetch("/board/editing", {
                 method : "POST",
                 headers : {"Content-Type" : "application/json"},
                 body : JSON.stringify(data)}
             )
-            .then(response => response.text())
-            .then(result => {
-                if(result = 0){
-                    console.log("북마크 처리 실패");
+            .then(resp => resp.text())
+            .then(result=>{
+
+                if(result == 0){
+                    console.log("게시글 수정 실패");
                     return;
                 }
-                if(check==0){
-                    
-                }
-
-
+                BoardPost.querySelector(".innerDiv>p").style.display = 'block';
+                hiddenEditing.style.display = 'none';
+                editingSubmit.style.display = 'none';
+                editingCancel.style.display = 'none';
+                BoardPost.querySelector(".innerDiv>p").innerHTML = hiddenEditing.value;
             })
+            .catch(err => {
+                console.log(err);
+            })
+        });
 
-        })
+
 
         slideInitFn();
-        secondComment = document.querySelectorAll("secondComment");
+
+
+
+
     })
     .catch(err => console.log(err));
 }
 
+
+// 댓글 삭제 함수
+function removeComment(commentNo) {
+    document.getElementById(hashtag).remove();
+}
+
+
+// 댓글 달기 AJAX
+const insertComment = document.getElementById("insertComment");
+let commentContentArea = document.getElementById("commentContentArea");
+if(insertComment != null){
+insertComment.addEventListener("click", e=>{
+    if(loginMemberNo == ""){
+        alert("로그인 후 이용해주세요");
+        return;
+    }
+    let data;
+    if(commentContentArea.value[0] == "@"){
+        const parentNickname = commentContentArea.value.split(" ")[0].substring(1);
+        const commentContent = commentContentArea.value.split(" ").slice(1).join(' ');
+        data = {"commentContent" : commentContent, "memberNo" : loginMemberNo, "boardNo" : boardNumber, "parentNo" : commentParentNo};
+    } else{
+        data = {"commentContent" : commentContentArea.value, "memberNo" : loginMemberNo, "boardNo" : boardNumber, "parentNo" : null};
+    }
+    
+    console.log(data);
+    commentContentArea.value ='';
+    commentContentArea.focus();
+
+    fetch("/board/comment", {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(data)
+    })
+    .then(resp => resp.text())
+    .then(boardNo => {
+        console.log("boardNo : " + boardNo);
+
+        selectBoardList(boardNo);
+    })
+    .catch(err => {
+        console.log(err);
+    })
+
+})
+}
+
+
+
+
+function getSiblings(currentNode) {
+    let slblings = [];
+  
+    // 부모 노드가 없는 경우 현재 노드를 반환
+    if (!currentNode.parentNode) {
+      return currentNode;
+    }
+  
+    // 1. 부모 노드를 접근합니다.
+    let parentNode = currentNode.parentNode;
+  
+    // 2. 부모 노드의 첫 번째 자식 노드를 가져옵니다.
+    let silblingNode = parentNode.firstChild;
+  
+    while (silblingNode) {
+      // 기존 노드가 아닌 경우 배열에 추가합니다.
+      if (silblingNode.nodeType === 1 && silblingNode !== currentNode) {
+        slblings.push(silblingNode);
+      }
+      // 다음 노드를 접근합니다.
+      silblingNode = silblingNode.nextElementSibling;
+    }
+  
+    // 형제 노드가 담긴 배열을 반환합니다.
+    return slblings;
+  }
+
 // 답글 보기 버튼을 눌렀을 때
 
 
-// for(let i=0;i<secondComment.length;i++){
-//     secondComment.addEventListener("click", e =>{
-//         e.target.nextAll().classList.toggle("postcontent2");
-//     });
-// }
-
-
-
-// 좋아요 처리 구현
+// 좋아요 AJAX
 const boardLike = document.querySelectorAll(".boardLike");
 const likeCount = document.querySelector(".likeCount");
 for(let i=0;i<boardLike.length;i++){
@@ -647,7 +720,6 @@ for(let i=0;i<boardLike.length;i++){
         } else {  // 좋아요 o
             check = 1;
         }
-        console.log(check);
 
 
         const data = {"boardNo" : boardNumber, "memberNo" : loginMemberNo, "check" : check};
@@ -669,6 +741,7 @@ for(let i=0;i<boardLike.length;i++){
             if(check==0){
                 BoardRedHeart.style.display = "block";
                 BoardHeart.style.display = "none";
+                sendLike(boardNumber);
             } else {
                 BoardRedHeart.style.display = "none";
                 BoardHeart.style.display = "block";
@@ -681,8 +754,50 @@ for(let i=0;i<boardLike.length;i++){
     });
 }
 
+const boardMark = document.querySelectorAll(".boardMark");
 
-//let currSlide = 1;
+
+// 북마크 AJAX
+for(let i=0;i<boardMark.length;i++){
+    boardMark[i].addEventListener("click", e=>{
+        if(loginMemberNo == ""){
+            alert("로그인 후 이용해주세요");
+            return;
+        }
+        let check1;
+        
+        if(e.target.classList.contains("markOff")){  // 북마크 x
+            check1 = 0;
+        } else { // 북마크 o
+            check1 = 1;
+        }
+
+        const data = {"boardNo" : boardNumber, "memberNo" : loginMemberNo, "check" : check1};
+
+        fetch("/board/markup", {
+            method : "POST",
+            headers : {"Content-Type" : "application/json"},
+            body : JSON.stringify(data)}
+        )
+        .then(response => response.text())
+        .then(result => {
+            if(result == 0){
+                console.log("북마크 처리 실패");
+                return;
+            }
+            if(check1==0){
+                markOn.style.display = "block";
+                markOff.style.display = "none";
+            } else{
+                markOn.style.display = "none";
+                markOff.style.display = "block";
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    })
+}
 
 // 페이지네이션 생성
 //const pagination = document.querySelector(".slide_pagination");
@@ -725,16 +840,6 @@ function slideInitFn(){
     const startElem = document.createElement("div");
     const endElem = document.createElement("div");
     
-    // endSlide.classList.forEach((c) => endElem.classList.add(c));
-    // endElem.innerHTML = endSlide.innerHTML;
-
-    // startSlide.classList.forEach((c) => startElem.classList.add(c));
-    // startElem.innerHTML = startSlide.innerHTML;
-
-    // // 각 복제한 엘리먼트 추가하기
-    // slideItems[0].before(endElem);
-    // slideItems[slideItems.length - 1].after(startElem);
-
     // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
     slideItems = document.querySelectorAll(".slide_item");
     //
@@ -835,60 +940,9 @@ window.addEventListener("resize", () => {
 
 
 
-// // 드래그(스와이프) 이벤트를 위한 변수 초기화
-// let startPoint = 0;
-// let endPoint = 0;
+/* 새 게시글 업로드 */
 
-// // PC 클릭 이벤트 (드래그)
-// slide.addEventListener("mousedown", (e) => {
-//     startPoint = e.pageX; // 마우스 드래그 시작 위치 저장
-// });
-
-// slide.addEventListener("mouseup", (e) => {
-//     endPoint = e.pageX; // 마우스 드래그 끝 위치 저장
-//     if (startPoint < endPoint) {
-//         // 마우스가 오른쪽으로 드래그 된 경우
-//         prevMove();
-//     } else if (startPoint > endPoint) {
-//         // 마우스가 왼쪽으로 드래그 된 경우
-//         nextMove();
-//     }
-// });
-
-// // 모바일 터치 이벤트 (스와이프)
-// slide.addEventListener("touchstart", (e) => {
-//     startPoint = e.touches[0].pageX; // 터치가 시작되는 위치 저장
-// });
-// slide.addEventListener("touchend", (e) => {
-//     endPoint = e.changedTouches[0].pageX; // 터치가 끝나는 위치 저장
-//     if (startPoint < endPoint) {
-//         // 오른쪽으로 스와이프 된 경우
-//         prevMove();
-//     } else if (startPoint > endPoint) {
-//         // 왼쪽으로 스와이프 된 경우
-//         nextMove();
-//     }
-// });
-
-// // 기본적으로 슬라이드 루프 시작하기
-// let loopInterval = setInterval(() => {
-//     nextMove();
-// }, 3000);
-
-// // 슬라이드에 마우스가 올라간 경우 루프 멈추기
-// slide.addEventListener("mouseover", () => {
-//     clearInterval(loopInterval);
-// });
-
-// // 슬라이드에서 마우스가 나온 경우 루프 재시작하기
-// slide.addEventListener("mouseout", () => {
-//     loopInterval = setInterval(() => {
-//         nextMove();
-//     }, 3000);
-// });
-
-/* 새 게시글 클릭 */
-const NewBoardBackground = document.querySelector(".NewBoardBackground");
+const NewBoardBackground = document.querySelector(".NewBoardBackground"); 
 
 newContent.addEventListener("click", () => {
     NewBoardBackground.style.display = "flex";
@@ -908,7 +962,7 @@ const inputFileBtn = document.querySelector(".inputFileBtn");
 const BoardBackground2 = document.querySelector(".BoardBackground2");
 const BoardPicture = document.querySelector(".BoardPicture");
 
-inputFileBtn.addEventListener("click", () => {
+inputFileBtn.addEventListener("change", () => {
     BoardBackground2.style.display = "flex";
     BoardBackground2.classList.remove('BoardBackground-close');
 
@@ -921,7 +975,7 @@ const upload = document.querySelector('#ContentNewFile');
 //     BoardBackground2.style.display = "flex";
 //     BoardBackground2.classList.remove('BoardBackground-close');
 // });
-
+const NewWriteTextArea = document.querySelector(".NewWriteTextArea");
 function getImageFiles(e) {
     // 이미지 배열로 받아서 검사 (아래부분 늘려주고 요소 추가하는 코드 넣으면 여러 개 가능)
     const uploadFiles = [];
@@ -961,11 +1015,11 @@ function getImageFiles(e) {
             };
             BoardBackground2.style.display = "flex";
             BoardBackground2.classList.remove('BoardBackground-close');
+            // hashtagInput.focus();
+            NewWriteTextArea.focus();
         }
-
         
     });
-
     
 }
 
@@ -984,22 +1038,25 @@ function createElement(e, file) {
 upload.addEventListener('change', getImageFiles);
 
 
-
-
 /* 게시글 작성 화면 이전 버튼 */
 const BackIcon = document.querySelector("#BackIcon");
 
 BackIcon.addEventListener("click", () => {
     NewBoardBackground.style.display = "flex";
-
     BoardBackground2.style.display = "none";
+    upload.value = "";
+    pagination2.innerHTML = '';
+    const slide_item2 = document.querySelectorAll('.BoardPicture2 .slide_item2');
+    for(let i=0;i<slide_item2.length;i++){
+        slide_item2[i].remove();
+    }
 })
 /* 새 게시글 작성 내용 글자수 카운트 */
-const NewWriteTextArea = document.querySelector(".NewWriteTextArea");
+
 const NewWriteTextAreaCount = document.querySelector(".NewWriteTextAreaCount");
 
 NewWriteTextArea.addEventListener("input", () => {
-    const count = NewWriteTextArea.value.length;
+    const count = NewWriteTextArea.innerText.length;
 
     NewWriteTextAreaCount.innerHTML = count;
 })
@@ -1012,12 +1069,13 @@ let prevBtn2;
 let nextBtn2; 
 let maxSlide2;
 let paginationItems2;
+let pagination2;
+const slide2 = document.querySelector(".slide2");
 
 function slide2Fn(){
 
     // 게시글 업로드 슬라이드
     // 슬라이크 전체 크기(width 구하기)
-    const slide2 = document.querySelector(".slide2");
     slideWidth2 = slide2.clientWidth;
 
     // 버튼 엘리먼트 선택하기
@@ -1033,7 +1091,7 @@ function slide2Fn(){
     currSlide2 = 1;
 
     // 페이지네이션 생성
-    const pagination2 = document.querySelector(".slide_pagination2");
+    pagination2 = document.querySelector(".slide_pagination2");
 
     for (let i = 0; i < maxSlide2; i++) {
         if (i === 0) pagination2.innerHTML += `<li class="active">•</li>`;
@@ -1200,57 +1258,142 @@ window.addEventListener("resize", () => {
 });
 
 
+function addHashtag() {
+    let hashtag = document.getElementById("hashtag").value;
+    let item = getHashtagItem(hashtag);
 
-// // 드래그(스와이프) 이벤트를 위한 변수 초기화
-// let startPoint2 = 0;
-// let endPoint2 = 0;
+    document.getElementById("hashtagList").insertAdjacentHTML("beforeend", item);
+}
 
-// // PC 클릭 이벤트 (드래그)
-// slide2.addEventListener("mousedown", (e) => {
-//     startPoint2 = e.pageX; // 마우스 드래그 시작 위치 저장
-// });
+function removeHashtag(hashtag) {
+    document.getElementById(hashtag).remove();
+}
 
-// slide2.addEventListener("mouseup", (e) => {
-//     endPoint2 = e.pageX; // 마우스 드래그 끝 위치 저장
-//     if (startPoint2 < endPoint2) {
-//         // 마우스가 오른쪽으로 드래그 된 경우
-//         prevMove2();
-//     } else if (startPoint2 > endPoint2) {
-//         // 마우스가 왼쪽으로 드래그 된 경우
-//         nextMove2();
-//     }
-// });
+function getHashtagItem(hashtag) {
 
-// // 모바일 터치 이벤트 (스와이프)
-// slide2.addEventListener("touchstart", (e) => {
-//     startPoint2 = e.touches[0].pageX; // 터치가 시작되는 위치 저장
-// });
-// slide2.addEventListener("touchend", (e) => {
-//     endPoint2 = e.changedTouches[0].pageX; // 터치가 끝나는 위치 저장
-//     if (startPoint2 < endPoint2) {
-//         // 오른쪽으로 스와이프 된 경우
-//         prevMove2();
-//     } else if (startPoint2 > endPoint2) {
-//         // 왼쪽으로 스와이프 된 경우
-//         nextMove2();
-//     }
-// });
+    hashtag = hashtag.replaceAll(' ', '');
+    let item = `
+        <div class="hashtag" id="${hashtag}">
+            <span class="hashtag-value">#${hashtag}</span>
+            <button type="button" onclick="removeHashtag('${hashtag}')">×</button>
+        </div>
+    `;
 
-// // 기본적으로 슬라이드 루프 시작하기
-// let loopInterval2 = setInterval(() => {
-//     nextMove2();
-// }, 3000);
-
-// // 슬라이드에 마우스가 올라간 경우 루프 멈추기
-// slide2.addEventListener("mouseover", () => {
-//     clearInterval(loopInterval2);
-// });
-
-// // 슬라이드에서 마우스가 나온 경우 루프 재시작하기
-// slide2.addEventListener("mouseout", () => {
-//     loopInterval2 = setInterval(() => {
-//         nextMove2();
-//     }, 3000);
-// });
+    return item;
+}
 
 
+// 팔로우 버튼이 클릭 되었을 때
+let followUser;
+let nufollow;
+let profileBtn; 
+let followBtn;
+
+document.addEventListener("DOMContentLoaded",()=>{
+})
+
+    followBtn = document.querySelectorAll(".followBtn>svg.fb");
+
+    followUser = document.querySelector(".followUser");
+    nufollow = document.querySelector(".nufollow");
+    profileBtn = document.querySelector(".followBtn");
+
+
+    for(let i=0;i<followBtn.length;i++){
+        followBtn[i].addEventListener("click", ()=>{
+            followFn()
+        });
+    }    
+    
+
+function followFn(){
+    // 로그인 여부 검사
+    if(loginMemberNo==""){
+        alert("로그인 후 이용해주세요.");
+        return;
+    }
+
+    let check; // 기존에 팔로우 X(노란색) : 0, followUser
+               //        팔로우 0(하늘색) : 1 nufollow
+    // contains("클래스명") : 클래스가 있으면 true, 없으면 false
+    if(followUser.classList.contains("followshow")){
+        check = 0; // 팔로우 X(노란색) : 0, followUser
+    } else{
+        check = 1;  // 팔로우 0(하늘색) : 1 nufollow
+    }
+
+    // 팔로우 할 대상 
+    const followerNo = profileBtn.getAttribute("follow");
+
+    // ajax로 서버로 제출할 파라미터를 모아둔 JS 객체
+    const data = {"memberNo": followerNo, // 회원 번호
+                "followerNo":loginMemberNo, // 팔로우한 사람 번호
+                "check":check
+                };
+
+    // ajax 코드 작성
+    fetch("/alarm/follow", {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"}, // 우리가 지금 보낼 거는 json이야
+        body : JSON.stringify(data)
+    })
+    .then(response=>response.text()) // 응답 객체를 필요한 형태로 파싱하여 리턴
+    .then(count =>{
+
+        console.log("count : "+count);
+
+        if(count == -1){ // INSERT, DELETE 실패 시
+            console.log("팔로우 처리 실패");
+            return;
+        }
+        if(count == 0){ // 자기 자신
+            console.log("자신은 팔로우 하지 못합니다.");
+            return;
+        }
+        
+        sendFollow(followerNo);
+        // followUser.classList.toggle("followshow");
+        // nufollow.classList.toggle("followshow");
+
+        if(check==0){ // 팔로우 성공
+            followUser.classList.remove("followshow");
+            nufollow.classList.add("followshow");
+        } else {
+            followUser.classList.add("followshow");
+            nufollow.classList.remove("followshow");
+        }
+
+    }) // 파싱한 데이터를 받아서 처리하는 코드 작성
+    .catch(err=>{
+        console.log("예외 발생");
+        console.log(err);
+    }) // 예외 발생 시 처리하는 부분
+}
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+    const params = new URL(location.href).searchParams;
+    const boardNo = params.get("boardNo");
+    
+    if(boardNo == null){
+        return;
+    }
+
+    let no;
+    let target;
+    const list = document.querySelectorAll(".contentBox a");
+    for(let a of list){
+        const tmp = a.getAttribute("onclick");
+        no = tmp.substring(tmp.indexOf("(")+1, tmp.indexOf(")"));
+
+        if(boardNo == no){
+            target = a;
+            break;
+        }
+    }
+
+    if(target != undefined){
+        target.click();
+        history.replaceState({}, null, location.pathname);
+    }
+})

@@ -43,15 +43,14 @@
 	</select>
 	<!-- resultMap 은 언제 사용? 조회 결과 컬럼명과 DTO의 필드명이 다를 때 사용 -->
 
-	<!-- 이메일이 일부라도 일치하는 모든 회원 조회 -->
-	<select id="selectMemberList" resultMap="member_rm">
-		SELECT MEMBER_NO ,
-		MEMBER_EMAIL , MEMBER_NICKNAME
+	<!-- 닉네임이 일부라도 일치하는 모든 회원 조회 (40명) -->
+	<!-- <select id="selectAllNickname" resultMap="member_rm">
+		SELECT MEMBER_NO , MEMBER_EMAIL  ,MEMBER_NICKNAME , MEMBER_NICKNAME  
 		FROM "MEMBER"
-		WHERE MEMBER_DEL_FL = 'N'
-		AND MEMBER_EMAIL LIKE '%${input}%'
-		ORDER BY 1
-	</select>
+		WHERE LOWER(MEMBER_NICKNAME) LIKE '%${headerOpenSearchBox1}%'
+		AND MEMBER_DEL_FL = 'N'
+		AND ROWNUM <= 40
+	</select> -->
 	
 	<!-- URL 중복 검사 -->
 	<select id="checkUrl" resultType="int">

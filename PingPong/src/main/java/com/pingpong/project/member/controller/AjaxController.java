@@ -60,13 +60,12 @@ public class AjaxController {
 		return service.selectMember(email);
 	}
 	
-	
-	// 이메일이 일부라도 일치하는 모든 회원 조회
-	@PostMapping(value = "/selectMemberList", produces = "application/json; charset=UTF-8")
+	// 닉네임이 일부라도 일치하는 모든 회원 조회 (40명)
+	@PostMapping(value = "/selectAllNickname", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public List<Member> selectMemberList(@RequestBody String input){
+	public List<Member> selectAllNickname(@RequestBody String input){
 		
-		return service.selectMemberList(input);
+		return service.selectAllNickname(input);
 	};
 	
 	

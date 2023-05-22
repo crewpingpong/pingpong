@@ -30,11 +30,11 @@
    <context:component-scan base-package="com.pingpong.project" />
    
    <!-- 웹소켓 처리 클래스를 bean으로 등록 -->
-	<beans:bean id="testHandler" class="com.pingpong.project.main.model.websoket.TestWebsocketHandler"/>
+	<beans:bean id="alarmHandler" class="com.pingpong.project.message.websocket.AlarmWebsocketHandler"/>
 	
 	<!-- 어떤 주소로 웹소켓 요청이 오면 세션을 가로챌지 지정 -->
 	<websocket:handlers>
-		<websocket:mapping handler="testHandler" path="/testSock"/>
+		<websocket:mapping handler="alarmHandler" path="/alarmSock"/>
 		
 		<!-- 요청 클라이언트의 세션을 가로채서 WebsocketSession에 넣어주는 역할 -->
 		<websocket:handshake-interceptors>

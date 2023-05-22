@@ -168,10 +168,10 @@ document.addEventListener("DOMContentLoaded",()=>{
         .then(resp => resp.text())
         .then(result => {
             if(result>0){
+                sendMessage(messageResendBox.value,resendMemNo);
                 alert("메세지 전송 성공");
                 messageResendBox.value = '';
                 messageSendContainer.style.display="none";
-                
                 gotoMessagesendFn();
             } else{
                 alert("메세지 전송 실패");
@@ -268,7 +268,7 @@ function gotoMessageFn(){ // 받은 메세지 함으로 가는 함수
                 if(reciveMem.profileImg != null){
                     profileImg.setAttribute('src', reciveMem.profileImg);
                 }
-                profileImg.setAttribute('alt', '프로필 사진');
+                profileImg.setAttribute('alt', '');
                 const profileBox = document.createElement('div'); // 보낸 멤버 이름 + 내용 담는 상자
                 profileBox.classList.add('probox');
                 profileBox.appendChild(profileImg);
@@ -434,7 +434,7 @@ function gotoMessagesendFn(){ // 보낸 메세지 함으로 가는 함수
                 if(reciveMem.profileImg != null){
                     profileImg.setAttribute('src', reciveMem.profileImg);
                 }
-                profileImg.setAttribute('alt', '프로필 사진');
+                profileImg.setAttribute('alt', '');
                 const profileBox = document.createElement('div');
                 profileBox.classList.add('probox');
                 profileBox.appendChild(profileImg);
@@ -585,6 +585,7 @@ function postMessageSendFn(){ // 메세지 전송 함수
     .then(resp => resp.text())
     .then(result => {
         if(result>0){
+            sendMessage(messageContent,receiveMessageNo);
             alert("메세지 전송 성공");
             messageSendBoxContent.value ="";
             gotoMessagesendFn();

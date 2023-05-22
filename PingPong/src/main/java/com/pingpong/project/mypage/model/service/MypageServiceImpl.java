@@ -17,6 +17,7 @@ import com.pingpong.project.common.utility.Util;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.mypage.model.dao.MypageDAO;
 import com.pingpong.project.mypage.model.dto.MyPage;
+import com.pingpong.project.mypage.model.dto.Tech;
 import com.pingpong.project.mypage.model.exception.FileUploadException;
 
 @Service
@@ -149,6 +150,18 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public List<Board> selectBoardLikeList(int memberNo) {
 		return dao.selectBoardLikeList(memberNo);
+	}
+
+	// 지식/기술 리스트 조회
+	@Override
+	public List<Member> selectTechList(int memberNo) {
+		return dao.selectTechList(memberNo);
+	}
+
+	// 프로필 정보 수정
+	@Override
+	public int updateProfileInfo(MyPage updateMyPage) {
+		return dao.updateProfileInfo(updateMyPage);
 	}
 
 

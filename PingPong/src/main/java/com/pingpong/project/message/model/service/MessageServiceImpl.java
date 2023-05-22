@@ -49,6 +49,7 @@ public class MessageServiceImpl implements MessageService{
 	}
 
 	// 메세지 보내기
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int sendMessage(Message message) {
 		return dao.sendMessage(message);
