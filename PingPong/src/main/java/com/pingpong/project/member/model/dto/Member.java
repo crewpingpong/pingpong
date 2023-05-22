@@ -24,10 +24,12 @@ public class Member {
    private String memberDeleteFlag;
    private int Authority;
    
+   private String profileImage; 
+   
    private List<Tech> techList;
    
 	/*
-	 * private String profileImage; 
+	 * 
 	 * private String backgroundImage;
 	 */
    private String oneLiner;

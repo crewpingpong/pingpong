@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.pingpong.project.member.model.dao.AjaxDAO;
 import com.pingpong.project.member.model.dto.Member;
+import com.pingpong.project.search.model.dto.SearchTag;
 
 @Service // 서비스임을 명시 + bean으로 등록
 public class AjaxServiceImpl implements AjaxService{
@@ -52,6 +53,11 @@ public class AjaxServiceImpl implements AjaxService{
 	@Override
 	public List<Member> selectAllNickname(String input) {
 		return dao.selectAllNickname(input);
+	}
+	// 태그가 일부라도 일치하는 모든 태그 조회 (40명)
+	@Override
+	public List<SearchTag> selectAllTag(String headerOpenSearchBox) {
+		return dao.selectAllTag(headerOpenSearchBox);
 	}
 
 	// URL 중복 검사

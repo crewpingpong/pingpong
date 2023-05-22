@@ -91,6 +91,7 @@
                     </svg>
                     <input id="headerOpenSearchBox" name="headerOpenSearchBox" type="text" placeholder="검색어를 입력하세요" value="">
                 </div>
+                <!-- 검색창 x 버튼 -->
                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M11.2669 10.0015L14.8503 6.42646C15.0072 6.26954 15.0953 6.05671 15.0953 5.83479C15.0953 5.61287 15.0072 5.40004 14.8503 5.24312C14.6933 5.0862 14.4805 4.99805 14.2586 4.99805C14.0367 4.99805 13.8238 5.0862 13.6669 5.24312L10.0919 8.82646L6.51693 5.24312C6.36001 5.0862 6.14718 4.99805 5.92526 4.99805C5.70334 4.99805 5.49052 5.0862 5.3336 5.24312C5.17668 5.40004 5.08852 5.61287 5.08852 5.83479C5.08852 6.05671 5.17668 6.26954 5.3336 6.42646L8.91693 10.0015L5.3336 13.5765C5.25549 13.6539 5.19349 13.7461 5.15119 13.8476C5.10888 13.9492 5.0871 14.0581 5.0871 14.1681C5.0871 14.2781 5.10888 14.3871 5.15119 14.4886C5.19349 14.5902 5.25549 14.6823 5.3336 14.7598C5.41106 14.8379 5.50323 14.8999 5.60478 14.9422C5.70633 14.9845 5.81525 15.0063 5.92526 15.0063C6.03527 15.0063 6.14419 14.9845 6.24574 14.9422C6.34729 14.8999 6.43946 14.8379 6.51693 14.7598L10.0919 11.1765L13.6669 14.7598C13.7444 14.8379 13.8366 14.8999 13.9381 14.9422C14.0397 14.9845 14.1486 15.0063 14.2586 15.0063C14.3686 15.0063 14.4775 14.9845 14.5791 14.9422C14.6806 14.8999 14.7728 14.8379 14.8503 14.7598C14.9284 14.6823 14.9904 14.5902 15.0327 14.4886C15.075 14.3871 15.0968 14.2781 15.0968 14.1681C15.0968 14.0581 15.075 13.9492 15.0327 13.8476C14.9904 13.7461 14.9284 13.6539 14.8503 13.5765L11.2669 10.0015Z" fill="#C5C5C5"/>
                 </svg>
@@ -98,7 +99,7 @@
                 <!-- 상단에 검색했을 때 열리는 검색 창 -->
                 <div id="headerSearchModContainer">
 
-                    <a href="">
+                    <%-- <a href="">
                         <div class="search-result-main-box" >
                             <div class="search-result-inner-box">
                                 <div class="searchModRound1">
@@ -112,12 +113,11 @@
                                 </div><!-- #, 사람 아이콘 -->
                                 <div class="search-input-tag-box">
                                     <span class="search-input-tag-name">검색했어요</span>
-                                    <%-- <span class="search-input-tag-count">게시물 4030만</span> --%>
+                                    <!-- <span class="search-input-tag-count">게시물 4030만</span> -->
                                 </div><!-- 글자 -->
                             </div>
                         </div>
                     </a>
-                    
                     <a href="">
                         <div class="search-result-main-box" >
                             <div class="search-result-inner-box">
@@ -126,11 +126,11 @@
                                 </div><!-- #, 사람 아이콘 -->
                                 <div class="search-input-user-box">
                                     <span class="search-input-tag-name">나봉봉</span>
-                                    <%-- <span class="search-input-tag-count">건빵이 최고야</span> --%>
+                                    <!-- <span class="search-input-tag-count">건빵이 최고야</span> -->
                                 </div><!-- 글자 -->
                             </div>
                         </div>
-                    </a>
+                    </a> --%>
 
                 </div>
             </div>
@@ -567,6 +567,7 @@ Java를 이용한 백엔드 연결
         alert("${message}");
     </script>
 </c:if>
+
 <script src="/resources/js/main/header.js"></script>
 <script src="/resources/js/alarm.js"></script>
 <script src="/resources/js/message.js"></script>
