@@ -177,127 +177,19 @@ submit.addEventListener("click", ()=>{
     alert("제출 되었습니다.")
 });
 
-
-// -------------------------------------------------------------------------
-// 게시글 상세 시작
-
-// // let IconList = document.getElementsByClassName("BoardIcon");
-// // let BoardIconInfo = document.getElementsByClassName("BoardIconInfo");
-// /* 아이콘 드랍다운 */
-
-// // for(let i = 0 ; i<IconList.length; i++){
-// //     IconList[i].addEventListener("mouseenter",()=>{
-// //         if(IconList[i]) BoardIconInfo[i].style.display ="flex";
-// //     });
-// //     IconList[i].addEventListener("mouseleave",()=>{
-// //         if(IconList[i])BoardIconInfo[i].style.display ="none";
-// //     })
-// // }
 const Boardcontent = document.querySelector(".Boardcontent");
 const Boardcontent1 = document.querySelector(".Boardcontent1");
 
 const BoardHeartBox = document.querySelector(".BoardHeartBox");
 
 const BoardCommentBox = document.querySelector(".BoardCommentBox");
-// const BoardCommentBox1 = document.querySelector(".BoardCommentBox1");
 
 const BoardComment = document.querySelector(".BoardComment");
-// const BoardCommentBtn1 = document.querySelector(".BoardCommentBtn1").firstElementChild
-// const BoardCommentBtn2 = document.querySelector(".BoardCommentBtn1").lastElementChild
+
 const BoardPost1 = document.querySelector(".BoardPost1")
-// let BoardCommentText1 = document.querySelector(".BoardCommentText1");
 
 const newContent = document.querySelector(".newContent");
-/* 댓글 달기 버튼 */
-// BoardComment.addEventListener("click", () => {
-//     Boardcontent.style.display = "none";
-//     Boardcontent1.style.display = "flex";
 
-//     BoardHeartBox.style.display = "none";
-
-//     BoardCommentBox.style.display = "none";
-//     BoardCommentBox1.style.display = "block";
-// })
-// /* 이전 버튼 */
-// BoardCommentBtn2.addEventListener("click", () => {
-//     // console.log("dddddd")
-//     Boardcontent.style.display = "flex";
-//     Boardcontent1.style.display = "none";
-
-//     BoardHeartBox.style.display = "flex";
-
-//     BoardCommentBox.style.display = "flex";
-//     BoardCommentBox1.style.display = "none";
-
-// });
-
-// /* 확인 버튼 */
-// function selectCommentList(){
-
-//     fetch("/comment?boardNo="+boardNo)
-
-
-// }
-// if(BoardCommentBtn1 != null){
-//     BoardCommentBtn1.addEventListener("click", () => {
-
-//         const check = confirm("댓글을 등록하시겠습니까?");
-//         let text = document.querySelector(".BoardCommentText1").value;
-
-//         if (check && text.trim() !== "") {
-//             alert("등록되었습니다")
-
-//             const div1 = document.createElement("div");
-//             div1.classList.add("postcontent1");
-
-//             const div2 = document.createElement("div");
-//             div2.classList.add("BoardPost1");
-
-//             const a1 = document.createElement("a");
-//             a1.classList.add("BoardProfile1")
-
-//             const div3 = document.createElement("div");
-
-//             const a2 = document.createElement("a")
-
-//             const p = document.createElement("p")
-
-//             const span = document.createElement("span");
-//             span.classList.add("BoardComment-remove-row");
-
-//             span.innerHTML = "&times;"
-
-//             text = text.replaceAll(/(\n|\r\n)/g, "<br>");
-
-//             p.innerHTML = text
-//             a2.innerHTML = "김핑퐁" /* 추후 프로필명 으로 수정 */
-
-//             Boardcontent1.prepend(div1);
-//             div1.prepend(div2);
-//             div2.append(a1);
-//             div1.append(div3);
-//             div1.append(span);
-//             div3.prepend(a2);
-//             div3.append(p);
-
-//             document.querySelector(".BoardCommentText1").value = "";
-
-//             span.addEventListener("click", e => {
-
-//                 const check1 = confirm("삭제하시겠습니까?")
-
-//                 if (check1) {
-//                     alert("댓글 삭제 완료")
-//                     e.target.parentElement.remove();
-
-//                 } else alert("취소되었습니다")
-//             });
-
-//         }
-//         else alert("취소되었습니다")
-
-//     });
-// }
 
 /* 게시글 닫기 버튼으로 닫기 */
 const BoardClose = document.querySelector(".BoardClose");
@@ -321,21 +213,8 @@ const boardModal = document.querySelector("#boardModal");
 if(boardModal.style.display == 'flex'){
     console.log("abc");
 }
-// -----------------------------------------------------------------------------------------
-// 게시글 슬라이드
-
-
-//const slide = document.querySelector(".slide");
-//let slideWidth = slide.clientWidth;
-
-// 버튼 엘리먼트 선택하기
-//const prevBtn = document.querySelector(".slide_prev_button");
-//const nextBtn = document.querySelector(".slide_next_button");
-
 
 //*** */ 게시글 슬라이드****
-
-
 
 const slide = document.querySelector(".slide");
 // 버튼 엘리먼트 선택하기
@@ -825,14 +704,6 @@ function getSiblings(currentNode) {
 // 답글 보기 버튼을 눌렀을 때
 
 
-// for(let i=0;i<secondComment.length;i++){
-//     secondComment.addEventListener("click", e =>{
-//         e.target.nextAll().classList.toggle("postcontent2");
-//     });
-// }
-
-
-
 // 좋아요 AJAX
 const boardLike = document.querySelectorAll(".boardLike");
 const likeCount = document.querySelector(".likeCount");
@@ -870,6 +741,7 @@ for(let i=0;i<boardLike.length;i++){
             if(check==0){
                 BoardRedHeart.style.display = "block";
                 BoardHeart.style.display = "none";
+                sendLike(boardNumber);
             } else {
                 BoardRedHeart.style.display = "none";
                 BoardHeart.style.display = "block";
@@ -927,14 +799,6 @@ for(let i=0;i<boardMark.length;i++){
     })
 }
 
-
-
-
-
-
-
-//let currSlide = 1;
-
 // 페이지네이션 생성
 //const pagination = document.querySelector(".slide_pagination");
 
@@ -976,16 +840,6 @@ function slideInitFn(){
     const startElem = document.createElement("div");
     const endElem = document.createElement("div");
     
-    // endSlide.classList.forEach((c) => endElem.classList.add(c));
-    // endElem.innerHTML = endSlide.innerHTML;
-
-    // startSlide.classList.forEach((c) => startElem.classList.add(c));
-    // startElem.innerHTML = startSlide.innerHTML;
-
-    // // 각 복제한 엘리먼트 추가하기
-    // slideItems[0].before(endElem);
-    // slideItems[slideItems.length - 1].after(startElem);
-
     // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
     slideItems = document.querySelectorAll(".slide_item");
     //
@@ -1085,58 +939,6 @@ window.addEventListener("resize", () => {
 });
 
 
-
-// // 드래그(스와이프) 이벤트를 위한 변수 초기화
-// let startPoint = 0;
-// let endPoint = 0;
-
-// // PC 클릭 이벤트 (드래그)
-// slide.addEventListener("mousedown", (e) => {
-//     startPoint = e.pageX; // 마우스 드래그 시작 위치 저장
-// });
-
-// slide.addEventListener("mouseup", (e) => {
-//     endPoint = e.pageX; // 마우스 드래그 끝 위치 저장
-//     if (startPoint < endPoint) {
-//         // 마우스가 오른쪽으로 드래그 된 경우
-//         prevMove();
-//     } else if (startPoint > endPoint) {
-//         // 마우스가 왼쪽으로 드래그 된 경우
-//         nextMove();
-//     }
-// });
-
-// // 모바일 터치 이벤트 (스와이프)
-// slide.addEventListener("touchstart", (e) => {
-//     startPoint = e.touches[0].pageX; // 터치가 시작되는 위치 저장
-// });
-// slide.addEventListener("touchend", (e) => {
-//     endPoint = e.changedTouches[0].pageX; // 터치가 끝나는 위치 저장
-//     if (startPoint < endPoint) {
-//         // 오른쪽으로 스와이프 된 경우
-//         prevMove();
-//     } else if (startPoint > endPoint) {
-//         // 왼쪽으로 스와이프 된 경우
-//         nextMove();
-//     }
-// });
-
-// // 기본적으로 슬라이드 루프 시작하기
-// let loopInterval = setInterval(() => {
-//     nextMove();
-// }, 3000);
-
-// // 슬라이드에 마우스가 올라간 경우 루프 멈추기
-// slide.addEventListener("mouseover", () => {
-//     clearInterval(loopInterval);
-// });
-
-// // 슬라이드에서 마우스가 나온 경우 루프 재시작하기
-// slide.addEventListener("mouseout", () => {
-//     loopInterval = setInterval(() => {
-//         nextMove();
-//     }, 3000);
-// });
 
 /* 새 게시글 업로드 */
 
@@ -1456,89 +1258,6 @@ window.addEventListener("resize", () => {
 });
 
 
-
-// // 드래그(스와이프) 이벤트를 위한 변수 초기화
-// let startPoint2 = 0;
-// let endPoint2 = 0;
-
-// // PC 클릭 이벤트 (드래그)
-// slide2.addEventListener("mousedown", (e) => {
-//     startPoint2 = e.pageX; // 마우스 드래그 시작 위치 저장
-// });
-
-// slide2.addEventListener("mouseup", (e) => {
-//     endPoint2 = e.pageX; // 마우스 드래그 끝 위치 저장
-//     if (startPoint2 < endPoint2) {
-//         // 마우스가 오른쪽으로 드래그 된 경우
-//         prevMove2();
-//     } else if (startPoint2 > endPoint2) {
-//         // 마우스가 왼쪽으로 드래그 된 경우
-//         nextMove2();
-//     }
-// });
-
-// // 모바일 터치 이벤트 (스와이프)
-// slide2.addEventListener("touchstart", (e) => {
-//     startPoint2 = e.touches[0].pageX; // 터치가 시작되는 위치 저장
-// });
-// slide2.addEventListener("touchend", (e) => {
-//     endPoint2 = e.changedTouches[0].pageX; // 터치가 끝나는 위치 저장
-//     if (startPoint2 < endPoint2) {
-//         // 오른쪽으로 스와이프 된 경우
-//         prevMove2();
-//     } else if (startPoint2 > endPoint2) {
-//         // 왼쪽으로 스와이프 된 경우
-//         nextMove2();
-//     }
-// });
-
-// // 기본적으로 슬라이드 루프 시작하기
-// let loopInterval2 = setInterval(() => {
-//     nextMove2();
-// }, 3000);
-
-// // 슬라이드에 마우스가 올라간 경우 루프 멈추기
-// slide2.addEventListener("mouseover", () => {
-//     clearInterval(loopInterval2);
-// });
-
-// // 슬라이드에서 마우스가 나온 경우 루프 재시작하기
-// slide2.addEventListener("mouseout", () => {
-//     loopInterval2 = setInterval(() => {
-//         nextMove2();
-//     }, 3000);
-// });
-
-// const uploadBtn = document.querySelector("#uploadBtn");
-
-// uploadBtn.addEventListener("click", ()=>{
-//     uploadBoard();
-// });
-
-// function uploadBoard() {
-//     let form = document.getElementById("uploadForm");
-//     let formData = new FormData(form);
-  
-//     let hashtagList = document.getElementsByClassName("hashtag-value");
-//     for (let i = 0; i < hashtagList.length; i++) {
-//       formData.append(`hashtagList[${i}]`, hashtagList[i].innerText);
-//     }
-  
-//     fetch("/board2/boardInsert", {
-//       method: "POST",
-//       headers : {"Content-Type" : false, "processData" : false},
-//       body: formData,
-//     })
-//       .then((res) => res.json())
-//       .then((resp) => {
-//         console.log(resp);
-//         location.href = `http://localhost:8080/user/${resp.data}`;
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       });
-//   }
-
 function addHashtag() {
     let hashtag = document.getElementById("hashtag").value;
     let item = getHashtagItem(hashtag);
@@ -1562,3 +1281,119 @@ function getHashtagItem(hashtag) {
 
     return item;
 }
+
+
+// 팔로우 버튼이 클릭 되었을 때
+let followUser;
+let nufollow;
+let profileBtn; 
+let followBtn;
+
+document.addEventListener("DOMContentLoaded",()=>{
+})
+
+    followBtn = document.querySelectorAll(".followBtn>svg.fb");
+
+    followUser = document.querySelector(".followUser");
+    nufollow = document.querySelector(".nufollow");
+    profileBtn = document.querySelector(".followBtn");
+
+
+    for(let i=0;i<followBtn.length;i++){
+        followBtn[i].addEventListener("click", ()=>{
+            followFn()
+        });
+    }    
+    
+
+function followFn(){
+    // 로그인 여부 검사
+    if(loginMemberNo==""){
+        alert("로그인 후 이용해주세요.");
+        return;
+    }
+
+    let check; // 기존에 팔로우 X(노란색) : 0, followUser
+               //        팔로우 0(하늘색) : 1 nufollow
+    // contains("클래스명") : 클래스가 있으면 true, 없으면 false
+    if(followUser.classList.contains("followshow")){
+        check = 0; // 팔로우 X(노란색) : 0, followUser
+    } else{
+        check = 1;  // 팔로우 0(하늘색) : 1 nufollow
+    }
+
+    // 팔로우 할 대상 
+    const followerNo = profileBtn.getAttribute("follow");
+
+    // ajax로 서버로 제출할 파라미터를 모아둔 JS 객체
+    const data = {"memberNo": followerNo, // 회원 번호
+                "followerNo":loginMemberNo, // 팔로우한 사람 번호
+                "check":check
+                };
+
+    // ajax 코드 작성
+    fetch("/alarm/follow", {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"}, // 우리가 지금 보낼 거는 json이야
+        body : JSON.stringify(data)
+    })
+    .then(response=>response.text()) // 응답 객체를 필요한 형태로 파싱하여 리턴
+    .then(count =>{
+
+        console.log("count : "+count);
+
+        if(count == -1){ // INSERT, DELETE 실패 시
+            console.log("팔로우 처리 실패");
+            return;
+        }
+        if(count == 0){ // 자기 자신
+            console.log("자신은 팔로우 하지 못합니다.");
+            return;
+        }
+        
+        sendFollow(followerNo);
+        // followUser.classList.toggle("followshow");
+        // nufollow.classList.toggle("followshow");
+
+        if(check==0){ // 팔로우 성공
+            followUser.classList.remove("followshow");
+            nufollow.classList.add("followshow");
+        } else {
+            followUser.classList.add("followshow");
+            nufollow.classList.remove("followshow");
+        }
+
+    }) // 파싱한 데이터를 받아서 처리하는 코드 작성
+    .catch(err=>{
+        console.log("예외 발생");
+        console.log(err);
+    }) // 예외 발생 시 처리하는 부분
+}
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+    const params = new URL(location.href).searchParams;
+    const boardNo = params.get("boardNo");
+    
+    if(boardNo == null){
+        return;
+    }
+
+    let no;
+    let target;
+    const list = document.querySelectorAll(".contentBox a");
+    for(let a of list){
+        const tmp = a.getAttribute("onclick");
+        no = tmp.substring(tmp.indexOf("(")+1, tmp.indexOf(")"));
+
+        if(boardNo == no){
+            target = a;
+            break;
+        }
+    }
+
+    if(target != undefined){
+        target.click();
+        history.replaceState({}, null, location.pathname);
+    }
+})

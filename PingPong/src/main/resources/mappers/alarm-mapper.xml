@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="alarmMapper">
+
+	
+	<!-- 알람 관련 -->
+	<resultMap type="Notice" id="notice_rm">
+		<id property="noticeNo" column="NOTICE_NO" />
+		<result property="noticeContent" column="NOTICE_COMENT" />
+		<result property="elapsedDate" column="ELAPSED_TIME" />
+		<result property="memberNo" column="MEMBER_NO" />
+				
+		<result property="sendNo" column="SEND_NO" />
+		<result property="sendProfile" column="PROFILE_IMG" />
+	</resultMap>
+	
+	<!-- 팔로우 관련 -->
+	<resultMap type="Follow" id="follow_rm">
+		<id property="followNo" column="FOLLOW_NO" />
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="followerNo" column="FOLLOWER_NO" />
+	</resultMap>
+	
+	
+	<!-- 팔로우 여부 -->
+	<select id="followCheck" resultType="_int">
+		SELECT COUNT(*) 
+		FROM FOLLOW
+		WHERE MEMBER_NO = #{memberNo}
+		AND FOLLOWER_NO = #{followerNo}
+	</select>
+	
+	<!-- 팔로워 삽입 -->
+	<insert id="follow">
+		INSERT INTO FOLLOW
+		VALUES(SEQ_FOLLOW_NO.NEXTVAL, #{memberNo}, #{followerNo})    
+	</insert>
+	
+	<!-- 팔로우 삭제 -->
+	<delete id="unfollow">
+		DELETE FROM FOLLOW
+		WHERE MEMBER_NO = #{memberNo}
+		AND FOLLOWER_NO = #{followerNo}
+	</delete>
+	
+	
+	<!-- 알람 메세지를 보낸 사람의 프로필 이미지 조회 -->
+	<select id="selectProfileImage" resultType="string">
+		SELECT PROFILE_IMG
+		FROM MEMBER_PROFILE
+		WHERE MEMBER_NO = #{sendNo}
+	</select>
+	
+	<!-- 알람을 받는 사람 번호(== 게시글 작성) -->
+	<select id="selectMemberNo" resultType="int">
+		SELECT MEMBER_NO 
+		FROM BOARD
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	<!-- 알람 삽입 -->
+	<insert id="insertAlarm">
+		INSERT INTO NOTICE
+		(NOTICE_NO, NOTICE_COMENT, ELAPSED_TIME, MEMBER_NO)
+		VALUES(SEQ_NOTICE_NO.NEXTVAL, #{noticeContent} , SYSDATE, #{memberNo})
+	</insert>
+	
+
+	
+</mapper>

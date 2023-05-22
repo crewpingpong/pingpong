@@ -50,7 +50,7 @@ const alarmIconRedColor = document.querySelector(".redheart");
 const alarmModBox = document.querySelector("#alarmModBox");
 
 alarmIcon.addEventListener("click", () => {
-    alarmIconRedColor.classList.toggle("alarm-icon-redColor");
+    // alarmIconRedColor.classList.toggle("alarm-icon-redColor");
     alarmModBox.classList.toggle("alarm-icon-redColor");
 });
 
@@ -264,21 +264,4 @@ headerOpenSearchBox.addEventListener("keyup", e => {
         }
     }
 });
-
-
-
-
-// // 알림 모달에서 메세지 보기
-// // 받은 메세지 제일 위에 샘플을 클릭하면 받은메세지로 이동함
-// const ModalmessageExample = document.querySelector("#alarmModBox .messageExample");
-
-// ModalmessageExample.addEventListener("click",()=>{
-//     messagerecieveContainer.style.display="flex";
-// })
-
-
-// // 메세지 함 JS
-
-// // 메세지 X 눌렀을 때 지우기 (시도해보다가 실패...)
-// // const messageListX = document.querySelectorAll(".messageListX");
 
