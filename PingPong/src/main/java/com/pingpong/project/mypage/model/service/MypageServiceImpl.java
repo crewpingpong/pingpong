@@ -173,20 +173,20 @@ public class MypageServiceImpl implements MypageService{
 
 	// 선택된 지식기술 리스트 삽입
 	@Override
-	public int insertTechList(List<String> techList) {
-		return dao.insertTechList(techList);
+	public int insertTechList(List<String> selectedtechList) {
+		return dao.insertTechList(selectedtechList);
 	}
 
 	// 선택된 지식기술 리스트 조회
 	@Override
-	public int selectTechCount(List<String> techList) {
-		return dao.selectTechCount(techList);
+	public int selectTechCount(List<String> selectedtechList) {
+		return dao.selectTechCount(selectedtechList);
 	}
 
 	// 선택된 지식기술 리스트 삭제
 	@Override
-	public int deleteTechList(List<String> techList) {
-		return dao.deleteTechList(techList);
+	public int deleteTechList(List<String> selectedtechList) {
+		return dao.deleteTechList(selectedtechList);
 	}
 
 

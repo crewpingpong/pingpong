@@ -35,7 +35,7 @@ import com.pingpong.project.mypage.model.service.MypageService;
 
 @SessionAttributes({"loginMember", "mypage"})
 @RequestMapping("/mypage")
-//@Controller
+@Controller
 public class MypageController {
 	
 	@Autowired
@@ -147,8 +147,7 @@ public class MypageController {
 			, RedirectAttributes ra
 			, HttpSession session) {
 		
-		List<String> techList = Arrays.asList(techArray);
-		
+		List<String> selectedtechList = Arrays.asList(techArray);
 		
 		updateMyPage.setMemberNo(mypage.getMemberNo());
 		
@@ -177,24 +176,24 @@ public class MypageController {
 		
 		
 		// 지식기술
-		int techYN = service.selectTechCount(techList);
+		int techYN = service.selectTechCount(selectedtechList);
 		
 		if(techYN != 0) {
 			
-			int techListDeleteResult = service.deleteTechList(techList);
+			int techListDeleteResult = service.deleteTechList(selectedtechList);
 			
-			int techListInsertResult = service.insertTechList(techList);
+			int techListInsertResult = service.insertTechList(selectedtechList);
 			
-			for(String tech : techList) {
-				techList.add(tech);
+			for(String tech : selectedtechList) {
+				selectedtechList.add(tech);
 			}
 		}
 		
 		else {
-			int techListInsertResult = service.insertTechList(techList);
+			int techListInsertResult = service.insertTechList(selectedtechList);
 			
-			for(String tech : techList) {
-				techList.add(tech);
+			for(String tech : selectedtechList) {
+				selectedtechList.add(tech);
 			}
 		}
 		

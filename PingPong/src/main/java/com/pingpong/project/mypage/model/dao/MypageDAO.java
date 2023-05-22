@@ -139,24 +139,24 @@ public class MypageDAO {
 	 * @param techList
 	 * @return
 	 */
-	public int insertTechList(List<String> techList) {
-		return sqlSession.insert("mypageMapper.insertTechList", techList);
+	public int insertTechList(List<String> selectedtechList) {
+		return sqlSession.insert("mypageMapper.insertTechList", selectedtechList);
 	}
 
 	/** 선택된 지식기술 리스트 조회
 	 * @param selectedTech
 	 * @return
 	 */
-	public int selectTechCount(List<String> techList) {
-		return sqlSession.selectOne("mypageMapper.selectTechCount", techList);
+	public int selectTechCount(List<String> selectedtechList) {
+		return sqlSession.selectOne("mypageMapper.selectTechCount", selectedtechList);
 	}
 
 	/** 선택된 지식기술 리스트 삭제
 	 * @param selectedTech
 	 * @return
 	 */
-	public int deleteTechList(List<String> techList) {
-		return sqlSession.delete("mypageMapper.deleteTechList", techList);
+	public int deleteTechList(List<String> selectedtechList) {
+		return sqlSession.delete("mypageMapper.deleteTechList", selectedtechList);
 	}
 
 

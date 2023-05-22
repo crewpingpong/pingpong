@@ -95,19 +95,19 @@ public interface MypageService {
 	 * @param techList
 	 * @return
 	 */
-	int insertTechList(List<String> techList);
+	int insertTechList(List<String> selectedtechList);
 
 	/** 선택된 지식기술 리스트 조회
 	 * @param techList
 	 * @return
 	 */
-	int selectTechCount(List<String> techList);
+	int selectTechCount(List<String> selectedtechList);
 
 	/** 선택된 지식기술 리스트 삭제
 	 * @param techList
 	 * @return
 	 */
-	int deleteTechList(List<String> techList);
+	int deleteTechList(List<String> selectedtechList);
 	
 
 
