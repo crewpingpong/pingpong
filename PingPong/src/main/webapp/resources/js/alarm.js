@@ -59,6 +59,23 @@ function sendMessage(messageContent,receiveMessageNo){
                   // JS 객체 -> JSON
 }
 
+// 팔로우 알람
+function sendFollow(followerNo){
+    // 매개 변수를 JS 객체에 저장
+    let obj = {}; // 비어있는 객체
+
+    // 객체에 일치하는 key가 없다면 자동으로 추가 (지울 때 delete)
+    obj.sendNo = loginMemberNo; // 보낸 회원 번호
+    obj.sendName = loginMemberNickname; // 보낸 회원 닉네임
+    obj.memberNo = followerNo; // 팔로우 당한 사람
+    obj.type=4;
+    // #대신 게시글 상세조회 주소
+    // console.log(obj);
+
+    alarmSock.send(JSON.stringify(obj)); // 웹소켓 연결된 곳으로 메시지를 보냄
+                  // JS 객체 -> JSON
+}
+
 let alarmModBoxList = document.querySelector("#alarmModBox .alarmList");
 
 

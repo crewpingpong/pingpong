@@ -1269,7 +1269,6 @@ window.addEventListener("resize", () => {
 
 
 
-
 // 팔로우 버튼이 클릭 되었을 때
 let followUser;
 let nufollow;
@@ -1338,6 +1337,7 @@ function followFn(){
             return;
         }
         
+        sendFollow(followerNo);
         // followUser.classList.toggle("followshow");
         // nufollow.classList.toggle("followshow");
 
@@ -1355,3 +1355,31 @@ function followFn(){
         console.log(err);
     }) // 예외 발생 시 처리하는 부분
 }
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+    const params = new URL(location.href).searchParams;
+    const boardNo = params.get("boardNo");
+    
+    if(boardNo == null){
+        return;
+    }
+
+    let no;
+    let target;
+    const list = document.querySelectorAll(".contentBox a");
+    for(let a of list){
+        const tmp = a.getAttribute("onclick");
+        no = tmp.substring(tmp.indexOf("(")+1, tmp.indexOf(")"));
+
+        if(boardNo == no){
+            target = a;
+            break;
+        }
+    }
+
+    if(target != undefined){
+        target.click();
+        history.replaceState({}, null, location.pathname);
+    }
+})
