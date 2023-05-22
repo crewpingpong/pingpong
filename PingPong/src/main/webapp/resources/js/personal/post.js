@@ -838,6 +838,14 @@ insertComment.addEventListener("click", e=>{
                 prntCommentNode.innerText = "—— 답글 보기(" + (Number(a.match(/\d+/)[0]) +1) + ")";
 
             }
+            const replyCommentInsert = document.querySelectorAll(".replyCommentInsert");
+            for(let i=0;i<replyCommentInsert.length;i++){
+                replyCommentInsert[i].addEventListener("click", e=>{
+                    let nickName = e.target.parentNode.previousElementSibling.children[0].innerText;
+                    commentContentArea.focus();
+                    commentContentArea.value = "@" + nickName+" ";
+                })
+            }
         }
 
 
