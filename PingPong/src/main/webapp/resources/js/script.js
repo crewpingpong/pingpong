@@ -117,46 +117,46 @@ openHam.addEventListener("click",() => {
         });
     }
 
-    seachModInnerContent.addEventListener("keyup", e => {
-        while(searchModResultList.hasChildNodes()) {
-            searchModResultList.removeChild(searchModResultList.firstChild);
-        }
-        if(seachModInnerContent.value.startsWith('#')){
-            for(let i=0;i<tagArr.length;i++){
-                if(tagArr[i].startsWith(seachModInnerContent.value) && seachModInnerContent.value!='#'){
+    // seachModInnerContent.addEventListener("keyup", e => {
+    //     while(searchModResultList.hasChildNodes()) {
+    //         searchModResultList.removeChild(searchModResultList.firstChild);
+    //     }
+    //     if(seachModInnerContent.value.startsWith('#')){
+    //         for(let i=0;i<tagArr.length;i++){
+    //             if(tagArr[i].startsWith(seachModInnerContent.value) && seachModInnerContent.value!='#'){
             
-                    const div = document.createElement('div');
-                    const a1 = document.createElement('a');
-                    a1.classList.add("searchModTagRound1");
-                    a1.innerText = "#"
-                    div.classList.add("searchModResultCont");
-                    const a2 = document.createElement('a');
-                    a2.classList.add("searchModTagRound2");
-                    a2.innerText = tagArr[i].substring(1);
+    //                 const div = document.createElement('div');
+    //                 const a1 = document.createElement('a');
+    //                 a1.classList.add("searchModTagRound1");
+    //                 a1.innerText = "#"
+    //                 div.classList.add("searchModResultCont");
+    //                 const a2 = document.createElement('a');
+    //                 a2.classList.add("searchModTagRound2");
+    //                 a2.innerText = tagArr[i].substring(1);
 
-                    div.append(a1);
-                    div.append(a2);
-                    searchModResultList.append(div);
-                }
-            }
-        } else if(!seachModInnerContent.value.startsWith('#') && seachModInnerContent.value!='') {
-            for(let i=0;i<nameArr.length;i++){
-                if(nameArr[i].startsWith(seachModInnerContent.value)){
-                    const div = document.createElement('div');
-                    const a1 = document.createElement('a');
-                    a1.classList.add("searchModNameRound1");
-                    div.classList.add("searchModResultCont");
-                    const a2 = document.createElement('a');
-                    a2.classList.add("searchModNameRound2");
-                    a2.innerText = nameArr[i];
+    //                 div.append(a1);
+    //                 div.append(a2);
+    //                 searchModResultList.append(div);
+    //             }
+    //         }
+    //     } else if(!seachModInnerContent.value.startsWith('#') && seachModInnerContent.value!='') {
+    //         for(let i=0;i<nameArr.length;i++){
+    //             if(nameArr[i].startsWith(seachModInnerContent.value)){
+    //                 const div = document.createElement('div');
+    //                 const a1 = document.createElement('a');
+    //                 a1.classList.add("searchModNameRound1");
+    //                 div.classList.add("searchModResultCont");
+    //                 const a2 = document.createElement('a');
+    //                 a2.classList.add("searchModNameRound2");
+    //                 a2.innerText = nameArr[i];
 
-                    div.append(a1);
-                    div.append(a2);
-                    searchModResultList.append(div);
-                }
-            }
-        }
-    });
+    //                 div.append(a1);
+    //                 div.append(a2);
+    //                 searchModResultList.append(div);
+    //             }
+    //         }
+    //     }
+    // });
 
     // 더보기 + 사이트 정보 눌렀을 때 창
     const siteInfoClick = document.querySelector(".navmore li:last-child");
