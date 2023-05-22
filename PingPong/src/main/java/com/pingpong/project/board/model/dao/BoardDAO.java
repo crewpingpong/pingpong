@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pingpong.project.board.model.dto.Board;
+import com.pingpong.project.board.model.dto.Comment;
 import com.pingpong.project.board.model.dto.Hashtag;
 
 
@@ -70,8 +71,16 @@ public class BoardDAO {
 	 * @param paramMap
 	 * @return result
 	 */
-	public int commentInsert(Map<String, Object> paramMap) {
-		return sqlSession.insert("boardMapper.insertComment", paramMap);
+	public Comment commentInsert(Comment comment) {
+		
+		int result = sqlSession.insert("boardMapper.insertComment", comment);
+		System.out.println(result);
+		Comment resultComment = null;
+		if(result>0){
+			resultComment = sqlSession.selectOne("boardMapper.selectComment", comment);
+			System.out.println(resultComment);
+		}
+		return resultComment;
 	}
 
 	/** 게시글 수정
@@ -89,6 +98,24 @@ public class BoardDAO {
 	public List<Hashtag> getHashtags(Map<String, String> hashtags) {
 		return sqlSession.selectList("boardMapper.selectHashtagList", hashtags);
 	}
+
+	/** 댓글 삭제
+	 * @param commentNo
+	 * @return result
+	 */
+	public int commentDelete(int commentNo) {
+		return sqlSession.update("boardMapper.deleteComment", commentNo);
+	}
+
 	
+	/** 댓댓글 삭제
+	 * @param commentNo
+	 * @return result
+	 */
+	public int childCommentDelete(int commentNo) {
+		return sqlSession.update("boardMapper.deleteChildComment", commentNo);
+	}
+
+
 
 }

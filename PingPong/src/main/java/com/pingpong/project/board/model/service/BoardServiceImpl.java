@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pingpong.project.board.model.dao.BoardDAO;
 import com.pingpong.project.board.model.dto.Board;
+import com.pingpong.project.board.model.dto.Comment;
 import com.pingpong.project.board.model.dto.Hashtag;
 
 @Service
@@ -58,12 +59,8 @@ public class BoardServiceImpl implements BoardService{
 
 	// 댓글 테이블 삽입
 	@Override
-	public int commentInsert(Map<String, Object> paramMap) {
-		
-		dao.commentInsert(paramMap);
-		
-		int boardNo = (int) paramMap.get("boardNo");
-		return boardNo; 
+	public Comment commentInsert(Comment comment) {
+		return dao.commentInsert(comment); 
 	}
 	
 	// 게시글 수정
@@ -76,6 +73,18 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<Hashtag> getHashtags(Map<String, String> hashtags) {
 		return dao.getHashtags(hashtags);
+	}
+
+	// 댓글 삭제
+	@Override
+	public int commentDelete(int commentNo) {
+		return dao.commentDelete(commentNo);
+	}
+
+	// 댓댓글 삭제
+	@Override
+	public int childCommentDelete(int commentNo) {
+		return dao.childCommentDelete(commentNo);
 	}
 	
 
