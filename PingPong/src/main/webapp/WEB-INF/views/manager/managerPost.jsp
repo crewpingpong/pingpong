@@ -75,12 +75,18 @@
                 <div class="admin-left-side-menu">
                     <div>게시글 관리</div>
                     <div>
-                        <select name="select" id="">
-                            <option value="memberNo">ID</option>
-                            <option value="memberNo">게시글 내용</option>
-                        </select>
-                        <input type="text">
-                        <button type="button">검색</button>
+            <form action="/manager/Post" method="get" id="boardSearch"><%-- 게시글 관리 내 검색 --%>
+
+                    <select name="key" id="searchKey">
+                        <option value="n">게시글 번호</option>
+                        <option value="c">게시글 내용</option>
+                        <option value="i">ID</option>
+                    </select>
+
+                    <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+                    <button>검색</button>
+            </form>
                     </div>
                     <div>
                         <button id="PostDelBtn">삭제처리</button>
@@ -127,7 +133,7 @@
                                     </td>
                                     <td>${Content.boardNo}</td>
                                     <td>
-                                        <a href="#">${Content.memberUrl}</a>
+                                        <a href="/mypage/${Content.memberNo}">${Content.memberUrl}</a>
                                     </td>
                                     <td>${Content.boardContent}</td> <!-- 한글 16글자 1줄 -->
                                     <td>${Content.declarationCount}</td>

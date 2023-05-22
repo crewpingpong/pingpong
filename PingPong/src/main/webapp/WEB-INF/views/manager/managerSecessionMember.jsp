@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set var="memberList" value="${SecessionList.memberList}"/>
+<c:set var="memberList" value="${map.memberList}"/>
 
 
 <!DOCTYPE html>
@@ -75,13 +75,18 @@
                 <div class="admin-left-side-menu">
                     <div>탈퇴 회원 관리</div>
                     <div>
-                        <select name="select" id="">
-                            <option value="memberNo">ID</option>
-                            <option value="memberNo">NickName</option>
-                            <option value="memberNo">Email</option>
-                        </select>
-                        <input type="text">
-                        <button type="button">검색</button>
+            <form action="/manager/Secession" method="get" id="boardSearch">
+
+                    <select name="key" id="searchKey">
+                        <option value="i">ID</option>
+                        <option value="n">NICKNAME</option>
+                        <option value="e">EMAIL</option>
+                    </select>
+
+                    <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+                    <button>검색</button>
+            </form>
                     </div>
                     <form action="/manager/restore" method="POST" id="Secessionform">
                         <table id="oneToOneTable">
@@ -124,7 +129,7 @@
                                     </td>
                                     <td>${member.memberNo}</td>
                                     <td>
-                                        <a href="#">${member.memberUrl}</a>
+                                        <a href="/mypage/${member.memberNo}">${member.memberUrl}</a>
                                     </td>
                                     <td>${member.memberNickname}</td> <!-- 한글 16글자 1줄 -->
                                     <td>${member.memberEmail}</td>

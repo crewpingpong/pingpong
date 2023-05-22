@@ -47,23 +47,59 @@ public class ManagerServiceImpl implements ManagerService{
 		return map;
 	}
 	
+	// 검색된 회원 목록 조회
+		@Override
+		public Map<String, Object> selectMemberList(Map<String, Object> paramMap, int cp) {
+			
+			int listCount = dao.getMemberListCount(paramMap);
+			
+			Pagination pagination = new Pagination(listCount, cp);
+			
+			List<Member> memberList = dao.selectMemberList(pagination, paramMap);
+			
+			Map<String, Object> map = new HashMap<>();
+			map.put("pagination", pagination);
+			map.put("memberList", memberList);
+			
+			return map;
+		}	
+	
+	
 	// 탈퇴 회원 목록 조회
 	@Override
-	public Map<String, Object> selectSessionList(int cp) {
+	public Map<String, Object> selectSecessionList(int cp) {
 
 		int listCount = dao.getDelListCount();
 		
 		Pagination pagination = new Pagination(listCount, cp);
 		
-		List<Member> memberList = dao.selectSessionList(pagination);
+		List<Member> memberList = dao.selectSecessionList(pagination);
 		
-		Map<String, Object> SecessionList = new HashMap<>();
-		SecessionList.put("pagination", pagination);
-		SecessionList.put("memberList", memberList);
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		map.put("memberList", memberList);
 		
-		return SecessionList;
+		return map;
+	}
+	
+	// 검색된 탈퇴 회원 목록 조회
+	@Override
+	public Map<String, Object> selectSecessionList(Map<String, Object> paramMap, int cp) {
+		
+		int listCount = dao.getDelListCount(paramMap);
+		
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		List<Member> memberList = dao.selectSecessionList(pagination, paramMap);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		map.put("memberList", memberList);
+		
+		return map;
 	}
 
+	
 	// 게시글 목록 조회
 	@Override
 	public Map<String, Object> selectBoardList(int cp) {
@@ -80,6 +116,25 @@ public class ManagerServiceImpl implements ManagerService{
 		
 		return map;
 	}
+	
+	
+	// 검색된 게시글 목록 조회
+	@Override
+	public Map<String, Object> selectBoardList(Map<String, Object> paramMap, int cp) {
+			
+		int listCount = dao.getContentListCount(paramMap);
+		
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		List<Board> boardList = dao.selectBoardList(pagination,paramMap);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		map.put("boardList", boardList);
+		
+		return map;
+	}
+
 
 	// 댓글 목록 조회
 	@Override
@@ -180,6 +235,7 @@ public class ManagerServiceImpl implements ManagerService{
 		return dao.commentRe(commentNo);
 	}
 
+	
 	
 	
 	
