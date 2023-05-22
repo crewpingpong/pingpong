@@ -35,10 +35,8 @@ public class AjaxDAO {
 	}
 		
 	// 닉네임이 일부라도 일치하는 모든 회원 조회 (40명)
-	// 이메일이 일부라도 일치하는 모든 회원 조회
-	public List<Member> selectMemberList(String input) {
-		return sqlSession.selectList("ajaxMapper.selectMemberList", input);
-		
+	public List<Member> selectAllNickname(String input) {
+		return sqlSession.selectList("ajaxMapper.selectAllNickname", input);
 	}
 	
 	//////////////////////////////////////////////////////////

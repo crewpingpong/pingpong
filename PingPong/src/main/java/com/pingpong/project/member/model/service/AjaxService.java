@@ -33,11 +33,11 @@ public interface AjaxService {
 
 
 
-	/** 이메일이 일부라도 일치하는 모든 회원 조회
+	/** 닉네임이 일부라도 일치하는 모든 회원 조회 (40명)
 	 * @param input
 	 * @return
 	 */
-	List<Member> selectMemberList(String input);
+	List<Member> selectAllNickname(String input);
 
 	/**	URL 중복 검사
 	 * @param URL
@@ -51,5 +51,7 @@ public interface AjaxService {
 	 * @return
 	 */
 	Member selectMember(String email);
+
+
 
 }

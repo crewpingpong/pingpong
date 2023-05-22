@@ -334,9 +334,19 @@ display: none; z-index: 202;
     position: relative;
     width: 90%;
 }
+.search-input-user-box>span{
+    font-size: 16px;
+    display: block;
+    width: 100%;
+    margin-left: 10px;
+}
+.search-input-user-box{
+    position: relative;
+    width: 90%;
+}
 
 /* 검색 결과 : 태그 + result 개수 */
-.search-input-tag-name{
+/* .search-input-tag-name{
     position: absolute;
     top: -23px;
 }
@@ -344,13 +354,13 @@ display: none; z-index: 202;
     position: absolute;
     top: -2px;
     
-}
+} */
 /* 검색 결과 : 태그 */
-/* .search-input-tag-name{
+.search-input-tag-name{
     position: absolute;
     top: -13px;
 }
- */
+
 
 .search-user-picture{
     position: absolute;

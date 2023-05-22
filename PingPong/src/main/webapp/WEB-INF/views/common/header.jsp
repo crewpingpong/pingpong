@@ -134,52 +134,21 @@
                                 </div><!-- #, 사람 아이콘 -->
                                 <div class="search-input-tag-box">
                                     <span class="search-input-tag-name">검색했어요</span>
-                                    <span class="search-input-tag-count">게시물 4030만</span>
+                                    <%-- <span class="search-input-tag-count">게시물 4030만</span> --%>
                                 </div><!-- 글자 -->
                             </div>
                         </div>
                     </a>
-                    <a href="">
-                        <div class="search-result-main-box" >
-                            <div class="search-result-inner-box">
-                                <div class="searchModRound1">
-                                    <svg aria-label="해시태그" class="search-tag-icon" color="rgb(0, 0, 0)" fill="rgb(0, 0, 0)" height="16" role="img" viewBox="0 0 24 24" width="16">
-                                        <title>해시태그</title>
-                                        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="4.728" x2="20.635" y1="7.915" y2="7.915"></line>
-                                        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="3.364" x2="19.272" y1="15.186" y2="15.186"></line>
-                                        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="17.009" x2="13.368" y1="2" y2="22"></line>
-                                        <line fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="10.64" x2="7" y1="2" y2="22"></line>
-                                    </svg>
-                                </div><!-- #, 사람 아이콘 -->
-                                <div class="search-input-tag-box">
-                                    <span class="search-input-tag-name">안녕하세요</span>
-                                    <span class="search-input-tag-count">게시물 30만</span>
-                                </div><!-- 글자 -->
-                            </div>
-                        </div>
-                    </a>
+                    
                     <a href="">
                         <div class="search-result-main-box" >
                             <div class="search-result-inner-box">
                                 <div class="searchModRound1">
                                     <img class="search-user-picture" src="https://via.placeholder.com/45" alt="">
                                 </div><!-- #, 사람 아이콘 -->
-                                <div class="search-input-tag-box">
+                                <div class="search-input-user-box">
                                     <span class="search-input-tag-name">나봉봉</span>
-                                    <span class="search-input-tag-count">건빵이 최고야</span>
-                                </div><!-- 글자 -->
-                            </div>
-                        </div>
-                    </a>
-                    <a href="">
-                        <div class="search-result-main-box" >
-                            <div class="search-result-inner-box">
-                                <div class="searchModRound1">
-                                    <img class="search-user-picture" src="https://via.placeholder.com/45" alt="">
-                                </div><!-- #, 사람 아이콘 -->
-                                <div class="search-input-tag-box">
-                                    <span class="search-input-tag-name">닌칠라</span>
-                                    <span class="search-input-tag-count">탈주닌자</span>
+                                    <%-- <span class="search-input-tag-count">건빵이 최고야</span> --%>
                                 </div><!-- 글자 -->
                             </div>
                         </div>
