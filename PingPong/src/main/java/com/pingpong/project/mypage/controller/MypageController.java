@@ -94,6 +94,7 @@ public class MypageController {
 		model.addAttribute("techImgList", techImgList);
 		
 		return "personal/post";
+		
 	}
 	
 	// 내 정보 수정으로 이동
