@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.board.model.dto.BoardImage;
+import com.pingpong.project.board.model.dto.Hashtag;
 
 @Repository
 public class BoardDAO2 {
@@ -34,5 +35,15 @@ public class BoardDAO2 {
 	 */
 	public int insertImageList(List<BoardImage> uploadList) {
 		return sqlSession.insert("boardMapper.insertImageList", uploadList);
+	}
+
+	/** 해시태그 여러개 삽입
+	 * @param board
+	 */
+	public void hashInsert(List<Hashtag> hashtags) {
+		int result = sqlSession.insert("boardMapper.hashInsert", hashtags);
+		int result1 = sqlSession.insert("boardMapper.hashBoardInsert", hashtags);
+		System.out.println(result);
+		System.out.println(result1);
 	}
 }

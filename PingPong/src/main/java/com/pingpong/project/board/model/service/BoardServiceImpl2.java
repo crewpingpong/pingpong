@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pingpong.project.board.model.dao.BoardDAO2;
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.board.model.dto.BoardImage;
+import com.pingpong.project.board.model.dto.Hashtag;
 import com.pingpong.project.common.utility.Util;
 import com.pingpong.project.mypage.model.exception.FileUploadException;
 
@@ -78,6 +79,14 @@ public class BoardServiceImpl2 implements BoardService2 {
 		}
 		
 		return boardNo;
+	}
+
+
+	// 해시태그 삽입
+	@Override
+	public void hashInsert(List<Hashtag> hashtags) {
+		dao.hashInsert(hashtags);
+		
 	}
 	
 	

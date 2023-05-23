@@ -679,6 +679,9 @@
     display: flex;
     margin-bottom : 16px;
 }
+.lastDivadd>div:nth-child(2){
+    width: 100%;
+}
 
 .lastDivadd1{
     display: flex;

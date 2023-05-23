@@ -300,11 +300,13 @@ function selectBoardList(boardNo){
         const porfileRac = document.querySelector(".porfileRac");
         const boardMemberInfo = document.querySelector(".boardMemberInfo");
         const BoardPost = document.querySelector(".BoardPost");
+        const HashPost = document.querySelector(".hashPost");
         const likeCountSpan = document.querySelector(".likeCount");
         likeCountSpan.innerHTML = '';
         porfileRac.innerHTML = '';
         boardMemberInfo.innerHTML = '';
         BoardPost.innerHTML = '';
+        HashPost.innerHTML = '';
         Boardcontent1.innerHTML = '';
         
         for(let i=0; i<board.imageList.length;i++){
@@ -451,6 +453,7 @@ function selectBoardList(boardNo){
         }  // 댓글 창 구현 끝
 
 
+        // 게시글 편집 버튼 숨기기
         const editing = document.querySelector(".editing");
         if(loginMemberNo == boardMember){
             editing.style.display = 'block';
@@ -500,7 +503,6 @@ function selectBoardList(boardNo){
         console.log(memberNickA);
         boardMemberInfo.append(memberNickA);
 
-
         const postContentDiv = document.createElement("div");
         postContentDiv.classList.add("postcontent1");
 
@@ -514,6 +516,12 @@ function selectBoardList(boardNo){
         profileImg.src = board.profileImage;
         boardProfileA.append(profileImg);
         boardPostDiv.append(boardProfileA);
+
+        // 게시글 해시태그 구역에 해시태그 추가
+        for(let i=0;i<hashtagList;i++){
+            const hashSpan = document.createElement("span");
+            hashSpan.innerText
+        }
 
 
         const div = document.createElement("div");
@@ -1476,7 +1484,7 @@ window.addEventListener("resize", () => {
     }
 });
 
-
+// 해시태그 추가
 function addHashtag() {
     let hashtag = document.getElementById("hashtag").value;
     let item = getHashtagItem(hashtag);
@@ -1484,13 +1492,24 @@ function addHashtag() {
     document.getElementById("hashtagList").insertAdjacentHTML("beforeend", item);
 }
 
+// 해시태그 제거
 function removeHashtag(hashtag) {
     document.getElementById(hashtag).remove();
 }
 
+// 해시태그 한줄 만드는 함수
 function getHashtagItem(hashtag) {
 
     hashtag = hashtag.replaceAll(' ', '');
+    const hashtagList = document.querySelector('[name="hashtagLists"]');
+    console.log(hashtagList);
+    if(hashtagList.value == ''){
+        hashtagList.value = hashtag;
+    } else {
+        hashtagList.value += ","+hashtag;
+    }
+
+
     let item = `
         <div class="hashtag" id="${hashtag}">
             <span class="hashtag-value">#${hashtag}</span>
