@@ -16,7 +16,7 @@
 </head>
 <body>
 
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
     <!-- 내 정보 수정 Tab Menu -->
     <div class="myPage-content-container">
@@ -135,21 +135,21 @@
                         <div class="introduce-change"> 
                             <p>소개</p>
                             <input type="text" name="memberInfo" maxlength="50" placeholder="자기 소개를 입력해주세요."
-                            	value="${mypage.memberInfo}" id="memberInfo">
+                                value="${mypage.memberInfo}" id="memberInfo">
                         </div>
 
                         <!-- 커리어 -->
                         <div class="career-change"> 
                             <p>커리어</p>
                             <input type="text" name="memberCareer" maxlength="50" placeholder="경력 / 수상 내역을 입력해주세요."
-                            	value="${mypage.memberCareer}" id="memberCareer">
+                                value="${mypage.memberCareer}" id="memberCareer">
                         </div>
 
                         <!-- 자격증 -->
                         <div class="certificate-change"> 
                             <p>자격증</p>
                             <input type="text" name="memberCertificate" maxlength="50" placeholder="보유중인 자격증을 입력해주세요."
-                            	value="${mypage.memberCertificate}" id="memberCertificate">
+                                value="${mypage.memberCertificate}" id="memberCertificate">
                         </div>                        
 
 
@@ -286,6 +286,10 @@
                         <div>
                             안녕하세요. 문의 드려요. 어쩌구 저쩌구 문제가 생겨서요....
                             <div class="inquiry-date">2023년 5월 9일</div> 
+                        </div>
+                        <div>
+                            안녕하세요. 문의 드려요. 문희눈~~꽃무늬가요~~~좋아요~~
+                            <div class="inquiry-date">2023년 5월 22일</div> 
                         </div>
                     </div>
                 </form>

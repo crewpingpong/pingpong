@@ -82,8 +82,16 @@ public class MypageController {
 		model.addAttribute("myfollowList", myfollowList);
 		model.addAttribute("mefollowList", mefollowList);
 		
-
-
+		
+		// 선택한 techImgList 조회
+		List<Tech> checkTechImgList = service.seletCheckTechImgList(loginMember.getMemberNo());
+		
+		List<String> techImgList = new ArrayList<>();
+		
+		for (Tech tech : checkTechImgList) {
+		    techImgList.add(tech.getTechImg());
+		}
+		model.addAttribute("techImgList", techImgList);
 		
 		return "personal/post";
 	}
@@ -264,6 +272,10 @@ public class MypageController {
 		
 		
 		/* *** 지식/기술 리스트 *** */
+		// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+		int techListDelete =  service.techListDeleteAll(loginMember.getMemberNo());
+				
+		
 		// 체크된 techList 삽입
 		for(String tech : selectedtechList) {	
 			
@@ -277,9 +289,6 @@ public class MypageController {
 			int result = service.insertNewTechList(techMap);
 		}
 
-
-		
-		
 		
        
 	

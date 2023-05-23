@@ -181,11 +181,10 @@ public class MypageServiceImpl implements MypageService{
 	public int insertNewTechList(Map<String, Object> techMap) {
 		return dao.insertNewTechList(techMap);
 	}
-
-	// 체크 해제된 techList 삭제
+	// 지식/기술 리스트 전체 삭제
 	@Override
-	public int deleteNewTechList(Map<String, Object> techMap) {
-		return dao.deleteNewTechList(techMap);
+	public int techListDeleteAll(int memberNo) {
+		return dao.techListDeleteAll(memberNo);
 	}
 	
 	
@@ -238,6 +237,8 @@ public class MypageServiceImpl implements MypageService{
 	
 	
 	
+
+
 
 
 

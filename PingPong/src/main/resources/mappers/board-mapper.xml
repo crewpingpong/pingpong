@@ -240,6 +240,26 @@
     	) A
     </insert>
     
+    <insert id="hashInsert" parameterType="list">
+    	INSERT INTO "HASHTAG"
+		SELECT SEQ_HASHTAG_NO.NEXTVAL, A.*
+    	FROM(
+    		<foreach collection="list" item="hash" separator=" UNION ">
+				SELECT #{hash.hashtagName} HASHTAG_NAME 
+				FROM DUAL 
+				WHERE (SELECT COUNT(*) FROM "HASHTAG" WHERE HASHTAG_NAME=#{hash.hashtagName}) = 0
+			</foreach>	
+    	) A
+    </insert>
+    
+    <insert id="hashBoardInsert" parameterType="list">
+    	INSERT INTO "HASHTAG_BOARD"	
+   		<foreach collection="list" item="hash" separator=" UNION ">
+			SELECT #{hash.boardNo} BOARD_NO, (SELECT HASH_NO FROM HASHTAG WHERE HASHTAG_NAME = #{hash.hashtagName})
+			FROM DUAL 
+		</foreach>	
+    </insert>
+    
     <insert id="insertComment" useGeneratedKeys="true" parameterType="Comment">
 	  <selectKey resultType="_int" keyProperty="commentNo" order="BEFORE">
 	    SELECT SEQ_COMMENT_NO.NEXTVAL FROM DUAL
@@ -318,7 +338,7 @@
 		WHERE B.BOARD_DEL_FL = 'N'
 		AND BI.IMG_ORDER = 1
 		ORDER BY LIKE_COUNT DESC
-		FETCH FIRST 10 ROWS ONLY
+		FETCH FIRST 12 ROWS ONLY
 	</select>
 
 	

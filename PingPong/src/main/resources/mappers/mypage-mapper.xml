@@ -140,11 +140,10 @@
 		WHERE MEMBER_NO =  #{memberNo}
 	</select>
 	
-	<!-- 체크 해제된 지식/기술 한개씩 삭제 -->
-	<!-- <delete>
-		DELETE FROM MEMBER_TECH
-		WHERE MEMBER_TECH_NO=0;
-	</delete> -->
+	<delete id="techListDeleteAll">
+		DELETE FROM "MEMBER_TECH"
+		WHERE MEMBER_NO = #{memberNo}
+	</delete>
 	
 	
 	

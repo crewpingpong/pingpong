@@ -149,6 +149,14 @@ public class MypageDAO {
 		return sqlSession.insert("mypageMapper.insertNewTechList", techMap);
 	}
 	
+	/** 지식/기술 삽입 전 전체 삭제
+	 * @param memberNo
+	 * @return
+	 */
+	public int techListDeleteAll(int memberNo) {
+		return sqlSession.delete("mypageMapper.techListDeleteAll", memberNo);
+	}
+	
 	/** 체크 해제된 지식/기술 한개씩 삭제
 	 * @param techMap
 	 * @return
@@ -211,6 +219,8 @@ public class MypageDAO {
 	
 	
 	
+
+
 
 
 
