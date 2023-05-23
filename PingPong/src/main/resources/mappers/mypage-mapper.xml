@@ -132,8 +132,16 @@
 		VALUES(SEQ_TECH_NO.NEXTVAL, #{memberNo}, #{techNo})
 	</insert>
 	
+	<!-- 선택한 techImgList 조회 -->
+	<select id="seletCheckTechImgList" resultMap="tech_rm">
+		SELECT TECH_IMG
+		FROM "MEMBER_TECH"
+		JOIN "TECH" USING (TECH_NO)
+		WHERE MEMBER_NO =  #{memberNo}
+	</select>
+	
 	<!-- 체크 해제된 지식/기술 한개씩 삭제 -->
-<!-- 	<delete>
+	<!-- <delete>
 		DELETE FROM MEMBER_TECH
 		WHERE MEMBER_TECH_NO=0;
 	</delete> -->
