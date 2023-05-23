@@ -210,6 +210,12 @@ public class MypageServiceImpl implements MypageService{
 		return dao.selectSNSList();
 	}
 
+	// 선택한 techImgList 조회
+	@Override
+	public List<Tech> seletCheckTechImgList(int memberNo) {
+		return dao.seletCheckTechImgList(memberNo);
+	}
+
 	
 
 

@@ -108,15 +108,16 @@ ${mypage.memberInfo}
                             <h4 id="certificate">지식 / 기술</h4>
                             <!-- 아이콘 추가 기능 구현 -->
                             <div>
+                                <p>${techImgList}</p>
                                 <c:choose>
-	                                <c:when test="${empty mypage.techList}">
+	                                <c:when test="${empty techImgList}">
 	                                    없음
 	                                </c:when>
 	                            
 	                                <c:otherwise>
-	                                    <c:forEach items="${techList}" var="tech">
+	                                    <c:forEach items="${techImgList}" var="tech">
 	                                        <div>
-	                                            <img src="${tech.techImg}" alt="${tech.techName}">
+	                                            <img src="${techImgList}" alt="">
 	                                        </div>
 	                                    </c:forEach>
 	                                </c:otherwise>
