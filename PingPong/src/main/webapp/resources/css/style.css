@@ -55,13 +55,13 @@ header .alarm_search_box{display: flex; position: relative; height: 40px;}
 header .signBtn button{
     width: 100px; height: 35px; border-radius: 20px;
     color: #fff; font-size: 12px; font-weight: bold; background-color: #FFE69A;
-    position: relative;
+    position: relative; margin-bottom: 0;
 }
 header .signBtn button >p{
     color: #fff; font-size: 12px; font-weight: bold;
     position: absolute; top: 10px; left: 0; bottom: 0; right: 0; margin: auto;
 }
-header .signBtn .colormain2{margin-right: 20px; margin-left: 50px;}
+header .signBtn .colormain2{margin-right: 20px; margin-left: 50px; margin-bottom: 0;}
 header .signBtn{display: flex; align-items: center;}
 .signBtn button:hover{background-color: #FFD24C;}
 
