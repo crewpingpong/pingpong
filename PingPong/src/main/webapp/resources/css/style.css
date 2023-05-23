@@ -51,7 +51,7 @@ header .menu_icon{margin-left: 50px;}
 header .alarm_search_box{margin-right: 50px;}
 header .alarm_icon{margin-right: 20px;}
 
-header .alarm_search_box{display: flex; position: relative;}
+header .alarm_search_box{display: flex; position: relative; height: 40px;}
 header .signBtn button{
     width: 100px; height: 35px; border-radius: 20px;
     color: #fff; font-size: 12px; font-weight: bold; background-color: #FFE69A;

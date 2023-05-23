@@ -69,6 +69,8 @@ public class MypageController {
 		List<Follow> myfollowList = alarmService.myfollowList(follow); // 내가 팔로우 하는 사람들
 		List<Follow> mefollowList = alarmService.mefollowList(follow); // 나를 팔로우 하는 사람들
 		
+		
+		model.addAttribute("memberNo", memberNo);
 		model.addAttribute("mypage", mypage);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("markList", boardMarkList);
