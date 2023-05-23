@@ -59,7 +59,7 @@ header .signBtn button{
 }
 header .signBtn button >p{
     color: #fff; font-size: 12px; font-weight: bold;
-    position: absolute; top: 10px; left: 0; bottom: 0; right: 0; margin: auto;
+    left: 0; bottom: 0; right: 0; margin: auto;
 }
 header .signBtn .colormain2{margin-right: 20px; margin-left: 50px; margin-bottom: 0;}
 header .signBtn{display: flex; align-items: center;}
