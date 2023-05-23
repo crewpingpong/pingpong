@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.member.model.dto.Member;
-import com.pingpong.project.mypage.model.dto.Interest;
+import com.pingpong.project.mypage.model.dto.Interests;
 import com.pingpong.project.mypage.model.dto.MyPage;
 import com.pingpong.project.mypage.model.dto.SNS;
 import com.pingpong.project.mypage.model.dto.Tech;
@@ -137,8 +137,8 @@ public class MypageDAO {
 	/** 선택된 techList 조회
 	 * @return
 	 */
-	public List<Tech> seletCheckTechList(int memberNo) {
-		return sqlSession.selectList("mypageMapper.seletCheckTechList", memberNo);
+	public List<Tech> selectCheckTechList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.selectCheckTechList", memberNo);
 	}
 	
 	/** 선택된 지식/기술 한개씩 삽입
@@ -174,7 +174,7 @@ public class MypageDAO {
 	/** 전체 관심분야 리스트 조회
 	 * @return
 	 */
-	public List<Interest> selectInterestList() {
+	public List<Interests> selectInterestList() {
 		return sqlSession.selectList("mypageMapper.selectInterestList");
 	}
 	
@@ -182,7 +182,7 @@ public class MypageDAO {
 	 * @param memberNo
 	 * @return
 	 */
-	public List<Tech> seletCheckInterestList(int memberNo) {
+	public List<Interests> selectCheckInterestList(int memberNo) {
 		return sqlSession.selectList("mypageMapper.seletCheckInterestList", memberNo);
 	}
 	
@@ -192,6 +192,14 @@ public class MypageDAO {
 	 */
 	public int insertNewInterestList(Map<String, Object> interestMap) {
 		return sqlSession.insert("mypageMapper.insertNewInterestList", interestMap);
+	}
+	
+	/** 체크 해제된 interestList 한개씩 삭제
+	 * @param memberNo
+	 * @return
+	 */
+	public int interestListDeleteAll(int memberNo) {
+		return sqlSession.delete("mypageMapper.interestListDeleteAll", memberNo);
 	}
 	
 	
@@ -211,14 +219,25 @@ public class MypageDAO {
 	 * @param memberNo
 	 * @return
 	 */
-	public List<Tech> seletCheckSNSList(int memberNo) {
+	public List<SNS> seletCheckSNSList(int memberNo) {
 		return sqlSession.selectList("mypageMapper.seletCheckSNSList", memberNo);
 	}
-	
-	
-	
-	
-	
+
+	/** 선택된 SNSList 삽입
+	 * @param snsMap
+	 * @return
+	 */
+	public int insertNewSnsList(Map<String, Object> snsMap) {
+		return sqlSession.insert("mypageMapper.insertNewSnsList", snsMap);
+	}
+
+	/** SNSList 전체 삭제 후 SNSList 삽입 진행
+	 * @param memberNo
+	 * @return
+	 */
+	public int snsListDeleteAll(int memberNo) {
+		return sqlSession.delete("mypageMapper.insertNewSnsList", memberNo);
+	}
 
 
 

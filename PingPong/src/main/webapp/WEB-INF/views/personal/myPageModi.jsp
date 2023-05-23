@@ -94,7 +94,7 @@
 
                         <!-- 관심분야 변경 -->
                         <div class="interest-field-container">
-                        
+${checkInterestList}                        
                             <p>작업 & 관심 분야(선택)</p>
                             <div class="interest-field">
                             	<c:forEach var="interest" items="${interestList}">
@@ -107,7 +107,7 @@
 	                                </c:forEach>
 	                                <div> 
 	                                    <label for="${interest.interestsNo}">
-	                                    	<input type="checkbox" value="${interest.interestsNo}" id="${interest.interestsNo}" name="interest" ${checked} }> ${interest.interestsName}
+	                                    	<input type="checkbox" value="${interest.interestsNo}" id="${interest.interestsNo}" name="interest" ${checked}> ${interest.interestsName}
 	                                    </label>
 	                                </div>
 	                                
@@ -155,6 +155,7 @@
 
                         <!-- 지식 / 기술 -->
                         <div class="tech-field-container">
+${checkTechList}
                             <p>지식 / 기술</p>
                             <div class="tech-field">
                             	<c:forEach var="tech" items="${techList}">
@@ -179,8 +180,31 @@
 
                         <!-- SNS -->
                         <div class="SNS-container">
+${checkSNSList}
                             <p>SNS</p>
                             <div class="SNS-field">
+                            	<c:forEach var="SNS" items="${SNSList}">
+                            		<c:forEach var="chSNS" items="${checkSNSList}">
+	                            	
+	                            		<c:if test="${SNS.snsNo == chSNS.snsNo}">
+	                            			<c:set var="checked" value="checked"/>
+	                            		</c:if>
+		                                
+	                                </c:forEach>
+	                                
+	                                <div>
+	                                    <label for="${SNS.snsNo}">
+	                                    	<input type="checkbox" value="${SNS.snsNo}" id="${SNS.snsNo}" name=SNS ${checked}> ${SNS.snsName}
+	                                    </label>
+	                                    <input type="text" value="www." id="" name="address">
+	                                </div>
+	                                
+	                                <c:remove var="checked"/>
+                            	</c:forEach>
+                            	
+                            
+                            
+                                <!-- 
                                 <div>
                                     <label for="instagram"><input type="checkbox" value="인스타그램" id="instagram" name="SNS"> 인스타그램</label>
                                     <input type="text" value="www." id="" name="address">
@@ -204,7 +228,8 @@
                                 <div>
                                     <label for="blog"><input type="checkbox" value="네이버 블로그" id="blog" name="SNS"> 네이버 블로그</label>
                                     <input type="text" value="www." id="" name="address"> 
-                                </div>
+                                </div> 
+                                -->
                             </div>
                         </div>
 
