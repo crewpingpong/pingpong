@@ -156,6 +156,14 @@ public class MypageDAO {
 		return sqlSession.insert("mypageMapper.insertNewTechList", techMap);
 	}
 	
+	/** 지식/기술 삽입 전 전체 삭제
+	 * @param memberNo
+	 * @return
+	 */
+	public int techListDeleteAll(int memberNo) {
+		return sqlSession.delete("mypageMapper.techListDeleteAll", memberNo);
+	}
+	
 	/** 체크 해제된 지식/기술 한개씩 삭제
 	 * @param techMap
 	 * @return
@@ -187,14 +195,6 @@ public class MypageDAO {
 		return sqlSession.selectOne("mypageMapper.selectTechCount", selectedtechList);
 	}
 
-	/** 선택된 지식기술 리스트 삭제
-	 * @param selectedTech
-	 * @return
-	 */
-	public int deleteTechList(List<String> selectedtechList) {
-		return sqlSession.delete("mypageMapper.deleteTechList", selectedtechList);
-	}
-
 	/** 전체 관심분야 리스트 조회
 	 * @return
 	 */
@@ -217,6 +217,8 @@ public class MypageDAO {
 	public List<Tech> seletCheckTechImgList(int memberNo) {
 		return sqlSession.selectList("mypageMapper.seletCheckTechImgList", memberNo);
 	}
+
+
 
 
 
