@@ -95,6 +95,11 @@ public class MypageController {
 		List<Tech> techList = service.selectTechList();
 		model.addAttribute("techList", techList); 
 		
+		// 선택한 techList 조회
+		List<Tech> checkTechList = service.seletCheckTechList(loginMember.getMemberNo());
+		model.addAttribute("checkTechList", checkTechList);
+		
+		
 		// SNSList 전체 조회
 		List<SNS> SNSList = service.selectSNSList();
 		model.addAttribute("SNSList", SNSList);
@@ -175,14 +180,14 @@ public class MypageController {
 			, @RequestParam(value="tech", required=false) String[] techArray
 			, @RequestParam(value="SNS", required=false) String[] SNSArray
 			, @SessionAttribute("mypage") MyPage mypage
+			, @SessionAttribute("loginMember") Member loginMember
 			, RedirectAttributes ra
 			, HttpSession session) {
 		
+		
+		
 		List<String> selectedtechList = Arrays.asList(techArray);
 		
-		for(String t : selectedtechList) {
-			System.out.println(t);
-		}
 		
 		updateMyPage.setMemberNo(mypage.getMemberNo());
 		
@@ -210,32 +215,42 @@ public class MypageController {
 		}
 		
 		
-		// 지식기술
-		int techYN = service.selectTechCount(selectedtechList);
 		
-		if(techYN != 0) {
+		/* *** 지식/기술 리스트 *** */
+		
+		// 체크된 techList 삽입
+		for(String tech : selectedtechList) {	
 			
-			int techListDeleteResult = service.deleteTechList(selectedtechList);
+			Map<String, Object> techMap = new HashMap<>();
 			
-			if(techListDeleteResult != 0) {
-				
-				for(String tech : selectedtechList) {
-					
-					int techListInsertResult = service.insertTechList(selectedtechList);
-					
-					selectedtechList.add(tech);
-				}
-			}
+			techMap.put("techNo", tech);
+			techMap.put("memberNo", loginMember.getMemberNo());
+			
+			System.out.println(techMap.get("techNo"));
+			
+			int result = service.insertNewTechList(techMap);
+		}
+
+		// 체크 해제된 techList 삭제
+		for(String tech : selectedtechList) {	
+			
+			Map<String, Object> techMap = new HashMap<>();
+			
+			techMap.put("techNo", tech);
+			techMap.put("memberNo", loginMember.getMemberNo());
+			
+			System.out.println(techMap.get("techNo"));
+			
+		
+			int result = service.deleteNewTechList(techMap);
 		}
 		
-		else {
-			
-			int techListInsertResult = service.insertTechList(selectedtechList);
-			
-			for(String tech : selectedtechList) {
-				selectedtechList.add(tech);
-			}
-		}
+		
+		
+		
+		
+		
+		 
 		
        
 		
@@ -246,7 +261,7 @@ public class MypageController {
 		
 		ra.addFlashAttribute("message", message);
 		
-		return "personal/post";
+		return "redirect:/mypage/" + mypage.getMemberNo(); // mypage로 redirect
 	}
 
 	

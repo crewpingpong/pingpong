@@ -130,12 +130,46 @@ public class MypageDAO {
 		return sqlSession.update("mypageMapper.updateProfileInfo", updateMyPage);
 	}
 
+	
+	
+	
+	
 	/** 전체 지식/기술 리스트 조회
 	 * @return
 	 */
 	public List<Tech> selectTechList() {
 		return sqlSession.selectList("mypageMapper.selectTechList");
 	}
+	
+	/** 선택된 techList 조회
+	 * @return
+	 */
+	public List<Tech> seletCheckTechList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.seletCheckTechList", memberNo);
+	}
+	
+	/** 선택된 지식/기술 한개씩 삽입
+	 * @param t
+	 * @return
+	 */
+	public int insertNewTechList(Map<String, Object> techMap) {
+		return sqlSession.insert("mypageMapper.insertNewTechList", techMap);
+	}
+	
+	/** 체크 해제된 지식/기술 한개씩 삭제
+	 * @param techMap
+	 * @return
+	 */
+	public int deleteNewTechList(Map<String, Object> techMap) {
+		return sqlSession.delete("mypageMapper.deleteNewTechList", techMap);
+	}
+
+	
+	
+	
+	
+	
+	
 
 	/** 선택된 지식기술 리스트 삽입
 	 * @param techList
@@ -174,6 +208,11 @@ public class MypageDAO {
 	public List<SNS> selectSNSList() {
 		return sqlSession.selectList("mypageMapper.selectSNSList");
 	}
+
+
+
+
+
 
 
 }

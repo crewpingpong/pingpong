@@ -3,6 +3,7 @@ package com.pingpong.project.mypage.model.service;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -92,24 +93,29 @@ public interface MypageService {
 	 */
 	List<Tech> selectTechList();
 
+	/** 선택된 지식/기술 리스트 조회
+	 * @return
+	 */
+	List<Tech> seletCheckTechList(int memberNo);
 	
-	/** 선택된 지식기술 리스트 삽입
-	 * @param techList
+	/** 선택된 teckList 삽입
+	 * @param selectedtechList
 	 * @return
 	 */
-	int insertTechList(List<String> selectedtechList);
+	int insertNewTechList(Map<String, Object> techMap);
+	
+	/** 체크 해제된 techList 삭제
+	 * @param techMap
+	 * @return
+	 */
+	int deleteNewTechList(Map<String, Object> techMap);
+	
+	
+	
+	
+	
+	
 
-	/** 선택된 지식기술 리스트 조회
-	 * @param techList
-	 * @return
-	 */
-	int selectTechCount(List<String> selectedtechList);
-
-	/** 선택된 지식기술 리스트 삭제
-	 * @param techList
-	 * @return
-	 */
-	int deleteTechList(List<String> selectedtechList);
 
 	/** 전체 관심분야 리스트 조회
 	 * @return
@@ -120,6 +126,14 @@ public interface MypageService {
 	 * @return
 	 */
 	List<SNS> selectSNSList();
+
+
+
+
+
+
+
+
 	
 
 

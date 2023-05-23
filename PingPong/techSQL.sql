@@ -107,14 +107,7 @@ INSERT INTO "pingpong".TECH (TECH_NO, TECH_NAME, TECH_IMG)
 VALUES(19, '큐베이스', '/resources/images/personal/techIcon/certiIcon19_cubase.png');
 INSERT INTO "pingpong".TECH (TECH_NO, TECH_NAME, TECH_IMG)
 VALUES(20, '베가스 ', '/resources/images/personal/techIcon/certiIcon20_vegas.png');
-INSERT INTO "pingpong".TECH (TECH_NO, TECH_NAME, TECH_IMG)
-VALUES(21, 'ios', '/resources/images/personal/techIcon/certiIcon21_ios.png');
-INSERT INTO "pingpong".TECH (TECH_NO, TECH_NAME, TECH_IMG)
-VALUES(22, '안드로이드', '/resources/images/personal/techIcon/certiIcon22_android.png');
-INSERT INTO "pingpong".TECH (TECH_NO, TECH_NAME, TECH_IMG)
-VALUES(23, 'spring', '/resources/images/personal/techIcon/certiIcon23_spring.png');
-INSERT INTO "pingpong".TECH (TECH_NO, TECH_NAME, TECH_IMG)
-VALUES(24, 'tomcat', '/resources/images/personal/techIcon/certiIcon24_tomcat.png');
+
 
 
 ---------------------
@@ -181,7 +174,12 @@ WHERE MEMBER_NO = 50;
 ---------------------
 
 
+SELECT MEMBER_TECH_NO, MEMBER_NO, TECH_NO, TECH_NAME
+FROM "MEMBER_TECH"
+JOIN "TECH" USING (TECH_NO)
+WHERE MEMBER_NO = 50;
 
+COMMIT;
 
 
 ---------------------
@@ -199,9 +197,11 @@ WHERE MEMBER_NO=50;
 INSERT INTO "pingpong".MEMBER_TECH
 (MEMBER_TECH_NO, MEMBER_NO, TECH_NO)
 VALUES(SEQ_TECH_NO.NEXTVAL, 50, 5);
+
 INSERT INTO "pingpong".MEMBER_TECH
 (MEMBER_TECH_NO, MEMBER_NO, TECH_NO)
 VALUES(SEQ_TECH_NO.NEXTVAL, 50, 6);
+
 INSERT INTO "pingpong".MEMBER_TECH
 (MEMBER_TECH_NO, MEMBER_NO, TECH_NO)
 VALUES(SEQ_TECH_NO.NEXTVAL, 50, 7);
@@ -238,3 +238,6 @@ FROM "pingpong"."MEMBER";
 SELECT MEMBER_NO, PROFILE_IMG, BACKGROUND_IMG, MEMBER_INFO, MEMBER_CAREER, MEMBER_TECH, CERTIFICATE_NO, ONE_LINER
 FROM "pingpong".MEMBER_PROFILE;
 
+
+
+SELECT * FROM "TECH";

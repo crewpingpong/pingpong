@@ -10,6 +10,8 @@
 		<result property="memberInfo" column="MEMBER_INFO"/>
 		<result property="memberCareer" column="MEMBER_CAREER"/>
 		<result property="oneLiner" column="ONE_LINER"/>
+		<result property="memberUrl" column="MEMBER_URL"/>
+		<result property="memberCertificate" column="MEMBER_CERTIFICATE"/>
 		
 		<collection property="techList" 
 					select="selectTechList"
@@ -92,7 +94,7 @@
 	
 	<!-- 내 정보 조회하기 -->
 	<select id="selectMemberProfile" resultMap="mypage_rm">
-		SELECT MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, BACKGROUND_IMG, MEMBER_INFO, MEMBER_CAREER, MEMBER_CERTIFICATE, ONE_LINER 
+		SELECT MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, BACKGROUND_IMG, MEMBER_INFO, MEMBER_CAREER, MEMBER_CERTIFICATE, ONE_LINER, MEMBER_URL 
 		FROM "MEMBER_PROFILE"
 		RIGHT JOIN "MEMBER" USING(MEMBER_NO)
 		WHERE MEMBER_NO = #{memberNo}
@@ -108,31 +110,48 @@
 	</update>
 	
 	
+	
+	
+	
 	<!-- 전체 지식기술 조회 -->
 	<select id="selectTechList" resultMap="tech_rm">
-		SELECT MEMBER_TECH_NO, MEMBER_NO, TECH_NO 
-		FROM "MEMBER_TECH"
+		SELECT * FROM "TECH"
 	</select>
 	
-	
-	<!-- 선택된 지식기술 리스트 조회 -->
-	<select id="selectTechCount" resultType="_int">
-		SELECT COUNT(TECH_NO) 
+	<!-- 선택된 지식기술 조회 -->
+	<select id="seletCheckTechList" resultMap="tech_rm">
+		SELECT MEMBER_TECH_NO, MEMBER_NO, TECH_NO, TECH_NAME, TECH_IMG
 		FROM "MEMBER_TECH"
+		JOIN "TECH" USING (TECH_NO)
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
-	<!-- 선택된 지식기술 리스트 삽입 -->
-	<insert id="insertTechList">
-		INSERT INTO "MEMBER_TECH""
+	<!-- 선택된 지식/기술 한개씩 삽입 -->
+	<insert id="insertNewTechList">
+		INSERT INTO "MEMBER_TECH"
 		VALUES(SEQ_TECH_NO.NEXTVAL, #{memberNo}, #{techNo})
 	</insert>
 	
-	<!-- 선택된 지식기술 리스트 삭제 -->
-	<delete id="deleteTechList">
-		DELETE FROM "MEMBER_TECH"
-		WHERE MEMBER_NO=#{memberNo}
+	<!-- 체크 해제된 지식/기술 한개씩 삭제 -->
+	<delete>
+		DELETE FROM MEMBER_TECH
+		WHERE MEMBER_TECH_NO=0;
 	</delete>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	
 	
 	

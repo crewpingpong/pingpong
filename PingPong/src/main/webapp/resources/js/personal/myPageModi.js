@@ -323,21 +323,21 @@ if (updateProfileInfo != null) {
 /* *** 지식/기술 *** */
 /*
 function tech_checkbox(){
-  var flag = false;
+    var flag = false;
 
-  var values = document.querySelector("tech");
+    var values = document.querySelector("tech");
   // alert(values.length);
 
-  var count=0;
+    var count=0;
 
-  for(var i=0; i<values.length; i++){
+    for(var i=0; i<values.length; i++){
     if(values[i].checked){
       // alert(values[i].value);
-      count++;
+        count++;
     }
-  }
+    }
 
-  if(count>6){
+    if(count>6){
     alert("6개까지 선택할 수 있습니다.");
   }
   else{

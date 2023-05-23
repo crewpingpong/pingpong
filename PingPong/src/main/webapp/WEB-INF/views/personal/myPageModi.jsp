@@ -140,16 +140,29 @@
                             	value="${mypage.memberCertificate}" id="memberCertificate">
                         </div>                        
 
+
                         <!-- 지식 / 기술 -->
                         <div class="tech-field-container">
                             <p>지식 / 기술</p>
                             <div class="tech-field">
                             	<c:forEach var="tech" items="${techList}">
+	                            	<c:forEach var="ch" items="${checkTechList}">
+	                            	
+	                            		<c:if test="${tech.techNo == ch.techNo}">
+	                            			<c:set var="checked" value="checked"/>
+	                            		</c:if>
+	                            		
+		                                
+	                                </c:forEach>
+	                                
+	                                
 	                                <div>
 	                                    <label for="${tech.techNo}">
-	                                    	<input type="checkbox" value="${tech.techNo}" id="${tech.techNo}" name="tech"> ${tech.techName}
+	                                    	<input type="checkbox" value="${tech.techNo}" id="${tech.techNo}" name="tech" ${checked}> ${tech.techName}
 	                                    </label>
 	                                </div>
+	                                
+	                                <c:remove var="checked"/>
                                 </c:forEach>
                             </div>
                         </div>
