@@ -498,7 +498,7 @@
     cursor: pointer;
 }
 
-.innerDiv>div{
+.innerDiv>div:last-child{
     float: right;
     margin : 2px;
 }

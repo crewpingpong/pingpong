@@ -283,9 +283,6 @@ ${mypage.memberCareer}
                         <div class="BoardPost">
                             <!-- 게시글 내용 들어가는 곳 -->
                         </div>
-                        <div class="hashPost">
-                            <%-- 해시태그 들어가는 곳 --%>
-                        </div>
                         <div class="Boardcontent1"> <!-- 게시글 내용 + 좋아요 수 -->
                     
                         </div> 
@@ -567,6 +564,9 @@ ${mypage.memberCareer}
                                         <input type="text" placeholder="해시태그를 추가해보세요!" id="hashtag" name="hashtag">
                                         <button type="button" class="cta blue" onclick="addHashtag()">추가</button>
                                         <input type="hidden" name="hashtagLists">
+                                        <ul class="hashList">
+                                            <%-- 해시태그 목록 --%>
+                                        </ul>
                                     </div>
                                     <div class="countBox"><span class="NewWriteTextAreaCount">0</span><span>/2000</span></div>
                                     <div class="hashtagList" id="hashtagList"></div>

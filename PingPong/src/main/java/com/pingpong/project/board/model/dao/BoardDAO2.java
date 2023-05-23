@@ -43,7 +43,5 @@ public class BoardDAO2 {
 	public void hashInsert(List<Hashtag> hashtags) {
 		int result = sqlSession.insert("boardMapper.hashInsert", hashtags);
 		int result1 = sqlSession.insert("boardMapper.hashBoardInsert", hashtags);
-		System.out.println(result);
-		System.out.println(result1);
 	}
 }

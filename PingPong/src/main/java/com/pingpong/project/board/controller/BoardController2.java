@@ -60,9 +60,6 @@ public class BoardController2 {
     		hash.setHashtagName(hashs[i]);
     		hash.setBoardNo(boardNo);
     		hashtags.add(hash);
-    		for(String h : hashs) {
-    			System.out.println(h);
-    		}
     	}
     	
     	service.hashInsert(hashtags);
