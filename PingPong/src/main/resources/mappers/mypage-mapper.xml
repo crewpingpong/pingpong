@@ -150,24 +150,27 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
 	<!-- 전체 관심분야 조회 -->
 	<select id="selectInterestList" resultMap="interest_rm">
 		SELECT INTERESTS_NO, INTERESTS_NAME
 		FROM INTERESTS
 	</select>
+	
+	<!-- 선택한 interestList 조회 -->
+	<select id="seletCheckInterestList" resultMap="interest_rm">
+		SELECT INTERESTS_MEMBER_NO, MEMBER_NO, INTERESTS_NO, INTERESTS_NAME, MEMBER_NO
+		FROM MEMBER_INTERESTS
+		JOIN INTERESTS USING (INTERESTS_NO)
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 체크된 interestList 삽입 -->
+	<insert id="insertNewInterestList">
+		INSERT INTO "MEMBER_INTEREST"
+		VALUES(SEQ_TECH_NO.NEXTVAL, #{memberNo}, #{interestNo})
+	</insert>
+	
+	
 	
 	
 	<!-- 전체 SNS 조회 -->
@@ -175,6 +178,16 @@
 		SELECT SNS_NO, SNS_NAME, SNS_IMG
 		FROM SNS
 	</select>
+
+	<!-- 선택한 SNSList 조회 -->
+	<select id="seletCheckSNSList" resultMap="SNS_rm">
+		SELECT MEMBER_SNS_NO, MEMBER_NO, SNS_NO
+		FROM MEMBER_SNS
+		JOIN SNS USING (SNS_NO)
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	
 	
 	
 

@@ -114,13 +114,6 @@ public class MypageDAO {
 		return sqlSession.selectList("boardMapper.selectBoardLikeList", memberNo);
 	}
 
-	/** 지식기술 조회
-	 * @param memberNo
-	 * @return
-	 */
-//	public List<Member> selectTechList(int memberNo) {
-//		return sqlSession.selectList("mypageMapper.selectTechList", memberNo);
-//	}
 
 	/** 프로필 정보 수정
 	 * @param updateMember
@@ -169,31 +162,6 @@ public class MypageDAO {
 	
 	
 	
-	
-
-	/** 선택된 지식기술 리스트 삽입
-	 * @param techList
-	 * @return
-	 */
-	public int insertTechList(List<String> selectedtechList) {
-		return sqlSession.insert("mypageMapper.insertTechList", selectedtechList);
-	}
-
-	/** 선택된 지식기술 리스트 조회
-	 * @param selectedTech
-	 * @return
-	 */
-	public int selectTechCount(List<String> selectedtechList) {
-		return sqlSession.selectOne("mypageMapper.selectTechCount", selectedtechList);
-	}
-
-	/** 선택된 지식기술 리스트 삭제
-	 * @param selectedTech
-	 * @return
-	 */
-	public int deleteTechList(List<String> selectedtechList) {
-		return sqlSession.delete("mypageMapper.deleteTechList", selectedtechList);
-	}
 
 	/** 전체 관심분야 리스트 조회
 	 * @return
@@ -201,6 +169,28 @@ public class MypageDAO {
 	public List<Interest> selectInterestList() {
 		return sqlSession.selectList("mypageMapper.selectInterestList");
 	}
+	
+	/** 선택한 interestList 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public List<Tech> seletCheckInterestList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.seletCheckInterestList", memberNo);
+	}
+	
+	/** 체크된 interestList 삽입
+	 * @param interestMap
+	 * @return
+	 */
+	public int insertNewInterestList(Map<String, Object> interestMap) {
+		return sqlSession.insert("mypageMapper.insertNewInterestList", interestMap);
+	}
+	
+	
+	
+	
+	
+	
 
 	/** 전체 SNS 리스트 조회
 	 * @return
@@ -208,18 +198,19 @@ public class MypageDAO {
 	public List<SNS> selectSNSList() {
 		return sqlSession.selectList("mypageMapper.selectSNSList");
 	}
-
 	
-	/** 선택한 techImgList 조회
+	/** 선택한 SNSList 조회
 	 * @param memberNo
-	 * @return List
+	 * @return
 	 */
-	public List<Tech> seletCheckTechImgList(int memberNo) {
-		return sqlSession.selectList("mypageMapper.seletCheckTechImgList", memberNo);
+	public List<Tech> seletCheckSNSList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.seletCheckSNSList", memberNo);
 	}
-
-
-
+	
+	
+	
+	
+	
 
 
 

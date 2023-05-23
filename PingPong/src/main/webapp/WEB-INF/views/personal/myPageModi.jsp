@@ -94,17 +94,29 @@
 
                         <!-- 관심분야 변경 -->
                         <div class="interest-field-container">
+                        
                             <p>작업 & 관심 분야(선택)</p>
                             <div class="interest-field">
                             	<c:forEach var="interest" items="${interestList}">
+                            		<c:forEach var="chIn" items="${checkInterestList}">
+	                            	
+	                            		<c:if test="${interest.interestsNo == chIn.interestsNo}">
+	                            			<c:set var="checked" value="checked"/>
+	                            		</c:if>
+		                                
+	                                </c:forEach>
 	                                <div> 
 	                                    <label for="${interest.interestsNo}">
-	                                    	<input type="checkbox" value="${interest.interestsNo}" id="${interest.interestsNo}" name="interest"> ${interest.interestsName}
+	                                    	<input type="checkbox" value="${interest.interestsNo}" id="${interest.interestsNo}" name="interest" ${checked} }> ${interest.interestsName}
 	                                    </label>
 	                                </div>
+	                                
+	                                <c:remove var="checked"/>
                                 </c:forEach> 
                             </div>
                         </div>
+                        
+                        
                     </div>
 
                     <div class="myPage-save">
@@ -151,10 +163,8 @@
 	                            		<c:if test="${tech.techNo == ch.techNo}">
 	                            			<c:set var="checked" value="checked"/>
 	                            		</c:if>
-	                            		
 		                                
 	                                </c:forEach>
-	                                
 	                                
 	                                <div>
 	                                    <label for="${tech.techNo}">

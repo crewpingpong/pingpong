@@ -350,6 +350,51 @@ function tech_checkbox(){
 */
 
 
+// 이미지 URL 목록
+window.onload = function() {
+    var imageUrls = [
+        "/resources/images/personal/techIcon/certiIcon1_phtoshop.png",
+        "/resources/images/personal/techIcon/certiIcon1_phtoshop.png",
+        "/resources/images/personal/techIcon/certiIcon2_illust.png",
+        "/resources/images/personal/techIcon/certiIcon2_illust.png",
+        "/resources/images/personal/techIcon/certiIcon2_illust.png",
+        "/resources/images/personal/techIcon/certiIcon3_xd.png",
+        "/resources/images/personal/techIcon/certiIcon3_xd.png",
+        "/resources/images/personal/techIcon/certiIcon4_primer.png",
+        "/resources/images/personal/techIcon/certiIcon4_primer.png",
+        "/resources/images/personal/techIcon/certiIcon4_primer.png",
+        "/resources/images/personal/techIcon/certiIcon4_primer.png",
+        "/resources/images/personal/techIcon/certiIcon4_primer.png",
+        "/resources/images/personal/techIcon/certiIcon4_primer.png",
+        "/resources/images/personal/techIcon/certiIcon7_c.png",
+        "/resources/images/personal/techIcon/certiIcon7_c.png",
+        "/resources/images/personal/techIcon/certiIcon10_css.png",
+        "/resources/images/personal/techIcon/certiIcon10_css.png",
+        "/resources/images/personal/techIcon/certiIcon10_css.png",
+        "/resources/images/personal/techIcon/certiIcon10_css.png",
+        "/resources/images/personal/techIcon/certiIcon11_js.png",
+        "/resources/images/personal/techIcon/certiIcon11_js.png",
+        "/resources/images/personal/techIcon/certiIcon15_power.png",
+        "/resources/images/personal/techIcon/certiIcon15_power.png",
+        "/resources/images/personal/techIcon/certiIcon15_power.png",
+        "/resources/images/personal/techIcon/certiIcon15_power.png"
+    ];
+
+    var imageContainer = document.querySelector("imageContainer");
+
+    // 이미지 URL들을 순회하며 이미지 생성 및 표시
+    imageUrls.forEach(function(url) {
+        var image = document.createElement("img");
+        image.src = url;
+        imageContainer.appendChild(image);
+    });
+};
+
+
+
+
+
+
 /* ********************************************************************** */
 
 /* *** 비밀번호 변경 제출 시 *** */

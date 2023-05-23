@@ -82,15 +82,8 @@ public class MypageController {
 		model.addAttribute("myfollowList", myfollowList);
 		model.addAttribute("mefollowList", mefollowList);
 		
-		// 선택한 techImgList 조회
-		List<Tech> checkTechImgList = service.seletCheckTechImgList(loginMember.getMemberNo());
-		
-		List<String> techImgList = new ArrayList<>();
-		
-		for (Tech tech : checkTechImgList) {
-		    techImgList.add(tech.getTechImg());
-		}
-		model.addAttribute("techImgList", techImgList);
+
+
 		
 		return "personal/post";
 	}
@@ -100,9 +93,7 @@ public class MypageController {
 	public String myPageModi(@SessionAttribute("loginMember") Member loginMember
 							, Model model) {
 		
-		// interestList 전체 조회
-		List<Interest> interestList = service.selectInterestList();
-		model.addAttribute("interestList", interestList);
+
 		
 		// techList 전체 조회
 		List<Tech> techList = service.selectTechList();
@@ -112,10 +103,37 @@ public class MypageController {
 		List<Tech> checkTechList = service.seletCheckTechList(loginMember.getMemberNo());
 		model.addAttribute("checkTechList", checkTechList);
 		
+//		System.out.println("techList" + techList);
+//		System.out.println("checkTechList" + checkTechList);
+		
+		
+		
+		
+		
+		// interestList 전체 조회
+		List<Interest> interestList = service.selectInterestList();
+		model.addAttribute("interestList", interestList);
+		
+		// 선택한 interestList 조회
+		List<Tech> checkInterestList = service.seletCheckInterestList(loginMember.getMemberNo());
+		model.addAttribute("checkInterestList", checkInterestList);
+		
+//		System.out.println("interestList" + interestList);
+//		System.out.println("checkInterestList" + checkInterestList);
+		
+		
+		
+		
+		
+		
 		
 		// SNSList 전체 조회
 		List<SNS> SNSList = service.selectSNSList();
 		model.addAttribute("SNSList", SNSList);
+		
+		// 선택한 SNSList 조회
+		List<Tech> checkSNSList = service.seletCheckSNSList(loginMember.getMemberNo());
+		model.addAttribute("checkSNSList", checkSNSList);
 		
 		
 		return "personal/myPageModi"; 
@@ -128,13 +146,15 @@ public class MypageController {
 	@PostMapping("/myPageModi")
 	public String updateInfoAndProfile(Member updateMember
 									, @RequestParam(value="profileImage", required=false) MultipartFile profileImage
-									, @RequestParam(value="interest", required=false) String[] interest
+									, @RequestParam(value="interest", required=false) String[] interestArray
 									, @SessionAttribute("loginMember") Member loginMember
 									, @SessionAttribute("mypage") MyPage mypage
 									, RedirectAttributes ra
 									, HttpSession session) throws IllegalStateException, IOException {
 		
 	    updateMember.setMemberNo(loginMember.getMemberNo());
+
+	    List<String> selectedInterestList = Arrays.asList(interestArray);
 
 	    // 닉네임, url 수정
 	    int infoResult = service.updateInfo(updateMember);
@@ -173,12 +193,25 @@ public class MypageController {
 	        }
 	    }
 	    
-	    // 관심분야
-	    if (interest != null) {
-	        for(String i : interest) {
-	            // System.out.println(i);
-	        }
-	    }
+	    
+	    
+	    
+		/* *** 관심분야 *** */
+		// 체크된 interestList 삽입
+		
+		for(String interest : selectedInterestList) {
+		 
+			 Map<String, Object> interestMap = new HashMap<>();
+			 
+			 interestMap.put("interestsNo", interest); 
+			 interestMap.put("memberNo", loginMember.getMemberNo());
+			  
+			 System.out.println(interestMap.get("interestNo"));
+		 
+			 int result = service.insertNewInterestList(interestMap); 
+		 }
+
+		 
 
 	    ra.addFlashAttribute("message", message);
 
@@ -192,6 +225,7 @@ public class MypageController {
 	public String updateProfileInfo(MyPage updateMyPage
 			, @RequestParam(value="tech", required=false) String[] techArray
 			, @RequestParam(value="SNS", required=false) String[] SNSArray
+			
 			, @SessionAttribute("mypage") MyPage mypage
 			, @SessionAttribute("loginMember") Member loginMember
 			, RedirectAttributes ra
@@ -230,7 +264,6 @@ public class MypageController {
 		
 		
 		/* *** 지식/기술 리스트 *** */
-		
 		// 체크된 techList 삽입
 		for(String tech : selectedtechList) {	
 			
@@ -244,33 +277,12 @@ public class MypageController {
 			int result = service.insertNewTechList(techMap);
 		}
 
-		// 체크 해제된 techList 삭제
-		for(String tech : selectedtechList) {	
-			
-			Map<String, Object> techMap = new HashMap<>();
-			
-			techMap.put("techNo", tech);
-			techMap.put("memberNo", loginMember.getMemberNo());
-			
-			System.out.println(techMap.get("techNo"));
-			
-		
-			int result = service.deleteNewTechList(techMap);
-		}
+
 		
 		
-		
-		
-		
-		
-		 
 		
        
-		
-		// SNS 
-//		for(String s : SNS) {
-//			System.out.println(s);
-//		}
+	
 		
 		ra.addFlashAttribute("message", message);
 		

@@ -203,18 +203,45 @@ public class MypageServiceImpl implements MypageService{
 	public List<Interest> selectInterestList() {
 		return dao.selectInterestList();
 	}
+	
+	// 선택한 interestList 조회
+	@Override
+	public List<Tech> seletCheckInterestList(int memberNo) {
+		return dao.seletCheckInterestList(memberNo);
+	}
+	
+	// 체크된 interestList 삽입
+	@Override
+	public int insertNewInterestList(Map<String, Object> interestMap) {
+		return dao.insertNewInterestList(interestMap);
+	}
+	
+	
+	
+	
 
 	// 전체 SNS 리스트 조회
 	@Override
 	public List<SNS> selectSNSList() {
 		return dao.selectSNSList();
 	}
-
-	// 선택한 techImgList 조회
+	
+	// 선택한 SNSList 조회
 	@Override
-	public List<Tech> seletCheckTechImgList(int memberNo) {
-		return dao.seletCheckTechImgList(memberNo);
+	public List<Tech> seletCheckSNSList(int memberNo) {
+		return dao.seletCheckSNSList(memberNo);
 	}
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
 
 	
 

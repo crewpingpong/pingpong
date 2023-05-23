@@ -88,6 +88,9 @@ public interface MypageService {
 	int updateProfileInfo(MyPage updateMyPage);
 
 	
+	
+	
+	
 	/** 전체 지식/기술 리스트 조회
 	 * @return
 	 */
@@ -113,25 +116,47 @@ public interface MypageService {
 	
 	
 	
-	
-	
-
 
 	/** 전체 관심분야 리스트 조회
 	 * @return
 	 */
 	List<Interest> selectInterestList();
+	
+	/** 선택한 interestList 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<Tech> seletCheckInterestList(int memberNo);
+	
+	/** 체크된 interestList 삽입
+	 * @param interestMap
+	 * @return
+	 */
+	int insertNewInterestList(Map<String, Object> interestMap);
+	
+	
+	
+	
 
 	/** 전체 SNS 리스트 조회
 	 * @return
 	 */
 	List<SNS> selectSNSList();
-
-	/** 선택한 techImgList 조회
+	
+	/** 선택한 SNSList 조회
 	 * @param memberNo
 	 * @return
 	 */
-	List<Tech> seletCheckTechImgList(int memberNo);
+	List<Tech> seletCheckSNSList(int memberNo);
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 
