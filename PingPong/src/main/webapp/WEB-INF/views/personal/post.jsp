@@ -57,7 +57,7 @@
                 </div>
 
                 <p class="profileName">${mypage.memberNickname}</p>
-                <p class="profileIntroduce">pingpong.net/${loginMember.memberUrl}</p>
+                <p class="profileIntroduce">pingpong.net/${mypage.memberUrl}</p>
                 <%-- <p class="profileIntroduce">${mypage.oneLiner}</p> --%>
                 <div class="profileBtn">
                     <!-- 팔로워 버튼 --> <!-- c:choose/c:when -->

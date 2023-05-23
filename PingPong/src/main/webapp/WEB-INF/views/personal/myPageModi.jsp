@@ -182,12 +182,12 @@
                                 </c:forEach>
 
                             
-	                                    <!-- 
-	                                    <label for="Ai"><input type="checkbox" value="일러스트" id="Ai" name="tech"> 일러스트</label> 
-	                                    <label for="Xd"><input type="checkbox" value="인디자인" id="Xd" name="tech"> 인디자인</label> 
-	                                    <label for="Pr"><input type="checkbox" value="그래픽 디자인" id="Pr" name="tech"> 그래픽 디자인</label>
-	                                    <label for="java"><input type="checkbox" value="자바" id="java" name="tech"> 자바</label>  
-	                                    -->
+                                <!-- 
+                                <label for="Ai"><input type="checkbox" value="일러스트" id="Ai" name="tech"> 일러스트</label> 
+                                <label for="Xd"><input type="checkbox" value="인디자인" id="Xd" name="tech"> 인디자인</label> 
+                                <label for="Pr"><input type="checkbox" value="그래픽 디자인" id="Pr" name="tech"> 그래픽 디자인</label>
+                                <label for="java"><input type="checkbox" value="자바" id="java" name="tech"> 자바</label>  
+                                -->
                                 <!-- 
                                 <div>
                                     <label for="python"><input type="checkbox" value="파이썬" id="python" name="tech"> 파이썬</label> 

@@ -22,6 +22,13 @@ public class MainDAO {
 		return sqlSession.selectList("boardMapper.selectBoardAll");
 	}
 	
+	/** 슬라이드에 넣어줄 게시글 가져오기 (좋아요 많은 순)
+	 * @return
+	 */
+	public List<Board> selectMainList() {
+		return sqlSession.selectList("boardMapper.selectMainList");
+	}
 	
 	
 }
+
