@@ -31,6 +31,18 @@
 		<result property="techImg" column="TECH_IMG"/>	
 		<result property="memberNo" column="MEMBER_NO"/>	
 	</resultMap>
+	
+	<resultMap type="Interest" id="interest_rm">
+		<id property="interestsNo" column="INTERESTS_NO"/>
+		<result property="interestsName" column="INTERESTS_NAME"/>
+	</resultMap>
+	
+	<resultMap type="SNS" id="SNS_rm">
+		<id property="snsNo" column="SNS_NO"/>
+		<result property="snsName" column="SNS_NAME"/>
+		<result property="snsImg" column="SNS_IMG"/>	
+		<result property="memberNo" column="MEMBER_NO"/>
+	</resultMap>
 
 
 	<!-- 회원 정보 수정 -->
@@ -98,55 +110,65 @@
 	</update>
 	
 	
+	
+	
+	
 	<!-- 전체 지식기술 조회 -->
 	<select id="selectTechList" resultMap="tech_rm">
-		SELECT MEMBER_TECH_NO, MEMBER_NO, TECH_NO 
-		FROM "MEMBER_TECH"
+		SELECT * FROM "TECH"
 	</select>
 	
-	
-	<!-- 선택된 지식기술 리스트 조회 -->
-	<select id="selectTechCount" resultMap="tech_rm">
-		SELECT COUNT(TECH_NO) 
+	<!-- 선택된 지식기술 조회 -->
+	<select id="seletCheckTechList" resultMap="tech_rm">
+		SELECT MEMBER_TECH_NO, MEMBER_NO, TECH_NO, TECH_NAME, TECH_IMG
 		FROM "MEMBER_TECH"
+		JOIN "TECH" USING (TECH_NO)
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
-	<!-- 선택된 지식기술 리스트 삽입 -->
-	<insert id="insertTechList">
-		INSERT INTO "MEMBER_TECH""
+	<!-- 선택된 지식/기술 한개씩 삽입 -->
+	<insert id="insertNewTechList">
+		INSERT INTO "MEMBER_TECH"
 		VALUES(SEQ_TECH_NO.NEXTVAL, #{memberNo}, #{techNo})
 	</insert>
 	
-	<!-- 선택된 지식기술 리스트 삭제 -->
-	<delete id="deleteTechList">
-		DELETE FROM "MEMBER_TECH"
-		WHERE MEMBER_NO=#{memberNo}
+	<!-- 체크 해제된 지식/기술 한개씩 삭제 -->
+	<delete>
+		DELETE FROM MEMBER_TECH
+		WHERE MEMBER_TECH_NO=0;
 	</delete>
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!--  -->
-	<select id="selectCareerList">
-		SELECT CERTIFICATE_NO, MEMBER_CERT
-		FROM "CAREER"
-		WHERE CERTIFICATE_NO IN (SELECT CERTIFICATE_NO FROM "MEMBER_PROFILE"
-					WHERE MEMBER_NO = #{memberNo})	
+	
+	
+	
+	<!-- 전체 관심분야 조회 -->
+	<select id="selectInterestList" resultMap="interest_rm">
+		SELECT INTERESTS_NO, INTERESTS_NAME
+		FROM INTERESTS
 	</select>
+	
+	
+	<!-- 전체 SNS 조회 -->
+	<select id="selectSNSList" resultMap="SNS_rm">
+		SELECT SNS_NO, SNS_NAME, SNS_IMG
+		FROM SNS
+	</select>
+	
+	
+
+
 </mapper>

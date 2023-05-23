@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.member.model.dto.Member;
+import com.pingpong.project.mypage.model.dto.Interest;
 import com.pingpong.project.mypage.model.dto.MyPage;
+import com.pingpong.project.mypage.model.dto.SNS;
 import com.pingpong.project.mypage.model.dto.Tech;
 
 @Repository
@@ -128,12 +130,46 @@ public class MypageDAO {
 		return sqlSession.update("mypageMapper.updateProfileInfo", updateMyPage);
 	}
 
-	/** 지식/기술 리스트 조회
+	
+	
+	
+	
+	/** 전체 지식/기술 리스트 조회
 	 * @return
 	 */
 	public List<Tech> selectTechList() {
 		return sqlSession.selectList("mypageMapper.selectTechList");
 	}
+	
+	/** 선택된 techList 조회
+	 * @return
+	 */
+	public List<Tech> seletCheckTechList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.seletCheckTechList", memberNo);
+	}
+	
+	/** 선택된 지식/기술 한개씩 삽입
+	 * @param t
+	 * @return
+	 */
+	public int insertNewTechList(Map<String, Object> techMap) {
+		return sqlSession.insert("mypageMapper.insertNewTechList", techMap);
+	}
+	
+	/** 체크 해제된 지식/기술 한개씩 삭제
+	 * @param techMap
+	 * @return
+	 */
+	public int deleteNewTechList(Map<String, Object> techMap) {
+		return sqlSession.delete("mypageMapper.deleteNewTechList", techMap);
+	}
+
+	
+	
+	
+	
+	
+	
 
 	/** 선택된 지식기술 리스트 삽입
 	 * @param techList
@@ -158,6 +194,25 @@ public class MypageDAO {
 	public int deleteTechList(List<String> selectedtechList) {
 		return sqlSession.delete("mypageMapper.deleteTechList", selectedtechList);
 	}
+
+	/** 전체 관심분야 리스트 조회
+	 * @return
+	 */
+	public List<Interest> selectInterestList() {
+		return sqlSession.selectList("mypageMapper.selectInterestList");
+	}
+
+	/** 전체 SNS 리스트 조회
+	 * @return
+	 */
+	public List<SNS> selectSNSList() {
+		return sqlSession.selectList("mypageMapper.selectSNSList");
+	}
+
+
+
+
+
 
 
 }
