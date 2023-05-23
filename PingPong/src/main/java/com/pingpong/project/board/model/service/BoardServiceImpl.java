@@ -22,7 +22,6 @@ public class BoardServiceImpl implements BoardService{
 	// 게시글 상세 조회 (AJAX)
 	@Override
 	public Board select(int boardNo) {
-		System.out.println("여기는?");
 		return dao.select(boardNo);
 	}
 	
