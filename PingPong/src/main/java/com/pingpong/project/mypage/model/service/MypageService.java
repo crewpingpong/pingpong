@@ -104,11 +104,11 @@ public interface MypageService {
 	 */
 	int insertNewTechList(Map<String, Object> techMap);
 	
-	/** 체크 해제된 techList 삭제
-	 * @param techMap
+	/** teckList 전체 삭제 후 teckList 삽입 진행
+	 * @param memberNo
 	 * @return
 	 */
-	int deleteNewTechList(Map<String, Object> techMap);
+	int techListDeleteAll(int memberNo);
 	
 	
 	
@@ -132,6 +132,8 @@ public interface MypageService {
 	 * @return
 	 */
 	List<Tech> seletCheckTechImgList(int memberNo);
+
+
 
 
 
