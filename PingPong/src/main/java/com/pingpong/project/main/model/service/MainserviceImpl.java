@@ -19,6 +19,14 @@ public class MainserviceImpl implements MainService{
 	public List<Board> selectBoardAll() {
 		return dao.selectBoardAll();
 	}
+
+	// 슬라이드에 넣어줄 게시글 가져오기 (좋아요 많은 순)
+	@Override
+	public List<Board> selectMainList() {
+		return dao.selectMainList();
+	}
+	
+	
 	
 	
 }
