@@ -75,13 +75,18 @@
                 <div class="admin-left-side-menu">
                     <div>1:1 문의</div>
                     <div>
-                        <select name="select" id="">
-                            <option value="memberNo">ID</option>
-                            <option value="memberNo">NickName</option>
-                            <option value="memberNo">Email</option>
-                        </select>
-                        <input type="text">
-                        <button type="button">검색</button>
+            <form action="/manager/1To1inquiry" method="get" id="boardSearch">
+
+                    <select name="key" id="searchKey">
+                        <option value="i">ID</option>
+                        <option value="c">내용</option>
+                        <option value="e">EMAIL</option>
+                    </select>
+
+                    <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+                    <button>검색</button>
+            </form>
                     </div>
                     <div>
                         <table id="oneToOneTable">
@@ -120,7 +125,7 @@
                                             </td>
                                             <td>${Inquiry.inquiryNo}</td>
                                             <td>
-                                                <a href="/personalHome.html">${Inquiry.memberUrl}</a>
+                                                <a href="/mypage/${Inquiry.memberNo}">${Inquiry.memberUrl}</a>
                                             </td>
                                             <td><a href="/manager1To1Content.html">${Inquiry.inquiryContent}</a></td>
                                             <td>${Inquiry.memberEmail}</td>
