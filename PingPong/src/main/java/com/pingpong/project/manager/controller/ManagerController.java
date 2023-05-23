@@ -162,10 +162,21 @@ public class ManagerController {
 	public String managerComment(
 			Model model
 			,@RequestParam(value="cp", required=false, defaultValue="1") int cp
+			, @RequestParam Map<String, Object> paramMap
 			) {
+		if(paramMap.get("key") == null) {
+		
 		Map<String, Object> CommentList = service.selectCommentList(cp);
 		
 		model.addAttribute("CommentList",CommentList);
+		
+		}else {
+			
+		Map<String, Object> CommentList = service.selectCommentList(paramMap, cp);
+		
+		model.addAttribute("CommentList",CommentList);
+		
+		}
 		
 		return "manager/managerComment";
 	}
@@ -203,12 +214,22 @@ public class ManagerController {
 	public String manager1To1inquiry(
 			Model model
 			,@RequestParam(value="cp", required=false, defaultValue="1") int cp
+			, @RequestParam Map<String, Object> paramMap
 			) {
 		
-		Map<String, Object> InquiryList = service.selectInquiryList(cp);
+		if(paramMap.get("key") == null) {
 		
-		model.addAttribute("InquiryList",InquiryList);
+			Map<String, Object> InquiryList = service.selectInquiryList(cp);
 		
+			model.addAttribute("InquiryList",InquiryList);
+		
+		}else {
+			
+			Map<String, Object> InquiryList = service.selectInquiryList(paramMap, cp);
+			
+			model.addAttribute("InquiryList",InquiryList);
+			
+		}
 		
 		return "manager/manager1To1Inquiry";
 	}

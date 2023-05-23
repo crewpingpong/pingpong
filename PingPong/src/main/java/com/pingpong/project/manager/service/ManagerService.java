@@ -103,5 +103,19 @@ public interface ManagerService {
 	 */
 	Map<String, Object> selectBoardList(Map<String, Object> paramMap, int cp);
 
+	/** 검색된 댓글 목록 조회
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectCommentList(Map<String, Object> paramMap, int cp);
+
+	/** 검색된 1:1 문의 목록 조회
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> selectInquiryList(Map<String, Object> paramMap, int cp);
+
 	
 }
