@@ -86,14 +86,20 @@ public class MemberController {
 	}
 	// 비밀번호 인증키 이동
 	@GetMapping("/pwSearchCertNum")
-	public String pwSearchCertNum() {
-
+	public String pwSearchCertNum(Model model) {
+		
+		if(model.getAttribute("passPwSearch") == null) {
+			return "common/error";
+		}
+		
 		return "member/pwSearchCertNum";
 	}
 	// 비밀번호 변경 이동
 	@GetMapping("/pwReset")
-	public String pwReset() {
-
+	public String pwReset(Model model) {
+		if(model.getAttribute("pwSearchCertNum") == null) {
+			return "common/error";
+		}
 		return "member/pwReset";
 	}
 
@@ -106,8 +112,11 @@ public class MemberController {
 
 	// 회원 가입 두번째 페이지로 이동
 	@GetMapping("/signupInfo")
-	public String signupInfo() {
-
+	public String signupInfo(Model model) {
+		if(model.getAttribute("passSignup") == null) {
+			return "common/error";
+		}
+		
 		return "member/signupInfo";
 	}
 	
@@ -116,8 +125,8 @@ public class MemberController {
 	public String pwSearch(@RequestParam("memberEmail") String memberEmail,
 			HttpSession session,
 			RedirectAttributes ra,
-			Model Model) {
-		
+			Model model) {
+		model.addAttribute("passPwSearch","passPwSearch");
 		int result = service.emailSearch(memberEmail);
 		
 		String path = "member/";
@@ -136,8 +145,8 @@ public class MemberController {
 	// 비번변경 인증키 검사
 	@PostMapping("/pwSearchCertNum")
 	public String pwSearchCertNum(HttpSession session, RedirectAttributes ra
-			, @RequestParam("checkCertNum") boolean checkCertNum) {
-		
+			, @RequestParam("checkCertNum") boolean checkCertNum, Model model) {
+		model.addAttribute("pwSearchCertNum","pwSearchCertNum");
 		String message;
 		
 		String path = "member/";
@@ -182,8 +191,9 @@ public class MemberController {
 	// 회원 가입 진행 1페이지
 	@PostMapping("/signup")
 	public String signup(@RequestParam("memberEmail") String memberEmail, @RequestParam("memberPw") String memberPw,
-			HttpSession session, Member inputMember) {
+			HttpSession session, Member inputMember, Model model) {
 		
+		model.addAttribute("passSignup","passSignup");
 		session.setAttribute("memberEmail", memberEmail);
 		session.setAttribute("memberPw", memberPw);
 
@@ -192,7 +202,15 @@ public class MemberController {
 	// 회원 가입 진행 2페이지
 	@PostMapping("/signupInfo")
 	public String signupInfo(
-			HttpSession session, RedirectAttributes ra, Member inputMember) {
+			HttpSession session, RedirectAttributes ra, Member inputMember, Model model) {
+		// 가입 성공 여부에 따라 주소 변경
+		String path = "redirect:";
+		String message = null;
+		model.addAttribute("passSignup","passSignup");
+		
+		if(model.getAttribute("passSignup") == null) {
+			return "common/error";
+		}
 		
 		String memberEmail = (String) session.getAttribute("memberEmail");
 		String memberPw = (String) session.getAttribute("memberPw");
@@ -201,14 +219,11 @@ public class MemberController {
 		inputMember.setMemberPw(memberPw);
 		
 
-		// 가입 성공 여부에 따라 주소 변경
-		String path = "redirect:";
-		String message = null;
-
+		
 		// 회원 가입 서비스 호출
 		// DB에 DML 수행 시 성공 행의 개수 (int형) 반환
 		int result = service.signupInfo(inputMember);
-
+		
 		if (result > 0) {
 			path += "/member/login"; // 메인페이지
 			

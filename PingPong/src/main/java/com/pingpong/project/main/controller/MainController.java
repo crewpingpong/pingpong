@@ -22,8 +22,12 @@ public class MainController {
       
 	  // 화면에 넣어줄 게시글 가져오기 (최신순)
 	  List<Board> boardList = service.selectBoardAll(); 
+	  
+	  // 슬라이드에 넣어줄 게시글 가져오기 (좋아요 많은 순)
+	  List<Board> boardMainList = service.selectMainList(); 
       
 	  model.addAttribute("boardList", boardList);
+	  model.addAttribute("boardMainList", boardMainList);
 	  
       return "common/index";
    }

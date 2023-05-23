@@ -13,5 +13,6 @@ public class Inquiry {
 	private String memberUrl;
 	private String inquiryContent;
 	private String memberEmail;
+	private int memberNo;
 	
 }

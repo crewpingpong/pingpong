@@ -103,3 +103,39 @@ arrowLeftBtn.addEventListener("click",()=>{
   --pageActiveIdx;
   displayPage(pageActiveIdx);
 });  // https://www.youtube.com/watch?v=drXZCq3Y9d8&list=PL-qMANrofLyvzqz2yYzNectJnYo5ZifE7&index=74&ab_channel=Rock%27sEasyweb
+
+//검색
+
+const boardSearch = document.querySelector("#boardSearch");
+const searchKey = document.querySelector("#searchKey");
+const searchQuery = document.querySelector("#searchQuery");
+
+const options = document.querySelectorAll("#searchKey > option");
+
+(()=>{
+  const params = new URL(location.href).searchParams;
+
+  const key = params.get("key"); // i,n,e 중 하나
+  const query = params.get("query"); // 검색어
+
+  if(key != null){ 
+      searchQuery.value = query; 
+      for(let op of options){
+          if(op.value == key){
+              op.selected = true;
+          }
+      }
+  }
+
+})();
+
+boardSearch.addEventListener("submit", e => {
+
+  if(searchQuery.value.trim().length == 0){ 
+      e.preventDefault(); 
+
+      location.href = location.pathname; 
+
+  }
+
+});

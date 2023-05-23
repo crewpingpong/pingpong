@@ -9,61 +9,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PingPong</title>
-    <%-- <!-- 공통 헤더 css -->
-    <link rel="stylesheet" href="/resources/css/style.css">
-     --%>
+
     <!-- 파비콘 -->
 	<link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
 	
     <!-- 제이쿼리 -->
     <script src="/resources/js/jquery.js"></script>
-
     <!-- 슬라이더 css / js -->
     <link rel="stylesheet" href="/resources/css/main/mainSlide.css">
     <script src="/resources/js/main/slick.js"></script>
 
-    <style>
-        #btn11{ /* 임시 관리자 페이지 버튼 입니다.*/
-            position: absolute; width: 100px; height: 40px; background-color: #5286DC; top: 200px; left: 100px; border-radius: 20px; color: #fff;
-        }
-    </style>
+    <%-- owl 슬라이드 --%>
+    <link rel="stylesheet" href="/resources/css/main/docs.theme.min.css">
+
+    <link rel="stylesheet" href="/resources/css/main/owl.carousel.min.css">
+    <link rel="stylesheet" href="/resources/css/main/owl.theme.default.min.css">
+
+    <script src="/resources/js/main/jquery.min.js"></script>
+    <script src="/resources/js/main/owl.carousel.js"></script>
+    <%-- <link rel="stylesheet" href="/resources/css/style.css"> --%>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <!-- 메인 슬라이드 -->
-    <button id="btn11" onclick="location.href='/manager/'">관리자 페이지</button>
     <main>
-        <div class="slider center autoplay">
-            <div class="slider-item">
-                <a href="/mypage/" class="slider-item-link">
-                    <img src="/resources/images/peach.jpg" class="item-picture textImg">
-                </a>
+        <!-- title -->
+        <section class="title">
+        <div class="row">
+            <div class="large-12 columns">
+            <h1>Responsive</h1>
             </div>
-            <div class="slider-item">
-                <a href="/mypage/" class="slider-item-link">
-                    <img src="/resources/images/peach.jpg" class="item-picture textImgtextImg">
-                </a>
+        </div>
+        </section>
+
+        <section id="demos">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="owl-carousel owl-theme">
+                        <c:forEach items="${boardMainList}" var="boardMain">
+                            <div class="item">
+                                <a href="/mypage/${boardMain.memberNo}?boardNo=${boardMain.boardNo}" class="slider-item-link">
+                                <img src="${boardMain.thumbnail}" class="item-picture textImg">
+                                </a>
+                            </div>
+                        </c:forEach>
+                        <%-- <div class="item">
+                            <h4>2</h4>
+                        </div>
+                        <div class="item">
+                            <h4>3</h4>
+                        </div>
+                        <div class="item">
+                            <h4>4</h4>
+                        </div> --%>
+                    </div>
+                </div>
             </div>
-            <div class="slider-item">
-                <a href="/mypage/" class="slider-item-link">
-                    <img src="/resources/images/peach.jpg" class="item-picture textImg">
-                </a>
-            </div>
-            <div class="slider-item">
-                <a href="/mypage/" class="slider-item-link">
-                    <img src="/resources/images/peach.jpg" class="item-picture textImg">
-                </a>
-            </div>
-            <%-- <div class="slider-item">
-                <a href="/mypage/" class="slider-item-link">
-                    <img src="/resources/images/peach.jpg" class="item-picture textImg">
-                </a>
-            </div> --%>
-            <%-- <div class="slider-item">
-                <a href="/mypage/" class="slider-item-link">
-                    <img src="/resources/images/peach.jpg" class="item-picture textImg">
-                </a>
-            </div> --%>
+        </section>
+
+        <%-- <div class="slider center autoplay">
+            <c:forEach items="${boardMainList}" var="boardMain">            
+                <div class="slider-item">
+                    <a href="/mypage/${boardMain.memberNo}?boardNo=${boardMain.boardNo}" class="slider-item-link">
+                        <img src="${boardMain.thumbnail}" class="item-picture textImg">
+                    </a>
+                </div>
+            </c:forEach>
         </div>
         <button class="custom-slick-prev slick-arrow"aria-label="Previous" style>
             <svg width="50" height="50" viewBox="0 0 51 50" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +87,7 @@
                 <circle cx="25.5" cy="25" r="25" fill="white" fill-opacity="0.8"/>
                 <path d="M21.3324 39.583C20.8456 39.584 20.3739 39.4145 19.9991 39.1039C19.7881 38.929 19.6138 38.7142 19.4859 38.4718C19.3581 38.2294 19.2794 37.9642 19.2542 37.6913C19.2291 37.4185 19.258 37.1433 19.3393 36.8816C19.4207 36.62 19.5528 36.3769 19.7283 36.1664L29.0616 24.9997L20.0616 13.8122C19.8885 13.5991 19.7593 13.3539 19.6813 13.0907C19.6033 12.8275 19.5781 12.5515 19.6072 12.2785C19.6362 12.0055 19.7189 11.741 19.8505 11.5001C19.9821 11.2592 20.1601 11.0466 20.3741 10.8747C20.5896 10.6851 20.8421 10.542 21.1155 10.4545C21.389 10.367 21.6776 10.337 21.9632 10.3664C22.2488 10.3957 22.5253 10.4838 22.7752 10.625C23.0252 10.7663 23.2433 10.9577 23.4158 11.1872L33.4783 23.6872C33.7847 24.06 33.9522 24.5276 33.9522 25.0101C33.9522 25.4927 33.7847 25.9603 33.4783 26.333L23.0616 38.833C22.8526 39.0852 22.5871 39.2845 22.2867 39.4148C21.9862 39.5451 21.6593 39.6027 21.3324 39.583Z" fill="#231F20"/>
             </svg>
-        </button>
+        </button> --%>
     </main>
 
     <div class="profileContent">
@@ -110,27 +121,34 @@
     </div>
 
 
-    <!-- 게시글 (무한 스크롤) -->
-<%--
-    <article class="main-post">
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-        <div class="main-post-item"><a href="#"></a></div>
-    </article>
---%>
+
+    
+    <script>
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                nav: true
+                },
+                600: {
+                    items: 3,
+                nav: false
+                },
+                1000: {
+                    items: 5,
+                nav: true,
+                loop: false,
+                margin: 20
+                }
+            }
+            })
+        })
+    </script>
+
     <script src="/resources/js/script.js"></script>
 
     <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"/> --%>

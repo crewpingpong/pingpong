@@ -74,13 +74,18 @@
                 <div class="admin-left-side-menu">
                     <div>댓글 관리</div>
                     <div>
-                        <select name="select" id="">
-                            <option value="memberNo">ID</option>
-                            <option value="memberNo">게시글 번호</option>
-                            <option value="memberNo">댓글 내용</option>
-                        </select>
-                        <input type="text">
-                        <button type="button">검색</button>
+            <form action="/manager/Comment" method="get" id="boardSearch"><%-- 게시글 관리 내 검색 --%>
+
+                    <select name="key" id="searchKey">
+                        <option value="n">게시글 번호</option>
+                        <option value="c">댓글 내용</option>
+                        <option value="i">ID</option>
+                    </select>
+
+                    <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+                    <button>검색</button>
+            </form>
                     </div>
                     <div>
                         <button id="DelBtn">삭제처리</button>
@@ -126,7 +131,7 @@
                                                 <td>${Comment.boardNo}</td>
                                                 <td><a href="/manager1To1Content.html">${Comment.commentContent}</a></td>
                                                 <td>
-                                                    <a href="/personalHome.html">${Comment.memberUrl}</a>
+                                                    <a href="/mypage/${Comment.memberNo}">${Comment.memberUrl}</a>
                                                 </td>
                                                 <td>${Comment.commentDelFl}</td>
                                             </tr>

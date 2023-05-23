@@ -3,7 +3,6 @@
 const preview = document.getElementsByClassName("preview");  // img 태그
 const background = document.getElementById("background");  // file
 const deleteBackground = document.getElementById("deleteBackground"); // 돌아가기
-
 const selectBackground = document.getElementById("selectBackground");
 const afterChoice = document.getElementById("afterChoice");
 let secondComment;
@@ -246,7 +245,7 @@ const BoardHeart = document.querySelector(".BoardHeart");
 const BoardRedHeart = document.querySelector(".BoardRedHeart");
 const markOn = document.querySelector(".markOn");
 const markOff = document.querySelector(".markOff");
-
+let arr = [];
 let boardNumber;
 let boardMember;
 function selectBoardList(boardNo){
@@ -320,7 +319,7 @@ function selectBoardList(boardNo){
             prevBtn.before(slideDiv);
         }
 
-        let arr = [];
+        
 
         for(let i=0; i<board.commentList.length;i++){
             if(board.commentList[i].parentNo == 0){
@@ -343,6 +342,8 @@ function selectBoardList(boardNo){
 
                 const div = document.createElement("div");
                 div.classList.add("commentbox");
+                div.classList.add("parentNo"+board.commentList[i].commentNo);
+
 
                 const innerDiv = document.createElement("div");
                 innerDiv.classList.add("innerDiv");
@@ -437,11 +438,13 @@ function selectBoardList(boardNo){
                 const lastDiv = document.createElement("div");
                 lastDiv.classList.add("lastDivadd")
                 lastDiv.append(boardPostDiv, div);
+                if(board.commentList[i].memberNo == loginMemberNo){
                     let item = 
                         `<div class="deleteComment">
                             <button type="button" onclick="removeComment(event, ${board.commentList[i].commentNo})">×</button>
                         </div>`;
                     lastDiv.insertAdjacentHTML("beforeend", item);
+                }
                 postContentDiv.append(lastDiv);
                 Boardcontent1.append(postContentDiv);
             }
@@ -456,15 +459,16 @@ function selectBoardList(boardNo){
 
         // 답글 보기 누르면 댓댓글 보이는 이벤트
         const secondComment = document.querySelectorAll(".secondComment");
+        
         for(let i=0;i<secondComment.length;i++){
             secondComment[i].addEventListener("click", e=>{
                 let siblings = getSiblings(e.target);
-                
                 for(let j=0;j<siblings.length;j++){
                     siblings[j].classList.toggle("postcontent2");
                 }
             });
         }
+        
 
         // 답글 달기 누르면 댓글textarea에 @아이디 추가됨
         const replyCommentInsert = document.querySelectorAll(".replyCommentInsert");
@@ -667,10 +671,10 @@ function removeChildComment(event, commentNo) {
     .then(result=>{
         if(result>0){
             // selectBoardList(boardNumber)
-            let a = event.target.parentNode.parentNode.parentNode.parentNode.querySelector(".secondComment").innerText;
+            let a = event.target.parentNode.parentNode.parentNode.parentNode.querySelector(".secondComment").innerText;  // 버튼의 부모의 부모의 부모의 부모의 답글 보기
             console.log(a);
             if(Number(a.match(/\d+/)[0]) == 1){
-                event.target.parentNode.parentNode.parentNode.parentNode.querySelector(".secondComment").style.display = 'none';
+                event.target.parentNode.parentNode.parentNode.parentNode.querySelector(".secondComment").remove();
 
             } else {
 
@@ -678,7 +682,7 @@ function removeChildComment(event, commentNo) {
             }
 
 
-            event.target.parentNode.parentNode.parentNode.innerHTML = '';
+            event.target.parentNode.parentNode.parentNode.remove();
             
         }
     })
@@ -705,12 +709,12 @@ insertComment.addEventListener("click", e=>{
     if(commentContentArea.value[0] == "@"){
         const parentNickname = commentContentArea.value.split(" ")[0].substring(1);
         const commentContent = commentContentArea.value.split(" ").slice(1).join(' ');
+        const parentNo2 = document.querySelector(".co")
         data = {"commentContent" : commentContent, "memberNo" : loginMemberNo, "boardNo" : boardNumber, "parentNo" : commentParentNo};
     } else{
         data = {"commentContent" : commentContentArea.value, "memberNo" : loginMemberNo, "boardNo" : boardNumber, "parentNo" : 0};
     }
     
-    console.log(data);
     commentContentArea.value ='';
     commentContentArea.focus();
 
@@ -721,134 +725,163 @@ insertComment.addEventListener("click", e=>{
     })
     .then(resp => resp.json())
     .then(comment => {
-        console.log(comment);
         if(comment.commentNo > 0){
             sendComment(comment.boardNo);
             if(comment.parentNo == 0){
-                
-                const postContentDiv = document.createElement("div");
+                arr.push(comment.commentNo);
+                const postContentDiv = document.createElement("div");  // 댓글 감싸는 div
                 postContentDiv.classList.add("postcontent1");
+                const lastDiv = document.createElement("div");      // 한번더 댓글 감싸는 div
+                lastDiv.classList.add("lastDivadd");
 
-                const boardPostDiv = document.createElement("div");
+
+                // --------------------------- 부모댓글 프로필 이미지 담기 -----------------------------
+                const boardPostDiv = document.createElement("div");  // 프로필 사진 div
                 boardPostDiv.classList.add("BoardPost1");
-
-                const boardProfileA = document.createElement("a");
+                const boardProfileA = document.createElement("a");  // 프로필 사진 a태그
                 boardProfileA.href = "/mypage/"+comment.memberNo;
-                boardProfileA.classList.add("Boardprofile1");
-                const profileImg = document.createElement("img");
+                boardProfileA.classList.add("Boardprofile1");       
+                const profileImg = document.createElement("img");   // 프로필 이미지 img태그
                 profileImg.src = comment.profileImg;
-                boardProfileA.append(profileImg);
-                boardPostDiv.append(boardProfileA);
+                boardProfileA.append(profileImg);                   
+                boardPostDiv.append(boardProfileA);                 // div에 담기
+                // -------------------------------------------------------------------------------------
 
 
-                const div = document.createElement("div");
+
+                // ---------------------------- 부모댓글 구성들 담기 -----------------------------------
+                const div = document.createElement("div");          // 댓글 글부분 div
                 div.classList.add("commentbox");
-
-                const innerDiv = document.createElement("div");
+                div.classList.add("parentNo"+comment.commentNo);
+                const innerDiv = document.createElement("div");     // 댓글 닉네임과 내용 div
                 innerDiv.classList.add("innerDiv");
-
-                const nameA = document.createElement("a");
+                const nameA = document.createElement("a");          // 닉네임 클릭시 프로필 이동 a태그
                 nameA.href = "/mypage/"+ comment.memberNo;
                 nameA.innerText = comment.memberNickname;
-
-                const contentP = document.createElement("p");
+                const contentP = document.createElement("p");       // 댓글 내용 p태그
                 contentP.innerText = comment.commentContent;
-
-                const dateDiv = document.createElement("div");
+                const dateDiv = document.createElement("div");      // 날짜, 답글 달기 div
                 dateDiv.classList.add("dateDiv");
-
-                const cDateP = document.createElement("p");
+                const cDateP = document.createElement("p");         // 날짜 p태그
                 cDateP.innerText = comment.commentDate;
-
-                const replSpan = document.createElement("span");
+                const replSpan = document.createElement("span");    // 답글 span 태그
                 replSpan.innerText = "답글 달기";
                 replSpan.classList.add("replyCommentInsert");
-
-                dateDiv.append(cDateP, replSpan);
-
-                innerDiv.append(nameA, contentP);
-                div.append(innerDiv, dateDiv);
-
-                const lastDiv = document.createElement("div");
-                lastDiv.classList.add("lastDivadd")
-                lastDiv.append(boardPostDiv, div);
-                let item = 
-                    `<div class="deleteComment">
-                        <button type="button" onclick="removeComment(event, ${comment.commentNo})">×</button>
-                    </div>`;
-                lastDiv.insertAdjacentHTML("beforeend", item);
-                postContentDiv.append(lastDiv);
-                Boardcontent1.append(postContentDiv);
-
-            } else{
-                const postContentDiv1 = document.createElement("div");
-                postContentDiv1.classList.add("postcontent2");
-
-                const boardPostDiv1 = document.createElement("div");
-                boardPostDiv1.classList.add("BoardPost2");
-
-                const boardProfileA1 = document.createElement("a");
-                boardProfileA1.href = "/mypage/"+comment.memberNo;
-                boardProfileA1.classList.add("Boardprofile2");
-                const profileImg1 = document.createElement("img");
-                profileImg1.src = comment.profileImg;
-                boardProfileA1.append(profileImg1);
-                boardPostDiv1.append(boardProfileA1);
-
-
-                const div1 = document.createElement("div");
-
-                const innerDiv1 = document.createElement("div");
-                innerDiv1.classList.add("innerDiv");
-
-                const nameA1 = document.createElement("a");
-                nameA1.href = "/mypage/"+comment.memberNo;
-                nameA1.innerText = comment.memberNickname;
-
-                const contentP1 = document.createElement("p");
-                contentP1.innerText = comment.commentContent;
-
-                const dateDiv1 = document.createElement("div");
-                dateDiv1.classList.add("dateDiv");
-
-                const cDateP1 = document.createElement("p");
-                cDateP1.innerText = comment.commentDate;
-
-                dateDiv1.append(cDateP1);
-
-                innerDiv1.append(nameA1, contentP1);
-                div1.append(innerDiv1, dateDiv1);
+                dateDiv.append(cDateP, replSpan);                   // 날짜, 답글 div에 담기
+                innerDiv.append(nameA, contentP);                   // 닉네임, 내용 div에 담기
+                div.append(innerDiv, dateDiv);                      // 날짜, 답글, 닉네임, 내용
+                // -----------------------------------------------------------------------------------
 
                 
-                const lastDiv1 = document.createElement("div");
+                
+                // ---------------------------- 버튼 생성 후 담기 ------------------------------
+                let item =   // 버튼 생성
+                `<div class="deleteComment">
+                <button type="button" onclick="removeComment(event, ${comment.commentNo})">×</button>
+                </div>`;
+                lastDiv.append(boardPostDiv, div);                  // 프로필, 구성들 담기
+                lastDiv.insertAdjacentHTML("beforeend", item);      // 버튼 담기
+                postContentDiv.append(lastDiv);
+                Boardcontent1.append(postContentDiv);  // 댓글창에 넣기
+                // ----------------------------------------------------------------------------
+
+
+                const replyCommentInsert = document.querySelectorAll(".replyCommentInsert");
+                for(let i=0;i<replyCommentInsert.length;i++){
+                    replyCommentInsert[i].addEventListener("click", e=>{
+                        let nickName = e.target.parentNode.previousElementSibling.children[0].innerText;
+                        commentContentArea.focus();
+                        commentContentArea.value = "@" + nickName+" ";
+                        commentParentNo = arr[i];
+                    })
+                }
+
+            } else {
+
+                const postContentDiv1 = document.createElement("div");  // 댓댓글을 감싸는 div (display : block)
+                postContentDiv1.classList.add("postcontent2");
+                const lastDiv1 = document.createElement("div");         // 한번더 댓댓글을 감싸는 div
                 lastDiv1.classList.add("lastDivadd1")
-                lastDiv1.append(boardPostDiv1, div1);
+
+                // --------------------------- 댓댓글 프로필 이미지 담기 -----------------------------
+                const boardPostDiv1 = document.createElement("div");    // 댓댓글 프로필 부분 div
+                boardPostDiv1.classList.add("BoardPost2");
+
+                const boardProfileA1 = document.createElement("a");     // 프로필 이미지 a태그
+                boardProfileA1.href = "/mypage/"+comment.memberNo;      // 프로필페이지 연결
+                boardProfileA1.classList.add("Boardprofile2");          
+                const profileImg1 = document.createElement("img");      // 프로필 이미지 부분
+                profileImg1.src = comment.profileImg;
+                boardProfileA1.append(profileImg1);
+                boardPostDiv1.append(boardProfileA1);                   // div에 담기
+                // -----------------------------------------------------------------------------------
+
+
+
+                // ----------------------------- 자식댓글 구성들 담기 --------------------------------
+                const div1 = document.createElement("div");             // 댓댓글 글부분
+                const innerDiv1 = document.createElement("div");        // 닉네임, 내용 부분
+                innerDiv1.classList.add("innerDiv");
+                const nameA1 = document.createElement("a");             // 닉네임 프로필페이지 연결
+                nameA1.href = "/mypage/"+comment.memberNo;
+                nameA1.innerText = comment.memberNickname;
+                const contentP1 = document.createElement("p");          // 댓댓글 내용 p태그
+                contentP1.innerText = comment.commentContent;
+                const dateDiv1 = document.createElement("div");         // 날짜 div
+                dateDiv1.classList.add("dateDiv");
+                const cDateP1 = document.createElement("p");            // 날짜
+                cDateP1.innerText = comment.commentDate;
+                dateDiv1.append(cDateP1);                               // 날짜 div에 날짜 담기
+                innerDiv1.append(nameA1, contentP1);                    // 닉네임, 내용 담기
+                div1.append(innerDiv1, dateDiv1);                       // 닉네임, 내용, 날짜 담기
+                // -----------------------------------------------------------------------------------
+                
+
+                // ------------------------------ 버튼 생성 후 담기 -----------------------------------
                 let item = 
-                    `<div class="deleteComment">
-                        <button type="button" onclick="removeChildComment(event, ${comment.commentNo})">×</button>
-                    </div>`;
-                lastDiv1.insertAdjacentHTML("beforeend", item);
-                postContentDiv1.append(lastDiv1);
+                `<div class="deleteComment">
+                <button type="button" onclick="removeChildComment(event, ${comment.commentNo})">×</button>
+                </div>`;
+                lastDiv1.append(boardPostDiv1, div1);                   // 프로필, 구성들 담기
+                lastDiv1.insertAdjacentHTML("beforeend", item);         // 버튼 담기
+                postContentDiv1.append(lastDiv1);                       // 댓댓글 감싸는 div에 담기
+                // -----------------------------------------------------------------------------------
+
                 const prntCommentNode = document.querySelector(".commentNo"+comment.parentNo);
-                console.log(prntCommentNode.parentNode);
-                postContentDiv1.classList.toggle("postcontent2");
-                prntCommentNode.parentNode.append(postContentDiv1);
+                const prntParentNo = document.querySelector(".parentNo"+comment.parentNo);
+                
+                if(prntCommentNode == null){  // 답글 보기가 없으면
+                    const secondDiv = document.createElement("div");    // 답글 보기 만들기
+                    secondDiv.classList.add("secondComment");
+                    secondDiv.classList.add("commentNo"+comment.parentNo);
+                    secondDiv.innerText = "—— 답글 보기(1)";
+                    prntParentNo.append(secondDiv, postContentDiv1);
 
-                const a = prntCommentNode.innerText;
-                prntCommentNode.innerText = "—— 답글 보기(" + (Number(a.match(/\d+/)[0]) +1) + ")";
+                    secondDiv.addEventListener("click", e=>{
+                        let siblings = getSiblings(e.target);
+                        for(let j=0;j<siblings.length;j++){
+                            siblings[j].classList.toggle("postcontent2");
+                        }
+                    });
+                    
+                } else{
+                    const a = prntCommentNode.innerText;
+                    prntCommentNode.innerText = "—— 답글 보기(" + (Number(a.match(/\d+/)[0]) +1) + ")";
+                    console.log(prntCommentNode.parentNode);
+                    prntParentNo.append(postContentDiv1);
+                    
+                }
+                const postcontent2s = document.querySelectorAll(".parentNo"+comment.parentNo+" .postcontent2");
+                for(let i=0;i<postcontent2s.length;i++){
+                    postcontent2s[i].classList.toggle("postcontent2");
+                }
+                
+                // postContentDiv1.classList.toggle("postcontent2");
 
+                
             }
-            const replyCommentInsert = document.querySelectorAll(".replyCommentInsert");
-            for(let i=0;i<replyCommentInsert.length;i++){
-                replyCommentInsert[i].addEventListener("click", e=>{
-                    let nickName = e.target.parentNode.previousElementSibling.children[0].innerText;
-                    commentContentArea.focus();
-                    commentContentArea.value = "@" + nickName+" ";
-                })
-            }
+            
         }
-
-
     })
     .catch(err => {
         console.log(err);
@@ -1545,10 +1578,7 @@ function followFn(){
             console.log("자신은 팔로우 하지 못합니다.");
             return;
         }
-        
-        // followUser.classList.toggle("followshow");
-        // nufollow.classList.toggle("followshow");
-        
+
         if(check==0){ // 팔로우 성공
             sendFollow(followerNo);
             followUser.classList.remove("followshow");

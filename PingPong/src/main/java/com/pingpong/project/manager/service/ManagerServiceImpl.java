@@ -17,6 +17,10 @@ import com.pingpong.project.manager.dao.ManagerDAO;
 import com.pingpong.project.member.model.dto.Member;
 
 
+/**
+ * @author user
+ *
+ */
 @Service
 public class ManagerServiceImpl implements ManagerService{
 
@@ -152,6 +156,24 @@ public class ManagerServiceImpl implements ManagerService{
 		
 		return map;
 	}
+	
+	// 검색된 댓글 목록 조회
+		@Override
+		public Map<String, Object> selectCommentList(Map<String, Object> paramMap, int cp) {
+			
+		int listCount = dao.getCommentListCount(paramMap);
+		
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		List<Comment> CommentList = dao.selectCommentList(pagination,paramMap);
+			
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		map.put("CommentList", CommentList);
+		
+		return map;
+		}
+
 
 	// 1:1 문의 목록 조회
 	@Override
@@ -162,6 +184,23 @@ public class ManagerServiceImpl implements ManagerService{
 		Pagination pagination = new Pagination(listCount, cp);
 		
 		List<Inquiry> InquiryList = dao.selectInquiryList(pagination);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		map.put("inquiryList", InquiryList);
+		
+		return map;
+	}
+	
+	// 검색된 1:1 문의 목록 조회
+	@Override
+	public Map<String, Object> selectInquiryList(Map<String, Object> paramMap, int cp) {
+	
+		int listCount = dao.getInquiryListCount(paramMap);
+		
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		List<Inquiry> InquiryList = dao.selectInquiryList(pagination,paramMap);
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("pagination", pagination);
