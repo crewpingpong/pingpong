@@ -82,6 +82,7 @@ public class MypageController {
 		model.addAttribute("myfollowList", myfollowList);
 		model.addAttribute("mefollowList", mefollowList);
 		
+		
 		// 선택한 techImgList 조회
 		List<Tech> checkTechImgList = service.seletCheckTechImgList(loginMember.getMemberNo());
 		
@@ -230,6 +231,9 @@ public class MypageController {
 		
 		
 		/* *** 지식/기술 리스트 *** */
+		// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+		int techListDelete =  service.techListDeleteAll(loginMember.getMemberNo());
+				
 		
 		// 체크된 techList 삽입
 		for(String tech : selectedtechList) {	
@@ -244,26 +248,6 @@ public class MypageController {
 			int result = service.insertNewTechList(techMap);
 		}
 
-		// 체크 해제된 techList 삭제
-		for(String tech : selectedtechList) {	
-			
-			Map<String, Object> techMap = new HashMap<>();
-			
-			techMap.put("techNo", tech);
-			techMap.put("memberNo", loginMember.getMemberNo());
-			
-			System.out.println(techMap.get("techNo"));
-			
-		
-			int result = service.deleteNewTechList(techMap);
-		}
-		
-		
-		
-		
-		
-		
-		 
 		
        
 		
