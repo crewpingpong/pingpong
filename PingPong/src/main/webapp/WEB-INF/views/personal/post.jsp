@@ -11,9 +11,12 @@
     <%-- <link rel="stylesheet" href="/resources/css/style.css"> <!-- 메인 헤더, 네브 css --> --%>
     <link rel="stylesheet" href="/resources/css/personal/post.css">
     <link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
+    <script>
+        let techImgList = "${techImgList}";
+    </script>
 </head>
 <body>
-
+    
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <!-- 개인 홈 프로필 -->
     <div class="personalHome">
@@ -107,20 +110,16 @@ ${mypage.memberInfo}
                             </div>
                             <h4 id="certificate">지식 / 기술</h4>
                             <!-- 아이콘 추가 기능 구현 -->
-                            <div>
-                                <c:choose>
-	                                <c:when test="${empty mypage.techList}">
-	                                    없음
-	                                </c:when>
-	                            
-	                                <c:otherwise>
-	                                    <c:forEach items="${techList}" var="tech">
-	                                        <div>
-	                                            <img src="${tech.techImg}" alt="${tech.techName}">
-	                                        </div>
-	                                    </c:forEach>
-	                                </c:otherwise>
-                            	</c:choose>
+                            <div class="certificate-main-con">
+                                <c:if test="${empty techImgList}">
+                                    없음
+                                </c:if>
+
+                                    <%--
+                                    <div class="certificate-sub-con">
+                                        <img class="tech-img-list" src="" alt="">
+                                    </div> 
+                                    --%>
                             </div>
                         </div>
                         <div id="profiletab2" class="cont">
@@ -613,7 +612,6 @@ ${mypage.memberCareer}
     </div>
 
     <script>
-        // const mypage = "${mypage}";
         const followCheck = ${followCheck};
     </script>
     <script src="/resources/js/script.js"></script> <!-- 메인 헤더, 네브 js -->

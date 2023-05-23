@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,7 @@ import com.pingpong.project.common.utility.Util;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.message.model.dto.Follow;
 import com.pingpong.project.message.model.service.AlarmService;
+import com.pingpong.project.mypage.model.dto.Interest;
 import com.pingpong.project.mypage.model.dto.MyPage;
 import com.pingpong.project.mypage.model.dto.SNS;
 import com.pingpong.project.mypage.model.dto.Tech;
@@ -80,16 +82,41 @@ public class MypageController {
 		model.addAttribute("myfollowList", myfollowList);
 		model.addAttribute("mefollowList", mefollowList);
 		
+		// 선택한 techImgList 조회
+		List<Tech> checkTechImgList = service.seletCheckTechImgList(loginMember.getMemberNo());
+		
+		List<String> techImgList = new ArrayList<>();
+		
+		for (Tech tech : checkTechImgList) {
+		    techImgList.add(tech.getTechImg());
+		}
+		model.addAttribute("techImgList", techImgList);
+		
 		return "personal/post";
 	}
 	
 	// 내 정보 수정으로 이동
 	@GetMapping("/myPageModi")
-	public String myPageModi(@SessionAttribute("loginMember") Member loginMember, Model model) {
+	public String myPageModi(@SessionAttribute("loginMember") Member loginMember
+							, Model model) {
+		
+		// interestList 전체 조회
+		List<Interest> interestList = service.selectInterestList();
+		model.addAttribute("interestList", interestList);
 		
 		// techList 전체 조회
 		List<Tech> techList = service.selectTechList();
 		model.addAttribute("techList", techList); 
+		
+		// 선택한 techList 조회
+		List<Tech> checkTechList = service.seletCheckTechList(loginMember.getMemberNo());
+		model.addAttribute("checkTechList", checkTechList);
+		
+		
+		// SNSList 전체 조회
+		List<SNS> SNSList = service.selectSNSList();
+		model.addAttribute("SNSList", SNSList);
+		
 		
 		return "personal/myPageModi"; 
 	}
@@ -166,10 +193,14 @@ public class MypageController {
 			, @RequestParam(value="tech", required=false) String[] techArray
 			, @RequestParam(value="SNS", required=false) String[] SNSArray
 			, @SessionAttribute("mypage") MyPage mypage
+			, @SessionAttribute("loginMember") Member loginMember
 			, RedirectAttributes ra
 			, HttpSession session) {
 		
+		
+		
 		List<String> selectedtechList = Arrays.asList(techArray);
+		
 		
 		updateMyPage.setMemberNo(mypage.getMemberNo());
 		
@@ -197,27 +228,42 @@ public class MypageController {
 		}
 		
 		
-		// 지식기술
-		int techYN = service.selectTechCount(selectedtechList);
 		
-		if(techYN != 0) {
+		/* *** 지식/기술 리스트 *** */
+		
+		// 체크된 techList 삽입
+		for(String tech : selectedtechList) {	
 			
-			int techListDeleteResult = service.deleteTechList(selectedtechList);
+			Map<String, Object> techMap = new HashMap<>();
 			
-			int techListInsertResult = service.insertTechList(selectedtechList);
+			techMap.put("techNo", tech);
+			techMap.put("memberNo", loginMember.getMemberNo());
 			
-			for(String tech : selectedtechList) {
-				selectedtechList.add(tech);
-			}
+			System.out.println(techMap.get("techNo"));
+			
+			int result = service.insertNewTechList(techMap);
+		}
+
+		// 체크 해제된 techList 삭제
+		for(String tech : selectedtechList) {	
+			
+			Map<String, Object> techMap = new HashMap<>();
+			
+			techMap.put("techNo", tech);
+			techMap.put("memberNo", loginMember.getMemberNo());
+			
+			System.out.println(techMap.get("techNo"));
+			
+		
+			int result = service.deleteNewTechList(techMap);
 		}
 		
-		else {
-			int techListInsertResult = service.insertTechList(selectedtechList);
-			
-			for(String tech : selectedtechList) {
-				selectedtechList.add(tech);
-			}
-		}
+		
+		
+		
+		
+		
+		 
 		
        
 		
@@ -228,7 +274,7 @@ public class MypageController {
 		
 		ra.addFlashAttribute("message", message);
 		
-		return "personal/post";
+		return "redirect:/mypage/" + mypage.getMemberNo(); // mypage로 redirect
 	}
 
 	
