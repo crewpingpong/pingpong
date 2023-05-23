@@ -132,7 +132,7 @@ display: none; z-index: 202;
 #logModContainer{
     width : 420px; height : 420px;
     border-radius: 20px; border: 1px solid #5C5C5C;
-    position: absolute; margin: auto;
+    position: fixed; margin: auto;
     top: 0; bottom: 0; left: 0; right: 0;
     background-color: white; z-index: 300;
     display: none;
@@ -228,7 +228,7 @@ display: none; z-index: 202;
 #searchModContainer{
     width : 500px; height : 600px; 
     border-radius: 20px; border: 1px solid black; 
-    position: absolute; margin: auto; 
+    position: fixed; margin: auto; 
     top: 0; bottom: 0; left: 0; right: 0; 
     background-color: white; z-index: 300; 
     display: none;
