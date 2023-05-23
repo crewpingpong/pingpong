@@ -3,6 +3,7 @@ package com.pingpong.project.member.model.service;
 import java.util.List;
 
 import com.pingpong.project.member.model.dto.Member;
+import com.pingpong.project.search.model.dto.SearchTag;
 
 public interface AjaxService {
 
@@ -35,9 +36,15 @@ public interface AjaxService {
 
 	/** 닉네임이 일부라도 일치하는 모든 회원 조회 (40명)
 	 * @param input
-	 * @return
+	 * @return List
 	 */
 	List<Member> selectAllNickname(String input);
+	
+	/** 태그가 일부라도 일치하는 모든 태그 조회 (40명)
+	 * @param input
+	 * @return List
+	 */
+	List<SearchTag> selectAllTag(String headerOpenSearchBox);
 
 	/**	URL 중복 검사
 	 * @param URL

@@ -7,22 +7,22 @@ $( document ).ready( function() {
 } );
 
 // 게시글 무한 스크롤
-var count = 0;
-//스크롤 바닥 감지
-window.onscroll = function(e) {
-    //추가되는 임시 콘텐츠
-    //window height + window scrollY 값이 document height보다 클 경우,
-    if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-    	//실행할 로직 (콘텐츠 추가)
-        count++;
-        var addContent = '<div class="main-post-item"><a href="#"></a></div>';
-        //article에 추가되는 콘텐츠를 append
-        for(let i = 0; i < 3; i++){
-            $('article').append(addContent);
-        }
+// var count = 0;
+// //스크롤 바닥 감지
+// window.onscroll = function(e) {
+//     //추가되는 임시 콘텐츠
+//     //window height + window scrollY 값이 document height보다 클 경우,
+//     if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+//     	//실행할 로직 (콘텐츠 추가)
+//         count++;
+//         var addContent = '<div class="main-post-item"><a href="#"></a></div>';
+//         //article에 추가되는 콘텐츠를 append
+//         for(let i = 0; i < 3; i++){
+//             $('article').append(addContent);
+//         }
         
-    }
-}
+//     }
+// }
 
 // 슬라이드 크기 조정
 const itemLeft = $(".slick-current").find(".item-picture");

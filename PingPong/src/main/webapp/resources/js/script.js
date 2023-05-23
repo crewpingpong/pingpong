@@ -71,8 +71,8 @@ const seachModInnerContent = document.getElementById("seachModInnerContent");
 
 const searchModResultList = document.getElementById("searchModResultList");
 const headerSearchModResultList = document.getElementById("headerSearchModResultList");
-// const tagArr = ['#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱'];
-// const nameArr = ['kimchanhee', 'leenahyun', 'leesangyun', 'choigeuntae', 'parkjaekyung'];
+const tagArr = ['#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱','#kimpingpong', '#k-playthatpingpong', '#pingpong', '#kukurupingpong', '#가나다라', '#핑퐁짱'];
+const nameArr = ['kimchanhee', 'leenahyun', 'leesangyun', 'choigeuntae', 'parkjaekyung'];
 
 
 // 열기 버튼을 누르면 nav의 display가 flex로 변경
@@ -117,46 +117,46 @@ openHam.addEventListener("click",() => {
         });
     }
 
-    seachModInnerContent.addEventListener("keyup", e => {
-        while(searchModResultList.hasChildNodes()) {
-            searchModResultList.removeChild(searchModResultList.firstChild);
-        }
-        if(seachModInnerContent.value.startsWith('#')){
-            for(let i=0;i<tagArr.length;i++){
-                if(tagArr[i].startsWith(seachModInnerContent.value) && seachModInnerContent.value!='#'){
+    // seachModInnerContent.addEventListener("keyup", e => {
+    //     while(searchModResultList.hasChildNodes()) {
+    //         searchModResultList.removeChild(searchModResultList.firstChild);
+    //     }
+    //     if(seachModInnerContent.value.startsWith('#')){
+    //         for(let i=0;i<tagArr.length;i++){
+    //             if(tagArr[i].startsWith(seachModInnerContent.value) && seachModInnerContent.value!='#'){
             
-                    const div = document.createElement('div');
-                    const a1 = document.createElement('a');
-                    a1.classList.add("searchModTagRound1");
-                    a1.innerText = "#"
-                    div.classList.add("searchModResultCont");
-                    const a2 = document.createElement('a');
-                    a2.classList.add("searchModTagRound2");
-                    a2.innerText = tagArr[i].substring(1);
+    //                 const div = document.createElement('div');
+    //                 const a1 = document.createElement('a');
+    //                 a1.classList.add("searchModTagRound1");
+    //                 a1.innerText = "#"
+    //                 div.classList.add("searchModResultCont");
+    //                 const a2 = document.createElement('a');
+    //                 a2.classList.add("searchModTagRound2");
+    //                 a2.innerText = tagArr[i].substring(1);
 
-                    div.append(a1);
-                    div.append(a2);
-                    searchModResultList.append(div);
-                }
-            }
-        } else if(!seachModInnerContent.value.startsWith('#') && seachModInnerContent.value!='') {
-            for(let i=0;i<nameArr.length;i++){
-                if(nameArr[i].startsWith(seachModInnerContent.value)){
-                    const div = document.createElement('div');
-                    const a1 = document.createElement('a');
-                    a1.classList.add("searchModNameRound1");
-                    div.classList.add("searchModResultCont");
-                    const a2 = document.createElement('a');
-                    a2.classList.add("searchModNameRound2");
-                    a2.innerText = nameArr[i];
+    //                 div.append(a1);
+    //                 div.append(a2);
+    //                 searchModResultList.append(div);
+    //             }
+    //         }
+    //     } else if(!seachModInnerContent.value.startsWith('#') && seachModInnerContent.value!='') {
+    //         for(let i=0;i<nameArr.length;i++){
+    //             if(nameArr[i].startsWith(seachModInnerContent.value)){
+    //                 const div = document.createElement('div');
+    //                 const a1 = document.createElement('a');
+    //                 a1.classList.add("searchModNameRound1");
+    //                 div.classList.add("searchModResultCont");
+    //                 const a2 = document.createElement('a');
+    //                 a2.classList.add("searchModNameRound2");
+    //                 a2.innerText = nameArr[i];
 
-                    div.append(a1);
-                    div.append(a2);
-                    searchModResultList.append(div);
-                }
-            }
-        }
-    });
+    //                 div.append(a1);
+    //                 div.append(a2);
+    //                 searchModResultList.append(div);
+    //             }
+    //         }
+    //     }
+    // });
 
     // 더보기 + 사이트 정보 눌렀을 때 창
     const siteInfoClick = document.querySelector(".navmore li:last-child");
@@ -214,54 +214,5 @@ navSearchclBtn.addEventListener("click", () => {
     searchModContainer.style.display = "none";
 });
 
-// 헤더에 검색버튼 올리면 열리는 검색 버튼 id = "headerOpenSearchBox"
-const headerOpenSearchBox = document.querySelector("#headerOpenSearchBox");
-const headerSearchModContainer = document.querySelector("#headerSearchModContainer");
-headerOpenSearchBox.addEventListener("keyup", e => {
-    
-    if(headerOpenSearchBox.value=='' || headerOpenSearchBox.value=='#'){
-        headerSearchModContainer.style.display = "none";
-    } else{
-        headerSearchModContainer.style.display = "block";
-    }
-    // 여기 수정
-    // while(headerSearchModResultList.hasChildNodes()) {
-    //     headerSearchModResultList.removeChild(headerSearchModResultList.firstChild);
-    // }
-    if(headerOpenSearchBox.value.startsWith('#')){
-        for(let i=0;i<tagArr.length;i++){
-            if(tagArr[i].startsWith(headerOpenSearchBox.value) && headerOpenSearchBox.value!='#'){
-        
-                const div = document.createElement('div');
-                const a1 = document.createElement('a');
-                a1.classList.add("searchModTagRound1");
-                a1.innerText = "#"
-                div.classList.add("searchModResultCont");
-                const a2 = document.createElement('a');
-                a2.classList.add("searchModcontent");
-                a2.innerText = tagArr[i].substring(1);
 
-                div.append(a1);
-                div.append(a2);
-                headerSearchModResultList.append(div);
-            }
-        }
-    } else if(!headerOpenSearchBox.value.startsWith('#') && headerOpenSearchBox.value!='') {
-        for(let i=0;i<nameArr.length;i++){
-            if(nameArr[i].startsWith(headerOpenSearchBox.value)){
-                const div = document.createElement('div');
-                const a1 = document.createElement('a');
-                a1.classList.add("searchModNameRound1");
-                div.classList.add("searchModResultCont");
-                const a2 = document.createElement('a');
-                a2.classList.add("searchModcontent");
-                a2.innerText = nameArr[i];
-
-                div.append(a1);
-                div.append(a2);
-                headerSearchModResultList.append(div);
-            }
-        }
-    }
-});
 

@@ -30,6 +30,26 @@
 		AND FOLLOWER_NO = #{followerNo}
 	</select>
 	
+	<!-- 내가 팔로우 하는 사람들 -->
+	<select id="myfollowList" resultMap="follow_rm">
+		SELECT MEMBER_NO, FOLLOWER_NO, MEMBER_NICKNAME 
+		FROM FOLLOW
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE FOLLOWER_NO = #{followerNo}
+		ORDER BY FOLLOW_NO
+	</select>
+	
+	<!-- 나를 팔로우 하는 사람들 -->
+	<select id="mefollowList" resultMap="follow_rm">
+		SELECT F.MEMBER_NO, F.FOLLOWER_NO, M2.MEMBER_NICKNAME AS FOLLOWER_NICKNAME
+		FROM FOLLOW F
+		JOIN "MEMBER" M1 ON F.MEMBER_NO = M1.MEMBER_NO
+		JOIN "MEMBER" M2 ON F.FOLLOWER_NO = M2.MEMBER_NO
+		WHERE F.MEMBER_NO = #{followerNo}
+		ORDER BY F.FOLLOW_NO
+	</select>
+	
+	
 	<!-- 팔로워 삽입 -->
 	<insert id="follow">
 		INSERT INTO FOLLOW

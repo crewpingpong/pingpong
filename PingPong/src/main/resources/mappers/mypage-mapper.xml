@@ -22,6 +22,14 @@
 					ofType="Career"
 					/>		
 	</resultMap>
+	
+	<resultMap type="Tech" id="tech_rm">
+		<id property="techNo" column="TECH_NO"/>
+		<result property="techName" column="TECH_NAME"/>
+		<result property="techImg" column="TECH_IMG"/>	
+		<result property="memberNo" column="MEMBER_NO"/>	
+	</resultMap>
+
 
 	<!-- 회원 정보 수정 -->
 	<update id="updateInfo" parameterType="Member">
@@ -87,14 +95,52 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
-	<!-- 지식기술 조회 -->
-	<select id="selectTechList">
-		SELECT TECH_NAME, TECH_IMG
-		FROM "TECH"
-		WHERE TECH_NO IN (SELECT TECH_NO FROM "MEMBER_TECH"
-					WHERE MEMBER_NO = #{memberNO})
+	
+	<!-- 전체 지식기술 조회 -->
+	<select id="selectTechList" resultMap="tech_rm">
+		SELECT MEMBER_TECH_NO, MEMBER_NO, TECH_NO 
+		FROM "MEMBER_TECH"
 	</select>
 	
+	
+	<!-- 선택된 지식기술 리스트 조회 -->
+	<select id="selectTechCount" resultMap="tech_rm">
+		SELECT COUNT(TECH_NO) 
+		FROM "MEMBER_TECH"
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 선택된 지식기술 리스트 삽입 -->
+	<insert id="insertTechList">
+		INSERT INTO "MEMBER_TECH""
+		VALUES(SEQ_TECH_NO.NEXTVAL, #{memberNo}, #{techNo})
+	</insert>
+	
+	<!-- 선택된 지식기술 리스트 삭제 -->
+	<delete id="deleteTechList">
+		DELETE FROM "MEMBER_TECH"
+		WHERE MEMBER_NO=#{memberNo}
+	</delete>
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--  -->
 	<select id="selectCareerList">
 		SELECT CERTIFICATE_NO, MEMBER_CERT
 		FROM "CAREER"

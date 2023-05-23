@@ -1,5 +1,8 @@
 package com.pingpong.project.message.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,9 +32,13 @@ public class AlarmController {
 //			, Model model
 			){
 		int result = 0;
-		// 팔로우 여부 0 이면 안함 / 1이면 함
-		follow.setCheck(service.followCheck(follow)); 
 		
+		Map<String, Integer> followChk = new HashMap<>();
+		followChk.put("memberNo", follow.getMemberNo());
+		followChk.put("followerNo", loginMember.getMemberNo());
+		
+		// 팔로우 여부 0 이면 안함 / 1이면 함
+		follow.setCheck(service.followCheck(followChk)); 
 //		if(check>0) model.addAttribute("likeCheck","on");
 		 
 		if(loginMember != null) { // 로그인 상태인 경우
@@ -43,12 +50,5 @@ public class AlarmController {
 		return result;
 	}
 	
-	// 좋아요 처리
-//	@PostMapping("/like")
-//	@ResponseBody // 반환되는 값이 비동기 요청한 곳으로 돌아가게 된다.
-//	public int like(@RequestBody Map<String, Integer> paramMap) {
-//		System.out.println(paramMap);
-//		return service.like(paramMap);
-//	}
 
 }

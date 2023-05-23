@@ -100,13 +100,13 @@
 				]]>
 			 
 				BOARD_NO, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, PARENT_NO, COMMENT_DEL_FL,
-				(SELECT COUNT(*) FROM "COMMENT" IIC WHERE IIC.PARENT_NO IN (SELECT IC.COMMENT_NO FROM "COMMENT")) CHILD_CHECK
+				(SELECT COUNT(*) FROM "COMMENT" IIC WHERE IIC.PARENT_NO IN (SELECT IC.COMMENT_NO FROM "COMMENT") AND COMMENT_DEL_FL ='N') CHILD_CHECK
 			FROM "COMMENT" IC
 			JOIN "MEMBER" M ON(IC.COMMENT_MEMBER_NO = M.MEMBER_NO)
 			LEFT JOIN "MEMBER_PROFILE" USING(MEMBER_NO)
 			WHERE BOARD_NO = #{boardNo}) C
 		WHERE COMMENT_DEL_FL = 'N'
-		START WITH PARENT_NO IS NULL
+		START WITH PARENT_NO = 0
 		CONNECT BY PRIOR COMMENT_NO = PARENT_NO
 		ORDER SIBLINGS BY COMMENT_NO
 	</select>
@@ -240,11 +240,34 @@
     	) A
     </insert>
     
-    <insert id="insertComment">
-    	INSERT INTO "COMMENT" VALUES(
-    	SEQ_COMMENT_NO.NEXTVAL, #{commentContent}, SYSDATE, #{memberNo}, #{boardNo}, DEFAULT, #{parentNo})
+    <insert id="insertComment" useGeneratedKeys="true" parameterType="Comment">
+	  <selectKey resultType="_int" keyProperty="commentNo" order="BEFORE">
+	    SELECT SEQ_COMMENT_NO.NEXTVAL FROM DUAL
+	  </selectKey>
+	  INSERT INTO "COMMENT" VALUES(#{commentNo}, #{commentContent}, SYSDATE, #{memberNo}, #{boardNo}, DEFAULT, #{parentNo})
+	</insert>
     
-    </insert>
+    <select id="selectComment" resultMap="comment_rm">
+    	SELECT COMMENT_NO, COMMENT_CONTENT,
+			<![CDATA[
+			CASE  
+				WHEN SYSDATE - COMMENT_DATE < 1/24/60
+				THEN FLOOR( (SYSDATE - COMMENT_DATE) * 24 * 60 * 60 ) || '초 전'
+				WHEN SYSDATE - COMMENT_DATE < 1/24
+				THEN FLOOR( (SYSDATE - COMMENT_DATE) * 24 * 60) || '분 전'
+				WHEN SYSDATE - COMMENT_DATE < 1
+				THEN FLOOR( (SYSDATE - COMMENT_DATE) * 24) || '시간 전'
+				ELSE TO_CHAR(COMMENT_DATE, 'YYYY-MM-DD')
+			END COMMENT_DATE,
+			]]>
+		 
+			BOARD_NO, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, PARENT_NO, COMMENT_DEL_FL,
+			(SELECT COUNT(*) FROM "COMMENT" IIC WHERE IIC.PARENT_NO IN (SELECT IC.COMMENT_NO FROM "COMMENT") AND COMMENT_DEL_FL ='N') CHILD_CHECK
+		FROM "COMMENT" IC
+		JOIN "MEMBER" M ON(IC.COMMENT_MEMBER_NO = M.MEMBER_NO)
+		LEFT JOIN "MEMBER_PROFILE" USING(MEMBER_NO)
+		WHERE COMMENT_NO = #{commentNo}
+    </select>
     
     <update id="updateBoard">
     	UPDATE "BOARD" SET
@@ -257,4 +280,31 @@
 		FROM "HASHTAG"
 		WHERE HASHTAG_NAME LIKE '${hashtagName}%'
 	</select>
+
+	<!-- 댓글 삭제 -->
+	<update id="deleteComment">
+		UPDATE "COMMENT" SET
+		COMMENT_DEL_FL = 'Y'
+		WHERE COMMENT_NO = #{commentNo}
+		OR PARENT_NO = #{commentNo}
+	</update>
+	
+	<!-- 댓댓글 삭제 -->
+	<update id="deleteChildComment">
+		UPDATE "COMMENT" SET
+		COMMENT_DEL_FL = 'Y'
+		WHERE COMMENT_NO = #{commentNo}
+	</update>
+
+	<!-- 메인 화면 게시글 리스트 조회 (최신순) -->
+	<select id="selectBoardAll" resultMap="board_rm">
+		SELECT BOARD_NO, IMG_ADDRESS THUMBNAIL, MEMBER_NO
+		FROM BOARD
+		JOIN BOARD_IMG USING(BOARD_NO)
+		WHERE BOARD_DEL_FL = 'N'
+		AND IMG_ORDER = 1
+		ORDER BY 1 DESC
+	</select>
+
+	
 </mapper>

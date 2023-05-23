@@ -26,6 +26,6 @@ public class MyPage {
 	private String oneLiner;
 	
 	private List<Tech> techList;
-
+	private List<Interest> interestList;
 
 }

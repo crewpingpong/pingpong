@@ -4,7 +4,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,7 +29,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.common.utility.Util;
 import com.pingpong.project.member.model.dto.Member;
+import com.pingpong.project.message.model.dto.Follow;
+import com.pingpong.project.message.model.service.AlarmService;
 import com.pingpong.project.mypage.model.dto.MyPage;
+import com.pingpong.project.mypage.model.dto.SNS;
+import com.pingpong.project.mypage.model.dto.Tech;
 import com.pingpong.project.mypage.model.service.MypageService;
 
 
@@ -38,11 +45,15 @@ public class MypageController {
 	@Autowired
 	private MypageService service;
 	
+	@Autowired
+	private AlarmService alarmService;
+	
 	// 프로필 조회
 	@GetMapping("/{memberNo}")
 	public String personal(
 			@PathVariable("memberNo") int memberNo
-			, Model model) {
+			, Model model
+			, @SessionAttribute("loginMember") Member loginMember) {
 		
 		
 		MyPage mypage = service.selectMemberProfile(memberNo);  // 멤버 프로필 회원의 정보
@@ -50,10 +61,22 @@ public class MypageController {
 		List<Board> boardMarkList = service.selectBoardMarkList(memberNo);  // 북마크한 게시글 목록
 		List<Board> boardLikeList = service.selectBoardLikeList(memberNo);  // 좋아요한 게시글 목록
 		
+		// memberNo == 현재 보고 있는 페이지의 멤버 번호
+		Map<String, Integer> follow = new HashMap<>();
+		follow.put("memberNo", memberNo);
+		follow.put("followerNo", loginMember.getMemberNo());
+		int followCheck = alarmService.followCheck(follow); // 팔로우 여부 체크 0 == 안함 / 1 == 함
+		List<Follow> myfollowList = alarmService.myfollowList(follow); // 내가 팔로우 하는 사람들
+		List<Follow> mefollowList = alarmService.mefollowList(follow); // 나를 팔로우 하는 사람들
+		
 		model.addAttribute("mypage", mypage);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("markList", boardMarkList);
 		model.addAttribute("likeList", boardLikeList);
+		
+		model.addAttribute("followCheck", followCheck);
+		model.addAttribute("myfollowList", myfollowList);
+		model.addAttribute("mefollowList", mefollowList);
 		
 		return "personal/post";
 	}
@@ -61,6 +84,11 @@ public class MypageController {
 	// 내 정보 수정으로 이동
 	@GetMapping("/myPageModi")
 	public String myPageModi(@SessionAttribute("loginMember") Member loginMember, Model model) {
+		
+		// techList 전체 조회
+		List<Tech> techList = service.selectTechList();
+		model.addAttribute("techList", techList); 
+		
 		return "personal/myPageModi"; 
 	}
 	
@@ -71,7 +99,7 @@ public class MypageController {
 	@PostMapping("/myPageModi")
 	public String updateInfoAndProfile(Member updateMember
 									, @RequestParam(value="profileImage", required=false) MultipartFile profileImage
-									, @RequestParam(value = "interest", required = false) String[] interest
+									, @RequestParam(value="interest", required=false) String[] interest
 									, @SessionAttribute("loginMember") Member loginMember
 									, @SessionAttribute("mypage") MyPage mypage
 									, RedirectAttributes ra
@@ -133,14 +161,13 @@ public class MypageController {
 	// 프로필 편집 memberInfo, memberCareer, memberCertificate
 	@PostMapping("/profile")
 	public String updateProfileInfo(MyPage updateMyPage
-			, @RequestParam(value = "tech", required = false) String[] tech
-			, @RequestParam(value = "SNS", required = false) String[] SNS
+			, @RequestParam(value="tech", required=false) String[] techArray
+			, @RequestParam(value="SNS", required=false) String[] SNSArray
 			, @SessionAttribute("mypage") MyPage mypage
 			, RedirectAttributes ra
 			, HttpSession session) {
 		
-		System.out.println(tech);
-		System.out.println(SNS);
+		List<String> selectedtechList = Arrays.asList(techArray);
 		
 		updateMyPage.setMemberNo(mypage.getMemberNo());
 		
@@ -169,15 +196,33 @@ public class MypageController {
 		
 		
 		// 지식기술
-		for(String t : tech) {
-//			System.out.println(t);
+		int techYN = service.selectTechCount(selectedtechList);
+		
+		if(techYN != 0) {
+			
+			int techListDeleteResult = service.deleteTechList(selectedtechList);
+			
+			int techListInsertResult = service.insertTechList(selectedtechList);
+			
+			for(String tech : selectedtechList) {
+				selectedtechList.add(tech);
+			}
 		}
+		
+		else {
+			int techListInsertResult = service.insertTechList(selectedtechList);
+			
+			for(String tech : selectedtechList) {
+				selectedtechList.add(tech);
+			}
+		}
+		
+       
 		
 		// SNS 
-		for(String s : SNS) {
+//		for(String s : SNS) {
 //			System.out.println(s);
-		}
-		
+//		}
 		
 		ra.addFlashAttribute("message", message);
 		
