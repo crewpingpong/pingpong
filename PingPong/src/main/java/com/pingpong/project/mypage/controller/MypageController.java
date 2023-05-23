@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -80,6 +81,16 @@ public class MypageController {
 		model.addAttribute("followCheck", followCheck);
 		model.addAttribute("myfollowList", myfollowList);
 		model.addAttribute("mefollowList", mefollowList);
+		
+		// 선택한 techImgList 조회
+		List<Tech> checkTechImgList = service.seletCheckTechImgList(loginMember.getMemberNo());
+		
+		List<String> techImgList = new ArrayList<>();
+		
+		for (Tech tech : checkTechImgList) {
+		    techImgList.add(tech.getTechImg());
+		}
+		model.addAttribute("techImgList", techImgList);
 		
 		return "personal/post";
 	}

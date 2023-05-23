@@ -127,6 +127,12 @@ public interface MypageService {
 	 */
 	List<SNS> selectSNSList();
 
+	/** 선택한 techImgList 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<Tech> seletCheckTechImgList(int memberNo);
+
 
 
 

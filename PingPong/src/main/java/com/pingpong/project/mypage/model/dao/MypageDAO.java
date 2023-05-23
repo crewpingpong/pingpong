@@ -209,6 +209,15 @@ public class MypageDAO {
 		return sqlSession.selectList("mypageMapper.selectSNSList");
 	}
 
+	
+	/** 선택한 techImgList 조회
+	 * @param memberNo
+	 * @return List
+	 */
+	public List<Tech> seletCheckTechImgList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.seletCheckTechImgList", memberNo);
+	}
+
 
 
 
