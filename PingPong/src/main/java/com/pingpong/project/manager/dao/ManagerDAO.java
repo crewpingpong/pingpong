@@ -77,6 +77,14 @@ public class ManagerDAO {
 		return sqlSession.selectOne("managerMapper.getInquiryListCount_search",paramMap);
 	}
 	
+	/** 검색된 신고함 목록 카운트
+	 * @param paramMap
+	 * @return
+	 */
+	public int getDeclarationListCount(Map<String, Object> paramMap) {
+		return sqlSession.selectOne("managerMapper.getDeclarationListCount_search",paramMap);
+	}
+	
 	/** 관리자 페이지 가입 회원 목록 조회
 	 * @return memberList
 	 */
@@ -252,6 +260,20 @@ public class ManagerDAO {
 		
 		return sqlSession.selectList("managerMapper.selectDeclarationList",rowBounds);
 	}
+	
+	/** 검색된 신고함 목록 조회
+	 * @param pagination
+	 * @param paramMap
+	 * @return
+	 */
+	public List<Declaration> selectDeclarationList(Pagination pagination, Map<String, Object> paramMap) {
+	
+		int offset = (pagination.getCurrentPage() - 1) * pagination.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pagination.getLimit());
+		
+		return sqlSession.selectList("managerMapper.selectDeclarationList_search",paramMap,rowBounds);
+	}
 
 	/** 체크된 회원 탈퇴
 	 * @param boardNo
@@ -304,6 +326,7 @@ public class ManagerDAO {
 	public int commentRe(int commentNo) {
 		return sqlSession.update("managerMapper.commentRe",commentNo);
 	}
+
 
 
 	

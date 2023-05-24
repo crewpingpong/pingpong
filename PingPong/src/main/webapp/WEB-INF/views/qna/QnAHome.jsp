@@ -141,10 +141,10 @@
                 <div>
                     1 : 1 문의
                 </div>
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form action="/qna/Send" method="post" enctype="multipart/form-data">
                     이메일<br>
-                    <input type="email" name="Email" id="otoEmail" placeholder="답장 받으실 이메일을 입력해주세요."> <br>
-                    <textarea name="Content" id="otoContent" cols="30" rows="10" placeholder="문의사항을 입력해주세요."></textarea> <br>
+                    <input type="email" name="inquiryEmail" id="otoEmail" placeholder="답장 받으실 이메일을 입력해주세요."> <br>
+                    <textarea name="inquiryContent" id="otoContent" cols="30" rows="10" placeholder="문의사항을 입력해주세요."></textarea> <br>
 
                     <label for="chooseFile">+ 사진 파일 첨부하기</label>
                     <input type="file" id="chooseFile" name="chooseFile" accept="image/*" multiple> <br>

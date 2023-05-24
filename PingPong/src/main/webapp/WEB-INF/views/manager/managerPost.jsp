@@ -117,15 +117,12 @@
                             <tbody>
                                 <c:choose>
                                     <c:when test="${empty ContentList}">
-                                        <%-- 조회된 탈퇴 회원 목록이 비어있거나 null인 경우 --%>
 
-                                        <!-- 탈퇴 회원 목록 조회 결과가 비어있다면 -->
                                         <tr>
                                             <th colspan="6">게시글이 존재하지 않습니다</th>
                                         </tr>
                                     </c:when>
                             <c:otherwise>
-                                <%-- 탈퇴 회원 목록 결과가 있다면 --%>
                                 <c:forEach items="${ContentList}" var="Content">
                                 <tr>
                                     <td>
@@ -135,7 +132,7 @@
                                     <td>
                                         <a href="/mypage/${Content.memberNo}">${Content.memberUrl}</a>
                                     </td>
-                                    <td>${Content.boardContent}</td> <!-- 한글 16글자 1줄 -->
+                                    <td><a href="/mypage/${Content.memberNo}?boardNo=${Content.boardNo}">${Content.boardContent}</a></td> <!-- 한글 16글자 1줄 -->
                                     <td>${Content.declarationCount}</td>
                                     <td>${Content.boardDelFl}</td>
                                 </tr>
@@ -167,5 +164,6 @@
 
     <script src="/resources/js/script.js"></script> <!-- 메인 헤더, 네브 js -->
     <script src="/resources/js/maneger/managerPost.js"></script>
+    <script src="/resources/js/personal/post.js"></script>
 </body>
 </html>

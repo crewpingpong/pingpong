@@ -75,13 +75,18 @@
                 <div class="admin-left-side-menu">
                     <div>받은 신고</div>
                     <div>
-                        <select name="select" id="">
-                            <option value="memberNo">ID</option>
-                            <option value="memberNo">NickName</option>
-                            <option value="memberNo">Email</option>
-                        </select>
-                        <input type="text">
-                        <button type="button">검색</button>
+            <form action="/manager/Report" method="get" id="boardSearch">
+
+                    <select name="key" id="searchKey">
+                        <option value="i">ID</option>
+                        <option value="n">게시글 번호</option>
+                        <option value="c">내용</option>
+                    </select>
+
+                    <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+                    <button>검색</button>
+            </form>
                     </div>
                     <div>
                         <table id="oneToOneTable">
@@ -115,8 +120,8 @@
                                     <tr>
                                         <td><input type="checkbox" name="choicebox" value="1"></td>
                                         <td>${Declaration.indictmentNo}</td>
-                                        <td><a href="/personalHome.html" class="reporter">${Declaration.memberUrl}</a></td>
-                                        <td><a href="/personalHome.html" class="respondent">${Declaration.boardNo}</a></a></td>
+                                        <td><a href="/mypage/${Declaration.memberNo}" class="reporter">${Declaration.memberUrl}</a></td>
+                                        <td><a href="/mypage/${Declaration.memberNo}?boardNo=${Declaration.boardNo}" class="respondent">${Declaration.boardNo}</a></a></td>
                                         <td><a href="/managerReportContent.html">${Declaration.indictmentContent}</a></td>
                                     </tr>
                                 </c:forEach>
@@ -145,5 +150,6 @@
 
     <script src="/resources/js/script.js"></script> <!-- 메인 헤더, 네브 js -->
     <script src="/resources/js/maneger/manager1To1Inquiry.js"></script>
+    <script src="/resources/js/personal/post.js"></script>
 </body>
 </html>
