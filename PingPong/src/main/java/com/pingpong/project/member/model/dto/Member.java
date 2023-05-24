@@ -39,6 +39,8 @@ public class Member {
    private String techName;
    private String techImg;
    
+   private String snsAddress;
+   
    private String memberInfo;
    private String memberCareer;
    private String memberCertificate;
