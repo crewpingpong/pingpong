@@ -401,8 +401,8 @@ Java를 이용한 백엔드 연결
                 <%-- <div><p>받은 메세지가 없습니다.</p></div> --%>
                 
             </div>
+            <p class="reciveUnderline">메세지함 비우기</p>
 
-            <%-- <p class="underline">메세지 비우기</p> --%>
             <%-- <p class="underline">읽지 않은 메세지 <span>0</span></p> --%>
         </div>
     </div>
@@ -431,9 +431,8 @@ Java를 이용한 백엔드 연결
                         <a>안녕하세요. 김핑퐁 입니다...</a>
                     </div>
                 </div> --%>
-                </div>
-            <%-- <p class="underline">메세지 비우기</p> --%>
             </div>
+            <p class="sendUnderline">메세지함 비우기</p>
             <%-- <p><span></span></p> --%>
         </div>
     </div>

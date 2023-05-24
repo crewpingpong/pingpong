@@ -38,12 +38,29 @@ public interface MessageService {
 
 
 
+	/** 받은 메세지 전체 삭제
+	 * @param i 
+	 * @return
+	 */
+	int reciveDelAll(int memberNo);
+
+	/** 보낸 메세지 전체 삭제
+	 * @param i 
+	 * @return
+	 */
+	int sendDelAll(int memberNo);
+
+	
+
 
 	/** 메세지 보내기
 	 * @param message
 	 * @return
 	 */
 	int sendMessage(Message message);
+
+	
+
 
 	
 	

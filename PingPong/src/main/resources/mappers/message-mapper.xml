@@ -86,6 +86,20 @@
 		AND MESSAGE_SEND_DEL_FL='N'
 	</update>
 	
+	<!-- 받은 메세지 전체 삭제 -->
+	<update id="reciveDelAll">
+		UPDATE MESSAGE
+		SET MESSAGE_DEL_FL='Y'
+		WHERE RECEIVED_MEMBER = #{memberNo}
+	</update>
+	
+	<!-- 보낸 메세지 전체 삭제 -->
+	<update id="sendDelAll">
+		UPDATE MESSAGE
+		SET MESSAGE_SEND_DEL_FL='Y'
+		WHERE SEND_MEMBER = #{memberNo}
+	</update>
+	
 	
 	<!-- 메세지 보내기 -->
 	<insert id="sendMessage">
