@@ -240,6 +240,26 @@
     	) A
     </insert>
     
+    <insert id="hashInsert" parameterType="list">
+    	INSERT INTO "HASHTAG"
+		SELECT SEQ_HASHTAG_NO.NEXTVAL, A.*
+    	FROM(
+    		<foreach collection="list" item="hash" separator=" UNION ">
+				SELECT #{hash.hashtagName} HASHTAG_NAME 
+				FROM DUAL 
+				WHERE (SELECT COUNT(*) FROM "HASHTAG" WHERE HASHTAG_NAME=#{hash.hashtagName}) = 0
+			</foreach>	
+    	) A
+    </insert>
+    
+    <insert id="hashBoardInsert" parameterType="list">
+    	INSERT INTO "HASHTAG_BOARD"	
+   		<foreach collection="list" item="hash" separator=" UNION ">
+			SELECT #{hash.boardNo} BOARD_NO, (SELECT HASH_NO FROM HASHTAG WHERE HASHTAG_NAME = #{hash.hashtagName})
+			FROM DUAL 
+		</foreach>	
+    </insert>
+    
     <insert id="insertComment" useGeneratedKeys="true" parameterType="Comment">
 	  <selectKey resultType="_int" keyProperty="commentNo" order="BEFORE">
 	    SELECT SEQ_COMMENT_NO.NEXTVAL FROM DUAL
@@ -304,6 +324,21 @@
 		WHERE BOARD_DEL_FL = 'N'
 		AND IMG_ORDER = 1
 		ORDER BY 1 DESC
+	</select>
+	
+	<!-- 슬라이드에 넣어줄 게시글 가져오기 (좋아요 많은 순) -->
+	<select id="selectMainList" resultMap="board_rm">
+		SELECT B.BOARD_NO, BI.IMG_ADDRESS AS THUMBNAIL, B.MEMBER_NO,
+		  (SELECT COUNT(*)
+		   FROM "LIKE"
+		   WHERE "LIKE".BOARD_NO = B.BOARD_NO
+		   ) AS LIKE_COUNT
+		FROM BOARD B
+		JOIN BOARD_IMG BI ON B.BOARD_NO = BI.BOARD_NO
+		WHERE B.BOARD_DEL_FL = 'N'
+		AND BI.IMG_ORDER = 1
+		ORDER BY LIKE_COUNT DESC
+		FETCH FIRST 12 ROWS ONLY
 	</select>
 
 	

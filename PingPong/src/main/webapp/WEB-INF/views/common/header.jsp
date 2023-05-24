@@ -6,6 +6,7 @@
     <script>
             let loginMemberNo = ${loginMember.memberNo};
             let loginMemberNickname = '${loginMember.memberNickname}';
+            let loginMemberAuthority = '${loginMember.authority}';
             // let boardNumber;
     </script>
 </c:if>
@@ -79,8 +80,8 @@
             
             <c:if test="${empty loginMember}">
                 <div class="signBtn"> <!-- 로그인 회원가입 버튼 -->
-                    <button type="button" class="colormain2" onclick="location.href='/member/login'">로그인</button>
-                    <button type="button" class="colorsub1" onclick="location.href='/member/signup'">회원가입</button>
+                    <button type="button" class="colormain2" onclick="location.href='/member/login'"><p>로그인</p></button>
+                    <button type="button" class="colorsub1" onclick="location.href='/member/signup'"><p>회원가입</p></button>
                 </div>
             </c:if>
     
@@ -195,6 +196,12 @@
                             </svg>
                             프로필
                         </a>
+                    </li>
+                </c:if>
+                <c:if test="${loginMember.authority eq 2}">
+                    <li>
+                        <%-- <button id="btn11" onclick="location.href='/manager/'">관리자 페이지</button> --%>
+                        <a id="btn11" href="/manager/">관리자 페이지</a>
                     </li>
                 </c:if>
                 <c:if test="${empty loginMember}" >

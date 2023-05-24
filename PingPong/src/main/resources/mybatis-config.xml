@@ -26,6 +26,7 @@
       <typeAlias type="com.pingpong.project.search.model.dto.SearchTag" alias="SearchTag" />
       <typeAlias type="com.pingpong.project.mypage.model.dto.Tech" alias="Tech" /> 
       <typeAlias type="com.pingpong.project.mypage.model.dto.Interest" alias="Interest" />
+      <typeAlias type="com.pingpong.project.mypage.model.dto.SNS" alias="SNS" />
 
 
    </typeAliases>

@@ -11,9 +11,12 @@
     <%-- <link rel="stylesheet" href="/resources/css/style.css"> <!-- 메인 헤더, 네브 css --> --%>
     <link rel="stylesheet" href="/resources/css/personal/post.css">
     <link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
+    <script>
+        let techImgList = "${techImgList}";
+    </script>
 </head>
 <body>
-
+    
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <!-- 개인 홈 프로필 -->
     <div class="personalHome">
@@ -57,7 +60,7 @@
                 </div>
 
                 <p class="profileName">${mypage.memberNickname}</p>
-                <p class="profileIntroduce">pingpong.net/${loginMember.memberUrl}</p>
+                <p class="profileIntroduce">pingpong.net/${mypage.memberUrl}</p>
                 <%-- <p class="profileIntroduce">${mypage.oneLiner}</p> --%>
                 <div class="profileBtn">
                     <!-- 팔로워 버튼 --> <!-- c:choose/c:when -->
@@ -107,20 +110,16 @@ ${mypage.memberInfo}
                             </div>
                             <h4 id="certificate">지식 / 기술</h4>
                             <!-- 아이콘 추가 기능 구현 -->
-                            <div>
-                                <c:choose>
-	                                <c:when test="${empty mypage.techList}">
-	                                    없음
-	                                </c:when>
-	                            
-	                                <c:otherwise>
-	                                    <c:forEach items="${techList}" var="tech">
-	                                        <div>
-	                                            <img src="${tech.techImg}" alt="${tech.techName}">
-	                                        </div>
-	                                    </c:forEach>
-	                                </c:otherwise>
-                            	</c:choose>
+                            <div class="certificate-main-con">
+                                <c:if test="${empty techImgList}">
+                                    없음
+                                </c:if>
+
+                                    <%--
+                                    <div class="certificate-sub-con">
+                                        <img class="tech-img-list" src="" alt="">
+                                    </div> 
+                                    --%>
                             </div>
                         </div>
                         <div id="profiletab2" class="cont">
@@ -283,6 +282,9 @@ ${mypage.memberCareer}
                     <div class="postcontent"> <!-- 게시글 내용 박스 -->
                         <div class="BoardPost">
                             <!-- 게시글 내용 들어가는 곳 -->
+                        </div>
+                        <div class="hashPost">
+                            <%-- 해시태그 들어가는 곳 --%>
                         </div>
                         <div class="Boardcontent1"> <!-- 게시글 내용 + 좋아요 수 -->
                     
@@ -564,7 +566,7 @@ ${mypage.memberCareer}
                                     <div class="upload-form-hashtag" align="center">
                                         <input type="text" placeholder="해시태그를 추가해보세요!" id="hashtag" name="hashtag">
                                         <button type="button" class="cta blue" onclick="addHashtag()">추가</button>
-                                        <input type="hidden" name="hashtagList">
+                                        <input type="hidden" name="hashtagLists">
                                     </div>
                                     <div class="countBox"><span class="NewWriteTextAreaCount">0</span><span>/2000</span></div>
                                     <div class="hashtagList" id="hashtagList"></div>
@@ -610,7 +612,6 @@ ${mypage.memberCareer}
     </div>
 
     <script>
-        // const mypage = "${mypage}";
         const followCheck = ${followCheck};
     </script>
     <script src="/resources/js/script.js"></script> <!-- 메인 헤더, 네브 js -->

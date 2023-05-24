@@ -25,12 +25,12 @@ $( document ).ready( function() {
 // }
 
 // 슬라이드 크기 조정
-const itemLeft = $(".slick-current").find(".item-picture");
-const itemMid = $(".slick-current").next().find(".item-picture");
-const itemRight = $(".slick-current").next().next().find(".item-picture");
+// const itemLeft = $(".slick-current").find(".item-picture");
+// const itemMid = $(".slick-current").next().find(".item-picture");
+// const itemRight = $(".slick-current").next().next().find(".item-picture");
 
-$(".slick-current").find(".item-picture").css({"width" : "80%"});
-$(".slick-current").next().next().find(".item-picture").css({"width" : "80%"});
+// $(".slick-current").find(".item-picture").css({"width" : "80%"});
+// $(".slick-current").next().next().find(".item-picture").css({"width" : "80%"});
 
 /*
 

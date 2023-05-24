@@ -25,6 +25,9 @@ public class MyPage {
 	private String memberCertificate;
 	private String oneLiner;
 	
+	private String memberUrl;
+	private String techImg;
+	
 	private List<Tech> techList;
 	private List<Interest> interestList;
 

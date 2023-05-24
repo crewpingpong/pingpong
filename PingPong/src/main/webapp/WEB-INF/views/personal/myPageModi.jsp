@@ -16,7 +16,7 @@
 </head>
 <body>
 
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
     <!-- 내 정보 수정 Tab Menu -->
     <div class="myPage-content-container">
@@ -96,41 +96,13 @@
                         <div class="interest-field-container">
                             <p>작업 & 관심 분야(선택)</p>
                             <div class="interest-field">
-                            
-                            	<%-- <c:forEach var="interest" items="${interestList}">
-	                                <div> 
-	                                    <label for="${interest.interestsNo}">
-	                                    	<input type="checkbox" value="${interest.interestsNo}" id="${interest.interestsNo}" name="interest"> ${interest.interestsName}
-	                                    </label>
-	                                </div>
-                                </c:forEach> --%>
-                                
-
-                                    <label for="IT-SW"><input type="checkbox" value="IT/SW" id="IT-SW" name="interest"> IT/SW</label> 
-                                    <label for="game"><input type="checkbox" value="게임" id="game" name="interest"> 게임</label> 
-                                    <label for="engineering"><input type="checkbox" value="공학" id="engineering" name="interest"> 공학</label>
-                                    <label for="education"><input type="checkbox" value="교육" id="education" name="interest"> 교육</label> 
-                                    <label for="marketing"><input type="checkbox" value="마케팅" id="marketing" name="interest"> 마케팅</label> 
-                                    <label for="finance"><input type="checkbox" value="금융" id="finance" name="interest"> 금융</label>  
-                                <div>
-                                    <label for="animal"><input type="checkbox" value="동물" id="animal" name="interest"> 동물</label>
-                                    <label for="design"><input type="checkbox" value="디자인" id="design" name="interest"> 디자인</label> 
-                                    <label for="beauty-fashion"><input type="checkbox" value="미용/패션" id="beauty-fashion" name="interest"> 미용/패션</label> 
-                                    <label for="boardcast"><input type="checkbox" value="방송" id="boardcast" name="interest"> 방송</label> 
-                                    <label for="law"><input type="checkbox" value="법/수사" id="law" name="interest"> 법/수사</label> 
-                                    <label for="welfare"><input type="checkbox" value="사회복지" id="welfare" name="interest"> 사회복지</label> 
-                                    <label for="sports"><input type="checkbox" value="스포츠" id="sports" name="interest"> 스포츠</label> 
-                                </div> 
-                                <div>
-                                    <label for="travel"><input type="checkbox" value="여행" id="travel" name="interest"> 여행</label> 
-                                    <label for="b-m-d"><input type="checkbox" value="책/영화/드라마" id="b-m-d" name="interest"> 책/영화/드라마</label> 
-                                    <label for="universe"><input type="checkbox" value="우주/항공" id="universe" name="interest"> 우주/항공</label> 
-                                    <label for="food"><input type="checkbox" value="음식" id="food" name="interest"> 음식</label> 
-                                    <label for="music"><input type="checkbox" value="음악" id="music" name="interest"> 음악</label> 
-                                    <label for="medical-bio"><input type="checkbox" value="의료/바이오" id="medical-bio" name="interest"> 의료/바이오</label> 
-                                    <label for="environment"><input type="checkbox" value="환경/생태" id="environment" name="interest"> 환경/생태</label> 
-                                </div> 
-                                                             
+                                <c:forEach var="interest" items="${interestList}">
+                                    <div> 
+                                        <label for="${interest.interestsNo}">
+                                            <input type="checkbox" value="${interest.interestsNo}" id="${interest.interestsNo}" name="interest"> ${interest.interestsName}
+                                        </label>
+                                    </div>
+                                </c:forEach> 
                             </div>
                         </div>
                     </div>
@@ -150,67 +122,48 @@
                         <!-- 소개 -->
                         <div class="introduce-change"> 
                             <p>소개</p>
-                            <input type="text" name="memberInfo" maxlength="40" placeholder="자기 소개를 입력해주세요."
-                            	value="${mypage.memberInfo}" id="memberInfo">
+                            <input type="text" name="memberInfo" maxlength="50" placeholder="자기 소개를 입력해주세요."
+                                value="${mypage.memberInfo}" id="memberInfo">
                         </div>
 
                         <!-- 커리어 -->
                         <div class="career-change"> 
                             <p>커리어</p>
-                            <input type="text" name="memberCareer" maxlength="40" placeholder="경력 / 수상 내역을 입력해주세요."
-                            	value="${mypage.memberCareer}" id="memberCareer">
+                            <input type="text" name="memberCareer" maxlength="50" placeholder="경력 / 수상 내역을 입력해주세요."
+                                value="${mypage.memberCareer}" id="memberCareer">
                         </div>
 
                         <!-- 자격증 -->
                         <div class="certificate-change"> 
                             <p>자격증</p>
-                            <input type="text" name="memberCertificate" maxlength="40" placeholder="보유중인 자격증을 입력해주세요."
-                            	value="${mypage.memberCertificate}" id="memberCertificate">
+                            <input type="text" name="memberCertificate" maxlength="50" placeholder="보유중인 자격증을 입력해주세요."
+                                value="${mypage.memberCertificate}" id="memberCertificate">
                         </div>                        
+
 
                         <!-- 지식 / 기술 -->
                         <div class="tech-field-container">
                             <p>지식 / 기술</p>
                             <div class="tech-field">
-
-                            	<c:forEach var="tech" items="${techList}">
-	                                <div>
-	                                    <label for="${tech.techNo}">
-	                                    	<input type="checkbox" value="${tech.techNo}" id="${tech.techNo}" name="tech"> ${tech.techName}
-	                                    </label>
-	                                </div>
+                                <c:forEach var="tech" items="${techList}">
+                                    <c:forEach var="ch" items="${checkTechList}">
+                                    
+                                        <c:if test="${tech.techNo == ch.techNo}">
+                                            <c:set var="checked" value="checked"/>
+                                        </c:if>
+                                        
+                                        
+                                    </c:forEach>
+                                    
+                                    
+                                    <div>
+                                        <label for="${tech.techNo}">
+                                            <input type="checkbox" value="${tech.techNo}" id="${tech.techNo}" name="tech" ${checked}> ${tech.techName}
+                                        </label>
+                                    </div>
+                                    
+                                    <c:remove var="checked"/>
                                 </c:forEach>
-
-                            
-	                                    <!-- 
-	                                    <label for="Ai"><input type="checkbox" value="일러스트" id="Ai" name="tech"> 일러스트</label> 
-	                                    <label for="Xd"><input type="checkbox" value="인디자인" id="Xd" name="tech"> 인디자인</label> 
-	                                    <label for="Pr"><input type="checkbox" value="그래픽 디자인" id="Pr" name="tech"> 그래픽 디자인</label>
-	                                    <label for="java"><input type="checkbox" value="자바" id="java" name="tech"> 자바</label>  
-	                                    -->
-                                <!-- 
-                                <div>
-                                    <label for="python"><input type="checkbox" value="파이썬" id="python" name="tech"> 파이썬</label> 
-                                    <label for="c"><input type="checkbox" value="씨언어" id="c" name="tech"> 씨언어</label> 
-                                    <label for="sql"><input type="checkbox" value="SQL" id="sql" name="tech"> SQL</label>
-                                    <label for="html"><input type="checkbox" value="HTML" id="html" name="tech"> HTML</label> 
-                                    <label for="css"><input type="checkbox" value="CSS" id="css" name="tech"> CSS</label> 
-                                </div> 
-                                <div>
-                                    <label for="js"><input type="checkbox" value="JavaScript" id="js" name="tech"> JavaScript</label> 
-                                    <label for="unity"><input type="checkbox" value="Unity" id="unity" name="tech"> Unity</label> 
-                                    <label for="exel"><input type="checkbox" value="엑셀" id="exel" name="tech"> 엑셀</label> 
-                                    <label for="access"><input type="checkbox" value="엑세스" id="access" name="tech"> 엑세스</label> 
-                                    <label for="powerpoint"><input type="checkbox" value="파워포인트" id="powerpoint" name="tech"> 파워포인트</label> 
-                                </div> 
-                                <div>  
-                                    <label for="word"><input type="checkbox" value="워드" id="word" name="tech"> 워드</label> 
-                                    <label for="hancom"><input type="checkbox" value="한글" id="hancom" name="tech"> 한글</label> 
-                                    <label for="chatGPT"><input type="checkbox" value="chat GPT" id="chatGPT" name="tech"> chat GPT</label> 
-                                    <label for="cubase"><input type="checkbox" value="큐베이스" id="cubase" name="tech"> 큐베이스</label> 
-                                    <label for="vegas"><input type="checkbox" value="베가스" id="vegas" name="tech"> 베가스</label> 
-                                </div>   
-                                -->                              
                             </div>
                         </div>
 
@@ -264,19 +217,19 @@
                         <!-- 현재 비밀번호 -->
                         <div class="current-password"> 
                             <p>현재 비밀번호</p>
-                            <input type="password" name="currentPw" id="currentPw" minlength="6" placeholder="6자 이상">
+                            <input type="password" name="currentPw" id="currentPw" placeholder="8자 이상">
                         </div>
 
                         <!-- 새 비밀번호 -->
                         <div class="new-password"> 
                             <p>새 비밀번호</p>
-                            <input type="password" name="newPw" id="newPw" minlength="6" placeholder="6자 이상">
+                            <input type="password" name="newPw" id="newPw" placeholder="8자 이상">
                         </div>
 
                         <!-- 새 비밀번호 확인 -->
                         <div class="new-password-check"> 
                             <p>새 비밀번호 확인</p>
-                            <input type="password" name="newPwConfirm" id="newPwConfirm" minlength="6" placeholder="6자 이상" autocomplete="off" required>
+                            <input type="password" name="newPwConfirm" id="newPwConfirm" placeholder="8자 이상" autocomplete="off" required>
                             <button class="password-change" id="changePwBtn" type="button">비밀번호 변경</button>
                         </div> 
                     </div>     
@@ -323,6 +276,10 @@
                         <div>
                             안녕하세요. 문의 드려요. 어쩌구 저쩌구 문제가 생겨서요....
                             <div class="inquiry-date">2023년 5월 9일</div> 
+                        </div>
+                        <div>
+                            안녕하세요. 문의 드려요. 문희눈~~꽃무늬가요~~~좋아요~~
+                            <div class="inquiry-date">2023년 5월 22일</div> 
                         </div>
                     </div>
                 </form>

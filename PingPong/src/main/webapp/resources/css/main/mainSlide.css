@@ -68,7 +68,7 @@
     font-family: 'slick';
     font-size: 20px;
     line-height: 1;
-
+    height: 80%;
     opacity: .75;
     color: rgb(26, 22, 22);
 
@@ -358,6 +358,7 @@ main{margin-top: 180px;}
 }
 /* 각 img의 div */
 .slider-item{
+  width: 500px; height: 300px;
   border-radius: 20px;
 }
 /* 슬라이드 모든 사진 상위 a */
@@ -368,7 +369,7 @@ main{margin-top: 180px;}
 /* 슬라이드 모든 사진 */
 .slider-item > .slider-item-link > .item-picture{
   width: 100%;
-  border-radius: 10%;
+  border-radius: 5%;
 }
 /* 메인 슬라이드 중앙 크기 */
 .slick-slide > div >div>a>.item-picture{
@@ -421,7 +422,7 @@ main{margin-top: 180px;}
 }
 
 .posttab_menu {
-  margin: 100px 0;
+  margin-bottom: 100px; margin-top: 60px;
 }
 
 .postlist {

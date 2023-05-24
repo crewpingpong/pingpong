@@ -51,12 +51,17 @@ header .menu_icon{margin-left: 50px;}
 header .alarm_search_box{margin-right: 50px;}
 header .alarm_icon{margin-right: 20px;}
 
-header .alarm_search_box{display: flex; position: relative;}
+header .alarm_search_box{display: flex; position: relative; height: 40px;}
 header .signBtn button{
     width: 100px; height: 35px; border-radius: 20px;
     color: #fff; font-size: 12px; font-weight: bold; background-color: #FFE69A;
+    position: relative; margin-bottom: 0;
 }
-header .signBtn .colormain2{margin-right: 20px; margin-left: 50px;}
+header .signBtn button >p{
+    color: #fff; font-size: 12px; font-weight: bold;
+    left: 0; bottom: 0; right: 0; margin: auto;
+}
+header .signBtn .colormain2{margin-right: 20px; margin-left: 50px; margin-bottom: 0;}
 header .signBtn{display: flex; align-items: center;}
 .signBtn button:hover{background-color: #FFD24C;}
 
@@ -127,7 +132,7 @@ display: none; z-index: 202;
 #logModContainer{
     width : 420px; height : 420px;
     border-radius: 20px; border: 1px solid #5C5C5C;
-    position: absolute; margin: auto;
+    position: fixed; margin: auto;
     top: 0; bottom: 0; left: 0; right: 0;
     background-color: white; z-index: 300;
     display: none;
@@ -223,7 +228,7 @@ display: none; z-index: 202;
 #searchModContainer{
     width : 500px; height : 600px; 
     border-radius: 20px; border: 1px solid black; 
-    position: absolute; margin: auto; 
+    position: fixed; margin: auto; 
     top: 0; bottom: 0; left: 0; right: 0; 
     background-color: white; z-index: 300; 
     display: none;
@@ -669,4 +674,14 @@ display: none; z-index: 202;
 .message-box-button>button:last-child{
     background-color: #FFD24C; border: none; color: #fff; 
     margin-left: 10px;
+}
+
+
+/* --------------------- */
+#btn11{ /* 임시 관리자 페이지 버튼 입니다.*/
+    position: absolute; width: 100px; height: 40px; 
+    background-color: #5286DC; top: 200px; left: 100px; 
+    border-radius: 20px; color: #fff; font-size: 14px;
+    text-align: center; padding-left: 10px;
+    margin: 96px;
 }

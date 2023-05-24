@@ -13,10 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pingpong.project.board.model.dto.Board;
+import com.pingpong.project.board.model.dto.Pagination;
 import com.pingpong.project.common.utility.Util;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.mypage.model.dao.MypageDAO;
+import com.pingpong.project.mypage.model.dto.Interest;
 import com.pingpong.project.mypage.model.dto.MyPage;
+import com.pingpong.project.mypage.model.dto.SNS;
 import com.pingpong.project.mypage.model.dto.Tech;
 import com.pingpong.project.mypage.model.exception.FileUploadException;
 
@@ -152,42 +155,71 @@ public class MypageServiceImpl implements MypageService{
 		return dao.selectBoardLikeList(memberNo);
 	}
 
-	// 지식/기술 리스트 조회
-	/*
-	 * @Override public List<Member> selectTechList(int memberNo) { 
-	 * return dao.selectTechList(memberNo); 
-	 * }
-	 */
-
 	// 프로필 정보 수정
 	@Override
 	public int updateProfileInfo(MyPage updateMyPage) {
 		return dao.updateProfileInfo(updateMyPage);
 	}
 
-	// 지식/기술 리스트 조회
+	
+	
+	
+	// 전체 지식/기술 리스트 조회
 	@Override
 	public List<Tech> selectTechList() {
 		return dao.selectTechList();
 	}
-
-	// 선택된 지식기술 리스트 삽입
+	
+	// 선택된 지식/기술 리스트 조회
 	@Override
-	public int insertTechList(List<String> selectedtechList) {
-		return dao.insertTechList(selectedtechList);
+	public List<Tech> seletCheckTechList(int memberNo) {
+		return dao.seletCheckTechList(memberNo);
+	}
+	
+	// 선택된 지식/기술 리스트 삽입
+	@Override
+	public int insertNewTechList(Map<String, Object> techMap) {
+		return dao.insertNewTechList(techMap);
+	}
+	// 지식/기술 리스트 전체 삭제
+	@Override
+	public int techListDeleteAll(int memberNo) {
+		return dao.techListDeleteAll(memberNo);
+	}
+	
+	
+	
+	
+
+
+	
+	
+
+	
+	
+	// 전체 관심분야 리스트 조회
+	@Override
+	public List<Interest> selectInterestList() {
+		return dao.selectInterestList();
 	}
 
-	// 선택된 지식기술 리스트 조회
+	// 전체 SNS 리스트 조회
 	@Override
-	public int selectTechCount(List<String> selectedtechList) {
-		return dao.selectTechCount(selectedtechList);
+	public List<SNS> selectSNSList() {
+		return dao.selectSNSList();
 	}
 
-	// 선택된 지식기술 리스트 삭제
+	// 선택한 techImgList 조회
 	@Override
-	public int deleteTechList(List<String> selectedtechList) {
-		return dao.deleteTechList(selectedtechList);
+	public List<Tech> seletCheckTechImgList(int memberNo) {
+		return dao.seletCheckTechImgList(memberNo);
 	}
+
+
+
+	
+
+
 
 
 }
