@@ -129,7 +129,7 @@
                                                 </td>
                                                 <td>${Comment.commentNo}</td>
                                                 <td>${Comment.boardNo}</td>
-                                                <td><a href="/manager1To1Content.html">${Comment.commentContent}</a></td>
+                                                <td><a href="/mypage/${Comment.memberNo}?boardNo=${Comment.boardNo}">${Comment.commentContent}</a></td>
                                                 <td>
                                                     <a href="/mypage/${Comment.memberNo}">${Comment.memberUrl}</a>
                                                 </td>
@@ -162,5 +162,7 @@
 
     <script src="/resources/js/script.js"></script> <!-- 메인 헤더, 네브 js -->
     <script src="/resources/js/maneger/manageComment.js"></script>
+    <script src="/resources/js/personal/post.js"></script>
+    
 </body>
 </html>
