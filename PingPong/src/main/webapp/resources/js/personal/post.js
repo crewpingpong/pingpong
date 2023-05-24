@@ -1693,3 +1693,23 @@ for (let i = 0; i < urlList.length; i++) {
     let mainConElement = document.querySelector('.certificate-main-con');
     mainConElement.appendChild(subConElement);
 }
+
+
+
+/* SNS 아이콘 */
+snsImgList = snsImgList.replace(/\[|\]/g, '').trim();
+let snsUrlList = snsImgList.split(', ');
+for (let i = 0; i < snsUrlList.length; i++) {
+    let imgElement = document.createElement('img');
+    imgElement.className = 'sns-img-list';
+    imgElement.src = snsUrlList[i];
+    imgElement.alt = '';
+
+    let subConElement = document.createElement('div');
+    subConElement.className = 'forSNSIcon-sub';
+    subConElement.appendChild(imgElement);
+
+    let mainConElement = document.querySelector('.forSNSIcon-main');
+    mainConElement.appendChild(subConElement);
+
+}
