@@ -148,21 +148,25 @@ public class MypageDAO {
 	public int insertNewTechList(Map<String, Object> techMap) {
 		return sqlSession.insert("mypageMapper.insertNewTechList", techMap);
 	}
-	
-	/** 지식/기술 삽입 전 전체 삭제
+
+	/**
+	 * 지식/기술 삽입 전 전체 삭제
+	 * 
 	 * @param memberNo
 	 * @return
 	 */
 	public int techListDeleteAll(int memberNo) {
 		return sqlSession.delete("mypageMapper.techListDeleteAll", memberNo);
 	}
-	
-	/** 체크 해제된 지식/기술 한개씩 삭제
-	 * @param techMap
-	 * @return
+
+	/**
+	 * 선택한 techImgList 조회
+	 * 
+	 * @param memberNo
+	 * @return List
 	 */
-	public int deleteNewTechList(Map<String, Object> techMap) {
-		return sqlSession.delete("mypageMapper.deleteNewTechList", techMap);
+	public List<Tech> seletCheckTechImgList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.seletCheckTechImgList", memberNo);
 	}
 
 	
@@ -237,6 +241,14 @@ public class MypageDAO {
 	 */
 	public int snsListDeleteAll(int memberNo) {
 		return sqlSession.delete("mypageMapper.insertNewSnsList", memberNo);
+	}
+
+	/** 선택한 snsImgList 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public List<SNS> selectCheckSNSImgList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.selectCheckSNSImgList", memberNo);
 	}
 
 

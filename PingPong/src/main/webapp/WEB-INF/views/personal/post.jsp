@@ -40,6 +40,11 @@
                 <c:when test="${not empty mypage.backgroundImage}">
                     <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
                         <img class="preview" src="${mypage.backgroundImage}">
+                        <div class="forSNSIcon">
+                            <c:if test="${empty snsImgList}">
+                            으악
+                            </c:if>
+                        </div>
                     </div>
                 </c:when>
             

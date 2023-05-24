@@ -169,23 +169,29 @@ public class MypageServiceImpl implements MypageService{
 	public List<Tech> selectTechList() {
 		return dao.selectTechList();
 	}
-	
+
 	// 선택된 지식/기술 리스트 조회
 	@Override
 	public List<Tech> selectCheckTechList(int memberNo) {
 		return dao.selectCheckTechList(memberNo);
 	}
-	
+
 	// 선택된 지식/기술 리스트 삽입
 	@Override
 	public int insertNewTechList(Map<String, Object> techMap) {
 		return dao.insertNewTechList(techMap);
 	}
-	
+
 	// 지식/기술 리스트 전체 삭제
 	@Override
 	public int techListDeleteAll(int memberNo) {
 		return dao.techListDeleteAll(memberNo);
+	}
+
+	// 선택한 techImgList 조회
+	@Override
+	public List<Tech> seletCheckTechImgList(int memberNo) {
+		return dao.seletCheckTechImgList(memberNo);
 	}
 	
 	
@@ -249,6 +255,14 @@ public class MypageServiceImpl implements MypageService{
 	public int snsListDeleteAll(int memberNo) {
 		return dao.snsListDeleteAll(memberNo);
 	}
+
+	// 선택한 snsImgList 조회
+	@Override
+	public List<SNS> selectCheckSNSImgList(int memberNo) {
+		return dao.selectCheckSNSImgList(memberNo);
+	}
+
+
 
 
 	

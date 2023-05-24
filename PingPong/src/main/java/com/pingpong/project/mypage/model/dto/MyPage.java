@@ -27,6 +27,7 @@ public class MyPage {
 	
 	private String memberUrl;
 	private String techImg;
+	private String snsImg;
 	
 	private List<Tech> techList;
 	private List<Interests> interestList;

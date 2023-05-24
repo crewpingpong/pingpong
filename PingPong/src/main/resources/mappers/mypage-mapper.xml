@@ -13,6 +13,7 @@
 		<result property="memberUrl" column="MEMBER_URL"/>
 		<result property="memberCertificate" column="MEMBER_CERTIFICATE"/>
 		<result property="techImg" column="TECH_IMG"/>
+		<result property="snsImg" column="SNS_IMG"/>
 		
 		<collection property="techList" 
 					select="selectTechList"
@@ -48,6 +49,7 @@
 		<id property="snsNo" column="SNS_NO"/>
 		<result property="snsName" column="SNS_NAME"/>
 		<result property="snsImg" column="SNS_IMG"/>	
+		<result property="snsAddress" column="SNS_ADDRESS"/>	
 		<result property="memberNo" column="MEMBER_NO"/>
 	</resultMap>
 
@@ -171,7 +173,7 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</select>
 	
-	<!-- 체크된 interestList 삽입 -->
+	<!-- 체크된 interestList 한개씩 삽입 -->
 	<insert id="insertNewInterestList">
 		INSERT INTO "MEMBER_INTERESTS"
 		VALUES(SEQ_TECH_NO.NEXTVAL, #{memberNo}, #{interestsNo})
@@ -188,13 +190,13 @@
 	
 	<!-- 전체 SNS 조회 -->
 	<select id="selectSNSList" resultMap="SNS_rm">
-		SELECT SNS_NO, SNS_NAME, SNS_IMG
+		SELECT SNS_NO, SNS_NAME, SNS_IMG, SNS_ADDRESS
 		FROM SNS
 	</select>
 
 	<!-- 선택한 SNSList 조회 -->
 	<select id="seletCheckSNSList" resultMap="SNS_rm">
-		SELECT MEMBER_SNS_NO, SNS_NO, SNS_NAME, SNS_IMG, MEMBER_NO
+		SELECT MEMBER_SNS_NO, SNS_NO, SNS_NAME, SNS_IMG, SNS_ADDRESS, MEMBER_NO
 		FROM MEMBER_SNS
 		JOIN SNS USING (SNS_NO)
 		WHERE MEMBER_NO = #{memberNo}
@@ -211,6 +213,14 @@
 		DELETE FROM "MEMBER_SNS"
 		WHERE MEMBER_NO = #{memberNo}
 	</delete>
+	
+	<!-- 선택한 snsImgList 조회 -->
+	<select id="selectCheckSNSImgList" resultMap="SNS_rm">
+		SELECT SNS_IMG
+		FROM "MEMBER_SNS"
+		JOIN "SNS" USING (SNS_NO)
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
 	
 	
 	

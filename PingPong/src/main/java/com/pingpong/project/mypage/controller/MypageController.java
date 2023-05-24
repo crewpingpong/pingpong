@@ -84,15 +84,28 @@ public class MypageController {
 		
 		
 		// 선택한 techImgList 조회
-//		List<Tech> checkTechImgList = service.seletCheckTechImgList(loginMember.getMemberNo());
+		List<Tech> checkTechImgList = service.seletCheckTechImgList(loginMember.getMemberNo());
+		  
+		List<String> techImgList = new ArrayList<>();
 		
-//		List<String> techImgList = new ArrayList<>();
-//		
-//		for (Tech tech : checkTechImgList) {
-//		    techImgList.add(tech.getTechImg());
-//		}
-//		model.addAttribute("techImgList", techImgList);
-//		
+		for (Tech tech : checkTechImgList) {
+		    techImgList.add(tech.getTechImg());
+		}
+		model.addAttribute("techImgList", techImgList);
+		
+		
+		
+		// 선택한 snsImgList 조회
+		List<SNS> checkSNSImgList = service.selectCheckSNSImgList(loginMember.getMemberNo());
+		  
+		List<String> snsImgList = new ArrayList<>();
+		
+		for (SNS sns : checkSNSImgList) {
+			snsImgList.add(sns.getSnsImg());
+		}
+		model.addAttribute("snsImgList", snsImgList);
+	      
+	      
 		return "personal/post";
 	}
 	
@@ -155,7 +168,7 @@ public class MypageController {
 	// 내 정보 편집
 	@PostMapping("/myPageModi")
 	public String updateInfoAndProfile(Member updateMember
-									, @RequestParam(value="profileImage", required=false) MultipartFile profileImage
+									, @RequestParam(value="updateProfile", required=false) MultipartFile profileImage
 									, @RequestParam(value="interest", required=false) String[] interestArray
 									, @SessionAttribute("loginMember") Member loginMember
 									, @SessionAttribute("mypage") MyPage mypage
@@ -233,7 +246,7 @@ public class MypageController {
 
 	    ra.addFlashAttribute("message", message);
 
-	    return "personal/post";
+	    return "redirect:/mypage/" + loginMember.getMemberNo();
 	}
 
 	
@@ -295,7 +308,7 @@ public class MypageController {
 			techMap.put("techNo", tech);
 			techMap.put("memberNo", loginMember.getMemberNo());
 			
-			System.out.println("techMap : " + techMap);
+//			System.out.println("techMap : " + techMap);
 			
 			int result = service.insertNewTechList(techMap);
 		}
@@ -307,7 +320,7 @@ public class MypageController {
 		int snsListDelete =  service.snsListDeleteAll(loginMember.getMemberNo());
 				
 		
-		// 체크된 techList 삽입
+		// 체크된 snsList 삽입
 		for(String sns : selectedSnsList) {	
 			
 			Map<String, Object> snsMap = new HashMap<>();

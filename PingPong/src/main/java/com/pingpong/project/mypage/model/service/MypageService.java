@@ -113,6 +113,12 @@ public interface MypageService {
 	 */
 	int techListDeleteAll(int memberNo);
 	
+	/** 선택한 techImgList 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<Tech> seletCheckTechImgList(int memberNo);
+	
 	
 	
 	
@@ -166,6 +172,14 @@ public interface MypageService {
 	 * @return
 	 */
 	int snsListDeleteAll(int memberNo);
+
+	/** 선택한 snsImgList 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<SNS> selectCheckSNSImgList(int memberNo);
+
+
 
 
 	
