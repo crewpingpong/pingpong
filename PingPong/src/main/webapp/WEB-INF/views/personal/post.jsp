@@ -558,6 +558,7 @@ ${mypage.memberCareer}
                                         </div>
 
                                     </div>
+                                    
                                     <textarea class="NewWriteTextArea" name="boardContent" maxlength="2000" cols="30" rows="10" placeholder="문구 입력.."></textarea>
                                     <!-- <div class="NewWriteTextArea" id="hashtag-input" contenteditable="true" role="textbox" spellcheck="true" data-lexical-editor="true" style="user-select: text; white-space: pre-wrap; word-break: break-word;"></div> -->
                                     <div class="upload-form-hashtag" align="center">

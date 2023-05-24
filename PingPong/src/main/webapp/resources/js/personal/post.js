@@ -909,20 +909,20 @@ insertComment.addEventListener("click", e=>{
 // 해시태그 입력하면 리스트 나오는 함수
 const hashtagInput = document.getElementById("hashtag");
 const hashList1 = document.querySelector(".hashList");
-    hashtagInput.addEventListener("keyup", e=>{
-        hashList1.innerHTML = '';
-        const data = e.target.value;
-        if(data.length>0){
-            fetch("/board/hashtag?hashtagName="+data)
-            .then(resp => resp.json())
-            .then(hashList => {
-                console.log(hashList);
-                for(let i=0;i<hashList.length;i++){
-                    hashList1.innerHTML += `<li>#${hashList[i].hashtagName}</li>`
-                }
-            })
-        }
-    })    
+hashtagInput.addEventListener("keyup", e=>{
+    hashList1.innerHTML = '';
+    const data = e.target.value;
+    if(data.length>0 && data[0] != '#'){
+        fetch("/board/hashtag?hashtagName="+data)
+        .then(resp => resp.json())
+        .then(hashList => {
+            console.log(hashList);
+            for(let i=0;i<hashList.length;i++){
+                hashList1.innerHTML += `<li onclick="addHashList(this)">#${hashList[i].hashtagName}</li>`
+            }
+        })
+    }
+})    
 
 
 
@@ -1510,13 +1510,21 @@ window.addEventListener("resize", () => {
     }
 });
 
-// 해시태그 추가
+// 추가버튼 클릭시 해시태그 추가
 function addHashtag() {
     let hashtag = document.getElementById("hashtag").value;
     let item = getHashtagItem(hashtag);
 
     document.getElementById("hashtagList").insertAdjacentHTML("beforeend", item);
 }
+// 해시 리스트 클릭 시 해시태그 추가
+function addHashList(event){
+    let hashtag = event.innerText.slice(1);
+    let item = getHashtagItem(hashtag);
+    document.getElementById("hashtagList").insertAdjacentHTML("beforeend", item);
+    event.parentNo.innerHTML = '';
+}
+
 
 // 해시태그 제거
 function removeHashtag(hashtag) {
