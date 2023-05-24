@@ -57,7 +57,7 @@ public interface BoardService {
 	 * @param hashtags
 	 * @return hashtagList
 	 */
-	List<Hashtag> getHashtags(Map<String, String> hashtags);
+	List<Hashtag> getHashtags(String hashtagName);
 
 	/** 댓글 삭제
 	 * @param commentNo
