@@ -236,7 +236,7 @@ public class MypageController {
 			 interestMap.put("interestsNo", interest); 
 			 interestMap.put("memberNo", loginMember.getMemberNo());
 			  
-			 System.out.println("interestMap : " + interestMap);
+//			 System.out.println("interestMap : " + interestMap);
 		 
 			 int result = service.insertNewInterestList(interestMap); 
 		 }

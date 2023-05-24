@@ -240,7 +240,7 @@ public class MypageDAO {
 	 * @return
 	 */
 	public int snsListDeleteAll(int memberNo) {
-		return sqlSession.delete("mypageMapper.insertNewSnsList", memberNo);
+		return sqlSession.delete("mypageMapper.snsListDeleteAll", memberNo);
 	}
 
 	/** 선택한 snsImgList 조회
