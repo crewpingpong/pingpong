@@ -95,8 +95,8 @@ public class BoardDAO {
 	 * @param hashtags
 	 * @return
 	 */
-	public List<Hashtag> getHashtags(Map<String, String> hashtags) {
-		return sqlSession.selectList("boardMapper.selectHashtagList", hashtags);
+	public List<Hashtag> getHashtags(String hashtagName) {
+		return sqlSession.selectList("boardMapper.selectSelectHashtagList", hashtagName);
 	}
 
 	/** 댓글 삭제

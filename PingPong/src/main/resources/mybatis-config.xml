@@ -20,6 +20,7 @@
       <typeAlias type="com.pingpong.project.board.model.dto.Hashtag" alias="Hashtag" />
       <typeAlias type="com.pingpong.project.mypage.model.dto.MyPage" alias="MyPage" />
       <typeAlias type="com.pingpong.project.board.model.dto.Inquiry" alias="Inquiry" />
+      <typeAlias type="com.pingpong.project.qna.model.dto.InquiryImage" alias="InquiryImage" />
       <typeAlias type="com.pingpong.project.board.model.dto.Declaration" alias="Declaration" />
       <typeAlias type="com.pingpong.project.message.model.dto.Follow" alias="Follow" />
       <typeAlias type="com.pingpong.project.search.model.dto.SearchTag" alias="SearchTag" />
@@ -40,6 +41,7 @@
       <mapper resource="/mappers/ajax-mapper.xml" />
       <mapper resource="/mappers/board-mapper.xml" />
       <mapper resource="/mappers/alarm-mapper.xml" />
+      <mapper resource="/mappers/inquiry-mapper.xml" />
 
    </mappers>
 </configuration>
