@@ -107,6 +107,7 @@ public class MypageController {
 	      
 	      
 		return "personal/post";
+		
 	}
 	
 	// 내 정보 수정으로 이동
