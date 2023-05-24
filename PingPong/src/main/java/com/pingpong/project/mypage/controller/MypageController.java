@@ -83,7 +83,7 @@ public class MypageController {
 		model.addAttribute("mefollowList", mefollowList);
 		
 		
-		// 선택한 techImgList 조회
+		// 선택한 techImgList 조회 (아이콘)
 		List<Tech> checkTechImgList = service.seletCheckTechImgList(loginMember.getMemberNo());
 		  
 		List<String> techImgList = new ArrayList<>();
@@ -93,9 +93,11 @@ public class MypageController {
 		}
 		model.addAttribute("techImgList", techImgList);
 		
+//		System.out.println(techImgList);
 		
 		
-		// 선택한 snsImgList 조회
+		
+		// 선택한 snsImgList 조회 (아이콘)
 		List<SNS> checkSNSImgList = service.selectCheckSNSImgList(loginMember.getMemberNo());
 		  
 		List<String> snsImgList = new ArrayList<>();
@@ -104,10 +106,11 @@ public class MypageController {
 			snsImgList.add(sns.getSnsImg());
 		}
 		model.addAttribute("snsImgList", snsImgList);
+		
+//		System.out.println(snsImgList);
 	      
 	      
 		return "personal/post";
-		
 	}
 	
 	// 내 정보 수정으로 이동
@@ -257,7 +260,6 @@ public class MypageController {
 	public String updateProfileInfo(MyPage updateMyPage
 			, @RequestParam(value="tech", required=false) String[] techArray
 			, @RequestParam(value="SNS", required=false) String[] SNSArray
-			
 			, @SessionAttribute("mypage") MyPage mypage
 			, @SessionAttribute("loginMember") Member loginMember
 			, RedirectAttributes ra
@@ -329,7 +331,7 @@ public class MypageController {
 			snsMap.put("snsNo", sns);
 			snsMap.put("memberNo", loginMember.getMemberNo());
 			
-			System.out.println("snsMap : " + snsMap);
+//			System.out.println("snsMap : " + snsMap);
 			
 			int result = service.insertNewSnsList(snsMap);
 		}
