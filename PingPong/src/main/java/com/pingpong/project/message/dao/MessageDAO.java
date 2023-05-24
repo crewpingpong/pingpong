@@ -38,11 +38,24 @@ public class MessageDAO {
 	public int delSendmessage(int delNo) {
 		return sqlsession.update("messageMapper.delSendmessage",delNo);
 	}
-
-
 	
+	// 받은 메세지 전체 삭제
+	public int reciveDelAll(int memberNo) {
+		return sqlsession.update("messageMapper.reciveDelAll",memberNo);
+	}
+
+	// 보낸 메세지 전체 삭제
+	public int sendDelAll(int memberNo) {
+		return sqlsession.update("messageMapper.sendDelAll",memberNo);
+	}
+	
+
+
+	// 메세지 보내기
 	public int sendMessage(Message message) {
 		return sqlsession.insert("messageMapper.sendMessage",message);
 	}
+
+
 	
 }

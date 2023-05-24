@@ -48,6 +48,20 @@ public class MessageServiceImpl implements MessageService{
 		return dao.delSendmessage(delNo);
 	}
 
+	
+	
+	// 받은 메세지 전체 삭제
+	@Override
+	public int reciveDelAll(int memberNo) {
+		return dao.reciveDelAll(memberNo);
+	}
+
+	// 받은 메세지 전체 삭제
+	@Override
+	public int sendDelAll(int memberNo) {
+		return dao.sendDelAll(memberNo);
+	}
+
 	// 메세지 보내기
 	@Transactional(rollbackFor = Exception.class)
 	@Override

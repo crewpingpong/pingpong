@@ -85,10 +85,21 @@ document.addEventListener("DOMContentLoaded",()=>{
     messageBoXreciveX = document.querySelector(".message-Box-recive .message-Box-X");
     messageBoXrecive = document.querySelector(".message-Box-recive");
 
+    if(messageBoXreciveX!=null){
+        messageBoXreciveX.addEventListener("click",()=>{ // 받은 메세지함 닫기
+            messageBoXrecive.style.display="none";
+        })
+    }
+
     // 보낸 메세지 함
     messageBoXsendX = document.querySelector(".message-Box-send .message-Box-X");
     messageBoXsend = document.querySelector(".message-Box-send");
 
+    if(messageBoXsendX!=null){
+        messageBoXsendX.addEventListener("click",()=>{ // 보낸 메세지함 닫기
+            messageBoXsend.style.display="none";
+        })
+    }
 
     // 보낸 메세지 함 -> 받은 메세지 함
     gotoMessagerecive1 = document.querySelector(".goto-message-Box-recive").parentElement;
@@ -130,6 +141,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     // 받은 메세지 닫기
     messagebuttonxRe = document.querySelector(".message-recieve .recieve-message-x");
 
+    
     // 받은 메세지에서 답장 버튼 눌러서 메세지 전송 열기
     recieveMessageSend = document.querySelector(".recieve-message-send");
 
@@ -285,9 +297,9 @@ function gotoMessageFn(){ // 받은 메세지 함으로 가는 함수
                 textContainer.appendChild(message);
                 newMessage.appendChild(textContainer);
 
-                messageBoXreciveX.addEventListener("click",()=>{ // 받은 메세지함 닫기
-                    messageBoXrecive.style.display="none";
-                })
+                // messageBoXreciveX.addEventListener("click",()=>{ // 받은 메세지함 닫기
+                //     messageBoXrecive.style.display="none";
+                // })
                 // 메세지 상세 보기
                 textContainer.addEventListener('click', e=>{
                     messageBoXrecive.style.display="none"; 
@@ -390,7 +402,7 @@ function gotoMessageFn(){ // 받은 메세지 함으로 가는 함수
             }
 
         } else {
-            recivemessageList.innerHTML="<div><p> 받은 메세지가 없습니다.</p></div>"; 
+            recivemessageList.innerHTML="<div><p class='userSelectNone'> 받은 메세지가 없습니다.</p></div>"; 
         }
 
         MessageSendBox.style.display = "none"; /* 메세지 보내기 닫기 */ 
@@ -452,9 +464,9 @@ function gotoMessagesendFn(){ // 보낸 메세지 함으로 가는 함수
                 newMessage.appendChild(textContainer);
         
                 // 보낸 메세지 닫기
-                messageBoXsendX.addEventListener("click",()=>{
-                    messageBoXsend.style.display="none";
-                })
+                // messageBoXsendX.addEventListener("click",()=>{
+                //     messageBoXsend.style.display="none";
+                // })
 
 
 
@@ -538,7 +550,7 @@ function gotoMessagesendFn(){ // 보낸 메세지 함으로 가는 함수
             }
 
     } else {
-        sendMessageList.innerHTML="<div><p> 보낸 메세지가 없습니다.</p></div>"; 
+        sendMessageList.innerHTML="<div><p class='userSelectNone'> 보낸 메세지가 없습니다.</p></div>"; 
 
     }   
         MessageSendBox.style.display = "none"; /* 메세지 보내기 닫기 */ 
@@ -600,3 +612,52 @@ function postMessageSendFn(){ // 메세지 전송 함수
     })
 
 }
+
+
+const reciveUnderline = document.querySelector(".reciveUnderline");
+const sendUnderline = document.querySelector(".sendUnderline");
+
+// 받은 메세지 전체 비우기
+reciveUnderline.addEventListener("click", e =>{
+    // messageResendBox.value;
+
+    if(!confirm("전체 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.")){
+        return;
+    }
+
+    fetch("/message/reciveDelAll")
+    .then(resp => resp.text())
+    .then(result => {
+        if(result>0){
+            alert("삭제되었습니다.");
+            gotoMessagesendFn();
+        } else{
+            alert("메세지 삭제 실패");
+        }
+    })
+    .catch(err =>{
+        console.log(err);
+    })
+})
+// 받은 메세지 전체 비우기
+sendUnderline.addEventListener("click", e =>{
+    // messageResendBox.value;
+
+    if(!confirm("전체 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.")){
+        return;
+    }
+
+    fetch("/message/sendDelAll")
+    .then(resp => resp.text())
+    .then(result => {
+        if(result>0){
+            alert("삭제되었습니다.");
+            gotoMessagesendFn();
+        } else{
+            alert("메세지 삭제 실패");
+        }
+    })
+    .catch(err =>{
+        console.log(err);
+    })
+})
