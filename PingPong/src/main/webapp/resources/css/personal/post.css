@@ -280,6 +280,10 @@
     visibility: hidden;
 }
 
+.innerDiv>p{
+    white-space: pre-wrap;
+}
+
 .BoardMainContainer {
     display: flex; justify-content: space-between;
     /* width: 73%; height: 74%;  */
@@ -701,9 +705,10 @@
 .BoardPost2{
     margin-right:16px;
 }
-.innerDiv a{
+.hashPost>span{
     margin-right:8px;
 }
+
 
 .BoardPost1 a img{
     width: 40px; height: 40px;

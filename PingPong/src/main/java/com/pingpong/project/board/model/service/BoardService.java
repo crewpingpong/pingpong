@@ -51,7 +51,7 @@ public interface BoardService {
 	 * @param paramMap
 	 * @return result
 	 */
-	int boardEditing(Map<String, Object> paramMap);
+	Board boardEditing(Map<String, Object> paramMap);
 
 	/** 해시태그 리스트 반환
 	 * @param hashtags

@@ -31,7 +31,7 @@ public class BoardController2 {
 	@Autowired
 	private BoardService2 service;
 	
-	
+	// 게시글 삽입
 	@PostMapping("/boardInsert")
 	public String boardInsert(
 			@SessionAttribute("loginMember") Member loginMember

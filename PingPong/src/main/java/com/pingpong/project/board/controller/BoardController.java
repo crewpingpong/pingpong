@@ -58,7 +58,7 @@ public class BoardController {
     
     // 게시글 수정
     @PostMapping("/board/editing")
-    public int boardEditing(@RequestBody Map<String, Object> paramMap) {
+    public Board boardEditing(@RequestBody Map<String, Object> paramMap) {
     	
     	return service.boardEditing(paramMap);
     }
