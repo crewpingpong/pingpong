@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Interest {
+public class Interests {
 
 	private int interestsNo;
 	private String interestsName;

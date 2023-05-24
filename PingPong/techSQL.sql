@@ -110,6 +110,8 @@ VALUES(20, '베가스 ', '/resources/images/personal/techIcon/certiIcon20_vegas.
 
 
 
+
+
 ---------------------
 -- alter table [테이블명] drop [컬럼명];
 ALTER TABLE "MEMBER_PROFILE" DROP COLUMN MEMBER_TECH;
@@ -241,3 +243,5 @@ FROM "pingpong".MEMBER_PROFILE;
 
 
 SELECT * FROM "TECH";
+SELECT * FROM "INTERESTS";
+SELECT * FROM "SNS";

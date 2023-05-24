@@ -17,7 +17,7 @@ import com.pingpong.project.board.model.dto.Pagination;
 import com.pingpong.project.common.utility.Util;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.mypage.model.dao.MypageDAO;
-import com.pingpong.project.mypage.model.dto.Interest;
+import com.pingpong.project.mypage.model.dto.Interests;
 import com.pingpong.project.mypage.model.dto.MyPage;
 import com.pingpong.project.mypage.model.dto.SNS;
 import com.pingpong.project.mypage.model.dto.Tech;
@@ -169,22 +169,29 @@ public class MypageServiceImpl implements MypageService{
 	public List<Tech> selectTechList() {
 		return dao.selectTechList();
 	}
-	
+
 	// 선택된 지식/기술 리스트 조회
 	@Override
-	public List<Tech> seletCheckTechList(int memberNo) {
-		return dao.seletCheckTechList(memberNo);
+	public List<Tech> selectCheckTechList(int memberNo) {
+		return dao.selectCheckTechList(memberNo);
 	}
-	
+
 	// 선택된 지식/기술 리스트 삽입
 	@Override
 	public int insertNewTechList(Map<String, Object> techMap) {
 		return dao.insertNewTechList(techMap);
 	}
+
 	// 지식/기술 리스트 전체 삭제
 	@Override
 	public int techListDeleteAll(int memberNo) {
 		return dao.techListDeleteAll(memberNo);
+	}
+
+	// 선택한 techImgList 조회
+	@Override
+	public List<Tech> seletCheckTechImgList(int memberNo) {
+		return dao.seletCheckTechImgList(memberNo);
 	}
 	
 	
@@ -199,21 +206,62 @@ public class MypageServiceImpl implements MypageService{
 	
 	// 전체 관심분야 리스트 조회
 	@Override
-	public List<Interest> selectInterestList() {
+	public List<Interests> selectInterestList() {
 		return dao.selectInterestList();
 	}
+	
+	// 선택한 interestList 조회
+	@Override
+	public List<Interests> selectCheckInterestList(int memberNo) {
+		return dao.selectCheckInterestList(memberNo);
+	}
+	
+	// 체크된 interestList 삽입
+	@Override
+	public int insertNewInterestList(Map<String, Object> interestMap) {
+		return dao.insertNewInterestList(interestMap);
+	}
+	
+	// interestList 리스트 전체 삭제
+	@Override
+	public int interestListDeleteAll(int memberNo) {
+		return dao.interestListDeleteAll(memberNo);
+	}
+	
+	
+	
+	
 
 	// 전체 SNS 리스트 조회
 	@Override
 	public List<SNS> selectSNSList() {
 		return dao.selectSNSList();
 	}
-
-	// 선택한 techImgList 조회
+	
+	// 선택한 SNSList 조회
 	@Override
-	public List<Tech> seletCheckTechImgList(int memberNo) {
-		return dao.seletCheckTechImgList(memberNo);
+	public List<SNS> seletCheckSNSList(int memberNo) {
+		return dao.seletCheckSNSList(memberNo);
 	}
+
+	// 선택된 SNSList 삽입
+	@Override
+	public int insertNewSnsList(Map<String, Object> snsMap) {
+		return dao.insertNewSnsList(snsMap);
+	}
+
+	// SNSList 전체 삭제 후 SNSList 삽입 진행
+	@Override
+	public int snsListDeleteAll(int memberNo) {
+		return dao.snsListDeleteAll(memberNo);
+	}
+
+	// 선택한 snsImgList 조회
+	@Override
+	public List<SNS> selectCheckSNSImgList(int memberNo) {
+		return dao.selectCheckSNSImgList(memberNo);
+	}
+
 
 
 

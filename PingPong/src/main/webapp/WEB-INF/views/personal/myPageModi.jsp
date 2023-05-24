@@ -16,7 +16,7 @@
 </head>
 <body>
 
-    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
     <!-- 내 정보 수정 Tab Menu -->
     <div class="myPage-content-container">
@@ -67,7 +67,7 @@
                                 <img src="/resources/images/mypage/pencil.png"> <%-- 연필 --%>
                                 <div class="profile-change-Btn">
                                     <label for="file">프로필 사진 편집</label> 
-                                    <input type="file" name="profileImage" class="profileUpload" id="file" accept="image/*" required multiple>
+                                    <input type="file" name="updateProfile" class="profileUpload" id="file" accept="image/*" required multiple>
                                 </div>
                                 <img src="/resources/images/message/messageDeleteImg.png" id="deleteProfile"> <%-- X버튼 --%>
                             </div>
@@ -94,17 +94,29 @@
 
                         <!-- 관심분야 변경 -->
                         <div class="interest-field-container">
+                        
                             <p>작업 & 관심 분야(선택)</p>
                             <div class="interest-field">
-                                <c:forEach var="interest" items="${interestList}">
-                                    <div> 
-                                        <label for="${interest.interestsNo}">
-                                            <input type="checkbox" value="${interest.interestsNo}" id="${interest.interestsNo}" name="interest"> ${interest.interestsName}
-                                        </label>
-                                    </div>
+                            	<c:forEach var="interest" items="${interestList}">
+                            		<c:forEach var="chIn" items="${checkInterestList}">
+	                            	
+	                            		<c:if test="${interest.interestsNo == chIn.interestsNo}">
+	                            			<c:set var="checked" value="checked"/>
+	                            		</c:if>
+		                                
+	                                </c:forEach>
+	                                <div> 
+	                                    <label for="${interest.interestsNo}">
+	                                    	<input type="checkbox" value="${interest.interestsNo}" id="${interest.interestsNo}" name="interest" ${checked} }> ${interest.interestsName}
+	                                    </label>
+	                                </div>
+	                                
+	                                <c:remove var="checked"/>
                                 </c:forEach> 
                             </div>
                         </div>
+                        
+                        
                     </div>
 
                     <div class="myPage-save">
@@ -123,21 +135,21 @@
                         <div class="introduce-change"> 
                             <p>소개</p>
                             <input type="text" name="memberInfo" maxlength="50" placeholder="자기 소개를 입력해주세요."
-                                value="${mypage.memberInfo}" id="memberInfo">
+                            	value="${mypage.memberInfo}" id="memberInfo">
                         </div>
 
                         <!-- 커리어 -->
                         <div class="career-change"> 
                             <p>커리어</p>
                             <input type="text" name="memberCareer" maxlength="50" placeholder="경력 / 수상 내역을 입력해주세요."
-                                value="${mypage.memberCareer}" id="memberCareer">
+                            	value="${mypage.memberCareer}" id="memberCareer">
                         </div>
 
                         <!-- 자격증 -->
                         <div class="certificate-change"> 
                             <p>자격증</p>
                             <input type="text" name="memberCertificate" maxlength="50" placeholder="보유중인 자격증을 입력해주세요."
-                                value="${mypage.memberCertificate}" id="memberCertificate">
+                            	value="${mypage.memberCertificate}" id="memberCertificate">
                         </div>                        
 
 
@@ -145,24 +157,22 @@
                         <div class="tech-field-container">
                             <p>지식 / 기술</p>
                             <div class="tech-field">
-                                <c:forEach var="tech" items="${techList}">
-                                    <c:forEach var="ch" items="${checkTechList}">
-                                    
-                                        <c:if test="${tech.techNo == ch.techNo}">
-                                            <c:set var="checked" value="checked"/>
-                                        </c:if>
-                                        
-                                        
-                                    </c:forEach>
-                                    
-                                    
-                                    <div>
-                                        <label for="${tech.techNo}">
-                                            <input type="checkbox" value="${tech.techNo}" id="${tech.techNo}" name="tech" ${checked}> ${tech.techName}
-                                        </label>
-                                    </div>
-                                    
-                                    <c:remove var="checked"/>
+                            	<c:forEach var="tech" items="${techList}">
+	                            	<c:forEach var="ch" items="${checkTechList}">
+	                            	
+	                            		<c:if test="${tech.techNo == ch.techNo}">
+	                            			<c:set var="checked" value="checked"/>
+	                            		</c:if>
+		                                
+	                                </c:forEach>
+	                                
+	                                <div>
+	                                    <label for="${tech.techNo}">
+	                                    	<input type="checkbox" value="${tech.techNo}" id="${tech.techNo}" name="tech" ${checked}> ${tech.techName}
+	                                    </label>
+	                                </div>
+	                                
+	                                <c:remove var="checked"/>
                                 </c:forEach>
                             </div>
                         </div>
@@ -171,10 +181,28 @@
                         <div class="SNS-container">
                             <p>SNS</p>
                             <div class="SNS-field">
+                            	<c:forEach var="SNS" items="${SNSList}">
+	                            	<c:forEach var="chSNS" items="${checkSNSList}">
+	                            	
+	                            		<c:if test="${SNS.snsNo == chSNS.snsNo}">
+	                            			<c:set var="checked" value="checked"/>
+	                            		</c:if>
+		                                
+	                                </c:forEach>
+                            
                                 <div>
-                                    <label for="instagram"><input type="checkbox" value="인스타그램" id="instagram" name="SNS"> 인스타그램</label>
-                                    <input type="text" value="www." id="" name="address">
-                                </div>           
+                                    <label for="${SNS.snsNo}">
+                                    	<input type="checkbox" value="${SNS.snsNo}" id="${SNS.snsNo}" name="SNS" ${checked}> ${SNS.snsName}
+                                    </label>
+                                    <input type="text" value="www.${SNS.snsAddress}" id="${SNS.snsNo}" name="address">
+                                </div>    
+                                
+                                 <c:remove var="checked"/>
+                                </c:forEach>
+                            </div>
+                        </div>
+                                
+                                <%--       
                                 <div>
                                     <label for="facebook"><input type="checkbox" value="페이스북" id="facebook" name="SNS"> 페이스북</label>
                                     <input type="text" value="www." id="" name="address"> 
@@ -197,6 +225,7 @@
                                 </div>
                             </div>
                         </div>
+                        --%>  
 
                         <div class="myPage-save">
                             <button id="ProfileEditCompleteBtn" onclick="techListEvent()">편집 완료</button>
@@ -276,10 +305,6 @@
                         <div>
                             안녕하세요. 문의 드려요. 어쩌구 저쩌구 문제가 생겨서요....
                             <div class="inquiry-date">2023년 5월 9일</div> 
-                        </div>
-                        <div>
-                            안녕하세요. 문의 드려요. 문희눈~~꽃무늬가요~~~좋아요~~
-                            <div class="inquiry-date">2023년 5월 22일</div> 
                         </div>
                     </div>
                 </form>
