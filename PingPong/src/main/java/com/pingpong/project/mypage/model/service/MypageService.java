@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.member.model.dto.Member;
-import com.pingpong.project.mypage.model.dto.Interest;
+import com.pingpong.project.mypage.model.dto.Interests;
 import com.pingpong.project.mypage.model.dto.MyPage;
 import com.pingpong.project.mypage.model.dto.SNS;
 import com.pingpong.project.mypage.model.dto.Tech;
@@ -88,6 +88,9 @@ public interface MypageService {
 	int updateProfileInfo(MyPage updateMyPage);
 
 	
+	
+	
+	
 	/** 전체 지식/기술 리스트 조회
 	 * @return
 	 */
@@ -96,7 +99,7 @@ public interface MypageService {
 	/** 선택된 지식/기술 리스트 조회
 	 * @return
 	 */
-	List<Tech> seletCheckTechList(int memberNo);
+	List<Tech> selectCheckTechList(int memberNo);
 	
 	/** 선택된 teckList 삽입
 	 * @param selectedtechList
@@ -110,28 +113,84 @@ public interface MypageService {
 	 */
 	int techListDeleteAll(int memberNo);
 	
-	
-	
-	
-	
-	
-
-
-	/** 전체 관심분야 리스트 조회
-	 * @return
-	 */
-	List<Interest> selectInterestList();
-
-	/** 전체 SNS 리스트 조회
-	 * @return
-	 */
-	List<SNS> selectSNSList();
-
 	/** 선택한 techImgList 조회
 	 * @param memberNo
 	 * @return
 	 */
 	List<Tech> seletCheckTechImgList(int memberNo);
+	
+	
+	
+	
+
+	/** 전체 관심분야 리스트 조회
+	 * @return
+	 */
+	List<Interests> selectInterestList();
+	
+	/** 선택한 interestList 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<Interests> selectCheckInterestList(int memberNo);
+	
+	/** 체크된 interestList 삽입
+	 * @param interestMap
+	 * @return
+	 */
+	int insertNewInterestList(Map<String, Object> interestMap);
+	
+	/** interestList 전체 삭제 후 interestList 삽입 진행
+	 * @param memberNo
+	 * @return
+	 */
+	int interestListDeleteAll(int memberNo);
+	
+	
+	
+	
+
+	/** 전체 SNS 리스트 조회
+	 * @return
+	 */
+	List<SNS> selectSNSList();
+	
+	/** 선택한 SNSList 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<SNS> seletCheckSNSList(int memberNo);
+
+	/** 선택된 SNSList 삽입
+	 * @param snsMap
+	 * @return
+	 */
+	int insertNewSnsList(Map<String, Object> snsMap);
+	
+	/** SNSList 전체 삭제 후 SNSList 삽입 진행
+	 * @param memberNo
+	 * @return
+	 */
+	int snsListDeleteAll(int memberNo);
+
+	/** 선택한 snsImgList 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<SNS> selectCheckSNSImgList(int memberNo);
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 

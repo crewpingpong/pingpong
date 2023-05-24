@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.member.model.dto.Member;
-import com.pingpong.project.mypage.model.dto.Interest;
+import com.pingpong.project.mypage.model.dto.Interests;
 import com.pingpong.project.mypage.model.dto.MyPage;
 import com.pingpong.project.mypage.model.dto.SNS;
 import com.pingpong.project.mypage.model.dto.Tech;
@@ -114,13 +114,6 @@ public class MypageDAO {
 		return sqlSession.selectList("boardMapper.selectBoardLikeList", memberNo);
 	}
 
-	/** 지식기술 조회
-	 * @param memberNo
-	 * @return
-	 */
-//	public List<Member> selectTechList(int memberNo) {
-//		return sqlSession.selectList("mypageMapper.selectTechList", memberNo);
-//	}
 
 	/** 프로필 정보 수정
 	 * @param updateMember
@@ -144,8 +137,8 @@ public class MypageDAO {
 	/** 선택된 techList 조회
 	 * @return
 	 */
-	public List<Tech> seletCheckTechList(int memberNo) {
-		return sqlSession.selectList("mypageMapper.seletCheckTechList", memberNo);
+	public List<Tech> selectCheckTechList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.selectCheckTechList", memberNo);
 	}
 	
 	/** 선택된 지식/기술 한개씩 삽입
@@ -155,62 +148,20 @@ public class MypageDAO {
 	public int insertNewTechList(Map<String, Object> techMap) {
 		return sqlSession.insert("mypageMapper.insertNewTechList", techMap);
 	}
-	
-	/** 지식/기술 삽입 전 전체 삭제
+
+	/**
+	 * 지식/기술 삽입 전 전체 삭제
+	 * 
 	 * @param memberNo
 	 * @return
 	 */
 	public int techListDeleteAll(int memberNo) {
 		return sqlSession.delete("mypageMapper.techListDeleteAll", memberNo);
 	}
-	
-	/** 체크 해제된 지식/기술 한개씩 삭제
-	 * @param techMap
-	 * @return
-	 */
-	public int deleteNewTechList(Map<String, Object> techMap) {
-		return sqlSession.delete("mypageMapper.deleteNewTechList", techMap);
-	}
 
-	
-	
-	
-	
-	
-	
-
-	/** 선택된 지식기술 리스트 삽입
-	 * @param techList
-	 * @return
-	 */
-	public int insertTechList(List<String> selectedtechList) {
-		return sqlSession.insert("mypageMapper.insertTechList", selectedtechList);
-	}
-
-	/** 선택된 지식기술 리스트 조회
-	 * @param selectedTech
-	 * @return
-	 */
-	public int selectTechCount(List<String> selectedtechList) {
-		return sqlSession.selectOne("mypageMapper.selectTechCount", selectedtechList);
-	}
-
-	/** 전체 관심분야 리스트 조회
-	 * @return
-	 */
-	public List<Interest> selectInterestList() {
-		return sqlSession.selectList("mypageMapper.selectInterestList");
-	}
-
-	/** 전체 SNS 리스트 조회
-	 * @return
-	 */
-	public List<SNS> selectSNSList() {
-		return sqlSession.selectList("mypageMapper.selectSNSList");
-	}
-
-	
-	/** 선택한 techImgList 조회
+	/**
+	 * 선택한 techImgList 조회
+	 * 
 	 * @param memberNo
 	 * @return List
 	 */
@@ -218,8 +169,87 @@ public class MypageDAO {
 		return sqlSession.selectList("mypageMapper.seletCheckTechImgList", memberNo);
 	}
 
+	
+	
+	
+	
+	
 
+	/** 전체 관심분야 리스트 조회
+	 * @return
+	 */
+	public List<Interests> selectInterestList() {
+		return sqlSession.selectList("mypageMapper.selectInterestList");
+	}
+	
+	/** 선택한 interestList 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public List<Interests> selectCheckInterestList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.seletCheckInterestList", memberNo);
+	}
+	
+	/** 체크된 interestList 삽입
+	 * @param interestMap
+	 * @return
+	 */
+	public int insertNewInterestList(Map<String, Object> interestMap) {
+		return sqlSession.insert("mypageMapper.insertNewInterestList", interestMap);
+	}
+	
+	/** 체크 해제된 interestList 한개씩 삭제
+	 * @param memberNo
+	 * @return
+	 */
+	public int interestListDeleteAll(int memberNo) {
+		return sqlSession.delete("mypageMapper.interestListDeleteAll", memberNo);
+	}
+	
+	
+	
+	
+	
+	
 
+	/** 전체 SNS 리스트 조회
+	 * @return
+	 */
+	public List<SNS> selectSNSList() {
+		return sqlSession.selectList("mypageMapper.selectSNSList");
+	}
+	
+	/** 선택한 SNSList 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public List<SNS> seletCheckSNSList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.seletCheckSNSList", memberNo);
+	}
+
+	/** 선택된 SNSList 삽입
+	 * @param snsMap
+	 * @return
+	 */
+	public int insertNewSnsList(Map<String, Object> snsMap) {
+		return sqlSession.insert("mypageMapper.insertNewSnsList", snsMap);
+	}
+
+	/** SNSList 전체 삭제 후 SNSList 삽입 진행
+	 * @param memberNo
+	 * @return
+	 */
+	public int snsListDeleteAll(int memberNo) {
+		return sqlSession.delete("mypageMapper.snsListDeleteAll", memberNo);
+	}
+
+	/** 선택한 snsImgList 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public List<SNS> selectCheckSNSImgList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.selectCheckSNSImgList", memberNo);
+	}
 
 
 

@@ -1299,6 +1299,8 @@ BackIcon.addEventListener("click", () => {
     BoardBackground2.style.display = "none";
     upload.value = "";
     pagination2.innerHTML = '';
+    document.querySelector('[name="hashtagLists"]').value = '';
+    document.querySelector('.hashtagList').innerText = '';
     const slide_item2 = document.querySelectorAll('.BoardPicture2 .slide_item2');
     for(let i=0;i<slide_item2.length;i++){
         slide_item2[i].remove();
@@ -1512,23 +1514,82 @@ window.addEventListener("resize", () => {
 
 // 추가버튼 클릭시 해시태그 추가
 function addHashtag() {
-    let hashtag = document.getElementById("hashtag").value;
-    let item = getHashtagItem(hashtag);
 
-    document.getElementById("hashtagList").insertAdjacentHTML("beforeend", item);
+    let hashtag = document.getElementById("hashtag").value; // 해시태그 입력 input 태그
+    if (/[,#%]/.test(hashtag)){                             // ,#% 들어가 있으면 리턴
+        document.querySelector("#hashtag").value = '';      // input 태그 값 없앰
+        document.querySelector(".hashList").innerHTML = '';      // 리스트 값 없앰
+        return;                                             // 함수 종료
+    }
+
+    let flag = 0;                                                                               // 플래그 변수
+    if(document.querySelector('[name="hashtagLists"]').value.includes(",")){                    // 숨겨둔 해시태그리스트에 ,가 있다면
+        const splitHash = document.querySelector('[name="hashtagLists"]').value.split(",");     // ,를 기준으로 나눠서 배열을 만들어라
+        for(let i=0;i<splitHash.length;i++){                                                    // 배열 만든거에서 하나씩 비교해서 값이 같으면 flag++
+            if(splitHash[i] == hashtag){
+                flag++;
+            }
+        }
+    } else {
+        if(document.querySelector('[name="hashtagLists"]').value == hashtag){  // 이미 값이 있다면 flag++
+            flag++;
+        }
+
+    }
+    if(flag == 0){  // 리스트에 값이 없다면
+        let item = getHashtagItem(hashtag);  // 해시태그 만들기
+        document.getElementById("hashtagList").insertAdjacentHTML("beforeend", item);  // 리스트에 추가
+    }
+    document.querySelector("#hashtag").value = '';  // input 태그 내용 삭제
+    document.querySelector(".hashList").innerHTML = '';  // 리스트 삭제
+
 }
 // 해시 리스트 클릭 시 해시태그 추가
 function addHashList(event){
     let hashtag = event.innerText.slice(1);
-    let item = getHashtagItem(hashtag);
-    document.getElementById("hashtagList").insertAdjacentHTML("beforeend", item);
-    event.parentNo.innerHTML = '';
+    if (/[,#%]/.test(hashtag)){                             // ,#% 들어가 있으면 리턴
+        document.querySelector("#hashtag").innerHTML = '';      // input 태그 값 없앰
+        document.querySelector(".hashList").innerHTML = '';      // 리스트 값 없앰
+        return;                                             // 함수 종료
+    }
+    let flag = 0;                                                                               // 플래그 변수
+    if(document.querySelector('[name="hashtagLists"]').value.includes(",")){                    // 숨겨둔 해시태그리스트에 ,가 있다면
+        const splitHash = document.querySelector('[name="hashtagLists"]').value.split(",");     // ,를 기준으로 나눠서 배열을 만들어라
+        for(let i=0;i<splitHash.length;i++){                                                    // 배열 만든거에서 하나씩 비교해서 값이 같으면 flag++
+            if(splitHash[i] == hashtag){
+                flag++;
+            }
+        }
+    } else {
+        if(document.querySelector('[name="hashtagLists"]').value == hashtag){  // 이미 값이 있다면 flag++
+            flag++;
+        }
+    }
+    if(flag == 0){  // 리스트에 값이 없다면
+        let item = getHashtagItem(hashtag);
+        document.getElementById("hashtagList").insertAdjacentHTML("beforeend", item);
+    }
+    document.querySelector("#hashtag").value = '';      // input 태그 값 없앰
+    document.querySelector(".hashList").innerHTML = '';      // 리스트 값 없앰
 }
 
 
 // 해시태그 제거
 function removeHashtag(hashtag) {
     document.getElementById(hashtag).remove();
+    
+    if(document.querySelector('[name="hashtagLists"]').value.includes(",")){                    // 숨겨둔 해시태그리스트에 ,가 있다면
+        const splitHash = document.querySelector('[name="hashtagLists"]').value.split(",");     // ,를 기준으로 나눠서 배열을 만들어라
+        for(let i=0;i<splitHash.length;i++){                                                    // 배열 만든거에서 하나씩 비교해서 값이 같으면 flag++
+            if(splitHash[i] == hashtag){
+                document.querySelector('[name="hashtagLists"]').value = splitHash.filter((value) => value !== splitHash[i]);
+            }
+        }
+    } else {
+        if(document.querySelector('[name="hashtagLists"]').value == hashtag){  // 이미 값이 있다면 flag++
+            document.querySelector('[name="hashtagLists"]').value = '';
+        }
+    }
 }
 
 // 해시태그 한줄 만드는 함수
@@ -1692,4 +1753,24 @@ for (let i = 0; i < urlList.length; i++) {
 
     let mainConElement = document.querySelector('.certificate-main-con');
     mainConElement.appendChild(subConElement);
+}
+
+
+
+/* SNS 아이콘 */
+snsImgList = snsImgList.replace(/\[|\]/g, '').trim();
+let snsUrlList = snsImgList.split(', ');
+for (let i = 0; i < snsUrlList.length; i++) {
+    let imgElement = document.createElement('img');
+    imgElement.className = 'sns-img-list';
+    imgElement.src = snsUrlList[i];
+    imgElement.alt = '';
+
+    let subConElement = document.createElement('div');
+    subConElement.className = 'forSNSIcon-sub';
+    subConElement.appendChild(imgElement);
+
+    let mainConElement = document.querySelector('.forSNSIcon-main');
+    mainConElement.appendChild(subConElement);
+
 }

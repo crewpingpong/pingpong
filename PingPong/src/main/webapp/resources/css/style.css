@@ -48,10 +48,11 @@ header{
 header .logo{position: absolute; left: 50%; transform: translateX(-100px); user-select: none;}
 header .logo img{width: 200px; }
 header .menu_icon{margin-left: 50px;}
-header .alarm_search_box{margin-right: 50px;}
 header .alarm_icon{margin-right: 20px;}
 
-header .alarm_search_box{display: flex; position: relative; height: 40px;}
+header .alarm_search_box{
+    margin-right: 50px; display: flex; position: relative; 
+    height: 40px; justify-content: center; align-items: center;}
 header .signBtn button{
     width: 100px; height: 35px; border-radius: 20px;
     color: #fff; font-size: 12px; font-weight: bold; background-color: #FFE69A;
@@ -504,7 +505,8 @@ display: none; z-index: 202;
     width: 20px; height: 20px; position: absolute; 
     right: 18px; top: 18px; cursor: pointer;
 }
-.underline{cursor: pointer; user-select: none; text-decoration: underline;}
+.reciveUnderline{cursor: pointer; user-select: none; text-decoration: underline;}
+.sendUnderline{cursor: pointer; user-select: none; text-decoration: underline;}
 .goto-message-Box{cursor: pointer;} 
 /* 메세지 리스트 */
 .message-Box-recive .messageList{
@@ -676,7 +678,8 @@ display: none; z-index: 202;
     margin-left: 10px;
 }
 
-
+.userSelectNone{user-select: none;}
+.cursorPoint{cursor: point;}
 /* --------------------- */
 #btn11{ /* 임시 관리자 페이지 버튼 입니다.*/
     position: absolute; width: 100px; height: 40px; 
