@@ -49,3 +49,8 @@ const submit = document.getElementById('submit');
 submit.addEventListener("click", ()=>{
     alert("제출 되었습니다.")
 });
+
+const inquiryX = document.querySelector("#oneToOne svg:nth-child(2)");
+inquiryX.addEventListener("click",()=>{
+    grayBack.style.display = "none";
+});
