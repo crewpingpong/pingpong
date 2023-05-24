@@ -238,10 +238,22 @@ public class ManagerController {
 	public String manager1To1Content(
 			Model model
 			,@RequestParam(value="cp", required=false, defaultValue="1") int cp
+			, @RequestParam Map<String, Object> paramMap
 			) {
-		Map<String, Object> declarationList = service.selectDeclarationList(cp);
 		
-		model.addAttribute("DeclarationList",declarationList);
+		if(paramMap.get("key") == null) {
+		
+			Map<String, Object> declarationList = service.selectDeclarationList(cp);
+		
+			model.addAttribute("DeclarationList",declarationList);
+		
+		}else {
+			
+			Map<String, Object> declarationList = service.selectDeclarationList(cp,paramMap);
+			
+			model.addAttribute("DeclarationList",declarationList);
+			
+		}
 		
 		return "manager/managerReport";
 	}

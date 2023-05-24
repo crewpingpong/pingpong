@@ -13,5 +13,6 @@ public class Declaration {
 	private String memberUrl;
 	private int boardNo;
 	private String indictmentContent;
+	private int memberNo;
 	
 }

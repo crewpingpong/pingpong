@@ -21,6 +21,10 @@ import com.pingpong.project.member.model.dto.Member;
  * @author user
  *
  */
+/**
+ * @author user
+ *
+ */
 @Service
 public class ManagerServiceImpl implements ManagerService{
 
@@ -225,6 +229,25 @@ public class ManagerServiceImpl implements ManagerService{
 		
 		return map;
 	}
+	
+	// 검색된 신고함 목록 조회
+	@Override
+	public Map<String, Object> selectDeclarationList(int cp, Map<String, Object> paramMap) {
+		
+		int listCount = dao.getDeclarationListCount(paramMap);
+		
+		Pagination pagination = new Pagination(listCount, cp);
+		
+		List<Declaration> DeclarationList = dao.selectDeclarationList(pagination,paramMap);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("pagination", pagination);
+		map.put("DeclarationList", DeclarationList);
+		
+		return map;
+	}
+
 
 	// 체크된 회원 탈퇴
 	@Transactional(rollbackFor = Exception.class)
@@ -274,7 +297,6 @@ public class ManagerServiceImpl implements ManagerService{
 		return dao.commentRe(commentNo);
 	}
 
-	
 	
 	
 	
