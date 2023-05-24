@@ -64,10 +64,10 @@ public class BoardController {
     }
     
     // 해시태그 조회
-    @PostMapping("/board/hashtag")
-    public List<Hashtag> getHashtags(@RequestBody Map<String, String> hashtags) {
-    	System.out.println(hashtags);
-    	return service.getHashtags(hashtags);
+    @GetMapping("/board/hashtag")
+    public List<Hashtag> getHashtags(String hashtagName) {
+    	System.out.println(hashtagName);
+    	return service.getHashtags(hashtagName);
     }
 
     // 댓글 삭제
@@ -87,4 +87,5 @@ public class BoardController {
     	return service.childCommentDelete(commentNo);
     }
    
+    
 }

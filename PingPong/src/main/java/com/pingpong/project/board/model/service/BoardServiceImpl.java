@@ -68,12 +68,6 @@ public class BoardServiceImpl implements BoardService{
 		return dao.boardEditing(paramMap);
 	}
 
-	// 해시태그 리스트 반환
-	@Override
-	public List<Hashtag> getHashtags(Map<String, String> hashtags) {
-		return dao.getHashtags(hashtags);
-	}
-
 	// 댓글 삭제
 	@Override
 	public int commentDelete(int commentNo) {
@@ -84,6 +78,12 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int childCommentDelete(int commentNo) {
 		return dao.childCommentDelete(commentNo);
+	}
+
+	// 해시태그 리스트 반환
+	@Override
+	public List<Hashtag> getHashtags(String hashtagName) {
+		return dao.getHashtags(hashtagName);
 	}
 	
 

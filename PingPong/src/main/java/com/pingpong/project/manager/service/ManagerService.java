@@ -117,5 +117,12 @@ public interface ManagerService {
 	 */
 	Map<String, Object> selectInquiryList(Map<String, Object> paramMap, int cp);
 
+	/** 검색된 신고함 문의 목록 조회
+	 * @param cp
+	 * @param paramMap
+	 * @return
+	 */
+	Map<String, Object> selectDeclarationList(int cp, Map<String, Object> paramMap);
+
 	
 }

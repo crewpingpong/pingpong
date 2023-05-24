@@ -498,7 +498,7 @@
     cursor: pointer;
 }
 
-.innerDiv>div{
+.innerDiv>div:last-child{
     float: right;
     margin : 2px;
 }
@@ -1028,4 +1028,16 @@ li {
 
 #hashtag-input a{
     color : #5286DC;
+}
+
+#hashtag{
+    width: 80%;
+}
+
+.hashList{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5%;
+    max-height: 300px;
+    overflow: auto;
 }

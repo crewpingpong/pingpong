@@ -187,3 +187,4 @@ boardSearch.addEventListener("submit", e => {
   }
 
 });
+

@@ -300,13 +300,11 @@ function selectBoardList(boardNo){
         const porfileRac = document.querySelector(".porfileRac");
         const boardMemberInfo = document.querySelector(".boardMemberInfo");
         const BoardPost = document.querySelector(".BoardPost");
-        const HashPost = document.querySelector(".hashPost");
         const likeCountSpan = document.querySelector(".likeCount");
         likeCountSpan.innerHTML = '';
         porfileRac.innerHTML = '';
         boardMemberInfo.innerHTML = '';
         BoardPost.innerHTML = '';
-        HashPost.innerHTML = '';
         Boardcontent1.innerHTML = '';
         
         for(let i=0; i<board.imageList.length;i++){
@@ -517,12 +515,20 @@ function selectBoardList(boardNo){
         boardProfileA.append(profileImg);
         boardPostDiv.append(boardProfileA);
 
+        console.log(board.hashtagList);
+        
+        const hashDiv = document.createElement("div");
+        hashDiv.classList.add("hashPost");
         // 게시글 해시태그 구역에 해시태그 추가
-        for(let i=0;i<hashtagList;i++){
-            const hashSpan = document.createElement("span");
-            hashSpan.innerText
-        }
+        if(board.hashtagList != null){
+            for(let i=0;i<board.hashtagList.length;i++){
+                const hashSpan = document.createElement("span");
+                hashSpan.innerHTML = `<a href="#">#${board.hashtagList[i].hashtagName}</a>`;
 
+                console.log(board.hashtagList[i].hashtagName);
+                hashDiv.append(hashSpan);
+            }
+        }
 
         const div = document.createElement("div");
 
@@ -559,7 +565,9 @@ function selectBoardList(boardNo){
 
         dateDiv.append(cDateP);
 
-        innerDiv.append(nameA, contentP, input, editingDiv);
+
+
+        innerDiv.append(nameA, contentP, input, hashDiv, editingDiv);
         div.append(innerDiv, dateDiv);
         const lastDiv = document.createElement("div");
         lastDiv.classList.add("lastDivadd")
@@ -897,6 +905,24 @@ insertComment.addEventListener("click", e=>{
 
 })
 }
+
+// 해시태그 입력하면 리스트 나오는 함수
+const hashtagInput = document.getElementById("hashtag");
+const hashList1 = document.querySelector(".hashList");
+hashtagInput.addEventListener("keyup", e=>{
+    hashList1.innerHTML = '';
+    const data = e.target.value;
+    if(data.length>0 && data[0] != '#'){
+        fetch("/board/hashtag?hashtagName="+data)
+        .then(resp => resp.json())
+        .then(hashList => {
+            console.log(hashList);
+            for(let i=0;i<hashList.length;i++){
+                hashList1.innerHTML += `<li onclick="addHashList(this)">#${hashList[i].hashtagName}</li>`
+            }
+        })
+    }
+})    
 
 
 
@@ -1484,13 +1510,21 @@ window.addEventListener("resize", () => {
     }
 });
 
-// 해시태그 추가
+// 추가버튼 클릭시 해시태그 추가
 function addHashtag() {
     let hashtag = document.getElementById("hashtag").value;
     let item = getHashtagItem(hashtag);
 
     document.getElementById("hashtagList").insertAdjacentHTML("beforeend", item);
 }
+// 해시 리스트 클릭 시 해시태그 추가
+function addHashList(event){
+    let hashtag = event.innerText.slice(1);
+    let item = getHashtagItem(hashtag);
+    document.getElementById("hashtagList").insertAdjacentHTML("beforeend", item);
+    event.parentNo.innerHTML = '';
+}
+
 
 // 해시태그 제거
 function removeHashtag(hashtag) {
