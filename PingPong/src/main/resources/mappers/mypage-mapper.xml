@@ -12,16 +12,23 @@
 		<result property="oneLiner" column="ONE_LINER"/>
 		<result property="memberUrl" column="MEMBER_URL"/>
 		<result property="memberCertificate" column="MEMBER_CERTIFICATE"/>
+		<result property="techImg" column="TECH_IMG"/>
+		<result property="snsImg" column="SNS_IMG"/>
 		
 		<collection property="techList" 
 					select="selectTechList"
 					column="java.util.ArrayList"
 					ofType="Tech"
 					/>
-		<collection property="careerList" 
-					select="selectCareerList"
+		<collection property="interestList" 
+					select="selectInterestList"
 					column="java.util.ArrayList"
-					ofType="Career"
+					ofType="INTERESTS"
+					/>		
+		<collection property="snsList" 
+					select="selectSNSList"
+					column="java.util.ArrayList"
+					ofType="SNS"
 					/>		
 	</resultMap>
 	
@@ -32,15 +39,17 @@
 		<result property="memberNo" column="MEMBER_NO"/>	
 	</resultMap>
 	
-	<resultMap type="Interest" id="interest_rm">
+	<resultMap type="Interests" id="interest_rm">
 		<id property="interestsNo" column="INTERESTS_NO"/>
 		<result property="interestsName" column="INTERESTS_NAME"/>
+		<result property="memberNo" column="MEMBER_NO"/>
 	</resultMap>
 	
 	<resultMap type="SNS" id="SNS_rm">
 		<id property="snsNo" column="SNS_NO"/>
 		<result property="snsName" column="SNS_NAME"/>
 		<result property="snsImg" column="SNS_IMG"/>	
+		<result property="snsAddress" column="SNS_ADDRESS"/>	
 		<result property="memberNo" column="MEMBER_NO"/>
 	</resultMap>
 
@@ -119,8 +128,8 @@
 	</select>
 	
 	<!-- 선택된 지식기술 조회 -->
-	<select id="seletCheckTechList" resultMap="tech_rm">
-		SELECT MEMBER_TECH_NO, MEMBER_NO, TECH_NO, TECH_NAME, TECH_IMG
+	<select id="selectCheckTechList" resultMap="tech_rm">
+		SELECT MEMBER_TECH_NO, TECH_NO, TECH_NAME, TECH_IMG, MEMBER_NO
 		FROM "MEMBER_TECH"
 		JOIN "TECH" USING (TECH_NO)
 		WHERE MEMBER_NO = #{memberNo}
@@ -140,6 +149,7 @@
 		WHERE MEMBER_NO =  #{memberNo}
 	</select>
 	
+	<!-- 선택 해제 지식/기술 삭제 -->
 	<delete id="techListDeleteAll">
 		DELETE FROM "MEMBER_TECH"
 		WHERE MEMBER_NO = #{memberNo}
@@ -149,31 +159,70 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
-	
 	<!-- 전체 관심분야 조회 -->
 	<select id="selectInterestList" resultMap="interest_rm">
 		SELECT INTERESTS_NO, INTERESTS_NAME
 		FROM INTERESTS
 	</select>
 	
+	<!-- 선택한 interestList 조회 -->
+	<select id="seletCheckInterestList" resultMap="interest_rm">
+		SELECT INTERESTS_MEMBER_NO, INTERESTS_NO, INTERESTS_NAME, MEMBER_NO
+		FROM MEMBER_INTERESTS
+		JOIN INTERESTS USING (INTERESTS_NO)
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 체크된 interestList 한개씩 삽입 -->
+	<insert id="insertNewInterestList">
+		INSERT INTO "MEMBER_INTERESTS"
+		VALUES(SEQ_TECH_NO.NEXTVAL, #{memberNo}, #{interestsNo})
+	</insert>
+	
+	<!-- 선택 해제 interestList 삭제 -->
+	<delete id="interestListDeleteAll">
+		DELETE FROM MEMBER_INTERESTS
+		WHERE MEMBER_NO = #{memberNo}
+	</delete>
+	
+	
+	
 	
 	<!-- 전체 SNS 조회 -->
 	<select id="selectSNSList" resultMap="SNS_rm">
-		SELECT SNS_NO, SNS_NAME, SNS_IMG
+		SELECT SNS_NO, SNS_NAME, SNS_IMG, SNS_ADDRESS
 		FROM SNS
 	</select>
+
+	<!-- 선택한 SNSList 조회 -->
+	<select id="seletCheckSNSList" resultMap="SNS_rm">
+		SELECT MEMBER_SNS_NO, SNS_NO, SNS_NAME, SNS_IMG, SNS_ADDRESS, MEMBER_NO
+		FROM MEMBER_SNS
+		JOIN SNS USING (SNS_NO)
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 선택된 SNSList/기술 한개씩 삽입 -->
+	<insert id="insertNewSnsList">
+		INSERT INTO "MEMBER_SNS"
+		VALUES(SEQ_TECH_NO.NEXTVAL, #{memberNo}, #{snsNo})
+	</insert>
+	
+	<!-- 선택 해제 SNSList 삭제 -->
+	<delete id="snsListDeleteAll">
+		DELETE FROM "MEMBER_SNS"
+		WHERE MEMBER_NO = #{memberNo}
+	</delete>
+	
+	<!-- 선택한 snsImgList 조회 -->
+	<select id="selectCheckSNSImgList" resultMap="SNS_rm">
+		SELECT SNS_IMG
+		FROM "MEMBER_SNS"
+		JOIN "SNS" USING (SNS_NO)
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	
 	
 	
 

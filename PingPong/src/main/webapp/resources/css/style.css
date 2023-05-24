@@ -257,13 +257,9 @@ display: none; z-index: 202;
 
 /* 검색 아이콘 호버했을 때 늘어난 검색창*/
 .seachbox{
-    width: 400px; 
-    height: 50px; 
-    border-radius: 30px; 
-    border: 1px solid #231F20;
+    width: 400px; height: 50px; border-radius: 30px; border: 1px solid #231F20;
     display: flex; justify-content: space-between; align-items: center; padding: 0 20px; 
-    display: none; z-index: 101;
-    transition: width 0.5s, height 0.5s;
+    display: none; z-index: 101; /* background-color: #fff; */
 }
 .seachboxleft>svg{margin-right: 12px;}
 .seachbox .seachboxleft{display: flex; align-items: center;}
