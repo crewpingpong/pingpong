@@ -435,7 +435,7 @@ display: none; z-index: 202;
     width: 100%; padding: 30px; height: 520px;
     display: flex; flex-direction: column; justify-content: space-between;
 }
-
+.goto-message-Box{user-select: none; cursor: pointer;}
 .message-Box-recive .messageList{
     margin: 40px 0; height: 400px; width: 500px;
     font-size: 14px; color:#000; overflow: auto;

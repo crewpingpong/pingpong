@@ -668,3 +668,12 @@ sendUnderline.addEventListener("click", e =>{
         console.log(err);
     })
 })
+
+const messageBoxOpen = document.querySelectorAll(".messageBoxOpen");
+if(messageBoxOpen!=null){
+    for(let i of messageBoxOpen){
+        i.addEventListener("click",()=>{
+            gotoMessageFn();
+        })
+    }
+}

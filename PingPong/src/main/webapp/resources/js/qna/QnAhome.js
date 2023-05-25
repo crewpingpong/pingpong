@@ -11,14 +11,14 @@ const oneToOne = document.getElementById("oneToOne");
 // const oneToOnechild = document.querySelectorAll("#oneToOne>*");
 function showModal(target){
     grayBack.style.display = "flex";
-    document.addEventListener("mouseup", e=>{
-        // if(e.target!==oneToOne){
-        if(e.target==grayBack){
-            grayBack.style.display = "none";
-            document.getElementById("chooseFile").value = '';
-            document.getElementById("fileName").innerText = '';
-        }
-    })
+    // document.addEventListener("mouseup", e=>{
+    //     // if(e.target!==oneToOne){
+    //     if(e.target==grayBack){
+    //         grayBack.style.display = "none";
+    //         document.getElementById("chooseFile").value = '';
+    //         document.getElementById("fileName").innerText = '';
+    //     }
+    // })
 }
 
 const chooseFile = document.getElementById('chooseFile');
