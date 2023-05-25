@@ -179,6 +179,19 @@ public interface MypageService {
 	 */
 	List<SNS> selectCheckSNSImgList(int memberNo);
 
+	/** 선택한 SNSList의 URL 조회
+	 * @param memberNo
+	 * @return
+	 */
+	List<SNS> selectCheckSNSURL(int memberNo);
+	
+	/** 선택한 snsList의 URL 주소 (링크)
+	 * @param memberNo
+	 * @return
+	 */
+	List<SNS> selectSNSAddress(int memberNo);
+
+
 
 
 

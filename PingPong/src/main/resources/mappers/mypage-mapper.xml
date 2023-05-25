@@ -14,6 +14,7 @@
 		<result property="memberCertificate" column="MEMBER_CERTIFICATE"/>
 		<result property="techImg" column="TECH_IMG"/>
 		<result property="snsImg" column="SNS_IMG"/>
+		<result property="snsAddress" column="SNS_ADDRESS"/>
 		
 		<collection property="techList" 
 					select="selectTechList"
@@ -200,6 +201,7 @@
 		FROM MEMBER_SNS
 		JOIN SNS USING (SNS_NO)
 		WHERE MEMBER_NO = #{memberNo}
+		ORDER BY SNS_NO
 	</select>
 	
 	<!-- 선택된 SNSList/기술 한개씩 삽입 -->
@@ -220,6 +222,24 @@
 		FROM "MEMBER_SNS"
 		JOIN "SNS" USING (SNS_NO)
 		WHERE MEMBER_NO = #{memberNo}
+		ORDER BY SNS_NO
+	</select>
+	
+	<!-- 선택한 SNSList의 URL 조회 -->
+	<select id="selectCheckSNSURL" resultMap="SNS_rm">
+		SELECT SNS_ADDRESS
+		FROM SNS 
+		JOIN MEMBER_SNS USING (SNS_NO)
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+	
+	<!-- 선택한 snsList의 URL 주소 (링크) -->
+	<select id="selectSNSAddress" resultMap="SNS_rm">
+		SELECT SNS_ADDRESS
+		FROM "MEMBER_SNS"
+		JOIN "SNS" USING (SNS_NO)
+		WHERE MEMBER_NO = #{memberNo}
+		ORDER BY SNS_NO
 	</select>
 	
 	
