@@ -75,14 +75,15 @@
 .myFollowList .followList{
     margin: 40px 0; height: 400px; width: 500px;
     font-size: 14px; color:#000; overflow: auto;
-    display: flex; justify-content: center;
+    display: flex;  flex-direction: column; align-items: center;
 }
 .userProfile{display: flex;}
 .myFollowList .followExample{
     width: 80%; height: 46px; margin-bottom: 20px;
     display: flex; 
 }
-.myFollowList h4{margin: 20px 0;}
+.h4{display: flex; justify-content: center; margin: 20px 0;}
+/* .myFollowList h4{} */
 .myFollowList .followExample .probox{
     width: 35px; height: 35px; 
     background-color: #FFE69A; border-radius: 50%; margin-right: 15px;
@@ -102,3 +103,113 @@
     color: #fff; display: flex; justify-content: center; margin-top: 8px;
     align-items: center; float: right;
 }
+
+
+
+
+/*  나를 팔로우 하는 사람
+
+--------------------------------------------------------- */
+
+
+.meFollowList .followList{
+    margin: 40px 0; height: 400px; width: 500px;
+    font-size: 14px; color:#000; overflow: auto;
+}
+.meFollowList .followExample{
+    width: 100%; height: 46px; margin-bottom: 20px;
+    display: flex; align-items: center;
+}
+.meFollowList .followExample .probox{
+    width: 35px; height: 35px; 
+    background-color: #FFE69A; border-radius: 50%; margin-right: 15px;
+}
+.meFollowList .followExample>div:nth-of-type(2)>p{margin-bottom: 4px;}
+.meFollowList .followExample>div:nth-of-type(3){
+    display: flex; flex-direction: column; align-items: end;
+    justify-content: space-between;
+}
+.meFollowList .followExample>div:nth-of-type(3) img{cursor: pointer;}
+.meFollowList .followExample>div:nth-of-type(3) p{
+    color: #5C5C5C;
+    align-self: flex-end; font-size: 12px; margin-top: 4px;
+}
+.meFollowList .followExample>div:nth-of-type(2){
+    width: 150px; cursor: pointer; height: 46px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#alarmModBox .followerLink{
+    display: flex; justify-content: center;
+    margin-top: 20px;
+}
+#alarmModBox .followerLink svg{margin-right: 8px;}
+.messageBoxOpen{width: 300px; user-select: none; cursor: pointer;}
+
+
+.meFollowList{
+    width: 100vw; height: 100vh; background-color: #5C5C5C50; 
+    display: flex; justify-content: center; align-items: center;
+    position: fixed; z-index: 300; top: 0; left: 0;
+    display: none;
+}
+.meFollowList>div{
+    width: 600px;  height: 600px;  
+    background-color: #FFFFFF; border-radius: 20px; 
+    display: flex; flex-direction: column; align-items: center; 
+    position: relative;
+}
+.meFollowList>div>div:first-child{ /* 메세지 함 TOP */
+    width: 100%; height: 10%; border-bottom: 1px solid #C5C5C5;
+    display: flex; align-items: center;
+    padding: 0 20px;
+}
+.meFollowList .followerLink{
+    display: flex; align-items: center; user-select: none; cursor: pointer;
+}
+.meFollowList .followerLink>svg{margin-right: 8px;}
+
+.meFollowList>div>div:first-child h2{
+    position: absolute; user-select: none; left: 50%; transform: translateX(-60px);
+}
+
+.meFollowList>div>div:first-child>svg:last-of-type{
+    width: 20px; height: 20px; position: absolute; 
+    right: 18px; top: 18px; cursor: pointer;
+}
+.reciveUnderline{cursor: pointer; user-select: none; text-decoration: underline;}
+.sendUnderline{cursor: pointer; user-select: none; text-decoration: underline;}
+/* 메세지 리스트 */
+.meFollowList .followList{
+    margin: 40px 0; height: 400px; width: 500px;
+    font-size: 14px; color:#000; overflow: auto;
+    display: flex;  flex-direction: column; align-items: center;
+}
+.userProfile{display: flex;}
+.meFollowList .followExample{
+    width: 80%; height: 46px; margin-bottom: 20px;
+    display: flex; 
+}
+.h4{display: flex; justify-content: center; margin: 20px 0;}
+/* .myFollowList h4{} */
+.meFollowList .followExample .probox{
+    width: 35px; height: 35px; 
+    background-color: #FFE69A; border-radius: 50%; margin-right: 15px;
+}
+.meFollowList .followExample>div:nth-of-type(2)>p{margin-bottom: 4px;}
+
+/* meFollowList .followExample>div:nth-of-type(3) svg{color: #5C5C5C; margin-bottom: 12px;} */
+.followExample .followListX{width: 10px; width: 10px; color: #5C5C5C;}
+.meFollowList .followExample>div:nth-of-type(2){
+    width: 150px;
+}
+.followExample{width: 100%; display: flex; justify-content: space-between;}
+.probox img{width: 100%; height: 100%; border-radius: 50%;}
+.followExample p{font-size: 16px; line-height: 35px; width: 200px;}
+.followManage button{
+    width: 100px; height: 30px; border-radius: 20px; background-color: #5286DC;
+    color: #fff; display: flex; justify-content: center; margin-top: 8px;
+    align-items: center; float: right;
+}
+

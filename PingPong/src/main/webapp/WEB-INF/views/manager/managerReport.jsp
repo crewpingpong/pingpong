@@ -122,7 +122,7 @@
                                         <td>${Declaration.indictmentNo}</td>
                                         <td><a href="/mypage/${Declaration.memberNo}" class="reporter">${Declaration.memberUrl}</a></td>
                                         <td><a href="/mypage/${Declaration.memberNo}?boardNo=${Declaration.boardNo}" class="respondent">${Declaration.boardNo}</a></a></td>
-                                        <td><a href="/managerReportContent.html">${Declaration.indictmentContent}</a></td>
+                                        <td><a onclick="location.href='/manager/ReportContent?indictmentNo=${Declaration.indictmentNo}'">${Declaration.indictmentContent}</a></td>
                                     </tr>
                                 </c:forEach>
                             </c:otherwise>

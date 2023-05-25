@@ -67,7 +67,17 @@ public class AlarmController {
 	public List<Follow> myFollowList(@SessionAttribute("loginMember") Member loginMember){
 
 		List<Follow> myFollowList = service.myfollowList(loginMember.getMemberNo());
-		System.out.println(myFollowList);
+//		System.out.println(myFollowList);
 		return myFollowList;
+	}
+	
+	// 나를 팔로우 하는 사람들 조회
+	@GetMapping(value="/meFollowList", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Follow> meFollowList(@SessionAttribute("loginMember") Member loginMember){
+		
+		List<Follow> meFollowList = service.mefollowList(loginMember.getMemberNo());
+//		System.out.println(meFollowList);
+		return meFollowList;
 	}
 }
