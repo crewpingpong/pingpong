@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="ch-squareBtn">
-                    <a href="#">
+                    <a href="/qna/FAQlist">
                         계정/프로필
                     </a>
                 </li>
