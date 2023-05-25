@@ -51,7 +51,7 @@ public class MypageController {
 	private AlarmService alarmService;
 	
 	// 프로필 조회
-	@GetMapping("/{memberNo}")
+	@GetMapping("/{memberNo:[0-9]+}")
 	public String personal(
 			@PathVariable("memberNo") int memberNo
 			, Model model

@@ -55,16 +55,17 @@
         </div>
 
         <div class="forSNSIcon-main">
-        
-            <c:forEach var="i" begin="0" end="${fn:length(snsURL) - 1}" step="1">
-                <div class="forSNSIcon-sub">
-                
-                    <a href="${snsURL[i].snsAddress}">
-                        <img class="sns-img-list" src="${snsImgList[i]}" alt="">
-                    </a> 
-                </div>
-
-            </c:forEach>
+        	<c:if test="${fn:length(snsURL) > 0}">
+	            <c:forEach var="i" begin="0" end="${fn:length(snsURL) - 1}" step="1">
+	                <div class="forSNSIcon-sub">
+	                
+	                    <a href="${snsURL[i].snsAddress}">
+	                        <img class="sns-img-list" src="${snsImgList[i]}" alt="">
+	                    </a> 
+	                </div>
+	
+	            </c:forEach>
+            </c:if>
         </div>
         
         <div class="profilebox"> <!-- 프로필 박스 -->
