@@ -294,6 +294,7 @@
 		JOIN "MEMBER" M ON(IC.COMMENT_MEMBER_NO = M.MEMBER_NO)
 		LEFT JOIN "MEMBER_PROFILE" USING(MEMBER_NO)
 		WHERE COMMENT_NO = #{commentNo}
+		AND COMMENT_DEL_FL = 'N'
     </select>
     
     <update id="updateBoard">

@@ -684,19 +684,22 @@ function selectBoardList(boardNo){
 
             }
         });
-
-        boardDeleteBtn.querySelector("a").href = "/board2/delete/"+boardNo+"?memberNo="+boardMember;
-
+        // 게시글 삭제
+        boardDeleteBtn.addEventListener("click", e=>{
+            if(confirm("정말 삭제하시겠습니까?")){
+                location.href = "/board2/delete/"+boardNo+"?memberNo="+boardMember;
+            } else{
+                e.target.querySelector("a").preventDefault();
+            }
+        })
+        
         slideInitFn();
-
+        
     })
     .catch(err => console.log(err));
 }
 
-// 게시글 삭제
-// boardDeleteBtn.addEventListener("click", ()=>{
-//     location.href = "/board2/delete?boardNo="+boardNo;
-// })
+
 
 
 // 해시 삭제 함수
