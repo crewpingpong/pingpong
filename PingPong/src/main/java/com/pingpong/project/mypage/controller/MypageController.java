@@ -174,13 +174,13 @@ public class MypageController {
 		model.addAttribute("checkSNSList", checkSNSList);
 		
 //		System.out.println("SNSList" + SNSList);
-//		System.out.println("checkSNSList" + checkSNSList);
+		System.out.println("checkSNSList" + checkSNSList);
 		
 		// 선택한 SNSList의 URL 조회
 		List<SNS> checkSNSURL = service.selectCheckSNSURL(loginMember.getMemberNo());
 		model.addAttribute("checkSNSURL", checkSNSURL);
 		
-		System.out.println(checkSNSURL);
+//		System.out.println(checkSNSURL);
 		
 		
 		
