@@ -51,18 +51,22 @@ public class BoardController2 {
     	int boardNo = service.boardInsert(board, images, webPath, filePath);
     	
     	// 해시태그 처리
-    	List<Hashtag> hashtags = new ArrayList<Hashtag>();
-    	
-    	String[] hashs = hashtagLists.split(",");  // 파라미터로 가져온 해시태그 "," 구분자로 나눠서 배열로 만듦
-    	
-    	for(int i=0;i<hashs.length;i++) {
-    		Hashtag hash = new Hashtag();
-    		hash.setHashtagName(hashs[i]);
-    		hash.setBoardNo(boardNo);
-    		hashtags.add(hash);
+    	if(!hashtagLists.isEmpty()) {
+    		
+    		List<Hashtag> hashtags = new ArrayList<Hashtag>();
+    		
+    		String[] hashs = hashtagLists.split(",");  // 파라미터로 가져온 해시태그 "," 구분자로 나눠서 배열로 만듦
+    		
+    		for(int i=0;i<hashs.length;i++) {
+    			Hashtag hash = new Hashtag();
+    			hash.setHashtagName(hashs[i]);
+    			hash.setBoardNo(boardNo);
+    			hashtags.add(hash);
+    		}
+
+    		service.hashInsert(hashtags);    		
+    		
     	}
-    	
-    	service.hashInsert(hashtags);
     	
     	String message = null;
     	if(boardNo > 0) {

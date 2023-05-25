@@ -1,3 +1,14 @@
+const forms = document.querySelectorAll('form');
+forms.forEach(form => {
+    form.addEventListener('keypress', event => {
+        if (event.keyCode === 13) {
+        event.preventDefault();
+        return false;
+        }
+    });
+});
+
+
 // 개인 홈 프로필 js
 // 홈프로필 배경 변경
 const preview = document.getElementsByClassName("preview");  // img 태그
@@ -235,7 +246,7 @@ let maxSlide; // 현재 슬라이드 위치가 슬라이드 개수를 넘기지 
 let paginationItems;
 let FirstPagination;
 let parentComment;
-let boardCont;
+// let boardCont;
 
 let commentParentNo;
 
@@ -257,7 +268,7 @@ function selectBoardList(boardNo){
     .then(board => {
 
 
-        boardCont = board.boardContent;
+        // boardCont = board.boardContent;
 
         document.querySelectorAll('.slide_item').forEach(function(slideItem) {
             slideItem.remove();
@@ -560,15 +571,18 @@ function selectBoardList(boardNo){
         const nameA = document.createElement("a");
         nameA.href = "/mypage/"+board.memberNo;
         nameA.innerText = board.memberNickname;
-
-        let beforeMainContent = board.boardContent;
-        beforeMainContent =  beforeMainContent.replaceAll("&amp;", "&");
-        beforeMainContent =  beforeMainContent.replaceAll("&lt;", "<");
-        beforeMainContent =  beforeMainContent.replaceAll("&gt;", ">");
-        beforeMainContent =  beforeMainContent.replaceAll("&quot;", "\"");
-
         const contentP = document.createElement("p");
-        contentP.innerText = beforeMainContent;
+
+        if(board.boardContent != null){
+            
+            let beforeMainContent = board.boardContent;
+            beforeMainContent =  beforeMainContent.replaceAll("&amp;", "&");
+            beforeMainContent =  beforeMainContent.replaceAll("&lt;", "<");
+            beforeMainContent =  beforeMainContent.replaceAll("&gt;", ">");
+            beforeMainContent =  beforeMainContent.replaceAll("&quot;", "\"");
+            contentP.innerText = beforeMainContent;
+        }
+
 
         const input = document.createElement("textarea");
         input.classList.add("hiddenEditing");
@@ -677,13 +691,15 @@ function selectBoardList(boardNo){
                     hiddenEditing.style.display = 'none';
                     editingSubmit.style.display = 'none';
                     editingCancel.style.display = 'none';
-
-                    board.boardContent =  board.boardContent.replaceAll("&amp;", "&");
-                    board.boardContent =  board.boardContent.replaceAll("&lt;", "<");
-                    board.boardContent =  board.boardContent.replaceAll("&gt;", ">");
-                    board.boardContent =  board.boardContent.replaceAll("&quot;", "\"");
-
-                    BoardPost.querySelector(".innerDiv>p").innerHTML = board.boardContent;
+                    if(board.boardContent != null){
+                        
+                        board.boardContent =  board.boardContent.replaceAll("&amp;", "&");
+                        board.boardContent =  board.boardContent.replaceAll("&lt;", "<");
+                        board.boardContent =  board.boardContent.replaceAll("&gt;", ">");
+                        board.boardContent =  board.boardContent.replaceAll("&quot;", "\"");
+    
+                        BoardPost.querySelector(".innerDiv>p").innerHTML = board.boardContent;
+                    }
                 })
                 .catch(err => {
                     console.log(err);
@@ -1686,7 +1702,7 @@ window.addEventListener("resize", () => {
 function addHashtag() {
 
     let hashtag = document.getElementById("hashtag").value; // 해시태그 입력 input 태그
-    if (/[,#%]/.test(hashtag)){                             // ,#% 들어가 있으면 리턴
+    if (/[,#%\s]/.test(hashtag)){                             // ,#% 들어가 있으면 리턴
         document.querySelector("#hashtag").value = '';      // input 태그 값 없앰
         document.querySelector(".hashList").innerHTML = '';      // 리스트 값 없앰
         return;                                             // 함수 종료
@@ -1717,7 +1733,7 @@ function addHashtag() {
 // 해시 리스트 클릭 시 해시태그 추가
 function addHashList(event){
     let hashtag = event.innerText.slice(1);
-    if (/[,#%]/.test(hashtag)){                             // ,#% 들어가 있으면 리턴
+    if (/[,#%\s]/.test(hashtag)){                             // ,#% 들어가 있으면 리턴
         document.querySelector("#hashtag").innerHTML = '';      // input 태그 값 없앰
         document.querySelector(".hashList").innerHTML = '';      // 리스트 값 없앰
         return;                                             // 함수 종료
