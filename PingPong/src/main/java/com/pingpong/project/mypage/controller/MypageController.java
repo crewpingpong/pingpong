@@ -101,12 +101,12 @@ public class MypageController {
 		// 선택한 snsImgList 조회 (아이콘)
 		List<SNS> checkSNSImgList = service.selectCheckSNSImgList(loginMember.getMemberNo());
 		  
-//		List<String> snsImgList = new ArrayList<>();
-//		
-//		for (SNS sns : checkSNSImgList) {
-//			snsImgList.add(sns.getSnsImg());
-//		}
-//		model.addAttribute("snsImgList", snsImgList);
+		List<String> snsImgList = new ArrayList<>();
+		
+		for (SNS sns : checkSNSImgList) {
+			snsImgList.add(sns.getSnsImg());
+		}
+		model.addAttribute("snsImgList", snsImgList);
 		
 //		System.out.println(snsImgList);
 		
@@ -118,14 +118,16 @@ public class MypageController {
 	    
 	    List<String> snsLinkAddress = new ArrayList<>();
 	    
-//	    System.out.println(snsURL);
-//	    System.out.println(snsLinkAddress);
-	
-	    
-	    for(SNS sns : snsURL) {
-	    	snsLinkAddress.add(sns.getSnsAddress());
-	    }
-	    model.addAttribute("snsLinkAddress", snsLinkAddress);
+	    model.addAttribute("snsURL", snsURL);
+	    System.out.println(snsURL);
+//	
+//	    
+//	    for(SNS sns : snsURL) {
+//	    	snsLinkAddress.add(sns.getSnsAddress());
+//	    	
+//	    	System.out.println(snsLinkAddress);
+//	    }
+//	    model.addAttribute("snsLinkAddress", snsLinkAddress);
 	    
 //	    System.out.println(snsLinkAddress);
 		
@@ -362,24 +364,54 @@ public class MypageController {
 		for(String sns : selectedSnsList) {	
 			
 			Map<String, Object> snsMap = new HashMap<>();
-			
+			  
 			snsMap.put("snsNo", sns);
 			snsMap.put("memberNo", loginMember.getMemberNo());
 			
+			
+			SNS s = new SNS();
+			s.setSnsNo(Integer.parseInt(sns));
+			s.setMemberNo(loginMember.getMemberNo());
+			
+			String addr = selectedSnsAddress.get(s.getSnsNo() -1);
+			
+			s.setSnsAddress(addr);
+			
 //			System.out.println("snsMap : " + snsMap);
 			
-			int result = service.insertNewSnsList(snsMap);
+			int result = service.insertNewSnsList(s);
 		}
 		
 		
+		
+		
+		
 		/* *** update snsAddress *** */
-		int result = service.selectSNSAddress(loginMember.getMemberNo());
+//		int result = service.selectSNSAddress(loginMember.getMemberNo());
 		
 //		System.out.println(selectedSnsAddress); -> [instagram, , sdf, , instagram, ]
 			
 		// insert snsAddress
-		if(result == 6) {
+/*
+		for(String sns : selectedSnsAddress) {	
 			
+			if(sns != null) {
+				Map<String, Object> snsAddressMap = new HashMap<>();
+				
+				snsAddressMap.put("memberNo", loginMember.getMemberNo());
+				snsAddressMap.put("snsAddress", sns);
+				
+				int updateResult = service.updateSNSAddress(snsAddressMap);			
+			}
+			
+			
+//				System.out.println("snsAddressMap : " + snsAddressMap);
+			
+		}
+		}
+		
+		// update snsAddress
+		else {
 			for(String sns : selectedSnsAddress) {	
 				
 				Map<String, Object> snsAddressMap = new HashMap<>();
@@ -392,25 +424,12 @@ public class MypageController {
 				int insertResult = service.insertSNSAddress(snsAddressMap);
 			}
 		}
-		
-		// update snsAddress
-		else {
-			for(String sns : selectedSnsAddress) {	
-				
-				Map<String, Object> snsAddressMap = new HashMap<>();
-				
-				snsAddressMap.put("memberNo", loginMember.getMemberNo());
-				snsAddressMap.put("snsAddress", sns);
-				
-				System.out.println("snsAddressMap : " + snsAddressMap);
-				
-				int updateResult = service.updateSNSAddress(snsAddressMap);
-			}
-		}
+	*/	
 		
 		
-		
-		
+		// 빈칸이 아닐떄
+		// 업데이트
+		// 업데이트 = 0 -> 인설트
 		
 		ra.addFlashAttribute("message", message);
 		

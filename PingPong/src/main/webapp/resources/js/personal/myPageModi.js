@@ -156,7 +156,7 @@ if (imageInput != null) {
     originalImage = profileImage.getAttribute("src");
 
     // 회원 프로필 화면 진입 시 현재 회원의 프로필 이미지 상태를 확인
-    if (profileImage.getAttribute("src") == "/resources/images/profileImage/basicUserProfile.ico") {
+    if (profileImage.getAttribute("src") == "/resources/images/profileImage/basicUserProfile.png") {
         initCheck = false; // 기본 이미지
     }
     else {
@@ -220,7 +220,7 @@ if (imageInput != null) {
     deleteProfile.addEventListener("click", () => {
 
         imageInput.value = "";
-        profileImage.setAttribute("src", "/resources/images/profileImage/basicUserProfile.ico");
+        profileImage.setAttribute("src", "/resources/images/profileImage/basicUserProfile.png");
 
         deleteCheck = 0;
     });
