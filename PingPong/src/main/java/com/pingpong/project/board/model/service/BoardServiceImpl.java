@@ -95,6 +95,12 @@ public class BoardServiceImpl implements BoardService{
 	public List<Hashtag> getHashtags(String hashtagName) {
 		return dao.getHashtags(hashtagName);
 	}
+
+	// 해시태그 삭제
+	@Override
+	public int deleteHash(Map<String, Object> paramMap) {
+		return dao.deleteHash(paramMap);
+	}
 	
 
 	

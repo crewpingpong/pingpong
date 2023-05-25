@@ -592,7 +592,7 @@ function selectBoardList(boardNo){
         const hiddenEditing = document.querySelector(".hiddenEditing");
         const editingSubmit = document.querySelector(".editingSubmit");
         const editingCancel = document.querySelector(".editingCancel");
-
+        const hashPost = document.querySelectorAll(".hashs");
         // 게시글 편집 버튼 클릭 시
         for(let i=0;i<boardEditing.length;i++){
             boardEditing[i].addEventListener("click", ()=>{
@@ -602,12 +602,14 @@ function selectBoardList(boardNo){
                 editingCancel.style.display = 'inline';
                 hiddenEditing.focus();
                 const whitecontent = BoardPost.querySelector(".innerDiv>p").innerHTML;
-                const hashPost = document.querySelectorAll(".hashs");
-                console.log(hashPost);
-                for(let j=0;j<hashPost.length;j++){
-                    let item = 
-                        `<button type="button" onclick="removeHash(event, ${board.boardNo}, ${hashPost[i].hashtagName})">×</button>`;
-                    hashPost[j].parentNode.insertAdjacentHTML("beforeend", item);
+                
+                
+                if(hashPost[0].nextElementSibling == null){
+                    for(let j=0;j<hashPost.length;j++){
+                        let item = 
+                            `<button type="button" onclick="removeHash(event, ${board.boardNo})">×</button>`;
+                        hashPost[j].parentNode.insertAdjacentHTML("beforeend", item);
+                    }
                 }
 
 
@@ -622,6 +624,7 @@ function selectBoardList(boardNo){
             hiddenEditing.style.display = 'none';
             editingSubmit.style.display = 'none';
             editingCancel.style.display = 'none';
+            const hashDTBtn = hashPost.querySelector("span>button")
         });
 
         // 게시물 수정 버튼
@@ -632,6 +635,7 @@ function selectBoardList(boardNo){
                 hiddenEditing.style.display = 'none';
                 editingSubmit.style.display = 'none';
                 editingCancel.style.display = 'none';
+                
                 return;
             }
 
@@ -678,7 +682,27 @@ function selectBoardList(boardNo){
     .catch(err => console.log(err));
 }
 
-// 해시 
+// 해시 삭제 함수
+function removeHash(event, boardNo){
+    let tagName = event.target.previousElementSibling.innerText.slice(1);
+    const data = {"boardNo" : boardNo, "hashtagName" : tagName};
+
+    fetch("/board/deleteHash", {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(data)
+    })
+    .then(resp=>resp.text())
+    .then(result=>{
+        if(result>0){
+            event.target.parentNode.innerHTML = '';
+        }
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+
+}
 
 
 

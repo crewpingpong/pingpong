@@ -71,4 +71,10 @@ public interface BoardService {
 	 */
 	int childCommentDelete(int commentNo);
 
+	/** 해시태그 삭제
+	 * @param paramMap
+	 * @return result
+	 */
+	int deleteHash(Map<String, Object> paramMap);
+
 }

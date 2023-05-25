@@ -66,8 +66,13 @@ public class BoardController {
     // 해시태그 조회
     @GetMapping("/board/hashtag")
     public List<Hashtag> getHashtags(String hashtagName) {
-    	System.out.println(hashtagName);
     	return service.getHashtags(hashtagName);
+    }
+    
+    // 해시태그 삭제
+    @PostMapping("/board/deleteHash")
+    public int deleteHash(@RequestBody Map<String, Object> paramMap) {
+    	return service.deleteHash(paramMap);
     }
 
     // 댓글 삭제
@@ -80,9 +85,6 @@ public class BoardController {
     // 댓댓글 삭제
     @PostMapping("/board/deleteChildComment")
     public int childCommentDelete(@RequestBody String commentNo1) {
-    	
-    	System.out.println(commentNo1);
-    	
     	int commentNo = Integer.parseInt(commentNo1);
     	return service.childCommentDelete(commentNo);
     }

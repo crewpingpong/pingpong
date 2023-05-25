@@ -116,6 +116,14 @@ public class BoardDAO {
 		return sqlSession.update("boardMapper.deleteChildComment", commentNo);
 	}
 
+	/** 해시태그 삭제
+	 * @param paramMap
+	 * @return result
+	 */
+	public int deleteHash(Map<String, Object> paramMap) {
+		return sqlSession.delete("boardMapper.deleteHash", paramMap);
+	}
+
 
 
 }
