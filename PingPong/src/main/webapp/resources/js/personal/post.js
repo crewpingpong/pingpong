@@ -1828,10 +1828,6 @@ for (let i = 0; i < snsUrlList.length; i++) {
     imgElement.src = snsUrlList[i];
     imgElement.alt = '';
 
-    // 링크 연결
-    imgElement.addEventListener('click', function() {
-        window.location.href = '${snsLinkAddress}';
-    });
 
     let subConElement = document.createElement('div');
     subConElement.className = 'forSNSIcon-sub';
@@ -1843,29 +1839,19 @@ for (let i = 0; i < snsUrlList.length; i++) {
 }
 
 
+let snsUrlLinkList = [
+    'https://www.instagram.com/',
+    'https://ko-kr.facebook.com/',
+    'https://twitter.com/?lang=ko',
+    'https://www.notion.so/e6d20e0548c54ec496088e9cfa14c019',
+    'https://github.com/crewpingpong/pingpong',
+    'https://section.blog.naver.com/BlogHome.naver?directoryNo=0&currentPage=1&groupId=0'
+];
 
-/* SNS 아이콘 */
-/* 
-snsImgList = snsImgList.replace(/\[|\]/g, '').trim();
-let snsUrlList = snsImgList.split(', ');
-for (let i = 0; i < snsUrlList.length; i++) {
-    let imgElement = document.createElement('img');
-    imgElement.className = 'sns-img-list';
-    imgElement.src = snsUrlList[i];
-    imgElement.alt = '';
+let snsIcons = document.querySelectorAll('.sns-img-list');
 
-    let subConElement = document.createElement('div');
-    subConElement.className = 'forSNSIcon-sub';
-
-    // Create a link element and set the URL
-    let linkElement = document.createElement('a');
-    linkElement.href = snsUrlList[i];
-    linkElement.appendChild(imgElement);
-
-    subConElement.appendChild(linkElement);
-
-    let mainConElement = document.querySelector('.forSNSIcon-main');
-    mainConElement.appendChild(subConElement);
-}
-
-*/
+snsIcons.forEach(function(icon, index) {
+    icon.addEventListener('click', function() {
+        window.open(snsUrlLinkList[index]);
+    });
+});

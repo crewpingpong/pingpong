@@ -101,12 +101,12 @@ public class MypageController {
 		// 선택한 snsImgList 조회 (아이콘)
 		List<SNS> checkSNSImgList = service.selectCheckSNSImgList(loginMember.getMemberNo());
 		  
-//		List<String> snsImgList = new ArrayList<>();
-//		
-//		for (SNS sns : checkSNSImgList) {
-//			snsImgList.add(sns.getSnsImg());
-//		}
-//		model.addAttribute("snsImgList", snsImgList);
+		List<String> snsImgList = new ArrayList<>();
+		
+		for (SNS sns : checkSNSImgList) {
+			snsImgList.add(sns.getSnsImg());
+		}
+		model.addAttribute("snsImgList", snsImgList);
 		
 //		System.out.println(snsImgList);
 		
@@ -402,7 +402,7 @@ public class MypageController {
 				snsAddressMap.put("memberNo", loginMember.getMemberNo());
 				snsAddressMap.put("snsAddress", sns);
 				
-				System.out.println("snsAddressMap : " + snsAddressMap);
+//				System.out.println("snsAddressMap : " + snsAddressMap);
 				
 				int updateResult = service.updateSNSAddress(snsAddressMap);
 			}
