@@ -61,5 +61,13 @@ public class AlarmController {
 		return result;
 	}
 	
+	// 내가 팔로우 하는 사람들 조회
+	@GetMapping(value="/myFollowList", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Follow> myFollowList(@SessionAttribute("loginMember") Member loginMember){
 
+		List<Follow> myFollowList = service.myfollowList(loginMember.getMemberNo());
+		System.out.println(myFollowList);
+		return myFollowList;
+	}
 }

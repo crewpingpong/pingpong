@@ -68,9 +68,9 @@ public class MypageController {
 		follow.put("memberNo", memberNo);
 		follow.put("followerNo", loginMember.getMemberNo());
 		int followCheck = alarmService.followCheck(follow); // 팔로우 여부 체크 0 == 안함 / 1 == 함
-		List<Follow> myfollowList = alarmService.myfollowList(follow); // 내가 팔로우 하는 사람들
-		List<Follow> mefollowList = alarmService.mefollowList(follow); // 나를 팔로우 하는 사람들
-		
+//		List<Follow> myfollowList = alarmService.myfollowList(follow); // 내가 팔로우 하는 사람들
+//		List<Follow> mefollowList = alarmService.mefollowList(follow); // 나를 팔로우 하는 사람들
+		int myFollowCount = alarmService.myFollowCount(loginMember.getMemberNo());
 		
 		model.addAttribute("memberNo", memberNo);
 		model.addAttribute("mypage", mypage);
@@ -79,8 +79,9 @@ public class MypageController {
 		model.addAttribute("likeList", boardLikeList);
 		
 		model.addAttribute("followCheck", followCheck);
-		model.addAttribute("myfollowList", myfollowList);
-		model.addAttribute("mefollowList", mefollowList);
+		model.addAttribute("myFollowCount", myFollowCount);
+//		model.addAttribute("myfollowList", myfollowList);
+//		model.addAttribute("mefollowList", mefollowList);
 		
 		
 		// 선택한 techImgList 조회 (아이콘)
@@ -100,12 +101,12 @@ public class MypageController {
 		// 선택한 snsImgList 조회 (아이콘)
 		List<SNS> checkSNSImgList = service.selectCheckSNSImgList(loginMember.getMemberNo());
 		  
-		List<String> snsImgList = new ArrayList<>();
-		
-		for (SNS sns : checkSNSImgList) {
-			snsImgList.add(sns.getSnsImg());
-		}
-		model.addAttribute("snsImgList", snsImgList);
+//		List<String> snsImgList = new ArrayList<>();
+//		
+//		for (SNS sns : checkSNSImgList) {
+//			snsImgList.add(sns.getSnsImg());
+//		}
+//		model.addAttribute("snsImgList", snsImgList);
 		
 //		System.out.println(snsImgList);
 		
@@ -116,10 +117,10 @@ public class MypageController {
 	    
 	    List<String> snsLinkAddress = new ArrayList<>();
 	    
-	    for(SNS sns : snsURL) {
-	    	snsLinkAddress.add(sns.getSnsAddress());
-	    }
-	    model.addAttribute("snsLinkAddress", snsLinkAddress);
+//	    for(SNS sns : snsURL) {
+//	    	snsLinkAddress.add(sns.getSnsAddress());
+//	    }
+//	    model.addAttribute("snsLinkAddress", snsLinkAddress);
 	    
 //	    System.out.println(snsLinkAddress);
 		
@@ -177,8 +178,8 @@ public class MypageController {
 		System.out.println("checkSNSList" + checkSNSList);
 		
 		// 선택한 SNSList의 URL 조회
-		List<SNS> checkSNSURL = service.selectCheckSNSURL(loginMember.getMemberNo());
-		model.addAttribute("checkSNSURL", checkSNSURL);
+//		List<SNS> checkSNSURL = service.selectCheckSNSURL(loginMember.getMemberNo());
+//		model.addAttribute("checkSNSURL", checkSNSURL);
 		
 //		System.out.println(checkSNSURL);
 		
