@@ -44,15 +44,23 @@ window.addEventListener("click", e => {
 })
 
 // 알람 하트 아이콘
-const alarmIcon = document.querySelector(".alarm_icon");
-// const alarmIconRedColor = document.querySelector(".alarm_icon>svg>svg");
-const alarmIconRedColor = document.querySelector(".redheart");
-const alarmModBox = document.querySelector("#alarmModBox");
+let alarmIcon;
+let alarmModBox;
+// let alarmIconRedColor = document.querySelector(".alarm_icon>svg>svg");
+// let alarmIconRedColor = document.querySelector(".redheart");
+// alarmIconRedColor.classList.toggle("alarm-icon-redColor");
 
-alarmIcon.addEventListener("click", () => {
-    // alarmIconRedColor.classList.toggle("alarm-icon-redColor");
-    alarmModBox.classList.toggle("alarm-icon-redColor");
-});
+
+document.addEventListener("DOMContentLoaded",()=>{
+    let alarmIcon = document.querySelector(".basicheart");
+    let alarmModBox = document.querySelector("#alarmModBox");
+    alarmIcon.addEventListener("click", () => {
+        alramFn();
+        alarmModBox.classList.toggle("alarm-icon-redColor");
+        // if(!alarmModBox.classList.contains("alarm-icon-redColor")){
+        // }
+    });
+})
 
 
 
@@ -216,3 +224,113 @@ navSearchclBtn.addEventListener("click", () => {
 
 
 
+
+function alramFn(){ // 알람 메세지 함수
+    
+    sendMessageList = document.querySelector(".message-Box-send .messageList");
+    alarmModBoxList = document.querySelector("#alarmModBox .alarmList");
+    sendMessageList.innerHTML=""; // 내부 내용 모두 없애기
+
+    fetch("/alarm/send")
+    .then(resp => resp.json()) // 응답 객체를 매개변수로 얻어와 파싱
+    .then(alarmList => { // 파싱한 데이터를 이용해서 비동기 처리 후 동작
+
+        if(alarmList.length > 0){
+            for(let alarm of alarmList){
+                // console.log(alarm);
+             // 부모 요소 생성
+            const messageExampleDiv = document.createElement("div");
+            messageExampleDiv.classList.add("messageExample");
+
+            // 첫 번째 자식 요소 생성
+            const firstChildDiv = document.createElement("div");
+            firstChildDiv.classList.add("probox");
+
+            // 이미지 요소 생성
+            const image = document.createElement("img");
+            if(alarm.sendProfile!=null){
+                image.src = alarm.sendProfile;
+            }
+
+            // 이미지를 첫 번째 자식 요소에 추가
+            firstChildDiv.appendChild(image);
+
+            // 이미지를 클릭하면 프로필로 이동하는 링크를 생성
+            const profileLink = document.createElement("a");
+            if(alarm.sendNo!=null){
+                profileLink.href = "/mypage/" + alarm.sendNo;
+            }
+
+            // 이미지 요소를 링크에 추가
+            profileLink.appendChild(image);
+
+            // 첫 번째 자식 요소에 프로필 링크를 추가
+            firstChildDiv.appendChild(profileLink);
+
+            // 두 번째 자식 요소 생성
+            const secondChildDiv = document.createElement("div");
+
+            // 두 번째 자식 요소 내부의 요소 생성
+            const secondChildParagraph = document.createElement("p");
+            if(alarm.noticeContent!=null){
+                secondChildParagraph.innerHTML = alarm.noticeContent;
+            }
+
+            // 두 번째 자식 요소 내부의 요소들을 두 번째 자식 요소에 추가
+            secondChildDiv.appendChild(secondChildParagraph);
+
+
+            // 모든 자식 요소들을 부모 요소에 추가
+            messageExampleDiv.appendChild(firstChildDiv);
+            messageExampleDiv.appendChild(secondChildDiv);
+            // messageExampleDiv.appendChild(thirdChildDiv);
+
+            // 부모 요소를 원하는 컨테이너에 추가
+            // const container = document.getElementById("container"); // 원하는 컨테이너의 id를 사용해야 합니다.
+            alarmModBoxList.appendChild(messageExampleDiv);
+
+
+                // 알람 메세지 삭제 하기
+                // thirdChildImage.addEventListener("click", e =>{
+                //     // messageResendBox.value;
+                //     delNo = e.currentTarget.parentElement.previousElementSibling.getAttribute("delNo");
+
+                //     if(!confirm("정말 삭제하시겠습니까?")){
+                //         return;
+                //     }
+
+                //     fetch("/alarm/alarmDel",{
+                //         method : "DELETE",
+                //         headers : {"content-type":"application/json"},
+                //         body : JSON.stringify({
+                //             "deletMessageNo" : delNo,
+                //             "MessageBoxType" : MessageBox
+                //         })
+                //     })
+                //     .then(resp => resp.text())
+                //     .then(result => {
+                //         if(result>0){
+                //             alert("삭제되었습니다.");
+                //             gotoMessagesendFn();
+                //         } else{
+                //             alert("메세지 삭제 실패");
+                //         }
+                //     })
+                //     .catch(err =>{
+                //         console.log(err);
+                //     })
+                // })
+            }
+
+    } else {
+        alarmModBoxList.innerHTML="<div><p> 받은 알림이 없습니다.</p></div>"; 
+    }   
+
+    })
+
+    .catch(err =>{
+        console.log(err);
+    })
+
+    
+}

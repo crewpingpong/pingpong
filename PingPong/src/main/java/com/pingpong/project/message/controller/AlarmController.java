@@ -1,10 +1,12 @@
 package com.pingpong.project.message.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.message.model.dto.Follow;
+import com.pingpong.project.message.model.dto.Notice;
 import com.pingpong.project.message.model.service.AlarmService;
 
 @SessionAttributes({"loginMember"})
@@ -23,6 +26,15 @@ public class AlarmController {
 	
 	@Autowired
 	private AlarmService service;
+	
+	// 최근 알람 20개 조회
+	@GetMapping(value="/send", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public List<Notice> alarmList(@SessionAttribute("loginMember") Member loginMember){
+		List<Notice> alarmList = service.alarmList(loginMember.getMemberNo());
+//		System.out.println(alarmList);
+		return alarmList;
+	}
 	
 	// 팔로우 삽입
 	@PostMapping("/follow")
@@ -39,7 +51,6 @@ public class AlarmController {
 		
 		// 팔로우 여부 0 이면 안함 / 1이면 함
 		follow.setCheck(service.followCheck(followChk)); 
-//		if(check>0) model.addAttribute("likeCheck","on");
 		 
 		if(loginMember != null) { // 로그인 상태인 경우
 			if(loginMember.getMemberNo() != follow.getMemberNo()) { // 자기 자신 X				

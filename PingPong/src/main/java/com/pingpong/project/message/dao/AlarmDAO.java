@@ -41,14 +41,14 @@ public class AlarmDAO {
 		return sqlSession.insert("alarmMapper.insertAlarm",notice);
 	}
 	
-//	/** 팔로우 여부
-//	 * @param follow
-//	 * @return
-//	 */
-//	public int followCheck(Follow follow) {
-//		return sqlSession.selectOne("alarmMapper.followCheck",follow);
-//	}
-	
+	/** 최근 알람 20개 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public List<Notice> alarmList(int memberNo) {
+		return sqlSession.selectList("alarmMapper.alarmList",memberNo);
+	}
+
 
 	/** 팔로우 여부
 	 * @param follow
@@ -91,6 +91,7 @@ public class AlarmDAO {
 	public int unfollow(Follow follow) {
 		return sqlSession.delete("alarmMapper.unfollow",follow);
 	}
+
 
 
 

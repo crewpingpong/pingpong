@@ -280,10 +280,13 @@ function gotoMessageFn(){ // 받은 메세지 함으로 가는 함수
                 if(reciveMem.profileImg != null){
                     profileImg.setAttribute('src', reciveMem.profileImg);
                 }
+                const profileLink = document.createElement('a');
+                profileLink.href = "/mypage/" + reciveMem.sendMember;
                 profileImg.setAttribute('alt', '');
                 const profileBox = document.createElement('div'); // 보낸 멤버 이름 + 내용 담는 상자
                 profileBox.classList.add('probox');
-                profileBox.appendChild(profileImg);
+                profileLink.appendChild(profileImg);
+                profileBox.appendChild(profileLink);
                 newMessage.appendChild(profileBox);
                 // 이름 요소 생성
                 const name = document.createElement('p');
@@ -446,12 +449,15 @@ function gotoMessagesendFn(){ // 보낸 메세지 함으로 가는 함수
                 if(reciveMem.profileImg != null){
                     profileImg.setAttribute('src', reciveMem.profileImg);
                 }
+                const profileLink = document.createElement('a');
+                profileLink.href = "/mypage/" + reciveMem.receivedMember;
                 profileImg.setAttribute('alt', '');
-                const profileBox = document.createElement('div');
+                const profileBox = document.createElement('div'); // 보낸 멤버 이름 + 내용 담는 상자
                 profileBox.classList.add('probox');
-                profileBox.appendChild(profileImg);
+                profileLink.appendChild(profileImg);
+                profileBox.appendChild(profileLink);
                 newMessage.appendChild(profileBox);
-        
+
                 // 이름 요소 생성
                 const name = document.createElement('p');
                 name.innerText = reciveMem.memberNickname; 
@@ -477,6 +483,7 @@ function gotoMessagesendFn(){ // 보낸 메세지 함으로 가는 함수
 
                     // 받은 사람 프로필 이미지 가져오기
                     const sendProfile = document.querySelector(".message-my .message-profile");
+                    // sendProfile.innerHTML =  e.currentTarget.previousElementSibling.innerHTML;
                     sendProfile.innerHTML =  e.currentTarget.previousElementSibling.innerHTML;
                     
                     // 받은 사람 이름, 내용 가져오기
@@ -630,7 +637,7 @@ reciveUnderline.addEventListener("click", e =>{
     .then(result => {
         if(result>0){
             alert("삭제되었습니다.");
-            gotoMessagesendFn();
+            gotoMessageFn();
         } else{
             alert("메세지 삭제 실패");
         }
@@ -639,7 +646,7 @@ reciveUnderline.addEventListener("click", e =>{
         console.log(err);
     })
 })
-// 받은 메세지 전체 비우기
+// 보낸 메세지 전체 비우기
 sendUnderline.addEventListener("click", e =>{
     // messageResendBox.value;
 

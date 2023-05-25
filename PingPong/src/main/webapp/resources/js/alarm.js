@@ -99,10 +99,6 @@ alarmSock.onmessage = e => {
             alarmIconRedColor.classList.add("alarm-icon-redColor");
         })
     }
-    // const alarmModBox = document.querySelector("#alarmModBox");
-    // if (alarmModBox.classList.contains("alarm-icon-redColor")) {
-    //     alarmModBox.classList.remove("alarm-icon-redColor");
-    // }
 
 
     if(receiveAlarm != null){
@@ -128,13 +124,6 @@ alarmSock.onmessage = e => {
     // 이미지를 클릭하면 프로필로 이동하는 링크를 생성
     const profileLink = document.createElement("a");
     profileLink.href = "/mypage/" + obj.sendNo;
-
-    // profileLink.addEventListener("click", (event) => {
-    //     event.preventDefault();
-    //     location.href = "/mypage/" + obj.sendNo;
-    //     boardNo = obj.boardNo;
-    //     openModal(boardNo);
-    // });
 
     // 이미지 요소를 링크에 추가
     profileLink.appendChild(image);
@@ -167,36 +156,6 @@ alarmSock.onmessage = e => {
 
 };
 
-const openBoard = document.querySelector("#boardModal");
-
-// 모달 열기 함수
-// document.addEventListener("DOMContentLoaded",()=>{
-// });
-// function openModal(boardNo) {
-//     selectBoardList(boardNo);
-//     openBoard.style.display = "flex";
-//     openBoard.classList.remove('BoardBackground-close');
-// }
-
-
-
-
-
-// 세 번째 자식 요소 생성
-// const thirdChildDiv = document.createElement("div");
-
-// 세 번째 자식 요소 내부의 요소 생성
-// const thirdChildImage = document.createElement("img");
-// thirdChildImage.src = "/resources/images/message/messageDeleteImg.png";
-// thirdChildImage.alt = "messageDeleteImg";
-// thirdChildImage.classList.add("messageListX");
-
-// const thirdChildParagraph = document.createElement("p");
-// thirdChildParagraph.textContent = "1hour 전";
-
-// 세 번째 자식 요소 내부의 요소들을 추가
-// thirdChildDiv.appendChild(thirdChildImage);
-// thirdChildDiv.appendChild(thirdChildParagraph);
 
 
 // 테스트용 기능
@@ -214,123 +173,4 @@ const openBoard = document.querySelector("#boardModal");
 //                   // JS 객체 -> JSON
 // }
 
-
-// function alramFn(){ // 알람 메세지 함수
-//     fetch("/alarm/send")
-//     .then(resp => resp.json()) // 응답 객체를 매개변수로 얻어와 파싱
-    
-//     .then(alarmMessage => { // 파싱한 데이터를 이용해서 비동기 처리 후 동작
-        
-//         sendMessageList.innerHTML=""; // 내부 내용 모두 없애기
-//         MessageBox = 2; // MessageBox 2이면 보낸 메세지함
-
-//         if(alarmMessage.length > 0){
-//             for(let alarm of alarmMessage){
-
-
-//             // 부모 요소 생성
-//             const messageExampleDiv = document.createElement("div");
-//             messageExampleDiv.classList.add("messageExample");
-
-//             // 첫 번째 자식 요소 생성
-//             const firstChildDiv = document.createElement("div");
-//             firstChildDiv.classList.add("probox");
-
-//             // 이미지 요소 생성
-//             const image = document.createElement("img");
-//             image.src = "";
-//             image.alt = "";
-
-//             // 이미지를 첫 번째 자식 요소에 추가
-//             firstChildDiv.appendChild(image);
-
-//             // 두 번째 자식 요소 생성
-//             const secondChildDiv = document.createElement("div");
-
-//             // 두 번째 자식 요소 내부의 요소 생성
-//             const secondChildParagraph = document.createElement("p");
-
-//             const secondChildLink1 = document.createElement("a");
-//             secondChildLink1.textContent = "김핑퐁";
-
-//             const secondChildLink2 = document.createElement("a");
-//             secondChildLink2.textContent = "안녕하세요. 김핑퐁 입니다...";
-
-//             // 두 번째 자식 요소 내부의 요소들을 추가
-//             secondChildParagraph.appendChild(secondChildLink1);
-//             secondChildParagraph.appendChild(secondChildLink2);
-
-//             // 두 번째 자식 요소 내부의 요소들을 두 번째 자식 요소에 추가
-//             secondChildDiv.appendChild(secondChildParagraph);
-
-//             // 세 번째 자식 요소 생성
-//             const thirdChildDiv = document.createElement("div");
-
-//             // 세 번째 자식 요소 내부의 요소 생성
-//             const thirdChildImage = document.createElement("img");
-//             thirdChildImage.src = "/resources/images/message/messageDeleteImg.png";
-//             thirdChildImage.alt = "messageDeleteImg";
-//             thirdChildImage.classList.add("messageListX");
-
-//             const thirdChildParagraph = document.createElement("p");
-//             thirdChildParagraph.textContent = "1hour 전";
-
-//             // 세 번째 자식 요소 내부의 요소들을 추가
-//             thirdChildDiv.appendChild(thirdChildImage);
-//             thirdChildDiv.appendChild(thirdChildParagraph);
-
-//             // 모든 자식 요소들을 부모 요소에 추가
-//             messageExampleDiv.appendChild(firstChildDiv);
-//             messageExampleDiv.appendChild(secondChildDiv);
-//             messageExampleDiv.appendChild(thirdChildDiv);
-
-//             // 부모 요소를 원하는 컨테이너에 추가
-//             // const container = document.getElementById("container"); // 원하는 컨테이너의 id를 사용해야 합니다.
-//             alarmModBoxList.appendChild(messageExampleDiv);
-
-
-//                 // 알람 메세지 삭제 하기
-//                 // thirdChildImage.addEventListener("click", e =>{
-//                 //     // messageResendBox.value;
-//                 //     delNo = e.currentTarget.parentElement.previousElementSibling.getAttribute("delNo");
-
-//                 //     if(!confirm("정말 삭제하시겠습니까?")){
-//                 //         return;
-//                 //     }
-
-//                 //     fetch("/alarm/alarmDel",{
-//                 //         method : "DELETE",
-//                 //         headers : {"content-type":"application/json"},
-//                 //         body : JSON.stringify({
-//                 //             "deletMessageNo" : delNo,
-//                 //             "MessageBoxType" : MessageBox
-//                 //         })
-//                 //     })
-//                 //     .then(resp => resp.text())
-//                 //     .then(result => {
-//                 //         if(result>0){
-//                 //             alert("삭제되었습니다.");
-//                 //             gotoMessagesendFn();
-//                 //         } else{
-//                 //             alert("메세지 삭제 실패");
-//                 //         }
-//                 //     })
-//                 //     .catch(err =>{
-//                 //         console.log(err);
-//                 //     })
-//                 // })
-//             }
-
-//     } else {
-//         alarmModBoxList.innerHTML="<div><p> 받은 알림이 없습니다.</p></div>"; 
-//     }   
-
-//     })
-
-//     .catch(err =>{
-//         console.log(err);
-//     })
-
-    
-// }
 
