@@ -250,22 +250,72 @@ public class MypageDAO {
 	public List<SNS> selectCheckSNSImgList(int memberNo) {
 		return sqlSession.selectList("mypageMapper.selectCheckSNSImgList", memberNo);
 	}
+
+	/** snsURL COUNT
+	 * @param memberNo
+	 * @return
+	 */
+	public int selectSNSAddress(int memberNo) {
+		return sqlSession.selectOne("mypageMapper.selectSNSAddress", memberNo);
+	}
+
+	/** snsURL UPDATE
+	 * @param selectedSnsAddress
+	 * @return
+	 */
+	public int updateSNSAddress(Map<String, Object> snsAddressMap) {
+		return sqlSession.update("mypageMapper.updateSNSAddress", snsAddressMap);
+	}
+
+	/** snsURL INSERT
+	 * @param snsAddressMap
+	 * @return
+	 */
+	public int insertSNSAddress(Map<String, Object> snsAddressMap) {
+		return sqlSession.insert("mypageMapper.insertSNSAddress", snsAddressMap);
+	}
+
+	/** 선택한 snsList의 URL 주소 (링크)
+	 * @param memberNo
+	 * @return
+	 */
+	public List<SNS> selectSNSAddressList(int memberNo) {
+		return sqlSession.selectList("mypageMapper.selectSNSAddressList", memberNo);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/** 선택한 SNSList의 URL 조회
 	 * @param memberNo
 	 * @return
 	 */
-	public List<SNS> selectCheckSNSURL(int memberNo) {
-		return sqlSession.selectList("mypageMapper.selectCheckSNSURL", memberNo);
-	}
+//	public List<SNS> selectCheckSNSURL(int memberNo) {
+//		return sqlSession.selectList("mypageMapper.selectCheckSNSURL", memberNo);
+//	}
 	
 	/** 선택한 snsList의 URL 주소 (링크)
 	 * @param memberNo
 	 * @return
 	 */
-	public List<SNS> selectSNSAddress(int memberNo) {
-		return sqlSession.selectList("mypageMapper.selectSNSAddress", memberNo);
-	}
+//	public List<SNS> selectSNSAddress(int memberNo) {
+//		return sqlSession.selectList("mypageMapper.selectSNSAddress", memberNo);
+//	}
+
+	/** update snsAddress
+	 * @param memberNo
+	 * @return
+	 */
+//	public int updateSNSAddress(int memberNo) {
+//		return sqlSession.update("mypageMapper.updateSNSAddress", memberNo);
+//	}
 
 
 

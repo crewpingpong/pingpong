@@ -44,4 +44,12 @@ public class BoardDAO2 {
 		int result = sqlSession.insert("boardMapper.hashInsert", hashtags);
 		int result1 = sqlSession.insert("boardMapper.hashBoardInsert", hashtags);
 	}
+
+	/** 게시글 삭제
+	 * @param boardNo
+	 * @return result
+	 */
+	public int deleteBoard(String boardNo) {
+		return sqlSession.update("boardMapper.deleteBoard", boardNo);
+	}
 }

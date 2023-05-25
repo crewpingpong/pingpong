@@ -62,16 +62,24 @@ public class AlarmDAO {
 	 * @param follow
 	 * @return
 	 */
-	public List<Follow> myfollowList(Map<String, Integer> follow) {
-		return sqlSession.selectList("alarmMapper.myfollowList",follow);
+	public List<Follow> myfollowList(int followerNo) {
+		return sqlSession.selectList("alarmMapper.myfollowList",followerNo);
 	}
 
+	/** 내가 팔로우 하는 사람들 수 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public int myFollowCount(int memberNo) {
+		return sqlSession.selectOne("alarmMapper.myFollowCount",memberNo);
+	}
+	
 	/** 나를 팔로우 하는 사람들
 	 * @param follow
 	 * @return
 	 */
-	public List<Follow> mefollowList(Map<String, Integer> follow) {
-		return sqlSession.selectList("alarmMapper.mefollowList",follow);
+	public List<Follow> mefollowList(int followerNo) {
+		return sqlSession.selectList("alarmMapper.mefollowList",followerNo);
 	}
 	
 	/** 팔로우 삽입
@@ -91,6 +99,8 @@ public class AlarmDAO {
 	public int unfollow(Follow follow) {
 		return sqlSession.delete("alarmMapper.unfollow",follow);
 	}
+
+
 
 
 

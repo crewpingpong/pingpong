@@ -5,7 +5,9 @@ const checkObj1 = {
     "memberEmail": false,
     "memberPw": false,
     "memberPwConfirm": false,
-    "authKey": false // 인증키
+    "authKey": false, // 인증키
+    "checkTerm1": false,
+    "checkTerm2": false
 };
 const checkObj2 = {
     "memberNickname": false,
@@ -374,6 +376,50 @@ if (memberNickname != null) {
         }
     });
 }
+
+/* 약관 */
+const checkTerms = document.getElementById("checkTerms")
+const checkTermsAll = document.getElementById("checkTermsAll")
+
+const checkTerms1 = document.getElementById("checkTerms1")
+const checkTerms2 = document.getElementById("checkTerms2")
+const checkTerms3 = document.getElementById("checkTerms3")
+
+let isAllChecked = false;
+
+function toggleCheckboxes() {
+    isAllChecked = !isAllChecked;
+    checkTerms1.checked = isAllChecked;
+    checkTerms2.checked = isAllChecked;
+    checkTerms3.checked = isAllChecked;
+    checkTerms.checked = isAllChecked;
+    checkTermsAll.checked = isAllChecked;
+    checkObj1.checkTerm1 = isAllChecked;
+    checkObj1.checkTerm2 = isAllChecked;
+}
+checkTerms.addEventListener("click", toggleCheckboxes);
+checkTermsAll.addEventListener("click", toggleCheckboxes);
+
+
+/* 약관 확인하기 창 열기 */
+const openTermsBtn = document.getElementsByClassName("open-termsBtn");
+
+if (openTermsBtn[0] != null) {
+    openTermsBtn[0].addEventListener("click", () => {
+        document.getElementsByClassName("termsbackground")[0].style.display = "block";
+    });
+
+}
+
+/* 약관 확인하기 창 닫기 */
+const closeSignupBtn = document.getElementsByClassName("close-signup-terms")[0];
+if (closeSignupBtn) {
+    closeSignupBtn.addEventListener("click", () => {
+        document.getElementsByClassName("termsbackground")[0].style.display = 'none';
+    });
+}
+
+
 /* signup 제출 시 검사 */
 if (document.getElementById("signUpFrm") != null) {
     document.getElementById("signUpFrm").addEventListener("submit", e => {
@@ -394,10 +440,16 @@ if (document.getElementById("signUpFrm") != null) {
 
                     case "authKey":
                         alert("인증번호가 확인되지 않았습니다"); break;
+
+                    case "checkTerm1":
+                        alert("약관동의가 확인되지 않았습니다"); break;
+
+                    case "checkTerm2":
+                        alert("약관동의가 확인되지 않았습니다"); break;
                 }
                 // 유효하지 않은 input 태그로 focus 이동
                 // - key를 input의 id와 똑같이 설정했음!
-                document.getElementById(key).focus();
+                // document.getElementById(key).focus();
 
                 e.preventDefault(); // form 태그 기본 이벤트 제거
                 return; // 함수 종료
@@ -430,45 +482,5 @@ if (document.getElementById("signupInfoFrm") != null) {
     });
 }
 
-/* 약관 */
-const checkTermsAllOutside = document.getElementById("checkTermsAllOutside")
-const checkTermsAllInside = document.getElementById("checkTermsAllInside")
-
-const checkTerms1 = document.getElementById("checkTerms1")
-const checkTerms2 = document.getElementById("checkTerms2")
-const checkTerms3 = document.getElementById("checkTerms3")
-
-let isAllChecked = false;
-
-checkTermsAllOutside.addEventListener("click", (e)=>{
-    isAllChecked = !isAllChecked;
-    checkTerms1.checked = isAllChecked ;
-    checkTerms2.checked = isAllChecked ;
-    checkTerms3.checked = isAllChecked ;
-});
-
-
-
-
-
-
-
-/* 약관 확인하기 창 열기 */
-const openTermsBtn = document.getElementsByClassName("open-termsBtn");
-
-if (openTermsBtn[0] != null) {
-    openTermsBtn[0].addEventListener("click", () => {
-        document.getElementsByClassName("termsbackground")[0].style.display = "block";
-    });
-
-}
-
-/* 약관 확인하기 창 닫기 */
-const closeSignupBtn = document.getElementsByClassName("close-signup-terms")[0];
-if (closeSignupBtn) {
-    closeSignupBtn.addEventListener("click", () => {
-        document.getElementsByClassName("termsbackground")[0].style.display = 'none';
-    });
-}
 
 

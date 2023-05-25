@@ -53,14 +53,20 @@ public class AlarmServiceImpl implements AlarmService{
 	
 	// 내가 팔로우 하는 사람들
 	@Override
-	public List<Follow> myfollowList(Map<String, Integer> follow) {
-		return dao.myfollowList(follow);
+	public List<Follow> myfollowList(int followerNo) {
+		return dao.myfollowList(followerNo);
+	}	
+	
+	// 내가 팔로우 하는 사람들 수 조회
+	@Override
+	public int myFollowCount(int memberNo) {
+		return dao.myFollowCount(memberNo);
 	}
-		
+
 	// 나를 팔로우 하는 사람들
 	@Override
-	public List<Follow> mefollowList(Map<String, Integer> follow) {
-		return dao.mefollowList(follow);
+	public List<Follow> mefollowList(int followerNo) {
+		return dao.mefollowList(followerNo);
 	}
 
 	// 팔로우 처리

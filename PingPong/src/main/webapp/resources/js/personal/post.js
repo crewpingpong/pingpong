@@ -112,10 +112,10 @@ messageBoxClose.addEventListener("click", () => {
 })
 
 // 게시글 상세 페이지 메세지 누르면 메세지 보내기 화면으로 넘어가기
-const BoardIcon = document.querySelector(".BoardIconMessage");
-BoardIcon.addEventListener("click", () => {
-    messageSendContainer.style.display = "flex";
-})
+// const BoardIcon = document.querySelector(".BoardIconMessage");
+// BoardIcon.addEventListener("click", () => {
+//     messageSendContainer.style.display = "flex";
+// })
 
 // 게시글 상세 페이지 신고 버튼 누르면 신고 화면으로 넘어가기
 const BoardIconReport = document.querySelector(".BoardIconReport").parentElement;
@@ -216,7 +216,7 @@ const nextBtn = document.querySelector(".slide_next_button");
 
 // 페이지네이션 생성
 const pagination = document.querySelector(".slide_pagination");
-
+const boardDeleteBtn = document.querySelector(".boardDeleteBtn");
 
 let slideWidth; // 슬라이크 전체 크기(width 구하기)
 let currSlide; // 버튼 클릭할 때 마다 현재 슬라이드가 어디인지 알려주기 위한 변수
@@ -242,11 +242,13 @@ const markOff = document.querySelector(".markOff");
 let arr = [];
 let boardNumber;
 let boardMember;
+
 function selectBoardList(boardNo){
 
     fetch("/boardDetail?boardNo="+boardNo)
     .then(response => response.json())
     .then(board => {
+
 
         boardCont = board.boardContent;
 
@@ -288,6 +290,24 @@ function selectBoardList(boardNo){
 
         boardNumber = board.boardNo;
         boardMember = board.memberNo;
+
+        // 게시글 편집 버튼 나타나게 하기
+        const editing = document.querySelectorAll(".editing");
+        
+        
+
+        for(let i=0;i<editing.length;i++){  // 편집, 삭제 버튼 감추기
+            editing[i].style.display = 'none';
+            
+        }
+
+        if(loginMemberNo == boardMember){  // 로그인회원과 게시글회원이 같으면 보여주기
+            for(let i=0;i<editing.length;i++){
+                editing[i].style.display = 'block';
+            }
+            
+        }
+
 
         const porfileRac = document.querySelector(".porfileRac");
         const boardMemberInfo = document.querySelector(".boardMemberInfo");
@@ -457,13 +477,6 @@ function selectBoardList(boardNo){
         }  // 댓글 창 구현 끝
 
 
-        // 게시글 편집 버튼 숨기기
-        const editing = document.querySelector(".editing");
-        if(loginMemberNo == boardMember){
-            editing.style.display = 'block';
-        }
-
-
         // 답글 보기 누르면 댓댓글 보이는 이벤트
         const secondComment = document.querySelectorAll(".secondComment");
         
@@ -594,7 +607,7 @@ function selectBoardList(boardNo){
         const editingCancel = document.querySelector(".editingCancel");
         const hashPost = document.querySelectorAll(".hashs");
         // 게시글 편집 버튼 클릭 시
-        for(let i=0;i<boardEditing.length;i++){
+        for(let i=0;i<boardEditing.length;i++){  // 없애고 새로 만드는걸로 추후에 수정...
             boardEditing[i].addEventListener("click", ()=>{
                 BoardPost.querySelector(".innerDiv>p").style.display = 'none';
                 hiddenEditing.style.display = 'block';
@@ -603,15 +616,15 @@ function selectBoardList(boardNo){
                 hiddenEditing.focus();
                 const whitecontent = BoardPost.querySelector(".innerDiv>p").innerHTML;
                 
-                
-                if(hashPost[0].nextElementSibling == null){
-                    for(let j=0;j<hashPost.length;j++){
-                        let item = 
-                            `<button type="button" onclick="removeHash(event, ${board.boardNo})">×</button>`;
-                        hashPost[j].parentNode.insertAdjacentHTML("beforeend", item);
+                if(hashPost.length != 0){
+                    if(hashPost[0].nextElementSibling == null){
+                        for(let j=0;j<hashPost.length;j++){
+                            let item = 
+                                `<button type="button" onclick="removeHash(event, ${board.boardNo})">×</button>`;
+                            hashPost[j].parentNode.insertAdjacentHTML("beforeend", item);
+                        }
                     }
                 }
-
 
                 const textWithLineBreaks = whitecontent.replace(/<br[^>]*>/gi, "\n");
                 hiddenEditing.value = textWithLineBreaks;
@@ -624,7 +637,6 @@ function selectBoardList(boardNo){
             hiddenEditing.style.display = 'none';
             editingSubmit.style.display = 'none';
             editingCancel.style.display = 'none';
-            const hashDTBtn = hashPost.querySelector("span>button")
         });
 
         // 게시물 수정 버튼
@@ -635,73 +647,82 @@ function selectBoardList(boardNo){
                 hiddenEditing.style.display = 'none';
                 editingSubmit.style.display = 'none';
                 editingCancel.style.display = 'none';
-                
                 return;
             }
 
+            if(confirm("수정하시겠습니까?")){
 
-            const data = {"boardNo" : board.boardNo, "boardContent" : hiddenEditing.value};
+                const data = {"boardNo" : board.boardNo, "boardContent" : hiddenEditing.value};
 
-            fetch("/board/editing", {
-                method : "POST",
-                headers : {"Content-Type" : "application/json"},
-                body : JSON.stringify(data)}
-            )
-            .then(resp => resp.json())
-            .then(board=>{
+                fetch("/board/editing", {
+                    method : "POST",
+                    headers : {"Content-Type" : "application/json"},
+                    body : JSON.stringify(data)}
+                )
+                .then(resp => resp.json())
+                .then(board=>{
 
-                if(board == null){
-                    alert("게시글 업로드에 실패하였습니다")
-                    return;
-                }
-                BoardPost.querySelector(".innerDiv>p").style.display = 'block';
-                hiddenEditing.style.display = 'none';
-                editingSubmit.style.display = 'none';
-                editingCancel.style.display = 'none';
+                    if(board == null){
+                        alert("게시글 업로드에 실패하였습니다")
+                        return;
+                    }
+                    BoardPost.querySelector(".innerDiv>p").style.display = 'block';
+                    hiddenEditing.style.display = 'none';
+                    editingSubmit.style.display = 'none';
+                    editingCancel.style.display = 'none';
 
-                board.boardContent =  board.boardContent.replaceAll("&amp;", "&");
-                board.boardContent =  board.boardContent.replaceAll("&lt;", "<");
-                board.boardContent =  board.boardContent.replaceAll("&gt;", ">");
-                board.boardContent =  board.boardContent.replaceAll("&quot;", "\"");
+                    board.boardContent =  board.boardContent.replaceAll("&amp;", "&");
+                    board.boardContent =  board.boardContent.replaceAll("&lt;", "<");
+                    board.boardContent =  board.boardContent.replaceAll("&gt;", ">");
+                    board.boardContent =  board.boardContent.replaceAll("&quot;", "\"");
 
-                BoardPost.querySelector(".innerDiv>p").innerHTML = board.boardContent;
-            })
-            .catch(err => {
-                console.log(err);
-            })
+                    BoardPost.querySelector(".innerDiv>p").innerHTML = board.boardContent;
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+
+            }
         });
-
-
-
+        // 게시글 삭제
+        boardDeleteBtn.addEventListener("click", e=>{
+            if(confirm("정말 삭제하시겠습니까?")){
+                location.href = "/board2/delete/"+boardNo+"?memberNo="+boardMember;
+            } else{
+                e.target.querySelector("a").preventDefault();
+            }
+        })
+        
         slideInitFn();
-
-
-
-
+        
     })
     .catch(err => console.log(err));
 }
 
+
+
+
 // 해시 삭제 함수
 function removeHash(event, boardNo){
-    let tagName = event.target.previousElementSibling.innerText.slice(1);
-    const data = {"boardNo" : boardNo, "hashtagName" : tagName};
+    if(confirm('완전 삭제하시겠습니까?')){
+        let tagName = event.target.previousElementSibling.innerText.slice(1);
+        const data = {"boardNo" : boardNo, "hashtagName" : tagName};
 
-    fetch("/board/deleteHash", {
-        method : "POST",
-        headers : {"Content-Type" : "application/json"},
-        body : JSON.stringify(data)
-    })
-    .then(resp=>resp.text())
-    .then(result=>{
-        if(result>0){
-            event.target.parentNode.innerHTML = '';
-        }
-    })
-    .catch(err=>{
-        console.log(err);
-    })
-
+        fetch("/board/deleteHash", {
+            method : "POST",
+            headers : {"Content-Type" : "application/json"},
+            body : JSON.stringify(data)
+        })
+        .then(resp=>resp.text())
+        .then(result=>{
+            if(result>0){
+                event.target.parentNode.innerHTML = '';
+            }
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
 }
 
 
@@ -1241,20 +1262,20 @@ window.addEventListener("resize", () => {
 /* 새 게시글 업로드 */
 
 const NewBoardBackground = document.querySelector(".NewBoardBackground"); 
+if(newContent != null){
+    newContent.addEventListener("click", () => {
+        NewBoardBackground.style.display = "flex";
 
-newContent.addEventListener("click", () => {
-    NewBoardBackground.style.display = "flex";
+        NewBoardBackground.classList.remove('BoardBackground-close');
 
-    NewBoardBackground.classList.remove('BoardBackground-close');
+    })
+    const newContentClose = document.querySelector(".newContentClose");
 
-})
-const newContentClose = document.querySelector(".newContentClose");
+    newContentClose.addEventListener("click", () => {
 
-newContentClose.addEventListener("click", () => {
-
-    NewBoardBackground.style.display = "none";
-})
-
+        NewBoardBackground.style.display = "none";
+    })
+}
 /* 게시글 파일 첨부 버튼 */
 const inputFileBtn = document.querySelector(".inputFileBtn");
 const BoardBackground2 = document.querySelector(".BoardBackground2");
