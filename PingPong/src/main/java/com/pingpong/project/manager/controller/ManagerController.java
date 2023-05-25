@@ -272,5 +272,17 @@ public class ManagerController {
 		return "manager/managerReport";
 	}
 	
+	// 신고함 상세 내역 조회
+	@GetMapping("/ReportContent")
+	public String managerReportContent(
+			Model model
+			,@RequestParam("indictmentNo") int indictmentNo
+			) {
 	
+		Declaration declaration = service.DeclarationContentList(indictmentNo);
+		
+		model.addAttribute("declaration",declaration);
+		
+		return "manager/managerReportContent";
+	}
 }
