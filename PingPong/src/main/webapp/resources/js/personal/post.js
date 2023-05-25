@@ -6,8 +6,13 @@ const deleteBackground = document.getElementById("deleteBackground"); // 돌아�
 const selectBackground = document.getElementById("selectBackground");
 const afterChoice = document.getElementById("afterChoice");
 let secondComment;
+let beforeBack;
+const bgimageBox = document.querySelector(".bgimageBox");
+
+// 프로필 배경화면 변경
 if(background != null){
     background.addEventListener("change", e=>{
+        beforeBack = bgimageBox.innerHTML;
         const file = e.target.files[0];
         if(file != undefined){
             const reader = new FileReader();
@@ -25,16 +30,18 @@ if(background != null){
     
     });
     
-
+    // 돌아가기
     deleteBackground.addEventListener('click', ()=>{
         if(preview[0].getAttribute("src") != ""){
             preview[0].removeAttribute("src");
             background.value = "";
             selectBackground.style.display = 'block';
             afterChoice.style.display = 'none';
+            bgimageBox.innerHTML = beforeBack;
         }
     });
 
+    // 변경하기
     const updateBackground = document.getElementById("updateBackground");
     updateBackground.addEventListener("click", () => {
     
@@ -1031,6 +1038,7 @@ const boardLike = document.querySelectorAll(".boardLike");
 const likeCount = document.querySelector(".likeCount");
 for(let i=0;i<boardLike.length;i++){
     boardLike[i].addEventListener("click", e=>{
+        console.log(boardNumber);
         if(loginMemberNo == ""){
             alert("로그인 후 이용해주세요");
             return;
@@ -1051,10 +1059,11 @@ for(let i=0;i<boardLike.length;i++){
             headers : {"Content-Type" : "application/json"},
             body : JSON.stringify(data)
         })
-        .then(resp => resp.text())
-        .then(count => {
-
-            if(count == -1){  // INSERT, DELETE 실패 시
+        .then(resp => resp.json())
+        .then(board => {
+            const likeposttab = document.querySelector("#posttab2>div");
+            const postlist = document.querySelector(".postlist>li:nth-child(2)>a>span");
+            if(board == null){  // INSERT, DELETE 실패 시
                 console.log("좋아요 처리 실패");
                 return;
             }
@@ -1066,7 +1075,53 @@ for(let i=0;i<boardLike.length;i++){
                 BoardRedHeart.style.display = "none";
                 BoardHeart.style.display = "block";
             }
-            likeCount.innerText = count+"명이 좋아합니다";
+            likeCount.innerText = board.likeCount+"명이 좋아합니다";
+
+            if(board.memberNo == loginMemberNo){
+
+                if(check == 0 && likeposttab.querySelector(`* [src="${board.thumbnail}"]`) == null){
+
+                    if(likeposttab.querySelector("div").innerText == "게시글이 존재하지 않습니다."){
+                        likeposttab.querySelector("div").remove();
+                    }
+
+                    const div = document.createElement("div");  // 게시글 div태그
+                    const a = document.createElement("a");  // 게시글 a태그
+                    a.onclick = "selectBoardList("+boardNumber+")";
+                    const img = document.createElement("img");  // 게시글 썸네일 img태그
+                    img.classList.add("list-thumbnail");
+                    img.src = board.thumbnail;
+                    
+                    
+                    postlist.innerText = parseInt(postlist.innerText) + 1;
+        
+                    a.append(img);
+                    a.addEventListener("click", () => {
+                        BoardBackground.style.display = "flex";
+                        BoardBackground.classList.remove('BoardBackground-close');
+                    });
+                    div.append(a);
+                    likeposttab.append(div);
+                } else {
+                    if(likeposttab.querySelector(`* [src="${board.thumbnail}"]`) != null){
+                        likeposttab.querySelector(`* [src="${board.thumbnail}"]`).parentNode.parentNode.remove();
+                        postlist.innerText = parseInt(postlist.innerText) - 1;
+                    }
+                    if(likeposttab.querySelector("div") == null){
+                        const div = document.createElement("div");
+                        div.innerHTML = "<div>게시글이 존재하지 않습니다.</div>";
+                        likeposttab.append(div);
+                    }
+                }
+            } else{
+
+                if(likeposttab.querySelector(`* [src="${board.thumbnail}"]`) != null){
+                    likeposttab.querySelector(`* [src="${board.thumbnail}"]`).parentNode.parentNode.remove();
+                    postlist.innerText = parseInt(postlist.innerText) - 1;
+                }
+            }
+            boardNumber = board.boardNo;
+
         })
         .catch(err => {
             console.log(err);
@@ -1074,7 +1129,7 @@ for(let i=0;i<boardLike.length;i++){
     });
 }
 
-const boardMark = document.querySelectorAll(".boardMark");
+const boardMark = document.querySelectorAll(".boardMark>*");
 
 
 // 북마크 AJAX
@@ -1085,6 +1140,7 @@ for(let i=0;i<boardMark.length;i++){
             return;
         }
         let check1;
+        console.log(boardNumber);
         
         if(e.target.classList.contains("markOff")){  // 북마크 x
             check1 = 0;
@@ -1099,9 +1155,12 @@ for(let i=0;i<boardMark.length;i++){
             headers : {"Content-Type" : "application/json"},
             body : JSON.stringify(data)}
         )
-        .then(response => response.text())
-        .then(result => {
-            if(result == 0){
+        .then(response => response.json())
+        .then(board => {
+
+            const bookmarkposttab = document.querySelector("#posttab3>div");
+            const postlist = document.querySelector(".postlist>li:nth-child(3)>a>span");
+            if(board == null){
                 console.log("북마크 처리 실패");
                 return;
             }
@@ -1112,6 +1171,52 @@ for(let i=0;i<boardMark.length;i++){
                 markOn.style.display = "none";
                 markOff.style.display = "block";
             }
+
+            if(board.memberNo == loginMemberNo){
+
+
+                if(check1 == 0 && bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`) == null){
+
+                    if(bookmarkposttab.querySelector("div").innerText == "게시글이 존재하지 않습니다."){
+                        bookmarkposttab.querySelector("div").remove();
+                    }
+
+                    const div = document.createElement("div");  // 게시글 div태그
+                    const a = document.createElement("a");  // 게시글 a태그
+                    a.onclick = "selectBoardList("+boardNumber+")";
+                    const img = document.createElement("img");  // 게시글 썸네일 img태그
+                    img.classList.add("list-thumbnail");
+                    img.src = board.thumbnail;
+                    
+                    
+                    postlist.innerText = parseInt(postlist.innerText) + 1;
+        
+                    a.append(img);
+                    a.addEventListener("click", () => {
+                        BoardBackground.style.display = "flex";
+                        BoardBackground.classList.remove('BoardBackground-close');
+                    });
+                    div.append(a);
+                    bookmarkposttab.append(div);
+                } else {
+                    if(bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`) != null){
+                        bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`).parentNode.parentNode.remove();
+                        postlist.innerText = parseInt(postlist.innerText) - 1;
+                    }
+                    if(bookmarkposttab.querySelector("div") == null){
+                        bookmarkposttab.innerHTML = "<div>게시글이 존재하지 않습니다.</div>";
+                    }
+                }
+            } else{
+                if(bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`) != null){
+                    bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`).parentNode.parentNode.remove();
+                    postlist.innerText = parseInt(postlist.innerText) - 1;
+                }
+                
+            }
+
+            boardNumber = board.boardNo;
+
         })
         .catch(err => {
             console.log(err);

@@ -40,14 +40,13 @@ public class BoardController {
 	
     // 좋아요 처리
     @PostMapping("/board/like")
-    public int like(@RequestBody Map<String, Integer> paramMap) {
+    public Board like(@RequestBody Map<String, Integer> paramMap) {
         return service.like(paramMap);
     }
     
     // 북마크 처리
     @PostMapping("/board/markup")
-    public int boardMarkup(@RequestBody Map<String, Integer> paramMap) {
-    	System.out.println(paramMap.get("check"));
+    public Board boardMarkup(@RequestBody Map<String, Integer> paramMap) {
     	return service.boardMarkup(paramMap);
     }
     
