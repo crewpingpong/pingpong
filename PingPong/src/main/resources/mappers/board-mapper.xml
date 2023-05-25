@@ -364,4 +364,10 @@
 						WHERE HASHTAG_NAME = #{hashtagName})
 	</delete>
 	
+	<update id="deleteBoard">
+		UPDATE "BOARD" SET
+		BOARD_DEL_FL = 'Y'
+		WHERE BOARD_NO = #{boardNo}
+	</update>
+	
 </mapper>

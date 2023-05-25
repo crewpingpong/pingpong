@@ -83,10 +83,17 @@ public class BoardServiceImpl2 implements BoardService2 {
 
 
 	// 해시태그 삽입
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public void hashInsert(List<Hashtag> hashtags) {
 		dao.hashInsert(hashtags);
 		
+	}
+
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteBoard(String boardNo) {
+		return dao.deleteBoard(boardNo);
 	}
 	
 	

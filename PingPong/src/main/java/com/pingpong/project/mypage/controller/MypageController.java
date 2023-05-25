@@ -112,14 +112,14 @@ public class MypageController {
 		
 		
 		// 선택한 snsList의 URL 주소 (링크)
-	    List<SNS> snsURL = service.selectSNSAddress(loginMember.getMemberNo());
-	    
-	    List<String> snsLinkAddress = new ArrayList<>();
-	    
-	    for(SNS sns : snsURL) {
-	    	snsLinkAddress.add(sns.getSnsAddress());
-	    }
-	    model.addAttribute("snsLinkAddress", snsLinkAddress);
+//	    List<SNS> snsURL = service.selectSNSAddress(loginMember.getMemberNo());
+//	    
+//	    List<String> snsLinkAddress = new ArrayList<>();
+//	    
+//	    for(SNS sns : snsURL) {
+//	    	snsLinkAddress.add(sns.getSnsAddress());
+//	    }
+//	    model.addAttribute("snsLinkAddress", snsLinkAddress);
 	    
 //	    System.out.println(snsLinkAddress);
 		
@@ -177,8 +177,8 @@ public class MypageController {
 		System.out.println("checkSNSList" + checkSNSList);
 		
 		// 선택한 SNSList의 URL 조회
-		List<SNS> checkSNSURL = service.selectCheckSNSURL(loginMember.getMemberNo());
-		model.addAttribute("checkSNSURL", checkSNSURL);
+//		List<SNS> checkSNSURL = service.selectCheckSNSURL(loginMember.getMemberNo());
+//		model.addAttribute("checkSNSURL", checkSNSURL);
 		
 //		System.out.println(checkSNSURL);
 		

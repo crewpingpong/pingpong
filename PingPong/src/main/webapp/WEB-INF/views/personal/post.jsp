@@ -176,11 +176,18 @@ ${mypage.memberCareer}
                 <li>
                 <a href="#posttab3" class="btn">컬렉션  <span>${fn:length(markList)}</span></a>
                 </li>
-                <c:if test="${mypage.memberNo == loginMember.memberNo}" >
-                    <li>
-                        <button class="newContent">새 게시글</button>
-                    </li>
-                </c:if>
+                <c:choose>
+                    <c:when test="${mypage.memberNo == loginMember.memberNo}">
+                        <li>
+                            <button class="newContent">새 게시글</button>
+                        </li>
+                    </c:when>
+                
+                    <c:otherwise>
+                        <li></li>
+                    </c:otherwise>
+                </c:choose>
+
             </ul>
         
             <div class="postcont_area">
@@ -373,16 +380,6 @@ ${mypage.memberCareer}
         </div>
         <div class="BoardIconBox">
 
-            <div class="BoardIcon editing"> <!-- 게시글 편집 -->
-                <a href="#">
-                    <svg class="boardEditing" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle class="boardEditing" cx="30" cy="30" r="30" fill="white"/>
-                        <path class="boardEditing" d="M31.9201 19.12L37.0401 14L46 22.96L40.88 28.08M31.9201 19.12L14.5302 36.5099C14.1907 36.8493 14 37.3098 14 37.7899V46H22.2102C22.6903 46 23.1507 45.8094 23.4902 45.4698L40.88 28.08M31.9201 19.12L40.88 28.08" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg> 
-                </a>
-                <p class="BoardIconInfo">편집</p>
-            </div>
-
             <div class = "BoardIcon"><!-- 저장 -->
                     <svg class = "markOff boardMark" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle class = "markOff boardMark" cx="30" cy="30" r="30" fill="white"/>
@@ -430,6 +427,34 @@ ${mypage.memberCareer}
                 </a>
                 <p class="BoardIconInfo">신고</p>
             </div>
+
+        
+            <div class="BoardIcon editing"> <!-- 게시글 편집 -->
+                <input type="checkbox" id="editIcon">
+                    <label for="editIcon">
+                        <a href="#">
+                            <svg class="boardEditing" width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle class="boardEditing" cx="30" cy="30" r="30" fill="white"/>
+                                <path class="boardEditing" d="M31.9201 19.12L37.0401 14L46 22.96L40.88 28.08M31.9201 19.12L14.5302 36.5099C14.1907 36.8493 14 37.3098 14 37.7899V46H22.2102C22.6903 46 23.1507 45.8094 23.4902 45.4698L40.88 28.08M31.9201 19.12L40.88 28.08" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg> 
+                        </a>
+                    </label>    
+                <p class="BoardIconInfo">편집</p>
+            </div>
+
+            <div class="BoardIcon boardDeleteBtn editing"> <%-- 게시글 삭제 --%>
+                <a href="#">
+                    <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="30" cy="30" r="30" fill="white"/>
+                    <path d="M44.9948 19.9971H36.6615V17.2138C36.6224 16.1468 36.1618 15.1389 35.3807 14.4109C34.5997 13.683 33.5619 13.2944 32.4948 13.3304H27.4948C26.4277 13.2944 25.3899 13.683 24.6088 14.4109C23.8278 15.1389 23.3672 16.1468 23.3281 17.2138V19.9971H14.9948C14.5528 19.9971 14.1288 20.1727 13.8163 20.4852C13.5037 20.7978 13.3281 21.2217 13.3281 21.6638C13.3281 22.1058 13.5037 22.5297 13.8163 22.8423C14.1288 23.1548 14.5528 23.3304 14.9948 23.3304H16.6615V41.6638C16.6615 42.9898 17.1882 44.2616 18.1259 45.1993C19.0636 46.137 20.3354 46.6638 21.6615 46.6638H38.3281C39.6542 46.6638 40.926 46.137 41.8637 45.1993C42.8013 44.2616 43.3281 42.9898 43.3281 41.6638V23.3304H44.9948C45.4368 23.3304 45.8607 23.1548 46.1733 22.8423C46.4859 22.5297 46.6615 22.1058 46.6615 21.6638C46.6615 21.2217 46.4859 20.7978 46.1733 20.4852C45.8607 20.1727 45.4368 19.9971 44.9948 19.9971ZM26.6615 17.2138C26.6615 16.9471 27.0115 16.6638 27.4948 16.6638H32.4948C32.9781 16.6638 33.3281 16.9471 33.3281 17.2138V19.9971H26.6615V17.2138ZM39.9948 41.6638C39.9948 42.1058 39.8192 42.5297 39.5066 42.8423C39.1941 43.1548 38.7702 43.3304 38.3281 43.3304H21.6615C21.2194 43.3304 20.7955 43.1548 20.4829 42.8423C20.1704 42.5297 19.9948 42.1058 19.9948 41.6638V23.3304H39.9948V41.6638Z" fill="#231F20"/>
+                    <path d="M24.9948 38.332C25.4368 38.332 25.8607 38.1564 26.1733 37.8439C26.4859 37.5313 26.6615 37.1074 26.6615 36.6654V29.9987C26.6615 29.5567 26.4859 29.1327 26.1733 28.8202C25.8607 28.5076 25.4368 28.332 24.9948 28.332C24.5528 28.332 24.1288 28.5076 23.8163 28.8202C23.5037 29.1327 23.3281 29.5567 23.3281 29.9987V36.6654C23.3281 37.1074 23.5037 37.5313 23.8163 37.8439C24.1288 38.1564 24.5528 38.332 24.9948 38.332Z" fill="#231F20"/>
+                    <path d="M34.9948 38.332C35.4368 38.332 35.8607 38.1564 36.1733 37.8439C36.4859 37.5313 36.6615 37.1074 36.6615 36.6654V29.9987C36.6615 29.5567 36.4859 29.1327 36.1733 28.8202C35.8607 28.5076 35.4368 28.332 34.9948 28.332C34.5528 28.332 34.1288 28.5076 33.8163 28.8202C33.5037 29.1327 33.3281 29.5567 33.3281 29.9987V36.6654C33.3281 37.1074 33.5037 37.5313 33.8163 37.8439C34.1288 38.1564 34.5528 38.332 34.9948 38.332Z" fill="#231F20"/>
+                    </svg>
+                </a>
+                <p class="BoardIconInfo">삭제</p>
+            </div>
+            
+
         </div> 
 
         <!-- 신고 메세지 -->
