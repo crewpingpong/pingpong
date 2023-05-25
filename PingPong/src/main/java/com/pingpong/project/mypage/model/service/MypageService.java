@@ -203,6 +203,12 @@ public interface MypageService {
 	 */
 	List<SNS> selectSNSAddressList(int memberNo);
 
+	/** 프로필 이미지 기본
+	 * @param memberNo
+	 * @return
+	 */
+	int updateBasicProfile(int memberNo);
+
 
 
 	
