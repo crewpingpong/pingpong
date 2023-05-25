@@ -553,7 +553,7 @@ ${mypage.memberCareer}
                     <div>
                         게시글 신고 하기
                     </div>
-                    <form action="#" method="post" enctype="multipart/form-data">
+                    <form action="/board/reportContent" method="post">
                         <input type="text" name="reportTitle" placeholder="신고 제목을 입력해주세요.">
                         <%-- 신고유형<br>
                         <select name="BoardReport" id="" required>
@@ -565,7 +565,7 @@ ${mypage.memberCareer}
                             <option value="others">기타</option>
                         </select> --%>
                         <%-- <input type="email" name="Email" id="otoEmail" placeholder="답장 받으실 이메일을 입력해주세요."> <br> --%>
-                        <textarea name="Content" id="otoContent" cols="30" rows="10" placeholder="신고내용을 입력해주세요."></textarea> <br>
+                        <textarea name="Content" id="otoContent" cols="30" rows="10" name="reportContent" placeholder="신고내용을 입력해주세요."></textarea> <br>
 <%--     
                         <label for="chooseFile">+ 사진 파일 첨부하기</label>
                         <input type="file" id="chooseFile" name="chooseFile" accept="image/*" multiple> <br>

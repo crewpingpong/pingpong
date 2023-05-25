@@ -124,6 +124,14 @@ public class BoardDAO {
 		return sqlSession.delete("boardMapper.deleteHash", paramMap);
 	}
 
+	/** 게시글 신고 삽입
+	 * @param paramMap
+	 * @return
+	 */
+	public int insertreport(Map<String, Object> paramMap) {
+		return sqlSession.insert("boardMapper.insertreport",paramMap);
+	}
+
 
 
 }

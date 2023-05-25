@@ -289,6 +289,7 @@ function selectBoardList(boardNo){
 
 
         boardNumber = board.boardNo;
+        tempBoardNo = board.boardNo;
         boardMember = board.memberNo;
 
         // 게시글 편집 버튼 나타나게 하기

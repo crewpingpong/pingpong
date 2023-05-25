@@ -91,6 +91,14 @@
 		<result property="boardNo" column="BOARD_NO"/>
 	</resultMap>
 	
+	<resultMap type="Declaration" id="declaration_rm">
+			<id property="indictmentNo" column="INDICTMENT_NO"/>
+			<result property="memberUrl" column="MEMBER_URL"/>
+			<result property="boardNo" column="BOARD_NO"/>
+			<result property="memberNo" column="MEMBER_NO"/>
+			<result property="indictmentContent" column="INDICTMENT_CONTENT"/>
+	</resultMap>
+		
 	<select id="selectCommentList" resultMap="comment_rm">
 		SELECT LEVEL, C.* FROM
 			(SELECT COMMENT_NO, COMMENT_CONTENT,
@@ -371,4 +379,8 @@
 		WHERE BOARD_NO = #{boardNo}
 	</update>
 	
+	<!-- 게시글 신고 삽입 -->
+	<insert id="insertreport">
+	
+	</insert>
 </mapper>

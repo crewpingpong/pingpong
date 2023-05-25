@@ -101,7 +101,13 @@ public class BoardServiceImpl implements BoardService{
 	public int deleteHash(Map<String, Object> paramMap) {
 		return dao.deleteHash(paramMap);
 	}
-	
 
+	// 게시글 신고 제출
+	@Override
+	public int insertreport(Map<String, Object> paramMap) {
+		return dao.insertreport(paramMap);
+	}
+	
+	
 	
 }
