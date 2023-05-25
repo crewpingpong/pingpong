@@ -197,7 +197,7 @@ ${mypage.memberCareer}
                         <c:choose>
                             <c:when test="${empty boardList}">
                                 <%-- 조회된 게시글 목록이 비어있거나 null인 경우 --%>
-                                게시글이 존재하지 않습니다.
+                                <div>게시글이 존재하지 않습니다.</div>
                             </c:when>
                         
                             <c:otherwise>
@@ -219,7 +219,7 @@ ${mypage.memberCareer}
                         <c:choose>
                             <c:when test="${empty likeList}">
                                 <%-- 조회된 게시글 목록이 비어있거나 null인 경우 --%>
-                                게시글이 존재하지 않습니다.
+                                <div>게시글이 존재하지 않습니다.</div>
                             </c:when>
                         
                             <c:otherwise>

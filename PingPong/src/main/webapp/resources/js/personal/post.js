@@ -1079,6 +1079,11 @@ for(let i=0;i<boardLike.length;i++){
             if(board.memberNo == loginMemberNo){
 
                 if(check == 0 && likeposttab.querySelector(`* [src="${board.thumbnail}"]`) == null){
+
+                    if(likeposttab.querySelector("div").innerText == "게시글이 존재하지 않습니다."){
+                        likeposttab.querySelector("div").remove();
+                    }
+
                     const div = document.createElement("div");  // 게시글 div태그
                     const a = document.createElement("a");  // 게시글 a태그
                     a.onclick = "selectBoardList("+boardNumber+")";
@@ -1100,6 +1105,11 @@ for(let i=0;i<boardLike.length;i++){
                     if(likeposttab.querySelector(`* [src="${board.thumbnail}"]`) != null){
                         likeposttab.querySelector(`* [src="${board.thumbnail}"]`).parentNode.parentNode.remove();
                         postlist.innerText = parseInt(postlist.innerText) - 1;
+                    }
+                    if(likeposttab.querySelector("div") == null){
+                        const div = document.createElement("div");
+                        div.innerHTML = "<div>게시글이 존재하지 않습니다.</div>";
+                        likeposttab.append(div);
                     }
                 }
             } else{
@@ -1163,7 +1173,13 @@ for(let i=0;i<boardMark.length;i++){
 
             if(board.memberNo == loginMemberNo){
 
+
                 if(check1 == 0 && bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`) == null){
+
+                    if(bookmarkposttab.querySelector("div").innerText == "게시글이 존재하지 않습니다."){
+                        bookmarkposttab.querySelector("div").remove();
+                    }
+
                     const div = document.createElement("div");  // 게시글 div태그
                     const a = document.createElement("a");  // 게시글 a태그
                     a.onclick = "selectBoardList("+boardNumber+")";
@@ -1186,12 +1202,16 @@ for(let i=0;i<boardMark.length;i++){
                         bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`).parentNode.parentNode.remove();
                         postlist.innerText = parseInt(postlist.innerText) - 1;
                     }
+                    if(bookmarkposttab.querySelector("div") == null){
+                        bookmarkposttab.innerHTML = "<div>게시글이 존재하지 않습니다.</div>";
+                    }
                 }
             } else{
                 if(bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`) != null){
-                        bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`).parentNode.parentNode.remove();
-                        postlist.innerText = parseInt(postlist.innerText) - 1;
-                    }
+                    bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`).parentNode.parentNode.remove();
+                    postlist.innerText = parseInt(postlist.innerText) - 1;
+                }
+                
             }
 
             boardNumber = board.boardNo;
