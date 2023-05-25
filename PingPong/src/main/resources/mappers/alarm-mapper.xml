@@ -76,8 +76,8 @@
 	<!-- 팔로우 삭제 -->
 	<delete id="unfollow">
 		DELETE FROM FOLLOW
-		WHERE MEMBER_NO = #{memberNo}
-		AND FOLLOWER_NO = #{followerNo}
+		WHERE MEMBER_NO = #{followerNo}
+		AND FOLLOWER_NO = #{memberNo}
 	</delete>
 	
 	

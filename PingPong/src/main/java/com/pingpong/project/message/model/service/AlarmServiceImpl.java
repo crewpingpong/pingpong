@@ -95,11 +95,11 @@ public class AlarmServiceImpl implements AlarmService{
 //		return dao.follow(follow);
 //	}
 
-//	// 팔로우 취소
-//	@Override
-//	public int unfollow(Follow follow) {
-//		return dao.unfollow(follow);
-//	}
+	// 팔로우 취소
+	@Override
+	public int unfollow(Follow follow) {
+		return dao.unfollow(follow);
+	}
 
 
 	
