@@ -294,6 +294,7 @@
 		JOIN "MEMBER" M ON(IC.COMMENT_MEMBER_NO = M.MEMBER_NO)
 		LEFT JOIN "MEMBER_PROFILE" USING(MEMBER_NO)
 		WHERE COMMENT_NO = #{commentNo}
+		AND COMMENT_DEL_FL = 'N'
     </select>
     
     <update id="updateBoard">
@@ -363,5 +364,11 @@
 						FROM HASHTAG
 						WHERE HASHTAG_NAME = #{hashtagName})
 	</delete>
+	
+	<update id="deleteBoard">
+		UPDATE "BOARD" SET
+		BOARD_DEL_FL = 'Y'
+		WHERE BOARD_NO = #{boardNo}
+	</update>
 	
 </mapper>

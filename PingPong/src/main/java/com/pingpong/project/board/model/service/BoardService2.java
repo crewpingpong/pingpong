@@ -24,5 +24,11 @@ public interface BoardService2 {
 	 */
 	void hashInsert(List<Hashtag> hashtags);
 
+	/** 게시글 삭제 서비스
+	 * @param boardNo
+	 * @return result
+	 */
+	int deleteBoard(String boardNo);
+
 
 }

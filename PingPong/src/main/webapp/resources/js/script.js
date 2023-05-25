@@ -12,8 +12,8 @@ searchicon.addEventListener("click",()=>{
         document.querySelector(".basicheart").style.display="none";
 
         // 검색 켜지면 알람 켜 놓은거는 꺼지게 구현
-        alarmIconRedColor.classList.add("alarm-icon-redColor");
-        alarmModBox.classList.add("alarm-icon-redColor");
+        // alarmIconRedColor.classList.add("alarm-icon-redColor");
+        // alarmModBox.classList.add("alarm-icon-redColor");
     }
 
     searchicon.style.display="none";

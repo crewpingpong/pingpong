@@ -19,6 +19,8 @@
 		<id property="followNo" column="FOLLOW_NO" />
 		<result property="memberNo" column="MEMBER_NO" />
 		<result property="followerNo" column="FOLLOWER_NO" />
+		<result property="followerName" column="FOLLOW_NICKNAME" />
+		<result property="followerImg" column="FOLLOW_PROFILE_IMG" />
 	</resultMap>
 	
 	
@@ -32,11 +34,22 @@
 	
 	<!-- 내가 팔로우 하는 사람들 -->
 	<select id="myfollowList" resultMap="follow_rm">
-		SELECT MEMBER_NO, FOLLOWER_NO, MEMBER_NICKNAME 
+		SELECT MEMBER_NO, FOLLOWER_NO, MEMBER_NICKNAME AS "FOLLOW_NICKNAME", 
+				PROFILE_IMG AS "FOLLOW_PROFILE_IMG"
 		FROM FOLLOW
 		JOIN "MEMBER" USING (MEMBER_NO)
-		WHERE FOLLOWER_NO = #{followerNo}
+		JOIN "MEMBER_PROFILE" USING (MEMBER_NO)
+		WHERE FOLLOWER_NO =#{memberNo}
 		ORDER BY FOLLOW_NO
+	</select>
+	
+	<!-- 내가 팔로우 하는 사람들 수 조회 -->
+	<select id="myFollowCount" resultType="_int">
+			SELECT COUNT(*) 
+			FROM FOLLOW
+			JOIN "MEMBER" USING (MEMBER_NO)
+			WHERE FOLLOWER_NO =2
+			ORDER BY FOLLOW_NO
 	</select>
 	
 	<!-- 나를 팔로우 하는 사람들 -->

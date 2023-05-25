@@ -48,16 +48,23 @@ public interface AlarmService {
 	int followFL(Follow follow);
 
 	/** 내가 팔로우 하는 사람들
-	 * @param follow
+	 * @param i
 	 * @return
 	 */
-	List<Follow> myfollowList(Map<String, Integer> follow);
+	List<Follow> myfollowList(int followerNo);
 
+	/** 내가 팔로우 하는 사람들 수 조회
+	 * @param memberNo
+	 * @return
+	 */
+	int myFollowCount(int memberNo);
+	
 	/** 나를 팔로우 하는 사람들
 	 * @param follow
 	 * @return
 	 */
-	List<Follow> mefollowList(Map<String, Integer> follow);
+	List<Follow> mefollowList(int followerNo);
+
 
 	
 

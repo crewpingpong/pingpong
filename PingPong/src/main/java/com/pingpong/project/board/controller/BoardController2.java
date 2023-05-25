@@ -75,4 +75,25 @@ public class BoardController2 {
 		return "redirect:/mypage/" + loginMember.getMemberNo();
 	}
 	
+	@GetMapping("/delete/{boardNo}")
+	public String deleteBoard(@PathVariable("boardNo") String boardNo
+							, String memberNo
+							, RedirectAttributes ra) {
+		
+		System.out.println(memberNo);
+		
+		int result = service.deleteBoard(boardNo);
+		
+		String message = null;
+		if(result>0) {
+			message = "게시글이 삭제되었습니다.";
+		} else {
+			message = "게시글 등록에 실패하였습니다";
+		}
+		
+		ra.addFlashAttribute("message", message);
+		
+		return "redirect:/mypage/"+memberNo;
+	}
+	
 }
