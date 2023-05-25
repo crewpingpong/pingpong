@@ -254,6 +254,13 @@ public class ManagerServiceImpl implements ManagerService{
 		
 		return map;
 	}
+	
+	// 신고함 상세 조회
+	@Override
+	public Declaration DeclarationContentList(int indictmentNo) {
+		
+		return dao.DeclarationContentList(indictmentNo);
+	}
 
 
 	// 체크된 회원 탈퇴

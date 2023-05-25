@@ -130,6 +130,12 @@ public interface ManagerService {
 	 */
 	Map<String, Object> selectDeclarationList(int cp, Map<String, Object> paramMap);
 
+	/** 신고함 상세 내용 조회
+	 * @param declarationNo
+	 * @return
+	 */
+	Declaration DeclarationContentList(int indictmentNo);
+
 
 	
 }

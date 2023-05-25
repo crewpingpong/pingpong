@@ -461,4 +461,12 @@ JOIN "MEMBER" M USING(MEMBER_NO)
 		</choose>
 </select>
 
+<!-- 신고함 상세 조회 -->
+<select id="selectDeclarationContentList" resultMap="declaration_rm">
+SELECT INDICTMENT_NO, INDICTMENT_CONTENT, MEMBER_NO,BOARD_NO,MEMBER_URL
+FROM DECLARATION
+JOIN "MEMBER" USING(MEMBER_NO)
+WHERE INDICTMENT_NO = ${indictmentNo}
+</select>
+
 </mapper>

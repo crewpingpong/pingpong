@@ -284,6 +284,16 @@ public class ManagerDAO {
 		
 		return sqlSession.selectList("managerMapper.selectDeclarationList_search",paramMap,rowBounds);
 	}
+	
+	/** 신고함 상세 조회 
+	 * @param declarationNo
+	 * @return
+	 */
+	public Declaration DeclarationContentList(int indictmentNo) {
+		
+		return sqlSession.selectOne("managerMapper.selectDeclarationContentList",indictmentNo);
+	}
+
 
 	/** 체크된 회원 탈퇴
 	 * @param boardNo
@@ -337,8 +347,6 @@ public class ManagerDAO {
 		return sqlSession.update("managerMapper.commentRe",commentNo);
 	}
 
-
-	
 
 
 	
