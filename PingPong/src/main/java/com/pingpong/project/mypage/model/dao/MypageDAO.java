@@ -250,6 +250,23 @@ public class MypageDAO {
 	public List<SNS> selectCheckSNSImgList(int memberNo) {
 		return sqlSession.selectList("mypageMapper.selectCheckSNSImgList", memberNo);
 	}
+	
+	/** 선택한 SNSList의 URL 조회
+	 * @param memberNo
+	 * @return
+	 */
+	public List<SNS> selectCheckSNSURL(int memberNo) {
+		return sqlSession.selectList("mypageMapper.selectCheckSNSURL", memberNo);
+	}
+	
+	/** 선택한 snsList의 URL 주소 (링크)
+	 * @param memberNo
+	 * @return
+	 */
+	public List<SNS> selectSNSAddress(int memberNo) {
+		return sqlSession.selectList("mypageMapper.selectSNSAddress", memberNo);
+	}
+
 
 
 

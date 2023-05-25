@@ -108,7 +108,22 @@ public class MypageController {
 		model.addAttribute("snsImgList", snsImgList);
 		
 //		System.out.println(snsImgList);
-	      
+		
+		
+		
+		// 선택한 snsList의 URL 주소 (링크)
+	    List<SNS> snsURL = service.selectSNSAddress(loginMember.getMemberNo());
+	    
+	    List<String> snsLinkAddress = new ArrayList<>();
+	    
+	    for(SNS sns : snsURL) {
+	    	snsLinkAddress.add(sns.getSnsAddress());
+	    }
+	    model.addAttribute("snsLinkAddress", snsLinkAddress);
+	    
+//	    System.out.println(snsLinkAddress);
+		
+		
 	      
 		return "personal/post";
 	}
@@ -159,7 +174,13 @@ public class MypageController {
 		model.addAttribute("checkSNSList", checkSNSList);
 		
 //		System.out.println("SNSList" + SNSList);
-//		System.out.println("checkSNSList" + checkSNSList);
+		System.out.println("checkSNSList" + checkSNSList);
+		
+		// 선택한 SNSList의 URL 조회
+		List<SNS> checkSNSURL = service.selectCheckSNSURL(loginMember.getMemberNo());
+		model.addAttribute("checkSNSURL", checkSNSURL);
+		
+//		System.out.println(checkSNSURL);
 		
 		
 		

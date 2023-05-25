@@ -36,12 +36,13 @@ public class AlarmServiceImpl implements AlarmService{
 		return dao.insertAlarm(notice);
 	}
 	
-//	// 팔로우 여부
-//	@Override
-//	public int followCheck(Follow follow) {
-//		return dao.followCheck(follow);
-//	}
 	
+	// 최근 알람 20개 조회
+	@Override
+	public List<Notice> alarmList(int memberNo) {
+		return dao.alarmList(memberNo);
+	}
+
 	// 팔로우 여부
 	@Override
 	public int followCheck(Map<String, Integer> follow) {

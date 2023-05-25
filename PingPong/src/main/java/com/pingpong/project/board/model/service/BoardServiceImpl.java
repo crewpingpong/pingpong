@@ -12,6 +12,7 @@ import com.pingpong.project.board.model.dao.BoardDAO;
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.board.model.dto.Comment;
 import com.pingpong.project.board.model.dto.Hashtag;
+import com.pingpong.project.common.utility.Util;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -64,8 +65,17 @@ public class BoardServiceImpl implements BoardService{
 	
 	// 게시글 수정
 	@Override
-	public int boardEditing(Map<String, Object> paramMap) {
-		return dao.boardEditing(paramMap);
+	public Board boardEditing(Map<String, Object> paramMap) {
+		String newContent = Util.XSSHandling((String)paramMap.get("boardContent"));
+		paramMap.put("boardContent", newContent);
+		
+		int result = dao.boardEditing(paramMap);
+		Board board = null;
+		if(result>0) {
+			board = dao.select((Integer)paramMap.get("boardNo"));
+		}
+		
+		return board;
 	}
 
 	// 댓글 삭제
@@ -84,6 +94,12 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List<Hashtag> getHashtags(String hashtagName) {
 		return dao.getHashtags(hashtagName);
+	}
+
+	// 해시태그 삭제
+	@Override
+	public int deleteHash(Map<String, Object> paramMap) {
+		return dao.deleteHash(paramMap);
 	}
 	
 

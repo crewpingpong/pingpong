@@ -162,7 +162,6 @@ function showTextFile() {
     
     for (const file of selectedFiles) {
         if (selectedFiles != null) {
-            console.log("abc");
             const summary = document.createElement('p');
             summary.innerText = file.name;
             list.appendChild(summary);
@@ -208,11 +207,6 @@ for(let i=0;i<contentBox.length;i++){
     });
 }
 
-const boardModal = document.querySelector("#boardModal");
-if(boardModal.style.display == 'flex'){
-    console.log("abc");
-}
-
 //*** */ 게시글 슬라이드****
 
 const slide = document.querySelector(".slide");
@@ -253,11 +247,9 @@ function selectBoardList(boardNo){
     fetch("/boardDetail?boardNo="+boardNo)
     .then(response => response.json())
     .then(board => {
-        console.log(board.commentList);
 
         boardCont = board.boardContent;
 
-        console.log(board);
         document.querySelectorAll('.slide_item').forEach(function(slideItem) {
             slideItem.remove();
         });
@@ -352,8 +344,15 @@ function selectBoardList(boardNo){
                 nameA.href = "/mypage/"+board.commentList[i].memberNo;
                 nameA.innerText = board.commentList[i].memberNickname;
 
+
+                let beforeCommentContent = board.commentList[i].commentContent;
+                beforeCommentContent =  beforeCommentContent.replaceAll("&amp;", "&");
+                beforeCommentContent =  beforeCommentContent.replaceAll("&lt;", "<");
+                beforeCommentContent =  beforeCommentContent.replaceAll("&gt;", ">");
+                beforeCommentContent =  beforeCommentContent.replaceAll("&quot;", "\"");
+
                 const contentP = document.createElement("p");
-                contentP.innerText = board.commentList[i].commentContent;
+                contentP.innerText = beforeCommentContent;
 
                 const dateDiv = document.createElement("div");
                 dateDiv.classList.add("dateDiv");
@@ -405,7 +404,14 @@ function selectBoardList(boardNo){
                         nameA1.innerText = board.commentList[j].memberNickname;
 
                         const contentP1 = document.createElement("p");
-                        contentP1.innerText = board.commentList[j].commentContent;
+
+                        let beforeContent = board.commentList[j].commentContent;
+                        beforeContent =  beforeContent.replaceAll("&amp;", "&");
+                        beforeContent =  beforeContent.replaceAll("&lt;", "<");
+                        beforeContent =  beforeContent.replaceAll("&gt;", ">");
+                        beforeContent =  beforeContent.replaceAll("&quot;", "\"");
+
+                        contentP1.innerHTML = beforeContent;
 
                         const dateDiv1 = document.createElement("div");
                         dateDiv1.classList.add("dateDiv");
@@ -498,7 +504,6 @@ function selectBoardList(boardNo){
         const memberNickA = document.createElement("a");
         memberNickA.href = "/mypage/"+board.memberNo;
         memberNickA.innerText = board.memberNickname;
-        console.log(memberNickA);
         boardMemberInfo.append(memberNickA);
 
         const postContentDiv = document.createElement("div");
@@ -515,7 +520,6 @@ function selectBoardList(boardNo){
         boardProfileA.append(profileImg);
         boardPostDiv.append(boardProfileA);
 
-        console.log(board.hashtagList);
         
         const hashDiv = document.createElement("div");
         hashDiv.classList.add("hashPost");
@@ -523,9 +527,7 @@ function selectBoardList(boardNo){
         if(board.hashtagList != null){
             for(let i=0;i<board.hashtagList.length;i++){
                 const hashSpan = document.createElement("span");
-                hashSpan.innerHTML = `<a href="#">#${board.hashtagList[i].hashtagName}</a>`;
-
-                console.log(board.hashtagList[i].hashtagName);
+                hashSpan.innerHTML = `<a href="#" class="hashs">#${board.hashtagList[i].hashtagName}</a>`;
                 hashDiv.append(hashSpan);
             }
         }
@@ -539,8 +541,14 @@ function selectBoardList(boardNo){
         nameA.href = "/mypage/"+board.memberNo;
         nameA.innerText = board.memberNickname;
 
+        let beforeMainContent = board.boardContent;
+        beforeMainContent =  beforeMainContent.replaceAll("&amp;", "&");
+        beforeMainContent =  beforeMainContent.replaceAll("&lt;", "<");
+        beforeMainContent =  beforeMainContent.replaceAll("&gt;", ">");
+        beforeMainContent =  beforeMainContent.replaceAll("&quot;", "\"");
+
         const contentP = document.createElement("p");
-        contentP.innerText = board.boardContent;
+        contentP.innerText = beforeMainContent;
 
         const input = document.createElement("textarea");
         input.classList.add("hiddenEditing");
@@ -580,40 +588,54 @@ function selectBoardList(boardNo){
 
 
         // 게시글 수정 (내용 / 태그)
-        const boardEditing = document.querySelectorAll(".boardEditing");
+        const boardEditing = document.querySelectorAll(".boardEditing>*");
         const hiddenEditing = document.querySelector(".hiddenEditing");
         const editingSubmit = document.querySelector(".editingSubmit");
         const editingCancel = document.querySelector(".editingCancel");
+        const hashPost = document.querySelectorAll(".hashs");
+        // 게시글 편집 버튼 클릭 시
         for(let i=0;i<boardEditing.length;i++){
             boardEditing[i].addEventListener("click", ()=>{
-                console.log("abc");
                 BoardPost.querySelector(".innerDiv>p").style.display = 'none';
                 hiddenEditing.style.display = 'block';
                 editingSubmit.style.display = 'inline';
                 editingCancel.style.display = 'inline';
                 hiddenEditing.focus();
-                hiddenEditing.value = BoardPost.querySelector(".innerDiv>p").innerHTML;
+                const whitecontent = BoardPost.querySelector(".innerDiv>p").innerHTML;
                 
+                
+                if(hashPost[0].nextElementSibling == null){
+                    for(let j=0;j<hashPost.length;j++){
+                        let item = 
+                            `<button type="button" onclick="removeHash(event, ${board.boardNo})">×</button>`;
+                        hashPost[j].parentNode.insertAdjacentHTML("beforeend", item);
+                    }
+                }
+
+
+                const textWithLineBreaks = whitecontent.replace(/<br[^>]*>/gi, "\n");
+                hiddenEditing.value = textWithLineBreaks;
             });
         }
 
+        // 편집 취소
         editingCancel.addEventListener("click", ()=>{
             BoardPost.querySelector(".innerDiv>p").style.display = 'block';
             hiddenEditing.style.display = 'none';
             editingSubmit.style.display = 'none';
             editingCancel.style.display = 'none';
+            const hashDTBtn = hashPost.querySelector("span>button")
         });
 
+        // 게시물 수정 버튼
         editingSubmit.addEventListener("click", ()=>{
-
-            console.log(board.boardNo);
-            console.log(hiddenEditing.value);
 
             if(board.boardContent == hiddenEditing.value){
                 BoardPost.querySelector(".innerDiv>p").style.display = 'block';
                 hiddenEditing.style.display = 'none';
                 editingSubmit.style.display = 'none';
                 editingCancel.style.display = 'none';
+                
                 return;
             }
 
@@ -625,18 +647,24 @@ function selectBoardList(boardNo){
                 headers : {"Content-Type" : "application/json"},
                 body : JSON.stringify(data)}
             )
-            .then(resp => resp.text())
-            .then(result=>{
+            .then(resp => resp.json())
+            .then(board=>{
 
-                if(result == 0){
-                    console.log("게시글 수정 실패");
+                if(board == null){
+                    alert("게시글 업로드에 실패하였습니다")
                     return;
                 }
                 BoardPost.querySelector(".innerDiv>p").style.display = 'block';
                 hiddenEditing.style.display = 'none';
                 editingSubmit.style.display = 'none';
                 editingCancel.style.display = 'none';
-                BoardPost.querySelector(".innerDiv>p").innerHTML = hiddenEditing.value;
+
+                board.boardContent =  board.boardContent.replaceAll("&amp;", "&");
+                board.boardContent =  board.boardContent.replaceAll("&lt;", "<");
+                board.boardContent =  board.boardContent.replaceAll("&gt;", ">");
+                board.boardContent =  board.boardContent.replaceAll("&quot;", "\"");
+
+                BoardPost.querySelector(".innerDiv>p").innerHTML = board.boardContent;
             })
             .catch(err => {
                 console.log(err);
@@ -653,6 +681,29 @@ function selectBoardList(boardNo){
     })
     .catch(err => console.log(err));
 }
+
+// 해시 삭제 함수
+function removeHash(event, boardNo){
+    let tagName = event.target.previousElementSibling.innerText.slice(1);
+    const data = {"boardNo" : boardNo, "hashtagName" : tagName};
+
+    fetch("/board/deleteHash", {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(data)
+    })
+    .then(resp=>resp.text())
+    .then(result=>{
+        if(result>0){
+            event.target.parentNode.innerHTML = '';
+        }
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+
+}
+
 
 
 // 댓글 삭제 함수
@@ -677,7 +728,6 @@ function removeComment(event, commentNo) {
 // 댓댓글 삭제 함수
 function removeChildComment(event, commentNo) {
 
-    console.log(commentNo);
     fetch("/board/deleteChildComment", {
         method : "POST",
         headers : {"Content-Type" : "application/json"},
@@ -688,7 +738,6 @@ function removeChildComment(event, commentNo) {
         if(result>0){
             // selectBoardList(boardNumber)
             let a = event.target.parentNode.parentNode.parentNode.parentNode.querySelector(".secondComment").innerText;  // 버튼의 부모의 부모의 부모의 부모의 답글 보기
-            console.log(a);
             if(Number(a.match(/\d+/)[0]) == 1){
                 event.target.parentNode.parentNode.parentNode.parentNode.querySelector(".secondComment").remove();
 
@@ -883,7 +932,6 @@ insertComment.addEventListener("click", e=>{
                 } else{
                     const a = prntCommentNode.innerText;
                     prntCommentNode.innerText = "—— 답글 보기(" + (Number(a.match(/\d+/)[0]) +1) + ")";
-                    console.log(prntCommentNode.parentNode);
                     prntParentNo.append(postContentDiv1);
                     
                 }
@@ -916,7 +964,6 @@ hashtagInput.addEventListener("keyup", e=>{
         fetch("/board/hashtag?hashtagName="+data)
         .then(resp => resp.json())
         .then(hashList => {
-            console.log(hashList);
             for(let i=0;i<hashList.length;i++){
                 hashList1.innerHTML += `<li onclick="addHashList(this)">#${hashList[i].hashtagName}</li>`
             }
@@ -984,13 +1031,11 @@ for(let i=0;i<boardLike.length;i++){
         })
         .then(resp => resp.text())
         .then(count => {
-            console.log("count : " + count);
 
             if(count == -1){  // INSERT, DELETE 실패 시
                 console.log("좋아요 처리 실패");
                 return;
             }
-            console.log(check);
             if(check==0){
                 BoardRedHeart.style.display = "block";
                 BoardHeart.style.display = "none";
@@ -1236,8 +1281,6 @@ function getImageFiles(e) {
     const slidePrevButton = document.querySelector('.slide_prev_button2');
     const docFrag = new DocumentFragment();
 
-    console.log(files);
-
 
     // 이미지 6개 이상 들어오면 돌려보내주기
     if ([...files].length > 7) {
@@ -1293,11 +1336,13 @@ upload.addEventListener('change', getImageFiles);
 
 /* 게시글 작성 화면 이전 버튼 */
 const BackIcon = document.querySelector("#BackIcon");
+const NewWriteTextAreaCount = document.querySelector(".NewWriteTextAreaCount");
 
 BackIcon.addEventListener("click", () => {
     NewBoardBackground.style.display = "flex";
     BoardBackground2.style.display = "none";
     upload.value = "";
+    NewWriteTextAreaCount.value= "";
     pagination2.innerHTML = '';
     document.querySelector('[name="hashtagLists"]').value = '';
     document.querySelector('.hashtagList').innerText = '';
@@ -1308,7 +1353,6 @@ BackIcon.addEventListener("click", () => {
 })
 /* 새 게시글 작성 내용 글자수 카운트 */
 
-const NewWriteTextAreaCount = document.querySelector(".NewWriteTextAreaCount");
 
 NewWriteTextArea.addEventListener("input", () => {
     const count = NewWriteTextArea.innerText.length;
@@ -1597,7 +1641,6 @@ function getHashtagItem(hashtag) {
 
     hashtag = hashtag.replaceAll(' ', '');
     const hashtagList = document.querySelector('[name="hashtagLists"]');
-    console.log(hashtagList);
     if(hashtagList.value == ''){
         hashtagList.value = hashtag;
     } else {
@@ -1682,8 +1725,6 @@ function followFn(){
     .then(response=>response.text()) // 응답 객체를 필요한 형태로 파싱하여 리턴
     .then(count =>{
 
-        console.log("count : "+count);
-
         if(count == -1){ // INSERT, DELETE 실패 시
             console.log("팔로우 처리 실패");
             return;
@@ -1766,6 +1807,11 @@ for (let i = 0; i < snsUrlList.length; i++) {
     imgElement.src = snsUrlList[i];
     imgElement.alt = '';
 
+    // 링크 연결
+    imgElement.addEventListener('click', function() {
+        window.location.href = '${snsLinkAddress}';
+    });
+
     let subConElement = document.createElement('div');
     subConElement.className = 'forSNSIcon-sub';
     subConElement.appendChild(imgElement);
@@ -1774,3 +1820,31 @@ for (let i = 0; i < snsUrlList.length; i++) {
     mainConElement.appendChild(subConElement);
 
 }
+
+
+
+/* SNS 아이콘 */
+/* 
+snsImgList = snsImgList.replace(/\[|\]/g, '').trim();
+let snsUrlList = snsImgList.split(', ');
+for (let i = 0; i < snsUrlList.length; i++) {
+    let imgElement = document.createElement('img');
+    imgElement.className = 'sns-img-list';
+    imgElement.src = snsUrlList[i];
+    imgElement.alt = '';
+
+    let subConElement = document.createElement('div');
+    subConElement.className = 'forSNSIcon-sub';
+
+    // Create a link element and set the URL
+    let linkElement = document.createElement('a');
+    linkElement.href = snsUrlList[i];
+    linkElement.appendChild(imgElement);
+
+    subConElement.appendChild(linkElement);
+
+    let mainConElement = document.querySelector('.forSNSIcon-main');
+    mainConElement.appendChild(subConElement);
+}
+
+*/

@@ -41,11 +41,6 @@
                 <c:when test="${not empty mypage.backgroundImage}">
                     <div class="bgimageBox"> <!-- 이미지 들어오는 구역 -->
                         <img class="preview" src="${mypage.backgroundImage}">
-                        <div class="forSNSIcon-main">
-                            <c:if test="${empty snsImgList}">
-                            으악
-                            </c:if>
-                        </div>
                     </div>
                 </c:when>
             
@@ -57,8 +52,12 @@
             </c:choose>
 
         </div>
-
-
+        <div class="forSNSIcon-main">
+            <c:if test="${empty snsImgList}">
+            <%-- <a href="${snsLinkAddress}">링크</a> --%> 
+            </c:if>
+        </div>
+        
         <div class="profilebox"> <!-- 프로필 박스 -->
             <div class="profileLeft"> <!-- 프로필 사진 있는 구역 -->
                 <div class="profileCircle">
@@ -246,6 +245,7 @@ ${mypage.memberCareer}
         
         </div>
     </div>
+
 
     <!-- 상세페이지 구역!!!! -->
     <!-- !!!!!!!!!!!!!여기까지가 상세페이지 입니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 전부 옮겨주세요!!!!!!!!!!!!!!!! -->

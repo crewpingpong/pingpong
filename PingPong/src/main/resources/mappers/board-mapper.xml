@@ -356,5 +356,12 @@
 		FETCH FIRST 12 ROWS ONLY
 	</select>
 
+	<delete id="deleteHash">
+		DELETE FROM "HASHTAG_BOARD"
+		WHERE BOARD_NO = #{boardNo}
+		AND HASH_NO = (SELECT HASH_NO 
+						FROM HASHTAG
+						WHERE HASHTAG_NAME = #{hashtagName})
+	</delete>
 	
 </mapper>
