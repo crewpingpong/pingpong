@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -28,6 +30,7 @@
                 <ul>
                     <li>
                         <p>회원 관리</p>
+                        
                     </li>  
 
                     <li class="admin_is_on">        
@@ -77,17 +80,32 @@
                     <div>
                         <div>
                             <div>이메일</div>
-                            <div>[회원ID|비회원]</div>
+                            <c:choose>
+                                <c:when test="${inquiry.memberUrl == null}">
+                                    <div>[비회원]</div>
+                                </c:when>
+                            
+                                <c:otherwise>
+                                    <div>[회원ID : ${inquiry.memberUrl} ]</div>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                         <div>
-                            <input type="text" placeholder=" 회원이 작성한 이메일 나옴">
+                            <input type="text" value=" ${inquiry.inquiryEmail}">
                         </div>
                         <div>
-                            <textarea name="" id="" cols="30" rows="10" placeholder=" 문의사항 내용"></textarea>
+                            <textarea name="" id="" cols="30" rows="10" placeholder=" 문의사항 내용">${inquiry.inquiryContent}</textarea>
                         </div>
+
+                    <c:if test="${inquiry.imageList[0].imageAddress != null}" >
                         <div>
                             첨부한 사진
-                            <div><img src="/img/QnAguide/회원가입1.png" style="max-width:100%; height:auto;"></div>
+                        <%-- <c:forEach var="i" begin="${start}" end="${fn:length(inquiry.imageList) - 1}" items="">  --%>
+                        <c:forEach items="${inquiry.imageList}" var="imageList">
+                            <%-- <div><img src="${inquiry.imageList[i].imageAddress}" style="max-width:100%; height:auto;"></div> --%>
+                            <div><img src="${imageList.imageAddress}" style="max-width:100%; height:auto;"></div>
+                        </c:forEach>
+                    </c:if>
                         </div>
                     </div>
                 </div>
