@@ -91,7 +91,7 @@ public class AlarmController {
 
 		follow.setMemberNo(loginMember.getMemberNo());
 		
-		return service.unfollow(follow);
+		return service.unfollow2(follow);
 		 
 	}
 	
@@ -103,7 +103,7 @@ public class AlarmController {
 		
 		follow.setFollowerNo(loginMember.getMemberNo());
 		
-		return service.unfollow(follow);
+		return service.unfollow2(follow);
 		
 	}
 	

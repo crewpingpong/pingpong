@@ -97,8 +97,8 @@ public class AlarmServiceImpl implements AlarmService{
 
 	// 팔로우 취소
 	@Override
-	public int unfollow(Follow follow) {
-		return dao.unfollow(follow);
+	public int unfollow2(Follow follow) {
+		return dao.unfollow2(follow);
 	}
 
 

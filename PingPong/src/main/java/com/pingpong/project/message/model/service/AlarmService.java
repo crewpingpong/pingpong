@@ -80,7 +80,7 @@ public interface AlarmService {
 	 * @param follow
 	 * @return
 	 */
-	int unfollow(Follow follow);
+	int unfollow2(Follow follow);
 
 
 
