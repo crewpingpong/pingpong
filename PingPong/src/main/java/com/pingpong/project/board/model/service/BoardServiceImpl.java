@@ -29,7 +29,7 @@ public class BoardServiceImpl implements BoardService{
     // 좋아요 처리 서비스
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public int like(Map<String, Integer> paramMap) {
+    public Board like(Map<String, Integer> paramMap) {
         int result = 0;
         if(paramMap.get("check") == 0) {
             result = dao.insertBoardLike(paramMap);
@@ -37,24 +37,26 @@ public class BoardServiceImpl implements BoardService{
             result = dao.deleteBoardLike(paramMap);
         }
         
-        if(result == 0) return -1;
-        
-        int count = dao.countBoardLike(paramMap.get("boardNo"));
-        return count;
+        if(result == 0) return null;
+        Board board = dao.select(paramMap.get("boardNo"));
+//        int count = dao.countBoardLike(paramMap.get("boardNo"));
+        return board;
     }
 
     // 북마크 테이블 삽입/삭제
 	@Override
-	public int boardMarkup(Map<String, Integer> paramMap) {
+	public Board boardMarkup(Map<String, Integer> paramMap) {
 		int result = 0;
         if(paramMap.get("check") == 0) {
             result = dao.insertBoardMarkup(paramMap);
-            System.out.println("테이블 삽입");
         } else {
             result = dao.deleteBoardMarkup(paramMap);
-            System.out.println("테이블 삭제");
         }
-        return result;
+        
+        if(result == 0) return null;
+        Board board = dao.select(paramMap.get("boardNo"));
+        
+        return board;
 	}
 
 	// 댓글 테이블 삽입

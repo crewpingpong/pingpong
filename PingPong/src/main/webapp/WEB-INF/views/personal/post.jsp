@@ -169,13 +169,13 @@ ${mypage.memberCareer}
         <div class="posttab_menu">
             <ul class="postlist">
                 <li class="is_on">
-                <a href="#posttab1" class="btn">게시글  <span>${fn:length(boardList)}</span></a>
+                    <a href="#posttab1" class="btn">게시글  <span>${fn:length(boardList)}</span></a>
                 </li>
                 <li>
-                <a href="#posttab2" class="btn">좋아요  <span>${fn:length(likeList)}</span></a>
+                    <a href="#posttab2" class="btn">좋아요  <span>${fn:length(likeList)}</span></a>
                 </li>
                 <li>
-                <a href="#posttab3" class="btn">컬렉션  <span>${fn:length(markList)}</span></a>
+                    <a href="#posttab3" class="btn">컬렉션  <span>${fn:length(markList)}</span></a>
                 </li>
                 <c:choose>
                     <c:when test="${mypage.memberNo == loginMember.memberNo}">
@@ -197,7 +197,7 @@ ${mypage.memberCareer}
                         <c:choose>
                             <c:when test="${empty boardList}">
                                 <%-- 조회된 게시글 목록이 비어있거나 null인 경우 --%>
-                                게시글이 존재하지 않습니다.
+                                <div>게시글이 존재하지 않습니다.</div>
                             </c:when>
                         
                             <c:otherwise>
@@ -219,7 +219,7 @@ ${mypage.memberCareer}
                         <c:choose>
                             <c:when test="${empty likeList}">
                                 <%-- 조회된 게시글 목록이 비어있거나 null인 경우 --%>
-                                게시글이 존재하지 않습니다.
+                                <div>게시글이 존재하지 않습니다.</div>
                             </c:when>
                         
                             <c:otherwise>
