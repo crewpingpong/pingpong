@@ -102,7 +102,7 @@ function myFollowListFn(){ // 내가 팔로우하는 리스트 조회
         const unfollowButton = document.createElement('button');
         unfollowButton.classList.add('unfollow');
         unfollowButton.textContent = 'UNFOLLOW';
-
+        
         followManageDiv.appendChild(unfollowButton);
 
         // 생성한 내부 요소들을 followExampleDiv에 추가합니다.
@@ -110,7 +110,37 @@ function myFollowListFn(){ // 내가 팔로우하는 리스트 조회
         followExampleDiv.appendChild(followManageDiv);
 
         // 부모 요소에 followExampleDiv를 추가합니다.
-        parentElement.appendChild(followExampleDiv);    
+        parentElement.appendChild(followExampleDiv);   
+        
+        deleteImg.addEventListener("click", e =>{
+
+            // if(!confirm("팔로우를 취소하겠습니까?")){
+            //     return;
+            // }
+
+            // fetch("/alarm/unFollow",{
+            //     method : "DELETE",
+            //     headers : {"content-type":"application/json"},
+            //     body : JSON.stringify({
+            //         "deletMessageNo" : delNo,
+            //         "MessageBoxType" : MessageBox
+            //     })
+            // })
+            // .then(resp => resp.text())
+            // .then(result => {
+            //     if(result>0){
+            //         alert("팔로우 취소 완료");
+            //         gotoMessagesendFn();
+            //     } else{
+            //         alert("팔로우 취소 실패");
+            //     }
+            // })
+            // .catch(err =>{
+            //     console.log(err);
+            // })
+        })
+
+
         }
     })
     .catch(err =>{
