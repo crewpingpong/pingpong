@@ -82,7 +82,8 @@
     width: 80%; height: 46px; margin-bottom: 20px;
     display: flex; 
 }
-.myFollowList h4{margin: 20px 0;}
+.h4{display: flex; justify-content: center; margin: 20px 0;}
+/* .myFollowList h4{} */
 .myFollowList .followExample .probox{
     width: 35px; height: 35px; 
     background-color: #FFE69A; border-radius: 50%; margin-right: 15px;
