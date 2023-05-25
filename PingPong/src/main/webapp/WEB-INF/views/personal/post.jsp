@@ -171,9 +171,11 @@ ${mypage.memberCareer}
                 <li>
                 <a href="#posttab3" class="btn">컬렉션  <span>${fn:length(markList)}</span></a>
                 </li>
-                <li>
-                    <button class="newContent">새 게시글</button>
-                </li>
+                <c:if test="${mypage.memberNo == loginMember.memberNo}" >
+                    <li>
+                        <button class="newContent">새 게시글</button>
+                    </li>
+                </c:if>
             </ul>
         
             <div class="postcont_area">
