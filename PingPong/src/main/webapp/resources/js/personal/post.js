@@ -141,39 +141,39 @@ function showModal(target){
         // if(e.target!==oneToOne){
         if(e.target==grayBack){
             grayBack.style.display = "none";
-            document.getElementById("chooseFile").value = '';
-            document.getElementById("fileName").innerText = '';
+            // document.getElementById("chooseFile").value = '';
+            // document.getElementById("fileName").innerText = '';
         }
     })
 }
 
-const chooseFile = document.getElementById('chooseFile');
-const fileName = document.getElementById('fileName');
+// const chooseFile = document.getElementById('chooseFile');
+// const fileName = document.getElementById('fileName');
 
-chooseFile.addEventListener("change", showTextFile);
+// chooseFile.addEventListener("change", showTextFile);
 
-function showTextFile() {
-    const selectedFiles = chooseFile.files;
-    if(document.querySelector('#fileName>p')){
-        document.querySelector('#fileName>p').remove();
-    }
-    const list = document.createElement('p');
-    fileName.appendChild(list);
+// function showTextFile() {
+//     const selectedFiles = chooseFile.files;
+//     if(document.querySelector('#fileName>p')){
+//         document.querySelector('#fileName>p').remove();
+//     }
+//     const list = document.createElement('p');
+//     fileName.appendChild(list);
     
-    for (const file of selectedFiles) {
-        if (selectedFiles != null) {
-            const summary = document.createElement('p');
-            summary.innerText = file.name;
-            list.appendChild(summary);
-        }
-    }
-}
+//     for (const file of selectedFiles) {
+//         if (selectedFiles != null) {
+//             const summary = document.createElement('p');
+//             summary.innerText = file.name;
+//             list.appendChild(summary);
+//         }
+//     }
+// }
 
-const submit = document.getElementById('submit');
+// const submit = document.getElementById('submit');
 
-submit.addEventListener("click", ()=>{
-    alert("제출 되었습니다.")
-});
+// submit.addEventListener("click", ()=>{
+//     alert("제출 되었습니다.")
+// });
 
 const Boardcontent = document.querySelector(".Boardcontent");
 const Boardcontent1 = document.querySelector(".Boardcontent1");
