@@ -179,17 +179,65 @@ public interface MypageService {
 	 */
 	List<SNS> selectCheckSNSImgList(int memberNo);
 
+	/** snsURL COUNT
+	 * @param memberNo
+	 * @return
+	 */
+	int selectSNSAddress(int memberNo);
+
+	/** snsURL UPDATE
+	 * @param selectedSnsAddress
+	 * @return
+	 */
+	int updateSNSAddress(Map<String, Object> snsAddressMap);
+
+	/** snsURL INSERT
+	 * @param snsAddressMap
+	 * @return
+	 */
+	int insertSNSAddress(Map<String, Object> snsAddressMap);
+
+	/** 선택한 snsList의 URL 주소 (링크)
+	 * @param memberNo
+	 * @return
+	 */
+	List<SNS> selectSNSAddressList(int memberNo);
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/** 선택한 SNSList의 URL 조회
 	 * @param memberNo
 	 * @return
 	 */
-	List<SNS> selectCheckSNSURL(int memberNo);
+//	List<SNS> selectCheckSNSURL(int memberNo);
 	
 	/** 선택한 snsList의 URL 주소 (링크)
 	 * @param memberNo
 	 * @return
 	 */
-	List<SNS> selectSNSAddress(int memberNo);
+//	List<SNS> selectSNSAddress(int memberNo);
+
+	/** update snsAddress
+	 * @param memberNo
+	 * @return
+	 */
+//	int updateSNSAddress(int memberNo);
+
+	/** sns 주소 COUNT
+	 * @return
+	 */
+//	int selectSNSAddress();
 
 
 
