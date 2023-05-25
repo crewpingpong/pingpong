@@ -297,17 +297,89 @@
             <!-- *** 문의 내역 화면 구현 *** -->
             <div id="myPageModiTab4" class="myPage-content-main">
                 <form name="myPageFrm" action="/mypage/inquiry" method="POST">
-                    <div class="inquiry-area">
-                        <p>문의 내역</p> 
-                        <div>
-                            안녕하세요. 문의 드려요. 어쩌구 저쩌구 문제가 생겨서요....
-                            <div class="inquiry-date">2023년 5월 4일</div> 
-                        </div>
-                        <div>
-                            안녕하세요. 문의 드려요. 어쩌구 저쩌구 문제가 생겨서요....
-                            <div class="inquiry-date">2023년 5월 9일</div> 
-                        </div>
+                            <div class="admin-content-main-area"> 
+            <div id="adminModiTab5" class="admin-content-main">
+                <!-- ★★★★★★★★★★★★★★ 1:1문의 ★★★★★★★★★★★★★★ -->
+                <div class="admin-left-side-menu">
+
+                    <div>
+            <form action="/manager/1To1inquiry" method="get" id="boardSearch">
+
+                    <select name="key" id="searchKey">
+                        <option value="i">ID</option>
+                        <option value="c">내용</option>
+                        <option value="e">EMAIL</option>
+                    </select>
+
+                    <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요.">
+
+                    <button>검색</button>
+            </form>
                     </div>
+                    <div>
+                        <table id="oneToOneTable">
+                            <colgroup>
+                                <col class="col1">
+                                <col class="col2">
+                                <col class="col3">
+                                <col class="col4">
+                                <col class="col5">
+                                <col class="col6">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" name="choiceBox" value="selectAll" id="chkSelectAll">
+                                    </th>
+                                    <th>No.</th>
+                                    <th>ID(URL)</th>
+                                    <th>내용</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <c:choose>
+                                <c:when test="${empty Inquiry}">
+                                    <tr>
+                                        <th colspan="6">등록된 문의가 없습니다.</th>
+                                    </tr>
+                                </c:when>
+                            
+                                <c:otherwise>
+                                    <c:forEach items="${InquiryList.inquiryList}" var="Inquiry">
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="choicebox" value="1">
+                                            </td>
+                                            <td>${Inquiry.inquiryNo}</td>
+                                            <td>
+                                                <a href="/mypage/${Inquiry.memberNo}">${Inquiry.memberUrl}</a>
+                                            </td>
+                                            <td><a onclick="location.href='/manager/1to1Content?inquiryNo=${Inquiry.inquiryNo}'">${Inquiry.inquiryContent}</a></td>
+                                            <td>${Inquiry.memberEmail}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:otherwise>
+
+                            </c:choose>
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- 페이지 네이션 -->
+                    <div class="pagination">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <ol id="paginationNumbers">
+                            <!-- <li><a href="">1</a></li>
+                            <li><a href="">2</a></li>
+                            <li><a href="">3</a></li> -->
+                        </ol>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <!-- ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★ -->
+            </div> 
+        </div>
                 </form>
             </div> 
         </div>

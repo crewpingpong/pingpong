@@ -208,7 +208,7 @@ public class MypageController {
 									, RedirectAttributes ra
 									, HttpSession session) throws IllegalStateException, IOException {
 		
-		System.out.println(profileImage);
+//		System.out.println(profileImage);
 		
 	    updateMember.setMemberNo(loginMember.getMemberNo());
 
