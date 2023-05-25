@@ -80,6 +80,13 @@
 		AND FOLLOWER_NO = #{followerNo}
 	</delete>
 	
+	<!-- 팔로우 삭제 -->
+	<delete id="unfollow2">
+		DELETE FROM FOLLOW
+		WHERE MEMBER_NO = #{followerNo}
+		AND FOLLOWER_NO = #{memberNo}
+	</delete>
+	
 	
 	<!-- 알람 메세지를 보낸 사람의 프로필 이미지 조회 -->
 	<select id="selectProfileImage" resultType="string">

@@ -323,15 +323,15 @@ ${mypage.memberCareer}
             <div class="h4"></div>
             <%-- <h4 class="h4">팔로우 ()</h4> --%>
             <div class="followList"> <!-- 메세지 목록 -->
-                <div class="followExample">
-                    <%-- <div class=userProfile>
+                <%--<div class="followExample">
+                    <div class=userProfile>
                         <a href=""><div class="probox"><img src="" alt=""></div></a>
                         <a href=""><p>김핑퐁</p></a>
                     </div>
                     <div class="followManage">
                         <button class="unfollow">UNFOLLOW</button>
-                    </div> --%>
-                </div>
+                    </div> 
+                </div>--%>
             </div>
         </div>
     </div>

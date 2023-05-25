@@ -90,14 +90,20 @@ public class AlarmDAO {
 		return sqlSession.insert("alarmMapper.follow", follow);
 	}
 
-
-	
 	/** 팔로우 삭제
 	 * @param follow
 	 * @return
 	 */
 	public int unfollow(Follow follow) {
 		return sqlSession.delete("alarmMapper.unfollow",follow);
+	}
+	
+	/** 팔로우 삭제
+	 * @param follow
+	 * @return
+	 */
+	public int unfollow2(Follow follow) {
+		return sqlSession.delete("alarmMapper.unfollow2",follow);
 	}
 
 
