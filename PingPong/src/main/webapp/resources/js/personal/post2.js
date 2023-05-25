@@ -24,10 +24,10 @@ if(gotoFollower!=null){
         myFollowList.style.display = "none"; // 팔로우 닫기
         meFollowList.style.display = "flex"; // 팔로워 열기
 
-        const followerBoxX = document.querySelector(".follower-Box-X");
-        followerBoxX.addEventListener("click",()=>{ // 팔로워 닫기
-            meFollowList.style.display = "none";
-        })
+    })
+    const followerBoxX = document.querySelector(".follower-Box-X");
+    followerBoxX.addEventListener("click",()=>{ // 팔로워 닫기
+        meFollowList.style.display = "none";
     })
 }
 const gotoFollow = document.querySelector(".goto-follow");
@@ -37,10 +37,10 @@ if(gotoFollow!=null){
         myFollowList.style.display = "flex"; // 팔로우 열기
         meFollowList.style.display = "none"; // 팔로워 닫기
 
-        const followBoxX = document.querySelector(".follow-Box-X");
-        followBoxX.addEventListener("click",()=>{ // 팔로우 닫기
-            myFollowList.style.display = "none";
-        })
+    })
+    const followBoxX = document.querySelector(".follow-Box-X");
+    followBoxX.addEventListener("click",()=>{ // 팔로우 닫기
+        myFollowList.style.display = "none";
     })
 }
 
@@ -61,6 +61,7 @@ function myFollowListFn(){ // 내가 팔로우하는 리스트 조회
         myFollowCount.append(fmyFollowCountDiv);
         // `<h4 class="h4">팔로우 ${myFollowList.length}</h4>`;
         parentElement.innerHTML="";
+
         for(let mfl of myFollowList){
 
         // 새로운 div 요소를 생성합니다.
@@ -112,32 +113,31 @@ function myFollowListFn(){ // 내가 팔로우하는 리스트 조회
         // 부모 요소에 followExampleDiv를 추가합니다.
         parentElement.appendChild(followExampleDiv);   
         
-        deleteImg.addEventListener("click", e =>{
+        unfollowButton.addEventListener("click", e =>{
 
-            // if(!confirm("팔로우를 취소하겠습니까?")){
-            //     return;
-            // }
+            if(!confirm("팔로우를 취소하겠습니까?")){
+                return;
+            }
 
-            // fetch("/alarm/unFollow",{
-            //     method : "DELETE",
-            //     headers : {"content-type":"application/json"},
-            //     body : JSON.stringify({
-            //         "deletMessageNo" : delNo,
-            //         "MessageBoxType" : MessageBox
-            //     })
-            // })
-            // .then(resp => resp.text())
-            // .then(result => {
-            //     if(result>0){
-            //         alert("팔로우 취소 완료");
-            //         gotoMessagesendFn();
-            //     } else{
-            //         alert("팔로우 취소 실패");
-            //     }
-            // })
-            // .catch(err =>{
-            //     console.log(err);
-            // })
+            fetch("/alarm/unFollow",{
+                method : "DELETE",
+                headers : {"content-type":"application/json"},
+                body : JSON.stringify({
+                    "followerNo" : mfl.memberNo,
+                })
+            })
+            .then(resp => resp.text())
+            .then(result => {
+                if(result>0){
+                    alert("팔로우 취소 완료");
+                    myFollowListFn();
+                } else{
+                    alert("팔로우 취소 실패");
+                }
+            })
+            .catch(err =>{
+                console.log(err);
+            })
         })
 
 
@@ -213,7 +213,34 @@ function meFollowListFn(){ // 내가 팔로우하는 리스트 조회
         followExampleDiv.appendChild(followManageDiv);
 
         // 부모 요소에 followExampleDiv를 추가합니다.
-        parentElement2.appendChild(followExampleDiv);    
+        parentElement2.appendChild(followExampleDiv);  
+        
+        unfollowButton.addEventListener("click", e =>{
+
+            if(!confirm("팔로워 팔로우를 취소시키겠습니까?")){
+                return;
+            }
+
+            fetch("/alarm/followCancel",{
+                method : "DELETE",
+                headers : {"content-type":"application/json"},
+                body : JSON.stringify({
+                    "memberNo" : mfl.followerNo,
+                })
+            })
+            .then(resp => resp.text())
+            .then(result => {
+                if(result>0){
+                    alert("팔로워 취소 완료");
+                    meFollowListFn();
+                } else{
+                    alert("팔로워 취소 실패");
+                }
+            })
+            .catch(err =>{
+                console.log(err);
+            })
+        })
         }
     })
     .catch(err =>{

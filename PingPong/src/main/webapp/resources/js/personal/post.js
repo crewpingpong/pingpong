@@ -1,3 +1,14 @@
+const forms = document.querySelectorAll('form');
+forms.forEach(form => {
+    form.addEventListener('keypress', event => {
+        if (event.keyCode === 13) {
+        event.preventDefault();
+        return false;
+        }
+    });
+});
+
+
 // 개인 홈 프로필 js
 // 홈프로필 배경 변경
 const preview = document.getElementsByClassName("preview");  // img 태그
@@ -235,7 +246,7 @@ let maxSlide; // 현재 슬라이드 위치가 슬라이드 개수를 넘기지 
 let paginationItems;
 let FirstPagination;
 let parentComment;
-let boardCont;
+// let boardCont;
 
 let commentParentNo;
 
@@ -256,8 +267,8 @@ function selectBoardList(boardNo){
     .then(response => response.json())
     .then(board => {
 
-
-        boardCont = board.boardContent;
+        boardNumber = board.boardNo;
+        boardMember = board.memberNo;
 
         document.querySelectorAll('.slide_item').forEach(function(slideItem) {
             slideItem.remove();
@@ -295,8 +306,6 @@ function selectBoardList(boardNo){
         }
 
 
-        boardNumber = board.boardNo;
-        boardMember = board.memberNo;
 
         // 게시글 편집 버튼 나타나게 하기
         const editing = document.querySelectorAll(".editing");
@@ -560,15 +569,18 @@ function selectBoardList(boardNo){
         const nameA = document.createElement("a");
         nameA.href = "/mypage/"+board.memberNo;
         nameA.innerText = board.memberNickname;
-
-        let beforeMainContent = board.boardContent;
-        beforeMainContent =  beforeMainContent.replaceAll("&amp;", "&");
-        beforeMainContent =  beforeMainContent.replaceAll("&lt;", "<");
-        beforeMainContent =  beforeMainContent.replaceAll("&gt;", ">");
-        beforeMainContent =  beforeMainContent.replaceAll("&quot;", "\"");
-
         const contentP = document.createElement("p");
-        contentP.innerText = beforeMainContent;
+
+        if(board.boardContent != null){
+            
+            let beforeMainContent = board.boardContent;
+            beforeMainContent =  beforeMainContent.replaceAll("&amp;", "&");
+            beforeMainContent =  beforeMainContent.replaceAll("&lt;", "<");
+            beforeMainContent =  beforeMainContent.replaceAll("&gt;", ">");
+            beforeMainContent =  beforeMainContent.replaceAll("&quot;", "\"");
+            contentP.innerText = beforeMainContent;
+        }
+
 
         const input = document.createElement("textarea");
         input.classList.add("hiddenEditing");
@@ -677,13 +689,15 @@ function selectBoardList(boardNo){
                     hiddenEditing.style.display = 'none';
                     editingSubmit.style.display = 'none';
                     editingCancel.style.display = 'none';
-
-                    board.boardContent =  board.boardContent.replaceAll("&amp;", "&");
-                    board.boardContent =  board.boardContent.replaceAll("&lt;", "<");
-                    board.boardContent =  board.boardContent.replaceAll("&gt;", ">");
-                    board.boardContent =  board.boardContent.replaceAll("&quot;", "\"");
-
-                    BoardPost.querySelector(".innerDiv>p").innerHTML = board.boardContent;
+                    if(board.boardContent != null){
+                        
+                        board.boardContent =  board.boardContent.replaceAll("&amp;", "&");
+                        board.boardContent =  board.boardContent.replaceAll("&lt;", "<");
+                        board.boardContent =  board.boardContent.replaceAll("&gt;", ">");
+                        board.boardContent =  board.boardContent.replaceAll("&quot;", "\"");
+    
+                        BoardPost.querySelector(".innerDiv>p").innerHTML = board.boardContent;
+                    }
                 })
                 .catch(err => {
                     console.log(err);
@@ -1076,7 +1090,7 @@ for(let i=0;i<boardLike.length;i++){
             }
             likeCount.innerText = board.likeCount+"명이 좋아합니다";
 
-            if(board.memberNo == loginMemberNo){
+            if(window.location.pathname.split("/")[window.location.pathname.split("/").length-1] == loginMemberNo){   // 게시글이 로그인 회원의 게시글이면
 
                 if(check == 0 && likeposttab.querySelector(`* [src="${board.thumbnail}"]`) == null){
 
@@ -1107,18 +1121,10 @@ for(let i=0;i<boardLike.length;i++){
                         postlist.innerText = parseInt(postlist.innerText) - 1;
                     }
                     if(likeposttab.querySelector("div") == null){
-                        const div = document.createElement("div");
-                        div.innerHTML = "<div>게시글이 존재하지 않습니다.</div>";
-                        likeposttab.append(div);
+                        likeposttab.innerHTML = "<div>게시글이 존재하지 않습니다.</div>";
                     }
                 }
-            } else{
-
-                if(likeposttab.querySelector(`* [src="${board.thumbnail}"]`) != null){
-                    likeposttab.querySelector(`* [src="${board.thumbnail}"]`).parentNode.parentNode.remove();
-                    postlist.innerText = parseInt(postlist.innerText) - 1;
-                }
-            }
+            } 
             boardNumber = board.boardNo;
 
         })
@@ -1171,7 +1177,7 @@ for(let i=0;i<boardMark.length;i++){
                 markOff.style.display = "block";
             }
 
-            if(board.memberNo == loginMemberNo){
+            if(window.location.pathname.split("/")[window.location.pathname.split("/").length-1] == loginMemberNo){
 
 
                 if(check1 == 0 && bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`) == null){
@@ -1206,13 +1212,7 @@ for(let i=0;i<boardMark.length;i++){
                         bookmarkposttab.innerHTML = "<div>게시글이 존재하지 않습니다.</div>";
                     }
                 }
-            } else{
-                if(bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`) != null){
-                    bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`).parentNode.parentNode.remove();
-                    postlist.innerText = parseInt(postlist.innerText) - 1;
-                }
-                
-            }
+            } 
 
             boardNumber = board.boardNo;
 
@@ -1686,7 +1686,7 @@ window.addEventListener("resize", () => {
 function addHashtag() {
 
     let hashtag = document.getElementById("hashtag").value; // 해시태그 입력 input 태그
-    if (/[,#%]/.test(hashtag)){                             // ,#% 들어가 있으면 리턴
+    if (/[,#%\s]/.test(hashtag)){                             // ,#% 들어가 있으면 리턴
         document.querySelector("#hashtag").value = '';      // input 태그 값 없앰
         document.querySelector(".hashList").innerHTML = '';      // 리스트 값 없앰
         return;                                             // 함수 종료
@@ -1717,7 +1717,7 @@ function addHashtag() {
 // 해시 리스트 클릭 시 해시태그 추가
 function addHashList(event){
     let hashtag = event.innerText.slice(1);
-    if (/[,#%]/.test(hashtag)){                             // ,#% 들어가 있으면 리턴
+    if (/[,#%\s]/.test(hashtag)){                             // ,#% 들어가 있으면 리턴
         document.querySelector("#hashtag").innerHTML = '';      // input 태그 값 없앰
         document.querySelector(".hashList").innerHTML = '';      // 리스트 값 없앰
         return;                                             // 함수 종료

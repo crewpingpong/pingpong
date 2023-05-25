@@ -191,7 +191,7 @@
     width: 80%; height: 46px; margin-bottom: 20px;
     display: flex; 
 }
-.h4{display: flex; justify-content: center; margin: 20px 0;}
+.h4{display: flex; justify-content: center; margin: 20px 0; user-select: none;}
 /* .myFollowList h4{} */
 .meFollowList .followExample .probox{
     width: 35px; height: 35px; 
