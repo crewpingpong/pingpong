@@ -83,6 +83,7 @@
 
 /* 1:1 문의 내용 창 */
 #oneToOneContent>div{
+    width: 98%;
     text-align: center;
     padding: 20px 40px;
 }
