@@ -53,7 +53,7 @@ public class QnAController {
 		
 		inquiry.setMemberNo(loginMember.getMemberNo());
 		
-		String webPath = "/resources/images/inquiry";
+		String webPath = "/resources/images/inquiry/";
 		String filePath = session.getServletContext().getRealPath(webPath);
 		
 		int inquiryNo = service.inquiryInsert(inquiry,images,webPath,filePath);
