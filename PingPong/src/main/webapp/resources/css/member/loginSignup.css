@@ -160,9 +160,10 @@ input::placeholder {
     font-size: 12px; margin-left: 4px;
 }
 
-.signup-check>a{   /* 확인하기 */
+.signup-check>span{   /* 확인하기 */
     font-size: 12px;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .login-container div:last-child>button:first-child{

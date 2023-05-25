@@ -51,14 +51,14 @@
             
             <div class="signup-check">
                 <div>
-                    <input type="checkbox" id="checkTermsAllOutside" >
+                    <input type="checkbox" id="checkTerms">
                     <label for="checkTerms">
                         <span></span>
                         핑퐁 가입 약관에 모두 동의 합니다.
                     </label>
                 </div>
 
-                <a href="#" class="open-termsBtn">확인하기</a>
+                <span class="open-termsBtn">확인하기</span>
             </div>
     
             <div>
@@ -66,13 +66,15 @@
                 <button class="signup-next">다음</button>
             </div>
         </form>
-
+    
+    
+    
         <div class="signup-box termsbackground customChk">
             <div>
                 <p>약관 확인하기</p>
     
                 <div class="check-all">
-                    <input type="checkbox" id="checkTermsAllInside" >
+                    <input type="checkbox" id="checkTermsAll">
                     <label for="checkTermsAll">
                         <p>전체 동의</p>
                     </label>

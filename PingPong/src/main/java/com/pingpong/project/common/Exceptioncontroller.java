@@ -1,12 +1,21 @@
 package com.pingpong.project.common;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 // 예외 처리용 컨트롤러 
 @ControllerAdvice
 public class Exceptioncontroller {
+	
+	@ExceptionHandler(ServletRequestBindingException.class)
+    public String handleServletRequestBindingException() {
+//		e.printStackTrace(); // 예외 내용/발생 메서드 확인
+		System.out.println("비 로그인 에러");
+        return "redirect:/member/login";
+    }
+	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e, Model model) {
 		

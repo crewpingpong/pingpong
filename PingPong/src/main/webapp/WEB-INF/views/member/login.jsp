@@ -51,7 +51,6 @@
         </div>
     </div>
 
-
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     <script src="/resources/js/member/login.js"></script>
 </body>
