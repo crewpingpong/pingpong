@@ -246,8 +246,8 @@ public class MypageServiceImpl implements MypageService{
 
 	// 선택된 SNSList 삽입
 	@Override
-	public int insertNewSnsList(Map<String, Object> snsMap) {
-		return dao.insertNewSnsList(snsMap);
+	public int insertNewSnsList(SNS s) {
+		return dao.insertNewSnsList(s);
 	}
 
 	// SNSList 전체 삭제 후 SNSList 삽입 진행

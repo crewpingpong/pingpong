@@ -80,4 +80,15 @@ public class AlarmController {
 //		System.out.println(meFollowList);
 		return meFollowList;
 	}
+	
+	// 팔로우 취소
+//	@GetMapping(value="/unFollow", produces = "application/json; charset=UTF-8")
+//	@ResponseBody
+//	public List<Follow> unFollow(@SessionAttribute("loginMember") Member loginMember){
+//		
+//		List<Follow> unFollow = service.mefollowList(loginMember.getMemberNo());
+////		System.out.println(meFollowList);
+//		return meFollowList;
+//	}
+//	
 }
