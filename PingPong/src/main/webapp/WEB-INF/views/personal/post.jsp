@@ -169,13 +169,13 @@ ${mypage.memberCareer}
         <div class="posttab_menu">
             <ul class="postlist">
                 <li class="is_on">
-                <a href="#posttab1" class="btn">게시글  <span>${fn:length(boardList)}</span></a>
+                    <a href="#posttab1" class="btn">게시글  <span>${fn:length(boardList)}</span></a>
                 </li>
                 <li>
-                <a href="#posttab2" class="btn">좋아요  <span>${fn:length(likeList)}</span></a>
+                    <a href="#posttab2" class="btn">좋아요  <span>${fn:length(likeList)}</span></a>
                 </li>
                 <li>
-                <a href="#posttab3" class="btn">컬렉션  <span>${fn:length(markList)}</span></a>
+                    <a href="#posttab3" class="btn">컬렉션  <span>${fn:length(markList)}</span></a>
                 </li>
                 <c:choose>
                     <c:when test="${mypage.memberNo == loginMember.memberNo}">

@@ -33,13 +33,13 @@ public interface BoardService {
      * @param paramMap
      * @return count
      */
-    int like(Map<String, Integer> paramMap);
+    Board like(Map<String, Integer> paramMap);
 
 	/** 북마크 처리 서비스 (AJAX)
 	 * @param paramMap
 	 * @return count
 	 */
-    int boardMarkup(Map<String, Integer> paramMap);
+    Board boardMarkup(Map<String, Integer> paramMap);
 
 	/** 댓글 달기 서비스 (AJAX)
 	 * @param paramMap
