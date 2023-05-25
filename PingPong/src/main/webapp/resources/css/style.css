@@ -430,9 +430,9 @@ display: none; z-index: 202;
     color: #5C5C5C;
     align-self: flex-end;
 }
-
+.alarmList{overflow: auto; height: 480px;}
 #alarmModBox>div{
-    width: 100%; padding: 40px; height: 520px;
+    width: 100%; padding: 30px; height: 520px;
     display: flex; flex-direction: column; justify-content: space-between;
 }
 
@@ -466,9 +466,10 @@ display: none; z-index: 202;
 }
 #alarmModBox .messageLink{
     display: flex; justify-content: center;
+    margin-top: 20px;
 }
 #alarmModBox .messageLink svg{margin-right: 8px;}
-
+.messageBoxOpen{width: 300px; user-select: none; cursor: pointer;}
 
 /* ------------------------------------------------ */
 /* 메세지 함 css */
@@ -507,7 +508,6 @@ display: none; z-index: 202;
 }
 .reciveUnderline{cursor: pointer; user-select: none; text-decoration: underline;}
 .sendUnderline{cursor: pointer; user-select: none; text-decoration: underline;}
-.goto-message-Box{cursor: pointer;} 
 /* 메세지 리스트 */
 .message-Box-recive .messageList{
     margin: 40px 0; height: 400px; width: 500px;

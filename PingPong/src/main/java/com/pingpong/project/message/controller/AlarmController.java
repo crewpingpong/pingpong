@@ -28,11 +28,11 @@ public class AlarmController {
 	private AlarmService service;
 	
 	// 최근 알람 20개 조회
-	@GetMapping("/send")
+	@GetMapping(value="/send", produces = "application/json; charset=UTF-8")
+	@ResponseBody
 	public List<Notice> alarmList(@SessionAttribute("loginMember") Member loginMember){
 		List<Notice> alarmList = service.alarmList(loginMember.getMemberNo());
-		
-		System.out.println(alarmList);
+//		System.out.println(alarmList);
 		return alarmList;
 	}
 	
