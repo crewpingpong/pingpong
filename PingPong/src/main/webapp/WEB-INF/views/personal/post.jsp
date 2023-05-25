@@ -549,12 +549,13 @@ ${mypage.memberCareer}
                         </svg>
                     </div>
     
-                    <!-- 1 : 1 문의 구간 -->
+                    <!-- 게시글 신고  -->
                     <div>
                         게시글 신고 하기
                     </div>
                     <form action="#" method="post" enctype="multipart/form-data">
-                        신고유형<br>
+                        <input type="text" name="reportTitle" placeholder="신고 제목을 입력해주세요.">
+                        <%-- 신고유형<br>
                         <select name="BoardReport" id="" required>
                             <option value="" disabled selected>신고 유형을 선택해주세요.</option>
                             <option value="intellectual">지식재산권</option>
@@ -562,13 +563,13 @@ ${mypage.memberCareer}
                             <option value="unpleasant">불쾌한 콘텐츠</option>
                             <option value="integrityAndIntegrity">무결성 및 진실성</option>
                             <option value="others">기타</option>
-                        </select>
-                        <!-- <input type="email" name="Email" id="otoEmail" placeholder="답장 받으실 이메일을 입력해주세요."> <br> -->
+                        </select> --%>
+                        <%-- <input type="email" name="Email" id="otoEmail" placeholder="답장 받으실 이메일을 입력해주세요."> <br> --%>
                         <textarea name="Content" id="otoContent" cols="30" rows="10" placeholder="신고내용을 입력해주세요."></textarea> <br>
-    
+<%--     
                         <label for="chooseFile">+ 사진 파일 첨부하기</label>
                         <input type="file" id="chooseFile" name="chooseFile" accept="image/*" multiple> <br>
-                        <p id="fileName" name="picture"></p>
+                        <p id="fileName" name="picture"></p> --%>
                         <div><button id="submit">신고하기</button></div>
                     </form>
                 </div>
