@@ -48,10 +48,11 @@ header{
 header .logo{position: absolute; left: 50%; transform: translateX(-100px); user-select: none;}
 header .logo img{width: 200px; }
 header .menu_icon{margin-left: 50px;}
-header .alarm_search_box{margin-right: 50px;}
 header .alarm_icon{margin-right: 20px;}
 
-header .alarm_search_box{display: flex; position: relative; height: 40px;}
+header .alarm_search_box{
+    margin-right: 50px; display: flex; position: relative; 
+    height: 40px; justify-content: center; align-items: center;}
 header .signBtn button{
     width: 100px; height: 35px; border-radius: 20px;
     color: #fff; font-size: 12px; font-weight: bold; background-color: #FFE69A;
@@ -408,7 +409,7 @@ display: none; z-index: 202;
     display: none;
 }
 
-
+.probox a{display: block; width: 100%; height: 100%;}
 #alarmModBox .messageExample{
     width: 100%; height: 46px; margin-bottom: 20px;
     display: flex; align-items: center;
@@ -429,9 +430,9 @@ display: none; z-index: 202;
     color: #5C5C5C;
     align-self: flex-end;
 }
-
+.alarmList{overflow: auto; height: 480px;}
 #alarmModBox>div{
-    width: 100%; padding: 40px; height: 520px;
+    width: 100%; padding: 30px; height: 520px;
     display: flex; flex-direction: column; justify-content: space-between;
 }
 
@@ -465,9 +466,10 @@ display: none; z-index: 202;
 }
 #alarmModBox .messageLink{
     display: flex; justify-content: center;
+    margin-top: 20px;
 }
 #alarmModBox .messageLink svg{margin-right: 8px;}
-
+.messageBoxOpen{width: 300px; user-select: none; cursor: pointer;}
 
 /* ------------------------------------------------ */
 /* 메세지 함 css */
@@ -504,8 +506,8 @@ display: none; z-index: 202;
     width: 20px; height: 20px; position: absolute; 
     right: 18px; top: 18px; cursor: pointer;
 }
-.underline{cursor: pointer; user-select: none; text-decoration: underline;}
-.goto-message-Box{cursor: pointer;} 
+.reciveUnderline{cursor: pointer; user-select: none; text-decoration: underline;}
+.sendUnderline{cursor: pointer; user-select: none; text-decoration: underline;}
 /* 메세지 리스트 */
 .message-Box-recive .messageList{
     margin: 40px 0; height: 400px; width: 500px;
@@ -634,13 +636,13 @@ display: none; z-index: 202;
     background-color: #C5C5C5; 
     display: flex; justify-content: center; margin-top: 15px;
 }
-.message-profile>img{width: 100%; height: 100%; border-radius: 50%;}
+.message-profile>a>img{width: 100%; height: 100%; border-radius: 50%;}
 .message-box-top>div>p{
     height: 30px; 
     display: flex; justify-content: center; 
     font-size: 14px; margin-left: 10px; margin-top: 21px;
 }
-
+.message-profile>a{display: block; width: 100%; height: 100%;}
 .recieve-message-x{
     width: 20px; height: 20px; position: absolute; 
     right: 18px; top: 18px; cursor: pointer;
@@ -676,7 +678,8 @@ display: none; z-index: 202;
     margin-left: 10px;
 }
 
-
+.userSelectNone{user-select: none;}
+.cursorPoint{cursor: point;}
 /* --------------------- */
 #btn11{ /* 임시 관리자 페이지 버튼 입니다.*/
     position: absolute; width: 100px; height: 40px; 

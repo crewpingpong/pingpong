@@ -80,10 +80,24 @@
 	
 	<!-- 알람 삽입 -->
 	<insert id="insertAlarm">
-		INSERT INTO NOTICE
+<!-- 		INSERT INTO NOTICE
 		(NOTICE_NO, NOTICE_COMENT, ELAPSED_TIME, MEMBER_NO)
-		VALUES(SEQ_NOTICE_NO.NEXTVAL, #{noticeContent} , SYSDATE, #{memberNo})
+		VALUES(SEQ_NOTICE_NO.NEXTVAL, #{noticeContent} , SYSDATE, #{memberNo}) -->
+		INSERT INTO NOTICE
+		(NOTICE_NO, NOTICE_COMENT, ELAPSED_TIME, MEMBER_NO, SEND_NO, SEND_PROFILE)
+		VALUES(SEQ_NOTICE_NO.NEXTVAL, #{noticeContent}, SYSDATE, #{memberNo},#{sendNo},#{sendProfile})
 	</insert>
+	
+	<!-- 최근 알람 20개 조회 -->
+	<select id="alarmList" resultMap="notice_rm">
+		SELECT NOTICE_NO, NOTICE_COMENT, ELAPSED_TIME, MEMBER_NO,
+			   MEMBER_NICKNAME , SEND_NO, SEND_PROFILE
+		FROM NOTICE
+		JOIN "MEMBER" USING (MEMBER_NO)
+		WHERE MEMBER_NO = #{memberNo}
+		ORDER BY 1 DESC
+		FETCH FIRST 20 ROWS ONLY
+	</select>
 	
 
 	

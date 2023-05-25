@@ -95,8 +95,8 @@ public class BoardDAO {
 	 * @param hashtags
 	 * @return
 	 */
-	public List<Hashtag> getHashtags(Map<String, String> hashtags) {
-		return sqlSession.selectList("boardMapper.selectHashtagList", hashtags);
+	public List<Hashtag> getHashtags(String hashtagName) {
+		return sqlSession.selectList("boardMapper.selectSelectHashtagList", hashtagName);
 	}
 
 	/** 댓글 삭제
@@ -114,6 +114,14 @@ public class BoardDAO {
 	 */
 	public int childCommentDelete(int commentNo) {
 		return sqlSession.update("boardMapper.deleteChildComment", commentNo);
+	}
+
+	/** 해시태그 삭제
+	 * @param paramMap
+	 * @return result
+	 */
+	public int deleteHash(Map<String, Object> paramMap) {
+		return sqlSession.delete("boardMapper.deleteHash", paramMap);
 	}
 
 

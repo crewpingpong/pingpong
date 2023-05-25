@@ -12,8 +12,6 @@ const checkObj2 = {
     "memberUrl": false
 };
 
-
-
 // ----------------------------------------------- 이메일 유효성 검사 -----------------------------------------------
 const memberEmail = document.getElementById("memberEmail");
 const emailMessage = document.getElementById("emailMessage");
@@ -431,6 +429,28 @@ if (document.getElementById("signupInfoFrm") != null) {
         }
     });
 }
+
+/* 약관 */
+const checkTermsAllOutside = document.getElementById("checkTermsAllOutside")
+const checkTermsAllInside = document.getElementById("checkTermsAllInside")
+
+const checkTerms1 = document.getElementById("checkTerms1")
+const checkTerms2 = document.getElementById("checkTerms2")
+const checkTerms3 = document.getElementById("checkTerms3")
+
+let isAllChecked = false;
+
+checkTermsAllOutside.addEventListener("click", (e)=>{
+    isAllChecked = !isAllChecked;
+    checkTerms1.checked = isAllChecked ;
+    checkTerms2.checked = isAllChecked ;
+    checkTerms3.checked = isAllChecked ;
+});
+
+
+
+
+
 
 
 /* 약관 확인하기 창 열기 */

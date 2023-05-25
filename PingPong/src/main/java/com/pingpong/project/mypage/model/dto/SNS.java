@@ -12,6 +12,7 @@ public class SNS {
 	private int snsNo;
 	private String snsName;
 	private String snsImg;
+	private String snsAddress;
 	
 	private int memberNo; 
 

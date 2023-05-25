@@ -280,6 +280,10 @@
     visibility: hidden;
 }
 
+.innerDiv>p{
+    white-space: pre-wrap;
+}
+
 .BoardMainContainer {
     display: flex; justify-content: space-between;
     /* width: 73%; height: 74%;  */
@@ -498,7 +502,7 @@
     cursor: pointer;
 }
 
-.innerDiv>div{
+.innerDiv>div:last-child{
     float: right;
     margin : 2px;
 }
@@ -701,9 +705,10 @@
 .BoardPost2{
     margin-right:16px;
 }
-.innerDiv a{
+.hashPost>span{
     margin-right:8px;
 }
+
 
 .BoardPost1 a img{
     width: 40px; height: 40px;
@@ -1028,4 +1033,33 @@ li {
 
 #hashtag-input a{
     color : #5286DC;
+}
+
+#hashtag{
+    width: 80%;
+}
+
+.hashList{
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5%;
+    max-height: 300px;
+    overflow: auto;
+}
+
+
+
+
+/* ********** SNS 아이콘 ********** */
+.forSNSIcon-main{
+    width: 400px; height: 55px; padding: 5px;
+    position: absolute; bottom: -27.5px; right: 0; margin-right: 15%;
+    display: flex; justify-content: center;
+}
+.forSNSIcon-sub{
+    width: 45px; height: 45px; margin-left: 16px;
+}
+.sns-img-list{
+    width: 100%; height: 100%;
+    cursor: pointer;
 }

@@ -13,6 +13,7 @@
     <link rel="icon" type="image/x-icon" href="/resources/images/pingpong.ico">
     <script>
         let techImgList = "${techImgList}";
+        let snsImgList = "${snsImgList}";
     </script>
 </head>
 <body>
@@ -51,8 +52,12 @@
             </c:choose>
 
         </div>
-
-
+        <div class="forSNSIcon-main">
+            <c:if test="${empty snsImgList}">
+            <%-- <a href="${snsLinkAddress}">링크</a> --%> 
+            </c:if>
+        </div>
+        
         <div class="profilebox"> <!-- 프로필 박스 -->
             <div class="profileLeft"> <!-- 프로필 사진 있는 구역 -->
                 <div class="profileCircle">
@@ -241,6 +246,7 @@ ${mypage.memberCareer}
         </div>
     </div>
 
+
     <!-- 상세페이지 구역!!!! -->
     <!-- !!!!!!!!!!!!!여기까지가 상세페이지 입니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 전부 옮겨주세요!!!!!!!!!!!!!!!! -->
 
@@ -282,9 +288,6 @@ ${mypage.memberCareer}
                     <div class="postcontent"> <!-- 게시글 내용 박스 -->
                         <div class="BoardPost">
                             <!-- 게시글 내용 들어가는 곳 -->
-                        </div>
-                        <div class="hashPost">
-                            <%-- 해시태그 들어가는 곳 --%>
                         </div>
                         <div class="Boardcontent1"> <!-- 게시글 내용 + 좋아요 수 -->
                     
@@ -561,12 +564,16 @@ ${mypage.memberCareer}
                                         </div>
 
                                     </div>
+                                    
                                     <textarea class="NewWriteTextArea" name="boardContent" maxlength="2000" cols="30" rows="10" placeholder="문구 입력.."></textarea>
                                     <!-- <div class="NewWriteTextArea" id="hashtag-input" contenteditable="true" role="textbox" spellcheck="true" data-lexical-editor="true" style="user-select: text; white-space: pre-wrap; word-break: break-word;"></div> -->
                                     <div class="upload-form-hashtag" align="center">
                                         <input type="text" placeholder="해시태그를 추가해보세요!" id="hashtag" name="hashtag">
                                         <button type="button" class="cta blue" onclick="addHashtag()">추가</button>
                                         <input type="hidden" name="hashtagLists">
+                                        <ul class="hashList">
+                                            <%-- 해시태그 목록 --%>
+                                        </ul>
                                     </div>
                                     <div class="countBox"><span class="NewWriteTextAreaCount">0</span><span>/2000</span></div>
                                     <div class="hashtagList" id="hashtagList"></div>

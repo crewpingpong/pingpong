@@ -82,6 +82,20 @@ public class MessageController {
 
 	}
 	
+	// 받은 메세지 전체 삭제
+	@GetMapping("/reciveDelAll")
+	@ResponseBody
+	public int reciveDelAll(@SessionAttribute("loginMember") Member loginMember) {
+		return service.reciveDelAll(loginMember.getMemberNo());	    	
+	}
+	
+	// 받은 메세지 전체 삭제
+	@GetMapping("/sendDelAll")
+	@ResponseBody
+	public int sendDelAll(@SessionAttribute("loginMember") Member loginMember) {
+		return service.sendDelAll(loginMember.getMemberNo());	    	
+	}
+	
 	
 	
 	

@@ -31,7 +31,7 @@ public class BoardController2 {
 	@Autowired
 	private BoardService2 service;
 	
-	
+	// 게시글 삽입
 	@PostMapping("/boardInsert")
 	public String boardInsert(
 			@SessionAttribute("loginMember") Member loginMember
@@ -60,9 +60,6 @@ public class BoardController2 {
     		hash.setHashtagName(hashs[i]);
     		hash.setBoardNo(boardNo);
     		hashtags.add(hash);
-    		for(String h : hashs) {
-    			System.out.println(h);
-    		}
     	}
     	
     	service.hashInsert(hashtags);

@@ -47,6 +47,13 @@
 					javaType="java.util.ArrayList"
 					ofType="Comment"
 					/>
+					
+		<collection property="hashtagList"
+					select="selectHashtagList"
+					column="BOARD_NO"
+					javaType="java.util.ArrayList"
+					ofType="Hashtag"
+					/>
 	</resultMap>
 	<resultMap type="Like" id="like_rm" autoMapping="true">
 		<id property="boardNo" column="BOARD_NO"/>
@@ -296,6 +303,14 @@
     </update>
 	
 	<select id="selectHashtagList" resultMap="hashtag_rm">
+		SELECT HASHTAG_NAME, BOARD_NO 
+		FROM "HASHTAG"
+		JOIN "HASHTAG_BOARD" USING(HASH_NO)
+		WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	
+	<select id="selectSelectHashtagList" resultMap="hashtag_rm">
 		SELECT HASHTAG_NAME
 		FROM "HASHTAG"
 		WHERE HASHTAG_NAME LIKE '${hashtagName}%'
@@ -341,5 +356,12 @@
 		FETCH FIRST 12 ROWS ONLY
 	</select>
 
+	<delete id="deleteHash">
+		DELETE FROM "HASHTAG_BOARD"
+		WHERE BOARD_NO = #{boardNo}
+		AND HASH_NO = (SELECT HASH_NO 
+						FROM HASHTAG
+						WHERE HASHTAG_NAME = #{hashtagName})
+	</delete>
 	
 </mapper>
