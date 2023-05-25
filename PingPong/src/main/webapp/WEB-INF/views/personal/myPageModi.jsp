@@ -176,7 +176,6 @@
                                 </c:forEach>
                             </div>
                         </div>
-
                         <!-- SNS -->
                         <div class="SNS-container">
                             <p>SNS</p>
@@ -186,6 +185,7 @@
 	                            	
 	                            		<c:if test="${SNS.snsNo == chSNS.snsNo}">
 	                            			<c:set var="checked" value="checked"/>
+	                            			<c:set var="address" value="${chSNS.snsAddress}"/>
 	                            		</c:if>
 		                                
 	                                </c:forEach>
@@ -194,10 +194,11 @@
                                     <label for="${SNS.snsNo}">
                                     	<input type="checkbox" value="${SNS.snsNo}" id="${SNS.snsNo}" name="SNS" ${checked}> ${SNS.snsName}
                                     </label>
-                                    <input type="text" value="" id="${SNS.snsNo}" name="address">
+                                    <input type="text" value="${address}" id="${SNS.snsNo}" name="address">
                                 </div>    
                                 
                                  <c:remove var="checked"/>
+                                 <c:remove var="address"/>
                                 </c:forEach>
                             </div>
                         </div>

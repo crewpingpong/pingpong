@@ -162,10 +162,10 @@ public interface MypageService {
 	List<SNS> seletCheckSNSList(int memberNo);
 
 	/** 선택된 SNSList 삽입
-	 * @param snsMap
+	 * @param s
 	 * @return
 	 */
-	int insertNewSnsList(Map<String, Object> snsMap);
+	int insertNewSnsList(SNS s);
 	
 	/** SNSList 전체 삭제 후 SNSList 삽입 진행
 	 * @param memberNo

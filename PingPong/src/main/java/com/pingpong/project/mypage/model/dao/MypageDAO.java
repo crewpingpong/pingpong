@@ -228,11 +228,11 @@ public class MypageDAO {
 	}
 
 	/** 선택된 SNSList 삽입
-	 * @param snsMap
+	 * @param s
 	 * @return
 	 */
-	public int insertNewSnsList(Map<String, Object> snsMap) {
-		return sqlSession.insert("mypageMapper.insertNewSnsList", snsMap);
+	public int insertNewSnsList(SNS s) {
+		return sqlSession.insert("mypageMapper.insertNewSnsList", s);
 	}
 
 	/** SNSList 전체 삭제 후 SNSList 삽입 진행

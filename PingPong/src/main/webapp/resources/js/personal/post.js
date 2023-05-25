@@ -1820,6 +1820,7 @@ for (let i = 0; i < urlList.length; i++) {
 
 
 /* SNS 아이콘 */
+/*
 snsImgList = snsImgList.replace(/\[|\]/g, '').trim();
 let snsUrlList = snsImgList.split(', ');
 for (let i = 0; i < snsUrlList.length; i++) {
@@ -1837,8 +1838,8 @@ for (let i = 0; i < snsUrlList.length; i++) {
     mainConElement.appendChild(subConElement);
 
 }
-
-
+*/
+/*
 let snsUrlLinkList = [
     'https://www.instagram.com/',
     'https://ko-kr.facebook.com/',
@@ -1855,3 +1856,4 @@ snsIcons.forEach(function(icon, index) {
         window.open(snsUrlLinkList[index]);
     });
 });
+*/
