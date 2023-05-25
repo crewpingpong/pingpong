@@ -76,18 +76,14 @@
                     </div>
                     <div>
                         <div>
-                            <div class="reporter">신고자 ID : <a href="/personalHome.html">AAA</a> </div>
-                            <div class="respondent">피신고자 ID : <a href="/personalHome.html">badDog</a></div>
+                            <div class="reporter">신고자 ID : <a href="/mypage/${declaration.memberNo}">${declaration.memberUrl}</a> </div>
+                            <div class="respondent">신고한 게시글 번호 : <a href="/mypage/${declaration.memberNo}?boardNo=${declaration.boardNo}">${declaration.boardNo}</a></div>
                         </div>
                         <div>
                             <input type="text" placeholder="회원이 작성한 신고 제목">
                         </div>
                         <div>
-                            <textarea name="" id="" cols="30" rows="10" placeholder=" 신고 내용"></textarea>
-                        </div>
-                        <div>
-                            첨부한 사진
-                            <div><img src="/resources/images/QnAguide/회원가입1.png" style="max-width:100%; height:auto;"></div>
+                            <textarea name="" id="" cols="30" rows="10" placeholder=" 신고 내용">${declaration.indictmentContent}</textarea>
                         </div>
                     </div>
                 </div>

@@ -114,14 +114,18 @@ public class MypageController {
 		
 		// 선택한 snsList의 URL 주소 (링크)
 
-//	    List<SNS> snsURL = service.selectSNSAddress(loginMember.getMemberNo());
-//	    
-//	    List<String> snsLinkAddress = new ArrayList<>();
-//	    
-//	    for(SNS sns : snsURL) {
-//	    	snsLinkAddress.add(sns.getSnsAddress());
-//	    }
-//	    model.addAttribute("snsLinkAddress", snsLinkAddress);
+	    List<SNS> snsURL = service.selectSNSAddressList(loginMember.getMemberNo());
+	    
+	    List<String> snsLinkAddress = new ArrayList<>();
+	    
+//	    System.out.println(snsURL);
+//	    System.out.println(snsLinkAddress);
+	
+	    
+	    for(SNS sns : snsURL) {
+	    	snsLinkAddress.add(sns.getSnsAddress());
+	    }
+	    model.addAttribute("snsLinkAddress", snsLinkAddress);
 	    
 //	    System.out.println(snsLinkAddress);
 		
@@ -176,7 +180,7 @@ public class MypageController {
 		model.addAttribute("checkSNSList", checkSNSList);
 		
 //		System.out.println("SNSList" + SNSList);
-		System.out.println("checkSNSList" + checkSNSList);
+//		System.out.println("checkSNSList" + checkSNSList);
 		
 		// 선택한 SNSList의 URL 조회
 //		List<SNS> checkSNSURL = service.selectCheckSNSURL(loginMember.getMemberNo());
@@ -267,6 +271,9 @@ public class MypageController {
 		 
 			 int result = service.insertNewInterestList(interestMap); 
 		 }
+		
+		
+
 
 		 
 		
@@ -283,6 +290,7 @@ public class MypageController {
 	public String updateProfileInfo(MyPage updateMyPage
 			, @RequestParam(value="tech", required=false) String[] techArray
 			, @RequestParam(value="SNS", required=false) String[] SNSArray
+			, @RequestParam(value="address", required=false) String[] SNSAddress
 			, @SessionAttribute("mypage") MyPage mypage
 			, @SessionAttribute("loginMember") Member loginMember
 			, RedirectAttributes ra
@@ -292,6 +300,10 @@ public class MypageController {
 		
 		List<String> selectedtechList = Arrays.asList(techArray);
 		List<String> selectedSnsList = Arrays.asList(SNSArray);
+		List<String> selectedSnsAddress = Arrays.asList(SNSAddress);
+		
+//		System.out.println(selectedSnsList); -> [4, 5]
+//		System.out.println(selectedSnsAddress); -> [instagram, , sdf, , instagram, ]
 		
 		
 		updateMyPage.setMemberNo(mypage.getMemberNo());
@@ -334,7 +346,7 @@ public class MypageController {
 			techMap.put("techNo", tech);
 			techMap.put("memberNo", loginMember.getMemberNo());
 			
-//			System.out.println("techMap : " + techMap);
+//			System.out.println("techMap : " + techMap); -> {memberNo=50, techNo=5}, {memberNo=50, techNo=9}
 			
 			int result = service.insertNewTechList(techMap);
 		}
@@ -358,7 +370,46 @@ public class MypageController {
 			
 			int result = service.insertNewSnsList(snsMap);
 		}
-
+		
+		
+		/* *** update snsAddress *** */
+		int result = service.selectSNSAddress(loginMember.getMemberNo());
+		
+//		System.out.println(selectedSnsAddress); -> [instagram, , sdf, , instagram, ]
+			
+		// insert snsAddress
+		if(result == 6) {
+			
+			for(String sns : selectedSnsAddress) {	
+				
+				Map<String, Object> snsAddressMap = new HashMap<>();
+				
+				snsAddressMap.put("memberNo", loginMember.getMemberNo());
+				snsAddressMap.put("snsAddress", sns);
+				
+//				System.out.println("snsAddressMap : " + snsAddressMap);
+				
+				int insertResult = service.insertSNSAddress(snsAddressMap);
+			}
+		}
+		
+		// update snsAddress
+		else {
+			for(String sns : selectedSnsAddress) {	
+				
+				Map<String, Object> snsAddressMap = new HashMap<>();
+				
+				snsAddressMap.put("memberNo", loginMember.getMemberNo());
+				snsAddressMap.put("snsAddress", sns);
+				
+				System.out.println("snsAddressMap : " + snsAddressMap);
+				
+				int updateResult = service.updateSNSAddress(snsAddressMap);
+			}
+		}
+		
+		
+		
 		
 		
 		ra.addFlashAttribute("message", message);
