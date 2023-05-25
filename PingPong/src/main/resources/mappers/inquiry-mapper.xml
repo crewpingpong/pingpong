@@ -78,7 +78,7 @@
 	FROM (
 		<foreach collection="list" item="img" separator=" UNION ALL ">
 			SELECT #{img.imageOrder} IMG_ORDER,
-				   #{img.imagePath} IMG_ADDRESS ,
+				   #{img.imageAddress} IMG_ADDRESS ,
 				   #{img.inquiryNo} INQUIRY_NO
 			FROM DUAL
 		</foreach>

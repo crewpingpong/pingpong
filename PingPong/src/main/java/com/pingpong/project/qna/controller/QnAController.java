@@ -48,31 +48,16 @@ public class QnAController {
 			Inquiry inquiry
 			,@SessionAttribute("loginMember") Member loginMember
 			,@RequestParam(value="chooseFile",required = false) List<MultipartFile> images
-			,RedirectAttributes ra
 			,HttpSession session
 			) throws IllegalStateException, IOException {
 		
 		inquiry.setMemberNo(loginMember.getMemberNo());
-		System.out.println("11111");
 		
-		String webPath = "/resources/images/inquiry";
-		System.out.println("22222");
+		String webPath = "/resources/images/inquiry/";
 		String filePath = session.getServletContext().getRealPath(webPath);
-		System.out.println("33333");
 		
 		int inquiryNo = service.inquiryInsert(inquiry,images,webPath,filePath);
-		System.out.println("44444");
 		
-		String message = null;
-		System.out.println("55555");
-		
-		if(inquiryNo >0) { // 성공 시
-			message = "1:1문의가 등록 되었습니다";
-		}else {
-			message = "1:1문의 등록 실패";
-		}
-		
-		ra.addFlashAttribute("message",message);
 		
 		return "/qna/QnAHome";
 	}

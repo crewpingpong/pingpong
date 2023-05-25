@@ -111,7 +111,7 @@
                             </thead>
                             <tbody>
                             <c:choose>
-                                <c:when test="${empty InquiryList}">
+                                <c:when test="${empty Inquiry}">
                                     <tr>
                                         <th colspan="6">등록된 문의가 없습니다.</th>
                                     </tr>
@@ -127,7 +127,7 @@
                                             <td>
                                                 <a href="/mypage/${Inquiry.memberNo}">${Inquiry.memberUrl}</a>
                                             </td>
-                                            <td><a href="/manager1To1Content.html">${Inquiry.inquiryContent}</a></td>
+                                            <td><a onclick="location.href='/manager/1to1Content?inquiryNo=${Inquiry.inquiryNo}'">${Inquiry.inquiryContent}</a></td>
                                             <td>${Inquiry.memberEmail}</td>
                                         </tr>
                                     </c:forEach>

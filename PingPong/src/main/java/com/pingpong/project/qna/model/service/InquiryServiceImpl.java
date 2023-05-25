@@ -40,18 +40,20 @@ public class InquiryServiceImpl implements InquiryService {
 			for(int i=0; i<images.size(); i++) {
 				
 				if(images.get(i).getSize() >0) {
-					
+						
 				InquiryImage img = new InquiryImage();
 				
-				img.setImagePath(webPath); // 웹 접근 경로
 				img.setInquiryNo(inquiryNo); //게시글 번호
 				img.setImageOrder(i); // 이미지 순서
 				
+				
 				String fileName = images.get(i).getOriginalFilename();
 				
-				img.setImageOriginal(fileName);
+				String rename = Util.fileRename(fileName);
 				
-				img.setImageReName(Util.fileRename(fileName));
+				img.setImageAddress(webPath+rename);
+				
+				images.get(i).transferTo(new File(filePath + rename));
 				
 				uploadList.add(img);
 				
@@ -63,21 +65,10 @@ public class InquiryServiceImpl implements InquiryService {
 			
 			int result = dao.insertImageList(uploadList);
 			
-			if(result == uploadList.size()) {
-				
-				for(int i=0; i< uploadList.size(); i++) {
-					
-					int index = uploadList.get(i).getImageOrder();
-					
-					String rename = uploadList.get(i).getImageReName();
-					
-					images.get(index).transferTo(new File(filePath+rename));
-				}
-			}else {
-				throw new FileUploadException();
+				if(result != uploadList.size()) {
+					throw new FileUploadException();
 			}
 		}
-		
 	}
 		return inquiryNo;
 
