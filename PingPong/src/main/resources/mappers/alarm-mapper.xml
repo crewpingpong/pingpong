@@ -43,6 +43,18 @@
 		ORDER BY FOLLOW_NO
 	</select>
 	
+	<!-- 나를 팔로우 하는 사람들 -->
+	<select id="mefollowList" resultMap="follow_rm">
+		SELECT F.MEMBER_NO, F.FOLLOWER_NO, M2.MEMBER_NICKNAME AS FOLLOW_NICKNAME, 
+		PF.PROFILE_IMG AS FOLLOW_PROFILE_IMG
+		FROM FOLLOW F
+		JOIN "MEMBER" M1 ON F.MEMBER_NO = M1.MEMBER_NO
+		JOIN "MEMBER" M2 ON F.FOLLOWER_NO = M2.MEMBER_NO
+		JOIN "MEMBER_PROFILE" PF ON F.FOLLOWER_NO = PF.MEMBER_NO
+		WHERE F.MEMBER_NO = #{memberNo}
+		ORDER BY F.FOLLOW_NO
+	</select>
+	
 	<!-- 내가 팔로우 하는 사람들 수 조회 -->
 	<select id="myFollowCount" resultType="_int">
 			SELECT COUNT(*) 
@@ -52,15 +64,7 @@
 			ORDER BY FOLLOW_NO
 	</select>
 	
-	<!-- 나를 팔로우 하는 사람들 -->
-	<select id="mefollowList" resultMap="follow_rm">
-		SELECT F.MEMBER_NO, F.FOLLOWER_NO, M2.MEMBER_NICKNAME AS FOLLOWER_NICKNAME
-		FROM FOLLOW F
-		JOIN "MEMBER" M1 ON F.MEMBER_NO = M1.MEMBER_NO
-		JOIN "MEMBER" M2 ON F.FOLLOWER_NO = M2.MEMBER_NO
-		WHERE F.MEMBER_NO = #{followerNo}
-		ORDER BY F.FOLLOW_NO
-	</select>
+
 	
 	
 	<!-- 팔로워 삽입 -->
