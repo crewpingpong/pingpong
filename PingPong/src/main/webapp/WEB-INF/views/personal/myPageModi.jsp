@@ -275,7 +275,7 @@
                         <!-- 현재 비밀번호 -->
                         <div class="password-for-secession"> 
                             <p>현재 비밀번호</p>
-                            <input type="password" name="memberPw" id="memberPw" minlength="6" placeholder="6자 이상">
+                            <input type="password" name="memberPw" id="secessionMemberPw" minlength="8" placeholder="8자 이상">
                         </div>
                         
                         <!-- 회원 탈퇴 약관 -->
