@@ -1,13 +1,3 @@
-const forms = document.querySelectorAll('form');
-forms.forEach(form => {
-    form.addEventListener('keypress', event => {
-        if (event.keyCode === 13) {
-        event.preventDefault();
-        return false;
-        }
-    });
-});
-
 
 // 개인 홈 프로필 js
 // 홈프로필 배경 변경
