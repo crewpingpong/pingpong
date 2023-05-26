@@ -89,6 +89,13 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<!-- 프로필 기본 이미지 수정 -->
+	<update id="updateBasicProfile">
+		UPDATE "MEMBER_PROFILE" SET
+		PROFILE_IMG = '/resources/images/profileImage/basicUserProfile.png'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
 	<!-- 배경화면 수정 -->
 	<update id="backgroundUpdate">
 		UPDATE "MEMBER_PROFILE" SET

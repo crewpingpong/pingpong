@@ -282,42 +282,18 @@ public class MypageDAO {
 	public List<SNS> selectSNSAddressList(int memberNo) {
 		return sqlSession.selectList("mypageMapper.selectSNSAddressList", memberNo);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/** 선택한 SNSList의 URL 조회
+
+	/** 프로필 이미지 기본
 	 * @param memberNo
 	 * @return
 	 */
-//	public List<SNS> selectCheckSNSURL(int memberNo) {
-//		return sqlSession.selectList("mypageMapper.selectCheckSNSURL", memberNo);
-//	}
+	public int updateBasicProfile(int memberNo) {
+		return sqlSession.update("mypageMapper.updateBasicProfile", memberNo);
+	}
 	
-	/** 선택한 snsList의 URL 주소 (링크)
-	 * @param memberNo
-	 * @return
-	 */
-//	public List<SNS> selectSNSAddress(int memberNo) {
-//		return sqlSession.selectList("mypageMapper.selectSNSAddress", memberNo);
-//	}
-
-	/** update snsAddress
-	 * @param memberNo
-	 * @return
-	 */
-//	public int updateSNSAddress(int memberNo) {
-//		return sqlSession.update("mypageMapper.updateSNSAddress", memberNo);
-//	}
-
-
+	
+	
+	
 
 
 

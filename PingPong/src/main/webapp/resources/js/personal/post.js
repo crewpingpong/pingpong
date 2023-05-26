@@ -111,13 +111,15 @@ for (var i = 0; i < posttabList.length-1; i++) {
 const messageBox = document.querySelector(".messageBox");
 const messageBoxClose = document.querySelector(".message-Box-X");
 
-messageBox.addEventListener("click", () => {
-    messageBoXrecive.style.display = "flex";
-})
-
-messageBoxClose.addEventListener("click", () => {
-    messageBoXrecive.style.display = "none";
-})
+if(messageBox!=null){
+    messageBox.addEventListener("click", () => {
+        messageBoXrecive.style.display = "flex";
+    })
+    
+    messageBoxClose.addEventListener("click", () => {
+        messageBoXrecive.style.display = "none";
+    })
+}
 
 // 게시글 상세 페이지 메세지 누르면 메세지 보내기 화면으로 넘어가기
 // const BoardIcon = document.querySelector(".BoardIconMessage");
@@ -1248,12 +1250,25 @@ function slideInitFn(){
     FirstPagination = document.querySelector(".slide_pagination > li");
     // 무한 슬라이드를 위해 start, end 슬라이드 복사하기
     
-    //const startSlide = slideItems[0];
-    //const endSlide = slideItems[slideItems.length - 1];
+    const startSlide = slideItems[0];
+    const endSlide = slideItems[slideItems.length - 1];
     
     const startElem = document.createElement("div");
     const endElem = document.createElement("div");
     
+
+    // 엘리먼트에 클래스 적용 동일하게 하기
+    endSlide.classList.forEach((c) => endElem.classList.add(c));
+    endElem.innerHTML = endSlide.innerHTML;
+    startSlide.classList.forEach((c) => startElem.classList.add(c));
+    startElem.innerHTML = startSlide.innerHTML;
+
+    // 각 복제한 엘리먼트를 각 위치에 추가하기
+    slideItems[0].before(endElem);
+    slideItems[slideItems.length - 1].after(startElem);
+
+
+
     // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
     slideItems = document.querySelectorAll(".slide_item");
     //
@@ -1792,11 +1807,19 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     if(followCheck != null){
         if(followCheck == 1){ // 팔로우 된 유저
-            followUser.classList.remove("followshow");
-            nufollow.classList.add("followshow");
+            if(followUser!=null){
+                followUser.classList.remove("followshow");
+            }
+            if(nufollow!=null){
+                nufollow.classList.add("followshow");
+            }
         } else if(followCheck == 0){ // 팔로우 안된 유저
-            followUser.classList.add("followshow");
-            nufollow.classList.remove("followshow");
+            if(followUser!=null){
+                followUser.classList.add("followshow");
+            }
+            if(nufollow!=null){
+                nufollow.classList.remove("followshow");
+            }
         }
     }
 
@@ -1898,18 +1921,20 @@ document.addEventListener("DOMContentLoaded",()=>{
 /* 지식/기술 아이콘 */
 techImgList = techImgList.replace(/\[|\]/g, '').trim();
 let urlList = techImgList.split(', ');
-for (let i = 0; i < urlList.length; i++) {
-    let imgElement = document.createElement('img');
-    imgElement.className = 'tech-img-list';
-    imgElement.src = urlList[i];
-    imgElement.alt = '';
+if(urlList != ""){
+    for (let i = 0; i < urlList.length; i++) {
+        let imgElement = document.createElement('img');
+        imgElement.className = 'tech-img-list';
+        imgElement.src = urlList[i];
+        imgElement.alt = '';
 
-    let subConElement = document.createElement('div');
-    subConElement.className = 'certificate-sub-con';
-    subConElement.appendChild(imgElement);
+        let subConElement = document.createElement('div');
+        subConElement.className = 'certificate-sub-con';
+        subConElement.appendChild(imgElement);
 
-    let mainConElement = document.querySelector('.certificate-main-con');
-    mainConElement.appendChild(subConElement);
+        let mainConElement = document.querySelector('.certificate-main-con');
+        mainConElement.appendChild(subConElement);
+    }
 }
 
 
