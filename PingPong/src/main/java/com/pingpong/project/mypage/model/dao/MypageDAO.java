@@ -290,6 +290,14 @@ public class MypageDAO {
 	public int updateBasicProfile(int memberNo) {
 		return sqlSession.update("mypageMapper.updateBasicProfile", memberNo);
 	}
+
+	/**
+	 * @param map
+	 * @return
+	 */
+	public int profileInsert(Map<String, Object> map) {
+		return sqlSession.insert("mypageMapper.profileInsert", map);
+	}
 	
 	
 	

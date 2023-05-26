@@ -228,7 +228,7 @@ public class MypageController {
 	        String reName = Util.fileRename(fileName);
 	        
 	        // 프로필 이미지 수정
-	        int profileResult = service.updateProfile(profileImage, reName, webPath, filePath, loginMember.getMemberNo());
+	        int profileResult = service.updateProfile(profileImage, reName, webPath, filePath, loginMember);
 
 	        if (infoResult > 0 && profileResult > 0) {
 	            message = "회원 정보가 수정되었습니다.";
