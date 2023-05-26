@@ -34,8 +34,8 @@
 
 /* FAQ 큰 박스 */
 .ch-guide-container>section:nth-child(2)>div{
-    width: 1100px;
-    min-height: 600px;
+    width: 800px;
+    min-height: 500px;
     border: 1px solid black;
     border-radius: 20px;
     display: flex;
@@ -46,8 +46,8 @@
 
 /* FAQ 작은 박스 */
 .ch-guide-container>section:nth-child(2)>div>ul{
-    width: 1000px;
-    min-height: 500px;
+    width: 700px;
+    min-height: 400px;
     border: 1px solid black;
     border-radius: 20px;
 }
@@ -65,9 +65,10 @@
 .ch-guide-container>section:nth-child(2)>div>ul>li>a{
     display: flex;
     align-items: center;
-    width: 1000px;
-    height: 100px;
-    font-size: 24px;
+    width: 700px;
+    height: 80px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .ch-guide-container>section:nth-child(2)>div>ul>li>a>svg{position : absolute; right: 0px; margin-right : 20px;}
@@ -79,10 +80,17 @@
     display: none;
     padding: 30px 60px;
 }
-li>.FAQ-cont {
+li>.FAQ-cont>p{
     display: block;
 }
 
 .Abtn{
     display: none;
+}
+
+.FAQ-cont p{
+    width: 100%;
+    background-color: #F0F0F0;
+    white-space: pre-wrap;
+    padding: 10px;
 }
