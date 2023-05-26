@@ -362,43 +362,77 @@ function tech_checkbox(){
 
 /* ********************************************************************** */
 
-/* *** 비밀번호 변경 제출 시 *** */
-const currentPw = document.querySelector("#currentPw");
-const newPw = document.querySelector("#newPw");
-const newPwConfirm = document.querySelector("#newPwConfirm");
-const secessionBtn = document.querySelector("#secessionBtn");
-const changePwFrm = document.querySelector("#changePwFrm");
+/* *** 비밀번호 변경 시 *** */
+const memberPw = document.getElementById("memberPw");
+const memberPwConfirm = document.getElementById("memberPwConfirm");
+const pwMessage1 = document.getElementById("pwMessage1");
+const pwMessage2 = document.getElementById("pwMessage2");
+if (memberPw != null) {
+    memberPw.addEventListener("input", (e) => {
 
-if (changePwFrm != null) { // 현재 페이지가 비밀번호 변경 페이지인 경우
+        // 비밀번호가 입력되지 않은 경우
+        if (memberPw.value.trim().length == 0) {
+            memberPw.value = ""; // 띄어쓰지 못넣게 하기
 
-    changePwBtn.addEventListener("click", e => {
+            pwMessage1.innerText = "8글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호를 입력해 주세요.";
+            pwMessage1.classList.remove("confirm", "error"); // 검정 글씨
 
-        // 현재 비밀번호 미작성 시
-        if (currentPw.value.trim() == "") {
-            alert("현재 비밀번호를 입력해주세요");
-            e.preventDefault();
-            currentPw.focus();
+            checkObj1.memberPw = false; // 빈칸 == 유효 X
             return;
         }
 
-        // 비밀번호 유효성 검사
+        // 8~ 영문 소문자, 최소 1개의 숫자 혹은 특수 문자 포함
         const regEx = /^(?=.*[a-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-z\d$@$!%*#?&]{8,}$/;
-        if (!regEx.test(newPw.value)) {
-            alert("비밀번호가 유효하지 않습니다");
-            e.preventDefault();
-            newPw.focus();
-            return;
-        }
 
-        // 비밀번호 != 비밀번호 확인
-        if (newPw.value != newPwConfirm.value) {
-            alert("비밀번호가 일치하지 않습니다");
-            e.preventDefault();
-            newPwConfirm.focus();
-            return;
-        }
+        // 입력한 비밀번호가 유효한 경우
+        if (regEx.test(memberPw.value)) {
 
-        changePwFrm.submit();
+            if (memberPwConfirm.value.trim().length == 0) {
+
+                pwMessage1.innerText = "유효한 비밀번호 형식입니다";
+                pwMessage1.classList.add("confirm");
+                pwMessage1.classList.remove("error");
+
+            } else {
+                if (memberPw.value == memberPwConfirm.value) {
+                    pwMessage2.innerText = "비밀번호가 일치합니다";
+                    pwMessage2.classList.add("confirm");
+                    pwMessage2.classList.remove("error");
+
+                } else { // 다를 경우
+                    pwMessage2.innerText = "비밀번호가 일치하지 않습니다";
+                    pwMessage2.classList.add("error");
+                    pwMessage2.classList.remove("confirm");
+                }
+            }
+
+        } else { // 유효하지 않은 경우
+            pwMessage1.innerText = "비밀번호 형식이 유효하지 않습니다";
+            pwMessage1.classList.add("error");
+            pwMessage1.classList.remove("confirm");
+        }
+    });
+
+
+    // 비밀번호 확인 유효성 검사
+    memberPwConfirm.addEventListener('input', () => {
+
+        if (true) { // 비밀번호가 유효하게 작성된 경우에
+
+            // 비밀번호 == 비밀번호 확인  (같을 경우)
+            if (memberPw.value == memberPwConfirm.value) {
+                pwMessage2.innerText = "비밀번호가 일치합니다";
+                pwMessage2.classList.add("confirm");
+                pwMessage2.classList.remove("error");
+
+            } else { // 다를 경우
+                pwMessage2.innerText = "비밀번호가 일치하지 않습니다";
+                pwMessage2.classList.add("error");
+                pwMessage2.classList.remove("confirm");
+            }
+
+        } else { // 비밀번호가 유효하지 않은 경우
+        }
     });
 }
 
