@@ -199,18 +199,20 @@ display: none; z-index: 202;
     width: 480px; margin-bottom: 20px;
 }
 .siteInfoModContainer>div:nth-of-type(2) p{
-    font-size: 14px; font-weight: bold; margin-top: 16px;
+    font-size: 14px; font-weight: bold; margin-top: 8px;
 }
 
 .pingpongTeaminfo{
-    margin: 20px 60px; font-size: 13px; color: #5C5C5C;
+    margin: 10px 60px; font-size: 13px; color: #5C5C5C;
     width: 480px;
 }
 .pingpongTeaminfo>li{
-    width: 210px;
-    float: left; margin-right: 30px; margin-bottom: 12px;
+    width: 220px;
+    float: left; margin-right: 20px; margin-bottom: 12px;
 }
-.pingpongTeaminfo>li>pre{margin:8px 0;}
+.pingpongTeaminfo>li>pre{
+    width: 220px;
+    margin:8px 0;}
 .pingpongTeaminfo>li>span:first-child{
     font-size: 14px; color: #000; font-weight: bold; margin-right: 8px;
     margin-bottom: 12px;
@@ -682,6 +684,7 @@ display: none; z-index: 202;
 .userSelectNone{user-select: none;}
 .cursorPoint{cursor: point;}
 /* --------------------- */
+/* 관리자 css */
 #btn11{ /* 임시 관리자 페이지 버튼 입니다.*/
     position: absolute; width: 100px; height: 40px; 
     background-color: #5286DC; top: 200px; left: 100px; 
@@ -689,3 +692,79 @@ display: none; z-index: 202;
     text-align: center; padding-left: 10px;
     margin: 96px;
 }
+.admin-left-side-menu > ul > li > a{
+    cursor: pointer; user-select: none;
+}
+.admin-left-side-menu > ul{
+    user-select: none;
+}
+#searchKey{
+    width: 100px; height: 30px; border-radius: 4px; border: 1px solid #C5C5C5;
+    margin-right: 12px; padding: 4px;
+}
+#searchQuery{
+    width: 240px; height: 30px; border-radius: 4px; border: 1px solid #C5C5C5;
+    margin-right: 12px; padding: 4px;
+}
+#boardSearch button{
+    width: 60px; height: 30px; background-color: #92B4EC; border-radius: 4px;
+    color: #fff; font-weight: bold;
+}
+#adminModiTab1 th{
+    background-color: #92B4EC; color: #fff;
+}
+#Secessionform th
+{background-color: #92B4EC; color: #fff;}
+#adminModiTab3 th
+{background-color: #92B4EC; color: #fff;}
+#adminModiTab4 th
+{background-color: #92B4EC; color: #fff;}
+#adminModiTab5 th
+{background-color: #92B4EC; color: #fff;}
+#adminModiTab6 th
+{background-color: #92B4EC; color: #fff;}
+table{
+    margin-top: 12px;
+}
+#boardSearch{
+    margin-bottom: 12px;
+}
+#DelBtn, #ReBtn{
+    width: 80px; height: 30px; background-color: #FFD24C; border-radius: 20px;
+    /* color: #fff; font-weight: bold; */
+}
+#adminModiTab4>div>div:nth-child(3)>button{
+    width: 80px; height: 30px; background-color: #5286DC; border-radius: 20px; color: #fff;
+}
+#adminModiTab3>div>div:nth-child(3)>button{
+    width: 80px; height: 30px; background-color: #5286DC; border-radius: 20px; color: #fff;
+}
+.admin-content-main-area{position: relative;}
+#selectMemberRestoreExisting{
+    position: absolute; bottom: 20px; left: 20px;
+}
+#selectMemberSecession{
+    position: absolute; bottom: 20px; left: 20px;
+}
+.reporter{color: #5286DC;}
+
+#selectMemberRestoreExisting {
+    background-color: #5286DC; color: #fff; font-weight: bold;
+}
+#selectMemberSecession {
+    background-color: #5286DC; color: #fff; font-weight: bold;
+}
+/* #selectMemberSecession{
+    margin: 10px;
+}
+#selectMemberRestoreExisting{
+    margin: 10px;
+} */
+#adminModiTab4 > div > div:nth-child(3){
+    margin-top: 12px;
+}
+#adminModiTab3 > div > div:nth-child(3){
+    margin-top: 12px;
+
+}
+.admin-left-side-menu{padding: 0;}
