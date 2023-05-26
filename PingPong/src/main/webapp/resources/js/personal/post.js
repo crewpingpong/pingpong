@@ -121,13 +121,15 @@ for (var i = 0; i < posttabList.length-1; i++) {
 const messageBox = document.querySelector(".messageBox");
 const messageBoxClose = document.querySelector(".message-Box-X");
 
-messageBox.addEventListener("click", () => {
-    messageBoXrecive.style.display = "flex";
-})
-
-messageBoxClose.addEventListener("click", () => {
-    messageBoXrecive.style.display = "none";
-})
+if(messageBox!=null){
+    messageBox.addEventListener("click", () => {
+        messageBoXrecive.style.display = "flex";
+    })
+    
+    messageBoxClose.addEventListener("click", () => {
+        messageBoXrecive.style.display = "none";
+    })
+}
 
 // 게시글 상세 페이지 메세지 누르면 메세지 보내기 화면으로 넘어가기
 // const BoardIcon = document.querySelector(".BoardIconMessage");
@@ -1802,11 +1804,19 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     if(followCheck != null){
         if(followCheck == 1){ // 팔로우 된 유저
-            followUser.classList.remove("followshow");
-            nufollow.classList.add("followshow");
+            if(followUser!=null){
+                followUser.classList.remove("followshow");
+            }
+            if(nufollow!=null){
+                nufollow.classList.add("followshow");
+            }
         } else if(followCheck == 0){ // 팔로우 안된 유저
-            followUser.classList.add("followshow");
-            nufollow.classList.remove("followshow");
+            if(followUser!=null){
+                followUser.classList.add("followshow");
+            }
+            if(nufollow!=null){
+                nufollow.classList.remove("followshow");
+            }
         }
     }
 

@@ -72,14 +72,19 @@
 .ch-cont_area>div>div{
     width: 1000px;
     height: 500px;
-    background-color: #FFE69A;
     margin-top: 50px;
+}
+.ch-cont_area>div>div>ul>li>pre{
+    border-top: 2px solid #FFE69A;
+    border-bottom: 2px solid #FFE69A;
+    font-size:20px;
+    font-weight: bold;
 }
 
 .ch-cont_area>div:first-child{
     display: block;
 }
-.ch-cont_area #ch-tab1 ul li img{
+.ch-cont_area ul>li>img{
     width: 100%;
 }
 .guide-infomation{
