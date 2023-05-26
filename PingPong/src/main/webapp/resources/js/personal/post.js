@@ -1908,18 +1908,20 @@ document.addEventListener("DOMContentLoaded",()=>{
 /* 지식/기술 아이콘 */
 techImgList = techImgList.replace(/\[|\]/g, '').trim();
 let urlList = techImgList.split(', ');
-for (let i = 0; i < urlList.length; i++) {
-    let imgElement = document.createElement('img');
-    imgElement.className = 'tech-img-list';
-    imgElement.src = urlList[i];
-    imgElement.alt = '';
+if(urlList != ""){
+    for (let i = 0; i < urlList.length; i++) {
+        let imgElement = document.createElement('img');
+        imgElement.className = 'tech-img-list';
+        imgElement.src = urlList[i];
+        imgElement.alt = '';
 
-    let subConElement = document.createElement('div');
-    subConElement.className = 'certificate-sub-con';
-    subConElement.appendChild(imgElement);
+        let subConElement = document.createElement('div');
+        subConElement.className = 'certificate-sub-con';
+        subConElement.appendChild(imgElement);
 
-    let mainConElement = document.querySelector('.certificate-main-con');
-    mainConElement.appendChild(subConElement);
+        let mainConElement = document.querySelector('.certificate-main-con');
+        mainConElement.appendChild(subConElement);
+    }
 }
 
 

@@ -333,25 +333,36 @@
 .password-modi-secession>p:last-child{
     margin-top: 50px;
 }
-.current-password>input,.new-password>input,.new-password-check>input,.password-for-secession>input{
+/* 비밀번호 관련 메세지 */
+.signUp-message{
+    font-size: 12px;
+    letter-spacing: -1px;
+    color: #5C5C5C;
+    font-weight: lighter;
+    margin-bottom: 10px;
+    display: block;
+}
+.confirm{ color : green !important; }
+.error{ color : red !important; }
+.pwResetP{
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+#memberPwConfirm, #memberPw {
+    width: 550px;
+    height: 42px;
+    border: 1px solid #C5C5C5;
+    border-radius: 5px;
+    padding: 8px
+}
+#currentPw{
     width: 550px;
     height: 42px;
     border: 1px solid #C5C5C5;
     border-radius: 5px;
     padding: 8px;
     margin-bottom: 10px;
-}
-.current-password>p,.new-password>p,.new-password-check>p,.password-for-secession>p,.terms-for-secession>p{
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-/* 비밀번호 변경 */
-.passwordcorrect{
-    color: green; font-size: 10px; margin-top: 4px;
-    display: none;
 }
 
 /* 회원 탈퇴 약관 */

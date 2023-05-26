@@ -210,7 +210,7 @@ public class MypageController {
 		
 	    updateMember.setMemberNo(loginMember.getMemberNo());
 
-	    List<String> selectedInterestList = Arrays.asList(interestArray);
+	    
 
 	    // 닉네임, url 수정
 	    int infoResult = service.updateInfo(updateMember);
@@ -255,36 +255,33 @@ public class MypageController {
 	    
 	    
 
-	    
-	    
-		/* *** 관심분야 *** */
-		// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
-		int interestListDelete =  service.interestListDeleteAll(loginMember.getMemberNo());
-		
-		// 체크된 interestList 삽입
-		for(String interest : selectedInterestList) {
-		 
-			 Map<String, Object> interestMap = new HashMap<>();
+	    if (interestArray != null && interestArray.length > 0) {
+		    List<String> selectedInterestList = Arrays.asList(interestArray);
+			/* *** 관심분야 *** */
+			// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+			int interestListDelete =  service.interestListDeleteAll(loginMember.getMemberNo());
+			
+			// 체크된 interestList 삽입
+			for(String interest : selectedInterestList) {
 			 
-			 interestMap.put("interestsNo", interest); 
-			 interestMap.put("memberNo", loginMember.getMemberNo());
-			  
-//			 System.out.println("interestMap : " + interestMap);
-		 
-			 int result = service.insertNewInterestList(interestMap); 
-		 }
-		
-		
-
-
-		 
-		
+				 Map<String, Object> interestMap = new HashMap<>();
+				 
+				 interestMap.put("interestsNo", interest); 
+				 interestMap.put("memberNo", loginMember.getMemberNo());
+				  
+		//			 System.out.println("interestMap : " + interestMap);
+			 
+				 int result = service.insertNewInterestList(interestMap); 
+			 }
+	    }else {
+	    	// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+	    	int interestListDelete =  service.interestListDeleteAll(loginMember.getMemberNo());
+	    }
 
 	    ra.addFlashAttribute("message", message);
 
 	    return "redirect:/mypage/" + loginMember.getMemberNo();
-	}
-
+	}	
 	
 	
 	// 프로필 편집 memberInfo, memberCareer, memberCertificate
@@ -298,10 +295,6 @@ public class MypageController {
 			, RedirectAttributes ra
 			, HttpSession session) {
 		
-		
-		
-		List<String> selectedtechList = Arrays.asList(techArray);
-		List<String> selectedSnsList = Arrays.asList(SNSArray);
 		List<String> selectedSnsAddress = Arrays.asList(SNSAddress);
 		
 //		System.out.println(selectedSnsList); -> [4, 5]
@@ -334,54 +327,61 @@ public class MypageController {
 		}
 		
 		
-		
-		/* *** 지식/기술 리스트 *** */
-		// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
-		int techListDelete =  service.techListDeleteAll(loginMember.getMemberNo());
+		if (techArray != null && techArray.length > 0) {
+			List<String> selectedtechList = Arrays.asList(techArray);
+			/* *** 지식/기술 리스트 *** */
+			// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+			int techListDelete =  service.techListDeleteAll(loginMember.getMemberNo());
+			
+			// 체크된 techList 삽입
+			for(String tech : selectedtechList) {	
 				
-		
-		// 체크된 techList 삽입
-		for(String tech : selectedtechList) {	
-			
-			Map<String, Object> techMap = new HashMap<>();
-			
-			techMap.put("techNo", tech);
-			techMap.put("memberNo", loginMember.getMemberNo());
-			
-//			System.out.println("techMap : " + techMap); -> {memberNo=50, techNo=5}, {memberNo=50, techNo=9}
-			
-			int result = service.insertNewTechList(techMap);
+				Map<String, Object> techMap = new HashMap<>();
+				
+				techMap.put("techNo", tech);
+				techMap.put("memberNo", loginMember.getMemberNo());
+				
+	//			System.out.println("techMap : " + techMap); -> {memberNo=50, techNo=5}, {memberNo=50, techNo=9}
+				
+				int result = service.insertNewTechList(techMap);
+			}
+		}else {
+			// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+			int techListDelete =  service.techListDeleteAll(loginMember.getMemberNo());
 		}
 		
-		
-		
-		/* *** SNS 리스트 *** */
-		// 선택한 SNSImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
-		int snsListDelete =  service.snsListDeleteAll(loginMember.getMemberNo());
+		if (SNSArray != null && SNSArray.length > 0) {
+			List<String> selectedSnsList = Arrays.asList(SNSArray);
+			/* *** SNS 리스트 *** */
+			// 선택한 SNSImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+			int snsListDelete =  service.snsListDeleteAll(loginMember.getMemberNo());
+					
+			
+			// 체크된 snsList 삽입
+			for(String sns : selectedSnsList) {	
 				
-		
-		// 체크된 snsList 삽입
-		for(String sns : selectedSnsList) {	
-			
-			Map<String, Object> snsMap = new HashMap<>();
-			  
-			snsMap.put("snsNo", sns);
-			snsMap.put("memberNo", loginMember.getMemberNo());
-			
-			
-			SNS s = new SNS();
-			s.setSnsNo(Integer.parseInt(sns));
-			s.setMemberNo(loginMember.getMemberNo());
-			
-			String addr = selectedSnsAddress.get(s.getSnsNo() -1);
-			
-			s.setSnsAddress(addr);
-			
-//			System.out.println("snsMap : " + snsMap);
-			
-			int result = service.insertNewSnsList(s);
+				Map<String, Object> snsMap = new HashMap<>();
+				  
+				snsMap.put("snsNo", sns);
+				snsMap.put("memberNo", loginMember.getMemberNo());
+				
+				
+				SNS s = new SNS();
+				s.setSnsNo(Integer.parseInt(sns));
+				s.setMemberNo(loginMember.getMemberNo());
+				
+				String addr = selectedSnsAddress.get(s.getSnsNo() -1);
+				
+				s.setSnsAddress(addr);
+				
+	//			System.out.println("snsMap : " + snsMap);
+				
+				int result = service.insertNewSnsList(s);
+			}
+		}else {
+			// 선택한 SNSImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+			int snsListDelete =  service.snsListDeleteAll(loginMember.getMemberNo());
 		}
-		
 		
 		
 		
@@ -456,7 +456,7 @@ public class MypageController {
 		
 		}else {
 			message = "현재 비밀번호가 일치하지 않습니다.";
-			path += "changePw";
+			path += "myPageModi";
 		}
 		
 		ra.addFlashAttribute("message", message);

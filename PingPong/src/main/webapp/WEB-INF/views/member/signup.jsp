@@ -38,7 +38,7 @@
                 <p>비밀번호</p>
                 <input type="password" placeholder="8글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호" name="memberPw" autocomplete="off" id="memberPw"> <br>
                 <span class="pwInconsistency signUp-message" id="pwMessage1">
-                    6글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호를 입력해 주세요.
+                    8글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호를 입력해 주세요.
                 </span>
             </div>
     

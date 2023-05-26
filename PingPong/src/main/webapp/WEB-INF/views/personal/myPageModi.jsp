@@ -246,22 +246,25 @@
 
                         <!-- 현재 비밀번호 -->
                         <div class="current-password"> 
-                            <p>현재 비밀번호</p>
-                            <input type="password" name="currentPw" id="currentPw" placeholder="8자 이상">
+                            <p class="pwResetP">현재 비밀번호</p>
+                            <input type="password" name="currentPw" id="currentPw" placeholder="현재 비밀번호">
                         </div>
 
                         <!-- 새 비밀번호 -->
-                        <div class="new-password"> 
-                            <p>새 비밀번호</p>
-                            <input type="password" name="newPw" id="newPw" placeholder="8자 이상">
+                        <div class="signup-input-password">
+                            <p class="pwResetP">비밀번호</p>
+                            <input type="password" placeholder="8글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호" name="newPw" autocomplete="off" id="memberPw"> <br>
+                            <span class="pwInconsistency signUp-message" id="pwMessage1">
+                                8글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호를 입력해 주세요.
+                            </span>
                         </div>
-
-                        <!-- 새 비밀번호 확인 -->
-                        <div class="new-password-check"> 
-                            <p>새 비밀번호 확인</p>
-                            <input type="password" name="newPwConfirm" id="newPwConfirm" placeholder="8자 이상" autocomplete="off" required>
-                            <button class="password-change" id="changePwBtn" type="button">비밀번호 변경</button>
-                        </div> 
+                        
+                        <div class="signup-password-check">
+                            <p class="pwResetP">비밀번호 확인</p>
+                            <input type="password" placeholder="비밀번호 재입력"  autocomplete="off" id="memberPwConfirm"> <br>
+                            <span class="pwInconsistency signUp-message" id="pwMessage2"></span>
+                        </div>
+                        <button class="password-change">비밀번호 변경</button>
                     </div>     
                 </form>
 
