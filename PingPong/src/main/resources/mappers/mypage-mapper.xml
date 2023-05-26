@@ -89,6 +89,13 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	<!-- 프로필 기본 이미지 수정 -->
+	<update id="updateBasicProfile">
+		UPDATE "MEMBER_PROFILE" SET
+		PROFILE_IMG = '/resources/images/profileImage/basicUserProfile.png'
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
 	<!-- 배경화면 수정 -->
 	<update id="backgroundUpdate">
 		UPDATE "MEMBER_PROFILE" SET
@@ -226,11 +233,14 @@
 	</select>
 	
 	<!-- snsURL COUNT -->
+	<!--  
 	<select id="selectSNSAddress" resultType="_int">
 		SELECT COUNT(*)
 		FROM "MEMBER_SNS" 
-		WHERE SNS_ADDRESS IS NOT NULL
+		WHERE SNS_ADDRESS IS NULL
+		AND MEMBER_NO = #{memberNo}
 	</select>
+	-->
 	
 	<!-- snsURL UPDATE -->
 	<update id="updateSNSAddress">
@@ -249,7 +259,7 @@
 	
 	<!-- 선택한 snsList의 URL 주소 (링크) -->
 	<select id="selectSNSAddressList" resultMap="SNS_rm">
-		SELECT SNS_ADDRESS, MEMBER_NO
+		SELECT SNS_NO, SNS_ADDRESS, MEMBER_NO
 		FROM MEMBER_SNS 
 		WHERE MEMBER_NO = #{memberNo}
 	</select>

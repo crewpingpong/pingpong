@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -80,4 +81,30 @@ public class AlarmController {
 //		System.out.println(meFollowList);
 		return meFollowList;
 	}
+	
+	// 내가 팔로우 하는 사람 팔로우 취소
+	@DeleteMapping("/unFollow")
+	@ResponseBody
+	public int unFollow(@SessionAttribute("loginMember") Member loginMember
+			,@RequestBody Follow follow){
+		
+
+		follow.setMemberNo(loginMember.getMemberNo());
+		
+		return service.unfollow2(follow);
+		 
+	}
+	
+	// 나를 팔로우 하는 사람 팔로우 취소 처리
+	@DeleteMapping("/followCancel")
+	@ResponseBody
+	public int followCancel(@SessionAttribute("loginMember") Member loginMember
+			,@RequestBody Follow follow){
+		
+		follow.setFollowerNo(loginMember.getMemberNo());
+		
+		return service.unfollow2(follow);
+		
+	}
+	
 }

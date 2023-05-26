@@ -15,11 +15,15 @@ searchicon.addEventListener("click",()=>{
         // alarmIconRedColor.classList.add("alarm-icon-redColor");
         // alarmModBox.classList.add("alarm-icon-redColor");
     }
-
+    let alarmModBox = document.querySelector("#alarmModBox");
     searchicon.style.display="none";
     if(document.querySelector(".signBtn") != null){
         document.querySelector(".signBtn").style.display="none";
     }
+    if(!alarmModBox.classList.contains("alarm-icon-redColor")){ // 알람 닫기
+        alarmModBox.classList.add("alarm-icon-redColor");
+    }
+        
     searchbox.style.display="flex"; // 검색 박스 커지기
 
 });
@@ -54,12 +58,14 @@ let alarmModBox;
 document.addEventListener("DOMContentLoaded",()=>{
     let alarmIcon = document.querySelector(".basicheart");
     let alarmModBox = document.querySelector("#alarmModBox");
-    alarmIcon.addEventListener("click", () => {
-        alramFn();
-        alarmModBox.classList.toggle("alarm-icon-redColor");
-        // if(!alarmModBox.classList.contains("alarm-icon-redColor")){
-        // }
-    });
+    if(alarmIcon!=null){
+        alarmIcon.addEventListener("click", () => {
+            alramFn();
+            alarmModBox.classList.toggle("alarm-icon-redColor");
+            // if(!alarmModBox.classList.contains("alarm-icon-redColor")){
+            // }
+        });
+    }
 })
 
 
@@ -87,6 +93,12 @@ const nameArr = ['kimchanhee', 'leenahyun', 'leesangyun', 'choigeuntae', 'parkja
 openHam.addEventListener("click",() => {
     mainnav.style.display = "block";
     searchbox.style.display="none";
+
+    let alarmModBox = document.querySelector("#alarmModBox");
+    if(!alarmModBox.classList.contains("alarm-icon-redColor")){ // 알람 닫기
+        alarmModBox.classList.add("alarm-icon-redColor");
+    }
+        
     if(mainnav.style.display === "block"){
         // 네브 오른쪽 회색 배경을 누르면  nav의 display가 none로 변경
         document.addEventListener("click", e=>{
@@ -94,7 +106,9 @@ openHam.addEventListener("click",() => {
                 mainnav.style.display = "none";
                 navmore.style.display="none"; 
                 logModContainer.style.display = "none";
+                let siteInfoMod = document.querySelector(".siteInfoModContainer");
                 if(siteInfoMod != null){
+                    if(siteInfoMod.style.display=="flex")
                     siteInfoMod.style.display="none";
                 }
                 searchModContainer.style.display = "none";
@@ -117,6 +131,13 @@ openHam.addEventListener("click",() => {
     if(navloginBtn != null){
         navloginBtn.addEventListener("click", ()=>{
             logModContainer.style.display = "block";
+
+            if(siteInfoMod != null){
+                siteInfoMod.style.display="none";
+            }
+            if(searchModContainer!= null){ // 검색 박스 닫기
+                searchModContainer.style.display = "none";
+            }
         });
         const navloginclBtn = document.getElementById("navloginclBtn");
         navloginclBtn.addEventListener("click", () => {
@@ -173,6 +194,12 @@ openHam.addEventListener("click",() => {
 
     siteInfoClick.addEventListener("click",()=>{
         siteInfoMod.style.display="flex";
+        if(logModContainer.style.display = "block"){
+            logModContainer.style.display = "none";
+        }
+        if(searchModContainer!= null){ // 검색 박스 닫기
+            searchModContainer.style.display = "none";
+        }   
         siteInfoModX.addEventListener("click",()=>{
             siteInfoMod.style.display="none";
         })
@@ -203,12 +230,13 @@ moreicon.addEventListener("click",()=>{
 // 검색 x버튼 누르면 안에 있는 값 지우기
 const hamseachboxX = document.querySelector('div.seachbox > svg'); // 햄버거 검색 X 버튼
 const navseachboxX = document.querySelector('#searchModContainer > div:nth-child(2) > div > svg'); // 햄버거 검색 X 버튼
+const navSearchBox2 = document.querySelector('#navSearchBox');
 
 hamseachboxX.addEventListener("click",()=>{
     headerOpenSearchBox.value="";
 });
 navseachboxX.addEventListener("click",()=>{
-    seachModInnerContent.value="";
+    navSearchBox2.value="";
 });
 
 // 햄버거창 검색버튼 눌렀을 때 검색 창
@@ -216,6 +244,16 @@ const navSearch = document.querySelector(".navSearch");
 const searchModContainer = document.querySelector("#searchModContainer");
 navSearch.addEventListener("click", ()=>{
     searchModContainer.style.display = "block";
+    let siteInfoMod = document.querySelector(".siteInfoModContainer");
+    if(siteInfoMod != null){ // 사이트 정보 닫기
+        siteInfoMod.style.display="none";
+    }
+
+    if(logModContainer != null){ // 비회원 모달 닫기
+        logModContainer.style.display = "none";
+    }
+    
+
 });
 const navSearchclBtn = document.getElementById("navSearchclBtn");
 navSearchclBtn.addEventListener("click", () => {
@@ -229,7 +267,7 @@ function alramFn(){ // 알람 메세지 함수
     
     sendMessageList = document.querySelector(".message-Box-send .messageList");
     alarmModBoxList = document.querySelector("#alarmModBox .alarmList");
-    sendMessageList.innerHTML=""; // 내부 내용 모두 없애기
+    alarmModBoxList.innerHTML=""; // 내부 내용 모두 없애기
 
     fetch("/alarm/send")
     .then(resp => resp.json()) // 응답 객체를 매개변수로 얻어와 파싱
@@ -249,7 +287,7 @@ function alramFn(){ // 알람 메세지 함수
             // 이미지 요소 생성
             const image = document.createElement("img");
             if(alarm.sendProfile!=null){
-                image.src = alarm.sendProfile;
+                image.setAttribute('src', alarm.sendProfile);
             }
 
             // 이미지를 첫 번째 자식 요소에 추가

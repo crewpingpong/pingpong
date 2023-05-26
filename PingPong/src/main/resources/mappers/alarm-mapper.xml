@@ -80,6 +80,13 @@
 		AND FOLLOWER_NO = #{followerNo}
 	</delete>
 	
+	<!-- 팔로우 삭제 -->
+	<delete id="unfollow2">
+		DELETE FROM FOLLOW
+		WHERE MEMBER_NO = #{followerNo}
+		AND FOLLOWER_NO = #{memberNo}
+	</delete>
+	
 	
 	<!-- 알람 메세지를 보낸 사람의 프로필 이미지 조회 -->
 	<select id="selectProfileImage" resultType="string">
@@ -108,7 +115,7 @@
 	<!-- 최근 알람 20개 조회 -->
 	<select id="alarmList" resultMap="notice_rm">
 		SELECT NOTICE_NO, NOTICE_COMENT, ELAPSED_TIME, MEMBER_NO,
-			   MEMBER_NICKNAME , SEND_NO, SEND_PROFILE
+			   MEMBER_NICKNAME , SEND_NO, SEND_PROFILE AS "PROFILE_IMG"
 		FROM NOTICE
 		JOIN "MEMBER" USING (MEMBER_NO)
 		WHERE MEMBER_NO = #{memberNo}

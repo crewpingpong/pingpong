@@ -76,11 +76,11 @@ public interface AlarmService {
 //	int follow(Follow follow);
 //
 //
-//	/** 팔로우 취소
-//	 * @param follow
-//	 * @return
-//	 */
-//	int unfollow(Follow follow);
+	/** 팔로우 취소
+	 * @param follow
+	 * @return
+	 */
+	int unfollow2(Follow follow);
 
 
 

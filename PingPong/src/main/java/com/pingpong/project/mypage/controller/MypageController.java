@@ -51,7 +51,7 @@ public class MypageController {
 	private AlarmService alarmService;
 	
 	// 프로필 조회
-	@GetMapping("/{memberNo}")
+	@GetMapping("/{memberNo:[0-9]+}")
 	public String personal(
 			@PathVariable("memberNo") int memberNo
 			, Model model
@@ -101,12 +101,12 @@ public class MypageController {
 		// 선택한 snsImgList 조회 (아이콘)
 		List<SNS> checkSNSImgList = service.selectCheckSNSImgList(loginMember.getMemberNo());
 		  
-//		List<String> snsImgList = new ArrayList<>();
-//		
-//		for (SNS sns : checkSNSImgList) {
-//			snsImgList.add(sns.getSnsImg());
-//		}
-//		model.addAttribute("snsImgList", snsImgList);
+		List<String> snsImgList = new ArrayList<>();
+		
+		for (SNS sns : checkSNSImgList) {
+			snsImgList.add(sns.getSnsImg());
+		}
+		model.addAttribute("snsImgList", snsImgList);
 		
 //		System.out.println(snsImgList);
 		
@@ -118,12 +118,14 @@ public class MypageController {
 	    
 	    List<String> snsLinkAddress = new ArrayList<>();
 	    
+	    model.addAttribute("snsURL", snsURL);
 //	    System.out.println(snsURL);
-//	    System.out.println(snsLinkAddress);
-	
-	    
+//	
+//	    
 	    for(SNS sns : snsURL) {
 	    	snsLinkAddress.add(sns.getSnsAddress());
+	    	
+//	    	System.out.println(snsLinkAddress);
 	    }
 	    model.addAttribute("snsLinkAddress", snsLinkAddress);
 	    
@@ -206,9 +208,11 @@ public class MypageController {
 									, RedirectAttributes ra
 									, HttpSession session) throws IllegalStateException, IOException {
 		
+//		System.out.println(profileImage);
+		
 	    updateMember.setMemberNo(loginMember.getMemberNo());
 
-	    List<String> selectedInterestList = Arrays.asList(interestArray);
+	    
 
 	    // 닉네임, url 수정
 	    int infoResult = service.updateInfo(updateMember);
@@ -217,7 +221,9 @@ public class MypageController {
 	    String filePath = session.getServletContext().getRealPath(webPath);
 
 	    String message = null;
+	    
 	    if (profileImage != null && !profileImage.isEmpty()) {
+	    	
 	        String fileName = profileImage.getOriginalFilename();
 	        String reName = Util.fileRename(fileName);
 	        
@@ -239,6 +245,9 @@ public class MypageController {
 	        
 	    } else {
 	    	
+	    	// 프로필 이미지 기본
+	    	int profileResult = service.updateBasicProfile(loginMember.getMemberNo());
+	    	
 	        if (infoResult > 0) {
 	            message = "회원 정보가 수정되었습니다.";
 
@@ -253,36 +262,33 @@ public class MypageController {
 	    
 	    
 
-	    
-	    
-		/* *** 관심분야 *** */
-		// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
-		int interestListDelete =  service.interestListDeleteAll(loginMember.getMemberNo());
-		
-		// 체크된 interestList 삽입
-		for(String interest : selectedInterestList) {
-		 
-			 Map<String, Object> interestMap = new HashMap<>();
+	    if (interestArray != null && interestArray.length > 0) {
+		    List<String> selectedInterestList = Arrays.asList(interestArray);
+			/* *** 관심분야 *** */
+			// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+			int interestListDelete =  service.interestListDeleteAll(loginMember.getMemberNo());
+			
+			// 체크된 interestList 삽입
+			for(String interest : selectedInterestList) {
 			 
-			 interestMap.put("interestsNo", interest); 
-			 interestMap.put("memberNo", loginMember.getMemberNo());
-			  
-//			 System.out.println("interestMap : " + interestMap);
-		 
-			 int result = service.insertNewInterestList(interestMap); 
-		 }
-		
-		
-
-
-		 
-		
+				 Map<String, Object> interestMap = new HashMap<>();
+				 
+				 interestMap.put("interestsNo", interest); 
+				 interestMap.put("memberNo", loginMember.getMemberNo());
+				  
+		//			 System.out.println("interestMap : " + interestMap);
+			 
+				 int result = service.insertNewInterestList(interestMap); 
+			 }
+	    }else {
+	    	// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+	    	int interestListDelete =  service.interestListDeleteAll(loginMember.getMemberNo());
+	    }
 
 	    ra.addFlashAttribute("message", message);
 
 	    return "redirect:/mypage/" + loginMember.getMemberNo();
-	}
-
+	}	
 	
 	
 	// 프로필 편집 memberInfo, memberCareer, memberCertificate
@@ -296,10 +302,6 @@ public class MypageController {
 			, RedirectAttributes ra
 			, HttpSession session) {
 		
-		
-		
-		List<String> selectedtechList = Arrays.asList(techArray);
-		List<String> selectedSnsList = Arrays.asList(SNSArray);
 		List<String> selectedSnsAddress = Arrays.asList(SNSAddress);
 		
 //		System.out.println(selectedSnsList); -> [4, 5]
@@ -332,82 +334,61 @@ public class MypageController {
 		}
 		
 		
-		
-		/* *** 지식/기술 리스트 *** */
-		// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
-		int techListDelete =  service.techListDeleteAll(loginMember.getMemberNo());
+		if (techArray != null && techArray.length > 0) {
+			List<String> selectedtechList = Arrays.asList(techArray);
+			/* *** 지식/기술 리스트 *** */
+			// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+			int techListDelete =  service.techListDeleteAll(loginMember.getMemberNo());
+			
+			// 체크된 techList 삽입
+			for(String tech : selectedtechList) {	
 				
-		
-		// 체크된 techList 삽입
-		for(String tech : selectedtechList) {	
-			
-			Map<String, Object> techMap = new HashMap<>();
-			
-			techMap.put("techNo", tech);
-			techMap.put("memberNo", loginMember.getMemberNo());
-			
-//			System.out.println("techMap : " + techMap); -> {memberNo=50, techNo=5}, {memberNo=50, techNo=9}
-			
-			int result = service.insertNewTechList(techMap);
-		}
-		
-		
-		
-		/* *** SNS 리스트 *** */
-		// 선택한 SNSImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
-		int snsListDelete =  service.snsListDeleteAll(loginMember.getMemberNo());
+				Map<String, Object> techMap = new HashMap<>();
 				
-		
-		// 체크된 snsList 삽입
-		for(String sns : selectedSnsList) {	
-			
-			Map<String, Object> snsMap = new HashMap<>();
-			
-			snsMap.put("snsNo", sns);
-			snsMap.put("memberNo", loginMember.getMemberNo());
-			
-//			System.out.println("snsMap : " + snsMap);
-			
-			int result = service.insertNewSnsList(snsMap);
-		}
-		
-		
-		/* *** update snsAddress *** */
-		int result = service.selectSNSAddress(loginMember.getMemberNo());
-		
-//		System.out.println(selectedSnsAddress); -> [instagram, , sdf, , instagram, ]
-			
-		// insert snsAddress
-		if(result == 6) {
-			
-			for(String sns : selectedSnsAddress) {	
+				techMap.put("techNo", tech);
+				techMap.put("memberNo", loginMember.getMemberNo());
 				
-				Map<String, Object> snsAddressMap = new HashMap<>();
+	//			System.out.println("techMap : " + techMap); -> {memberNo=50, techNo=5}, {memberNo=50, techNo=9}
 				
-				snsAddressMap.put("memberNo", loginMember.getMemberNo());
-				snsAddressMap.put("snsAddress", sns);
-				
-//				System.out.println("snsAddressMap : " + snsAddressMap);
-				
-				int insertResult = service.insertSNSAddress(snsAddressMap);
+				int result = service.insertNewTechList(techMap);
 			}
+		}else {
+			// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+			int techListDelete =  service.techListDeleteAll(loginMember.getMemberNo());
 		}
 		
-		// update snsAddress
-		else {
-			for(String sns : selectedSnsAddress) {	
+		if (SNSArray != null && SNSArray.length > 0) {
+			List<String> selectedSnsList = Arrays.asList(SNSArray);
+			/* *** SNS 리스트 *** */
+			// 선택한 SNSImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+			int snsListDelete =  service.snsListDeleteAll(loginMember.getMemberNo());
+					
+			
+			// 체크된 snsList 삽입
+			for(String sns : selectedSnsList) {	
 				
-				Map<String, Object> snsAddressMap = new HashMap<>();
+				Map<String, Object> snsMap = new HashMap<>();
+				  
+				snsMap.put("snsNo", sns);
+				snsMap.put("memberNo", loginMember.getMemberNo());
 				
-				snsAddressMap.put("memberNo", loginMember.getMemberNo());
-				snsAddressMap.put("snsAddress", sns);
 				
-				System.out.println("snsAddressMap : " + snsAddressMap);
+				SNS s = new SNS();
+				s.setSnsNo(Integer.parseInt(sns));
+				s.setMemberNo(loginMember.getMemberNo());
 				
-				int updateResult = service.updateSNSAddress(snsAddressMap);
+				String addr = selectedSnsAddress.get(s.getSnsNo() -1);
+				
+				s.setSnsAddress(addr);
+				
+	//			System.out.println("snsMap : " + snsMap);
+				
+				int result = service.insertNewSnsList(s);
 			}
+		}else {
+			// 선택한 SNSImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
+			int snsListDelete =  service.snsListDeleteAll(loginMember.getMemberNo());
 		}
-		
 		
 		
 		
@@ -437,7 +418,7 @@ public class MypageController {
 		
 		}else {
 			message = "현재 비밀번호가 일치하지 않습니다.";
-			path += "changePw";
+			path += "myPageModi";
 		}
 		
 		ra.addFlashAttribute("message", message);

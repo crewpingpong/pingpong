@@ -162,10 +162,10 @@ public interface MypageService {
 	List<SNS> seletCheckSNSList(int memberNo);
 
 	/** 선택된 SNSList 삽입
-	 * @param snsMap
+	 * @param s
 	 * @return
 	 */
-	int insertNewSnsList(Map<String, Object> snsMap);
+	int insertNewSnsList(SNS s);
 	
 	/** SNSList 전체 삭제 후 SNSList 삽입 진행
 	 * @param memberNo
@@ -203,46 +203,17 @@ public interface MypageService {
 	 */
 	List<SNS> selectSNSAddressList(int memberNo);
 
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/** 선택한 SNSList의 URL 조회
+	/** 프로필 이미지 기본
 	 * @param memberNo
 	 * @return
 	 */
-//	List<SNS> selectCheckSNSURL(int memberNo);
+	int updateBasicProfile(int memberNo);
+
+
+
 	
-	/** 선택한 snsList의 URL 주소 (링크)
-	 * @param memberNo
-	 * @return
-	 */
-//	List<SNS> selectSNSAddress(int memberNo);
-
-	/** update snsAddress
-	 * @param memberNo
-	 * @return
-	 */
-//	int updateSNSAddress(int memberNo);
-
-	/** sns 주소 COUNT
-	 * @return
-	 */
-//	int selectSNSAddress();
-
-
-
-
-
+	
+	
 	
 	
 	
