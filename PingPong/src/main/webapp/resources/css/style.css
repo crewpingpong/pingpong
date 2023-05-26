@@ -48,7 +48,8 @@ header{
 header .logo{position: absolute; left: 50%; transform: translateX(-100px); user-select: none;}
 header .logo img{width: 200px; }
 header .menu_icon{margin-left: 50px;}
-header .alarm_icon{margin-right: 20px;}
+header .alarm_icon{margin-right: 20px; height: 40px;}
+header .search_icon{height: 40px;}
 
 header .alarm_search_box{
     margin-right: 50px; display: flex; position: relative; 

@@ -213,3 +213,16 @@
     align-items: center; float: right;
 }
 
+.NewWriteTextArea{
+    padding: 8px; height: 300px;
+}
+
+#NewWriteTextArea{
+    height: 30px; padding: 8px; border-radius: 10px;
+    margin: 12px;
+}
+.cta{
+    width: 50px; height: 20px; border-radius: 10px;
+    background-color: #5286DC; color: #fff;
+} 
+.upload-form-hashtag{margin: 12px;}
