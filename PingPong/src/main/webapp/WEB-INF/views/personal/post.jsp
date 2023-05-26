@@ -488,7 +488,7 @@ ${mypage.memberCareer}
                 <p class="BoardIconInfo">공유</p>
             </div>
 
-            <div class = "BoardIcon"> <!-- 메세지 -->
+            <%-- <div class = "BoardIcon"> <!-- 메세지 -->
                 <a href="#" class="BoardIconMessage">
                     <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="30" cy="30" r="30" fill="white"/>
@@ -496,10 +496,11 @@ ${mypage.memberCareer}
                     </svg>
                 </a>
                 <p class="BoardIconInfo">메세지</p>
-            </div>
+            </div> --%>
 
             <!-- 신고 눌렀을 때 신고할 수 있는 창 출력 -->
             <form action=""></form>
+            <%-- <c:if test="${mypage.memberNo != loginMember.memberNo}" > --%>
             <div class="BoardIcon"> <!-- 신고 -->
                 <a href="#" class="BoardIconReport">
                     <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -511,8 +512,8 @@ ${mypage.memberCareer}
                 </a>
                 <p class="BoardIconInfo">신고</p>
             </div>
-
-        
+            <%-- </c:if> --%>
+            <%-- <c:if test="${mypage.memberNo == loginMember.memberNo}" > --%>
             <div class="BoardIcon editing"> <!-- 게시글 편집 -->
                 <input type="checkbox" id="editIcon">
                     <label for="editIcon">
@@ -525,7 +526,8 @@ ${mypage.memberCareer}
                     </label>    
                 <p class="BoardIconInfo">편집</p>
             </div>
-
+            <%-- </c:if> --%>
+            <%-- <c:if test="${mypage.memberNo == loginMember.memberNo}" > --%>
             <div class="BoardIcon boardDeleteBtn editing"> <%-- 게시글 삭제 --%>
                 <a href="#">
                     <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -537,7 +539,7 @@ ${mypage.memberCareer}
                 </a>
                 <p class="BoardIconInfo">삭제</p>
             </div>
-            
+            <%-- </c:if> --%>
 
         </div> 
 
@@ -685,6 +687,7 @@ ${mypage.memberCareer}
                                     
                                     <textarea class="NewWriteTextArea" name="boardContent" maxlength="2000" cols="30" rows="10" placeholder="문구 입력.."></textarea>
                                     <!-- <div class="NewWriteTextArea" id="hashtag-input" contenteditable="true" role="textbox" spellcheck="true" data-lexical-editor="true" style="user-select: text; white-space: pre-wrap; word-break: break-word;"></div> -->
+                                    <div class="countBox"><span class="NewWriteTextAreaCount">0</span><span>/2000</span></div>
                                     <div class="upload-form-hashtag" align="center">
                                         <input type="text" placeholder="해시태그를 추가해보세요!" id="hashtag" name="hashtag">
                                         <button type="button" class="cta blue" onclick="addHashtag()">추가</button>
@@ -693,7 +696,6 @@ ${mypage.memberCareer}
                                             <%-- 해시태그 목록 --%>
                                         </ul>
                                     </div>
-                                    <div class="countBox"><span class="NewWriteTextAreaCount">0</span><span>/2000</span></div>
                                     <div class="hashtagList" id="hashtagList"></div>
                                 </div>
                                 <div class="addLink">
