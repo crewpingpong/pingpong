@@ -304,36 +304,39 @@
             <li>
                 <span>이나현</span> <span>honabong@naver.com</span>
                 <pre>
-담당 : 프론트 엔드, 데이터 베이스 설계
-Java를 이용한 백엔드 연결            
-                </pre>
-            </li>
-            <li>
-                <span>박재경</span> <span>worudeee@naver.com</span>
-                <pre>
-담당 : 프론트 엔드, 데이터 베이스 설계
-Java를 이용한 백엔드 연결            
+담당 : 홈페이지 디자인 
+프론트엔드 : 개인 홈 , 헤더, 네브 모달창
+백엔드 : 메세지, 알람, 팔로우, 메인홈           
                 </pre>
             </li>
             <li>
                 <span>이상윤</span> <span>dltkddbs0714@naver.com</span>
                 <pre>
-담당 : 프론트 엔드, 데이터 베이스 설계
-Java를 이용한 백엔드 연결                   
+담당 : 프론트 게시글 상세
+백엔드 관리자 페이지, 게시글 신고,
+고객센터 1:1 문의                   
                 </pre>
             </li>
             <li>
                 <span>김찬희</span> <span>cksgml0156@naver.com</span>
                 <pre>
-담당 : 프론트 엔드, 데이터 베이스 설계
-Java를 이용한 백엔드 연결        
+담당 : 프론트 고객센터
+백엔드 게시글 업로드·삭제·편집, 댓글, 
+해시태그, 좋아요, 북마크, 배경화면      
                 </pre>
             </li>
             <li>
                 <span>최근태</span> <span>ckcc0813@gmail.com</span>
                 <pre>
-담당 : 프론트 엔드, 데이터 베이스 설계
-Java를 이용한 백엔드 연결     
+담당 : 프론트 메인, 프로필, 관리자
+백엔드 로그인, 회원가입, 내정보 수정, 검색    
+                </pre>
+            </li>
+            <li>
+                <span>박재경</span> <span>worudeee@naver.com</span>
+                <pre>
+담당 : 프론트 회원가입, 로그인, 내 정보 수정
+백엔드 : 내 정보 수정          
                 </pre>
             </li>
         </ul>
