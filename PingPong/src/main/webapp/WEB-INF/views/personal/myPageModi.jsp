@@ -252,7 +252,7 @@
 
                         <!-- 새 비밀번호 -->
                         <div class="signup-input-password">
-                            <p class="pwResetP">비밀번호</p>
+                            <p class="pwResetP">새 비밀번호</p>
                             <input type="password" placeholder="8글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호" name="newPw" autocomplete="off" id="memberPw"> <br>
                             <span class="pwInconsistency signUp-message" id="pwMessage1">
                                 8글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호를 입력해 주세요.
@@ -260,7 +260,7 @@
                         </div>
                         
                         <div class="signup-password-check">
-                            <p class="pwResetP">비밀번호 확인</p>
+                            <p class="pwResetP">새 비밀번호 확인</p>
                             <input type="password" placeholder="비밀번호 재입력"  autocomplete="off" id="memberPwConfirm"> <br>
                             <span class="pwInconsistency signUp-message" id="pwMessage2"></span>
                         </div>
@@ -275,7 +275,7 @@
                         <!-- 현재 비밀번호 -->
                         <div class="password-for-secession"> 
                             <p>현재 비밀번호</p>
-                            <input type="password" name="memberPw" id="memberPw" minlength="6" placeholder="6자 이상">
+                            <input type="password" name="memberPw" id="secessionMemberPw" minlength="8" placeholder="8자 이상">
                         </div>
                         
                         <!-- 회원 탈퇴 약관 -->
