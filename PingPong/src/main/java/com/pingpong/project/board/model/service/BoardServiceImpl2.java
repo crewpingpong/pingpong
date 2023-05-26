@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pingpong.project.board.model.dao.BoardDAO2;
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.board.model.dto.BoardImage;
+import com.pingpong.project.board.model.dto.Declaration;
 import com.pingpong.project.board.model.dto.Hashtag;
 import com.pingpong.project.common.utility.Util;
 import com.pingpong.project.mypage.model.exception.FileUploadException;
@@ -94,6 +95,12 @@ public class BoardServiceImpl2 implements BoardService2 {
 	@Override
 	public int deleteBoard(String boardNo) {
 		return dao.deleteBoard(boardNo);
+	}
+	
+	// 게시글 신고 삽입
+	@Override
+	public int insertreport(Declaration declaration) {
+		return dao.insertreport(declaration);
 	}
 	
 	

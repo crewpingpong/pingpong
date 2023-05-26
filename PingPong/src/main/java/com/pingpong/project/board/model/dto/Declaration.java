@@ -14,5 +14,7 @@ public class Declaration {
 	private int boardNo;
 	private String indictmentContent;
 	private int memberNo;
+	private String reportTitle;
+	
 	
 }

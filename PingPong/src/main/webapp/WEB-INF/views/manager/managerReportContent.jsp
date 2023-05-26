@@ -80,7 +80,7 @@
                             <div class="respondent">신고한 게시글 번호 : <a href="/mypage/${declaration.memberNo}?boardNo=${declaration.boardNo}">${declaration.boardNo}</a></div>
                         </div>
                         <div>
-                            <input type="text" placeholder="회원이 작성한 신고 제목">
+                            <input type="text" value="${declaration.reportTitle}">
                         </div>
                         <div>
                             <textarea name="" id="" cols="30" rows="10" placeholder=" 신고 내용">${declaration.indictmentContent}</textarea>

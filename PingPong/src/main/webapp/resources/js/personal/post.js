@@ -132,7 +132,14 @@ const BoardIconReport = document.querySelector(".BoardIconReport").parentElement
 const BoardIconReportMod = document.querySelector(".BoardIconReportMod #grayBackground");
 const ReportModX = document.querySelector(".BoardIconReportMod #oneToOne>div>svg:nth-child(2)");
 
-BoardIconReport.addEventListener("click", () => {
+BoardIconReport.addEventListener("click", (e) => {
+    console.log(e.currentTarget);
+    const reportNo= e.currentTarget.parentElement.parentElement.children[0].children[1];
+    const reportBoardNo= reportNo.getAttribute("currentBoardNo");
+    console.log(reportBoardNo);
+    const boardNo = document.querySelector(".boardNo");
+    boardNo.setAttribute("value",reportBoardNo);
+
     BoardIconReportMod.style.display = "flex";
     ReportModX.addEventListener("click",()=>{
         BoardIconReportMod.style.display = "none";
@@ -148,8 +155,10 @@ const oneToOne = document.getElementById("oneToOne");
 function showModal(target){
     grayBack.style.display = "flex";
     document.addEventListener("mouseup", e=>{
+        // console.log(e.currentTarget);
         // if(e.target!==oneToOne){
         if(e.target==grayBack){
+            // e.currentTarget
             grayBack.style.display = "none";
             // document.getElementById("chooseFile").value = '';
             // document.getElementById("fileName").innerText = '';
@@ -262,6 +271,8 @@ function selectBoardList(boardNo){
         boardNumber = board.boardNo;
         boardMember = board.memberNo;
 
+        const BoardContainerright = document.querySelector(".BoardContainerright");
+        BoardContainerright.setAttribute("currentBoardNo",board.boardNo);
         document.querySelectorAll('.slide_item').forEach(function(slideItem) {
             slideItem.remove();
         });
@@ -298,6 +309,9 @@ function selectBoardList(boardNo){
         }
 
 
+        boardNumber = board.boardNo;
+        tempBoardNo = board.boardNo;
+        boardMember = board.memberNo;
 
         // 게시글 편집 버튼 나타나게 하기
         const editing = document.querySelectorAll(".editing");
@@ -1118,7 +1132,7 @@ for(let i=0;i<boardLike.length;i++){
                 }
             } 
             boardNumber = board.boardNo;
-
+            tempBoardNo = board.boardNo;
         })
         .catch(err => {
             console.log(err);
