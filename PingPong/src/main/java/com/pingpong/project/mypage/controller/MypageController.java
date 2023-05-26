@@ -460,7 +460,7 @@ public class MypageController {
 		// 탈퇴 실패
 		else {
 			message = "현재 비밀번호가 일치하지 않습니다";
-			path += "changePw";
+			path += "myPageModi";
 		}
 		
 		ra.addFlashAttribute("message", message);

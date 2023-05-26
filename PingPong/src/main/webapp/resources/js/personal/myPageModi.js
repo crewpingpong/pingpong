@@ -383,6 +383,15 @@ if (memberPw != null) {
             checkObj1ruewyehruewyeh.memberPw = false; // 빈칸 == 유효 X
             return;
         }
+        if (memberPwConfirm.value.trim().length == 0) {
+            memberPwConfirm.value = ""; // 띄어쓰지 못넣게 하기
+
+            pwMessage2.innerText = "";
+            pwMessage2.classList.remove("confirm", "error"); // 검정 글씨
+
+            checkObj1ruewyehruewyeh.memberPwConfirm = false; // 빈칸 == 유효 X
+            return;
+        }
 
         // 8~ 영문 소문자, 최소 1개의 숫자 혹은 특수 문자 포함
         const regEx = /^(?=.*[a-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-z\d$@$!%*#?&]{8,}$/;
