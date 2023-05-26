@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -95,22 +96,5 @@ public class BoardController {
     	return service.childCommentDelete(commentNo);
     }
     
-    //게시글 신고
-    @PostMapping("/board/reportContent")
-    public String reportContent(
-    		Declaration declaration
-    		,@SessionAttribute("loginMember") Member loginMember
-    		,String reportContent
-    		,String reportTitle
-    		,RedirectAttributes ra
-    		) {
-    	
-    	declaration.setMemberNo(loginMember.getMemberNo());
-    	
-    	
-    	int result = service.insertreport();
-    	
-    	return "redirect:/";
-    }
     
 }

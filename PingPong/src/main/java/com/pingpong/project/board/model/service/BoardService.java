@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.board.model.dto.Comment;
+import com.pingpong.project.board.model.dto.Declaration;
 import com.pingpong.project.board.model.dto.Hashtag;
 
 
@@ -77,10 +78,6 @@ public interface BoardService {
 	 */
 	int deleteHash(Map<String, Object> paramMap);
 
-	/** 게시글 신고 제출
-	 * @param paramMap
-	 * @return
-	 */
-	int insertreport(Map<String, Object> paramMap);
+	
 
 }

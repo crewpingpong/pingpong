@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pingpong.project.board.model.dto.Board;
+import com.pingpong.project.board.model.dto.Declaration;
 import com.pingpong.project.board.model.dto.Hashtag;
 import com.pingpong.project.board.model.service.BoardService2;
 import com.pingpong.project.member.model.dto.Member;
@@ -96,4 +97,36 @@ public class BoardController2 {
 		return "redirect:/mypage/"+memberNo;
 	}
 	
+	//게시글 신고
+    @PostMapping("/reportContent")
+    public String reportContent(
+    		Declaration declaration
+    		,@SessionAttribute("loginMember") Member loginMember
+    		,@RequestParam(value = "reportTitle") String reportTitle
+    		,RedirectAttributes ra
+    		,@RequestParam(value = "boardNo") int boardNo
+    		,@RequestParam(value = "indictmentContent") String indictmentContent
+    		) {
+    	
+    	declaration.setBoardNo(boardNo);
+    	declaration.setMemberNo(loginMember.getMemberNo());
+    	declaration.setReportTitle(reportTitle);
+    	declaration.setIndictmentContent(indictmentContent);
+    	
+    	int result = service.insertreport(declaration);
+
+    	System.out.println(result);
+    	
+    	String message = "";
+    	
+    	if(result>0) {
+    		message = "신고되었습니다.";
+    		ra.addFlashAttribute("message",message);
+    	}else {
+    		message = "신고에 실패했습니다";
+    		ra.addFlashAttribute("message",message);
+    	}
+    	return "redirect:/";
+    }
+    
 }

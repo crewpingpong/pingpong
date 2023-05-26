@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.board.model.dto.BoardImage;
+import com.pingpong.project.board.model.dto.Declaration;
 import com.pingpong.project.board.model.dto.Hashtag;
 
 @Repository
@@ -52,4 +53,13 @@ public class BoardDAO2 {
 	public int deleteBoard(String boardNo) {
 		return sqlSession.update("boardMapper.deleteBoard", boardNo);
 	}
+	
+	/** 게시글 신고 삽입
+	 * @param declaration
+	 * @return
+	 */
+	public int insertreport(Declaration declaration) {
+		return sqlSession.insert("boardMapper.insertreport",declaration);
+	}
+	
 }
