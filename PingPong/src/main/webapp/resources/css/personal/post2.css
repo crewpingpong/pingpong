@@ -214,7 +214,7 @@
 }
 
 .NewWriteTextArea{
-    padding: 8px; height: 300px;
+    padding: 8px; height: 200px;
 }
 
 #NewWriteTextArea{
@@ -222,8 +222,8 @@
     margin: 12px;
 }
 .cta{
-    width: 50px; height: 24px; border-radius: 10px;
-    background-color: #5286DC; color: #fff;
+    width: 50px; height: 24px; border-radius: 20px;
+    background-color: #5286DC; color: #fff; margin-left: 8px;
 } 
 .upload-form-hashtag{margin: 12px;}
 .new-borad-upload{
@@ -235,3 +235,39 @@
     width: 200px; height: 70px;
     font-weight: bold; font-size: 14px;
 }
+
+.hashList{
+    border: none; max-height: 100px; overflow: auto;
+}
+.addLink{margin-top: 40px;}
+.hashtag>button{
+    background-color: #FFF;
+}
+.contentSet svg{
+    margin-top: 8px;
+}
+.addLink svg{
+    margin-top: 4px;
+}
+/* .countBox{
+    float: right;
+} */
+
+.BoardIconInfo{
+    background: #ffffff80; border-radius: 20px;
+}
+/* .editingSubmit{
+    display: inline-block;
+    width: 80px; height: 30px; border-radius: 20px;
+    background-color: #5286DC; color: #fff; margin-left: 8px;
+    text-align: center;
+}
+.editingCancel{
+    display: inline-block;
+    width: 80px; height: 30px; border-radius: 20px;
+    background-color: #5286DC; color: #fff; margin-left: 8px;
+    text-align: center;
+} */
+/* .BoardPost .innerDiv{
+    width: 70%;
+} */
