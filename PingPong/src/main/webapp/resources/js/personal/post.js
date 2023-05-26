@@ -1,13 +1,3 @@
-const forms = document.querySelectorAll('form');
-forms.forEach(form => {
-    form.addEventListener('keypress', event => {
-        if (event.keyCode === 13) {
-        event.preventDefault();
-        return false;
-        }
-    });
-});
-
 
 // 개인 홈 프로필 js
 // 홈프로필 배경 변경
@@ -139,8 +129,8 @@ if(messageBox!=null){
 
 // 게시글 상세 페이지 신고 버튼 누르면 신고 화면으로 넘어가기
 
-let BoardIconReport;
-if(BoardIconReport!=null){
+// let BoardIconReport;
+// if(BoardIconReport!=null){
     
     let BoardIconReport = document.querySelector(".BoardIconReport").parentElement;
     const BoardIconReportMod = document.querySelector(".BoardIconReportMod #grayBackground");
@@ -160,7 +150,7 @@ if(BoardIconReport!=null){
         })
     
     })
-}
+// }
 
 
 /* 신고 모달 구현 */

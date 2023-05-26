@@ -53,7 +53,7 @@
 
                                 <%-- 프로필 이미지가 없으면 기본 이미지 --%>
                                 <c:if test="${empty mypage.profileImage}" >
-                                    <img src="/resources/images/pingpong.ico" id="profileImage">
+                                    <img src="/resources/images/profileImage/basicUserProfile.png" id="profileImage">
                                 </c:if>
 
                                 <%-- 프로필 이미지가 있으면 프로필 이미지 --%>
@@ -203,30 +203,6 @@
                             </div>
                         </div>
                                 
-                                <%--       
-                                <div>
-                                    <label for="facebook"><input type="checkbox" value="페이스북" id="facebook" name="SNS"> 페이스북</label>
-                                    <input type="text" value="www." id="" name="address"> 
-                                </div>
-                                <div>
-                                    <label for="twitter"><input type="checkbox" value="트위터" id="twitter" name="SNS"> 트위터</label> 
-                                    <input type="text" value="www." id="" name="address">
-                                </div>                  
-                                <div>
-                                    <label for="github"><input type="checkbox" value="깃허브" id="github" name="SNS"> 깃허브</label>
-                                    <input type="text" value="www." id="" name="address">
-                                </div>
-                                <div>
-                                    <label for="notion"><input type="checkbox" value="노션" id="notion" name="SNS"> 노션</label> 
-                                    <input type="text" value="www." id="" name="address">
-                                </div>
-                                <div>
-                                    <label for="blog"><input type="checkbox" value="네이버 블로그" id="blog" name="SNS"> 네이버 블로그</label>
-                                    <input type="text" value="www." id="" name="address"> 
-                                </div>
-                            </div>
-                        </div>
-                        --%>  
 
                         <div class="myPage-save">
                             <button id="ProfileEditCompleteBtn" onclick="techListEvent()">편집 완료</button>
