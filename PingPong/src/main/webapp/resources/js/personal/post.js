@@ -667,6 +667,10 @@ function selectBoardList(boardNo){
             hiddenEditing.style.display = 'none';
             editingSubmit.style.display = 'none';
             editingCancel.style.display = 'none';
+
+            for(let i=0;i<document.querySelector(".hashPost").children.length;i++){
+                document.querySelector(".hashPost").children[i].querySelector("button").remove();
+            }
         });
 
         // 게시물 수정 버튼
@@ -677,6 +681,9 @@ function selectBoardList(boardNo){
                 hiddenEditing.style.display = 'none';
                 editingSubmit.style.display = 'none';
                 editingCancel.style.display = 'none';
+                for(let i=0;i<document.querySelector(".hashPost").children.length;i++){
+                    document.querySelector(".hashPost").children[i].querySelector("button").remove();
+                }
                 return;
             }
 
@@ -708,6 +715,9 @@ function selectBoardList(boardNo){
                         board.boardContent =  board.boardContent.replaceAll("&quot;", "\"");
     
                         BoardPost.querySelector(".innerDiv>p").innerHTML = board.boardContent;
+                        for(let i=0;i<document.querySelector(".hashPost").children.length;i++){
+                            document.querySelector(".hashPost").children[i].querySelector("button").remove();
+                        }
                     }
                 })
                 .catch(err => {
