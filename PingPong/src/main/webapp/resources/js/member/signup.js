@@ -1,7 +1,7 @@
 
 /* 유효성 검사 진행 여부 확인용 객체 */
 // -> 모든 value가 true인 경우에만 회원 가입 진행
-const checkObj1 = {
+const checkObj1fjfjfjfjfj = {
     "memberEmail": false,
     "memberPw": false,
     "memberPwConfirm": false,
@@ -9,7 +9,7 @@ const checkObj1 = {
     "checkTerm1": false,
     "checkTerm2": false
 };
-const checkObj2 = {
+const checkObj2fjfjfjfjfj = {
     "memberNickname": false,
     "memberUrl": false
 };
@@ -31,7 +31,7 @@ if (memberEmail != null) {
             // confirm, error 클래스 삭제해서 검정 글씨로 만들기
             emailMessage.classList.remove("confirm", "error");
 
-            checkObj1.memberEmail = false; // 빈칸 == 유효 X
+            checkObj1fjfjfjfjfj.memberEmail = false; // 빈칸 == 유효 X
             return;
         }
 
@@ -57,12 +57,12 @@ if (memberEmail != null) {
                         emailMessage.innerText = "사용 가능한 이메일 입니다.";
                         emailMessage.classList.add("confirm"); // .confirm 스타일 적용
                         emailMessage.classList.remove("error"); // .error 스타일 제거
-                        checkObj1.memberEmail = true; // 유효 O
+                        checkObj1fjfjfjfjfj.memberEmail = true; // 유효 O
                     } else {
                         emailMessage.innerText = "이미 사용중인 이메일 입니다.";
                         emailMessage.classList.remove("confirm"); // .confirm 스타일 적용
                         emailMessage.classList.add("error"); // .error 스타일 제거
-                        checkObj1.memberEmail = false; // 유효 O
+                        checkObj1fjfjfjfjfj.memberEmail = false; // 유효 O
                     }
 
                 }) // 파싱한 데이터를 이용해서 수행할 코드 작성
@@ -74,7 +74,7 @@ if (memberEmail != null) {
             emailMessage.classList.add("error"); // .error 스타일 적용
             emailMessage.classList.remove("confirm"); // .confirm 스타일 제거
 
-            checkObj1.memberEmail = false; // 유효 X
+            checkObj1fjfjfjfjfj.memberEmail = false; // 유효 X
         }
     });
 }
@@ -96,7 +96,7 @@ if (memberPw != null) {
             pwMessage1.innerText = "8글자 이상의 영어, 숫자, 특수문자를 포함한 비밀번호를 입력해 주세요.";
             pwMessage1.classList.remove("confirm", "error"); // 검정 글씨
 
-            checkObj1.memberPw = false; // 빈칸 == 유효 X
+            checkObj1fjfjfjfjfj.memberPw = false; // 빈칸 == 유효 X
             return;
         }
 
@@ -107,7 +107,7 @@ if (memberPw != null) {
 
         // 입력한 비밀번호가 유효한 경우
         if (regEx.test(memberPw.value)) {
-            checkObj1.memberPw = true;
+            checkObj1fjfjfjfjfj.memberPw = true;
 
             // 비밀번호가 유효하게 작성된 상태에서
             // 비밀번호 확인이 입력되지 않았을 때
@@ -126,14 +126,14 @@ if (memberPw != null) {
                     pwMessage2.innerText = "비밀번호가 일치합니다";
                     pwMessage2.classList.add("confirm");
                     pwMessage2.classList.remove("error");
-                    checkObj1.memberPwConfirm = true;
+                    checkObj1fjfjfjfjfj.memberPwConfirm = true;
 
 
                 } else { // 다를 경우
                     pwMessage2.innerText = "비밀번호가 일치하지 않습니다";
                     pwMessage2.classList.add("error");
                     pwMessage2.classList.remove("confirm");
-                    checkObj1.memberPwConfirm = false;
+                    checkObj1fjfjfjfjfj.memberPwConfirm = false;
                 }
             }
 
@@ -143,7 +143,7 @@ if (memberPw != null) {
             pwMessage1.innerText = "비밀번호 형식이 유효하지 않습니다";
             pwMessage1.classList.add("error");
             pwMessage1.classList.remove("confirm");
-            checkObj1.memberPw = false;
+            checkObj1fjfjfjfjfj.memberPw = false;
         }
     });
 
@@ -151,24 +151,24 @@ if (memberPw != null) {
     // 비밀번호 확인 유효성 검사
     memberPwConfirm.addEventListener('input', () => {
 
-        if (checkObj1.memberPw) { // 비밀번호가 유효하게 작성된 경우에
+        if (checkObj1fjfjfjfjfj.memberPw) { // 비밀번호가 유효하게 작성된 경우에
 
             // 비밀번호 == 비밀번호 확인  (같을 경우)
             if (memberPw.value == memberPwConfirm.value) {
                 pwMessage2.innerText = "비밀번호가 일치합니다";
                 pwMessage2.classList.add("confirm");
                 pwMessage2.classList.remove("error");
-                checkObj1.memberPwConfirm = true;
+                checkObj1fjfjfjfjfj.memberPwConfirm = true;
 
             } else { // 다를 경우
                 pwMessage2.innerText = "비밀번호가 일치하지 않습니다";
                 pwMessage2.classList.add("error");
                 pwMessage2.classList.remove("confirm");
-                checkObj1.memberPwConfirm = false;
+                checkObj1fjfjfjfjfj.memberPwConfirm = false;
             }
 
         } else { // 비밀번호가 유효하지 않은 경우
-            checkObj1.memberPwConfirm = false;
+            checkObj1fjfjfjfjfj.memberPwConfirm = false;
         }
     });
 }
@@ -187,9 +187,9 @@ if (sendAuthKeyBtn != null) {
     sendAuthKeyBtn.addEventListener("click", function (e) {
         authMin = 4;
         authSec = 59;
-        checkObj1.authKey = false;
+        checkObj1fjfjfjfjfj.authKey = false;
 
-        if (checkObj1.memberEmail) { // 중복이 아닌 이메일인 경우
+        if (checkObj1fjfjfjfjfj.memberEmail) { // 중복이 아닌 이메일인 경우
 
             sendAuthKeyBtn.setAttribute("disabled", "disabled") // 재전송 방지
 
@@ -224,7 +224,7 @@ if (sendAuthKeyBtn != null) {
                 sendAuthKeyBtn.innerText = "0" + authMin + ":" + (authSec < 10 ? "0" + authSec : authSec);
                 // 남은 시간이 0분 0초인 경우
                 if (authMin == 0 && authSec == 0) {
-                    checkObj1.authKey = false;
+                    checkObj1fjfjfjfjfj.authKey = false;
                     clearInterval(authTimer);
                     sendAuthKeyBtn.classList.add("error");
                     return;
@@ -264,11 +264,11 @@ if (sendAuthKeyBtn != null) {
                         authKeyMessage.innerText = "인증되었습니다.";
                         authKeyMessage.classList.remove("error");
                         authKeyMessage.classList.add("confirm");
-                        checkObj1.authKey = true;
+                        checkObj1fjfjfjfjfj.authKey = true;
 
                     } else {
                         alert("인증번호가 일치하지 않습니다.")
-                        checkObj1.authKey = false;
+                        checkObj1fjfjfjfjfj.authKey = false;
                     }
                 })
                 .catch(err => console.log(err));
@@ -292,7 +292,7 @@ if (memberUrl != null) {
             URLCheckMessage.innerText = "3~16글자 (영어, 숫자, - )";
 
             URLCheckMessage.classList.remove("confirm", "error");
-            checkObj2.memberUrl = false;
+            checkObj2fjfjfjfjfj.memberUrl = false;
             memberUrl.value = ""; // 빈칸 입력 방지 코드
             return;
         }
@@ -308,12 +308,12 @@ if (memberUrl != null) {
                         URLCheckMessage.innerText = "사용 가능한 URL 입니다.";
                         URLCheckMessage.classList.add("confirm"); // .confirm 스타일 적용
                         URLCheckMessage.classList.remove("error"); // .error 스타일 제거
-                        checkObj2.memberUrl = true; // 유효 O
+                        checkObj2fjfjfjfjfj.memberUrl = true; // 유효 O
                     } else {
                         URLCheckMessage.innerText = "이미 사용중인 URL 입니다.";
                         URLCheckMessage.classList.remove("confirm"); // .confirm 스타일 적용
                         URLCheckMessage.classList.add("error"); // .error 스타일 제거
-                        checkObj2.memberUrl = false; // 유효 X
+                        checkObj2fjfjfjfjfj.memberUrl = false; // 유효 X
                     }
                 })
                 .catch(err => console.log(err));
@@ -322,7 +322,7 @@ if (memberUrl != null) {
             URLCheckMessage.innerText = "URL 형식이 유효하지 않습니다."
             URLCheckMessage.classList.add("error");
             URLCheckMessage.classList.remove("confirm");
-            checkObj2.memberUrl = false;
+            checkObj2fjfjfjfjfj.memberUrl = false;
         }
     });
 }
@@ -339,7 +339,7 @@ if (memberNickname != null) {
             nickMessage.innerText = "한글,영어,숫자로만 2~10글자";
 
             nickMessage.classList.remove("confirm", "error");
-            checkObj2.memberNickname = false;
+            checkObj2fjfjfjfjfj.memberNickname = false;
             memberNickname.value = ""; // 빈칸 입력 방지 코드
             return;
         }
@@ -358,12 +358,12 @@ if (memberNickname != null) {
                         nickMessage.innerText = "사용 가능한 닉네임 입니다.";
                         nickMessage.classList.add("confirm"); // .confirm 스타일 적용
                         nickMessage.classList.remove("error"); // .error 스타일 제거
-                        checkObj2.memberNickname = true; // 유효 O
+                        checkObj2fjfjfjfjfj.memberNickname = true; // 유효 O
                     } else {
                         nickMessage.innerText = "이미 사용중인 닉네임 입니다.";
                         nickMessage.classList.remove("confirm"); // .confirm 스타일 적용
                         nickMessage.classList.add("error"); // .error 스타일 제거
-                        checkObj2.memberNickname = false; // 유효 X
+                        checkObj2fjfjfjfjfj.memberNickname = false; // 유효 X
                     }
                 })
                 .catch(err => console.log(err));
@@ -372,7 +372,7 @@ if (memberNickname != null) {
             nickMessage.innerText = "닉네임 형식이 유효하지 않습니다."
             nickMessage.classList.add("error");
             nickMessage.classList.remove("confirm");
-            checkObj2.memberNickname = false;
+            checkObj2fjfjfjfjfj.memberNickname = false;
         }
     });
 }
@@ -394,8 +394,8 @@ function toggleCheckboxes() {
     checkTerms3.checked = isAllChecked;
     checkTerms.checked = isAllChecked;
     checkTermsAll.checked = isAllChecked;
-    checkObj1.checkTerm1 = isAllChecked;
-    checkObj1.checkTerm2 = isAllChecked;
+    checkObj1fjfjfjfjfj.checkTerm1 = isAllChecked;
+    checkObj1fjfjfjfjfj.checkTerm2 = isAllChecked;
 }
 checkTerms.addEventListener("click", toggleCheckboxes);
 checkTermsAll.addEventListener("click", toggleCheckboxes);
@@ -424,9 +424,9 @@ if (closeSignupBtn) {
 if (document.getElementById("signUpFrm") != null) {
     document.getElementById("signUpFrm").addEventListener("submit", e => {
 
-        for (let key in checkObj1) {
+        for (let key in checkObj1fjfjfjfjfj) {
 
-            if (!checkObj1[key]) { // 각 key에 대한 value(true/false)를 얻어와
+            if (!checkObj1fjfjfjfjfj[key]) { // 각 key에 대한 value(true/false)를 얻어와
                 // false인 경우 == 유효하지 않다!
                 switch (key) {
                     case "memberEmail":
@@ -461,9 +461,9 @@ if (document.getElementById("signUpFrm") != null) {
 if (document.getElementById("signupInfoFrm") != null) {
     document.getElementById("signupInfoFrm").addEventListener("submit", e => {
 
-        for (let key in checkObj2) {
+        for (let key in checkObj2fjfjfjfjfj) {
 
-            if (!checkObj2[key]) { // 각 key에 대한 value(true/false)를 얻어와
+            if (!checkObj2fjfjfjfjfj[key]) { // 각 key에 대한 value(true/false)를 얻어와
                 // false인 경우 == 유효하지 않다!
                 switch (key) {
                     case "memberNickname":
