@@ -32,14 +32,14 @@
 }
 
 .profileBackground label, .profileBackground span{
-    position: absolute; right: 60px; top: 460px;
+    position: absolute; right: 60px; top: 400px;
     cursor: pointer; font-size: 16px; text-decoration: underline; z-index: 20;
     background-color: #fff; padding: 4px 8px; border-radius: 5px;
 }
 #deleteBackground{
     cursor: pointer; font-size: 16px; text-decoration: underline; z-index: 20;
     background-color: #fff; padding: 4px 8px; border-radius: 5px;
-    display: inline; float: left;
+    display: inline; float: left; top: 460px;
 }
 
 .profileBackground>div:last-child {
@@ -443,7 +443,7 @@
 /* 프사 + 이름 + 소개 */
 .BoardContainerright>div:nth-child(1) {
     width: 100%; height: 60px;
-    padding: 14px 4px 14px 16px;
+    padding: 10px 14px;
     /* height: 10%; */
     display: flex;
     border-bottom: 1px solid #CCCCCC; 
