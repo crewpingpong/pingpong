@@ -119,15 +119,15 @@ public class MypageController {
 	    List<String> snsLinkAddress = new ArrayList<>();
 	    
 	    model.addAttribute("snsURL", snsURL);
-	    System.out.println(snsURL);
+//	    System.out.println(snsURL);
 //	
 //	    
-//	    for(SNS sns : snsURL) {
-//	    	snsLinkAddress.add(sns.getSnsAddress());
-//	    	
+	    for(SNS sns : snsURL) {
+	    	snsLinkAddress.add(sns.getSnsAddress());
+	    	
 //	    	System.out.println(snsLinkAddress);
-//	    }
-//	    model.addAttribute("snsLinkAddress", snsLinkAddress);
+	    }
+	    model.addAttribute("snsLinkAddress", snsLinkAddress);
 	    
 //	    System.out.println(snsLinkAddress);
 		
@@ -208,6 +208,8 @@ public class MypageController {
 									, RedirectAttributes ra
 									, HttpSession session) throws IllegalStateException, IOException {
 		
+//		System.out.println(profileImage);
+		
 	    updateMember.setMemberNo(loginMember.getMemberNo());
 
 	    List<String> selectedInterestList = Arrays.asList(interestArray);
@@ -219,7 +221,9 @@ public class MypageController {
 	    String filePath = session.getServletContext().getRealPath(webPath);
 
 	    String message = null;
+	    
 	    if (profileImage != null && !profileImage.isEmpty()) {
+	    	
 	        String fileName = profileImage.getOriginalFilename();
 	        String reName = Util.fileRename(fileName);
 	        
@@ -240,6 +244,9 @@ public class MypageController {
 	        }
 	        
 	    } else {
+	    	
+	    	// 프로필 이미지 기본
+	    	int profileResult = service.updateBasicProfile(loginMember.getMemberNo());
 	    	
 	        if (infoResult > 0) {
 	            message = "회원 정보가 수정되었습니다.";

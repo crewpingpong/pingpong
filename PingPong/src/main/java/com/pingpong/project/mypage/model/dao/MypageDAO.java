@@ -282,6 +282,14 @@ public class MypageDAO {
 	public List<SNS> selectSNSAddressList(int memberNo) {
 		return sqlSession.selectList("mypageMapper.selectSNSAddressList", memberNo);
 	}
+
+	/** 프로필 이미지 기본
+	 * @param memberNo
+	 * @return
+	 */
+	public int updateBasicProfile(int memberNo) {
+		return sqlSession.update("mypageMapper.updateBasicProfile", memberNo);
+	}
 	
 	
 	

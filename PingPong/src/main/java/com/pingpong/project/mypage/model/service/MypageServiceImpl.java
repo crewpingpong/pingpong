@@ -286,6 +286,12 @@ public class MypageServiceImpl implements MypageService{
 		return dao.selectSNSAddressList(memberNo);
 	}
 
+	// 프로필 이미지 기본
+	@Override
+	public int updateBasicProfile(int memberNo) {
+		return dao.updateBasicProfile(memberNo);
+	}
+
 	
 	
 	
