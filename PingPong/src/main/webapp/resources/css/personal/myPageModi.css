@@ -349,7 +349,7 @@
     font-size: 14px;
     margin-bottom: 5px;
 }
-#memberPwConfirm, #memberPw {
+#memberPwConfirm, #memberPw, #secessionMemberPw {
     width: 550px;
     height: 42px;
     border: 1px solid #C5C5C5;

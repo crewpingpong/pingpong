@@ -125,18 +125,18 @@
                             <c:otherwise>
                                 <%-- 가입 회원 목록 결과가 있다면 --%>
                                 <c:forEach items="${memberList}" var="member">
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" name="choicebox" value="${member.memberNo}">
-                                    </td>
-                                    <td>${member.memberNo}</td>
-                                    <td>
-                                        <a href="/mypage/${member.memberNo}">${member.memberUrl}</a>
-                                    </td>
-                                    <td>${member.memberNickname}</td> <!-- 한글 16글자 1줄 -->
-                                    <td>${member.memberEmail}</td>
-                                    <td>${member.enrollDate}</td>
-                                </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="checkbox" name="choicebox" value="${member.memberNo}">
+                                            </td>
+                                            <td>${member.memberNo}</td>
+                                            <td>
+                                                <a href="/mypage/${member.memberNo}">${member.memberUrl}</a>
+                                            </td>
+                                            <td>${member.memberNickname}</td> <!-- 한글 16글자 1줄 -->
+                                            <td>${member.memberEmail}</td>
+                                            <td>${member.enrollDate}</td>
+                                        </tr>
                                 </c:forEach>
 
                             </c:otherwise>

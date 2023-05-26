@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.board.model.dto.Comment;
+import com.pingpong.project.board.model.dto.Declaration;
 import com.pingpong.project.board.model.dto.Hashtag;
 
 
@@ -123,6 +124,7 @@ public class BoardDAO {
 	public int deleteHash(Map<String, Object> paramMap) {
 		return sqlSession.delete("boardMapper.deleteHash", paramMap);
 	}
+
 
 
 

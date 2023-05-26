@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pingpong.project.board.model.dao.BoardDAO;
 import com.pingpong.project.board.model.dto.Board;
 import com.pingpong.project.board.model.dto.Comment;
+import com.pingpong.project.board.model.dto.Declaration;
 import com.pingpong.project.board.model.dto.Hashtag;
 import com.pingpong.project.common.utility.Util;
 
@@ -103,7 +104,7 @@ public class BoardServiceImpl implements BoardService{
 	public int deleteHash(Map<String, Object> paramMap) {
 		return dao.deleteHash(paramMap);
 	}
-	
+
 
 	
 }

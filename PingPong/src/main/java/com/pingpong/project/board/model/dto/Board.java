@@ -18,6 +18,9 @@ public class Board {
 
 	private String thumbnail;
 
+	
+	private String reportTitle;
+	
 
 	// member join
 	private int memberNo;

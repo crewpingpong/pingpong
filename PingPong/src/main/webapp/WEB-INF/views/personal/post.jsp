@@ -15,6 +15,7 @@
     <script>
         let techImgList = "${techImgList}";
         let snsImgList = "${snsImgList}";
+        let tempBoardNo;
     </script>
 </head>
 <body>
@@ -569,9 +570,9 @@ ${mypage.memberCareer}
     
                     <!-- 게시글 신고  -->
                     <div>
-                        게시글 신고 하기
+                        게시글 신고 하기${tempBoardNo}
                     </div>
-                    <form action="#" method="post" enctype="multipart/form-data">
+                    <form action="/board2/reportContent" method="post">
                         <input type="text" name="reportTitle" placeholder="신고 제목을 입력해주세요.">
                         <%-- 신고유형<br>
                         <select name="BoardReport" id="" required>
@@ -583,11 +584,12 @@ ${mypage.memberCareer}
                             <option value="others">기타</option>
                         </select> --%>
                         <%-- <input type="email" name="Email" id="otoEmail" placeholder="답장 받으실 이메일을 입력해주세요."> <br> --%>
-                        <textarea name="Content" id="otoContent" cols="30" rows="10" placeholder="신고내용을 입력해주세요."></textarea> <br>
+                        <textarea id="otoContent" cols="30" rows="10" name="indictmentContent" placeholder="신고내용을 입력해주세요."></textarea> <br>
 <%--     
                         <label for="chooseFile">+ 사진 파일 첨부하기</label>
                         <input type="file" id="chooseFile" name="chooseFile" accept="image/*" multiple> <br>
                         <p id="fileName" name="picture"></p> --%>
+                        <input type="hidden" name="boardNo" class="boardNo">
                         <div><button id="submit">신고하기</button></div>
                     </form>
                 </div>
