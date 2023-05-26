@@ -294,31 +294,7 @@ public class MypageServiceImpl implements MypageService{
 
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	// 선택한 SNSList의 URL 조회
-//	@Override
-//	public List<SNS> selectCheckSNSURL(int memberNo) {
-//		return dao.selectCheckSNSURL(memberNo);
-//	}
-	
-	// 선택한 snsList의 URL 주소 (링크)
-//	@Override
-//	public List<SNS> selectSNSAddress(int memberNo) {
-//		return dao.selectSNSAddress(memberNo);
-//	}
 
-	// update snsAddress
-//	@Override
-//	public int updateSNSAddress(int memberNo) {
-//		return dao.updateSNSAddress(memberNo);
-//	}
 
 
 

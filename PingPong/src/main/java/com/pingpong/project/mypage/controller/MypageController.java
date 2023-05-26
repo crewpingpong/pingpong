@@ -282,9 +282,6 @@ public class MypageController {
 		 }
 		
 		
-
-
-		 
 		
 
 	    ra.addFlashAttribute("message", message);
@@ -391,52 +388,7 @@ public class MypageController {
 		
 		
 		
-		
-		
-		/* *** update snsAddress *** */
-//		int result = service.selectSNSAddress(loginMember.getMemberNo());
-		
-//		System.out.println(selectedSnsAddress); -> [instagram, , sdf, , instagram, ]
-			
-		// insert snsAddress
-/*
-		for(String sns : selectedSnsAddress) {	
-			
-			if(sns != null) {
-				Map<String, Object> snsAddressMap = new HashMap<>();
-				
-				snsAddressMap.put("memberNo", loginMember.getMemberNo());
-				snsAddressMap.put("snsAddress", sns);
-				
-				int updateResult = service.updateSNSAddress(snsAddressMap);			
-			}
-			
-			
-//				System.out.println("snsAddressMap : " + snsAddressMap);
-			
-		}
-		}
-		
-		// update snsAddress
-		else {
-			for(String sns : selectedSnsAddress) {	
-				
-				Map<String, Object> snsAddressMap = new HashMap<>();
-				
-				snsAddressMap.put("memberNo", loginMember.getMemberNo());
-				snsAddressMap.put("snsAddress", sns);
-				
-//				System.out.println("snsAddressMap : " + snsAddressMap);
-				
-				int insertResult = service.insertSNSAddress(snsAddressMap);
-			}
-		}
-	*/	
-		
-		
-		// 빈칸이 아닐떄
-		// 업데이트
-		// 업데이트 = 0 -> 인설트
+
 		
 		ra.addFlashAttribute("message", message);
 		
