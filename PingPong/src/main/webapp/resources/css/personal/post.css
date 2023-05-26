@@ -869,7 +869,7 @@
 
     /* position - 버튼 클릭시 left offset값을 적용시키기 위해 */
     position: relative;
-    left: 0px;
+    /* left: 0px; */
 
     /* size */
     width: 100%;
