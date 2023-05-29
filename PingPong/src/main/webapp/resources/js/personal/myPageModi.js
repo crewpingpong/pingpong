@@ -451,6 +451,27 @@ if (memberPw != null) {
         } else { // 비밀번호가 유효하지 않은 경우
         }
     });
+    memberPw.addEventListener('input', () => {
+
+        if (true) { // 비밀번호가 유효하게 작성된 경우에
+
+            // 비밀번호 == 비밀번호 확인  (같을 경우)
+            if (memberPw.value == memberPwConfirm.value) {
+                pwMessage2.innerText = "비밀번호가 일치합니다";
+                pwMessage2.classList.add("confirm");
+                pwMessage2.classList.remove("error");
+                checkObj1ruewyehruewyeh.memberPwConfirm = true;
+
+            } else { // 다를 경우
+                pwMessage2.innerText = "비밀번호가 일치하지 않습니다";
+                pwMessage2.classList.add("error");
+                pwMessage2.classList.remove("confirm");
+                checkObj1ruewyehruewyeh.memberPwConfirm = false;
+            }
+
+        } else { // 비밀번호가 유효하지 않은 경우
+        }
+    });
 }
 
 

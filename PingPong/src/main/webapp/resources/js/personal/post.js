@@ -1,13 +1,3 @@
-const forms = document.querySelectorAll('form');
-forms.forEach(form => {
-    form.addEventListener('keypress', event => {
-        if (event.keyCode === 13) {
-        event.preventDefault();
-        return false;
-        }
-    });
-});
-
 
 // 개인 홈 프로필 js
 // 홈프로필 배경 변경
@@ -138,24 +128,29 @@ if(messageBox!=null){
 // })
 
 // 게시글 상세 페이지 신고 버튼 누르면 신고 화면으로 넘어가기
-const BoardIconReport = document.querySelector(".BoardIconReport").parentElement;
-const BoardIconReportMod = document.querySelector(".BoardIconReportMod #grayBackground");
-const ReportModX = document.querySelector(".BoardIconReportMod #oneToOne>div>svg:nth-child(2)");
 
-BoardIconReport.addEventListener("click", (e) => {
-    console.log(e.currentTarget);
-    const reportNo= e.currentTarget.parentElement.parentElement.children[0].children[1];
-    const reportBoardNo= reportNo.getAttribute("currentBoardNo");
-    console.log(reportBoardNo);
-    const boardNo = document.querySelector(".boardNo");
-    boardNo.setAttribute("value",reportBoardNo);
-
-    BoardIconReportMod.style.display = "flex";
-    ReportModX.addEventListener("click",()=>{
-        BoardIconReportMod.style.display = "none";
+// let BoardIconReport;
+// if(BoardIconReport!=null){
+    
+    let BoardIconReport = document.querySelector(".BoardIconReport").parentElement;
+    const BoardIconReportMod = document.querySelector(".BoardIconReportMod #grayBackground");
+    const ReportModX = document.querySelector(".BoardIconReportMod #oneToOne>div>svg:nth-child(2)");
+    
+    BoardIconReport.addEventListener("click", (e) => {
+        console.log(e.currentTarget);
+        const reportNo= e.currentTarget.parentElement.parentElement.children[0].children[1];
+        const reportBoardNo= reportNo.getAttribute("currentBoardNo");
+        console.log(reportBoardNo);
+        const boardNo = document.querySelector(".boardNo");
+        boardNo.setAttribute("value",reportBoardNo);
+    
+        BoardIconReportMod.style.display = "flex";
+        ReportModX.addEventListener("click",()=>{
+            BoardIconReportMod.style.display = "none";
+        })
+    
     })
-
-})
+// }
 
 
 /* 신고 모달 구현 */
@@ -672,6 +667,10 @@ function selectBoardList(boardNo){
             hiddenEditing.style.display = 'none';
             editingSubmit.style.display = 'none';
             editingCancel.style.display = 'none';
+
+            for(let i=0;i<document.querySelector(".hashPost").children.length;i++){
+                document.querySelector(".hashPost").children[i].querySelector("button").remove();
+            }
         });
 
         // 게시물 수정 버튼
@@ -682,6 +681,9 @@ function selectBoardList(boardNo){
                 hiddenEditing.style.display = 'none';
                 editingSubmit.style.display = 'none';
                 editingCancel.style.display = 'none';
+                for(let i=0;i<document.querySelector(".hashPost").children.length;i++){
+                    document.querySelector(".hashPost").children[i].querySelector("button").remove();
+                }
                 return;
             }
 
@@ -713,6 +715,9 @@ function selectBoardList(boardNo){
                         board.boardContent =  board.boardContent.replaceAll("&quot;", "\"");
     
                         BoardPost.querySelector(".innerDiv>p").innerHTML = board.boardContent;
+                        for(let i=0;i<document.querySelector(".hashPost").children.length;i++){
+                            document.querySelector(".hashPost").children[i].querySelector("button").remove();
+                        }
                     }
                 })
                 .catch(err => {
@@ -722,13 +727,15 @@ function selectBoardList(boardNo){
             }
         });
         // 게시글 삭제
-        boardDeleteBtn.addEventListener("click", e=>{
-            if(confirm("정말 삭제하시겠습니까?")){
-                location.href = "/board2/delete/"+boardNo+"?memberNo="+boardMember;
-            } else{
-                e.target.querySelector("a").preventDefault();
-            }
-        })
+        if(boardDeleteBtn!=null){
+            boardDeleteBtn.addEventListener("click", e=>{
+                if(confirm("정말 삭제하시겠습니까?")){
+                    location.href = "/board2/delete/"+boardNo+"?memberNo="+boardMember;
+                } else{
+                    e.target.querySelector("a").preventDefault();
+                }
+            })
+        }
         
         slideInitFn();
         
