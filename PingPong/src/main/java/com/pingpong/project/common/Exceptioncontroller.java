@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 // 예외 처리용 컨트롤러 
 @ControllerAdvice
 public class Exceptioncontroller {
-	
+//	최근태
 	@ExceptionHandler(ServletRequestBindingException.class)
     public String handleServletRequestBindingException() {
 //		e.printStackTrace(); // 예외 내용/발생 메서드 확인

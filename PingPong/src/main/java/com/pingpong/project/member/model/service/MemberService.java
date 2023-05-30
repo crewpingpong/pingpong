@@ -1,7 +1,7 @@
 package com.pingpong.project.member.model.service;
 
 import com.pingpong.project.member.model.dto.Member;
-
+//최근태
 public interface MemberService {
 
 	Member login(Member inputMember);

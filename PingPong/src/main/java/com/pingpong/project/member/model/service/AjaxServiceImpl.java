@@ -8,26 +8,12 @@ import org.springframework.stereotype.Service;
 import com.pingpong.project.member.model.dao.AjaxDAO;
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.search.model.dto.SearchTag;
-
-@Service // 서비스임을 명시 + bean으로 등록
+//최근태
+@Service
 public class AjaxServiceImpl implements AjaxService{
 
-	@Autowired // DI(의존성 주입)
+	@Autowired
 	private AjaxDAO dao;
-
-//	// 이메일로 닉네임 조회
-//	@Override
-//	public String selectNickname(String email) {
-//		
-//		return dao.selectNickname(email);
-//	}
-//
-//	// 닉네임으로 전화번호 조회
-//	@Override
-//	public String selectMemberTel(String nickname) {
-//		
-//		return dao.selectMemberTel(nickname);
-//	}
 
 	// 이메일 중복 검사
 	@Override

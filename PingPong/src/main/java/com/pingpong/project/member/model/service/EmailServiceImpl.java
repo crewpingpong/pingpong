@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pingpong.project.member.model.dao.EmailDAO;
-
+//최근태
 @Service
 public class EmailServiceImpl implements EmailService {
 

@@ -1,59 +1,56 @@
 
 // 개인 홈 프로필 js
 // 홈프로필 배경 변경
-const preview = document.getElementsByClassName("preview");  // img 태그
-const background = document.getElementById("background");  // file
-const deleteBackground = document.getElementById("deleteBackground"); // 돌아가기
-const selectBackground = document.getElementById("selectBackground");
-const afterChoice = document.getElementById("afterChoice");
 let secondComment;
-let beforeBack;
-const bgimageBox = document.querySelector(".bgimageBox");
 
+const preview = document.getElementsByClassName("preview");  // img 태그
+const background = document.getElementById("background");  // 배경화면 file input태그
+const selectBackground = document.getElementById("selectBackground");  // 배경화면 선택 버튼
+const afterChoice = document.getElementById("afterChoice");  // 돌아가기, 변경하기
+const deleteBackground = document.getElementById("deleteBackground"); // 돌아가기
+const updateBackground = document.getElementById("updateBackground"); // 변경하기
+const bgimageBox = document.querySelector(".bgimageBox");  // 기존의 배경화면
+let beforeBack;  // 배경화면을 복사해두기 위한 변수
 // 프로필 배경화면 변경
-if(background != null){
-    background.addEventListener("change", e=>{
-        beforeBack = bgimageBox.innerHTML;
-        const file = e.target.files[0];
-        if(file != undefined){
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = e => {
+if(background != null){  // 배경화면 파일 input 태그가 있으면
+    background.addEventListener("change", e=>{  // 파일 change 이벤트가 있으면
+        beforeBack = bgimageBox.innerHTML;  // 기존의 배경화면을 복사해둠
+        const file = e.target.files[0];  // 선택한 첫번째 파일
+        if(file != undefined){  // 파일이 있다면
+            const reader = new FileReader();  // 사용자의 파일을 읽기위한 개체
+            reader.readAsDataURL(file);  // 파일을 문자열로 변환
+            reader.onload = e => {  // img 태그에 배경화면 이미지를 넣음
                 preview[0].setAttribute("src", e.target.result);
             }
-            selectBackground.style.display = 'none';
-            afterChoice.style.display = 'block';
-        } else {
-            preview[0].removeAttribute("src");
-            selectBackground.style.display = 'block';
-            afterChoice.style.display = 'none';
+            selectBackground.style.display = 'none';  // 배경화면 선택 버튼 안보이게 처리
+            afterChoice.style.display = 'block';  // 돌아가기, 변경하기 버튼 보이게 처리
+        } else {  // 파일이 없다면(이미지 파일이 아니라면)
+            preview[0].removeAttribute("src");  // 배경화면 없앰
+            selectBackground.style.display = 'block';  // 배경화면 선택 버튼 보이게 처리
+            afterChoice.style.display = 'none';  // 돌아가기, 변경하기 버튼 안보이게 처리
         }
     
     });
     
-    // 돌아가기
+    // 돌아가기 버튼 클릭 시
     deleteBackground.addEventListener('click', ()=>{
-        if(preview[0].getAttribute("src") != ""){
-            preview[0].removeAttribute("src");
-            background.value = "";
-            selectBackground.style.display = 'block';
-            afterChoice.style.display = 'none';
-            bgimageBox.innerHTML = beforeBack;
+        if(preview[0].getAttribute("src") != ""){  // img태그의 src 속성 값이 있으면
+            preview[0].removeAttribute("src");  // src 속성 제거
+            background.value = "";  // 파일 제거
+            selectBackground.style.display = 'block';  // 배경화면 선택 보이게 처리
+            afterChoice.style.display = 'none';  // 변경하기, 돌아가기 안보이게 처리
+            bgimageBox.innerHTML = beforeBack;  // 기존 화면으로 돌려놓기
         }
     });
 
-    // 변경하기
-    const updateBackground = document.getElementById("updateBackground");
+    // 변경하기 버튼 클릭 시
     updateBackground.addEventListener("click", () => {
-    
-        if(background.value == ''){
+        if(background.value == ''){  // 이미지 파일이 없으면
             alert("배경화면을 지정해주세요");
-            e.preventDefault();
+            e.preventDefault();  // 클릭 제출 막기
             return;
         }
-    
-        location.href = "/mypage/background";
-    
+        location.href = "/mypage/background";  // GET방식 요청
     });
 }
 
@@ -121,113 +118,47 @@ if(messageBox!=null){
     })
 }
 
-// 게시글 상세 페이지 메세지 누르면 메세지 보내기 화면으로 넘어가기
-// const BoardIcon = document.querySelector(".BoardIconMessage");
-// BoardIcon.addEventListener("click", () => {
-//     messageSendContainer.style.display = "flex";
-// })
 
-// 게시글 상세 페이지 신고 버튼 누르면 신고 화면으로 넘어가기
+let BoardIconReport = document.querySelector(".BoardIconReport").parentElement;  // 게시글의 신고 버튼
+const BoardIconReportMod = document.querySelector(".BoardIconReportMod #grayBackground");  // 신고 모달창
+const ReportModX = document.querySelector(".BoardIconReportMod #oneToOne>div>svg:nth-child(2)");  // 신고창 X버튼
 
-// let BoardIconReport;
-// if(BoardIconReport!=null){
-    
-    let BoardIconReport = document.querySelector(".BoardIconReport").parentElement;
-    const BoardIconReportMod = document.querySelector(".BoardIconReportMod #grayBackground");
-    const ReportModX = document.querySelector(".BoardIconReportMod #oneToOne>div>svg:nth-child(2)");
-    
-    BoardIconReport.addEventListener("click", (e) => {
-        console.log(e.currentTarget);
-        const reportNo= e.currentTarget.parentElement.parentElement.children[0].children[1];
-        const reportBoardNo= reportNo.getAttribute("currentBoardNo");
-        console.log(reportBoardNo);
-        const boardNo = document.querySelector(".boardNo");
-        boardNo.setAttribute("value",reportBoardNo);
-    
-        BoardIconReportMod.style.display = "flex";
-        ReportModX.addEventListener("click",()=>{
-            BoardIconReportMod.style.display = "none";
-        })
-    
+BoardIconReport.addEventListener("click", (e) => {  // 신고 버튼을 누르면
+    const reportNo= e.currentTarget.parentElement.parentElement.children[0].children[1];  // 게시글 구역
+    const reportBoardNo= reportNo.getAttribute("currentBoardNo");  // 게시글 번호
+    const boardNo = document.querySelector(".boardNo");  // hidden input 게시글 번호
+    boardNo.setAttribute("value",reportBoardNo);  // hidden input 태그에 게시글 번호 값 대입
+    BoardIconReportMod.style.display = "flex";  // 신고 모달창 보이게
+    ReportModX.addEventListener("click",()=>{  // 신고 X버튼 클릭 시
+        BoardIconReportMod.style.display = "none";  // 신고 모달창 사라지게
     })
-// }
+})
 
 
-/* 신고 모달 구현 */
-const grayBack = document.getElementById("grayBackground");
-const oneToOne = document.getElementById("oneToOne");
-// const oneToOnechild = document.querySelectorAll("#oneToOne>*");
-function showModal(target){
-    grayBack.style.display = "flex";
-    document.addEventListener("mouseup", e=>{
-        // console.log(e.currentTarget);
-        // if(e.target!==oneToOne){
-        if(e.target==grayBack){
-            // e.currentTarget
-            grayBack.style.display = "none";
-            // document.getElementById("chooseFile").value = '';
-            // document.getElementById("fileName").innerText = '';
-        }
-    })
-}
 
-// const chooseFile = document.getElementById('chooseFile');
-// const fileName = document.getElementById('fileName');
-
-// chooseFile.addEventListener("change", showTextFile);
-
-// function showTextFile() {
-//     const selectedFiles = chooseFile.files;
-//     if(document.querySelector('#fileName>p')){
-//         document.querySelector('#fileName>p').remove();
-//     }
-//     const list = document.createElement('p');
-//     fileName.appendChild(list);
-    
-//     for (const file of selectedFiles) {
-//         if (selectedFiles != null) {
-//             const summary = document.createElement('p');
-//             summary.innerText = file.name;
-//             list.appendChild(summary);
-//         }
-//     }
-// }
-
-// const submit = document.getElementById('submit');
-
-// submit.addEventListener("click", ()=>{
-//     alert("제출 되었습니다.")
-// });
-
-const Boardcontent = document.querySelector(".Boardcontent");
-const Boardcontent1 = document.querySelector(".Boardcontent1");
-
-const BoardHeartBox = document.querySelector(".BoardHeartBox");
-
-const BoardCommentBox = document.querySelector(".BoardCommentBox");
-
-const BoardComment = document.querySelector(".BoardComment");
-
-const BoardPost1 = document.querySelector(".BoardPost1")
-
-const newContent = document.querySelector(".newContent");
+const Boardcontent = document.querySelector(".Boardcontent");  // 게시글 내용 + 좋아요 수
+const Boardcontent1 = document.querySelector(".Boardcontent1");  // 게시글 내용 + 좋아요 수
+const BoardHeartBox = document.querySelector(".BoardHeartBox");  // 좋아요 하트 + 좋아요 수
+const BoardCommentBox = document.querySelector(".BoardCommentBox");  // 댓글 Div
+const BoardComment = document.querySelector(".BoardComment");  // 댓글 작성 Div
+const BoardPost1 = document.querySelector(".BoardPost1")  // 게시글 프로필 Div
+const newContent = document.querySelector(".newContent");  // 새 게시글 버튼
 
 
 /* 게시글 닫기 버튼으로 닫기 */
-const BoardClose = document.querySelector(".BoardClose");
+const BoardClose = document.querySelector(".BoardClose");  // 게시글 X 버튼
 
-const BoardBackground = document.querySelector(".BoardBackground");
-BoardClose.addEventListener("click", () => {
-    BoardBackground.style.display = "none";
-    // FirstPagination.click();
+const BoardBackground = document.querySelector(".BoardBackground");  // 게시글 모달
+BoardClose.addEventListener("click", () => {  // 게시글 X 버튼 클릭했을 때
+    BoardBackground.style.display = "none";  // 게시글 모달 안보이게 처리
 });
 
 /* 게시글 클릭했을 때 게시글 열기 */
-const contentBox = document.querySelectorAll(".contentBox>div>a");
+const contentBox = document.querySelectorAll(".contentBox>div>a");  // 게시글 썸네일
 for(let i=0;i<contentBox.length;i++){
-    contentBox[i].addEventListener("click", () => {
-        BoardBackground.style.display = "flex";
-        BoardBackground.classList.remove('BoardBackground-close');
+    contentBox[i].addEventListener("click", () => {  // 썸네일 클릭 시
+        BoardBackground.style.display = "flex";  // 게시글 모달 보이게
+        BoardBackground.classList.remove('BoardBackground-close');  // 안보이게
     });
 }
 
@@ -256,7 +187,6 @@ let parentComment;
 
 let commentParentNo;
 
-const updateBackground = document.getElementById("updateBackground");
 const checkSlideDiv = document.getElementsByClassName("slide_item");
 let slideItems; // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
 const BoardHeart = document.querySelector(".BoardHeart");
@@ -267,104 +197,96 @@ let arr = [];
 let boardNumber;
 let boardMember;
 
-function selectBoardList(boardNo){
+function selectBoardList(boardNo){  // 게시글 선택 함수
 
-    fetch("/boardDetail?boardNo="+boardNo)
-    .then(response => response.json())
+    fetch("/boardDetail?boardNo="+boardNo)  // GET 방식 요청 파라미터 boardNo AJAX
+    .then(response => response.json())  // 결과를 Json 객체로 변환
     .then(board => {
 
-        boardNumber = board.boardNo;
-        boardMember = board.memberNo;
+        boardNumber = board.boardNo;  // 게시글의 boardNo 를 변수에 담음
+        boardMember = board.memberNo;  // 게시글의 memberNo 를 변수에 담음
+        tempBoardNo = board.boardNo;  // 게시글의 boardNo 를 변수에 담음
 
-        const BoardContainerright = document.querySelector(".BoardContainerright");
-        BoardContainerright.setAttribute("currentBoardNo",board.boardNo);
+        const BoardContainerright = document.querySelector(".BoardContainerright");  // 게시글 오른쪽 영역
+        BoardContainerright.setAttribute("currentBoardNo",board.boardNo);  // 게시글을 식별할 번호
         document.querySelectorAll('.slide_item').forEach(function(slideItem) {
             slideItem.remove();
         });
 
-        let flagHeart = 0;
+        let flagHeart = 0;  // 좋아요를 구별할 변수
 
-        for(let i of board.likeList){
+        for(let i of board.likeList){  // 좋아요 리스트에 로그인한 회원의 번호가 있으면 변수++
             if(loginMemberNo == i.memberNo){
                 flagHeart++;
                 break;
             }
         }
-        BoardRedHeart.style.display = "none";
-        BoardHeart.style.display = "none";
-        if(flagHeart>0){
-            BoardRedHeart.style.display = "block";
-        } else {
-            BoardHeart.style.display = "block";
+        BoardRedHeart.style.display = "none";  // 빨간 하트 안보이게(초기화)
+        BoardHeart.style.display = "none";  // 빈 하트 안보이게(초기화)
+        if(flagHeart>0){  // 좋아요를 했으면
+            BoardRedHeart.style.display = "block";  // 빨간 하트 보이게
+        } else {  // 안 했으면
+            BoardHeart.style.display = "block";  // 빈 하트 보이게
         }
 
-        let flagBookmark = 0;
-        for(let i of board.bookmarkList){
+        let flagBookmark = 0;  // 북마크를 구별할 변수
+        for(let i of board.bookmarkList){  // 북마크 리스트에 로그인한 회원의 번호가 있으면 변수++
             if(loginMemberNo == i.memberNo){
                 flagBookmark++;
                 break;
             }
         }
-        markOn.style.display = "none";
-        markOff.style.display = "none";
-        if(flagBookmark>0){
-            markOn.style.display = "block";
-        } else {
-            markOff.style.display = "block";
+        markOn.style.display = "none";  // 파란 북마크 안보이게 초기화
+        markOff.style.display = "none";  // 흰 북마크 안보이게 초기화
+        if(flagBookmark>0){  // 북마크를 했으면
+            markOn.style.display = "block";  // 파란 북마크 보이게
+        } else {  // 안 했으면
+            markOff.style.display = "block";  // 흰 북마크 보이게
         }
-
-
-        boardNumber = board.boardNo;
-        tempBoardNo = board.boardNo;
-        boardMember = board.memberNo;
 
         // 게시글 편집 버튼 나타나게 하기
         const editing = document.querySelectorAll(".editing");
-        
-        
 
         for(let i=0;i<editing.length;i++){  // 편집, 삭제 버튼 감추기
             editing[i].style.display = 'none';
-            
         }
 
         if(loginMemberNo == boardMember){  // 로그인회원과 게시글회원이 같으면 보여주기
             for(let i=0;i<editing.length;i++){
                 editing[i].style.display = 'block';
             }
-            
         }
 
 
-        const porfileRac = document.querySelector(".porfileRac");
-        const boardMemberInfo = document.querySelector(".boardMemberInfo");
-        const BoardPost = document.querySelector(".BoardPost");
-        const likeCountSpan = document.querySelector(".likeCount");
-        likeCountSpan.innerHTML = '';
-        porfileRac.innerHTML = '';
-        boardMemberInfo.innerHTML = '';
-        BoardPost.innerHTML = '';
-        Boardcontent1.innerHTML = '';
+        const porfileRac = document.querySelector(".porfileRac");  // 게시글 오른쪽 프로필 이미지
+        const boardMemberInfo = document.querySelector(".boardMemberInfo");  // 게시글 오른쪽 닉네임, 한줄 소개
+        const BoardPost = document.querySelector(".BoardPost");  // 게시글 내용
+        const likeCountSpan = document.querySelector(".likeCount");  // 좋아요 수
+        likeCountSpan.innerHTML = '';  // 좋아요 수 초기화
+        porfileRac.innerHTML = '';  // 게시글 프로필 초기화
+        boardMemberInfo.innerHTML = '';  // 게시글 닉네임, 한줄 소개 초기화
+        BoardPost.innerHTML = '';  // 게시글 내용 초기화
+        Boardcontent1.innerHTML = '';  // 게시글 내용+좋아요 수 초기화
         
-        for(let i=0; i<board.imageList.length;i++){
-            const slideDiv = document.createElement("div");
-            slideDiv.classList.add("slide_item");
+        for(let i=0; i<board.imageList.length;i++){  // 게시글 이미지리스트를 하나씩
+            const slideDiv = document.createElement("div");  // div 생성
+            slideDiv.classList.add("slide_item");  // div 에 클래스 추가
             
-            const img = document.createElement("img");
-            img.src = board.imageList[i].imgAddress;
-            img.classList.add("slide-img");
-            slideDiv.append(img);
+            const img = document.createElement("img");  // img 태그 추가
+            img.src = board.imageList[i].imgAddress;  // scr 속성 으로 imgAddress
+            img.classList.add("slide-img");  // 클래스 추가
+            slideDiv.append(img);  // 슬라이드에 추가
             
-            prevBtn.before(slideDiv);
+            prevBtn.before(slideDiv);  // 이전버튼 요소 전에 추가
         }
 
         
 
-        for(let i=0; i<board.commentList.length;i++){
-            if(board.commentList[i].parentNo == 0){
+        for(let i=0; i<board.commentList.length;i++){  // 댓글 리스트 하나씩
+            if(board.commentList[i].parentNo == 0){  // 부모 댓글이 없으면
 
-                arr.push(board.commentList[i].commentNo);
-                const postContentDiv = document.createElement("div");
+                arr.push(board.commentList[i].commentNo);  // 배열에 댓글번호 하나씩 담기
+                const postContentDiv = document.createElement("div");  // 댓글 구역 만들어서 추가
                 postContentDiv.classList.add("postcontent1");
 
                 const boardPostDiv = document.createElement("div");
@@ -392,7 +314,7 @@ function selectBoardList(boardNo){
                 nameA.innerText = board.commentList[i].memberNickname;
 
 
-                let beforeCommentContent = board.commentList[i].commentContent;
+                let beforeCommentContent = board.commentList[i].commentContent;  // 댓글 내용 XSS 돌려놓기
                 beforeCommentContent =  beforeCommentContent.replaceAll("&amp;", "&");
                 beforeCommentContent =  beforeCommentContent.replaceAll("&lt;", "<");
                 beforeCommentContent =  beforeCommentContent.replaceAll("&gt;", ">");
@@ -425,7 +347,7 @@ function selectBoardList(boardNo){
                 }
                 
                 for(let j=0; j<board.commentList.length;j++){
-                    if(board.commentList[i].commentNo == board.commentList[j].parentNo){
+                    if(board.commentList[i].commentNo == board.commentList[j].parentNo){  // 자식 댓글들 부모 댓글 아래로 구역 만들어서 추가
                         const postContentDiv1 = document.createElement("div");
                         postContentDiv1.classList.add("postcontent2");
 
@@ -475,7 +397,7 @@ function selectBoardList(boardNo){
                         const lastDiv1 = document.createElement("div");
                         lastDiv1.classList.add("lastDivadd1")
                         lastDiv1.append(boardPostDiv1, div1);
-                        if(board.commentList[j].memberNo == loginMemberNo){
+                        if(board.commentList[j].memberNo == loginMemberNo){  // 로그인한 회원이 쓴 자식 댓글이면 x버튼 추가
 
                             let item = 
                                 `<div class="deleteComment">
@@ -491,7 +413,7 @@ function selectBoardList(boardNo){
                 const lastDiv = document.createElement("div");
                 lastDiv.classList.add("lastDivadd")
                 lastDiv.append(boardPostDiv, div);
-                if(board.commentList[i].memberNo == loginMemberNo){
+                if(board.commentList[i].memberNo == loginMemberNo){  // 로그인 회원이 쓴 부모 댓글이면 X버튼 추가
                     let item = 
                         `<div class="deleteComment">
                             <button type="button" onclick="removeComment(event, ${board.commentList[i].commentNo})">×</button>
@@ -506,7 +428,6 @@ function selectBoardList(boardNo){
 
         // 답글 보기 누르면 댓댓글 보이는 이벤트
         const secondComment = document.querySelectorAll(".secondComment");
-        
         for(let i=0;i<secondComment.length;i++){
             secondComment[i].addEventListener("click", e=>{
                 let siblings = getSiblings(e.target);
@@ -582,7 +503,7 @@ function selectBoardList(boardNo){
         nameA.innerText = board.memberNickname;
         const contentP = document.createElement("p");
 
-        if(board.boardContent != null){
+        if(board.boardContent != null){  // 게시글 내용 XSS 처리 다시 보여주기
             
             let beforeMainContent = board.boardContent;
             beforeMainContent =  beforeMainContent.replaceAll("&amp;", "&");
@@ -592,7 +513,7 @@ function selectBoardList(boardNo){
             contentP.innerText = beforeMainContent;
         }
 
-
+        // 게시글, 수정, 취소 버튼
         const input = document.createElement("textarea");
         input.classList.add("hiddenEditing");
 
@@ -637,7 +558,7 @@ function selectBoardList(boardNo){
         const editingCancel = document.querySelector(".editingCancel");
         const hashPost = document.querySelectorAll(".hashs");
         // 게시글 편집 버튼 클릭 시
-        for(let i=0;i<boardEditing.length;i++){  // 없애고 새로 만드는걸로 추후에 수정...
+        for(let i=0;i<boardEditing.length;i++){
             boardEditing[i].addEventListener("click", ()=>{
                 BoardPost.querySelector(".innerDiv>p").style.display = 'none';
                 hiddenEditing.style.display = 'block';
@@ -1025,12 +946,12 @@ const hashList1 = document.querySelector(".hashList");
 hashtagInput.addEventListener("keyup", e=>{
     hashList1.innerHTML = '';
     const data = e.target.value;
-    if(data.length>0 && data[0] != '#'){
+    if(data.length>0 && data[0] != '#'){  // 해시태그를 1자 이상 입력하고 #으로 시작하지 않을 때
         fetch("/board/hashtag?hashtagName="+data)
         .then(resp => resp.json())
         .then(hashList => {
             for(let i=0;i<hashList.length;i++){
-                hashList1.innerHTML += `<li onclick="addHashList(this)">#${hashList[i].hashtagName}</li>`
+                hashList1.innerHTML += `<li onclick="addHashList(this)">#${hashList[i].hashtagName}</li>`  // 기존에 있는 해시태그를 리스트로 보여줌
             }
         })
     }
@@ -1114,7 +1035,7 @@ for(let i=0;i<boardLike.length;i++){
             likeCount.innerText = board.likeCount+"명이 좋아합니다";
 
             if(window.location.pathname.split("/")[window.location.pathname.split("/").length-1] == loginMemberNo){   // 게시글이 로그인 회원의 게시글이면
-
+                // 좋아요 구역에 게시물 추가
                 if(check == 0 && likeposttab.querySelector(`* [src="${board.thumbnail}"]`) == null){
 
                     if(likeposttab.querySelector("div").innerText == "게시글이 존재하지 않습니다."){
@@ -1202,7 +1123,7 @@ for(let i=0;i<boardMark.length;i++){
 
             if(window.location.pathname.split("/")[window.location.pathname.split("/").length-1] == loginMemberNo){
 
-
+                // 컬렉션 구역에 게시물 추가
                 if(check1 == 0 && bookmarkposttab.querySelector(`* [src="${board.thumbnail}"]`) == null){
 
                     if(bookmarkposttab.querySelector("div").innerText == "게시글이 존재하지 않습니다."){
@@ -1480,7 +1401,7 @@ function getImageFiles(e) {
     });
     
 }
-
+// 슬라이드 요소 생성 추가
 function createElement(e, file) {
     const div = document.createElement('div');
     div.classList.add("slide_item2");
@@ -1513,12 +1434,10 @@ BackIcon.addEventListener("click", () => {
         slide_item2[i].remove();
     }
 })
+
 /* 새 게시글 작성 내용 글자수 카운트 */
-
-
 NewWriteTextArea.addEventListener("input", () => {
     const count = NewWriteTextArea.innerText.length;
-
     NewWriteTextAreaCount.innerHTML = count;
 })
 // -----------------------------------------------------------------------------------------
@@ -1920,8 +1839,8 @@ function followFn(){
     }) // 예외 발생 시 처리하는 부분
 }
 
-
-document.addEventListener("DOMContentLoaded",()=>{
+// 게시글, 좋아요, 컬렉션 숫자
+document.addEventListener("DOMContentLoaded",()=>{ 
     const params = new URL(location.href).searchParams;
     const boardNo = params.get("boardNo");
     

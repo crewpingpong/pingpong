@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ajaxMapper">
-
+<!-- 최근태 -->
 	<resultMap type="Member" id="member_rm">
 		<id property="memberNo" column="MEMBER_NO" />
 		<result property="memberEmail" column="MEMBER_EMAIL" />
@@ -47,7 +47,6 @@
 		WHERE MEMBER_EMAIL = #{email}
 		AND MEMBER_DEL_FL ='N'
 	</select>
-	<!-- resultMap 은 언제 사용? 조회 결과 컬럼명과 DTO의 필드명이 다를 때 사용 -->
 
 	<!-- 닉네임이 일부라도 일치하는 모든 회원 조회 (40명) -->
 	<select id="selectAllNickname" resultMap="member_rm">
@@ -95,7 +94,6 @@
 
 
 	<!-- 닉네임으로 전화번호 조회 -->
-	<!-- parameterType : 전달 받은 파라미터 자료형 작성(선택사항) 작성 안하면 TypeHandler 가 알아서 처리 -->
 	<select id="selectMemberTel" resultType="string">
 		SELECT MEMBER_TEL
 		FROM

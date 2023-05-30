@@ -43,29 +43,29 @@ public class BoardController2 {
 			, HttpSession session
 			) throws IllegalStateException, IOException{
 		
-		board.setMemberNo(loginMember.getMemberNo());
+		board.setMemberNo(loginMember.getMemberNo());  // 로그인 회원의 번호를 게시물 회원의 번호에 대입
 		
 		String webPath = "/resources/images/boardImage/";  // 저장경로
 		
-		String filePath = session.getServletContext().getRealPath(webPath);
+		String filePath = session.getServletContext().getRealPath(webPath);  // 실제 저장 경로
 		
-    	int boardNo = service.boardInsert(board, images, webPath, filePath);
+    	int boardNo = service.boardInsert(board, images, webPath, filePath);  // 서비스 호출 게시글 INSERT
     	
     	// 해시태그 처리
     	if(!hashtagLists.isEmpty()) {
     		
-    		List<Hashtag> hashtags = new ArrayList<Hashtag>();
+    		List<Hashtag> hashtags = new ArrayList<Hashtag>();  // 해시태그 리스트 생성
     		
     		String[] hashs = hashtagLists.split(",");  // 파라미터로 가져온 해시태그 "," 구분자로 나눠서 배열로 만듦
     		
-    		for(int i=0;i<hashs.length;i++) {
+    		for(int i=0;i<hashs.length;i++) {  // 해시태그 리스트에 하나씩 담음
     			Hashtag hash = new Hashtag();
     			hash.setHashtagName(hashs[i]);
     			hash.setBoardNo(boardNo);
     			hashtags.add(hash);
     		}
 
-    		service.hashInsert(hashtags);    		
+    		service.hashInsert(hashtags);  // 해시태그 DB에 INSERT    		
     		
     	}
     	
@@ -80,14 +80,13 @@ public class BoardController2 {
 		return "redirect:/mypage/" + loginMember.getMemberNo();
 	}
 	
+	// 게시글 삭제
 	@GetMapping("/delete/{boardNo}")
 	public String deleteBoard(@PathVariable("boardNo") String boardNo
 							, String memberNo
 							, RedirectAttributes ra) {
 		
-		System.out.println(memberNo);
-		
-		int result = service.deleteBoard(boardNo);
+		int result = service.deleteBoard(boardNo);  // 게시글 번호로 UPDATE 요청
 		
 		String message = null;
 		if(result>0) {
