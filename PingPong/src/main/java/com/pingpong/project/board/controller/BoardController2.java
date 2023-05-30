@@ -105,30 +105,44 @@ public class BoardController2 {
     @PostMapping("/reportContent")
     public String reportContent(
     		Declaration declaration
-    		,@SessionAttribute("loginMember") Member loginMember
-    		,@RequestParam(value = "reportTitle") String reportTitle
-    		,RedirectAttributes ra
-    		,@RequestParam(value = "boardNo") int boardNo
-    		,@RequestParam(value = "indictmentContent") String indictmentContent
+    		// @ModelAttribute
+    		// - DTO(또는 VO)와 같이 사용하는 어노테이션
+    		// - 전달 받은 파라미터의 name 속성 값이
+    		//	 같이 사용되는 DTO의 필드명과 같다면
+    		//   자동으로 setter를 호출해서 필드에 값을 세팅
+    		
+    		
+    		// *** @ModelAttribute 사용 시 주의사항 ****
+    		// - DTO에 기본 생성자가 필수로 존재해야 한다
+    		// - DTO에 stter가 필수로 존재해야 한다
+    		
+    		// *** @ModelAttribute 어노테이션은 생략이 가능하다 ***
+    		
+    		// *** @ModelAttribute를 이용해 값이 필드에 세팅된 객체를
+    		//		"커맨드 객체"라고 한다 ***
+    		,@SessionAttribute("loginMember") Member loginMember // 로그인한 멤버 정보를 세션에 등록
+    		,@RequestParam(value = "reportTitle") String reportTitle // 제목 가져오기
+    		,RedirectAttributes ra // 리다이렉트 시 데이터 전달용 객체
+    		,@RequestParam(value = "boardNo") int boardNo // 게시글 번호 가져오기
+    		,@RequestParam(value = "indictmentContent") String indictmentContent //신고 내용 가져오기
     		) {
     	
+    	// DTO 에 파라미터 값 세팅
     	declaration.setBoardNo(boardNo);
     	declaration.setMemberNo(loginMember.getMemberNo());
     	declaration.setReportTitle(reportTitle);
     	declaration.setIndictmentContent(indictmentContent);
     	
-    	int result = service.insertreport(declaration);
-
-    	System.out.println(result);
+    	int result = service.insertreport(declaration); // 서비스 호출 후 결과값 저장
     	
-    	String message = "";
+    	String message = ""; 
     	
     	if(result>0) {
     		message = "신고되었습니다.";
     		ra.addFlashAttribute("message",message);
     	}else {
     		message = "신고에 실패했습니다";
-    		ra.addFlashAttribute("message",message);
+    		ra.addFlashAttribute("message",message); // redirect 되면서 보여줄 메세지
     	}
     	return "redirect:/";
     }
