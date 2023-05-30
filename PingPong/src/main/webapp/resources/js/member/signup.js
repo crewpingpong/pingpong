@@ -398,12 +398,12 @@ if (memberNickname != null) {
 }
 
 /* 약관 */
-const checkTerms = document.getElementById("checkTerms")
-const checkTermsAll = document.getElementById("checkTermsAll")
+const checkTerms = document.getElementById("checkTerms");
+const checkTermsAll = document.getElementById("checkTermsAll");
 
-const checkTerms1 = document.getElementById("checkTerms1")
-const checkTerms2 = document.getElementById("checkTerms2")
-const checkTerms3 = document.getElementById("checkTerms3")
+const checkTerms1 = document.getElementById("checkTerms1");
+const checkTerms2 = document.getElementById("checkTerms2");
+const checkTerms3 = document.getElementById("checkTerms3");
 
 let isAllChecked = false;
 
@@ -416,9 +416,22 @@ function toggleCheckboxes() {
     checkTermsAll.checked = isAllChecked;
     checkObj1fjfjfjfjfj.checkTerm1 = isAllChecked;
     checkObj1fjfjfjfjfj.checkTerm2 = isAllChecked;
-}
+};
 checkTerms.addEventListener("click", toggleCheckboxes);
 checkTermsAll.addEventListener("click", toggleCheckboxes);
+
+let checkTerms1Boolean = false;
+checkTerms1.addEventListener("click", ()=>{
+    checkTerms1Boolean = !checkTerms1Boolean
+    checkTerms1.checked = checkTerms1Boolean;
+    checkObj1fjfjfjfjfj.checkTerm1 = checkTerms1Boolean;
+});
+let checkTerms2Boolean = false;
+checkTerms2.addEventListener("click", ()=>{
+    checkTerms2Boolean = !checkTerms2Boolean
+    checkTerms2.checked = checkTerms2Boolean;
+    checkObj1fjfjfjfjfj.checkTerm2 = checkTerms2Boolean;
+});
 
 
 /* 약관 확인하기 창 열기 */

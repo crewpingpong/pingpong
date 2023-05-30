@@ -18,8 +18,13 @@ import com.pingpong.project.board.model.dto.Declaration;
 import com.pingpong.project.board.model.dto.Inquiry;
 import com.pingpong.project.manager.service.ManagerService;
 
+
+//@SessionAttribute("loginMember") Member loginMember
+// : Session에서 얻어온 " loginMember"에 해당하는 객체를
+// 매개 변수 Member loginMember에 저장
 @SessionAttributes({"loginMember"})
-@RequestMapping("/manager")
+@RequestMapping("/manager")// 공통된 주소 앞부분 작성
+						   // member로 시작하는 요청은 해당 컨트롤러에서 처리
 @Controller
 public class ManagerController {
 
@@ -30,39 +35,53 @@ public class ManagerController {
 	@GetMapping("/")
 	public String managerPage(
 			Model model
+			// Model : 데이터 전달용 객체 
+			// -> 데이터를 K : V 형식으로 담아서 전달
+			// -> 기본적으로 request scope
+			// -> @SessionAttributes 어노테이션과 함께 사용 시 Session scope
 			,@RequestParam(value="cp", required=false, defaultValue="1") int cp
+		    // @RequestParam(value="name", required = "fasle",defaultValue="1")
+		    // [속성]
+		    // value : 전달 받은 input 태그의 name 속성값
+		   
+		    // required : 입력된 name 속성값 파라미터 필수 여부 지정(기본값 true)
+		    // -> required = true인 파라미터가 존재하지 않는다면 400 Bad Request 에러 발생
+		    // -> required = true인 파라미터가 null인 경우에도 400 Bad Request
+
+		    // defaultValue : 파라미터 중 일치하는 name 속성 값이 없을 경우에 대입할 값 지정.
+		    // -> required = false인 경우 사용
 			, @RequestParam Map<String, Object> paramMap
-			) {
+			) {//검색 input값 select/option + value 가져오기 
 		
-		if(paramMap.get("key") == null) {
-		Map<String, Object> map = service.selectMemberList(cp);
+		if(paramMap.get("key") == null) { //검색창에 입력된 값이 없으면 목록 전체 조회
+		Map<String, Object> map = service.selectMemberList(cp); // String,Object 타입 map에 서비스 호출해서 리스트 반환받기(전달할 매개변수는 cp)
 		
-		model.addAttribute("map",map);
+		model.addAttribute("map",map); // model에 반환된 map 담기
 		
 		}else {
 			
 			Map<String, Object> map = service.selectMemberList(paramMap, cp); // 오버로딩
-			
+			// String,Object 타입 map에 서비스 호출해서 리스트 반환받기(전달할 매개변수는 cp,paramMap)
 			model.addAttribute("map", map);
 		}
 		
 		
-		return "manager/managerExistingMember";
+		return "manager/managerExistingMember"; // 가입 회원 관리 페이지로 이동
 	}
 	
 	// 체크된 회원 탈퇴 처리
 	@PostMapping("/delete")
 	public String managerPageDelete(
 			@RequestParam(name = "choicebox", required = false) String[] choicebox) {
-		
-		for(int i=0; i<choicebox.length;i++) {
+			// 체크박스가 체크된 목록 파라미터 값 배열로 가져오기 
+		for(int i=0; i<choicebox.length;i++) { // choicebox 배열의 길이만큼 반복
 			
-		 int boardNo = Integer.parseInt(choicebox[i]);
-		 int result = service.deleteId(boardNo);
+		 int boardNo = Integer.parseInt(choicebox[i]); // choicebox는 String 배열이기 때문에 int로 형변환
+		 int result = service.deleteId(boardNo); // delete , insert 는 성공하면 1 , 실패시 0 반환 이기 때문에 int result로 성공 실패 여부 값 저장
 		}
 		
 		
-		return "redirect:/manager/";
+		return "redirect:/manager/"; // 탈퇴 처리 성공 시 관리자 페이지 첫 화면으로 이동
 	}
 	
 

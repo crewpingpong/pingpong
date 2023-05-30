@@ -7,19 +7,6 @@ import com.pingpong.project.search.model.dto.SearchTag;
 
 public interface AjaxService {
 
-//	/** 이메일로 닉네임 조회
-//	 * @param email
-//	 * @return
-//	 */
-//	String selectNickname(String email);
-//
-//	/** 닉네임으로 전화번호 조회
-//	 * @param nickname
-//	 * @return
-//	 */
-//	String selectMemberTel(String nickname);
-
-	
 	/** 이메일 중복 검사
 	 * @param email
 	 * @return result
@@ -31,8 +18,6 @@ public interface AjaxService {
 	 * @return result
 	 */
 	int checkNickname(String nickname);
-
-
 
 	/** 닉네임이 일부라도 일치하는 모든 회원 조회 (40명)
 	 * @param input

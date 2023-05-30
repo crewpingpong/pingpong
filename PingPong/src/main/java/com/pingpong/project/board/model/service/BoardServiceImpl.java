@@ -32,15 +32,14 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public Board like(Map<String, Integer> paramMap) {
         int result = 0;
-        if(paramMap.get("check") == 0) {
-            result = dao.insertBoardLike(paramMap);
-        } else {
-            result = dao.deleteBoardLike(paramMap);
+        if(paramMap.get("check") == 0) {  // 좋아요를 하지 않았다면
+            result = dao.insertBoardLike(paramMap);  // INSERT 요청
+        } else {  // 좋아요를 했다면
+            result = dao.deleteBoardLike(paramMap);  // DELETE 요청
         }
         
         if(result == 0) return null;
         Board board = dao.select(paramMap.get("boardNo"));
-//        int count = dao.countBoardLike(paramMap.get("boardNo"));
         return board;
     }
 
@@ -48,10 +47,10 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Board boardMarkup(Map<String, Integer> paramMap) {
 		int result = 0;
-        if(paramMap.get("check") == 0) {
-            result = dao.insertBoardMarkup(paramMap);
-        } else {
-            result = dao.deleteBoardMarkup(paramMap);
+        if(paramMap.get("check") == 0) {  // 북마크를 하지 않았다면
+            result = dao.insertBoardMarkup(paramMap);  // INSERT 요청
+        } else {  // 북마크를 했다면
+            result = dao.deleteBoardMarkup(paramMap);  // DELETE 요청
         }
         
         if(result == 0) return null;
@@ -69,6 +68,7 @@ public class BoardServiceImpl implements BoardService{
 	// 게시글 수정
 	@Override
 	public Board boardEditing(Map<String, Object> paramMap) {
+		// 수정 게시글 XSS 방지 처리
 		String newContent = Util.XSSHandling((String)paramMap.get("boardContent"));
 		paramMap.put("boardContent", newContent);
 		

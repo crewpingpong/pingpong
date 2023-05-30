@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.member.model.service.MemberService;
-
+//최근태
 @Controller
 @RequestMapping("/member")
 @SessionAttributes({ "loginMember" })
@@ -57,27 +57,25 @@ public class MemberController {
 			model.addAttribute("loginMember", loginMember);
 			Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail());
 			
-			if(saveId != null) { // 체크 되었을 때
-				cookie.setMaxAge(60*60*24*30); // 초 단위
+			if(saveId != null) {
+				cookie.setMaxAge(60*60*24*30);
 			}else {
 				cookie.setMaxAge(0);
 			}
 					
 			cookie.setPath("/"); 
 			resp.addCookie(cookie);
-		}else { // 로그인 실패 시
+		}else {
 			path += referer;
 			ra.addFlashAttribute("message", "아이디 또는 비밀번호가 일치하지 않습니다.");
 		}
 		return path;
 	}
-
 	@GetMapping("/logout")
 	public String logout(SessionStatus status, HttpSession session) {
 		status.setComplete();
 		return "redirect:/";
 	}
-	
 	// 비밀번호 찾기 이동
 	@GetMapping("/pwSearch")
 	public String pwSearch() {
@@ -102,14 +100,12 @@ public class MemberController {
 		}
 		return "member/pwReset";
 	}
-
 	// 회원 가입 첫번째 페이지로 이동
 	@RequestMapping("/signup")
 	public String signup() {
 
 		return "member/signup";
 	}
-
 	// 회원 가입 두번째 페이지로 이동
 	@GetMapping("/signupInfo")
 	public String signupInfo(Model model) {
@@ -119,7 +115,6 @@ public class MemberController {
 		
 		return "member/signupInfo";
 	}
-	
 	// 이메일 검사
 	@PostMapping("/pwSearch")
 	public String pwSearch(@RequestParam("memberEmail") String memberEmail,
@@ -141,7 +136,6 @@ public class MemberController {
 		}
 		return path;
 	}
-	
 	// 비번변경 인증키 검사
 	@PostMapping("/pwSearchCertNum")
 	public String pwSearchCertNum(HttpSession session, RedirectAttributes ra
@@ -161,7 +155,6 @@ public class MemberController {
 		
 		return path;
 	}
-	
 	// 비밀번호 변경
 	@PostMapping("/pwReset")
 	public String pwReset(HttpSession session, RedirectAttributes ra, @RequestParam("newMemberPw") String newMemberPw) {
@@ -187,7 +180,6 @@ public class MemberController {
 		return path;
 	}
 	
-	
 	// 회원 가입 진행 1페이지
 	@PostMapping("/signup")
 	public String signup(@RequestParam("memberEmail") String memberEmail, @RequestParam("memberPw") String memberPw,
@@ -203,7 +195,7 @@ public class MemberController {
 	@PostMapping("/signupInfo")
 	public String signupInfo(
 			HttpSession session, RedirectAttributes ra, Member inputMember, Model model) {
-		// 가입 성공 여부에 따라 주소 변경
+		
 		String path = "redirect:";
 		String message = null;
 		model.addAttribute("passSignup","passSignup");
@@ -218,14 +210,10 @@ public class MemberController {
 		inputMember.setMemberEmail(memberEmail);
 		inputMember.setMemberPw(memberPw);
 		
-
-		
-		// 회원 가입 서비스 호출
-		// DB에 DML 수행 시 성공 행의 개수 (int형) 반환
 		int result = service.signupInfo(inputMember);
 		
 		if (result > 0) {
-			path += "/member/login"; // 메인페이지
+			path += "/member/login";
 			
 			message = inputMember.getMemberNickname() + "님의 가입을 환영합니다.";
 
@@ -233,11 +221,10 @@ public class MemberController {
 			session.removeAttribute("memberPw");
 
 		} else {
-			// path += "/member/signUp"; // 절대 경로
-			path += "signup"; // 상대 경로
+			path += "signup"; 
 			message = "회원 가입 실패";
 		}
-		// 리다이렉트 시 session에 잠깐 올라갔다 내려오도록 세팅
+		
 		ra.addFlashAttribute("message", message);
 
 		return path;

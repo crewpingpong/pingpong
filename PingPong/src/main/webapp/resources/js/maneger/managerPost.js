@@ -132,6 +132,7 @@ if(selectMemberRestoreExisting != null){
 const PostDelBtn = document.getElementById("PostDelBtn");
 const PostForm = document.getElementById("PostForm");
 
+// 삭제 버튼을 눌렀을 시 PostForm 제출
 if(PostDelBtn != null){
   
   PostDelBtn.addEventListener("click",()=>{
@@ -142,6 +143,7 @@ if(PostDelBtn != null){
 
 const PostReBtn = document.getElementById("PostReBtn");
 
+// 복구 버튼을 눌렀을 시 form 태그 요청 주소 변경
 if(PostReBtn != null){
 
   PostReBtn.addEventListener("click",()=>{
@@ -161,16 +163,16 @@ const searchQuery = document.querySelector("#searchQuery");
 const options = document.querySelectorAll("#searchKey > option");
 
 (()=>{
-  const params = new URL(location.href).searchParams;
+  const params = new URL(location.href).searchParams; // https://velog.io/@gillog/javaScript-URL-Parameter-%EA%B0%92-%EB%8B%A4%EB%A3%A8%EA%B8%B0
 
   const key = params.get("key"); // i,n,e 중 하나
   const query = params.get("query"); // 검색어
 
   if(key != null){ 
-      searchQuery.value = query; 
-      for(let op of options){
-          if(op.value == key){
-              op.selected = true;
+      searchQuery.value = query; // input 태그 안에 입력된 값
+      for(let op of options){ // select태그 내 options 값 반복문
+          if(op.value == key){ // 옵션의 값으로 key 설정 
+              op.selected = true; // 선택된 옵션만 true
           }
       }
   }
@@ -179,10 +181,10 @@ const options = document.querySelectorAll("#searchKey > option");
 
 boardSearch.addEventListener("submit", e => {
 
-  if(searchQuery.value.trim().length == 0){ 
-      e.preventDefault(); 
+  if(searchQuery.value.trim().length == 0){ //만약 검색에 아무것도 입력되지 않았을 경우
+      e.preventDefault(); // 제출 이벤트 제거
 
-      location.href = location.pathname; 
+      location.href = location.pathname; //pathname = url에 포함된 pathname값
 
   }
 
