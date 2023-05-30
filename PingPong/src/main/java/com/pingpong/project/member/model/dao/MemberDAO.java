@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.pingpong.project.member.model.dto.Member;
-
+//최근태
 @Repository
 public class MemberDAO {
 

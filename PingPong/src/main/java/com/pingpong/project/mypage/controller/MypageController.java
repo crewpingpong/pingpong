@@ -261,7 +261,7 @@ public class MypageController {
 	    }
 	    
 	    
-
+//		최근태
 	    if (interestArray != null && interestArray.length > 0) {
 		    List<String> selectedInterestList = Arrays.asList(interestArray);
 			/* *** 관심분야 *** */
@@ -333,7 +333,7 @@ public class MypageController {
 			message = "회원 프로필 정보 수정 실패";
 		}
 		
-		
+//		최근태
 		if (techArray != null && techArray.length > 0) {
 			List<String> selectedtechList = Arrays.asList(techArray);
 			/* *** 지식/기술 리스트 *** */
@@ -356,7 +356,7 @@ public class MypageController {
 			// 선택한 techImgList 조회 전 모두 삭제(체크 해제 구현을 위한)
 			int techListDelete =  service.techListDeleteAll(loginMember.getMemberNo());
 		}
-		
+//		최근태
 		if (SNSArray != null && SNSArray.length > 0) {
 			List<String> selectedSnsList = Arrays.asList(SNSArray);
 			/* *** SNS 리스트 *** */
