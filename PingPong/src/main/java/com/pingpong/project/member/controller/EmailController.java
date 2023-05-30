@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.pingpong.project.member.model.service.EmailService;
 
-
+//최근태
 @Controller
 @RequestMapping("/sendEmail")
 @SessionAttributes("authKey")

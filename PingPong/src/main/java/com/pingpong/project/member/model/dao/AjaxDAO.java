@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import com.pingpong.project.member.model.dto.Member;
 import com.pingpong.project.search.model.dto.SearchTag;
-
-@Repository // DB 연결 의미 + bean 등록
+//최근태
+@Repository
 public class AjaxDAO {
 	
-	@Autowired // bean 중에서 타입이 같은 객체를 DI(의존성 주입)
+	@Autowired
 	private SqlSessionTemplate sqlSession;
 
 	// 이메일로 닉네임 조회
