@@ -475,24 +475,23 @@ public class MypageController {
     		@RequestParam(value="backgroundImage", required=false) MultipartFile backgroundImage // 배경화면 이미지
     		,@SessionAttribute("loginMember") Member loginMember  // 회원 번호 확인용
     		, RedirectAttributes ra  // 메시지 전달용
-    		, HttpSession session  //
+    		, HttpSession session  // 세션 스코프
     		) throws IllegalStateException, IOException{
     	
     	String webPath = "/resources/images/mypage/";  // 저장경로
 		
-		String filePath = session.getServletContext().getRealPath(webPath);
-    	int result = service.backgroundUpdate(loginMember.getMemberNo(), backgroundImage, webPath, filePath);
+		String filePath = session.getServletContext().getRealPath(webPath);  // 파일이 실제로 저장될 경로
+    	int result = service.backgroundUpdate(loginMember.getMemberNo(), backgroundImage, webPath, filePath);  // 서비스 요청
 
-    	String message = null;
-		if(result > 0) {  // 성공 시
+    	String message = null;  // 메시지 출력 변수
+		if(result > 0) {  // 배경화면 변경 성공 시
 			message = "배경화면이 변경되었습니다";
-		} else {
-
+		} else {  // 실패 시
 			message = "배경화면 등록 실패......";
 		}
-		ra.addFlashAttribute("message", message);
+		ra.addFlashAttribute("message", message);  // 잠깐 세션 스코프로 전달
 
-		return "redirect:/mypage/" + loginMember.getMemberNo();
+		return "redirect:/mypage/" + loginMember.getMemberNo();  // 마이페이지로 리다이렉트 요청
     }
 
 }

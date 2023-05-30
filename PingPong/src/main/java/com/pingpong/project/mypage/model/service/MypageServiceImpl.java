@@ -161,23 +161,23 @@ public class MypageServiceImpl implements MypageService{
 		
 		map.put("memberNo", memberNo);  // 회원번호 담기
 		
-		String fileName = backgroundImage.getOriginalFilename();
+		String fileName = backgroundImage.getOriginalFilename();  // 파일의 진짜 이름 가져오기
 		
 		String reName = Util.fileRename(fileName);  // 파일 이름 변경
 		
 		map.put("backgroundImage", webPath+reName);  // 경로와 변경된 파일 이름 합쳐서 전달
 		
-		int result = dao.backgroundUpdate(map);
-		System.out.println(result);
-		if(result == 0) {
-			result = dao.backgroundInsert(map);
+		int result = dao.backgroundUpdate(map);  // 배경화면 UPDATE 요청 DAO
+		
+		if(result == 0) {  // 변경이 되지 않는다면
+			result = dao.backgroundInsert(map);  // 배경화면 새로 INSERT 요청
 		} 
-		if(result != 0) {
-			backgroundImage.transferTo(new File(filePath+reName));
-		} else {
-			throw new FileUploadException();
+		if(result != 0) {  // 변경 또는 삽입이 됐다면
+			backgroundImage.transferTo(new File(filePath+reName));  // 서버 컴퓨터에 파일 저장
+		} else {  // 실패 시
+			throw new FileUploadException();  // 파일 예외 처리  
 		}
-		return result;
+		return result;  // 결과 반환
 	}
 
 	// 게시글 가져오기
