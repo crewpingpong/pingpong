@@ -12,18 +12,6 @@ import com.pingpong.project.board.model.dto.Hashtag;
 
 public interface BoardService {
 
-	/** 게시글 상세 조회
-	 * @param boardCode
-	 * @return board
-	 */
-//	Board selectBoard(int boardCode);
-
-	/** 좋아요 여부 확인
-	 * @param map
-	 * @return result
-	 */
-//	int boardLikeCheck(Map<String, Object> map);
-
 	/** 게시글 상세 조회 (AJAX)
 	 * @param boardNo
 	 * @return board

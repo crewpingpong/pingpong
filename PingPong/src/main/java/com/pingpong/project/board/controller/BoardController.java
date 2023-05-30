@@ -59,7 +59,6 @@ public class BoardController {
     	comment.setMemberNo((Integer)paramMap.get("memberNo"));
     	comment.setBoardNo((Integer)paramMap.get("boardNo"));
     	comment.setParentNo(((Integer)paramMap.get("parentNo")).intValue());
-    	System.out.println(comment);
     	return service.commentInsert(comment);
     }
     
