@@ -18,6 +18,8 @@
 
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
+    <%-- 박재경 --%>
+
     <!-- 내 정보 수정 Tab Menu -->
     <div class="myPage-content-container">
 

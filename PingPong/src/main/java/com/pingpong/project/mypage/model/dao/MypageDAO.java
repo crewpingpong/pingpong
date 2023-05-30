@@ -20,7 +20,7 @@ public class MypageDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	/** 회원 정보 수정 DAO
+	/** 회원 정보 수정 
 	 * @param updateMember
 	 * @return result
 	 */
@@ -57,6 +57,21 @@ public class MypageDAO {
 		return sqlSession.update("mypageMapper.secession", memberNo);
 	}
 	
+	/** 프로필 이미지 기본
+	 * @param memberNo
+	 * @return
+	 */
+	public int updateBasicProfile(int memberNo) {
+		return sqlSession.update("mypageMapper.updateBasicProfile", memberNo);
+	}
+
+	/**
+	 * @param map
+	 * @return
+	 */
+	public int profileInsert(Map<String, Object> map) {
+		return sqlSession.insert("mypageMapper.profileInsert", map);
+	}
 
 	/** 프로필 이미지 수정
 	 * @param map
@@ -127,7 +142,7 @@ public class MypageDAO {
 	
 	
 	
-	/** 전체 지식/기술 리스트 조회
+	/** 전체 techList 조회
 	 * @return
 	 */
 	public List<Tech> selectTechList() {
@@ -141,7 +156,7 @@ public class MypageDAO {
 		return sqlSession.selectList("mypageMapper.selectCheckTechList", memberNo);
 	}
 	
-	/** 선택된 지식/기술 한개씩 삽입
+	/** 선택된 techList 한개씩 삽입
 	 * @param t
 	 * @return
 	 */
@@ -149,9 +164,7 @@ public class MypageDAO {
 		return sqlSession.insert("mypageMapper.insertNewTechList", techMap);
 	}
 
-	/**
-	 * 지식/기술 삽입 전 전체 삭제
-	 * 
+	/** techList 삽입 전 전체 삭제
 	 * @param memberNo
 	 * @return
 	 */
@@ -159,9 +172,7 @@ public class MypageDAO {
 		return sqlSession.delete("mypageMapper.techListDeleteAll", memberNo);
 	}
 
-	/**
-	 * 선택한 techImgList 조회
-	 * 
+	/** 선택한 techImgList 조회
 	 * @param memberNo
 	 * @return List
 	 */
@@ -173,9 +184,7 @@ public class MypageDAO {
 	
 	
 	
-	
-
-	/** 전체 관심분야 리스트 조회
+	/** 전체 interestList 조회
 	 * @return
 	 */
 	public List<Interests> selectInterestList() {
@@ -209,10 +218,8 @@ public class MypageDAO {
 	
 	
 	
-	
-	
 
-	/** 전체 SNS 리스트 조회
+	/** 전체 SNSList 조회
 	 * @return
 	 */
 	public List<SNS> selectSNSList() {
@@ -235,7 +242,7 @@ public class MypageDAO {
 		return sqlSession.insert("mypageMapper.insertNewSnsList", s);
 	}
 
-	/** SNSList 전체 삭제 후 SNSList 삽입 진행
+	/** SNSList 전체 삭제
 	 * @param memberNo
 	 * @return
 	 */
@@ -283,28 +290,9 @@ public class MypageDAO {
 		return sqlSession.selectList("mypageMapper.selectSNSAddressList", memberNo);
 	}
 
-	/** 프로필 이미지 기본
-	 * @param memberNo
-	 * @return
-	 */
-	public int updateBasicProfile(int memberNo) {
-		return sqlSession.update("mypageMapper.updateBasicProfile", memberNo);
-	}
 
-	/**
-	 * @param map
-	 * @return
-	 */
-	public int profileInsert(Map<String, Object> map) {
-		return sqlSession.insert("mypageMapper.profileInsert", map);
-	}
 	
 	
-	
-	
-
-
-
 
 
 }

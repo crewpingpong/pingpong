@@ -40,10 +40,24 @@ public class MypageServiceImpl implements MypageService{
 		return dao.updateInfo(updateMember);
 	}
 	
+	
+	// 프로필 정보 수정
+	@Override
+	public int updateProfileInfo(MyPage updateMyPage) {
+		return dao.updateProfileInfo(updateMyPage);
+	}
+	
+	
+	// 프로필 이미지 기본
+	@Override
+	public int updateBasicProfile(int memberNo) {
+		return dao.updateBasicProfile(memberNo);
+	}
+	
+	
 	// 프로필 이미지 수정 서비스
 	@Override
 	public int updateProfile(MultipartFile profileImage, String reName, String webPath, String filePath, Member loginMember) throws IllegalStateException, IOException {
-		
 
 		
 		// 업로드 된 이미지가 있을 경우 <-> 없는 경우 (X 버튼)
@@ -86,32 +100,10 @@ public class MypageServiceImpl implements MypageService{
 		}
 		
 		return result;
-		
-		/*
-		Map<String, Object> map = new HashMap<>();  // map 으로 담아서 전달
-		
-		map.put("memberNo", memberNo);  // 회원번호 담기
-		
-		String fileName = backgroundImage.getOriginalFilename();
-		
-		String reName = Util.fileRename(fileName);  // 파일 이름 변경
-		
-		map.put("backgroundImage", webPath+reName);  // 경로와 변경된 파일 이름 합쳐서 전달
-		
-		int result = dao.backgroundUpdate(map);
-		System.out.println(result);
-		if(result == 0) {
-			result = dao.backgroundInsert(map);
-		} 
-		if(result != 0) {
-			backgroundImage.transferTo(new File(filePath+reName));
-		} else {
-			throw new FileUploadException();
-		}
-		return result;
-		*/
+
 	}
 
+	
 	// 비밀번호 변경 서비스
 	@Transactional(rollbackFor = Exception.class)
 	@Override
@@ -203,40 +195,35 @@ public class MypageServiceImpl implements MypageService{
 		return dao.selectBoardLikeList(memberNo);
 	}
 
-	// 프로필 정보 수정
-	@Override
-	public int updateProfileInfo(MyPage updateMyPage) {
-		return dao.updateProfileInfo(updateMyPage);
-	}
 
 	
 	
 	
-	// 전체 지식/기술 리스트 조회
+	// 전체 techList 조회
 	@Override
 	public List<Tech> selectTechList() {
 		return dao.selectTechList();
 	}
 
-	// 선택된 지식/기술 리스트 조회
+	// 체크한 techList 조회
 	@Override
 	public List<Tech> selectCheckTechList(int memberNo) {
 		return dao.selectCheckTechList(memberNo);
 	}
 
-	// 선택된 지식/기술 리스트 삽입
+	// techList 전체 삭제
+	@Override
+	public int techListDeleteAll(int memberNo) {
+		return dao.techListDeleteAll(memberNo);
+	}
+	
+	// 체크한 techList 삽입
 	@Override
 	public int insertNewTechList(Map<String, Object> techMap) {
 		return dao.insertNewTechList(techMap);
 	}
 
-	// 지식/기술 리스트 전체 삭제
-	@Override
-	public int techListDeleteAll(int memberNo) {
-		return dao.techListDeleteAll(memberNo);
-	}
-
-	// 선택한 techImgList 조회
+	// 체크한 techImgList 조회
 	@Override
 	public List<Tech> seletCheckTechImgList(int memberNo) {
 		return dao.seletCheckTechImgList(memberNo);
@@ -245,66 +232,60 @@ public class MypageServiceImpl implements MypageService{
 	
 	
 	
-
-
 	
-	
-
-	
-	
-	// 전체 관심분야 리스트 조회
+	// 전체 interestList 조회
 	@Override
 	public List<Interests> selectInterestList() {
 		return dao.selectInterestList();
 	}
 	
-	// 선택한 interestList 조회
+	// 체크한 interestList 조회
 	@Override
 	public List<Interests> selectCheckInterestList(int memberNo) {
 		return dao.selectCheckInterestList(memberNo);
 	}
 	
-	// 체크된 interestList 삽입
-	@Override
-	public int insertNewInterestList(Map<String, Object> interestMap) {
-		return dao.insertNewInterestList(interestMap);
-	}
-	
-	// interestList 리스트 전체 삭제
+	// interestList 전체 삭제
 	@Override
 	public int interestListDeleteAll(int memberNo) {
 		return dao.interestListDeleteAll(memberNo);
 	}
 	
+	// 체크한 interestList 삽입
+	@Override
+	public int insertNewInterestList(Map<String, Object> interestMap) {
+		return dao.insertNewInterestList(interestMap);
+	}
 	
 	
 	
-
+	
+	
 	// 전체 SNS 리스트 조회
 	@Override
 	public List<SNS> selectSNSList() {
 		return dao.selectSNSList();
 	}
 	
-	// 선택한 SNSList 조회
+	// 체크한 SNSList 조회
 	@Override
 	public List<SNS> seletCheckSNSList(int memberNo) {
 		return dao.seletCheckSNSList(memberNo);
 	}
 
-	// 선택된 SNSList 삽입
+	// SNSList 전체 삭제
+	@Override
+	public int snsListDeleteAll(int memberNo) {
+		return dao.snsListDeleteAll(memberNo);
+	}
+	
+	// 체크한 SNSList 삽입
 	@Override
 	public int insertNewSnsList(SNS s) {
 		return dao.insertNewSnsList(s);
 	}
 
-	// SNSList 전체 삭제 후 SNSList 삽입 진행
-	@Override
-	public int snsListDeleteAll(int memberNo) {
-		return dao.snsListDeleteAll(memberNo);
-	}
-
-	// 선택한 snsImgList 조회
+	// 체크한 snsImgList 조회
 	@Override
 	public List<SNS> selectCheckSNSImgList(int memberNo) {
 		return dao.selectCheckSNSImgList(memberNo);
@@ -328,22 +309,11 @@ public class MypageServiceImpl implements MypageService{
 		return dao.insertSNSAddress(snsAddressMap);
 	}
 
-	// 선택한 snsList의 URL 주소 (링크)
+	// 체크한 snsList의 URL 주소 (링크)
 	@Override
 	public List<SNS> selectSNSAddressList(int memberNo) {
 		return dao.selectSNSAddressList(memberNo);
 	}
-
-	// 프로필 이미지 기본
-	@Override
-	public int updateBasicProfile(int memberNo) {
-		return dao.updateBasicProfile(memberNo);
-	}
-
-	
-	
-
-
 
 
 

@@ -69,7 +69,12 @@ public interface MypageService {
 	 * @return boardLikeList
 	 */
 	List<Board> selectBoardLikeList(int memberNo);
-
+	
+	/** 프로필 이미지 기본
+	 * @param memberNo
+	 * @return
+	 */
+	int updateBasicProfile(int memberNo);
 
 	/** 프로필 이미지 수정
 	 * @param profileImage
@@ -91,29 +96,29 @@ public interface MypageService {
 	
 	
 	
-	/** 전체 지식/기술 리스트 조회
+	/** 전체 techList 조회
 	 * @return
 	 */
 	List<Tech> selectTechList();
 
-	/** 선택된 지식/기술 리스트 조회
+	/** 체크한 techList 조회
 	 * @return
 	 */
 	List<Tech> selectCheckTechList(int memberNo);
 	
-	/** 선택된 teckList 삽입
-	 * @param selectedtechList
-	 * @return
-	 */
-	int insertNewTechList(Map<String, Object> techMap);
-	
-	/** teckList 전체 삭제 후 teckList 삽입 진행
+	/** techList 전체 삭제 후 techList 삽입 진행
 	 * @param memberNo
 	 * @return
 	 */
 	int techListDeleteAll(int memberNo);
 	
-	/** 선택한 techImgList 조회
+	/** 체크한 techList 삽입
+	 * @param selectedtechList
+	 * @return
+	 */
+	int insertNewTechList(Map<String, Object> techMap);
+	
+	/** 체크한 techImgList 조회 (아이콘)
 	 * @param memberNo
 	 * @return
 	 */
@@ -123,22 +128,16 @@ public interface MypageService {
 	
 	
 
-	/** 전체 관심분야 리스트 조회
+	/** 전체 interestList 조회
 	 * @return
 	 */
 	List<Interests> selectInterestList();
 	
-	/** 선택한 interestList 조회
+	/** 체크한 interestList 조회
 	 * @param memberNo
 	 * @return
 	 */
 	List<Interests> selectCheckInterestList(int memberNo);
-	
-	/** 체크된 interestList 삽입
-	 * @param interestMap
-	 * @return
-	 */
-	int insertNewInterestList(Map<String, Object> interestMap);
 	
 	/** interestList 전체 삭제 후 interestList 삽입 진행
 	 * @param memberNo
@@ -146,34 +145,40 @@ public interface MypageService {
 	 */
 	int interestListDeleteAll(int memberNo);
 	
+	/** 체크한 interestList 삽입
+	 * @param interestMap
+	 * @return
+	 */
+	int insertNewInterestList(Map<String, Object> interestMap);
+	
 	
 	
 	
 
-	/** 전체 SNS 리스트 조회
+	/** 전체 SNSList 조회
 	 * @return
 	 */
 	List<SNS> selectSNSList();
 	
-	/** 선택한 SNSList 조회
+	/** 체크한 SNSList 조회
 	 * @param memberNo
 	 * @return
 	 */
 	List<SNS> seletCheckSNSList(int memberNo);
 
-	/** 선택된 SNSList 삽입
-	 * @param s
-	 * @return
-	 */
-	int insertNewSnsList(SNS s);
-	
 	/** SNSList 전체 삭제 후 SNSList 삽입 진행
 	 * @param memberNo
 	 * @return
 	 */
 	int snsListDeleteAll(int memberNo);
+	
+	/** 체크한 SNSList 삽입
+	 * @param s
+	 * @return
+	 */
+	int insertNewSnsList(SNS s);
 
-	/** 선택한 snsImgList 조회
+	/** 체크한 snsImgList 조회 (아이콘)
 	 * @param memberNo
 	 * @return
 	 */
@@ -197,44 +202,10 @@ public interface MypageService {
 	 */
 	int insertSNSAddress(Map<String, Object> snsAddressMap);
 
-	/** 선택한 snsList의 URL 주소 (링크)
+	/** 체크한 snsList의 URL 주소 (링크)
 	 * @param memberNo
 	 * @return
 	 */
 	List<SNS> selectSNSAddressList(int memberNo);
-
-	/** 프로필 이미지 기본
-	 * @param memberNo
-	 * @return
-	 */
-	int updateBasicProfile(int memberNo);
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-
-
-
-
-
-
-
-	
-
-
 
 }

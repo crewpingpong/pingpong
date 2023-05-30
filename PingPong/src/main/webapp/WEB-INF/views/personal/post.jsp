@@ -138,6 +138,7 @@ ${mypage.memberInfo}
                             </div>
                             <h4 id="certificate">지식 / 기술</h4>
                             <!-- 아이콘 추가 기능 구현 -->
+                            
                             <div class="certificate-main-con">
                                 <c:if test="${empty techImgList}">
                                     없음
